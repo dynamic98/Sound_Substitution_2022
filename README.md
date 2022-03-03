@@ -6,5 +6,6 @@ Sound Enjoyment for Deaf and Hearing Impaired Person
 #### - using three.js: https://threejs.org/docs/
 
 visual studio code에서 p5 관련 실행하려면 확장에서 p5.vscode를 설치해야 할듯. <br/>
-p5 설치: npm i p5
+p5 설치: npm i p5 <br/>
+express 설치: npm i express <br/>
 ### Haptic Tactile Part
