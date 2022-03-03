@@ -5,4 +5,6 @@ Sound Enjoyment for Deaf and Hearing Impaired Person
 ### Visualization part
 #### - using three.js: https://threejs.org/docs/
 
+visual studio code에서 p5 관련 실행하려면 확장에서 p5.vscode를 설치해야 할듯.
+
 ### Haptic Tactile Part
