@@ -1,6 +1,6 @@
 {
   "name": "sound_substitution_2022",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Sound Enjoyment for Deaf and Hearing Impaired Person",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/dynamic98/Sound_Substitution_2022.git"
   },
+  "keywords": [
+    "sockets",
+    "p5.js",
+    "node"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -17,7 +22,6 @@
   },
   "homepage": "https://github.com/dynamic98/Sound_Substitution_2022#readme",
   "dependencies": {
-    "express": "^4.17.3",
-    "p5": "^1.4.1"
+    "express": "^4.17.3"
   }
 }
