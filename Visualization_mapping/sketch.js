@@ -2,6 +2,9 @@
 
 function setup(){
     createCanvas(400, 400);
+    background(51);
+
+    socket = socket.io.connect('https://localhost:3000')
 }
 
 function draw() {
