@@ -9,7 +9,9 @@ visual studio code에서 p5 관련 실행하려면 확장에서 p5.vscode를 설
 ![p5vscode](https://user-images.githubusercontent.com/43838273/156589966-9eafcc56-7f7c-4b77-abd5-9302c56912cd.PNG)<br/>
 해당 방법으로 설치 <br/>
 
-p5 설치: npm i p5 <br/>
+~~p5 설치: npm i p5 <br/>~~ <br/>
+p5 library is contained in Visualization_mapping folder <br/>
+
 express 설치: npm i express <br/>
 #### - using p5.js: https://p5js.org/ko/
 #### Visualization_mapping/sketch.js 사용예시
