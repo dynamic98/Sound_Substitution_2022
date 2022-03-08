@@ -1,9 +1,6 @@
 var mic, fft;
-
 var peak;
-
 var spectrum = [];
-
 var detected = false;
 
 function setup() {
