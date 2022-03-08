@@ -8,7 +8,6 @@ function setup(){
     fill(100,100,0);
     noStroke();
     ellipse(100, 100, 50, 50);
-    // socket = socket.io.connect('https://localhost:3000')
     socket.on('mouse', newDrawing);
 }
 
