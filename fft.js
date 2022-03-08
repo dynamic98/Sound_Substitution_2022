@@ -12,11 +12,6 @@ const io = new Server(server);
 
 io.on('connection', (socket) => {
     console.log(socket.id);
-    socket.on('mouse', (data) => {
-        // io.emit('mouse', data)
-        socket.broadcast.emit('mouse', data)
-        // console.log(data);
-    });
 })
 
 server.listen(3000, () => {
