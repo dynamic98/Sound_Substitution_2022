@@ -29,8 +29,11 @@ const pickr = Pickr.create({
 });
 
 // 선택한 색상을 'save' 버튼을 누를 때만 console 에 출력하기
-// HEXA 로 저장
+// HEXA code 로 저장
 pickr.on('save', (color, instance) => {
     const userColor = color.toHEXA().toString();
     document.querySelector('#userCustom').innerHTML = userColor;
 });
+
+
+export { pickr };

@@ -5,7 +5,7 @@ import { Group, Mesh, Sphere } from 'three';
 import SimplexNoise from "https://cdn.JsDelivr.net/npm/simplex-noise/dist/esm/simplex-noise.min.js";
 import { BoundingBoxHelper } from 'three';
 import { setQuaternionFromProperEuler } from 'three/src/math/MathUtils';
-// import { createShapeHeart } from './visualShape.js';
+import { pickr } from './pickr.js';
 
 let controls;
 let camera, scene, renderer;
@@ -61,7 +61,7 @@ function render() {
 
 
 
-// LOAD MUSIC
+// LOAD MUSIC (vizIntit)
 var vizInit = function () {
 
   var file = document.getElementById("thefile");
@@ -82,6 +82,7 @@ var vizInit = function () {
     audio.play(); // 음악이 load 되자마자 시각화 요소를 불러옴
     play();  // play - 시각화 요소 불러오기
   }
+
 
   function play() {
     var context = new AudioContext();
@@ -140,27 +141,62 @@ var vizInit = function () {
   
     document.getElementById('container').appendChild(renderer.domElement);
 
-
     render(); // render - 음악에 맞는 시각화 모션 불러오기
+
     scene.add(group); // 마지막에 group 을 scene 에 추가
 
+    // EVENTS
+    var saveButton = document.getElementsByClassName("pcr-save");
 
+    const shape_heart = document.getElementById("shape_heart");
+    let shape_heart_cnt = 0;
 
-    // CHOCIABLE EVENTS BY BUTTONS
+    // save 버튼을 누르면 하트의 색을 바꿔주는 함수
+    saveButton[0].addEventListener("click", function(){
+        shape_heart.addEventListener("click", shape_clickCounter);
+        console.log('하트가 눌린 갯수', shape_heart_cnt);
+        // 여기서부터 안됨
+        if (shape_heart_cnt % 2 != 0) {
+          deleteBasics();
+          createShapeHeart();
+        }
+    });
+    
+    // 클릭한 횟수를 카운트해주는 함수
+    function shape_clickCounter(clicked_id){
+      let shape_heart_cnt = 0;
+        if (clicked_id == "shape_heart") {
+            shape_heart_cnt += 1
+    }};
+  
+    
     document.getElementById("shape_heart").addEventListener("click", function(){
-        console.log('clicked!');
         deleteBasics();
         createShapeHeart();
-        console.log('it was executed...')
     });
 
+    shape_heart_cnt = shape_clickCounter();
 
-    // DELETE FUNCTIONS
+    // COLOR SAVE & CHANGE FUNCTION
+    function saveColor(){
+      pickr.on('save', (color, instance) => {
+        const userColor = color.toHEXA().toString();
+        document.querySelector('#userCustom').innerHTML = userColor;
+      })
+    };
+
+    function changeColor(){
+      var userColor = document.querySelector('#userCustom').innerHTML;
+      Material.color = new THREE.Color(userColor);
+    };
+
+
+    // DELETE FUNCTION
     function deleteBasics(){
       group.remove(compoCenter);
       group.remove(compoLeft);
       group.remove(compoRight);
-    }
+    };
 
 
     // CUSTOMIZING BUTTON FUNCTIONS
@@ -175,8 +211,7 @@ var vizInit = function () {
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 20000);
       camera.position.set(1, 20, 100);
-  
-  
+
       const x = 0;
       const y = 0;
   
@@ -191,12 +226,22 @@ var vizInit = function () {
       heartShape.bezierCurveTo( x + 7, y, x + 5, y + 5, x + 5, y + 5 );
   
       const shapeHeartGeometry = new THREE.ShapeGeometry(heartShape);
-  
-      const shapeHeartMaterial = new THREE.MeshBasicMaterial({
+      
+      var shapeHeartMaterial = new THREE.MeshBasicMaterial({
           color: '#F30489',
           wireframe: false
       });
-  
+
+      // color
+      // pickr.on('save', (color, instance) => {
+      //   const userColor = color.toHEXA().toString();
+      //   document.querySelector('#userCustom').innerHTML = userColor;
+      // });
+      var userColor = document.querySelector('#userCustom').innerHTML;
+      console.log('color of the shape', userColor);
+      shapeHeartMaterial.color = new THREE.Color(userColor);
+
+      // mesh position
       var shapeHeartMeshCenter = new THREE.Mesh(shapeHeartGeometry, shapeHeartMaterial);
       var shapeHeartMeshLeft = new THREE.Mesh(shapeHeartGeometry, shapeHeartMaterial);
       var shapeHeartMeshRight = new THREE.Mesh(shapeHeartGeometry, shapeHeartMaterial);
@@ -207,7 +252,8 @@ var vizInit = function () {
       group.add(shapeHeartMeshCenter);
       group.add(shapeHeartMeshLeft);
       group.add(shapeHeartMeshRight);
-  
+      
+      // light
       var ambientLight = new THREE.AmbientLight(0xaaaaaa);
       scene.add(ambientLight);
   
@@ -220,8 +266,6 @@ var vizInit = function () {
       spotLight.lookAt(shapeHeartMeshRight);
       spotLight.castShadow = true;
       scene.add(spotLight);
-  
-      // document.getElementById('container').appendChild(renderer.domElement);
       scene.add(group);
   }
 
@@ -230,8 +274,8 @@ var vizInit = function () {
     // * 중요 * 버튼 하나를 클릭할 때마다 렌더링이 된다
     function render() {
       // color rendering
-      var userColor = document.querySelector('#userCustom').innerHTML;
-      Material.color = new THREE.Color(userColor);
+      saveColor();
+      changeColor();
       
       // music mapped visualized output rendering
       analyser.getByteFrequencyData(dataArray);

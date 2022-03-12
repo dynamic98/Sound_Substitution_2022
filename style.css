@@ -37,7 +37,7 @@ h4#title{
 
 audio {
     position: fixed;
-    visibility: hidden;
+    visibility: visible;
     left: 10px;
     bottom: -10px;
     width: calc(100% - 20px);
