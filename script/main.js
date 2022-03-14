@@ -1,11 +1,12 @@
 import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { Group, Mesh, Sphere } from 'three';
 import SimplexNoise from "https://cdn.JsDelivr.net/npm/simplex-noise/dist/esm/simplex-noise.min.js";
 import { BoundingBoxHelper } from 'three';
 import { setQuaternionFromProperEuler } from 'three/src/math/MathUtils';
 import { pickr } from './pickr.js';
+import { RingGeometry, SphereGeometry, ShapeGeometry } from 'three';
+
 
 let controls;
 let camera, scene, renderer;
@@ -68,7 +69,6 @@ var vizInit = function () {
   var file = document.getElementById("thefile");
   var audio = document.getElementById("audio");
   var fileLabel = document.querySelector("label.file");
-
   document.onload = function(e){
     audio.play();
     play();
@@ -85,6 +85,7 @@ var vizInit = function () {
   }
 
 
+
   function play() {
     var context = new AudioContext();
     var src = context.createMediaElementSource(audio);
@@ -94,37 +95,53 @@ var vizInit = function () {
     analyser.fftSize = 512;
     var bufferLength = analyser.frequencyBinCount;
     var dataArray = new Uint8Array(bufferLength);
-  
+    var maxChroma = 0;
+    var energy = 0;
+
+    // meyda analyser
+    const meyda_analyser = Meyda.createMeydaAnalyzer({
+      audioContext: context,
+      source: src,
+      buffersize: 64,
+      featureExtractors: ["energy", "chroma", "zcr"],
+      callback: (features) => {
+        maxChroma = features['chroma'].indexOf(max(features['chroma']))
+        energy = features['energy']
+      }
+    })
+
+    meyda_analyser.start();
+
     var group = new THREE.Group();
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0,0,100);
     camera.lookAt(scene.position);
     scene.add(camera);
   
-    // window.addEventListener('resize', 1, false);
 
     var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // Geometry
-    var Geometry = new THREE.SphereGeometry(15, 15, 15);
+    var Geometry = new THREE.RingGeometry(13, 10, 8, 13, 6, 6.283185307179586);
     var Material = new THREE.MeshLambertMaterial({
       color: '#FFFFFF',
-      wireframe: true
+      wireframe: true,
+      side: THREE.DoubleSide
     });
 
     // * 중요 * Geometry + Material = Mesh 형태로 바꾸어줌
     var compoCenter = new THREE.Mesh(Geometry, Material);
-    var compoLeft = new THREE.Mesh(Geometry, Material);
-    var compoRight = new THREE.Mesh(Geometry, Material);
+    // var compoLeft = new THREE.Mesh(Geometry, Material);
+    // var compoRight = new THREE.Mesh(Geometry, Material);
 
     compoCenter.position.set(0, 0, 0);
-    compoLeft.position.set(-80, 0, 30);
-    compoRight.position.set(80, 0, 30);
+    // compoLeft.position.set(-80, 0, 30);
+    // compoRight.position.set(80, 0, 30);
 
     group.add(compoCenter);
-    group.add(compoLeft);
-    group.add(compoRight);
+    // group.add(compoLeft);
+    // group.add(compoRight);
 
     var ambientLight = new THREE.AmbientLight(0xaaaaaa);
     scene.add(ambientLight);
@@ -134,15 +151,15 @@ var vizInit = function () {
     spotLight.position.set(-10, 40, 20);
     
     spotLight.lookAt(compoCenter);
-    spotLight.lookAt(compoLeft);
-    spotLight.lookAt(compoRight);
+    // spotLight.lookAt(compoLeft);
+    // spotLight.lookAt(compoRight);
     spotLight.castShadow = true;
     scene.add(spotLight);
 
   
     document.getElementById('container').appendChild(renderer.domElement);
 
-    render(); // render - 음악에 맞는 시각화 모션 불러오기
+    render();         // render - 음악에 맞는 시각화 모션 불러오기
 
     scene.add(group); // 마지막에 group 을 scene 에 추가
     
@@ -201,6 +218,12 @@ var vizInit = function () {
       group.remove(compoLeft);
       group.remove(compoRight);
     };
+
+    // UPDATING GEOMETRY FUNCTION
+    function updateGroupGeometry( mesh, geometry ) {
+      mesh.geometry.dispose();
+      mesh.geometry = geometry;
+    }
 
 
     // CUSTOMIZING BUTTON FUNCTIONS
@@ -276,7 +299,12 @@ var vizInit = function () {
       // color rendering
       saveColor();
       changeColor();
-      
+
+      updateGroupGeometry( compoCenter,
+        new THREE.RingGeometry(
+          13, energy * 5, 8, 13, 6, maxChroma
+        ));
+
       // music mapped visualized output rendering
       analyser.getByteFrequencyData(dataArray);
       var lowerHalfArray = dataArray.slice(0, (dataArray.length/2) - 1);
@@ -295,17 +323,17 @@ var vizInit = function () {
 
       var time = performance.now() * 0.0001;
 
-      compoCenter.position.z = Math.sin(time) * 20 + 5;
-      compoCenter.position.y = upperMaxFr * 50;
-      compoCenter.rotation.x = time * 0.7;
+      // compoCenter.position.z = Math.sin(time) * 20 + 5;
+      // compoCenter.position.y = upperMaxFr * 50;
+      // compoCenter.rotation.x = time * 0.7;
 
-      compoLeft.rotation.x = time * 0.7;
-      compoLeft.position.z = - upperMaxFr * 50; 
-      compoLeft.rotation.y = time * 0.51;
+      // compoLeft.rotation.x = time * 0.7;
+      // compoLeft.position.z = - upperMaxFr * 50; 
+      // compoLeft.rotation.y = time * 0.51;
 
-      compoRight.position.z = - upperMaxFr * 50;
-      compoRight.rotation.x = time * 0.7;
-      compoRight.rotation.y = time * 0.51;
+      // compoRight.position.z = - upperMaxFr * 50;
+      // compoRight.rotation.x = time * 0.7;
+      // compoRight.rotation.y = time * 0.51;
 
       renderer.render(scene, camera);
       requestAnimationFrame(render);
