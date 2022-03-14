@@ -8,20 +8,20 @@ Sound Enjoyment for DHH(Deaf and Hard-of-Hearing)
 <img width="1200" src="https://user-images.githubusercontent.com/59073612/156991563-8cf7596e-d485-4ef2-9f9b-ca69078ca595.gif">
 
 ### Requirements on NPM
-├── @simonwep/pickr@1.8.2
+*ex. npm install meyda >> installation of meyda*
 
-├── babel-cli@6.26.0
-
-├── nodemon@2.0.15
-
-├── pickr@0.1.4
-
-└── vite@2.8.6
+- "simonwep/pickr",
+- "babel-cli": "6.26.0"
+- "meyda": "5.3.0",
+- "nodemon": "2.0.15",
+- "p5": "1.4.1",
+- "pickr": "0.1.4",
+- "vite": "2.8.6",
 
 ### How To RUN
 1. turn on the terminal
 2. git clone this repository
-3. change your directory to 'VibvizTool' folder
+3. change your root directory to 'VibvizTool' folder
 4. type 'npm run dev' on the terminal
 5. enter to http://localhost:3000/
 
