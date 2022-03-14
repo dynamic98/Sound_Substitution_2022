@@ -145,38 +145,41 @@ var vizInit = function () {
     render(); // render - 음악에 맞는 시각화 모션 불러오기
 
     scene.add(group); // 마지막에 group 을 scene 에 추가
+    
+
+
 
     // EVENTS
     var saveButton = document.getElementsByClassName("pcr-save");
 
     const shape_heart = document.getElementById("shape_heart");
+    var now_geometry = '';
     let shape_heart_cnt = 0;
+    let button_shape_heart_cnt = 0;
+
+    shape_heart.addEventListener("click", function(){
+      shape_heart_cnt += 1
+      console.log('하트가 눌린 갯수', shape_heart_cnt);
+      deleteBasics();
+      createShapeHeart();
+      now_geometry = 'shape_heart';
+      console.log('현재 geometry:', now_geometry);
+    });
+
 
     // save 버튼을 누르면 하트의 색을 바꿔주는 함수
     saveButton[0].addEventListener("click", function(){
-        shape_heart.addEventListener("click", shape_clickCounter);
-        console.log('하트가 눌린 갯수', shape_heart_cnt);
-        // 여기서부터 안됨
-        if (shape_heart_cnt % 2 != 0) {
+       button_shape_heart_cnt += 1;
+       console.log('버튼이 눌린 갯수', button_shape_heart_cnt);
+       console.log('현재 geometry:', now_geometry);
+       if (shape_heart_cnt != 0 && shape_heart_cnt % 2 == 1 && now_geometry == 'shape_heart') {
           deleteBasics();
           createShapeHeart();
-        }
+          now_geometry = 'shape_heart';
+       }
     });
     
-    // 클릭한 횟수를 카운트해주는 함수
-    function shape_clickCounter(clicked_id){
-      let shape_heart_cnt = 0;
-        if (clicked_id == "shape_heart") {
-            shape_heart_cnt += 1
-    }};
-  
-    
-    document.getElementById("shape_heart").addEventListener("click", function(){
-        deleteBasics();
-        createShapeHeart();
-    });
 
-    shape_heart_cnt = shape_clickCounter();
 
     // COLOR SAVE & CHANGE FUNCTION
     function saveColor(){
@@ -234,10 +237,6 @@ var vizInit = function () {
       });
 
       // color
-      // pickr.on('save', (color, instance) => {
-      //   const userColor = color.toHEXA().toString();
-      //   document.querySelector('#userCustom').innerHTML = userColor;
-      // });
       var userColor = document.querySelector('#userCustom').innerHTML;
       console.log('color of the shape', userColor);
       shapeHeartMaterial.color = new THREE.Color(userColor);
@@ -320,9 +319,9 @@ var vizInit = function () {
 
 
 window.onload = vizInit();
-// document.body.addEventListener('touchend', function(ev) { context.resume(); });
 
-//some helper functions here
+
+// some helper functions here
 function fractionate(val, minVal, maxVal) {
   return (val - minVal)/(maxVal - minVal);
 }
@@ -341,3 +340,4 @@ function avg(arr){
 function max(arr){
   return arr.reduce(function(a, b){ return Math.max(a, b); })
 }
+
