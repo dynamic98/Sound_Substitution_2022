@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@simonwep/pickr": "^1.8.2",
+    "meyda": "^5.3.0",
     "nodemon": "^2.0.15",
+    "p5": "^1.4.1",
     "pickr": "^0.1.4"
   },
   "main": "index.js",

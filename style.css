@@ -92,6 +92,10 @@ label.file:active{
 
 /* size: 100px; web gl canvas 사이즈 조정하기 */
 
+div#userCustom{
+    visibility: hidden;
+}
+
 h4#musicFeatureTitle{
     margin-top: 40px;
     margin-left: 90px;
