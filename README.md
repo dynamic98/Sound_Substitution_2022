@@ -10,13 +10,13 @@ Sound Enjoyment for DHH(Deaf and Hard-of-Hearing)
 ### Requirements on NPM
 *ex. npm install meyda >> installation of meyda*
 
-- "simonwep/pickr",
+- "simonwep/pickr"
 - "babel-cli": "6.26.0"
-- "meyda": "5.3.0",
-- "nodemon": "2.0.15",
-- "p5": "1.4.1",
-- "pickr": "0.1.4",
-- "vite": "2.8.6",
+- "meyda": "5.3.0"
+- "nodemon": "2.0.15"
+- "p5": "1.4.1"
+- "pickr": "0.1.4"
+- "vite": "2.8.6"
 
 ### How To RUN
 1. turn on the terminal
