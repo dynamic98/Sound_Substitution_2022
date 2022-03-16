@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import SimplexNoise from "https://cdn.JsDelivr.net/npm/simplex-noise/dist/esm/simplex-noise.min.js";
-import { BoundingBoxHelper } from 'three';
+import { BoundingBoxHelper, IntType } from 'three';
 import { setQuaternionFromProperEuler } from 'three/src/math/MathUtils';
 import { pickr } from './pickr.js';
 import { RingGeometry, SphereGeometry, ShapeGeometry } from 'three';
@@ -65,7 +65,6 @@ function render() {
 
 // LOAD MUSIC (vizIntit)
 var vizInit = function () {
-
   var file = document.getElementById("thefile");
   var audio = document.getElementById("audio");
   var fileLabel = document.querySelector("label.file");
@@ -73,6 +72,7 @@ var vizInit = function () {
     audio.play();
     play();
   }
+
 
   file.onchange = function(){
     fileLabel.classList.add('normal');
@@ -95,15 +95,17 @@ var vizInit = function () {
     analyser.fftSize = 512;
     var bufferLength = analyser.frequencyBinCount;
     var dataArray = new Uint8Array(bufferLength);
+
+
+     // meyda analyser
     var maxChroma = 0;
     var energy = 0;
 
-    // meyda analyser
     const meyda_analyser = Meyda.createMeydaAnalyzer({
       audioContext: context,
       source: src,
       buffersize: 64,
-      featureExtractors: ["energy", "chroma", "zcr"],
+      featureExtractors: ["energy", "chroma"],
       callback: (features) => {
         maxChroma = features['chroma'].indexOf(max(features['chroma']))
         energy = features['energy']
@@ -130,7 +132,7 @@ var vizInit = function () {
       side: THREE.DoubleSide
     });
 
-    // * 중요 * Geometry + Material = Mesh 형태로 바꾸어줌
+    // * 중요 * Geometry + Material = Mesh(최종) 형태로 바꾸어줌
     var compoCenter = new THREE.Mesh(Geometry, Material);
     // var compoLeft = new THREE.Mesh(Geometry, Material);
     // var compoRight = new THREE.Mesh(Geometry, Material);
@@ -174,29 +176,37 @@ var vizInit = function () {
     let shape_heart_cnt = 0;
     let button_shape_heart_cnt = 0;
 
-    shape_heart.addEventListener("click", function(){
+    shape_heart.addEventListener("click", ()=>{
       shape_heart_cnt += 1
       console.log('하트가 눌린 갯수', shape_heart_cnt);
       deleteBasics();
+      containerRender();
       createShapeHeart();
       now_geometry = 'shape_heart';
-      console.log('현재 geometry:', now_geometry);
     });
 
 
     // save 버튼을 누르면 하트의 색을 바꿔주는 함수
-    saveButton[0].addEventListener("click", function(){
+    saveButton[0].addEventListener("click", ()=>{
        button_shape_heart_cnt += 1;
        console.log('버튼이 눌린 갯수', button_shape_heart_cnt);
-       console.log('현재 geometry:', now_geometry);
        if (shape_heart_cnt != 0 && shape_heart_cnt % 2 == 1 && now_geometry == 'shape_heart') {
           deleteBasics();
+          containerRender();
           createShapeHeart();
           now_geometry = 'shape_heart';
        }
     });
     
-
+    //
+    function containerRender(){
+      container = document.getElementById( "container" );
+      renderer = new THREE.WebGLRenderer();
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      container.appendChild(renderer.domElement);
+    }
 
     // COLOR SAVE & CHANGE FUNCTION
     function saveColor(){
@@ -215,9 +225,10 @@ var vizInit = function () {
     // DELETE FUNCTION
     function deleteBasics(){
       group.remove(compoCenter);
-      group.remove(compoLeft);
-      group.remove(compoRight);
+      // group.remove(compoLeft);
+      // group.remove(compoRight);
     };
+
 
     // UPDATING GEOMETRY FUNCTION
     function updateGroupGeometry( mesh, geometry ) {
@@ -226,14 +237,15 @@ var vizInit = function () {
     }
 
 
-    // CUSTOMIZING BUTTON FUNCTIONS
+    // ** CUSTOMIZING BUTTON FUNCTIONS **
+    // (1) ShapeGeometry - heart
     function createShapeHeart(){
-      container = document.getElementById( "container" );
-      renderer = new THREE.WebGLRenderer();
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      container.appendChild(renderer.domElement);
+      // container = document.getElementById( "container" );
+      // renderer = new THREE.WebGLRenderer();
+      // renderer.setPixelRatio(window.devicePixelRatio);
+      // renderer.setSize(window.innerWidth, window.innerHeight);
+      // renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      // container.appendChild(renderer.domElement);
   
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 20000);
@@ -252,30 +264,23 @@ var vizInit = function () {
       heartShape.bezierCurveTo( x + 16, y + 7, x + 16, y, x + 10, y );
       heartShape.bezierCurveTo( x + 7, y, x + 5, y + 5, x + 5, y + 5 );
   
-      const shapeHeartGeometry = new THREE.ShapeGeometry(heartShape);
+      var shapeHeartGeometry = new THREE.ShapeGeometry(heartShape);
       
       var shapeHeartMaterial = new THREE.MeshBasicMaterial({
-          color: '#F30489',
-          wireframe: false
+          color: '#FFFFFF',
+          wireframe: true
       });
 
       // color
       var userColor = document.querySelector('#userCustom').innerHTML;
-      console.log('color of the shape', userColor);
       shapeHeartMaterial.color = new THREE.Color(userColor);
 
       // mesh position
       var shapeHeartMeshCenter = new THREE.Mesh(shapeHeartGeometry, shapeHeartMaterial);
-      var shapeHeartMeshLeft = new THREE.Mesh(shapeHeartGeometry, shapeHeartMaterial);
-      var shapeHeartMeshRight = new THREE.Mesh(shapeHeartGeometry, shapeHeartMaterial);
+
       shapeHeartMeshCenter.position.set(0, 0, 0);
-      shapeHeartMeshLeft.position.set(-70, 0, 20);
-      shapeHeartMeshRight.position.set(70, 0, 20);
-  
       group.add(shapeHeartMeshCenter);
-      group.add(shapeHeartMeshLeft);
-      group.add(shapeHeartMeshRight);
-      
+
       // light
       var ambientLight = new THREE.AmbientLight(0xaaaaaa);
       scene.add(ambientLight);
@@ -285,11 +290,12 @@ var vizInit = function () {
       spotLight.position.set(-10, 40, 20);
       
       spotLight.lookAt(shapeHeartMeshCenter);
-      spotLight.lookAt(shapeHeartMeshLeft);
-      spotLight.lookAt(shapeHeartMeshRight);
+      // spotLight.lookAt(shapeHeartMeshLeft);
+      // spotLight.lookAt(shapeHeartMeshRight);
       spotLight.castShadow = true;
       scene.add(spotLight);
       scene.add(group);
+      return shapeHeartMeshCenter
   }
 
 
@@ -300,12 +306,7 @@ var vizInit = function () {
       saveColor();
       changeColor();
 
-      updateGroupGeometry( compoCenter,
-        new THREE.RingGeometry(
-          13, energy * 5, 8, 13, 6, maxChroma
-        ));
-
-      // music mapped visualized output rendering
+      // music rendering
       analyser.getByteFrequencyData(dataArray);
       var lowerHalfArray = dataArray.slice(0, (dataArray.length/2) - 1);
       var upperHalfArray = dataArray.slice((dataArray.length/2) - 1, dataArray.length - 1);
@@ -323,23 +324,32 @@ var vizInit = function () {
 
       var time = performance.now() * 0.0001;
 
-      // compoCenter.position.z = Math.sin(time) * 20 + 5;
-      // compoCenter.position.y = upperMaxFr * 50;
-      // compoCenter.rotation.x = time * 0.7;
+      // SHAPE (HEART) Rendering
+      if (now_geometry == 'shape_heart') {
+        var shapeHeartMeshCenter = createShapeHeart();
+        
+        // // mesh position changing
+        // shapeHeartMeshCenter.rotation.z = time * 1.2;
+        // shapeHeartMeshCenter.rotation.y = upperMaxFr * 8;
+        shapeHeartMeshCenter.position.y = maxChroma  * 10;
+        shapeHeartMeshCenter.position.x = energy * 3;
+        // shapeHeartMeshCenter.position.z = Math.sin(time) * 20 + 5;
+        // // shapeHeartMeshCenter.position.y = upperMaxFr * 50;
 
-      // compoLeft.rotation.x = time * 0.7;
-      // compoLeft.position.z = - upperMaxFr * 50; 
-      // compoLeft.rotation.y = time * 0.51;
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+        audio.play();
+        console.log('rendering finished!');
 
-      // compoRight.position.z = - upperMaxFr * 50;
-      // compoRight.rotation.x = time * 0.7;
-      // compoRight.rotation.y = time * 0.51;
-
-      renderer.render(scene, camera);
-      requestAnimationFrame(render);
-
-
-      audio.play();
+      } else { 
+        updateGroupGeometry( compoCenter,
+          new THREE.RingGeometry(
+            13, energy * 5, 8, 13, 6, maxChroma
+        ));
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+        audio.play();
+      }
 
     }
   }
