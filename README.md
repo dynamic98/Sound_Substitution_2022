@@ -7,15 +7,15 @@ Sound Enjoyment for DHH(Deaf and Hard-of-Hearing)
 
 <img width="1200" src="https://user-images.githubusercontent.com/59073612/156991563-8cf7596e-d485-4ef2-9f9b-ca69078ca595.gif">
 
-### Requirements on NPM
+### Requirements on the NPM
 *ex. npm install meyda >> installation of meyda*
-
 - "simonwep/pickr"
 - "babel-cli": "6.26.0"
 - "meyda": "5.3.0"
 - "nodemon": "2.0.15"
 - "p5": "1.4.1"
 - "pickr": "0.1.4"
+- "three": "0.138.3"
 - "vite": "2.8.6"
 
 ### How To RUN
