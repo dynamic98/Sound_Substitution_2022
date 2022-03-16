@@ -2,13 +2,23 @@
 Sound Enjoyment for DHH(Deaf and Hard-of-Hearing)
 
 # VibvizTool
-- 사용 언어: javascript
-- 사용 라이브러리(js 기반): three.js(3차원 시각화), pickr(컬러판), meyda(오디오 feature 추출)
+### 사용 언어: <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/>
+
+### 사용 라이브러리
+- **three.js** (3차원 시각화, https://threejs.org/)
+- **pickr** (컬러판, https://simonwep.github.io/pickr/)
+- **meyda** (audio feature 추출, https://meyda.js.org/audio-features)
 
 <img width="1200" src="https://user-images.githubusercontent.com/59073612/156991563-8cf7596e-d485-4ef2-9f9b-ca69078ca595.gif">
 
 ### Requirements on the NPM
-*ex. npm install meyda >> installation of meyda*
+```
+npm install
+```
+터미널에 위 명령어를 입력하면 package.json 에 있는 dependencies(필요한 라이브러리) 가 알아서 깔립니다.
+
+혹시 모르니 필요한 라이브러리의 버전 정보를 밑에 남깁니다...
+
 - "simonwep/pickr"
 - "babel-cli": "6.26.0"
 - "meyda": "5.3.0"
@@ -18,10 +28,11 @@ Sound Enjoyment for DHH(Deaf and Hard-of-Hearing)
 - "three": "0.138.3"
 - "vite": "2.8.6"
 
+
 ### How To RUN
 1. turn on the terminal
 2. git clone this repository
-3. change your root directory to 'VibvizTool' folder
+3. change to your root directory
 4. type 'npm run dev' on the terminal
 5. enter to http://localhost:3000/
 
