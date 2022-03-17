@@ -8,7 +8,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "vite": "^2.8.4"
   },
   "dependencies": {
