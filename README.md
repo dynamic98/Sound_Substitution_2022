@@ -20,7 +20,6 @@ npm install
 혹시 모르니 필요한 라이브러리의 버전 정보를 밑에 남깁니다...
 
 - "simonwep/pickr"
-- "babel-cli": "6.26.0"
 - "meyda": "5.3.0"
 - "nodemon": "2.0.15"
 - "p5": "1.4.1"
