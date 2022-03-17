@@ -18,12 +18,15 @@ npm install
 터미널에 위 명령어를 입력하면 package.json 에 있는 dependencies(필요한 라이브러리) 가 알아서 깔립니다.
 
 
+
 ### How To RUN
 1. turn on the terminal
 2. git clone this repository
 3. change to your root directory
 4. type 'npm run dev' on the terminal
 5. enter to http://localhost:3000/
+6. press 'Choose A Music to Visualize!' button and pick a music
+7. visualize!
 
 
 <hr>
