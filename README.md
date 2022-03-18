@@ -2,7 +2,7 @@
 Sound Enjoyment for DHH(Deaf and Hard-of-Hearing)
 
 # VibvizTool
-### 사용 언어: <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/>
+### 사용 언어   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/>
 
 ### 사용 라이브러리
 - **three.js** (3차원 시각화, https://threejs.org/)
@@ -25,7 +25,7 @@ npm install
 3. change to your root directory
 4. type 'npm run dev' on the terminal
 5. enter to http://localhost:3000/
-6. press 'Choose A Music to Visualize!' button and pick a music
+6. press 'Choose A Music to Visualize!' button and pick a music in the mp3 format
 7. visualize!
 
 
