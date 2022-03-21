@@ -369,33 +369,7 @@ var vizInit = function () {
         console.log('rendering finished!');
 
       } else { 
-
-        // if (maxChroma == 0){
-        //   Material.color = new THREE.Color('#FF0000');
-        // } else if (maxChroma == 1) {
-        //   Material.color = new THREE.Color('#FF6400');
-        // } else if (maxChroma == 2){
-        //   Material.color = new THREE.Color('#FFA700');
-        // } else if (maxChroma == 3){
-        //   Material.color = new THREE.Color('#FFF100');
-        // } else if (maxChroma == 4){
-        //   Material.color = new THREE.Color('#AFFF00');
-        // } else if (maxChroma == 5){
-        //   Material.color = new THREE.Color('#51FF00');
-        // } else if (maxChroma == 6){
-        //   Material.color = new THREE.Color('#07AF06');
-        // } else if (maxChroma == 7){
-        //   Material.color = new THREE.Color('#00D1BA');
-        // } else if (maxChroma == 8){
-        //   Material.color = new THREE.Color('#0418FF');
-        // } else if (maxChroma == 9){
-        //   Material.color = new THREE.Color('#7F00FF');
-        // } else if (maxChroma == 10){
-        //   Material.color = new THREE.Color('#E300FF');
-        // } else {
-        //   Material.color = new THREE.Color('#FF2CAC');
-        // }
-
+        
         updateGroupGeometry( compoCenter,
           new THREE.RingGeometry(
             13, amplitudeSpectrum[1], 8, 13, 6
