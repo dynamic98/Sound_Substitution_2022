@@ -36,7 +36,8 @@ npm install
 - 유저의 color input 에 따라 시각화 color가 실시간으로 변경 (03/07)
 - Visual Feature 버튼 드롭다운 메뉴와 인터랙션 추가 (03/08)
 - Visual Feature 와 Colors 메뉴 유저의 선택에 따라 실시간으로 변경 (03/14)
-- meyda 를 사용해 Audio Feature 추출, energy + chroma 를 사용해 시각화 적용 (03/15)
+- meyda 를 사용해 Audio Feature 추출, energy + chroma(= pitch) 를 사용해 시각화 적용 (03/15)
+- pmeyda 를 사용해 Audio Feature 추출, pitch, amplitude 에 따른 시각화 적용 (03/21)
 
 
 ### 지금까지 구현한 것
