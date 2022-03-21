@@ -98,7 +98,7 @@ div#userCustom{
 
 h4#musicFeatureTitle{
     margin-top: 40px;
-    margin-left: 90px;
+    margin-left: 40px;
     margin-right: 20px;
     font-weight: 335;
     font-size: 1.2rem;
@@ -107,7 +107,7 @@ h4#musicFeatureTitle{
 
 h4#visualFeatureTitle{
     margin-top: 40px;
-    margin-left: 100px;
+    margin-left: 40px;
     margin-right: 20px;
     font-weight: 335;
     font-size: 1.2rem;
@@ -119,6 +119,7 @@ h4#visualFeatureTitle{
 button.musicButton{
     margin-top: 20px;
     margin-right: 7px;
+    margin-bottom: 10px;
     float: left;
     font-weight: 300;
 }
@@ -126,6 +127,7 @@ button.musicButton{
 button.visualButton{
     margin-top: 20px;
     margin-right: 7px;
+    margin-bottom: 10px;
     float: left;
     font-weight: 300;
 }
@@ -133,6 +135,7 @@ button.visualButton{
 button.visualButtonColors{
     margin-top: 20px;
     margin-right: 10px;
+    margin-bottom: 10px;
     float: left;
     font-weight: 300;
 }
