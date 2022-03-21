@@ -52,7 +52,7 @@ function animate() {
     requestAnimationFrame(animate);
     // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
     render();
-    stats.update(); // 왜냐면 여기에 DOM 에서 바뀐 점이 업데이트되기 때문
+    stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
   }
 
 
@@ -100,15 +100,19 @@ var vizInit = function () {
      // meyda analyser
     var maxChroma = 0;
     var energy = 0;
+    var amplitudeSpectrum = 0;
+    // var powerSpectrum = 0;
 
     const meyda_analyser = Meyda.createMeydaAnalyzer({
       audioContext: context,
       source: src,
       buffersize: 64,
-      featureExtractors: ["energy", "chroma"],
+      featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
       callback: (features) => {
         maxChroma = features['chroma'].indexOf(max(features['chroma']))
+        console.log(maxChroma);
         energy = features['energy']
+        amplitudeSpectrum = features['amplitudeSpectrum']
       }
     })
 
@@ -221,6 +225,34 @@ var vizInit = function () {
       Material.color = new THREE.Color(userColor);
     };
 
+    function changeColorByChroma(Material){
+      if (maxChroma == 0){
+        Material.color = new THREE.Color('#FF0000');
+      } else if (maxChroma == 1) {
+        Material.color = new THREE.Color('#FF6400');
+      } else if (maxChroma == 2){
+        Material.color = new THREE.Color('#FFA700');
+      } else if (maxChroma == 3){
+        Material.color = new THREE.Color('#FFF100');
+      } else if (maxChroma == 4){
+        Material.color = new THREE.Color('#AFFF00');
+      } else if (maxChroma == 5){
+        Material.color = new THREE.Color('#51FF00');
+      } else if (maxChroma == 6){
+        Material.color = new THREE.Color('#07AF06');
+      } else if (maxChroma == 7){
+        Material.color = new THREE.Color('#00D1BA');
+      } else if (maxChroma == 8){
+        Material.color = new THREE.Color('#0418FF');
+      } else if (maxChroma == 9){
+        Material.color = new THREE.Color('#7F00FF');
+      } else if (maxChroma == 10){
+        Material.color = new THREE.Color('#E300FF');
+      } else {
+        Material.color = new THREE.Color('#FF2CAC');
+      }
+    }
+
 
     // DELETE FUNCTION
     function deleteBasics(){
@@ -240,13 +272,6 @@ var vizInit = function () {
     // ** CUSTOMIZING BUTTON FUNCTIONS **
     // (1) ShapeGeometry - heart
     function createShapeHeart(){
-      // container = document.getElementById( "container" );
-      // renderer = new THREE.WebGLRenderer();
-      // renderer.setPixelRatio(window.devicePixelRatio);
-      // renderer.setSize(window.innerWidth, window.innerHeight);
-      // renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      // container.appendChild(renderer.domElement);
-  
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 20000);
       camera.position.set(1, 20, 100);
@@ -274,6 +299,7 @@ var vizInit = function () {
       // color
       var userColor = document.querySelector('#userCustom').innerHTML;
       shapeHeartMaterial.color = new THREE.Color(userColor);
+      changeColorByChroma(shapeHeartMaterial);
 
       // mesh position
       var shapeHeartMeshCenter = new THREE.Mesh(shapeHeartGeometry, shapeHeartMaterial);
@@ -305,6 +331,7 @@ var vizInit = function () {
       // color rendering
       saveColor();
       changeColor();
+      changeColorByChroma(Material);
 
       // music rendering
       analyser.getByteFrequencyData(dataArray);
@@ -342,9 +369,36 @@ var vizInit = function () {
         console.log('rendering finished!');
 
       } else { 
+
+        // if (maxChroma == 0){
+        //   Material.color = new THREE.Color('#FF0000');
+        // } else if (maxChroma == 1) {
+        //   Material.color = new THREE.Color('#FF6400');
+        // } else if (maxChroma == 2){
+        //   Material.color = new THREE.Color('#FFA700');
+        // } else if (maxChroma == 3){
+        //   Material.color = new THREE.Color('#FFF100');
+        // } else if (maxChroma == 4){
+        //   Material.color = new THREE.Color('#AFFF00');
+        // } else if (maxChroma == 5){
+        //   Material.color = new THREE.Color('#51FF00');
+        // } else if (maxChroma == 6){
+        //   Material.color = new THREE.Color('#07AF06');
+        // } else if (maxChroma == 7){
+        //   Material.color = new THREE.Color('#00D1BA');
+        // } else if (maxChroma == 8){
+        //   Material.color = new THREE.Color('#0418FF');
+        // } else if (maxChroma == 9){
+        //   Material.color = new THREE.Color('#7F00FF');
+        // } else if (maxChroma == 10){
+        //   Material.color = new THREE.Color('#E300FF');
+        // } else {
+        //   Material.color = new THREE.Color('#FF2CAC');
+        // }
+
         updateGroupGeometry( compoCenter,
           new THREE.RingGeometry(
-            13, energy * 5, 8, 13, 6, maxChroma
+            13, amplitudeSpectrum[1], 8, 13, 6
         ));
         renderer.render(scene, camera);
         requestAnimationFrame(render);
