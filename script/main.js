@@ -108,7 +108,6 @@ var vizInit = function () {
         maxChroma = features['chroma'].indexOf(max(features['chroma']))
         energy = features['energy']
         amplitudeSpectrum = features['amplitudeSpectrum']
-        console.log(maxChroma);
       }
     })
 
@@ -284,12 +283,12 @@ var vizInit = function () {
     }
 
     function changeColorByChromaVolume(color){
-      console.log('COLOR:', color);
       var pitchPoint = document.querySelector('#pitchPoint').innerHTML;
       var rValue = color.toArray()[0];
       var gValue = color.toArray()[1];
       var bValue = color.toArray()[2];
-      
+
+      // 조건을 더 다양화 시켜야함
       if (bValue <= 0.70) {
         bValue = bValue * (10 - pitchPoint) * 0.1
       } else if (rValue <= 0.70) {
@@ -421,11 +420,9 @@ var vizInit = function () {
         
         // // mesh position changing
         // shapeHeartMeshCenter.rotation.z = time * 1.2;
-        // shapeHeartMeshCenter.rotation.y = upperMaxFr * 8;
         shapeHeartMeshCenter.position.y = maxChroma  * 10;
         shapeHeartMeshCenter.position.x = energy * 3;
         // shapeHeartMeshCenter.position.z = Math.sin(time) * 20 + 5;
-        // // shapeHeartMeshCenter.position.y = upperMaxFr * 50;
 
         renderer.render(scene, camera);
         requestAnimationFrame(render);
