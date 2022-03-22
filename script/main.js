@@ -1,12 +1,7 @@
 import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import SimplexNoise from "https://cdn.JsDelivr.net/npm/simplex-noise/dist/esm/simplex-noise.min.js";
-import { BoundingBoxHelper, IntType } from 'three';
-import { setQuaternionFromProperEuler } from 'three/src/math/MathUtils';
 import { pickr } from './pickr.js';
-import { RingGeometry, SphereGeometry, ShapeGeometry } from 'three';
-
 
 let controls;
 let camera, scene, renderer;
@@ -97,7 +92,8 @@ var vizInit = function () {
     var dataArray = new Uint8Array(bufferLength);
 
 
-     // meyda analyser
+    // meyda analyser
+    var chroma = 0;
     var maxChroma = 0;
     var energy = 0;
     var amplitudeSpectrum = 0;
@@ -110,9 +106,9 @@ var vizInit = function () {
       featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
       callback: (features) => {
         maxChroma = features['chroma'].indexOf(max(features['chroma']))
-        console.log(maxChroma);
         energy = features['energy']
         amplitudeSpectrum = features['amplitudeSpectrum']
+        console.log(maxChroma);
       }
     })
 
@@ -172,14 +168,18 @@ var vizInit = function () {
 
 
 
+
     // EVENTS
     var saveButton = document.getElementsByClassName("pcr-save");
-
     const shape_heart = document.getElementById("shape_heart");
+
+    // GEOMETRY
     var now_geometry = '';
     let shape_heart_cnt = 0;
     let button_shape_heart_cnt = 0;
 
+
+    // EVENT LISTENERS
     shape_heart.addEventListener("click", ()=>{
       shape_heart_cnt += 1
       console.log('하트가 눌린 갯수', shape_heart_cnt);
@@ -202,7 +202,7 @@ var vizInit = function () {
        }
     });
     
-    //
+    // RENDER FUNCTION
     function containerRender(){
       container = document.getElementById( "container" );
       renderer = new THREE.WebGLRenderer();
@@ -225,32 +225,94 @@ var vizInit = function () {
       Material.color = new THREE.Color(userColor);
     };
 
+
+
     function changeColorByChroma(Material){
-      if (maxChroma == 0){
-        Material.color = new THREE.Color('#FF0000');
+      // color rendering by pitch
+      var plainRed = new THREE.Color('rgba(247, 152, 152, 1)');
+      var plainRedOrange = new THREE.Color('rgba(247, 189, 152, 1)');
+      var plainOrange = new THREE.Color('rgba(247, 206, 152, 1)');
+      var plainOrangeYellow = new THREE.Color('rgba(205, 159, 59, 1)');
+      var plainYellow = new THREE.Color('rgba(247, 233, 152, 1)');
+      var plainYeondu = new THREE.Color('rgba(203, 247, 152, 1)');
+      var plainGreen = new THREE.Color('rgba(152, 247, 177, 1)');
+      var plainCyan = new THREE.Color('rgba(152, 246, 247, 1)');
+      var plainBlue = new THREE.Color('rgba(152, 179, 247, 1)');
+      var plainViolet = new THREE.Color('rgba(178, 152, 247, 1)');
+      var plainMagenta = new THREE.Color('rgba(241, 152, 247, 1)');
+      var plainPink = new THREE.Color('rgba(247, 152, 213, 1)');
+
+
+      plainRed = changeColorByChromaVolume(plainRed);
+      plainRedOrange = changeColorByChromaVolume(plainRedOrange);
+      plainOrange = changeColorByChromaVolume(plainOrange);
+      plainOrangeYellow = changeColorByChromaVolume(plainOrangeYellow);
+      plainYellow = changeColorByChromaVolume(plainYellow);
+      plainYeondu = changeColorByChromaVolume(plainYeondu);
+      plainGreen = changeColorByChromaVolume(plainGreen);
+      plainCyan = changeColorByChromaVolume(plainCyan);
+      plainBlue = changeColorByChromaVolume(plainBlue);
+      plainViolet = changeColorByChromaVolume(plainViolet);
+      plainMagenta = changeColorByChromaVolume(plainMagenta);
+      plainPink = changeColorByChromaVolume(plainPink);
+
+      if (maxChroma == 0){ 
+        Material.color = plainRed;
       } else if (maxChroma == 1) {
-        Material.color = new THREE.Color('#FF6400');
+        Material.color = plainRedOrange;
       } else if (maxChroma == 2){
-        Material.color = new THREE.Color('#FFA700');
+        Material.color = plainOrange;
       } else if (maxChroma == 3){
-        Material.color = new THREE.Color('#FFF100');
+        Material.color = plainOrangeYellow;
       } else if (maxChroma == 4){
-        Material.color = new THREE.Color('#AFFF00');
+        Material.color = plainYellow;
       } else if (maxChroma == 5){
-        Material.color = new THREE.Color('#51FF00');
+        Material.color = plainYeondu;
       } else if (maxChroma == 6){
-        Material.color = new THREE.Color('#07AF06');
+        Material.color = plainGreen;
       } else if (maxChroma == 7){
-        Material.color = new THREE.Color('#00D1BA');
+        Material.color = plainCyan;
       } else if (maxChroma == 8){
-        Material.color = new THREE.Color('#0418FF');
+        Material.color = plainBlue;
       } else if (maxChroma == 9){
-        Material.color = new THREE.Color('#7F00FF');
+        Material.color = plainViolet;
       } else if (maxChroma == 10){
-        Material.color = new THREE.Color('#E300FF');
+        Material.color = plainMagenta;
       } else {
-        Material.color = new THREE.Color('#FF2CAC');
+        Material.color = plainPink;
       }
+    }
+
+    function changeColorByChromaVolume(color){
+      console.log('COLOR:', color);
+      var pitchPoint = document.querySelector('#pitchPoint').innerHTML;
+      var rValue = color.toArray()[0];
+      var gValue = color.toArray()[1];
+      var bValue = color.toArray()[2];
+      
+      if (bValue <= 0.70) {
+        bValue = bValue * (10 - pitchPoint) * 0.1
+      } else if (rValue <= 0.70) {
+        rValue = rValue * (10 - pitchPoint) * 0.1
+      } else if (gValue <= 0.70) {
+        gValue = gValue * (10 - pitchPoint) * 0.1
+      }
+
+      rValue = Math.floor(rValue * 255)
+      gValue = Math.floor(gValue * 255)
+      bValue = Math.floor(bValue * 255)
+
+      String.prototype.format = function() {
+        var formatted = this;
+        for( var arg in arguments ) {
+            formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+        }
+        return formatted;
+    };
+
+      var colorRGB = "rgba({0}, {1}, {2}, 1)".format(rValue, gValue, bValue);
+      var newColor = new THREE.Color(colorRGB);
+      return newColor
     }
 
 
@@ -293,7 +355,7 @@ var vizInit = function () {
       
       var shapeHeartMaterial = new THREE.MeshBasicMaterial({
           color: '#FFFFFF',
-          wireframe: true
+          wireframe: false
       });
 
       // color
@@ -331,7 +393,9 @@ var vizInit = function () {
       // color rendering
       saveColor();
       changeColor();
+
       changeColorByChroma(Material);
+
 
       // music rendering
       analyser.getByteFrequencyData(dataArray);
@@ -372,8 +436,9 @@ var vizInit = function () {
         
         updateGroupGeometry( compoCenter,
           new THREE.RingGeometry(
-            13, amplitudeSpectrum[1], 8, 13, 6
+            13, amplitudeSpectrum[1], 8, 13, 6, maxChroma
         ));
+        // compoCenter.rotation.z = time * 1.2;
         renderer.render(scene, camera);
         requestAnimationFrame(render);
         audio.play();
@@ -382,7 +447,6 @@ var vizInit = function () {
     }
   }
 }
-
 
 window.onload = vizInit();
 
