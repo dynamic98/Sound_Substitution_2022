@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Vibviz_Tool</title>
+    <title>VibvizTool</title>
     <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
     <link rel="stylesheet" href="style.css">
@@ -15,7 +15,6 @@
     <script type="module" defer src="./script/main.js"></script>
     <script type="module" defer src="./script/pickr.js"></script>
     <script defer src="./script/getAudio.js"></script>
-    <!-- <script defer src=".p5/p5.min.js"></script> -->
 </head>
 
 <body>
@@ -32,7 +31,15 @@
     <div class="customizing">
         <h4 id="musicFeatureTitle"> Music Features </h4>
             <button class="musicButton" type="button"> Pitch </button>
-            <button class="musicButton" type="button"> Timbre </button>
+            <div class="dropdownTimbre">
+                <button class="musicButton" type="button"> Timbre </button>
+                    <div class="dropdown-Timbre">
+                        <p id="timbre_drum"> Drum </p>
+                        <p id="timbre_bass"> Bass </p>
+                        <p id="timbre_vocal"> Vocal </p>
+                    </div>
+            </div>
+
             <button class="musicButton" type="button"> Amplitude </button>
             <button class="musicButton" type="button"> Rhythm </button>
             
@@ -65,13 +72,6 @@
                     </div>
             </div>
 
-            <!-- <div class="dropdownLines">
-                <button class="visualButton" type="button"> Lines </button>
-                    <div class="dropdown-Lines">
-                        <p>Solid</p>
-                        <p>Dotted</p>
-                    </div>
-            </div> -->
     </div>
     <!-- <hr> -->
     <div id="userCustom"></div>

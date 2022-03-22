@@ -26,7 +26,7 @@ h4#title{
     float: right;
     margin-top: 50px;
     font-size: 1.3rem;
-    font-weight: 340;
+    font-weight: 370;
 }
 
 .thetitle::before{
@@ -142,6 +142,11 @@ button.visualButtonColors{
 
 
 
+.dropdownTimbre {
+    position: relative;
+    display: inline-block;
+}
+
 .dropdownShapes {
     position: relative;
     display: inline-block;
@@ -161,6 +166,19 @@ button.visualButtonColors{
     position: relative;
     display: inline-block;
 }
+
+
+
+.dropdown-Timbre{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-weight: 300;
+}
+
 
 .dropdown-Shapes {
     display: none;
@@ -202,6 +220,14 @@ button.visualButtonColors{
     font-weight: 300;
 }
 
+.dropdown-Timbre p {
+    color: black;
+    padding: 12px 10px;
+    text-decoration: none;
+    display: block;
+    font-weight: 300;
+}
+
 .dropdown-Shapes p {
     color: black;
     padding: 12px 10px;
@@ -227,14 +253,11 @@ button.visualButtonColors{
 }
 
 
-.dropdown-Lines p {
-    color: black;
-    padding: 12px 10px;
-    text-decoration: none;
-    display: block;
-    font-weight: 300;
-}
 
+.dropdown-Timbre p:hover {
+    background-color: #ddd;
+    width: 140px;
+}
 
 .dropdown-Shapes p:hover {
     background-color: #ddd;
@@ -251,12 +274,11 @@ button.visualButtonColors{
     width: 140px;
 }
 
-.dropdown-Lines p:hover {
-    background-color: #ddd;
-    width: 140px;
+
+.dropdownTimbre:hover .dropdown-Timbre {
+    display: block;
+    font-weight: 400;
 }
-
-
 
 .dropdownShapes:hover .dropdown-Shapes {
     display: block;
@@ -273,9 +295,5 @@ button.visualButtonColors{
     font-weight: 400;
 }
 
-.dropdownLines:hover .dropdown-Lines {
-    display: block;
-    font-weight: 400;
-}
 
 
