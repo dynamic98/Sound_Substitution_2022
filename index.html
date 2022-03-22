@@ -29,8 +29,16 @@
 
     
     <div class="customizing">
-        <h4 id="musicFeatureTitle"> Music Features </h4>
-            <button class="musicButton" type="button"> Pitch </button>
+        <h4 id="customizeFeatureTitle"> 🍓🍋🫐   Customize Features </h4>
+            <button class="visualButtonColors" type="button"> Colors </button>
+            <div class="dropdownPitch">
+                <button class="musicButton" type="button"> Pitch </button>
+                    <div class="dropdown-Pitch">
+                        <input id="pitchValue" type="range" min="0" max="10" value="0" oninput="document.getElementById('pitchPoint').innerHTML=this.value;"/>
+                        <p id="pitchPoint"></p>
+                    </div>
+            </div>
+
             <div class="dropdownTimbre">
                 <button class="musicButton" type="button"> Timbre </button>
                     <div class="dropdown-Timbre">
@@ -41,10 +49,11 @@
             </div>
 
             <button class="musicButton" type="button"> Amplitude </button>
+
             <button class="musicButton" type="button"> Rhythm </button>
             
-        <h4 id="visualFeatureTitle"> Visual Features </h4>
-            <button class="visualButtonColors" type="button"> Colors </button>
+
+            <!-- <button class="visualButtonColors" type="button"> Colors </button> -->
             <div class="dropdownShapes">
                 <button class="visualButton" type="button"> Shapes </button>
                     <div class="dropdown-Shapes">
@@ -74,6 +83,7 @@
 
     </div>
     <!-- <hr> -->
+    <!--시각화 요소 features-->
     <div id="userCustom"></div>
 
     <!--시각화 output-->

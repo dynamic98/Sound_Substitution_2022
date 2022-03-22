@@ -96,51 +96,67 @@ div#userCustom{
     visibility: hidden;
 }
 
-h4#musicFeatureTitle{
+p#pitchPoint{
+    font-weight: 350;
+    margin-left: 24px;
+}
+
+#pitchPoint::before{
+    content: "Pitch Value:";
+    float: left;
+}
+
+
+
+h4#customizeFeatureTitle{
     margin-top: 40px;
-    margin-left: 40px;
+    margin-left: 230px;
     margin-right: 20px;
     font-weight: 335;
     font-size: 1.2rem;
     float: left;
 }
 
-h4#visualFeatureTitle{
+/* h4#visualFeatureTitle{
     margin-top: 40px;
-    margin-left: 40px;
+    margin-left: 100px;
     margin-right: 20px;
     font-weight: 335;
     font-size: 1.2rem;
     float: left;
-}
+} */
 
 
 
 button.musicButton{
     margin-top: 20px;
-    margin-right: 7px;
-    margin-bottom: 10px;
+    margin-right: 20px;
+    margin-bottom: 30px;
     float: left;
     font-weight: 300;
 }
 
 button.visualButton{
     margin-top: 20px;
-    margin-right: 7px;
-    margin-bottom: 10px;
+    margin-right: 20px;
+    margin-bottom: 30px;
     float: left;
     font-weight: 300;
 }
 
 button.visualButtonColors{
     margin-top: 20px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 20px;
+    margin-bottom: 30px;
     float: left;
     font-weight: 300;
 }
 
 
+.dropdownPitch {
+    position: relative;
+    display: inline-block;
+}
 
 .dropdownTimbre {
     position: relative;
@@ -169,7 +185,8 @@ button.visualButtonColors{
 
 
 
-.dropdown-Timbre{
+
+.dropdown-Pitch{
     display: none;
     position: absolute;
     background-color: #f1f1f1;
@@ -179,6 +196,16 @@ button.visualButtonColors{
     font-weight: 300;
 }
 
+
+.dropdown-Timbre{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-weight: 300;
+}
 
 .dropdown-Shapes {
     display: none;
@@ -220,6 +247,13 @@ button.visualButtonColors{
     font-weight: 300;
 }
 
+
+
+.dropdown-Pitch input {
+    padding: 12px 10px;
+    width: 110px;
+}
+
 .dropdown-Timbre p {
     color: black;
     padding: 12px 10px;
@@ -254,6 +288,10 @@ button.visualButtonColors{
 
 
 
+.dropdown-Pitch input:hover {
+    background-color: #ddd;
+}
+
 .dropdown-Timbre p:hover {
     background-color: #ddd;
     width: 140px;
@@ -275,6 +313,11 @@ button.visualButtonColors{
 }
 
 
+
+.dropdownPitch:hover .dropdown-Pitch {
+    display: block;
+}
+
 .dropdownTimbre:hover .dropdown-Timbre {
     display: block;
     font-weight: 400;
@@ -294,6 +337,4 @@ button.visualButtonColors{
     display: block;
     font-weight: 400;
 }
-
-
 
