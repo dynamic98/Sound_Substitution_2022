@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vibviz_Tool</title>
+    <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>\
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
+    <script defer src=https://cdn.JsDelivr.net/npm/p5></script>
+    <script type="module" defer src="./script/main.js"></script>
+    <script type="module" defer src="./script/pickr.js"></script>
+    <script defer src="./script/getAudio.js"></script>
+</head>
+
+<body>
+    <h4 class="thetitle" id="title"></h4>
+
+    <div id="content">
+        <label for="thefile" class="file"> Choose a Music to Visualize!
+            <input type="file" id="thefile" accept="audio/mp3" />
+        </label>
+        <audio id="audio" controls></audio>
+    </div>
+
+    
+    <div class="customizing">
+        <h4 id="musicFeatureTitle"> Music Features </h4>
+            <button class="musicButton" type="button"> Pitch </button>
+            <button class="musicButton" type="button"> Timbre </button>
+            <button class="musicButton" type="button"> Melody </button>
+            <button class="musicButton" type="button"> Harmony </button>
+            <button class="musicButton" type="button"> Rhythm </button>
+        <h4 id="visualFeatureTitle"> Visual Features </h4>
+            <button class="visualButtonColors" type="button"> Colors </button>
+            <div class="dropdownShapes">
+                <button class="visualButton" type="button"> Shapes </button>
+                    <div class="dropdown-Shapes">
+                        <p>Heart</p>
+                        <p>Circle</p>
+                        <p>Ring</p>
+                    </div>
+            </div>
+
+            <div class="dropdownGeometry">
+                <button class="visualButton" type="button"> Geometry </button>
+                    <div class="dropdown-Geometry">
+                        <p>Box</p>
+                        <p>Ring</p>
+                        <p>Sphere</p>
+                    </div>
+            </div>
+
+            <div class="dropdownParticles">
+                <button class="visualButton" type="button"> Particles </button>
+                    <div class="dropdown-Particles">
+                        <p>Circles</p>
+                        <p>Triangles</p>
+                        <p>Rectangles</p>
+                    </div>
+            </div>
+
+            <div class="dropdownLines">
+                <button class="visualButton" type="button"> Lines </button>
+                    <div class="dropdown-Lines">
+                        <p>Solid</p>
+                        <p>Dotted</p>
+                    </div>
+            </div>
+        
+    </div>
+    <hr>
+    <div id="userCustom"></div>
+
+    <!--시각화 output-->
+    <div id="container"></div>
+</body>
+</html>
