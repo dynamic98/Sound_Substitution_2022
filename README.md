@@ -1,4 +1,5 @@
 # Sound_Substitution_2022
+<<<<<<< HEAD
 Sound Enjoyment for DHH(Deaf and Hard-of-Hearing)
 
 # VibvizTool
@@ -51,3 +52,24 @@ npm install
 ### 앞으로 해야하는 것
 - **music feature, visualize feature 버튼을 누름에 따라 시각화 output 이 변하도록 만들기**
 - 어느 크기의 화면에서나 예쁘게 나오게 반응형 웹으로 만들기(현재는 제 모니터 기준이라 찌부될 가능성 높음 ㅋ)
+=======
+Sound Enjoyment for Deaf and Hearing Impaired Person
+
+## 적게 일하고 많이 벌고 싶어요
+### Visualization part
+#### - using three.js: https://threejs.org/docs/
+
+visual studio code에서 p5 관련 실행하려면 확장에서 p5.vscode를 설치해야 할듯. <br/>
+![p5vscode](https://user-images.githubusercontent.com/43838273/156589966-9eafcc56-7f7c-4b77-abd5-9302c56912cd.PNG)<br/>
+해당 방법으로 설치 <br/>
+
+~~p5 설치: npm i p5 <br/>~~ <br/>
+p5 library is contained in Visualization_mapping folder <br/>
+express 설치: npm i express <br/>
+#### - using p5.js: https://p5js.org/ko/
+#### Visualization_mapping/sketch.js 사용예시
+- $ node index.js <br/>
+![sketch 예시](https://user-images.githubusercontent.com/43838273/156589105-fea9ece7-9a6d-4159-bc61-dd1f19bc2467.PNG)
+
+### Haptic Tactile Part
+>>>>>>> haptic
