@@ -1,8 +1,10 @@
 'use strict';
 
+
 // Create an instance
 var wavesurfer;
-
+var ch0_data
+var ch1_data
 // Init & load audio file
 document.addEventListener('DOMContentLoaded', function() {
     // Init
@@ -16,68 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load audio from URL
     wavesurfer.load('./assets/beat.mp3');
 
-    // Equalizer
-    wavesurfer.on('ready', function() {
-        let EQ = [
-            {
-                f: 32,
-                type: 'lowshelf'
-            },
-            {
-                f: 64,
-                type: 'peaking'
-            },
-            {
-                f: 125,
-                type: 'peaking'
-            },
-            {
-                f: 250,
-                type: 'peaking'
-            },
-            {
-                f: 500,
-                type: 'peaking'
-            },
-            {
-                f: 1000,
-                type: 'peaking'
-            },
-            {
-                f: 2000,
-                type: 'peaking'
-            },
-            {
-                f: 4000,
-                type: 'peaking'
-            },
-            {
-                f: 8000,
-                type: 'peaking'
-            },
-            {
-                f: 16000,
-                type: 'highshelf'
-            }
-        ];
-
-        // Create filters
-        let filters = EQ.map(function(band) {
-            let filter = wavesurfer.backend.ac.createBiquadFilter();
-            filter.type = band.type;
-            filter.gain.value = 0;
-            filter.Q.value = 1;
-            filter.frequency.value = band.f;
-            return filter;
-        });
-
-        // Connect filters to wavesurfer
-        wavesurfer.backend.setFilters(filters);
-
-        // For debugging
-        wavesurfer.filters = filters;
-    });
-
     // Log errors
     wavesurfer.on('error', function(msg) {
         console.log(msg);
@@ -87,44 +27,85 @@ document.addEventListener('DOMContentLoaded', function() {
     document
         .querySelector('[data-action="play"]')
         .addEventListener('click', wavesurfer.playPause.bind(wavesurfer));
-    
-    document
-    .querySelector('[data-action="peaks"]')
-    .addEventListener('click', function() {
-        // load peaks from JSON file. See https://wavesurfer-js.org/faq/
-        // for instructions on how to generate peaks
-            console.log('loaded peaks!');
-            console.log(wavesurfer.backend.mergedPeaks);
 
-            // load peaks into wavesurfer.js
-            // wavesurfer.load('./assets/beat.mp3', [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1]);
-            // wavesurfer.load('./assets/beat.mp3', wavesurfer.backend.mergedPeaks);
-            wavesurfer.backend.setPeaks([1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1]);
-            // wavesurfer.backend.setPeaks(wavesurfer.backend.mergedPeaks);
-            wavesurfer.drawBuffer();
-            // document.body.scrollTop = 0;
-        });
-
-    document
-    .querySelector('[data-action="lowfilter"]')
-    .addEventListener('click', function() {
-        // load peaks from JSON file. See https://wavesurfer-js.org/faq/
-        // for instructions on how to generate peaks
-        // TODO: Change it to bandpass filter
-            var lowwpass = wavesurfer.backend.ac.createBiquadFilter();
-            console.log('lowpass-filter');
-            lowwpass.frequency.value = 150;
-            console.log(lowwpass);
-            console.log(wavesurfer.backend.buffer);
-            wavesurfer.backend.setFilter(lowwpass);
-            console.log(wavesurfer.backend.buffer);
-        });
+    // document
+    // .querySelector('[data-action="lowfilter"]')
+    // .addEventListener('click', function() {
+    //     // load peaks from JSON file. See https://wavesurfer-js.org/faq/
+    //     // for instructions on how to generate peaks
+    //     // TODO: Change it to bandpass filter
+    //         var lowwpass = wavesurfer.backend.ac.createBiquadFilter();
+    //         console.log('lowpass-filter');
+    //         lowwpass.frequency.value = 100;
+    //         console.log(lowwpass);
+    //         console.log(wavesurfer.backend.buffer);
+    //         wavesurfer.backend.setFilter(lowwpass);
+    //         console.log(wavesurfer.backend.buffer);
+    //     });
 
     document
     .querySelector('[data-action="test"]')
     .addEventListener('click', function() {
-            console.log(wavesurfer.backend.data);
+        console.log(wavesurfer.getDuration());
+        console.log(wavesurfer.backend.buffer.sampleRate);
+        console.log(wavesurfer.backend.buffer.length);
+        console.log(wavesurfer.backend.buffer.numberOfChannels);
+        // console.log(wavesurfer.backend.mergedPeaks);
+        
+        ch0_data = wavesurfer.backend.buffer.getChannelData(0);
+        ch1_data = wavesurfer.backend.buffer.getChannelData(1);
+        // vocal, drum, guit, bass, inst
+        wavesurfer.load('./assets/bass.mp3');
+
+        // wavesurfer.backend.buffer.copyToChannel(ch0_data, 0);
+        // wavesurfer.backend.buffer.copyToChannel(ch1_data, 1);
+        
+        // wavesurfer.loadDecodedBuffer(wavesurfer.backend.buffer);
     });
+
+    document
+    .querySelector('[data-action="test2"]')
+    .addEventListener('click', function() {
+        console.log(wavesurfer.getDuration());
+        console.log(wavesurfer.backend.buffer.sampleRate);
+        console.log(wavesurfer.backend.buffer.length);
+        console.log(wavesurfer.backend.buffer.numberOfChannels);
+
+        ch0_data = wavesurfer.backend.buffer.getChannelData(0);
+        ch1_data = wavesurfer.backend.buffer.getChannelData(1);
+
+        const hz = 100;
+        const volume = 1.0;
+        const sineWaveArray = new Float32Array(wavesurfer.backend.buffer.length);
+        var i;
+        var sampleTime;
+
+        for (i = 0; i < sineWaveArray.length; i++) {
+            sampleTime = i / wavesurfer.backend.buffer.sampleRate;
+            // sineWaveArray[i] = Math.sin(Math.asin(ch0_data[i])* hz) * volume;
+            // sineWaveArray[i] = Math.sin(Math.asin(ch0_data[i])* Math.PI * 2) * volume;
+            sineWaveArray[i] = Math.sin(sampleTime * Math.PI * 2 * hz) * volume;
+        }
+        
+        const ch0_haptic = new Float32Array(wavesurfer.backend.buffer.length);
+        const ch1_haptic = new Float32Array(wavesurfer.backend.buffer.length);
+
+        for (i = 0; i < sineWaveArray.length; i++) {
+            ch0_haptic[i] = sineWaveArray[i]*Math.abs(ch0_data[i]);
+            ch1_haptic[i] = sineWaveArray[i]*Math.abs(ch1_data[i]);
+            // ch0_haptic[i] = sineWaveArray[i];
+            // ch1_haptic[i] = sineWaveArray[i];
+        }
+        console.log(ch1_haptic)
+        wavesurfer.backend.buffer.copyToChannel(ch0_haptic, 0);
+        wavesurfer.backend.buffer.copyToChannel(ch1_haptic, 1);
+        
+        wavesurfer.loadDecodedBuffer(wavesurfer.backend.buffer);
+
+        // console.log(wavesurfer.backend.data);
+        // wavesurfer.load(osc)
+    });
+
     // Progress bar
     (function() {
         const progressDiv = document.querySelector('#progress-bar');
