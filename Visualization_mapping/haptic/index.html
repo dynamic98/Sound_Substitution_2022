@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>wavesurfer.js | Equalizer Example</title>
+        <title>Haptic Pattern test</title>
 
         <link href="data:image/gif;" rel="icon" type="image/x-icon" />
 
@@ -38,6 +38,7 @@
                 </div>
 
                 <div class="controls">
+                    <hr />
                     <button class="btn btn-primary" data-action="play">
                         <i class="glyphicon glyphicon-play"></i>
                         Play
@@ -45,16 +46,65 @@
                         <i class="glyphicon glyphicon-pause"></i>
                         Pause
                     </button>
-
-                    <button class="btn btn-primary" data-action="peaks">
-                        Peaks
-                    </button>
-                    <button class="btn btn-primary" data-action="lowfilter">
-                        lowpass
-                    </button>
                     <button class="btn btn-primary" data-action="test">
-                        Test
+                        Select Instroments
                     </button>
+                    <button class="btn btn-primary" data-action="test2">
+                        toHaptic
+                    </button>
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            &larr; Empty
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- Panner -->
+                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                        </div>
+                        <div class="col-sm-4">
+                            Full vibration &rarr;
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-4">
+                            &larr; Rough
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- Panner -->
+                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                        </div>
+                        <div class="col-sm-4">
+                            Sharp &rarr;
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-4">
+                            &larr; Week
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- Panner -->
+                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                        </div>
+                        <div class="col-sm-4">
+                            Strong &rarr;
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-4">
+                            &larr; Asymmetry
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- Panner -->
+                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                        </div>
+                        <div class="col-sm-4">
+                            Symmetry &rarr;
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
