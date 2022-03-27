@@ -93,21 +93,30 @@ var vizInit = function () {
 
 
     // meyda analyser
-    var chroma = 0;
+    var mfcc = 0;
     var maxChroma = 0;
-    var energy = 0;
+    var energy = '';
     var amplitudeSpectrum = 0;
+    var rms = 0;
     // var powerSpectrum = 0;
 
     const meyda_analyser = Meyda.createMeydaAnalyzer({
       audioContext: context,
       source: src,
       buffersize: 64,
-      featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
+      featureExtractors: ["energy", "chroma", "amplitudeSpectrum", "mfcc", "rms"],
       callback: (features) => {
-        maxChroma = features['chroma'].indexOf(max(features['chroma']))
-        energy = features['energy']
-        amplitudeSpectrum = features['amplitudeSpectrum']
+        maxChroma = features['chroma'].indexOf(max(features['chroma']));
+        energy = features['energy'];
+        amplitudeSpectrum = features['amplitudeSpectrum'];
+        mfcc = features['mfcc'];
+        console.log('chroma(pitch):', features['chroma']);
+        console.log('max chroma(pitch):', maxChroma);
+        console.log('amplitude spectrum:', amplitudeSpectrum);
+        console.log('mfcc:', mfcc);
+        console.log('rms(loudness):', rms);
+        console.log('energy:', energy);
+        console.log('             ');
       }
     })
 
@@ -354,7 +363,7 @@ var vizInit = function () {
       
       var shapeHeartMaterial = new THREE.MeshBasicMaterial({
           color: '#FFFFFF',
-          wireframe: false
+          wireframe: true
       });
 
       // color
@@ -384,7 +393,6 @@ var vizInit = function () {
       scene.add(group);
       return shapeHeartMeshCenter
   }
-
 
     // * 중요 * 렌더링 할 때 시각화 output 의 요소를 바꿔주기
     // * 중요 * 버튼 하나를 클릭할 때마다 렌더링이 된다
@@ -467,4 +475,3 @@ function avg(arr){
 function max(arr){
   return arr.reduce(function(a, b){ return Math.max(a, b); })
 }
-
