@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <script type="text/javascript" src="https://unpkg.com/meyda@<VERSION>/dist/web/meyda.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>\
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
     <script type="module" defer src="./script/main.js"></script>
     <script type="module" defer src="./script/pickr.js"></script>
@@ -27,62 +27,87 @@
         <audio id="audio" controls></audio>
     </div>
 
-    
-    <div class="customizing">
-        <h4 id="customizeFeatureTitle"> 🍓🍋🫐   Customize Features </h4>
-            <button class="visualButtonColors" type="button"> Colors </button>
+    <div class="haptic_customizing">
+        <h2 id="customizeFeatureTitle"> 🌻  Haptic Patterns 🌻 </h2>
+            <div class="dropdownTempo">
+                <h3 class="hapticFeature"> Tempo(Rhythm) </h3>
+                <div class="dropdown-Tempo">
+                    <input id="tempoValue" type="range" min="0" max="20" value="0" oninput="document.getElementById('tempoPoint').innerHTML=this.value;"/>
+                    <p id="tempoPoint"></p>
+                </div>
+            </div>
+            <hr>
+            <div class="dropdownFrequency">
+                <h3 class="hapticFeature"> Frequency </h3>
+                    <div class="dropdown-Frequency">
+                        <input id="frequencyValue" type="range" min="0" max="20" value="0" oninput="document.getElementById('frequencyPoint').innerHTML=this.value;"/>
+                        <p id="frequencyPoint"></p>
+                    </div>
+            </div>
+            <hr>
+            <div class="dropdownAmplitude">
+                <h3 class="hapticFeature"> Amplitude </h3>
+                    <div class="dropdown-Amplitude">
+                        <input id="amplitudeValue" type="range" min="0" max="20" value="0" oninput="document.getElementById('amplitudePoint').innerHTML=this.value;"/>
+                        <p id="amplitudePoint"></p>
+                    </div>
+            </div>
+            <hr>
+            <div class="dropdownTimbre">
+                <h3 class="hapticFeature"> Timbre </h3>
+                <div class="dropdown-Timbre">
+                    <input id="timbreValue" type="range" min="0" max="20" value="0" oninput="document.getElementById('timbrePoint').innerHTML=this.value;"/>
+                    <p id="timbrePoint"></p>
+                </div>
+            </div>
+
+
+    </div>
+
+    <div class="visual_customizing">
+        <h2 id="customizeFeatureTitle"> 🌻  Visualization 🌻 </h2>
             <div class="dropdownPitch">
-                <button class="musicButton" type="button"> Pitch </button>
+                <h3 class="visualFeature"> Background </h3>
+                <button class="visualButtonColors" type="button"> Colors </button>
+            </div>
+
+            <div class="dropdownPitch">
+                <h3 class="visualFeature"> Pitch </h3>
                     <div class="dropdown-Pitch">
                         <input id="pitchValue" type="range" min="0" max="10" value="0" oninput="document.getElementById('pitchPoint').innerHTML=this.value;"/>
                         <p id="pitchPoint"></p>
                     </div>
             </div>
-
+            <br>
             <div class="dropdownTimbre">
-                <button class="musicButton" type="button"> Timbre </button>
+                <h3 class="visualFeature"> Timbre </h3>
                     <div class="dropdown-Timbre">
-                        <p id="timbre_drum"> Drum </p>
-                        <p id="timbre_bass"> Bass </p>
-                        <p id="timbre_vocal"> Vocal </p>
+                        <button id="timbre_drum"> Drum </button>
+                        <button id="timbre_bass"> Bass </button>
+                        <button id="timbre_vocal"> Vocal </button>
+                    </div>
+            </div>
+            <br>
+            <!-- <button class="musicButton" type="button"> Amplitude </button>
+            <button class="musicButton" type="button"> Rhythm </button> -->
+
+            <div class="dropdownDynamics">
+                <h3 class="visualFeature"> Dynamics </h3>
+                    <div class="dropdown-Dynamics">
+                        <button>Sphere</button>
+                        <button>Box</button>
+                        <button>Ring</button>
+                        <br>
+                        <button>Torus</button>
+                        <button>Capsule</button>
+                        <button id="shape_heart">Heart</button>
                     </div>
             </div>
 
-            <button class="musicButton" type="button"> Amplitude </button>
-
-            <button class="musicButton" type="button"> Rhythm </button>
-            
-
-            <!-- <button class="visualButtonColors" type="button"> Colors </button> -->
-            <div class="dropdownShapes">
-                <button class="visualButton" type="button"> Shapes </button>
-                    <div class="dropdown-Shapes">
-                        <p id="shape_heart">Heart</p>
-                        <p id="shape_circle" >Circle</p>
-                        <p id="shape_ring" >Ring</p>
-                    </div>
-            </div>
-
-            <div class="dropdownGeometry">
-                <button class="visualButton" type="button"> Geometry </button>
-                    <div class="dropdown-Geometry">
-                        <p id="geo_box">Box</p>
-                        <p id="geo_cone">Cone</p>
-                        <p id="geo_sphere">Sphere</p>
-                    </div>
-            </div>
-
-            <div class="dropdownParticles">
-                <button class="visualButton" type="button"> Particles </button>
-                    <div class="dropdown-Particles">
-                        <p>Circles</p>
-                        <p>Triangles</p>
-                        <p>Rectangles</p>
-                    </div>
-            </div>
 
     </div>
-    <hr>
+
+
     <!--시각화 요소 features-->
     <div id="userCustom"></div>
 

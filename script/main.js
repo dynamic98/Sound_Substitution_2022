@@ -16,12 +16,13 @@ animate();
 // init function
 function init() {
     container = document.getElementById( "container" );
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({ alpha: false, antialias: false });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(800, 800);
+    // renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     container.appendChild(renderer.domElement);
-
+    console.log('renderer uploaded!')
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 20000);
     camera.position.set(1, 20, 100);
@@ -63,6 +64,7 @@ var vizInit = function () {
   var file = document.getElementById("thefile");
   var audio = document.getElementById("audio");
   var fileLabel = document.querySelector("label.file");
+
   document.onload = function(e){
     audio.play();
     play();
@@ -110,13 +112,6 @@ var vizInit = function () {
         energy = features['energy'];
         amplitudeSpectrum = features['amplitudeSpectrum'];
         mfcc = features['mfcc'];
-        console.log('chroma(pitch):', features['chroma']);
-        console.log('max chroma(pitch):', maxChroma);
-        console.log('amplitude spectrum:', amplitudeSpectrum);
-        console.log('mfcc:', mfcc);
-        console.log('rms(loudness):', rms);
-        console.log('energy:', energy);
-        console.log('             ');
       }
     })
 
@@ -129,8 +124,8 @@ var vizInit = function () {
     scene.add(camera);
   
 
-    var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    var renderer = new THREE.WebGLRenderer({ alpha: false, antialias: false });
+    renderer.setSize(700, 700);
 
     // Geometry
     var Geometry = new THREE.RingGeometry(13, 10, 8, 13, 6, 6.283185307179586);
@@ -350,7 +345,7 @@ var vizInit = function () {
       const y = 0;
   
       const heartShape = new THREE.Shape();
-  
+      
       heartShape.moveTo( x + 5, y + 5 );
       heartShape.bezierCurveTo( x + 5, y + 5, x + 4, y, x, y );
       heartShape.bezierCurveTo( x - 6, y, x - 6, y + 7,x - 6, y + 7 );
@@ -398,7 +393,7 @@ var vizInit = function () {
     // * 중요 * 버튼 하나를 클릭할 때마다 렌더링이 된다
     function render() {
       // color rendering
-      saveColor();
+      // saveColor();
       changeColor();
 
       changeColorByChroma(Material);
