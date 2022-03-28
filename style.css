@@ -74,7 +74,10 @@ label.file{
   
     cursor: pointer;
   }
-  
+
+div#container{
+      margin-left: 100px;
+  }
   
 label.file:hover{
     background: #FFC300;

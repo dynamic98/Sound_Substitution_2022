@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Bind play/pause button
     document
         .querySelector('[data-action="play"]')
-        .addEventListener('click', wavesurfer.playPause.bind(wavesurfer));
+        .addEventListener('click', ()=>{
+            wavesurfer.playPause.bind(wavesurfer)
+        });
 
     // document
     // .querySelector('[data-action="lowfilter"]')
@@ -46,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document
     .querySelector('[data-action="test"]')
     .addEventListener('click', function() {
+
         console.log(wavesurfer.getDuration());
         console.log(wavesurfer.backend.buffer.sampleRate);
         console.log(wavesurfer.backend.buffer.length);
@@ -55,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ch0_data = wavesurfer.backend.buffer.getChannelData(0);
         ch1_data = wavesurfer.backend.buffer.getChannelData(1);
         // vocal, drum, guit, bass, inst
-        wavesurfer.load('./assets/bass.mp3');
+        // wavesurfer.load('./assets/bass.mp3');
 
         // wavesurfer.backend.buffer.copyToChannel(ch0_data, 0);
         // wavesurfer.backend.buffer.copyToChannel(ch1_data, 1);
