@@ -12,7 +12,6 @@ html, body{
     background: linear-gradient(135deg, var(--bgColor), var(--bgColorLight));
     color: var(--textColor);
     font-family: 'Saira', sans-serif;
-    /* position: relative; */
 }
 
 div#content{
@@ -78,7 +77,7 @@ label.file{
   
   
 label.file:hover{
-    background: #FFC300;
+    background: rgb(255, 255, 96);
     opacity: 0.8;
     transform: translate3d(-50%, -55%, 0);
     font-size: 1.5rem;
@@ -91,8 +90,16 @@ label.file:active{
     font-weight: 300;
 }
 
-hr{
-    margin: 30px;
+hr#hapticHR{
+    width: 340px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+hr#visualHR{
+    width: 340px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 
@@ -175,10 +182,10 @@ button.visualButtonColors{
 
 
 canvas{
-    margin-top: 100px;
+    background-color: black;
+    margin-top: 110px;
     margin-left: 100px;
     margin-bottom: 10000px;
-    visibility: visible;
 }
 
 
@@ -189,14 +196,14 @@ div#container{
 
 .visual_customizing{
     margin-top: 100px;
-    margin-left: 40px;
+    margin-left: 10px;
     margin-right: 150px;      
     float: right;
 }
 
 .haptic_customizing{
     margin-top: 100px;
-    margin-right: 250px;
+    margin-right: 200px;
     float: right;
 }
 

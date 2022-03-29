@@ -223,9 +223,9 @@ var vizInit = function () {
       })
     };
 
-    function changeColor(){
+    function changeBGColor(){
       var userColor = document.querySelector('#userCustom').innerHTML;
-      Material.color = new THREE.Color(userColor);
+      scene.background = new THREE.Color(userColor);
     };
 
 
@@ -340,6 +340,8 @@ var vizInit = function () {
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 20000);
       camera.position.set(1, 20, 100);
+      saveColor();
+      changeBGColor();
 
       const x = 0;
       const y = 0;
@@ -362,8 +364,8 @@ var vizInit = function () {
       });
 
       // color
-      var userColor = document.querySelector('#userCustom').innerHTML;
-      shapeHeartMaterial.color = new THREE.Color(userColor);
+      // var userColor = document.querySelector('#userCustom').innerHTML;
+      // shapeHeartMaterial.color = new THREE.Color(userColor);
       changeColorByChroma(shapeHeartMaterial);
 
       // mesh position
@@ -393,8 +395,8 @@ var vizInit = function () {
     // * 중요 * 버튼 하나를 클릭할 때마다 렌더링이 된다
     function render() {
       // color rendering
-      // saveColor();
-      changeColor();
+      saveColor();
+      changeBGColor();
 
       changeColorByChroma(Material);
 
