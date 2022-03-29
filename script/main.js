@@ -7,8 +7,8 @@ let controls;
 let camera, scene, renderer;
 let container, stats;
 
-var CANVAS_WIDTH = 300;
-var CANVAS_HEIGHT = 300;
+// var CANVAS_WIDTH = 300;
+// var CANVAS_HEIGHT = 300;
 
 const shape_heart = document.getElementById("shape_heart");
 const shape_ring = document.getElementById("shape_ring");
@@ -26,6 +26,8 @@ var chroma, maxChroma,energy, amplitudeSpectrum;
 init();
 vizInit();
 animate();
+
+
 // REQUIRED FUNCTIONS
 // init function
 function init() {
@@ -34,7 +36,7 @@ function init() {
 
     renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize( window.innerWidth/2, window.innerHeight/2 );
+    renderer.setSize(window.innerWidth/2.4, window.innerHeight/1.3);
     container = document.getElementById( "container" );
     container.appendChild( renderer.domElement )
 
@@ -77,52 +79,55 @@ function init() {
 
 // animate function
 function animate() {
-    requestAnimationFrame(animate);
-    // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
-    changeColorByChroma(material);
+  saveColor();
+  changeBGColor();
+  requestAnimationFrame(animate);
+  // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
 
-    // music rendering
-    if (dataArray){
-    analyser.getByteFrequencyData(dataArray);
-    var lowerHalfArray = dataArray.slice(0, (dataArray.length/2) - 1);
-    var upperHalfArray = dataArray.slice((dataArray.length/2) - 1, dataArray.length - 1);
+  // music rendering
+  if (dataArray){
+  analyser.getByteFrequencyData(dataArray);
+  var lowerHalfArray = dataArray.slice(0, (dataArray.length/2) - 1);
+  var upperHalfArray = dataArray.slice((dataArray.length/2) - 1, dataArray.length - 1);
 
-    var overallAvg = avg(dataArray);
-    var lowerMax = max(lowerHalfArray);
-    var lowerAvg = avg(lowerHalfArray);
-    var upperMax = max(upperHalfArray);
-    var upperAvg = avg(upperHalfArray);
+  var overallAvg = avg(dataArray);
+  var lowerMax = max(lowerHalfArray);
+  var lowerAvg = avg(lowerHalfArray);
+  var upperMax = max(upperHalfArray);
+  var upperAvg = avg(upperHalfArray);
 
-    var lowerMaxFr = lowerMax / lowerHalfArray.length;
-    var lowerAvgFr = lowerAvg / lowerHalfArray.length;
-    var upperMaxFr = upperMax / upperHalfArray.length;
-    var upperAvgFr = upperAvg / upperHalfArray.length;
+  var lowerMaxFr = lowerMax / lowerHalfArray.length;
+  var lowerAvgFr = lowerAvg / lowerHalfArray.length;
+  var upperMaxFr = upperMax / upperHalfArray.length;
+  var upperAvgFr = upperAvg / upperHalfArray.length;
 
-    var time = performance.now() * 0.0001;
+  var time = performance.now() * 0.0001;
 
-    // SHAPE (HEART) Rendering
-    if (now_geometry == 'shape_heart') {
-      createShapeHeart();
-      
-      compoCenter.position.y = maxChroma  * 10;
-      compoCenter.position.x = energy * 3;
+  // SHAPE (HEART) Rendering
+  if (now_geometry == 'shape_heart') {
+    deleteBasics();
+    createShapeHeart();
+    
+    compoCenter.position.y = maxChroma  * 10;
+    compoCenter.position.x = energy * 3;
 
-      console.log('rendering finished!');
+    console.log('rendering finished!');
 
-    } else if (now_geometry == 'shape_ring') { 
-        updateGroupGeometry( compoCenter,
-        new THREE.RingGeometry(
-          13, amplitudeSpectrum[1], 8, 13, 6, maxChroma
-      ));
-      }
-
-      // audio.play();
-
-    // 
-    render();
+  } else if (now_geometry == 'shape_ring') { 
+      updateGroupGeometry( compoCenter,
+      new THREE.RingGeometry(
+        13, amplitudeSpectrum[1], 8, 13, 6, maxChroma
+    ));
     }
-    stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
+
+    // audio.play();
+
+  // 
+  changeColorByChroma(material);
+  render();
   }
+  stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
+}
 
 
 // render function
@@ -177,7 +182,7 @@ function createShapeRing(){
 }
 
 function deleteBasics(){
-  console.log(scene);
+//   console.log(scene);
   group.parent.remove(group);
   group = new THREE.Group();
   scene.add(group);
@@ -185,13 +190,17 @@ function deleteBasics(){
   compoCenter.geometry.dispose();
   compoCenter.material.dispose();
 
-  console.log("deleteBasics");
+//   console.log("deleteBasics");
 }
+
+
 
 function updateGroupGeometry( mesh, geometry ) {
   mesh.geometry.dispose();
   mesh.geometry = geometry;
 }
+
+
 
 // LOAD MUSIC (vizIntit)
 function vizInit() {
@@ -245,6 +254,7 @@ function vizInit() {
   });
 }
 
+
 function play() {
   analyser = context.createAnalyser();
   src.connect(analyser);
@@ -273,6 +283,19 @@ function play() {
   })
   meyda_analyser.start();
 }
+
+function saveColor(){
+  pickr.on('save', (color, instance) => {
+  const userColor = color.toHEXA().toString();
+  document.querySelector('#userCustom').innerHTML = userColor;
+})
+}
+
+function changeBGColor(){
+var userColor = document.querySelector('#userCustom').innerHTML;
+scene.background = new THREE.Color(userColor);
+}
+
 
 function changeColorByChroma(Material){
   // color rendering by pitch
@@ -382,4 +405,3 @@ function avg(arr){
 function max(arr){
   return arr.reduce(function(a, b){ return Math.max(a, b); })
 }
-
