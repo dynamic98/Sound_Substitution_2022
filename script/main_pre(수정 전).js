@@ -226,7 +226,6 @@
 //     function changeBGColor(){
 //       var userColor = document.querySelector('#userCustom').innerHTML;
 //       scene.background = new THREE.Color(userColor);
-//       console.log('여기에요 여기!!!', scene.children)
 //     };
 
 

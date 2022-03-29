@@ -36,10 +36,11 @@ h4#title{
 
 audio {
     position: fixed;
-    visibility: hidden;
-    left: 10px;
-    bottom: -10px;
-    width: calc(100% - 20px);
+    visibility: visible;
+    left: 90px;
+    bottom: 10px;
+    width: 910px;
+    height: 500px;
 }
   
 audio.playing{

@@ -80,6 +80,10 @@ function init() {
 
 // animate function
 function animate() {
+    // color rendering
+    saveColor();
+    changeBGColor();
+
     requestAnimationFrame(animate);
     // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
     changeColorByChroma(material);
@@ -105,8 +109,9 @@ function animate() {
 
     // SHAPE (HEART) Rendering
     if (now_geometry == 'shape_heart') {
-      deleteBasics();
-      createShapeHeart();
+      deleteBasics();     // 기존 group 삭제
+      createShapeHeart(); // 새로운 하트 만들기
+      changeColorByChroma(material); // 색깔 바꾸기
       
       compoCenter.position.y = maxChroma  * 10;
       compoCenter.position.x = energy * 3;
@@ -140,7 +145,7 @@ function createShapeHeart(){
   var x = 0;
   var y = 0;
   var heartShape = new THREE.Shape();
-
+  
   heartShape.moveTo( x + 5, y + 5 );
   heartShape.bezierCurveTo( x + 5, y + 5, x + 4, y, x, y );
   heartShape.bezierCurveTo( x - 6, y, x - 6, y + 7,x - 6, y + 7 );
@@ -154,13 +159,14 @@ function createShapeHeart(){
       color: '#FFFFFF',
       wireframe: false
   });
+
+
   compoCenter = new THREE.Mesh(geometry, material);
   compoCenter.position.set(0, 0, 0);
   spotLight.lookAt(compoCenter);
 
-  // group = new THREE.Group();
   group.add( compoCenter );
-  // scene.add( group );
+
 }
 
 
@@ -282,6 +288,21 @@ function play() {
   })
   meyda_analyser.start();
 }
+
+
+// COLOR SAVE & CHANGE FUNCTION on Pickr
+function saveColor(){
+    pickr.on('save', (color, instance) => {
+    const userColor = color.toHEXA().toString();
+    document.querySelector('#userCustom').innerHTML = userColor;
+  })
+};
+
+function changeBGColor(){
+  var userColor = document.querySelector('#userCustom').innerHTML;
+  scene.background = new THREE.Color(userColor);
+};
+
 
 function changeColorByChroma(Material){
   // color rendering by pitch
