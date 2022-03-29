@@ -9,7 +9,7 @@ Sound Enjoyment for DHH(Deaf and Hard-of-Hearing)
 - **pickr** (컬러판, https://simonwep.github.io/pickr/)
 - **meyda** (audio feature 추출, https://meyda.js.org/audio-features)
 
-<img width="1200" src="https://user-images.githubusercontent.com/59073612/156991563-8cf7596e-d485-4ef2-9f9b-ca69078ca595.gif">
+<img width="1200" src="https://user-images.githubusercontent.com/59073612/160543795-e1b5c012-87c6-468e-8f50-88ddbb27182f.gif">
 
 ### Install Requirements on the NPM
 ```
@@ -38,6 +38,7 @@ npm install
 - Visual Feature 와 Colors 메뉴 유저의 선택에 따라 실시간으로 변경 (03/14)
 - meyda 를 사용해 Audio Feature 추출, energy + chroma(= pitch) 를 사용해 시각화 적용 (03/15)
 - meyda 를 사용해 Audio Feature 추출, pitch, amplitude 에 따른 시각화 적용 (03/21)
+- 메뉴 인터페이스 수정(시각+햅틱 추가), 버튼에 따라 geometry 다르게 송출, 배경색 수정 (03/29)
 
 
 ### 지금까지 구현한 것
