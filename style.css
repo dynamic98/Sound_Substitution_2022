@@ -38,9 +38,8 @@ audio {
     position: fixed;
     visibility: visible;
     left: 90px;
-    bottom: 10px;
+    bottom: 40px;
     width: 910px;
-    height: 500px;
 }
   
 audio.playing{
@@ -184,7 +183,7 @@ button.visualButtonColors{
 
 canvas{
     background-color: black;
-    margin-top: 110px;
+    margin-top: 40px;
     margin-left: 100px;
     margin-bottom: 10000px;
 }
@@ -196,14 +195,14 @@ div#container{
 }
 
 .visual_customizing{
-    margin-top: 100px;
+    margin-top: 40px;
     margin-left: 10px;
     margin-right: 150px;      
     float: right;
 }
 
 .haptic_customizing{
-    margin-top: 100px;
+    margin-top: 40px;
     margin-right: 170px;
     float: right;
 }
