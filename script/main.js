@@ -7,11 +7,12 @@ let controls;
 let camera, scene, renderer;
 let container, stats;
 
-// var CANVAS_WIDTH = 300;
-// var CANVAS_HEIGHT = 300;
-
 const shape_heart = document.getElementById("shape_heart");
 const shape_ring = document.getElementById("shape_ring");
+const shape_sphere = document.getElementById("shape_sphere");
+const shape_box = document.getElementById("shape_box");
+const shape_torus = document.getElementById("shape_torus");
+const shape_cone = document.getElementById("shape_cone");
 
 var now_geometry;
 var group, geometry, material, compoCenter;
@@ -109,27 +110,55 @@ function animate() {
 
     // SHAPE (HEART) Rendering
     if (now_geometry == 'shape_heart') {
-      deleteBasics();     // 기존 group 삭제
-      createShapeHeart(); // 새로운 하트 만들기
-      changeColorByChroma(material); // 색깔 바꾸기
-      
-      compoCenter.position.y = maxChroma  * 10;
-      compoCenter.position.x = energy * 3;
-
-      console.log('rendering finished!');
+      deleteBasics();     
+      createShapeHeart(); 
+      changeColorByChroma(material); 
+      compoCenter.position.x = maxChroma  * 10;
+      compoCenter.position.y = energy * 3;
 
     } else if (now_geometry == 'shape_ring') { 
+        deleteBasics();
+        createShapeSphere();
+        changeColorByChroma(material);
         updateGroupGeometry( compoCenter,
-        new THREE.RingGeometry(
-          13, amplitudeSpectrum[1], 8, 13, 6, maxChroma
+          new THREE.RingGeometry(
+            13, energy, 8, 13, 6.283, 6.283
+        ));
+    } else if (now_geometry == 'shape_sphere') { 
+        deleteBasics();
+        createShapeSphere();
+        changeColorByChroma(material);
+        updateGroupGeometry( compoCenter,
+          new THREE.SphereGeometry(
+            energy * 0.5, 64, 32, 0, 6.283, 6.283, 6.283
+        ));
+    } else if (now_geometry == 'shape_box') { 
+        deleteBasics();
+        createShapeBox();
+        changeColorByChroma(material);
+        updateGroupGeometry( compoCenter,
+          new THREE.BoxGeometry(
+            energy, energy, 1
       ));
-      }
-
-      // audio.play();
-
-    // 
+    } else if (now_geometry == 'shape_torus') { 
+        deleteBasics();
+        createShapeTorus();
+        changeColorByChroma(material);
+        updateGroupGeometry( compoCenter,
+          new THREE.TorusGeometry(
+            energy, 3, 16, 100
+    ));
+    } else if (now_geometry == 'shape_cone') { 
+        deleteBasics();
+        createShapeCone();
+        changeColorByChroma(material);
+        updateGroupGeometry( compoCenter,
+          new THREE.ConeGeometry(
+            energy, 20, 32
+    ));
+    } 
     render();
-    }
+  }
     stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
   }
 
@@ -137,7 +166,6 @@ function animate() {
 // render function
 function render() {
   renderer.render(scene, camera);
-  // console.log('ehy');
 }
 
 
@@ -177,25 +205,77 @@ function createShapeRing(){
     wireframe: true,
     side: THREE.DoubleSide
   });
-  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter = new THREE.Mesh( geometry, material );
   compoCenter.position.set(0, 0, 0);
-  spotLight.lookAt(compoCenter);
+  spotLight.lookAt( compoCenter );
 
-  // group = new THREE.Group();
   group.add( compoCenter );
-  // scene.add( group );
 }
 
+
+function createShapeSphere(){
+  geometry = new THREE.SphereGeometry( 15, 32, 16 );
+  material = new THREE.MeshBasicMaterial( { 
+    color: '#FFFFFF',
+    wireframe: true
+  });
+  compoCenter = new THREE.Mesh( geometry, material );
+  compoCenter.position.set(0, 0, 0);
+  spotLight.lookAt( compoCenter );
+
+  group.add( compoCenter );
+}
+
+
+function createShapeBox(){
+  geometry = new THREE.BoxGeometry( 1, 1, 1 );
+  material = new THREE.MeshBasicMaterial( { 
+    color: '#FFFFFF',
+    wireframe: false
+  });
+  compoCenter = new THREE.Mesh( geometry, material );
+  compoCenter.position.set(0, 0, 0);
+  spotLight.lookAt( compoCenter );
+
+  group.add( compoCenter );
+}
+
+
+function createShapeTorus(){
+  geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
+  material = new THREE.MeshBasicMaterial( { 
+    color: '#FFFFFF',
+    wireframe: false
+  });
+  compoCenter = new THREE.Mesh( geometry, material );
+  compoCenter.position.set(0, 0, 0);
+  spotLight.lookAt( compoCenter );
+
+  group.add( compoCenter );
+}
+
+function createShapeCone(){
+  geometry = new THREE.ConeGeometry( 5, 20, 32 );
+  material = new THREE.MeshBasicMaterial( { 
+    color: '#FFFFFF',
+    wireframe: false
+  });
+  compoCenter = new THREE.Mesh( geometry, material );
+  compoCenter.position.set(0, 0, 0);
+  spotLight.lookAt( compoCenter );
+
+  group.add( compoCenter );
+}
+
+
+
 function deleteBasics(){
-//   console.log(scene);
   group.parent.remove(group);
   group = new THREE.Group();
   scene.add(group);
   
   compoCenter.geometry.dispose();
   compoCenter.material.dispose();
-
-//   console.log("deleteBasics");
 }
 
 
@@ -207,7 +287,7 @@ function updateGroupGeometry( mesh, geometry ) {
 
 
 
-// LOAD MUSIC (vizIntit)
+// LOAD MUSIC (vizInit)
 function vizInit() {
   file = document.getElementById("thefile");
   audio = document.getElementById("audio");
@@ -221,7 +301,6 @@ function vizInit() {
   file.onchange = function(){
     fileLabel.classList.add('normal');
     var files = this.files;
-    console.log("바꼈다 ㅋㅋ");
     audio.src = URL.createObjectURL(files[0]);
     audio.load();
     audio.play(); // 음악이 load 되자마자 시각화 요소를 불러옴
@@ -233,31 +312,54 @@ function vizInit() {
   var CountingStars = 0;
 
   // EVENTS
-  var saveButton = document.getElementsByClassName("pcr-save");
+  // var saveButton = document.getElementsByClassName("pcr-save");
 
-  // GEOMETRY
+  // // GEOMETRY
 
-  let shape_heart_cnt = 0;
-  let button_shape_heart_cnt = 0;
+  // // let shape_heart_cnt = 0;
+  // // let button_shape_heart_cnt = 0;
 
 
   // EVENT LISTENERS
   shape_heart.addEventListener("click", ()=>{
-    console.log('하트');
-    // containerRender();
     deleteBasics();
     createShapeHeart();
     now_geometry = 'shape_heart';
   });
 
   shape_ring.addEventListener("click", ()=>{
-    console.log('링');
-    // containerRender();
     deleteBasics();
     createShapeRing();
     now_geometry = 'shape_ring';
   });
-}
+
+  shape_sphere.addEventListener("click", ()=>{
+    deleteBasics();
+    createShapeSphere();
+    now_geometry = 'shape_sphere';
+  });
+
+  shape_box.addEventListener("click", ()=>{
+    deleteBasics();
+    createShapeBox();
+    now_geometry = 'shape_box';
+  });
+
+
+  shape_torus.addEventListener("click", ()=>{
+    deleteBasics();
+    createShapeTorus();
+    now_geometry = 'shape_torus';
+  });
+
+
+  shape_cone.addEventListener("click", ()=>{
+    deleteBasics();
+    createShapeCone();
+    now_geometry = 'shape_cone';
+  });
+
+};
 
 
 function play() {
