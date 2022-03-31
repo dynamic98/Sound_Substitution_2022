@@ -18,7 +18,6 @@ div#content{
     position: relative;
     top: 50px;
     left: 50px;
-    margin-bottom: 15px;
 }
 
 h4#title{
@@ -179,18 +178,23 @@ button.visualButtonColors{
     font-weight: 300;
 } */
 
-
 canvas{
-    background-color: black;
-    margin-top: 110px;
-    margin-left: 100px;
-    margin-bottom: 10000px;
+    width:100px;
+    height:100px;
 }
 
-
-div#container{
+canvas#canvas{
+    /* background-color: black; */
+    margin-left: 100px;
     width: 10px;
-    height: 10px
+    height: 10px;
+}
+
+div.container{
+    position: fixed;
+    top: 1100px;
+    margin-left: 100px;
+    /* left: 500px; */
 }
 
 .visual_customizing{
