@@ -17,7 +17,7 @@ var now_geometry;
 var group, geometry, material, compoCenter;
 var ambientLight, spotLight;
 
-var context, src, audio, file, fileLabel;
+var audio_context, src, audio, file, fileLabel;
 var analyser, dataArray, bufferLength;
 var chroma, maxChroma,energy, amplitudeSpectrum;
 
@@ -36,8 +36,8 @@ function init() {
 
     renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth/2.4, window.innerHeight/1.3);
-    container = document.getElementById( "container" );
+    renderer.setSize(window.innerWidth/3, window.innerHeight/3);
+    container = document.getElementById( "canvas" );
     container.appendChild( renderer.domElement )
 
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -52,8 +52,10 @@ function init() {
     controls.maxDistance = 200.0;
     controls.update();
 
-    stats = new Stats();
-    container.appendChild( stats.dom );
+    // stats = new Stats();
+    // container.appendChild( stats.dom );
+    // console.log(stats.dom);
+    // document.getElementById("canvas1").appendChild( stats.dom );
 
 
     ambientLight = new THREE.AmbientLight(0xaaaaaa);
@@ -126,7 +128,7 @@ function animate() {
   changeColorByChroma(material);
   render();
   }
-  stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
+  // stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
 }
 
 
@@ -207,24 +209,26 @@ function vizInit() {
   file = document.getElementById("thefile");
   audio = document.getElementById("audio");
   fileLabel = document.querySelector("label.file");
-  
-  document.onload = function(e){
-    audio.play();
-    play();
-  }
+  audio_context = new AudioContext();
+  // document.onload = function(e){
+    // audio.play();
+    // play();
+  // }
 
   file.onchange = function(){
     fileLabel.classList.add('normal');
     var files = this.files;
-    console.log("바꼈다 ㅋㅋ");
     audio.src = URL.createObjectURL(files[0]);
+    src = audio_context.createMediaElementSource(audio);
+    // console.log(audio);
     audio.load();
     audio.play(); // 음악이 load 되자마자 시각화 요소를 불러옴
     play();  // play - 시각화 요소 불러오기
   }
 
-  context = new AudioContext();
-  src = context.createMediaElementSource(audio);
+  // audio_context = new AudioContext();
+  // src = audio_context.createMediaElementSource(audio);
+
   var CountingStars = 0;
 
   // EVENTS
@@ -256,9 +260,9 @@ function vizInit() {
 
 
 function play() {
-  analyser = context.createAnalyser();
+  analyser = audio_context.createAnalyser();
   src.connect(analyser);
-  analyser.connect(context.destination);
+  analyser.connect(audio_context.destination);
   analyser.fftSize = 512;
   bufferLength = analyser.frequencyBinCount;
   dataArray = new Uint8Array(bufferLength);
@@ -271,7 +275,7 @@ function play() {
   // var powerSpectrum = 0;
 
   const meyda_analyser = Meyda.createMeydaAnalyzer({
-    audioContext: context,
+    audioContext: audio_context,
     source: src,
     buffersize: 64,
     featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
@@ -288,6 +292,7 @@ function saveColor(){
   pickr.on('save', (color, instance) => {
   const userColor = color.toHEXA().toString();
   document.querySelector('#userCustom').innerHTML = userColor;
+  
 })
 }
 
@@ -405,3 +410,5 @@ function avg(arr){
 function max(arr){
   return arr.reduce(function(a, b){ return Math.max(a, b); })
 }
+
+export {audio_context, file};

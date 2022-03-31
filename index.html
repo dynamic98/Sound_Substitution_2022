@@ -5,7 +5,7 @@
     <title>VibvizTool</title>
     <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" type="text/css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <script type="text/javascript" src="https://unpkg.com/meyda@<VERSION>/dist/web/meyda.min.js"></script> -->
@@ -15,12 +15,17 @@
     <script type="module" defer src="./script/main.js"></script>
     <script type="module" defer src="./script/pickr.js"></script>
     <script defer src="./script/getAudio.js"></script>
+
+    <script type="module" defer src="./Visualization_mapping/haptic/haptic.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+
+
 </head>
 
 <body>
     <h4 class="thetitle" id="title"></h4>
     <!--시각화 요소 features-->
-    <div id="userCustom"></div>
+    <div id="userCustom">#000000</div>
     <div id="content">
         <label for="thefile" class="file"> Choose a Music to Visualize!
             <input type="file" id="thefile" accept="audio/mp3" />
@@ -110,6 +115,106 @@
 
 
     <!--시각화 output-->
-    <div id="container"></div>
+    <div id="canvas"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1 itemprop="name">Haptic Pattern test</h1>
+        </div>
+
+        <div id="demo">
+            <div id="waveform">
+                <div class="progress progress-striped active" id="progress-bar">
+                    <div class="progress-bar progress-bar-info"></div>
+                </div>
+
+                <!-- Here be the waveform -->
+            </div>
+
+            <div class="controls">
+                <hr />
+                <button class="btn btn-primary" data-action="play">
+                    <i class="glyphicon glyphicon-play"></i>
+                    Play
+                    /
+                    <i class="glyphicon glyphicon-pause"></i>
+                    Pause
+                </button>
+                <button class="btn btn-primary" data-action="test">
+                    Select Instroments
+                </button>
+                <button class="btn btn-primary" data-action="test2">
+                    toHaptic
+                </button>
+                <hr />
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        &larr; Empty
+                    </div>
+                    <div class="col-sm-4">
+                        <!-- Panner -->
+                        <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                    </div>
+                    <div class="col-sm-4">
+                        Full vibration &rarr;
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4">
+                        &larr; Rough
+                    </div>
+                    <div class="col-sm-4">
+                        <!-- Panner -->
+                        <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                    </div>
+                    <div class="col-sm-4">
+                        Sharp &rarr;
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4">
+                        &larr; Weak
+                    </div>
+                    <div class="col-sm-4">
+                        <!-- Panner -->
+                        <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                    </div>
+                    <div class="col-sm-4">
+                        Strong &rarr;
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4">
+                        &larr; Asymmetry
+                    </div>
+                    <div class="col-sm-4">
+                        <!-- Panner -->
+                        <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                    </div>
+                    <div class="col-sm-4">
+                        Symmetry &rarr;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-50026819-1', 'wavesurfer.fm');
+        ga('send', 'pageview');
+    </script>
+
+
+
+
 </body>
 </html>
