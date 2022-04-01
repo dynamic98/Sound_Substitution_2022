@@ -1,35 +1,38 @@
 'use strict';
 
-import {audio_context, file} from '../../script/main.js';
+import {audio_context, audio, file, fileLabel, src} from '../../script/main.js';
+export {haptic_change};
 
 // Create an instance
 var wavesurfer;
 var ch0_data;
 var ch1_data;
 var audio_buffer;
+// var file;
+
+// console.log("init_audio", audio);
+
 
 // console.log("hahaha");
-console.log('Haptic_code is Initiated');
 function init(){
-    // file = document.getElementById("thefile");
-    file.onchange = function(){
-        audio_buffer = audio_context.decodeAudioData();
-        console.log(audio_buffer);
-        console.log('Haptic_code is Executed');
-    }
+    console.log('Haptic_code is Initiated');
+    wavesurfer = WaveSurfer.create({
+    container: document.querySelector('#waveform'),
+    waveColor: '#A8DBA8',
+    progressColor: '#3B8686',
+    normalize: true
+    });
 }
-
-function base64ToArrayBuffer(base64) {
-    var binary_string = window.atob(base64);
-    var len = binary_string.length;
-    var bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++) {
-      bytes[i] = binary_string.charCodeAt(i);
-    }
-    return bytes.buffer;
-}
-
 init();
+
+
+function haptic_change(){
+    console.log("haptic_changed", audio.src);
+    wavesurfer.load(audio);
+    console.log(wavesurfer);
+}
+
+
 
 // // Init & load audio file
 // document.addEventListener('DOMContentLoaded', function() {
