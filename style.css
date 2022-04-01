@@ -178,19 +178,16 @@ button.visualButtonColors{
     font-weight: 300;
 } */
 
-canvas{
-    width:100px;
-    height:100px;
-}
 
-canvas#canvas{
+div#canvas{
     /* background-color: black; */
     margin-left: 100px;
-    width: 10px;
-    height: 10px;
+    width: 100px;
+    height: 100px;
 }
 
 div.container{
+    /* background-color: yellowgreen; */
     position: fixed;
     top: 1100px;
     margin-left: 100px;
