@@ -5,9 +5,12 @@ import Pickr from '@simonwep/pickr';
 
 const pickr = Pickr.create({
     el: '.visualButtonColors',
+    container: '#menuLine',
     theme: 'monolith',
     useAsButton: true,
     defaultRepresentation: 'HEX',
+    showAlways: false,
+    position: 'right-start',
     components: {
         // Main components
         preview: false,

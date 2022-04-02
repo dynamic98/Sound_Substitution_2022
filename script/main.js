@@ -1,18 +1,21 @@
 import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline/src/THREE.MeshLine.js';
+
+// import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+// import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+// import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 import { pickr } from './pickr.js';
 
 let controls;
 let camera, scene, renderer;
 let container, stats;
 
-const shape_heart = document.getElementById("shape_heart");
-const shape_ring = document.getElementById("shape_ring");
-const shape_sphere = document.getElementById("shape_sphere");
-const shape_box = document.getElementById("shape_box");
-const shape_torus = document.getElementById("shape_torus");
-const shape_cone = document.getElementById("shape_cone");
+const pitch_lineHeight = document.getElementById("pitchLineHeight");
+const pitch_lineThickness = document.getElementById("pitchLineThickness");
+const pitch_lineType = document.getElementById("pitchLineType");
+
 
 var now_geometry;
 var group, geometry, material, compoCenter;
@@ -21,6 +24,7 @@ var ambientLight, spotLight;
 var context, src, audio, file, fileLabel;
 var analyser, dataArray, bufferLength;
 var chroma, maxChroma,energy, amplitudeSpectrum;
+
 
 
 // BASIC EVENTS
@@ -46,6 +50,7 @@ function init() {
 
     // Orbit Controller
     controls = new OrbitControls(camera, renderer.domElement);
+    console.log('여기', controls)
     camera.position.set(1, 20, 100);
 
     controls.maxPloarAngle = Math.PI * 0.495;
@@ -73,8 +78,8 @@ function init() {
 
     renderer.render(scene, camera);
 
+    // 제일 기본 도형 불러오기
     now_geometry = "shape_ring";
-    
     createShapeRing();
 };
 
@@ -86,8 +91,9 @@ function animate() {
     changeBGColor();
 
     requestAnimationFrame(animate);
+
     // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
-    changeColorByChroma(material);
+    // changeColorByChroma(material);
 
     // music rendering
     if (dataArray){
@@ -108,55 +114,17 @@ function animate() {
 
     var time = performance.now() * 0.0001;
 
-    // SHAPE (HEART) Rendering
-    if (now_geometry == 'shape_heart') {
+    // Geometry Rendering !
+    if (now_geometry == 'pitch_line_height') {
       deleteBasics();     
-      createShapeHeart(); 
-      changeColorByChroma(material); 
-      compoCenter.position.x = maxChroma  * 10;
-      compoCenter.position.y = energy * 3;
-
-    } else if (now_geometry == 'shape_ring') { 
-        deleteBasics();
-        createShapeSphere();
-        changeColorByChroma(material);
-        updateGroupGeometry( compoCenter,
-          new THREE.RingGeometry(
-            13, energy, 8, 13, 6.283, 6.283
-        ));
-    } else if (now_geometry == 'shape_sphere') { 
-        deleteBasics();
-        createShapeSphere();
-        changeColorByChroma(material);
-        updateGroupGeometry( compoCenter,
-          new THREE.SphereGeometry(
-            energy * 0.5, 64, 32, 0, 6.283, 6.283, 6.283
-        ));
-    } else if (now_geometry == 'shape_box') { 
-        deleteBasics();
-        createShapeBox();
-        changeColorByChroma(material);
-        updateGroupGeometry( compoCenter,
-          new THREE.BoxGeometry(
-            energy, energy, 1
-      ));
-    } else if (now_geometry == 'shape_torus') { 
-        deleteBasics();
-        createShapeTorus();
-        changeColorByChroma(material);
-        updateGroupGeometry( compoCenter,
-          new THREE.TorusGeometry(
-            energy, 3, 16, 100
-    ));
-    } else if (now_geometry == 'shape_cone') { 
-        deleteBasics();
-        createShapeCone();
-        changeColorByChroma(material);
-        updateGroupGeometry( compoCenter,
-          new THREE.ConeGeometry(
-            energy, 20, 32
-    ));
-    } 
+      createShapeLineHeight()
+    } else if (now_geometry == 'pitch_line_thickness') {
+      deleteBasics();     
+      createShapeLineThickness()
+    } else if (now_geometry == 'pitch_line_type') {
+      deleteBasics();
+      createShapeLineType()
+    }
     render();
   }
     stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
@@ -167,6 +135,89 @@ function animate() {
 function render() {
   renderer.render(scene, camera);
 }
+
+// geometry function
+function createShapeLineHeight(){ 
+
+  const points = [];
+  points.push( new THREE.Vector3( 30, -80, 0 ) );
+  points.push( new THREE.Vector3( -100, 30, 0 ) );
+  points.push( new THREE.Vector3( 30, 30, 0 ) );
+
+  geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const line = new MeshLine();
+  line.setGeometry(geometry);
+  line.setPoints(points);
+
+
+  material = new MeshLineMaterial( {
+    color: '#FFFFFF',
+    lineWidth: 1 // linethickness >> 여기를 변수로 업뎃해주기
+  } );
+
+  changeLineColorbymaxChroma(material);
+  compoCenter = new THREE.Mesh(line, material);
+  changeLinePositionbymaxChroma(compoCenter);
+  spotLight.lookAt(compoCenter);
+  group.add( compoCenter );
+
+}
+
+
+function createShapeLineThickness(){ 
+
+  const points = [];
+  points.push( new THREE.Vector3( 30, -80, 0 ) );
+  points.push( new THREE.Vector3( -100, 30, 0 ) );
+  points.push( new THREE.Vector3( 30, 30, 0 ) );
+
+  geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const line = new MeshLine();
+  line.setGeometry(geometry);
+  line.setPoints(points);
+
+
+  material = new MeshLineMaterial( {
+    color: '#FFFFFF',
+    lineWidth: 5
+  } );
+
+  changeLineColorbymaxChroma(material);
+  compoCenter = new THREE.Mesh(line, material);
+  changeLinePositionbymaxChroma(compoCenter);
+  spotLight.lookAt(compoCenter);
+  group.add( compoCenter );
+
+}
+
+
+function createShapeLineType(){ 
+
+  const points = [];
+  points.push( new THREE.Vector3( 30, -80, 0 ) );
+  points.push( new THREE.Vector3( -100, 30, 0 ) );
+  points.push( new THREE.Vector3( 30, 30, 0 ) );
+
+  geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const line = new MeshLine();
+  line.setGeometry(geometry);
+  line.setPoints(points);
+
+
+  material = new MeshLineMaterial( {
+    color: '#FFFFFF',
+    lineWidth: 3,
+    dashArray: 0.01,
+  } );
+
+  changeLineColorbymaxChroma(material);
+  compoCenter = new THREE.Mesh(line, material);
+  changeLinePositionbymaxChroma(compoCenter);
+  spotLight.lookAt(compoCenter);
+  group.add( compoCenter );
+
+}
+
 
 
 function createShapeHeart(){
@@ -268,7 +319,78 @@ function createShapeCone(){
 }
 
 
+function changeLineColorbymaxChroma(Material){
+  // color rendering by pitch
+  var plainRed = new THREE.Color('rgba(247, 152, 152, 1)');
+  var plainRedOrange = new THREE.Color('rgba(247, 189, 152, 1)');
+  var plainOrange = new THREE.Color('rgba(247, 206, 152, 1)');
+  var plainOrangeYellow = new THREE.Color('rgba(205, 159, 59, 1)');
+  var plainYellow = new THREE.Color('rgba(247, 233, 152, 1)');
+  var plainYeondu = new THREE.Color('rgba(203, 247, 152, 1)');
+  var plainGreen = new THREE.Color('rgba(152, 247, 177, 1)');
+  var plainCyan = new THREE.Color('rgba(152, 246, 247, 1)');
+  var plainBlue = new THREE.Color('rgba(152, 179, 247, 1)');
+  var plainViolet = new THREE.Color('rgba(178, 152, 247, 1)');
+  var plainMagenta = new THREE.Color('rgba(241, 152, 247, 1)');
+  var plainPink = new THREE.Color('rgba(247, 152, 213, 1)');
 
+  if (maxChroma == 0){ 
+    Material.color = plainRed;
+  } else if (maxChroma == 1) {
+    Material.color = plainRedOrange;
+  } else if (maxChroma == 2){
+    Material.color = plainOrange;
+  } else if (maxChroma == 3){
+    Material.color = plainOrangeYellow;
+  } else if (maxChroma == 4){
+    Material.color = plainYellow;
+  } else if (maxChroma == 5){
+    Material.color = plainYeondu;
+  } else if (maxChroma == 6){
+    Material.color = plainGreen;
+  } else if (maxChroma == 7){
+    Material.color = plainCyan;
+  } else if (maxChroma == 8){
+    Material.color = plainBlue;
+  } else if (maxChroma == 9){
+    Material.color = plainViolet;
+  } else if (maxChroma == 10){
+    Material.color = plainMagenta;
+  } else {
+    Material.color = plainPink;
+  }
+}
+
+
+function changeLinePositionbymaxChroma(mesh){
+  if (maxChroma == 0){ 
+    mesh.position.set(30, -40, 10);
+  } else if (maxChroma == 1) {
+    mesh.position.set(30, -35, 10);
+  } else if (maxChroma == 2){
+    mesh.position.set(30, -30, 10);
+  } else if (maxChroma == 3){
+    mesh.position.set(30, -25, 10);
+  } else if (maxChroma == 4){
+    mesh.position.set(30, -20, 10);
+  } else if (maxChroma == 5){
+    mesh.position.set(30, -15, 10);
+  } else if (maxChroma == 6){
+    mesh.position.set(30, -10, 10);
+  } else if (maxChroma == 7){
+    mesh.position.set(30, -5, 10);
+  } else if (maxChroma == 8){
+    mesh.position.set(30, 0, 10);
+  } else if (maxChroma == 9){
+    mesh.position.set(30, 5, 10);
+  } else if (maxChroma == 10){
+    mesh.position.set(30, 10, 10);
+  } else {
+    mesh.position.set(30, 15, 10);
+  }
+}
+
+// delete function
 function deleteBasics(){
   group.parent.remove(group);
   group = new THREE.Group();
@@ -309,7 +431,7 @@ function vizInit() {
 
   context = new AudioContext();
   src = context.createMediaElementSource(audio);
-  var CountingStars = 0;
+  // var CountingStars = 0;
 
   // EVENTS
   // var saveButton = document.getElementsByClassName("pcr-save");
@@ -321,43 +443,55 @@ function vizInit() {
 
 
   // EVENT LISTENERS
-  shape_heart.addEventListener("click", ()=>{
-    deleteBasics();
-    createShapeHeart();
-    now_geometry = 'shape_heart';
-  });
+  pitch_lineHeight.addEventListener("click", ()=>{
+    now_geometry = 'pitch_line_height';
+  })
 
-  shape_ring.addEventListener("click", ()=>{
-    deleteBasics();
-    createShapeRing();
-    now_geometry = 'shape_ring';
-  });
+  pitch_lineThickness.addEventListener("click", ()=>{
+    now_geometry = 'pitch_line_thickness';
+  })
 
-  shape_sphere.addEventListener("click", ()=>{
-    deleteBasics();
-    createShapeSphere();
-    now_geometry = 'shape_sphere';
-  });
+  pitch_lineType.addEventListener("click", ()=>{
+    now_geometry = 'pitch_line_type';
+  })
 
-  shape_box.addEventListener("click", ()=>{
-    deleteBasics();
-    createShapeBox();
-    now_geometry = 'shape_box';
-  });
+  // shape_heart.addEventListener("click", ()=>{
+  //   deleteBasics();
+  //   createShapeHeart();
+  //   now_geometry = 'shape_heart';
+  // });
+
+  // shape_ring.addEventListener("click", ()=>{
+  //   deleteBasics();
+  //   createShapeRing();
+  //   now_geometry = 'shape_ring';
+  // });
+
+  // shape_sphere.addEventListener("click", ()=>{
+  //   deleteBasics();
+  //   createShapeSphere();
+  //   now_geometry = 'shape_sphere';
+  // });
+
+  // shape_box.addEventListener("click", ()=>{
+  //   deleteBasics();
+  //   createShapeBox();
+  //   now_geometry = 'shape_box';
+  // });
 
 
-  shape_torus.addEventListener("click", ()=>{
-    deleteBasics();
-    createShapeTorus();
-    now_geometry = 'shape_torus';
-  });
+  // shape_torus.addEventListener("click", ()=>{
+  //   deleteBasics();
+  //   createShapeTorus();
+  //   now_geometry = 'shape_torus';
+  // });
 
 
-  shape_cone.addEventListener("click", ()=>{
-    deleteBasics();
-    createShapeCone();
-    now_geometry = 'shape_cone';
-  });
+  // shape_cone.addEventListener("click", ()=>{
+  //   deleteBasics();
+  //   createShapeCone();
+  //   now_geometry = 'shape_cone';
+  // });
 
 };
 
@@ -384,6 +518,7 @@ function play() {
     featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
     callback: (features) => {
       maxChroma = features['chroma'].indexOf(max(features['chroma']))
+      console.log('maxChroma', maxChroma); 
       energy = features['energy']
       amplitudeSpectrum = features['amplitudeSpectrum']
     }
@@ -406,93 +541,93 @@ function changeBGColor(){
 };
 
 
-function changeColorByChroma(Material){
-  // color rendering by pitch
-  var plainRed = new THREE.Color('rgba(247, 152, 152, 1)');
-  var plainRedOrange = new THREE.Color('rgba(247, 189, 152, 1)');
-  var plainOrange = new THREE.Color('rgba(247, 206, 152, 1)');
-  var plainOrangeYellow = new THREE.Color('rgba(205, 159, 59, 1)');
-  var plainYellow = new THREE.Color('rgba(247, 233, 152, 1)');
-  var plainYeondu = new THREE.Color('rgba(203, 247, 152, 1)');
-  var plainGreen = new THREE.Color('rgba(152, 247, 177, 1)');
-  var plainCyan = new THREE.Color('rgba(152, 246, 247, 1)');
-  var plainBlue = new THREE.Color('rgba(152, 179, 247, 1)');
-  var plainViolet = new THREE.Color('rgba(178, 152, 247, 1)');
-  var plainMagenta = new THREE.Color('rgba(241, 152, 247, 1)');
-  var plainPink = new THREE.Color('rgba(247, 152, 213, 1)');
+// function changeColorByChroma(Material){
+//   // color rendering by pitch
+//   var plainRed = new THREE.Color('rgba(247, 152, 152, 1)');
+//   var plainRedOrange = new THREE.Color('rgba(247, 189, 152, 1)');
+//   var plainOrange = new THREE.Color('rgba(247, 206, 152, 1)');
+//   var plainOrangeYellow = new THREE.Color('rgba(205, 159, 59, 1)');
+//   var plainYellow = new THREE.Color('rgba(247, 233, 152, 1)');
+//   var plainYeondu = new THREE.Color('rgba(203, 247, 152, 1)');
+//   var plainGreen = new THREE.Color('rgba(152, 247, 177, 1)');
+//   var plainCyan = new THREE.Color('rgba(152, 246, 247, 1)');
+//   var plainBlue = new THREE.Color('rgba(152, 179, 247, 1)');
+//   var plainViolet = new THREE.Color('rgba(178, 152, 247, 1)');
+//   var plainMagenta = new THREE.Color('rgba(241, 152, 247, 1)');
+//   var plainPink = new THREE.Color('rgba(247, 152, 213, 1)');
 
 
-  plainRed = changeColorByChromaVolume(plainRed);
-  plainRedOrange = changeColorByChromaVolume(plainRedOrange);
-  plainOrange = changeColorByChromaVolume(plainOrange);
-  plainOrangeYellow = changeColorByChromaVolume(plainOrangeYellow);
-  plainYellow = changeColorByChromaVolume(plainYellow);
-  plainYeondu = changeColorByChromaVolume(plainYeondu);
-  plainGreen = changeColorByChromaVolume(plainGreen);
-  plainCyan = changeColorByChromaVolume(plainCyan);
-  plainBlue = changeColorByChromaVolume(plainBlue);
-  plainViolet = changeColorByChromaVolume(plainViolet);
-  plainMagenta = changeColorByChromaVolume(plainMagenta);
-  plainPink = changeColorByChromaVolume(plainPink);
+//   plainRed = changeColorByChromaVolume(plainRed);
+//   plainRedOrange = changeColorByChromaVolume(plainRedOrange);
+//   plainOrange = changeColorByChromaVolume(plainOrange);
+//   plainOrangeYellow = changeColorByChromaVolume(plainOrangeYellow);
+//   plainYellow = changeColorByChromaVolume(plainYellow);
+//   plainYeondu = changeColorByChromaVolume(plainYeondu);
+//   plainGreen = changeColorByChromaVolume(plainGreen);
+//   plainCyan = changeColorByChromaVolume(plainCyan);
+//   plainBlue = changeColorByChromaVolume(plainBlue);
+//   plainViolet = changeColorByChromaVolume(plainViolet);
+//   plainMagenta = changeColorByChromaVolume(plainMagenta);
+//   plainPink = changeColorByChromaVolume(plainPink);
 
-  if (maxChroma == 0){ 
-    Material.color = plainRed;
-  } else if (maxChroma == 1) {
-    Material.color = plainRedOrange;
-  } else if (maxChroma == 2){
-    Material.color = plainOrange;
-  } else if (maxChroma == 3){
-    Material.color = plainOrangeYellow;
-  } else if (maxChroma == 4){
-    Material.color = plainYellow;
-  } else if (maxChroma == 5){
-    Material.color = plainYeondu;
-  } else if (maxChroma == 6){
-    Material.color = plainGreen;
-  } else if (maxChroma == 7){
-    Material.color = plainCyan;
-  } else if (maxChroma == 8){
-    Material.color = plainBlue;
-  } else if (maxChroma == 9){
-    Material.color = plainViolet;
-  } else if (maxChroma == 10){
-    Material.color = plainMagenta;
-  } else {
-    Material.color = plainPink;
-  }
-}
+//   if (maxChroma == 0){ 
+//     Material.color = plainRed;
+//   } else if (maxChroma == 1) {
+//     Material.color = plainRedOrange;
+//   } else if (maxChroma == 2){
+//     Material.color = plainOrange;
+//   } else if (maxChroma == 3){
+//     Material.color = plainOrangeYellow;
+//   } else if (maxChroma == 4){
+//     Material.color = plainYellow;
+//   } else if (maxChroma == 5){
+//     Material.color = plainYeondu;
+//   } else if (maxChroma == 6){
+//     Material.color = plainGreen;
+//   } else if (maxChroma == 7){
+//     Material.color = plainCyan;
+//   } else if (maxChroma == 8){
+//     Material.color = plainBlue;
+//   } else if (maxChroma == 9){
+//     Material.color = plainViolet;
+//   } else if (maxChroma == 10){
+//     Material.color = plainMagenta;
+//   } else {
+//     Material.color = plainPink;
+//   }
+// }
 
-function changeColorByChromaVolume(color){
-  var pitchPoint = document.querySelector('#pitchPoint').innerHTML;
-  var rValue = color.toArray()[0];
-  var gValue = color.toArray()[1];
-  var bValue = color.toArray()[2];
+// function changeColorByChromaVolume(color){
+//   var pitchPoint = document.querySelector('#pitchPoint').innerHTML;
+//   var rValue = color.toArray()[0];
+//   var gValue = color.toArray()[1];
+//   var bValue = color.toArray()[2];
 
-  // 조건을 더 다양화 시켜야함
-  if (bValue <= 0.70) {
-    bValue = bValue * (10 - pitchPoint) * 0.1
-  } else if (rValue <= 0.70) {
-    rValue = rValue * (10 - pitchPoint) * 0.1
-  } else if (gValue <= 0.70) {
-    gValue = gValue * (10 - pitchPoint) * 0.1
-  }
+//   // 조건을 더 다양화 시켜야함
+//   if (bValue <= 0.70) {
+//     bValue = bValue * (10 - pitchPoint) * 0.1
+//   } else if (rValue <= 0.70) {
+//     rValue = rValue * (10 - pitchPoint) * 0.1
+//   } else if (gValue <= 0.70) {
+//     gValue = gValue * (10 - pitchPoint) * 0.1
+//   }
 
-  rValue = Math.floor(rValue * 255)
-  gValue = Math.floor(gValue * 255)
-  bValue = Math.floor(bValue * 255)
+//   rValue = Math.floor(rValue * 255)
+//   gValue = Math.floor(gValue * 255)
+//   bValue = Math.floor(bValue * 255)
 
-  String.prototype.format = function() {
-    var formatted = this;
-    for( var arg in arguments ) {
-        formatted = formatted.replace("{" + arg + "}", arguments[arg]);
-    }
-    return formatted;
-};
+//   String.prototype.format = function() {
+//     var formatted = this;
+//     for( var arg in arguments ) {
+//         formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+//     }
+//     return formatted;
+// };
 
-  var colorRGB = "rgba({0}, {1}, {2}, 1)".format(rValue, gValue, bValue);
-  var newColor = new THREE.Color(colorRGB);
-  return newColor
-}
+//   var colorRGB = "rgba({0}, {1}, {2}, 1)".format(rValue, gValue, bValue);
+//   var newColor = new THREE.Color(colorRGB);
+//   return newColor
+// }
 
 
 // some helper functions here

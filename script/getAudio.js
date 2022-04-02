@@ -7,7 +7,6 @@ function titleAudio(){
             fileList += target.files[i].name;
             audioFile = target.files[i];
         }
-
         realTitle = document.getElementById('title');
         realTitle.innerText = fileList;
     });

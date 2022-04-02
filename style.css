@@ -61,7 +61,7 @@ label.file{
     display: inline-block;
     position: relative;
     left: 150px;
-    margin-top: 30px;
+    margin-top: 20px;
     transform: translate3d(-50%, -50%, 0);
     padding: 1rem 2rem;
     border-radius: 4px;
@@ -108,82 +108,10 @@ div#userCustom{
 }
 
 
-#pitchPoint::before{
-    content: "Pitch Value:";
-}
-
-#pitchValue{
-    width: 150px;
-}
-
-#tempoPoint::before{
-    content: "Tempo Value:";
-}
-
-#tempoValue{
-    width: 300px;
-}
-
-#frequencyPoint::before{
-    content: "Frequency Value:";
-}
-
-#frequencyValue{
-    width: 300px;
-}
-
-#amplitudePoint::before{
-    content: "Amplitude Value:";
-}
-
-#amplitudeValue{
-    width: 300px;
-}
-
-#timbrePoint::before{
-    content: "Timbre Value:";
-}
-
-#timbreValue{
-    width: 300px;
-}
-
-
-
-
-h2#customizeFeatureTitle{
-    margin-left: 70px;
-}
-
-
-/* button.musicButton{
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-bottom: 30px;
-    float: left;
-    font-weight: 300;
-}
-
-button.visualButton{
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-bottom: 30px;
-    float: left;
-    font-weight: 300;
-}
-
-button.visualButtonColors{
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-bottom: 30px;
-    float: left;
-    font-weight: 300;
-} */
-
 
 canvas{
     background-color: black;
-    margin-top: 40px;
+    margin-top: -80px;
     margin-left: 100px;
 }
 
@@ -193,201 +121,387 @@ div#container{
     height: 10px
 }
 
-.visual_customizing{
-    margin-top: 40px;
-    margin-left: 10px;
-    margin-right: 150px;      
-    float: right;
+
+
+nav {
+    margin-left: 1100px;
+    margin-bottom: 10px;
+    padding-bottom: 50px;
+	position: relative;
+	width: 910px;
+	height: 50px;
+	background-color: #7e7f83;
+	border-radius: 8px;
+	font-size: 0;
 }
 
-.haptic_customizing{
-    margin-top: 40px;
-    margin-right: 170px;
-    float: right;
+
+nav p {
+	line-height: 50px;
+	height: 100%;
+	font-size: 23px;
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+    font-weight: bold;
+}
+
+nav .animation {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	z-index: 0;
+	transition: all .4s ease 0s;
+	border-radius: 8px;
+}
+
+p:nth-child(1) {
+	width: 130px;
+}
+p:nth-child(2) {
+	width: 150px;
+}
+p:nth-child(3) {
+	width: 130px;
+}
+p:nth-child(4) {
+	width: 120px;
+}
+p:nth-child(5) {
+	width: 150px;
+}
+p:nth-child(6) {
+	width: 150px;
+}
+p:nth-child(7) {
+	width: 130px;
 }
 
 
-/* /* .dropdownPitch {
-    position: relative;
-    display: inline-block;
-} */
 
-/* .dropdownTimbre {
-    position: relative;
+.dropdownLine {
     display: inline-block;
 }
 
-.dropdownShapes {
-    position: relative;
+div.dropdownLine:hover {
     display: inline-block;
-  }
-
-.dropdownGeometry {
-    position: relative;
-    display: inline-block;
+    width: 130px;
+	left: 0;
+	background-color: #1abc9c;
+    border-radius: 8px;
 }
 
-.dropdownParticles {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdownLines {
-    position: relative;
-    display: inline-block;
-} */
-
-
-
-
-/* .dropdown-Pitch{
+.dropdown-Line {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    min-width: 140px;
+    background-color: #d1f3ec;
+    width: 910px;
+    height: 800px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     font-weight: 300;
 }
 
 
-.dropdown-Timbre{
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 140px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-weight: 300;
+.dropdownLine:hover .dropdown-Line {
+    display: block;
 }
 
-.dropdown-Shapes {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 140px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-weight: 300;
+
+
+
+
+.dropdownSphere {
+    display: inline-block;
 }
 
-.dropdown-Geometry {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 140px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-weight: 300;
+div.dropdownSphere:hover {
+    display: inline-block;
+    width: 130px;
+	left: 0;
+	background-color: #e67a6e;
+    border-radius: 8px;
 }
 
-.dropdown-Particles {
+.dropdown-Sphere {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    min-width: 140px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-weight: 300;
-}
-
-.dropdown-Lines {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 140px;
+    background-color: #f2ceca;
+    margin-left: -130px;
+    width: 910px;
+    height: 800px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     font-weight: 300;
 }
 
 
-
-.dropdown-Pitch input {
-    padding: 12px 10px;
-    width: 110px;
+.dropdownSphere:hover .dropdown-Sphere {
+    display: block;
 }
 
-.dropdown-Timbre p {
+
+
+
+.dropdownRing {
+    display: inline-block;
+}
+
+div.dropdownRing:hover {
+    display: inline-block;
+    width: 130px;
+	left: 0;
+	background-color: #3498db;
+    border-radius: 8px;
+}
+
+.dropdown-Ring {
+    display: none;
+    position: absolute;
+    background-color: #bdd7e9;
+    margin-left: -260px;
+    width: 910px;
+    height: 800px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-weight: 300;
+}
+
+
+.dropdownRing:hover .dropdown-Ring {
+    display: block;
+}
+
+
+
+
+.dropdownBox {
+    display: inline-block;
+}
+
+div.dropdownBox:hover {
+    display: inline-block;
+    width: 130px;
+	left: 0;
+	background-color: #9b59b6;
+    border-radius: 8px;
+}
+
+.dropdown-Box {
+    display: none;
+    position: absolute;
+    background-color: #ebd4f3;
+    margin-left: -390px;
+    width: 910px;
+    height: 800px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-weight: 300;
+}
+
+
+.dropdownBox:hover .dropdown-Box {
+    display: block;
+}
+
+
+
+
+.dropdownTorus {
+    display: inline-block;
+}
+
+div.dropdownTorus:hover {
+    display: inline-block;
+    width: 130px;
+	left: 0;
+	background-color: #e67e22;
+    border-radius: 8px;
+}
+
+.dropdown-Torus {
+    display: none;
+    position: absolute;
+    background-color: #fdcf9a;
+    margin-left: -520px;
+    width: 910px;
+    height: 800px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-weight: 300;
+}
+
+
+.dropdownTorus:hover .dropdown-Torus {
+    display: block;
+}
+
+
+
+.dropdownCone {
+    display: inline-block;
+}
+
+div.dropdownCone:hover {
+    display: inline-block;
+    width: 130px;
+	left: 0;
+	background-color: #e6c922;
+    border-radius: 8px;
+}
+
+.dropdown-Cone {
+    display: none;
+    position: absolute;
+    background-color: #fff5bb;
+    margin-left: -650px;
+    width: 910px;
+    height: 800px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-weight: 300;
+}
+
+
+.dropdownCone:hover .dropdown-Cone {
+    display: block;
+}
+
+
+.dropdownTorus {
+    display: inline-block;
+}
+
+
+div.dropdownTorus:hover {
+    display: inline-block;
+    width: 130px;
+	left: 0;
+	background-color: #e67e22;
+    border-radius: 8px;
+}
+
+.dropdown-Torus {
+    display: none;
+    position: absolute;
+    background-color: #fdcf9a;
+    margin-left: -520px;
+    width: 910px;
+    height: 800px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-weight: 300;
+}
+
+
+.dropdownTorus:hover .dropdown-Torus {
+    display: block;
+}
+
+
+
+.dropdownHeart {
+    display: inline-block;
+}
+
+div.dropdownHeart:hover {
+    display: inline-block;
+    width: 130px;
+	left: 0;
+	background-color: #e585c0;
+    border-radius: 8px;
+}
+
+.dropdown-Heart {
+    display: none;
+    position: absolute;
+    background-color: #ffd4ee;
+    margin-left: -780px;
+    width: 910px;
+    height: 800px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-weight: 300;
+}
+
+
+.dropdownHeart:hover .dropdown-Heart {
+    display: block;
+}
+
+
+p#menuLine{
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-right: -40px;
+    padding: 30px;
+    height: 60px;
+    text-align: left;
     color: black;
-    padding: 12px 10px;
-    text-decoration: none;
-    display: block;
-    font-weight: 300;
+    font-size: 25px;
 }
 
-.dropdown-Shapes p {
+button.pitchLineMenu{
+    background: rgb(0, 0, 0);
+    background: linear-gradient(0deg, rgb(33, 33, 33) 0%, rgb(162, 162, 162) 100%);
+    border: none;
+    margin-left: 50px;
+    width: 170px;
+    height: 50px;
+    font-size: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    color: white;
+}
+
+button.pitchLineMenu:focus{
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgb(249, 249, 249) 0%, rgb(182, 182, 182) 100%);
     color: black;
-    padding: 12px 10px;
-    text-decoration: none;
-    display: block;
-    font-weight: 300;
 }
 
-.dropdown-Geometry p {
+button.dynamicLineMenu{
+    background: rgb(0, 0, 0);
+    background: linear-gradient(0deg, rgb(33, 33, 33) 0%, rgb(162, 162, 162) 100%);
+    border: none;
+    margin-left: 50px;
+    width: 170px;
+    height: 50px;
+    font-size: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    color: white;
+}
+
+button.dynamicLineMenu:focus{
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgb(249, 249, 249) 0%, rgb(182, 182, 182) 100%);
     color: black;
-    padding: 12px 10px;
-    text-decoration: none;
-    display: block;
-    font-weight: 300;
 }
 
-.dropdown-Particles p {
+
+
+
+
+
+
+
+
+
+
+
+
+
+button.visualButtonColors{
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgb(248, 140, 140) 0%, rgb(255, 251, 124) 33%, rgb(179, 234, 139) 67%);
     color: black;
-    padding: 12px 10px;
-    text-decoration: none;
-    display: block;
-    font-weight: 300;
+    border: none;
+    margin-left: 50px;
+    width: 170px;
+    height: 50px;
+    font-size: 20px;
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 }
-
-
-
-.dropdown-Pitch input:hover {
-    background-color: #ddd;
-}
-
-.dropdown-Timbre p:hover {
-    background-color: #ddd;
-    width: 140px;
-}
-
-.dropdown-Shapes p:hover {
-    background-color: #ddd;
-    width: 140px;
-}
-
-.dropdown-Geometry p:hover {
-    background-color: #ddd;
-    width: 140px;
-}
-
-.dropdown-Particles p:hover {
-    background-color: #ddd;
-    width: 140px;
-}
-
-
-
-.dropdownPitch:hover .dropdown-Pitch {
-    display: block;
-}
-
-.dropdownTimbre:hover .dropdown-Timbre {
-    display: block;
-    font-weight: 400;
-}
-
-.dropdownShapes:hover .dropdown-Shapes {
-    display: block;
-    font-weight: 400;
-}
-
-.dropdownGeometry:hover .dropdown-Geometry {
-    display: block;
-    font-weight: 400;
-}
-
-.dropdownParticles:hover .dropdown-Particles {
-    display: block;
-    font-weight: 400;
-} */

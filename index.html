@@ -4,12 +4,11 @@
     <meta charset="utf-8">
     <title>VibvizTool</title>
     <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <script type="text/javascript" src="https://unpkg.com/meyda@<VERSION>/dist/web/meyda.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+    <script src="THREE.MeshLine.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
     <script type="module" defer src="./script/main.js"></script>
@@ -20,94 +19,75 @@
 <body>
     <h4 class="thetitle" id="title"></h4>
     <!--시각화 요소 features-->
-    <div id="userCustom"></div>
+    <div id="userCustom">#000000</div>
     <div id="content">
         <label for="thefile" class="file"> Choose a Music to Visualize!
             <input type="file" id="thefile" accept="audio/mp3" />
         </label>
         <audio id="audio" controls></audio>
     </div>
-
-    <div class="haptic_customizing">
-        <h2 id="customizeFeatureTitle"> 🌻  Haptic Patterns 🌻 </h2>
-            <div class="dropdownTempo">
-                <h3 class="hapticFeature"> Tempo (Rhythm) </h3>
-                <div class="dropdown-Tempo">
-                    <input id="tempoValue" type="range" min="0" max="20" value="0" oninput="document.getElementById('tempoPoint').innerHTML=this.value;"/>
-                    <p id="tempoPoint"></p>
-                </div>
+    
+    <nav>
+        <div class="dropdownLine">
+            <p> Line </p>
+            <div class="dropdown-Line">
+               <p id="menuLine"> Pitch </p>
+                    <button class="pitchLineMenu" id="pitchLineHeight"> Line Height </button>
+                    <button class="pitchLineMenu" id="pitchLineThickness"> Line Thickness </button>
+                    <button class="pitchLineMenu" id="pitchLineType"> Line Type </button>
+               <br>
+               <p id="menuLine"> Dynamics </p>
+                    <button class="dynamicLineMenu" id="dynamicLineHeight"> Line Height </button>
+                    <button class="dynamicLineMenu" id="dynamicLineThickness"> Line Thickness </button>
+                    <button class="dynamicLineMenu" id="dynamicLineType"> Line Type </button>
+               <br>
+               <p id="menuLine"> Background </p>
+                    <button class="visualButtonColors" type="button"> Colors </button>
             </div>
-            <hr id="hapticHR" align="left">
-            <div class="dropdownFrequency">
-                <h3 class="hapticFeature"> Frequency </h3>
-                    <div class="dropdown-Frequency">
-                        <input id="frequencyValue" type="range" min="0" max="20" value="0" oninput="document.getElementById('frequencyPoint').innerHTML=this.value;"/>
-                        <p id="frequencyPoint"></p>
-                    </div>
-            </div>
-            <hr id="hapticHR" align="left">
-            <div class="dropdownAmplitude">
-                <h3 class="hapticFeature"> Amplitude </h3>
-                    <div class="dropdown-Amplitude">
-                        <input id="amplitudeValue" type="range" min="0" max="20" value="0" oninput="document.getElementById('amplitudePoint').innerHTML=this.value;"/>
-                        <p id="amplitudePoint"></p>
-                    </div>
-            </div>
-            <hr id="hapticHR" align="left">
-            <div class="dropdownTimbre">
-                <h3 class="hapticFeature"> Timbre </h3>
-                <div class="dropdown-Timbre">
-                    <input id="timbreValue" type="range" min="0" max="20" value="0" oninput="document.getElementById('timbrePoint').innerHTML=this.value;"/>
-                    <p id="timbrePoint"></p>
-                </div>
-            </div>
+        </div>
 
-
-    </div>
-
-    <div class="visual_customizing">
-        <h2 id="customizeFeatureTitle"> 🌻  Visualization 🌻 </h2>
-            <div class="dropdownPitch">
-                <h3 class="visualFeature"> Background </h3>
-                <button class="visualButtonColors" type="button"> Colors </button>
+        <div class="dropdownSphere">
+            <p> Sphere </p>
+            <div class="dropdown-Sphere">
+                <!-- <p class="sth"> hey !</p> -->
             </div>
-            <hr id="visualHR" align="left">
-            <div class="dropdownPitch">
-                <h3 class="visualFeature"> Pitch </h3>
-                    <div class="dropdown-Pitch">
-                        <input id="pitchValue" type="range" min="0" max="10" value="0" oninput="document.getElementById('pitchPoint').innerHTML=this.value;"/>
-                        <p id="pitchPoint"></p>
-                    </div>
+        </div>
+
+        <div class="dropdownRing">
+            <p> Ring </p>
+            <div class="dropdown-Ring">
+                <!-- <p class="sth"> hey !</p> -->
             </div>
-            <hr id="visualHR" align="left">
-            <div class="dropdownTimbre">
-                <h3 class="visualFeature"> Timbre </h3>
-                    <div class="dropdown-Timbre">
-                        <button id="timbre_drum"> Drum </button>
-                        <button id="timbre_bass"> Bass </button>
-                        <button id="timbre_vocal"> Vocal </button>
-                    </div>
+        </div>
+
+        <div class="dropdownBox">
+            <p> Box </p>
+            <div class="dropdown-Box">
+
             </div>
-            <hr id="visualHR" align="left">
-            <!-- <button class="musicButton" type="button"> Amplitude </button>
-            <button class="musicButton" type="button"> Rhythm </button> -->
+        </div>
 
-            <div class="dropdownDynamics">
-                <h3 class="visualFeature"> Energy </h3>
-                    <div class="dropdown-Energy">
-                        <button id="shape_sphere">Sphere</button>
-                        <button id="shape_box">Box</button>
-                        <button id="shape_ring">Ring</button>
-                        <br>
-                        <button id="shape_torus">Torus</button>
-                        <button id="shape_cone">Cone</button>
-                        <button id="shape_heart">Heart</button>
-                    </div>
+        <div class="dropdownTorus">
+            <p> Torus </p>
+            <div class="dropdown-Torus">
+
             </div>
+        </div>
 
+        <div class="dropdownCone">
+            <p> Cone </p>
+            <div class="dropdown-Cone">
 
-    </div>
+            </div>
+        </div>
 
+        <div class="dropdownHeart">
+            <p> Heart </p>
+            <div class="dropdown-Heart">
+
+            </div>
+        </div>
+    </nav>
 
     <!--시각화 output-->
     <div id="container"></div>

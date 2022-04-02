@@ -16,7 +16,8 @@
     "nodemon": "^2.0.15",
     "p5": "^1.4.1",
     "pickr": "^0.1.4",
-    "three": "^0.138.3"
+    "three": "^0.138.3",
+    "three.meshline": "^1.4.0"
   },
   "main": "index.js",
   "keywords": [],
