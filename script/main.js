@@ -2,10 +2,6 @@ import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline/src/THREE.MeshLine.js';
-
-// import { Line2 } from 'three/examples/jsm/lines/Line2.js';
-// import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
-// import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 import { pickr } from './pickr.js';
 
 let controls;
@@ -78,7 +74,7 @@ function init() {
 
     renderer.render(scene, camera);
 
-    // 제일 기본 도형 불러오기
+    // 제일 기본 도형(현재는 ring) 불러오기
     now_geometry = "shape_ring";
     createShapeRing();
 };
@@ -179,12 +175,12 @@ function createShapeLineThickness(){
 
   material = new MeshLineMaterial( {
     color: '#FFFFFF',
-    lineWidth: 5
+    lineWidth: (maxChroma + 1)  * 2  // 여기가 바뀌어야 하는 값
   } );
 
-  changeLineColorbymaxChroma(material);
+  // changeLineColorbymaxChroma(material);
   compoCenter = new THREE.Mesh(line, material);
-  changeLinePositionbymaxChroma(compoCenter);
+  compoCenter.position.set(25, -20, 0);
   spotLight.lookAt(compoCenter);
   group.add( compoCenter );
 
@@ -193,26 +189,39 @@ function createShapeLineThickness(){
 
 function createShapeLineType(){ 
 
-  const points = [];
-  points.push( new THREE.Vector3( 30, -80, 0 ) );
-  points.push( new THREE.Vector3( -100, 30, 0 ) );
-  points.push( new THREE.Vector3( 30, 30, 0 ) );
 
-  geometry = new THREE.BufferGeometry().setFromPoints(points);
-  const line = new MeshLine();
-  line.setGeometry(geometry);
-  line.setPoints(points);
+  class CustomSinCurve extends THREE.Curve {
 
-
-  material = new MeshLineMaterial( {
+    constructor( scale = 1 ) {
+  
+      super();
+  
+      this.scale = scale;
+  
+    }
+  
+    getPoint( t, optionalTarget = new THREE.Vector3() ) {
+  
+      const tx = t * 3 - 1.5;
+      const ty = Math.sin( 10 * Math.PI * t );
+      const tz = 0;
+  
+      return optionalTarget.set( tx, ty, tz ).multiplyScalar( this.scale );
+  
+    }
+  
+  }
+  
+  const path = new CustomSinCurve( 40 );
+  geometry = new THREE.TubeGeometry( path, maxChroma, 1, maxChroma, false );
+  material = new THREE.MeshBasicMaterial( { 
     color: '#FFFFFF',
-    lineWidth: 3,
-    dashArray: 0.01,
+    wireframe: false
   } );
 
-  changeLineColorbymaxChroma(material);
-  compoCenter = new THREE.Mesh(line, material);
-  changeLinePositionbymaxChroma(compoCenter);
+  // changeLineColorbymaxChroma(material);
+  compoCenter = new THREE.Mesh( geometry, material );
+  compoCenter.position.set(0, 0, 0);
   spotLight.lookAt(compoCenter);
   group.add( compoCenter );
 
@@ -431,16 +440,6 @@ function vizInit() {
 
   context = new AudioContext();
   src = context.createMediaElementSource(audio);
-  // var CountingStars = 0;
-
-  // EVENTS
-  // var saveButton = document.getElementsByClassName("pcr-save");
-
-  // // GEOMETRY
-
-  // // let shape_heart_cnt = 0;
-  // // let button_shape_heart_cnt = 0;
-
 
   // EVENT LISTENERS
   pitch_lineHeight.addEventListener("click", ()=>{
@@ -518,7 +517,6 @@ function play() {
     featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
     callback: (features) => {
       maxChroma = features['chroma'].indexOf(max(features['chroma']))
-      console.log('maxChroma', maxChroma); 
       energy = features['energy']
       amplitudeSpectrum = features['amplitudeSpectrum']
     }
