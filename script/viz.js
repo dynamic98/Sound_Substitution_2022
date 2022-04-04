@@ -3,8 +3,8 @@
 import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { pickr } from './modules.js';
-import {haptic_change} from './modules.js'
+import { pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength} from './modules.js';
+// import {haptic_change} from './modules.js'
 import { PlaneGeometry } from 'three';
 
 let controls;
@@ -21,13 +21,13 @@ var now_geometry;
 var group, geometry, material, compoCenter;
 var ambientLight, spotLight;
 
-export var audio_context, audio, file, fileLabel, src;
-var analyser, dataArray, bufferLength;
-var chroma, maxChroma,energy, amplitudeSpectrum;
+// export var audio_context, audio, file, fileLabel, src;
+// var dataArray, bufferLength;
+// var chroma, maxChroma,energy, amplitudeSpectrum;
 // BASIC EVENTS
 init();
 vizInit();
-filechanged();
+// filechanged();
 animate();
 
 
@@ -210,17 +210,17 @@ function updateGroupGeometry( mesh, geometry ) {
 
 // LOAD MUSIC (vizIntit)
 function vizInit() {
-  file = document.getElementById("thefile");
-  audio = document.getElementById("audio");
-  fileLabel = document.querySelector("label.file");
-  audio_context = audio_context || new AudioContext();
-  document.onload = function(e){
-    audio.play();
-    play();
-  }
-  // var CountingStars = 0;
-  // EVENTS
-  var saveButton = document.getElementsByClassName("pcr-save");
+  // file = document.getElementById("thefile");
+  // audio = document.getElementById("audio");
+  // fileLabel = document.querySelector("label.file");
+  // audio_context = audio_context || new AudioContext();
+  // document.onload = function(e){
+  //   audio.play();
+  //   play();
+  // }
+  // // var CountingStars = 0;
+  // // EVENTS
+  // var saveButton = document.getElementsByClassName("pcr-save");
   // GEOMETRY
   let shape_heart_cnt = 0;
   let button_shape_heart_cnt = 0;
@@ -243,38 +243,38 @@ function vizInit() {
 }
 
 
-async function filechanged(){
-  file.onchange = function(){
-    fileLabel.classList.add('normal');
-    var files = this.files;
-    audio.src = URL.createObjectURL(files[0]);
-    console.log("VizInit play");
-    src = src || audio_context.createMediaElementSource(audio);
-    // console.log(audio);
-    audio.load();
-    haptic_change();
-    // let AudioIsReady = haptic_change();
-    // let result = await AudioIsReady;
-    // console.log(result);
-    audio.play();
-    console.log("Viz Audio Starts");
-    play(src);
-    // async () =>{ 
-    // AudioIsReady = await import AudioIsReady from ("./modules.js")
-    // console.log(AudioIsReady);
+// async function filechanged(){
+//   file.onchange = function(){
+//     fileLabel.classList.add('normal');
+//     var files = this.files;
+//     audio.src = URL.createObjectURL(files[0]);
+//     console.log("VizInit play");
+//     src = src || audio_context.createMediaElementSource(audio);
+//     // console.log(audio);
+//     audio.load();
+//     haptic_change();
+//     // let AudioIsReady = haptic_change();
+//     // let result = await AudioIsReady;
+//     // console.log(result);
+//     audio.play();
+//     console.log("Viz Audio Starts");
+//     play(src);
+//     // async () =>{ 
+//     // AudioIsReady = await import AudioIsReady from ("./modules.js")
+//     // console.log(AudioIsReady);
     
-    // AudioIsReady.onchange = function(){
-      // console.log(AudioIsReady);
-    // }
-    // await AudioIsReady;
-    // AudioIsReady.onchange = ()=>{
-    // audio.play(); // 음악이 load 되자마자 시각화 요소를 불러옴
-    // play(src);  // play - 시각화 요소 불러오기
-    }
-  }
+//     // AudioIsReady.onchange = function(){
+//       // console.log(AudioIsReady);
+//     // }
+//     // await AudioIsReady;
+//     // AudioIsReady.onchange = ()=>{
+//     // audio.play(); // 음악이 load 되자마자 시각화 요소를 불러옴
+//     // play(src);  // play - 시각화 요소 불러오기
+//     }
+//   }
 
-  // audio_context = new AudioContext();
-  // src = audio_context.createMediaElementSource(audio);
+//   // audio_context = new AudioContext();
+//   // src = audio_context.createMediaElementSource(audio);
 
 
 
@@ -284,34 +284,34 @@ async function filechanged(){
 //   // haptic_change();
 // }
 
-function play(src) {
-  analyser = audio_context.createAnalyser();
-  src.connect(analyser);
-  analyser.connect(audio_context.destination);
-  analyser.fftSize = 512;
-  bufferLength = analyser.frequencyBinCount;
-  dataArray = new Uint8Array(bufferLength);
+// function play(src) {
+//   analyser = audio_context.createAnalyser();
+//   src.connect(analyser);
+//   analyser.connect(audio_context.destination);
+//   analyser.fftSize = 512;
+//   bufferLength = analyser.frequencyBinCount;
+//   dataArray = new Uint8Array(bufferLength);
 
-  // meyda analyser
-  chroma = 0;
-  maxChroma = 0;
-  energy = 0;
-  amplitudeSpectrum = 0;
-  // var powerSpectrum = 0;
+//   // meyda analyser
+//   chroma = 0;
+//   maxChroma = 0;
+//   energy = 0;
+//   amplitudeSpectrum = 0;
+//   // var powerSpectrum = 0;
 
-  const meyda_analyser = Meyda.createMeydaAnalyzer({
-    audioContext: audio_context,
-    source: src,
-    buffersize: 64,
-    featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
-    callback: (features) => {
-      maxChroma = features['chroma'].indexOf(max(features['chroma']))
-      energy = features['energy']
-      amplitudeSpectrum = features['amplitudeSpectrum']
-    }
-  })
-  meyda_analyser.start();
-}
+//   const meyda_analyser = Meyda.createMeydaAnalyzer({
+//     audioContext: audio_context,
+//     source: src,
+//     buffersize: 64,
+//     featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
+//     callback: (features) => {
+//       maxChroma = features['chroma'].indexOf(max(features['chroma']))
+//       energy = features['energy']
+//       amplitudeSpectrum = features['amplitudeSpectrum']
+//     }
+//   })
+//   meyda_analyser.start();
+// }
 
 function saveColor(){
   pickr.on('save', (color, instance) => {
