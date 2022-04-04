@@ -1,10 +1,10 @@
 'use strict';
 
-import {audio_context, audio, file, fileLabel, src} from './modules.js';
-export {haptic_change};
+import {audio, wavesurfer} from './modules.js';
+// export {haptic_change};
 
 // Create an instance
-var wavesurfer;
+// var wavesurfer;
 var ch0_data;
 var ch1_data;
 var audio_buffer;
@@ -17,28 +17,24 @@ var AudioIsReady = '';
 // console.log("hahaha");
 function init(){
     console.log('Haptic_code is Initiated');
-    wavesurfer = WaveSurfer.create({
-    container: document.querySelector('#waveform'),
-    waveColor: '#A8DBA8',
-    progressColor: '#3B8686',
-    normalize: true
-    });
-    document
-    .querySelector('[data-action="play"]')
-    .addEventListener('click', wavesurfer.playPause.bind(wavesurfer));
-
+    // wavesurfer = WaveSurfer.create({
+    // container: document.querySelector('#waveform'),
+    // waveColor: '#A8DBA8',
+    // progressColor: '#3B8686',
+    // normalize: true
+    // });
 }
 init();
 
 
-function haptic_change(){
-    console.log("haptic_changed", audio.src);
-    wavesurfer.load(audio);
-    wavesurfer.on('ready', () => {
-        wavesurfer.play();
-        console.log("Haptic Audio Starts");
-         })
-        }
+// function haptic_change(){
+//     console.log("haptic_changed", audio.src);
+//     wavesurfer.load(audio);
+//     wavesurfer.on('ready', () => {
+//         wavesurfer.play();
+//         console.log("Haptic Audio Starts");
+//          })
+//         }
         // return new Promise((resolve, reject)=> {
             // resolve('ready');
         // })})
