@@ -11,6 +11,9 @@ let container, stats;
 const pitch_lineHeight = document.getElementById("pitchLineHeight");
 const pitch_lineThickness = document.getElementById("pitchLineThickness");
 const pitch_lineType = document.getElementById("pitchLineType");
+const dynamic_lineHeight = document.getElementById("dynamicLineHeight");
+const dynamic_lineThickness = document.getElementById("dynamicLineThickness");
+const dynamic_lineType = document.getElementById("dynamicLineType");
 
 
 var now_geometry;
@@ -19,7 +22,7 @@ var ambientLight, spotLight;
 
 var context, src, audio, file, fileLabel;
 var analyser, dataArray, bufferLength;
-var chroma, maxChroma,energy, amplitudeSpectrum;
+var chroma, maxChroma, energy, amplitudeSpectrum;
 
 
 
@@ -45,15 +48,14 @@ function init() {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
     // Orbit Controller
-    controls = new OrbitControls(camera, renderer.domElement);
-    console.log('여기', controls)
+    // controls = new OrbitControls(camera, renderer.domElement);
     camera.position.set(1, 20, 100);
 
-    controls.maxPloarAngle = Math.PI * 0.495;
-    controls.target.set( 0, 10, 0 );
-    controls.minDistance = 40.0;
-    controls.maxDistance = 200.0;
-    controls.update();
+    // controls.maxPloarAngle = Math.PI * 0.495;
+    // controls.target.set( 0, 10, 0 );
+    // controls.minDistance = 40.0;
+    // controls.maxDistance = 200.0;
+    // controls.update();
 
     stats = new Stats();
     container.appendChild( stats.dom );
@@ -93,35 +95,44 @@ function animate() {
 
     // music rendering
     if (dataArray){
-    analyser.getByteFrequencyData(dataArray);
-    var lowerHalfArray = dataArray.slice(0, (dataArray.length/2) - 1);
-    var upperHalfArray = dataArray.slice((dataArray.length/2) - 1, dataArray.length - 1);
+      analyser.getByteFrequencyData(dataArray);
+      var lowerHalfArray = dataArray.slice(0, (dataArray.length/2) - 1);
+      var upperHalfArray = dataArray.slice((dataArray.length/2) - 1, dataArray.length - 1);
 
-    var overallAvg = avg(dataArray);
-    var lowerMax = max(lowerHalfArray);
-    var lowerAvg = avg(lowerHalfArray);
-    var upperMax = max(upperHalfArray);
-    var upperAvg = avg(upperHalfArray);
+      var overallAvg = avg(dataArray);
+      var lowerMax = max(lowerHalfArray);
+      var lowerAvg = avg(lowerHalfArray);
+      var upperMax = max(upperHalfArray);
+      var upperAvg = avg(upperHalfArray);
 
-    var lowerMaxFr = lowerMax / lowerHalfArray.length;
-    var lowerAvgFr = lowerAvg / lowerHalfArray.length;
-    var upperMaxFr = upperMax / upperHalfArray.length;
-    var upperAvgFr = upperAvg / upperHalfArray.length;
+      var lowerMaxFr = lowerMax / lowerHalfArray.length;
+      var lowerAvgFr = lowerAvg / lowerHalfArray.length;
+      var upperMaxFr = upperMax / upperHalfArray.length;
+      var upperAvgFr = upperAvg / upperHalfArray.length;
 
-    var time = performance.now() * 0.0001;
+      var time = performance.now() * 0.0001;
 
-    // Geometry Rendering !
-    if (now_geometry == 'pitch_line_height') {
-      deleteBasics();     
-      createShapeLineHeight()
-    } else if (now_geometry == 'pitch_line_thickness') {
-      deleteBasics();     
-      createShapeLineThickness()
-    } else if (now_geometry == 'pitch_line_type') {
-      deleteBasics();
-      createShapeLineType()
-    }
-    render();
+      // Geometry Rendering !
+      if (now_geometry == 'pitch_line_height') {
+        deleteBasics();     
+        createShapeLineHeightPitch();
+      } else if (now_geometry == 'pitch_line_thickness') {
+        deleteBasics();     
+        createShapeLineThicknessPitch();
+      } else if (now_geometry == 'pitch_line_type') {
+        deleteBasics();
+        createShapeLineTypePitch();
+      } else if (now_geometry == 'dynamic_line_height') {
+        deleteBasics();
+        createShapeLineHeightDynamics();
+      } else if (now_geometry == 'dynamic_line_thickness') {
+        deleteBasics();
+        createShapeLineThicknessDynamics();
+      } else if (now_geometry == 'dynamic_line_type') {
+        deleteBasics();
+        createShapeLineTypeDynamics();
+      }
+      render();
   }
     stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
   }
@@ -130,15 +141,16 @@ function animate() {
 // render function
 function render() {
   renderer.render(scene, camera);
+  console.log(camera.position);
 }
 
 // geometry function
-function createShapeLineHeight(){ 
+function createShapeLineHeightPitch(){ 
 
   const points = [];
   points.push( new THREE.Vector3( 30, -80, 0 ) );
   points.push( new THREE.Vector3( -100, 30, 0 ) );
-  points.push( new THREE.Vector3( 30, 30, 0 ) );
+  points.push( new THREE.Vector3( 70, 30, 0 ) );
 
   geometry = new THREE.BufferGeometry().setFromPoints(points);
   const line = new MeshLine();
@@ -156,16 +168,17 @@ function createShapeLineHeight(){
   changeLinePositionbymaxChroma(compoCenter);
   spotLight.lookAt(compoCenter);
   group.add( compoCenter );
+  camera.position.set(1, 20, 100);
 
 }
 
 
-function createShapeLineThickness(){ 
+function createShapeLineThicknessPitch(){ 
 
   const points = [];
   points.push( new THREE.Vector3( 30, -80, 0 ) );
   points.push( new THREE.Vector3( -100, 30, 0 ) );
-  points.push( new THREE.Vector3( 30, 30, 0 ) );
+  points.push( new THREE.Vector3( 70, 30, 0 ) );
 
   geometry = new THREE.BufferGeometry().setFromPoints(points);
   const line = new MeshLine();
@@ -183,13 +196,12 @@ function createShapeLineThickness(){
   compoCenter.position.set(25, -20, 0);
   spotLight.lookAt(compoCenter);
   group.add( compoCenter );
+  camera.position.set(1, 10, 100);
 
 }
 
 
-function createShapeLineType(){ 
-
-
+function createShapeLineTypePitch(){ 
   class CustomSinCurve extends THREE.Curve {
 
     constructor( scale = 1 ) {
@@ -212,20 +224,84 @@ function createShapeLineType(){
   
   }
   
-  const path = new CustomSinCurve( 40 );
-  geometry = new THREE.TubeGeometry( path, maxChroma, 1, maxChroma, false );
-  material = new THREE.MeshBasicMaterial( { 
+    const path = new CustomSinCurve( 40 );
+    geometry = new THREE.TubeGeometry( path, maxChroma, 1, maxChroma, false );
+    material = new THREE.MeshBasicMaterial( { 
+      color: '#FFFFFF',
+      wireframe: false
+    } );
+
+    compoCenter = new THREE.Mesh( geometry, material );
+    compoCenter.position.set(0, 0, 0);
+    spotLight.lookAt(compoCenter);
+    group.add( compoCenter );
+    camera.position.set(0, 0, 130);
+
+}
+
+
+
+
+function createShapeLineHeightDynamics(){ 
+  geometry = new THREE.BoxGeometry( 5, energy * 1.5, 5 );
+  material = new THREE.MeshBasicMaterial( {
     color: '#FFFFFF',
     wireframe: false
   } );
 
-  // changeLineColorbymaxChroma(material);
-  compoCenter = new THREE.Mesh( geometry, material );
-  compoCenter.position.set(0, 0, 0);
-  spotLight.lookAt(compoCenter);
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(0, -20, 0);
+
+  var compoLeft = new THREE.Mesh(geometry, material);
+  compoLeft.position.set(-20, -25, 0);
+  
+  var compoRight = new THREE.Mesh(geometry, material);
+  compoRight.position.set(20, -30, 0);
+
+  spotLight.lookAt( compoCenter );
+  spotLight.lookAt( compoLeft );
+  spotLight.lookAt( compoRight );
   group.add( compoCenter );
+  group.add( compoLeft );
+  group.add( compoRight );
+  camera.position.set(1, 10, 100);
 
 }
+
+
+
+function createShapeLineThicknessDynamics(){ 
+  geometry = new THREE.BoxGeometry( energy, 30, 5 );
+  material = new THREE.MeshBasicMaterial( {
+    color: '#FFFFFF',
+    wireframe: false
+  } );
+
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(0, 5, 0);
+
+  spotLight.lookAt( compoCenter );
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+
+}
+
+
+function createShapeLineTypeDynamics(){ 
+  geometry = new THREE.TorusKnotGeometry( 10, 0.1, energy * 2, 16, energy );
+  material = new THREE.MeshBasicMaterial( { 
+    color: '#FFFFFF',
+    wireframe: true
+  } );
+
+  compoCenter = new THREE.Mesh( geometry, material );
+  compoCenter.position.set(0, 10, 0);
+  spotLight.lookAt( compoCenter );
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+
+}
+
 
 
 
@@ -399,6 +475,10 @@ function changeLinePositionbymaxChroma(mesh){
   }
 }
 
+// function changeLinePositionbyDynamic(mesh){
+
+// }
+
 // delete function
 function deleteBasics(){
   group.parent.remove(group);
@@ -441,18 +521,31 @@ function vizInit() {
   context = new AudioContext();
   src = context.createMediaElementSource(audio);
 
+
   // EVENT LISTENERS
   pitch_lineHeight.addEventListener("click", ()=>{
     now_geometry = 'pitch_line_height';
-  })
+  });
 
   pitch_lineThickness.addEventListener("click", ()=>{
     now_geometry = 'pitch_line_thickness';
-  })
+  });
 
   pitch_lineType.addEventListener("click", ()=>{
     now_geometry = 'pitch_line_type';
-  })
+  });
+
+  dynamic_lineHeight.addEventListener("click", ()=>{
+    now_geometry = 'dynamic_line_height';
+  });
+
+  dynamic_lineThickness.addEventListener("click", ()=>{
+    now_geometry = 'dynamic_line_thickness';
+  });
+
+  dynamic_lineType.addEventListener("click", ()=>{
+    now_geometry = 'dynamic_line_type';
+  });
 
   // shape_heart.addEventListener("click", ()=>{
   //   deleteBasics();

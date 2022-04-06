@@ -485,15 +485,6 @@ button.dynamicLineMenu:focus{
 
 
 
-
-
-
-
-
-
-
-
-
 button.visualButtonColors{
     background: rgb(255, 255, 255);
     background: linear-gradient(0deg, rgb(248, 140, 140) 0%, rgb(255, 251, 124) 33%, rgb(179, 234, 139) 67%);
@@ -504,4 +495,12 @@ button.visualButtonColors{
     height: 50px;
     font-size: 20px;
     box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+}
+
+
+
+#button:checked ~ ul {
+	visibility: visible;
+	opacity: 1;
+	transform: translateX(-50%) scaleY(1);
 }
