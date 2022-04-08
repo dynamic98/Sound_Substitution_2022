@@ -17,7 +17,7 @@ class HapticArray{
         let cnt = 0;
         this.devices.forEach(device => {
             if (device.device.id == id){
-                this.devices[cnt].disconnect()
+                this.devices[cnt].disconnect(haptic_listener)
                 this.devices.splice(cnt, 1);
                 console.log("device successfully disconneted" );
             }
@@ -26,7 +26,7 @@ class HapticArray{
     }
     send(data){
         this.devices.forEach(device => {
-            device.writeEbafeaeedccaec(data);
+            device.write(data);
         });
     }
 }
@@ -63,7 +63,7 @@ class HapticDevice {
       return 1
     }
     
-    writeEbafeaeedccaec(data) {
+    write(data) {
       // RX Characteristic (6E400002-B5A3-F393-E0A9-E50E24DCCA9E)
       // Write or Write Without Response
       // Write data to the RX Characteristic to send it on to the UART interface.
@@ -92,15 +92,23 @@ class HapticDevice {
         characteristic.removeEventListener('characteristicvaluechanged', listener);
     }
   
-    disconnect() {
+    async disconnect(listener) {
       if (!this.device) {
         return Promise.reject('Device is not connected.');
       }
-      return this.device.gatt.disconnect();
+      await this.stopNotifications(listener);
+      this.device.gatt.disconnect();
+      console.log('> Connected:        ' + this.device.gatt.connected);
+
     }
   
     onDisconnected() {
       console.log('Device is disconnected.');
+      console.log('> Name:             ' + this.device.name);
+      console.log('> Id:               ' + this.device.id);
+      console.log('> Connected:        ' + this.device.gatt.connected);
+
+
     }
   }
 function onebyte_to_twobyte_int(high, low){
@@ -190,10 +198,10 @@ document.addEventListener('DOMContentLoaded', function() {
         view[0] = 36; // STX 0x24
         view[1] = 2; // TYPE 0x02
         
-        var tmp = twobyte_int_to_onebyte(300)
+        var tmp = twobyte_int_to_onebyte(100)
         view[2] = tmp[0]
         view[3] = tmp[1]
-        tmp = twobyte_int_to_onebyte(50)
+        tmp = twobyte_int_to_onebyte(0)
         view[4] = tmp[0]
         view[5] = tmp[1]
         
@@ -201,7 +209,6 @@ document.addEventListener('DOMContentLoaded', function() {
         view[18] = 10; // ETX 0x0A
         console.log(view)
         haptic_devices.send(view);
-        
     });
 
     document
