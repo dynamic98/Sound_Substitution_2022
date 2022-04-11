@@ -123,12 +123,7 @@ function SyncAudio(){
                 audio.currentTime = AudioCurrentTime;
                 // console.log(AudioCurrentTime - AudioLastTime);
             }
-
             AudioLastTime = AudioCurrentTime;
-
-                // remainingTime = totalTime - currentTime;
-                // console.log(currentTime);
-            // audio.currentTime = WS_CurrentTime;
         }
     })
 }

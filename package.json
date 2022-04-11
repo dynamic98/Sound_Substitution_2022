@@ -18,6 +18,7 @@
     "p5": "^1.4.1",
     "pickr": "^0.1.4",
     "three": "^0.138.3",
+    "three.meshline": "^1.4.0",
     "wavesurfer.js": "^6.0.4"
   },
   "main": "index.js",
