@@ -46,20 +46,17 @@
                         <i class="glyphicon glyphicon-pause"></i>
                         Pause
                     </button>
-                    <button class="btn btn-primary" data-action="test">
-                        Select Instroments
+                    <button class="btn btn-success" data-action="toHaptic">
+                        Select Instroments & toHaptic
                     </button>
-                    <button class="btn btn-primary" data-action="test2">
-                        toHaptic
-                    </button>
-                    <button class="btn btn-primary" data-action="SearchHapticDevice">
+                    <button class="btn btn-info" data-action="SearchHapticDevice">
                         SearchHapticDevice
                     </button>
-                    <button class="btn btn-primary" data-action="SendHapticPattern">
+                    <button class="btn btn-info" data-action="SendHapticPattern">
                         <i class="glyphicon glyphicon-play"></i>
                         SendHapticPattern
                     </button>
-                    <button class="btn btn-primary" data-action="DisconnectHapticDevice">
+                    <button class="btn btn-info" data-action="DisconnectHapticDevice">
                         <i class="glyphicon glyphicon-stop"></i>
                         DisconnectHapticDevice
                     </button>
@@ -70,8 +67,7 @@
                             &larr; Empty
                         </div>
                         <div class="col-sm-4">
-                            <!-- Panner -->
-                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                            <input data-action="tempo" type="range" min="-45" max="45" value="0" style="width: 100%" />
                         </div>
                         <div class="col-sm-4">
                             Full vibration &rarr;
@@ -83,8 +79,10 @@
                             &larr; Rough
                         </div>
                         <div class="col-sm-4">
-                            <!-- Panner -->
-                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                            <input data-action="frequency" type="range" min="0" max="22" value="11" style="width: 100%"/>
+                            <!-- class="form-control-range" id="formControlRange" 
+                            onChange="document.getElementById('rangeval').innerText = document.getElementById('formControlRange').value">
+                            <span id="rangeval">11</span> -->
                         </div>
                         <div class="col-sm-4">
                             Sharp &rarr;
@@ -96,8 +94,7 @@
                             &larr; Week
                         </div>
                         <div class="col-sm-4">
-                            <!-- Panner -->
-                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                            <input data-action="amplitude" type="range" min="0" max="100" value="50" style="width: 100%"/>
                         </div>
                         <div class="col-sm-4">
                             Strong &rarr;
@@ -109,8 +106,7 @@
                             &larr; Asymmetry
                         </div>
                         <div class="col-sm-4">
-                            <!-- Panner -->
-                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
+                            <input data-action="symmetry" type="range" min="-45" max="45" value="0" style="width: 100%"/>
                         </div>
                         <div class="col-sm-4">
                             Symmetry &rarr;
@@ -122,7 +118,7 @@
         </div>
 
         <script>
-            
+
         </script>
     </body>
 </html>
