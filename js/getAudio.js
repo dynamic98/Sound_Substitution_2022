@@ -47,14 +47,6 @@ function FileInit() {
     })
   }
 
-// function haptic_change(){
-//     console.log("haptic_changed", audio.src);
-//     wavesurfer.load(audio);
-//     wavesurfer.on('ready', () => {
-//         wavesurfer.play();
-//         console.log("Haptic Audio Starts");
-//         })
-// }
 
 function FileChange(){
     file.onchange = function(){

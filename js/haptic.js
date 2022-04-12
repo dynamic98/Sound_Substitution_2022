@@ -156,22 +156,22 @@ init();
     });
 
     // Progress bar
-    (function() {
-        const progressDiv = document.querySelector('#progress-bar');
-        const progressBar = progressDiv.querySelector('.progress-bar');
+    // (function() {
+    //     const progressDiv = document.querySelector('#progress-bar');
+    //     const progressBar = progressDiv.querySelector('.progress-bar');
 
-        let showProgress = function(percent) {
-            progressDiv.style.display = 'block';
-            progressBar.style.width = percent + '%';
-        };
+    //     let showProgress = function(percent) {
+    //         progressDiv.style.display = 'block';
+    //         progressBar.style.width = percent + '%';
+    //     };
 
-        let hideProgress = function() {
-            progressDiv.style.display = 'none';
-        };
+    //     let hideProgress = function() {
+    //         progressDiv.style.display = 'none';
+    //     }
 
-        wavesurfer.on('loading', showProgress);
-        wavesurfer.on('ready', hideProgress);
-        wavesurfer.on('destroy', hideProgress);
-        wavesurfer.on('error', hideProgress);
-    })();
+    //     wavesurfer.on('loading', showProgress);
+    //     wavesurfer.on('ready', hideProgress);
+    //     wavesurfer.on('destroy', hideProgress);
+    //     wavesurfer.on('error', hideProgress);
+    // })();
 // });

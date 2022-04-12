@@ -7,6 +7,7 @@ const pickr = Pickr.create({
     el: '.visualButtonColors',
     theme: 'monolith',
     useAsButton: true,
+    position: 'right-end',
     defaultRepresentation: 'HEX',
     components: {
         // Main components

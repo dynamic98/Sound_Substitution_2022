@@ -5,6 +5,7 @@
     <title>VibvizTool_Customizing</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="cssfile.css" media="screen and (min-width: 512px) and (max-width: 1024px)" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Sharp|Material+Icons+Two+Tone|Material+Icons+Outlined" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
@@ -12,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link href="cssfile.css" media="screen and (min-width: 512px) and (max-width: 1024px)" rel="stylesheet">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
 
     <!-- Bootstrap CSS -->
@@ -25,22 +25,13 @@
     <script src="https://unpkg.com/wavesurfer.js@6.1.0/dist/wavesurfer.js"></script>
     <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
 
-    <link rel="shortcut icon" href="#">
-
-    <!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-    <link rel="stylesheet" href="style.css" type="text/css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script> -->
-    
+    <!-- <link rel="shortcut icon" href="#"> -->
 
 </head>
 
 <body>
     <script>
-        function check(box, delimiter){
+        function check(box, delimiter) {
           target = document.getElementById('thefile');
           if (target.files.length == 1){ // 음악이 무조건 하나 input 으로 들어와야 메뉴를 보여줌.
   
@@ -51,6 +42,16 @@
             }
           }
         };
+
+        // function make_wave_visible(delimiter) {
+        //   target = document.getElementById('thefile');
+        //   if (target.files.length == 1){ // 음악이 무조건 하나 input 으로 들어와야 햅틱 wave 보여줌.
+        //     document.getElementByTagName(delimiter).style.visibility = "visible";
+        //     document.getElementByTagName(delimiter).style.backgroundColor = "rgb(128, 17, 17)";
+        //   } else {
+        //     document.getElementByTagName(delimiter).style.visibility = "hidden";
+        //   }
+        // };
       </script>
       
       <aside class="sidebar">
@@ -67,7 +68,7 @@
             <span class="identity">Deaf</span>
           </div>
   
-          <div id="content">
+          <div id="sidebar-content">
             <label for="thefile" class="file"> Pick a Music 🎺
                 <input type="file" id="thefile" accept="audio/mp3" />
             </label>
@@ -132,139 +133,130 @@
       </aside>
   
   
-      
       <div id="userCustom">#000000</div>
-      <!-- <div id="content">
-          <label for="thefile" class="file"> Pick a Music 🎺
-              <input type="file" id="thefile" accept="audio/mp3" />
-          </label>
-          <audio id="audio" controls></audio>
-      </div> -->
   
-      <div class="customMenu" id="customMenu-Line">
+
+      <div class="visualCustomMenu" id="customMenu-Line">
         <h5 class="menuTitle">Line Visualization</h5>
-        <hr class="menuTitleHR">
-        <p id="menusmallTitle"> Pitch </p>
+        <hr class="menuTitleHR_visual">
+        <p id="menusmallTitle_visual"> Pitch </p>
             <button class="pitchMenu" id="pitchLineHeight"> Line Height </button>
             <button class="pitchMenu" id="pitchLineThickness"> Line Thickness </button>
             <button class="pitchMenu" id="pitchLineType"> Line Type </button>
         <br>
-        <p id="menusmallTitle"> Dynamics </p>
+        <p id="menusmallTitle_visual"> Dynamics </p>
             <button class="dynamicMenu" id="dynamicLineHeight"> Line Height </button>
             <button class="dynamicMenu" id="dynamicLineThickness"> Line Thickness </button>
             <button class="dynamicMenu" id="dynamicLineType"> Line Type </button>
         <br>
-        <p id="menusmallTitle" class="bgcolor"> Background </p>
+        <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
             <button class="visualButtonColors" type="button"> Colors </button>
       </div>
   
   
-      <div class="customMenu" id="customMenu-Sphere">
+      <div class="visualCustomMenu" id="customMenu-Sphere">
         <h5 class="menuTitle">Sphere Visualization</h5>
-        <hr class="menuTitleHR">
-        <p id="menusmallTitle"> Pitch </p>
+        <hr class="menuTitleHR_visual">
+        <p id="menusmallTitle_visual"> Pitch </p>
             <button class="pitchMenu" id="pitchSphereSize"> Sphere Size </button>
             <button class="pitchMenu" id="pitchSphereHeight"> Sphere Height </button>
             <button class="pitchMenu" id="pitchSphereColor"> Sphere Color </button>
         <br>
-        <p id="menusmallTitle"> Dynamics </p>
+        <p id="menusmallTitle_visual"> Dynamics </p>
             <button class="dynamicMenu" id="dynamicSphereSize"> Sphere Size </button>
             <button class="dynamicMenu" id="dynamicSpherePhiLength"> Sphere PhiLength </button>
             <button class="dynamicMenu" id="dynamicSphereThetaStart"> Sphere ThetaStart </button>
         <br>
-        <p id="menusmallTitle" class="bgcolor"> Background </p>
+        <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
             <button class="visualButtonColors" type="button"> Colors </button>
       </div>
   
 
     <main>
         <!--시각화 output-->
-        <div id="canvas"></div>
+        <div class="visual-container">
+          <div id="canvas"></div>
+        </div>
 
-        <div class="container">
-            <div class="header">
-                <h1 itemprop="name">Haptic Pattern test</h1>
-            </div>
-    
-            <div id="demo">
-                <div id="waveform">
-                    <div class="progress progress-striped active" id="progress-bar">
-                        <div class="progress-bar progress-bar-info"></div>
-                    </div>
-    
-                    <!-- Here be the waveform -->
+        <!-- 햅틱 output -->
+        <div id="demo">
+          <div id="waveform">
+          </div>
+        </div>
+
+        <div class="music-controls">
+          <br>
+            <!-- <hr /> -->
+            <button class="btn btn-primary" data-action="play">
+                <i class="glyphicon glyphicon-play"></i>
+                Play
+                /
+                <i class="glyphicon glyphicon-pause"></i>
+                Pause
+            </button>
+            <button class="btn btn-primary" data-action="test">
+                Select Instruments
+            </button>
+            <button class="btn btn-primary" data-action="test2">
+                toHaptic
+            </button>
+        </div>
+
+        <div class="haptic-container">
+          <div class="hapticCustomMenu">
+            <div class="haptic-controls">
+                <h5 class="menuTitle"> Haptic Pattern Filter </h5>
+                <br>
+                <p id="menusmallTitle_haptic"> Tempo </p>
+                <div class="haptic-tempo">
+                    <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                    &larr; Empty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full vibration &rarr;
                 </div>
-    
-                <div class="controls">
-                    <hr />
-                    <button class="btn btn-primary" data-action="play">
-                        <i class="glyphicon glyphicon-play"></i>
-                        Play
-                        /
-                        <i class="glyphicon glyphicon-pause"></i>
-                        Pause
-                    </button>
-                    <button class="btn btn-primary" data-action="test">
-                        Select Instroments
-                    </button>
-                    <button class="btn btn-primary" data-action="test2">
-                        toHaptic
-                    </button>
-                    <hr />
-    
-                    <div class="row">
-                        <div class="col-sm-4">
-                            &larr; Empty
-                        </div>
-                        <div class="col-sm-4">
-                            <!-- Panner -->
-                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
-                        </div>
-                        <div class="col-sm-4">
-                            Full vibration &rarr;
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-4">
-                            &larr; Rough
-                        </div>
-                        <div class="col-sm-4">
-                            <!-- Panner -->
-                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
-                        </div>
-                        <div class="col-sm-4">
-                            Sharp &rarr;
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-4">
-                            &larr; Weak
-                        </div>
-                        <div class="col-sm-4">
-                            <!-- Panner -->
-                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
-                        </div>
-                        <div class="col-sm-4">
-                            Strong &rarr;
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-4">
-                            &larr; Asymmetry
-                        </div>
-                        <div class="col-sm-4">
-                            <!-- Panner -->
-                            <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" />
-                        </div>
-                        <div class="col-sm-4">
-                            Symmetry &rarr;
-                        </div>
-                    </div>
+                <br>
+
+                <p id="menusmallTitle_haptic"> Frequency </p>
+                <div class="haptic-frequency">
+                    <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                    &larr; Rough &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sharp &rarr;
                 </div>
-            </div>
+                <br>
+
+                <p id="menusmallTitle_haptic"> Amplitude </p>
+                <div class="haptic-amplitude">
+                    <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                    &larr; Sharp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strong &rarr;
+                </div>
+                <br>
+
+                <p id="menusmallTitle_haptic"> Timbre </p>
+                <div class="haptic-timbre">
+                    <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                    &larr; Asymmetry &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symmetry &rarr;
+                </div>
+          </div>
+          </div>
         </div>
 
     </main>
