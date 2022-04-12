@@ -311,25 +311,19 @@ audio.playing{
   width: calc(100% - 20px);
 }
 
-canvas{
+
+
+/* 시각 메뉴 스타일 */
+
+div#canvas > canvas{
   background-color: black;
   margin-top: 30px;
   margin-left: 370px;
 }
 
 
-div#container{
-  width: 10px;
-  height: 10px
-}
 
-
-div#container > div{
-  visibility: hidden;
-}
-
-
-div#content{
+div#sidebar-content{
   font-size: 1.2rem;
   display: inline-block;
   position: relative;
@@ -347,20 +341,20 @@ div#title{
 }
 
 
-
 h5.menuTitle{
   margin-left: 260px;
   margin-top: 30px;
   font-size: 25px;
 }
 
-hr.menuTitleHR{
+hr.menuTitleHR_visual{
+  width: 700px;
   margin-top: 20px;
   margin-bottom: 5px;
 }
 
-p#menusmallTitle{
-  margin-left: 15px;
+p#menusmallTitle_visual{
+  margin-left: px;
   margin-right: -40px;
   padding: 30px;
   height: 60px;
@@ -419,7 +413,7 @@ button.visualButtonColors{
   box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 }
 
-div.customMenu{
+div.visualCustomMenu{
   position: relative;
   display: none;
   float: right;
@@ -457,23 +451,89 @@ input.check-btn{
 }
 
 
-/* camera{
-
-} */
-
-/* #customMenu-Line{
-  display: none;
-} */
 
 
+/* 햅틱 메뉴 스타일 */
+
+div.haptic-container{
+  display: inline-block;
+  margin-left: 400px;
+}
+
+div.haptic-controls{
+  display: inline-block;
+  width: 800px;
+  height: 300px;
+}
+
+div.hapticCustomMenu{
+  position: relative;
+  margin-left: 985px;
+  margin-top: -195px;
+  background-color: #e2e2e2;
+  width: 700px;
+  height: 400px;
+  border-radius: 8px;
+}
+
+p#menusmallTitle_haptic{
+  margin-top: 0.01px;
+  margin-bottom: 3px;
+  margin-left: 30px;
+  width: 10px;
+  height: 0px;
+  /* margin-left: 15px;
+  margin-right: -40px;
+  padding: 30px;
+  height: 60px; */
+  color: black;
+  font-size: 22px;
+}
+
+div.haptic-tempo{
+  margin-left: 160px;
+  width: 500px;
+}
+
+div.haptic-frequency{
+  margin-left: 160px;
+  width: 500px;
+}
+
+div.haptic-amplitude{
+  margin-left: 160px;
+  width: 500px;
+}
+
+div.haptic-timbre{
+  margin-left: 160px;
+  width: 500px;
+}
+
+div#demo > div#waveform > wave {
+  visibility: visible;
+  width: 952px;
+  margin-top: 20px;
+  margin-left: 370px;
+  background-color: rgb(29, 47, 92);
+}
+
+
+
+/* 음악 컨트롤 메뉴 */
+div.music-controls{
+  margin-left: 370px;
+}
+
+div.music-controls > button.btn-primary{
+  width: 200px;
+  padding: 10px;
+  margin-right: 10px;
+}
 
 /* 반응형 웹을 위한 미디어 쿼리 (미디어 쿼리는 반드시 가장 하단에 작성) */
 
 @media (max-width: 1600px) {
-  canvas{
-    width: 714px;
-    height: 417px;
-  }
 
   div.customMenu {
     width: 420px;
@@ -484,7 +544,7 @@ input.check-btn{
     font-size: 22px;
   }
 
-  p#menusmallTitle{
+  p#menusmallTitle_visual{
     padding-left: 5px;
     margin-top: 15px;
     margin-bottom: -20px;
@@ -518,10 +578,3 @@ input.check-btn{
     margin-bottom: 0.001px;
   }
 }
-
-/* @media (min-width: 2130px) {
-  canvas{
-    width: 952px;
-    height: 512px;
-  }
-} */
