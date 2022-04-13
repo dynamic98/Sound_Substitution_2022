@@ -93,6 +93,7 @@ function init() {
 
 // animate function
 function animate() {
+
   // color rendering
   saveColor();
   changeBGColor();
