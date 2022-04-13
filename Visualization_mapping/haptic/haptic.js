@@ -1,13 +1,15 @@
 'use strict';
 
 // Create an instance
+const sending_delay = 0.20
 var wavesurfer;
 var ch0_data;
 var ch1_data;
 var ch0_haptic;
 var ch1_haptic;
-var freq;
-var amp;
+var freq = 6;
+var amp = 50;
+let last_time = 0;
 let freqPanner = document.querySelector('[data-action="frequency"]');
 // freqPanner.addEventListener('input', event => {
 //     freq = Number(sliderPanner.value);
@@ -167,10 +169,34 @@ function haptic_pattern_gen(){
     for (var i = 0;i < fftsize; i++){
         dataArray[i] = Math.abs(dataArray[i]);
     }
-    var _amp = parseInt(Math.max(...dataArray)*100);
+    var _amp = parseInt(Math.max(...dataArray)* 2 * amp);
+    if (_amp >= 100){
+        _amp = 100;
+    }
     return [_HzIndex[freq], _amp]
 
 }
+
+function SendHapticData(frequency, amplitude){
+    let data_buffer = new ArrayBuffer(19);
+    let view = new Int8Array(data_buffer);
+    view[0] = 36; // STX 0x24
+    view[1] = 2; // TYPE 0x02
+    
+    var tmp = twobyte_int_to_onebyte(frequency);
+    view[2] = tmp[0];
+    view[3] = tmp[1];
+    tmp = twobyte_int_to_onebyte(amplitude);
+    view[4] = tmp[0];
+    view[5] = tmp[1];
+    
+    view[17] = 13; // ETX 0x0D
+    view[18] = 10; // ETX 0x0A
+    console.log();
+    console.log(view);
+    haptic_devices.send(view);
+}
+
 
 function haptic_listener(event){
     let data_buffer = new ArrayBuffer(19);
@@ -219,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Load audio from URL
-    wavesurfer.load('./assets/beat2.mp3');
+    wavesurfer.load('./assets/beat.mp3');
 
     // Log errors
     wavesurfer.on('error', function(msg) {
@@ -228,30 +254,23 @@ document.addEventListener('DOMContentLoaded', function() {
     document
     .querySelector('[data-action="SendHapticPattern"]')
     .addEventListener('click', function(event) {
-        var freq_amp = haptic_pattern_gen(10, 1)
+        // TODO : real time send
+        wavesurfer.on('audioprocess', function() {
+            var current_time = wavesurfer.getCurrentTime()
+            var difference_time = current_time - last_time
+            if (difference_time > sending_delay || difference_time < 0){
+                var freq_amp = haptic_pattern_gen();
+                
+                SendHapticData(freq_amp[0], freq_amp[1]);
 
-        let data_buffer = new ArrayBuffer(19);
-        let view = new Int8Array(data_buffer);
-        view[0] = 36; // STX 0x24
-        view[1] = 2; // TYPE 0x02
-        
-        var tmp = twobyte_int_to_onebyte(freq_amp[0])
-        view[2] = tmp[0]
-        view[3] = tmp[1]
-        tmp = twobyte_int_to_onebyte(freq_amp[1])
-        view[4] = tmp[0]
-        view[5] = tmp[1]
-        
-        view[17] = 13; // ETX 0x0D
-        view[18] = 10; // ETX 0x0A
-        console.log(freq_amp)
-        console.log(view)
-        haptic_devices.send(view);
+                last_time = current_time;
+            }
+        });
     });
-
     document
     .querySelector('[data-action="DisconnectHapticDevice"]')
     .addEventListener('click', async event => {
+        SendHapticData(0, 0);
         let device = new HapticDevice();
         await device.request();
         haptic_devices.del(device.device.id);
@@ -300,16 +319,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document
     .querySelector('[data-action="toHaptic"]')
     .addEventListener('click', async event => {
-        console.log(wavesurfer.getDuration());
-        console.log(wavesurfer.backend.buffer.sampleRate);
-        console.log(wavesurfer.backend.buffer.length);
-        console.log(wavesurfer.backend.buffer.numberOfChannels);
         // console.log(wavesurfer.backend.mergedPeaks);
-        
-        ch0_data = wavesurfer.backend.buffer.getChannelData(0);
-        ch1_data = wavesurfer.backend.buffer.getChannelData(1);
         // vocal, drum, guit, bass, inst
-        await wavesurfer.load('./assets/bass.mp3');
+        
+        //TODO: fix to sync
+        wavesurfer.load('./assets/bass.mp3')
 
         console.log(wavesurfer.getDuration());
         console.log(wavesurfer.backend.buffer.sampleRate);
@@ -318,13 +332,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         ch0_data = wavesurfer.backend.buffer.getChannelData(0);
         ch1_data = wavesurfer.backend.buffer.getChannelData(1);
-
+    
         const hz = 100;
         const volume = 1.0;
         const sineWaveArray = new Float32Array(wavesurfer.backend.buffer.length);
         var i;
         var sampleTime;
-
+    
         for (i = 0; i < sineWaveArray.length; i++) {
             sampleTime = i / wavesurfer.backend.buffer.sampleRate;
             // sineWaveArray[i] = Math.sin(Math.asin(ch0_data[i])* hz) * volume;
@@ -334,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         ch0_haptic = new Float32Array(wavesurfer.backend.buffer.length);
         ch1_haptic = new Float32Array(wavesurfer.backend.buffer.length);
-
+    
         for (i = 0; i < sineWaveArray.length; i++) {
             var tmp = 0.5 * (sineWaveArray[i]*Math.abs(ch0_data[i]) + sineWaveArray[i]*Math.abs(ch1_data[i]));
             ch0_haptic[i] = tmp;
@@ -342,13 +356,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // ch0_haptic[i] = sineWaveArray[i];
             // ch1_haptic[i] = sineWaveArray[i];
         }
-
+    
         console.log(ch1_haptic)
         wavesurfer.backend.buffer.copyToChannel(ch0_haptic, 0);
         wavesurfer.backend.buffer.copyToChannel(ch1_haptic, 1);
         
         wavesurfer.loadDecodedBuffer(wavesurfer.backend.buffer);
-
+    
         // console.log(wavesurfer.backend.data);
         // wavesurfer.load(osc)
     });
