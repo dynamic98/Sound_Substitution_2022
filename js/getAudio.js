@@ -1,11 +1,11 @@
 // import { audio, audio_context, file as target} from './modules.js';
+import { show_canvas } from './showCanvas.js'
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
 let chroma, maxChroma, energy, amplitudeSpectrum;
 let AudioLastTime, AudioCurrentTime;
 // let target;
-export {audio, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};
 
 // function titleAudio(){
 //     // target = document.getElementById('thefile');
@@ -31,12 +31,9 @@ function FileInit() {
         normalize: true
         });
 
-    // document.onload = function(e){
-    //   audio.play();
-    //   play();
-    // }
-    var saveButton = document.getElementsByClassName("pcr-save");
 
+    var saveButton = document.getElementsByClassName("pcr-save");
+    console.log('audio input completed')
     document
     .querySelector('[data-action="play"]')
     .addEventListener('click', ()=>{ 
@@ -50,6 +47,11 @@ function FileInit() {
 
 function FileChange(){
     file.onchange = function(){
+        // canvas rendering by file input
+        show_canvas("canvas"); // visual-canvas
+        show_canvas("demo");   // haptic-canvas
+        show_canvas("music-controls") // music controller
+
         fileLabel.classList.add('normal');
         var files = this.files;
         audio.src = URL.createObjectURL(files[0]);
@@ -156,3 +158,6 @@ function fractionate(val, minVal, maxVal) {
   // export {audio};
 // const button = document.getElementById("thefile");
 // button.addEventListener('click', titleAudio);
+
+
+export {audio, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};

@@ -4,7 +4,6 @@
 
 
 
-
 html, body{
   margin: 0;
   padding: 0;
@@ -189,7 +188,7 @@ aside {
         outline: none;
       }
       aside .side-inner .nav-menu ul li:hover {
-        color: rgb(185, 31, 31); }
+        color: rgb(0, 0, 0); }
         aside .side-inner .nav-menu ul li:hover:before {
           width: 4px;
           opacity: 1;
@@ -284,18 +283,18 @@ label.file{
   
 label.file:hover{
   margin-left: 90px;
-  background: rgb(255, 255, 96);
+  background: rgba(247, 155, 194, 0.643);
   transform: translate3d(-50%, -55%, 0);
   font-size: 1.2rem;
-  font-weight: 345;
+  font-weight: 445;
 }
 
-label.file:active{
+/* label.file:active{
   margin-left: 70px;
   transform: translate3d(-50%, -55%, 0);
   font-size: 1.5rem;
   font-weight: 300;
-}
+} */
 
 audio {
   position: fixed;
@@ -314,13 +313,15 @@ audio.playing{
 
 
 /* 시각 메뉴 스타일 */
+div#canvas{
+  visibility: hidden;
+}
 
 div#canvas > canvas{
   background-color: black;
   margin-top: 30px;
   margin-left: 370px;
 }
-
 
 
 div#sidebar-content{
@@ -460,13 +461,14 @@ div.haptic-container{
   margin-left: 400px;
 }
 
+
 div.haptic-controls{
-  display: inline-block;
   width: 800px;
   height: 300px;
 }
 
 div.hapticCustomMenu{
+  display: none;
   position: relative;
   margin-left: 985px;
   margin-top: -195px;
@@ -482,10 +484,6 @@ p#menusmallTitle_haptic{
   margin-left: 30px;
   width: 10px;
   height: 0px;
-  /* margin-left: 15px;
-  margin-right: -40px;
-  padding: 30px;
-  height: 60px; */
   color: black;
   font-size: 22px;
 }
@@ -511,21 +509,25 @@ div.haptic-timbre{
 }
 
 div#demo > div#waveform > wave {
-  visibility: visible;
   width: 952px;
   margin-top: 20px;
   margin-left: 370px;
   background-color: rgb(29, 47, 92);
 }
 
+div#demo{
+  visibility: hidden;
+}
 
 
 /* 음악 컨트롤 메뉴 */
-div.music-controls{
+
+div#music-controls{
+  visibility: hidden;
   margin-left: 370px;
 }
 
-div.music-controls > button.btn-primary{
+div#music-controls > button.btn-primary{
   width: 200px;
   padding: 10px;
   margin-right: 10px;
@@ -534,7 +536,6 @@ div.music-controls > button.btn-primary{
 /* 반응형 웹을 위한 미디어 쿼리 (미디어 쿼리는 반드시 가장 하단에 작성) */
 
 @media (max-width: 1600px) {
-
   div.customMenu {
     width: 420px;
     height: 410px;
