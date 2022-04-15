@@ -7,17 +7,18 @@ var ch0_data;
 var ch1_data;
 var ch0_haptic;
 var ch1_haptic;
-var freq = 6;
+var freq = 11;
 var amp = 50;
 let last_time = 0;
 let freqPanner = document.querySelector('[data-action="frequency"]');
-// freqPanner.addEventListener('input', event => {
-//     freq = Number(sliderPanner.value);
-// });
+freqPanner.addEventListener('input', event => {
+    freq = Number(freqPanner.value);
+});
+
 let ampPanner = document.querySelector('[data-action="amplitude"]');
-// ampPanner.addEventListener('input', event => {
-//     amp = Number(sliderPanner.value);
-// });
+ampPanner.addEventListener('input', event => {
+    amp = Number(ampPanner.value);
+});
 
 class HapticArray{
     constructor() {
@@ -209,7 +210,6 @@ function haptic_listener(event){
     console.log(data_buffer);
     // 0xF1 : battery info
     // 4byte float
-
     if (view[1]==-15){
         console.log("current battery" + onebyte_to_fourbyte_float([view[2],view[3],view[4],view[5]])/4.2);
     }
