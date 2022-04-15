@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>VibvizTool_Customizing</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Sharp|Material+Icons+Two+Tone|Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link href="css/style.css" media="screen and (min-width: 512px) and (max-width: 1024px)" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Javascript -->
+    <script type="module" defer src="./js/main.js"></script>
+    <script type="module" defer src="./js/showCanvas.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js@6.1.0/dist/wavesurfer.js"></script>
+    <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
+
+    <!-- <link rel="shortcut icon" href="#"> -->
+
+</head>
+
+<body>
+    <script>
+        function check(box, delimiter) {
+          target = document.getElementById('thefile');
+          if (target.files.length == 1){ // 음악이 무조건 하나 input 으로 들어와야 메뉴를 보여줌.
+  
+            if (box.checked == true) {
+              document.getElementById(delimiter).style.display = "inline-block";
+            } else {
+              document.getElementById(delimiter).style.display = "none";
+            }
+          }
+        };
+
+        function highlight(box, delimiter) {
+          if (box.checked == true) {
+              document.getElementById(delimiter).style.color = "rgba(255, 52, 91, 1)";
+              document.getElementById(delimiter).style.fontWeight = "600";
+          } else {
+              document.getElementById(delimiter).style.backgroundColor = "rgba(255, 255, 255, 0)";
+              document.getElementById(delimiter).style.color = "#8b8b8b";
+          }
+        }
+    </script>
+      
+      <aside class="sidebar">
+        <div class="toggle">
+          <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span></span>
+              </a>
+        </div>
+        <div class="side-inner">
+  
+          <div class="profile">
+            <img src="images/cutecat.jpeg" alt="Image" class="img-fluid">
+            <h3 class="name">User#01</h3>
+            <span class="identity">Deaf</span>
+          </div>
+  
+          <div id="sidebar-content">
+            <label for="thefile" class="file"> Pick a Music 🎺
+                <input type="file" id="thefile" accept="audio/mp3" />
+            </label>
+            <audio id="audio" controls></audio>
+            <div class="thetitle" id="title"></div>
+          </div>
+          
+          <div class="nav-menu">
+            <ul>
+              <li class="accordion">
+                <hr>
+  
+                <p id="VisuoMenu" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsible">
+                <!-- <a href="#" id="VisuoMenu" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsible"> -->
+                  <span class="material-icons" style="font-size:25px; vertical-align: top;">palette</span> Visualization
+                <!-- </a> -->
+                </p>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+                  <div>
+                    <ul>
+                      <li type="button" class="VisuoMenus" id="VisuoLine">
+                        <input class="check-btn" id="check-VisuoLine" type="checkbox" onclick="check(this, 'customMenu-Line'); highlight(this, 'active-line');"> 
+                          <label for="check-VisuoLine"> <div id="active-line">Line</div> </label>
+                      </li>
+                      <li type="button" class="VisuoMenus" id="VisuoSphere">
+                        <input class="check-btn" id="check-VisuoSphere" type="checkbox" onclick="check(this, 'customMenu-Sphere'); highlight(this, 'active-sphere');"> 
+                          <label for="check-VisuoSphere"> <div id="active-sphere">Sphere</div> </label>
+                      </li>
+                      <li type="button" class="VisuoMenus" id="VisuoRing">
+                        <input class="check-btn" id="check-VisuoRing" type="checkbox" onclick="check(this, 'customMenu-Ring'); highlight(this, 'active-ring');"> 
+                          <label for="check-VisuoRing"> <div id="active-ring">Ring</div> </label>
+                      </li>
+                      <li type="button" class="VisuoMenus" id="VisuoTorus">
+                        <input class="check-btn" id="check-VisuoTorus" type="checkbox" onclick="check(this, 'customMenu-Torus'); highlight(this, 'active-torus');"> 
+                          <label for="check-VisuoTorus"> <div id="active-torus">Torus</div> </label>
+                      </li>
+                      <li type="button" class="VisuoMenus" id="VisuoCone">
+                        <input class="check-btn" id="check-VisuoCone" type="checkbox" onclick="check(this, 'customMenu-Cone'); highlight(this, 'active-cone');"> 
+                          <label for="check-VisuoCone"> <div id="active-cone">Cone</div> </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <br>
+              <li class="accordion">
+                <p id="HapticMenu" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsible">
+                  <span class="material-icons" style="font-size:25px; vertical-align: top;">vibration</span> Haptic </p>
+  
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingOne">
+                  <div>
+                    <ul>
+                      <li type="button" class="HapticMenus">
+                        <input class="check-btn" id="check-Haptic" type="checkbox" onclick="check(this, 'hapticCustom'); highlight(this, 'active-haptic');"> 
+                        <label for="check-Haptic"> <div id="active-haptic">Pattern Filter</div> </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+  
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+      </aside>
+  
+  
+      <div id="userCustom">#000000</div>
+  
+
+      <div class="visualCustomMenu" id="customMenu-Line">
+        <h5 class="menuTitle">Line Visualization</h5>
+        <hr class="menuTitleHR_visual">
+        <p id="menusmallTitle_visual"> Pitch </p>
+            <button class="pitchMenu" id="pitchLineHeight"> Line Height </button>
+            <button class="pitchMenu" id="pitchLineThickness"> Line Thickness </button>
+            <button class="pitchMenu" id="pitchLineType"> Line Type </button>
+        <br>
+        <p id="menusmallTitle_visual"> Dynamics </p>
+            <button class="dynamicMenu" id="dynamicLineHeight"> Line Height </button>
+            <button class="dynamicMenu" id="dynamicLineThickness"> Line Thickness </button>
+            <button class="dynamicMenu" id="dynamicLineType"> Line Type </button>
+        <br>
+        <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
+            <button class="visualButtonColors" type="button"> Colors </button>
+      </div>
+  
+  
+      <div class="visualCustomMenu" id="customMenu-Sphere">
+        <h5 class="menuTitle">Sphere Visualization</h5>
+        <hr class="menuTitleHR_visual">
+        <p id="menusmallTitle_visual"> Pitch </p>
+            <button class="pitchMenu" id="pitchSphereSize"> Sphere Size </button>
+            <button class="pitchMenu" id="pitchSphereHeight"> Sphere Height </button>
+            <button class="pitchMenu" id="pitchSphereColor"> Sphere Color </button>
+        <br>
+        <p id="menusmallTitle_visual"> Dynamics </p>
+            <button class="dynamicMenu" id="dynamicSphereSize"> Sphere Size </button>
+            <button class="dynamicMenu" id="dynamicSpherePhiLength"> Sphere PhiLength </button>
+            <button class="dynamicMenu" id="dynamicSphereThetaStart"> Sphere ThetaStart </button>
+        <br>
+        <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
+            <button class="visualButtonColors" type="button"> Colors </button>
+      </div>
+  
+
+    <main>
+        <!--시각화 output-->
+        <div class="visual-container">
+          <div id="canvas">
+            <!-- <script>
+              show_canvas("canvas")
+            </script> -->
+          </div>
+        </div>
+
+        <!-- 햅틱 output -->
+        <div id="demo">
+          <div id="waveform">
+            <!-- <script>
+              show_canvas("waveform")
+            </script> -->
+          </div>
+        </div>
+
+        <div id="music-controls">
+          <br>
+            <!-- <hr /> -->
+            <button class="btn btn-primary" data-action="play">
+                <i class="glyphicon glyphicon-play"></i>
+                Play
+                /
+                <i class="glyphicon glyphicon-pause"></i>
+                Pause
+            </button>
+            <button class="btn btn-primary" data-action="test">
+                Select Instruments
+            </button>
+            <button class="btn btn-primary" data-action="test2">
+                toHaptic
+            </button>
+        </div>
+
+        <div class="haptic-container">
+          <div class="hapticCustomMenu" id="hapticCustom">
+            <div class="haptic-controls">
+                <h5 class="menuTitle"> Haptic Pattern Filter </h5>
+                <br>
+                <p id="menusmallTitle_haptic"> Tempo </p>
+                <div class="haptic-tempo">
+                    <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                    &larr; Empty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full vibration &rarr;
+                </div>
+                <br>
+
+                <p id="menusmallTitle_haptic"> Frequency </p>
+                <div class="haptic-frequency">
+                    <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                    &larr; Rough &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sharp &rarr;
+                </div>
+                <br>
+
+                <p id="menusmallTitle_haptic"> Amplitude </p>
+                <div class="haptic-amplitude">
+                    <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                    &larr; Sharp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strong &rarr;
+                </div>
+                <br>
+
+                <p id="menusmallTitle_haptic"> Timbre </p>
+                <div class="haptic-timbre">
+                    <input data-action="pan" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                    &larr; Asymmetry &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symmetry &rarr;
+                </div>
+          </div>
+          </div>
+        </div>
+
+    </main>
+
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-50026819-1', 'wavesurfer.fm');
+        ga('send', 'pageview');
+    </script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrapmain.js"></script>
+
+
+</body>
+</html>
