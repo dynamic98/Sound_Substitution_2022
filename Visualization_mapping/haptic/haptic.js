@@ -256,13 +256,11 @@ document.addEventListener('DOMContentLoaded', function() {
     .addEventListener('click', function(event) {
         // TODO : real time send
         wavesurfer.on('audioprocess', function() {
-            var current_time = wavesurfer.getCurrentTime()
-            var difference_time = current_time - last_time
+            var current_time = wavesurfer.getCurrentTime();
+            var difference_time = current_time - last_time;
             if (difference_time > sending_delay || difference_time < 0){
                 var freq_amp = haptic_pattern_gen();
-                
                 SendHapticData(freq_amp[0], freq_amp[1]);
-
                 last_time = current_time;
             }
         });
