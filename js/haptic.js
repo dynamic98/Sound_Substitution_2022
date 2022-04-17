@@ -172,22 +172,36 @@ function fourbyte_float_to_onebyte(origin){
 }
 
 function haptic_pattern_gen(){
-    var fftsize = wavesurfer.backend.analyser.frequencyBinCount
+    var fftsize = wavesurfer.backend.analyser.frequencyBinCount;
+    var _freq = 1;
+    var _index = 0;
     let ampArray = new Float32Array(fftsize);
-    let freqArray = new Uint8Array(fftsize);
-    const _HzIndex =  new Int16Array([0, 23, 46, 70, 93, 117, 140, 164, 187, 210, 234, 257, 281,
+    let dataArray = [0, 0];
+    const _HzIndex =  new Int16Array([10, 23, 46, 70, 93, 117, 140, 164, 187, 210, 234, 257, 281,
                                         304, 328, 351, 375, 398, 421, 445, 468, 492, 500]);
     wavesurfer.backend.analyser.getFloatTimeDomainData(ampArray);
-    wavesurfer.backend.analyser.getByteFrequencyData(freqArray);
+
     for (var i = 0;i < fftsize; i++){
-        ampArray[i] = Math.abs(ampArray[i]);
-        freqArray[i] = freqArray[i]/128.0;
+        if (ampArray[i] > 0.01) {
+            dataArray.push(ampArray[i]);
+        }
     }
-    var _amp = parseInt(Math.max(...ampArray)* 2 * amp);
+    dataArray = new Float32Array(dataArray);
+    
+    _index = dataArray.findIndex(function (item) {return item == Math.max(...dataArray)});
+    _freq = parseInt(dataArray.length/freq);
+    _freq = parseInt(_index/_freq);
+
+    var _amp = parseInt(Math.max(...dataArray)* 2 * amp);
+    
     if (_amp >= 100){
         _amp = 100;
     }
-    return [_HzIndex[freq], _amp]
+    if (_freq == NaN){
+        _freq = 0
+    }
+    // console.log(_freq,_HzIndex[_freq], _amp, _index)
+    return [_HzIndex[_freq], _amp]
 }
 
 function SendHapticData(frequency, amplitude){
