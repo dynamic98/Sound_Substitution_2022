@@ -28,11 +28,11 @@ function FileInit() {
         container: document.querySelector('#waveform'),
         waveColor: '#A8DBA8',
         progressColor: '#3B8686',
-        fillParent : true,
+        fillParent: false,
+        minPxPerSec: 4,
         cursorWidth : 5,
         normalize: true
         });
-
 
     var saveButton = document.getElementsByClassName("pcr-save");
     console.log('audio input completed')
