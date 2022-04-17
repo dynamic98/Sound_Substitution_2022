@@ -140,8 +140,6 @@ class HapticDevice {
       console.log('> Name:             ' + this.device.name);
       console.log('> Id:               ' + this.device.id);
       console.log('> Connected:        ' + this.device.gatt.connected);
-
-
     }
 }
 
