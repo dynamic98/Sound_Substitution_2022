@@ -174,30 +174,41 @@
         <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
             <button class="visualButtonColors" type="button"> Colors </button>
       </div>
+
+
+      <div class="visualCustomMenu" id="customMenu-Ring">
+        <h5 class="menuTitle">Ring Visualization</h5>
+        <hr class="menuTitleHR_visual">
+        <p id="menusmallTitle_visual"> Pitch </p>
+            <button class="pitchMenu" id="pitchRingThickness"> Ring Thickness </button>
+            <button class="pitchMenu" id="pitchRingSize"> Ring Size </button>
+            <button class="pitchMenu" id="pitchRingType"> Ring Type </button>
+        <br>
+        <p id="menusmallTitle_visual"> Dynamics </p>
+            <button class="dynamicMenu" id="dynamicRingThickness"> Ring Thickness </button>
+            <button class="dynamicMenu" id="dynamicRingSize"> Ring Size </button>
+            <button class="dynamicMenu" id="dynamicRingType"> Ring Type </button>
+        <br>
+        <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
+            <button class="visualButtonColors" type="button"> Colors </button>
+      </div>
   
 
     <main>
-        <!--시각화 output-->
+        <!--시각 output-->
         <div class="visual-container">
           <div id="canvas">
-            <!-- <script>
-              show_canvas("canvas")
-            </script> -->
           </div>
         </div>
 
         <!-- 햅틱 output -->
         <div id="demo">
           <div id="waveform">
-            <!-- <script>
-              show_canvas("waveform")
-            </script> -->
           </div>
         </div>
 
         <div id="music-controls">
           <br>
-            <!-- <hr /> -->
             <button class="btn btn-primary" data-action="play">
                 <i class="glyphicon glyphicon-play"></i>
                 Play

@@ -23,12 +23,12 @@ const dynamic_lineThickness = document.getElementById("dynamicLineThickness");
 const dynamic_lineType = document.getElementById("dynamicLineType");
 
 // 2. Sphere
-const pitch_RingThickness = document.getElementById("pitchSphereSize");
-const pitch_RingSize = document.getElementById("pitchSphereHeight");
-const pitch_RingType = document.getElementById("pitchSphereColor");
-const dynamic_RingThickness = document.getElementById("dynamicSphereSize");
-const dynamic_RingSize = document.getElementById("dynamicSpherePhiLength");
-const dynamic_RingType = document.getElementById("dynamicSphereThetaStart");
+const pitch_RingThickness = document.getElementById("pitchRingThickness");
+const pitch_RingSize = document.getElementById("pitchRingSize");
+const pitch_RingType = document.getElementById("pitchRingType");
+const dynamic_RingThickness = document.getElementById("dynamicRingThickness");
+const dynamic_RingSize = document.getElementById("dynamicRingSize");
+const dynamic_RingType = document.getElementById("dynamicRingType");
 
 
 
