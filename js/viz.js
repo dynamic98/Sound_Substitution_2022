@@ -351,6 +351,7 @@ function createShpaeLine_P3D0(){
   camera.position.set(0, 0, 130);
 }
 
+<<<<<<< HEAD
 function createShapeLine_P5D0(){ 
   geometry = new THREE.BoxGeometry( 100, 1, 1 );
   material = new THREE.MeshBasicMaterial( {
@@ -369,6 +370,73 @@ function createShapeLine_P5D0(){
 
 
 // 3. Ring geometry
+=======
+function createShapeRing_P0D1(){
+  var thickness = energy*5+1;
+  var inner = 13 - 13/thickness
+  // console.log(thickness);
+  geometry = new THREE.RingGeometry(inner, 13, 8, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P0D2(){
+  var custom_energy = energy*5;
+  if(custom_energy>15){
+    custom_energy = 15;
+  } else if(custom_energy<10){
+    custom_energy = custom_energy/2+5
+  }
+    // console.log(energy);
+  var size = custom_energy
+  geometry = new THREE.RingGeometry(size-3, size, 8, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P0D3(){
+  var segments = (Math.round(energy)+3);
+
+  // console.log(energy);
+  geometry = new THREE.RingGeometry(10, 13, segments, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+>>>>>>> 547641bbc724e13bf499baf9a4e6eb3b521b2734
 function createShapeRing_P1D0(){
   let thickness = maxChroma/2+5
   geometry = new THREE.RingGeometry(thickness, 13, 8, 13, 0, 6.283185307179586);
@@ -595,7 +663,54 @@ function createShapeRing_P3D1(){
   // scene.add( group );
 }
 
+function createShapeRing_P3D2(){
+  var segments = (maxChroma+3);
 
+  var custom_energy = energy*5;
+  if(custom_energy>15){
+    custom_energy = 15;
+  } else if(custom_energy<10){
+    custom_energy = custom_energy/2+5
+  }
+    // console.log(energy);
+  var size = custom_energy
+  geometry = new THREE.RingGeometry(size-3, size, segments, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P3D3(){
+
+  var custom_energy = energy*5;
+  var segments = (maxChroma+custom_energy)/2+3
+
+    // console.log(energy);
+  geometry = new THREE.RingGeometry(10, 13, segments, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
 
 function deleteBasics(){
   group.parent.remove(group);
@@ -606,7 +721,6 @@ function deleteBasics(){
   compoCenter.material.dispose();
 
 }
-
 
 
 function updateGroupGeometry( mesh, geometry ) {
