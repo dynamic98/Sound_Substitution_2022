@@ -4,14 +4,14 @@ import * as THREE from 'three';
 // import Stats from 'three/examples/jsm/libs/stats.module.js';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline/src/THREE.MeshLine.js';
-import { pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength} from './modules.js';
+import { pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio} from './modules.js';
 import { PlaneGeometry } from 'three';
 
 // let controls;
 let camera, scene, renderer;
 let container, stats;
 let customMenu;
-
+let FrameRate = 0;
 
 // 소메뉴 클릭 html 요소
 // 1. Line
@@ -23,7 +23,14 @@ const dynamic_lineThickness = document.getElementById("dynamicLineThickness");
 const dynamic_lineType = document.getElementById("dynamicLineType");
 
 // 2. Sphere
-const pitch_sphereSize = document.getElementById("pitchSphereSize");
+const pitch_RingThickness = document.getElementById("pitchSphereSize");
+const pitch_RingSize = document.getElementById("pitchSphereHeight");
+const pitch_RingType = document.getElementById("pitchSphereColor");
+const dynamic_RingThickness = document.getElementById("dynamicSphereSize");
+const dynamic_RingSize = document.getElementById("dynamicSpherePhiLength");
+const dynamic_RingType = document.getElementById("dynamicSphereThetaStart");
+
+
 
 var now_geometry;
 var group, geometry, material, compoCenter;
@@ -87,7 +94,8 @@ function init() {
   renderer.render(scene, camera);
 
   now_geometry = "shape_ring";
-  createShapeRing();
+  // createShapeRing();
+  createShapeRing_Vanilla();
 };
 
 
@@ -98,52 +106,107 @@ function animate() {
   saveColor();
   changeBGColor();
   requestAnimationFrame(animate);
+  FrameRate = FrameRate+1
   // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
+  if (FrameRate%3==0){
+    // music rendering
+    if (dataArray){
+    analyser.getByteFrequencyData(dataArray);
+    // var lowerHalfArray = dataArray.slice(0, (dataArray.length/2) - 1);
+    // var upperHalfArray = dataArray.slice((dataArray.length/2) - 1, dataArray.length - 1);
 
-  // music rendering
-  if (dataArray){
-  analyser.getByteFrequencyData(dataArray);
-  var lowerHalfArray = dataArray.slice(0, (dataArray.length/2) - 1);
-  var upperHalfArray = dataArray.slice((dataArray.length/2) - 1, dataArray.length - 1);
+    // var overallAvg = avg(dataArray);
+    // var lowerMax = max(lowerHalfArray);
+    // var lowerAvg = avg(lowerHalfArray);
+    // var upperMax = max(upperHalfArray);
+    // var upperAvg = avg(upperHalfArray);
 
-  var overallAvg = avg(dataArray);
-  var lowerMax = max(lowerHalfArray);
-  var lowerAvg = avg(lowerHalfArray);
-  var upperMax = max(upperHalfArray);
-  var upperAvg = avg(upperHalfArray);
+    // var lowerMaxFr = lowerMax / lowerHalfArray.length;
+    // var lowerAvgFr = lowerAvg / lowerHalfArray.length;
+    // var upperMaxFr = upperMax / upperHalfArray.length;
+    // var upperAvgFr = upperAvg / upperHalfArray.length;
 
-  var lowerMaxFr = lowerMax / lowerHalfArray.length;
-  var lowerAvgFr = lowerAvg / lowerHalfArray.length;
-  var upperMaxFr = upperMax / upperHalfArray.length;
-  var upperAvgFr = upperAvg / upperHalfArray.length;
+    // var time = performance.now() * 0.0001;
 
-  var time = performance.now() * 0.0001;
-
-  // Geometry Rendering !
-  if (now_geometry == 'pitch_line_height') {
-    deleteBasics();     
-    createShapeLineHeightPitch();
-  } else if (now_geometry == 'pitch_line_thickness') {
-    deleteBasics();     
-    createShapeLineThicknessPitch();
-  } else if (now_geometry == 'pitch_line_type') {
-    deleteBasics();
-    createShapeLineTypePitch();
-  } else if (now_geometry == 'dynamic_line_height') {
-    deleteBasics();
-    createShapeLineHeightDynamics();
-  } else if (now_geometry == 'dynamic_line_thickness') {
-    deleteBasics();
-    createShapeLineThicknessDynamics();
-  } else if (now_geometry == 'dynamic_line_type') {
-    deleteBasics();
-    createShapeLineTypeDynamics();
-  } else if (now_geometry == 'pitch_sphere_size'){
-    deleteBasics();
-    createShapeSphereSize();
-  }
-  // changeColorByChroma(material);
-  render();
+    // // Geometry Rendering !
+    if (now_geometry == 'pitch_line_height') {
+      deleteBasics();     
+      createShapeLineHeightPitch();
+    } else if (now_geometry == 'pitch_line_thickness') {
+      deleteBasics();     
+      createShapeLineThicknessPitch();
+    } else if (now_geometry == 'pitch_line_type') {
+      deleteBasics();
+      createShapeLineTypePitch();
+    } else if (now_geometry == 'dynamic_line_height') {
+      deleteBasics();
+      createShapeLineHeightDynamics();
+    } else if (now_geometry == 'dynamic_line_thickness') {
+      deleteBasics();
+      createShapeLineThicknessDynamics();
+    } else if (now_geometry == 'dynamic_line_type') {
+      deleteBasics();
+      createShapeLineTypeDynamics();
+    } else if (now_geometry == 'pitch_sphere_size'){
+      deleteBasics();
+      createShapeSphereSize();
+    } else if (typeof now_geometry == 'number'){
+      deleteBasics();
+      console.log(GeometryAnalysis(now_geometry));
+      var [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      // console.log(geometry_type, pitch_type, dynamic_type);
+      // createShapeSphereSize();
+      if (geometry_type == 3){
+        if (pitch_type==0 && dynamic_type==0){
+          createShapeRing_Vanilla();
+        }
+        else if(pitch_type == 0){
+            if (dynamic_type == 1){
+            createShapeRing_P0D1();
+          } else if (dynamic_type == 2){
+            createShapeRing_P0D2();
+          } else if (dynamic_type == 3){
+            createShapeRing_P0D3();
+          }
+        }  
+        else if(pitch_type == 1){
+          if (dynamic_type == 0){
+            createShapeRing_P1D0();
+          } else if (dynamic_type == 1){
+            createShapeRing_P1D1();
+          } else if (dynamic_type == 2){
+            createShapeRing_P1D2();
+          } else if (dynamic_type == 3){
+            createShapeRing_P1D3();
+          }
+        } 
+        else if(pitch_type == 2){
+          if (dynamic_type == 0){
+            createShapeRing_P2D0();
+          } else if (dynamic_type == 1){
+            createShapeRing_P2D1();
+          } else if (dynamic_type == 2){
+            createShapeRing_P2D2();
+          } else if (dynamic_type == 3){
+            createShapeRing_P2D3();
+          }
+        } 
+        else if(pitch_type == 3){
+          if (dynamic_type == 0){
+            createShapeRing_P3D0();
+          } else if (dynamic_type == 1){
+            createShapeRing_P3D1();
+          } else if (dynamic_type == 2){
+            createShapeRing_P3D2();
+          } else if (dynamic_type == 3){
+            createShapeRing_P3D3();
+          }
+        }
+      }
+    }
+    // changeColorByChroma(material);
+    render();
+    }
   }
   // stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
 }
@@ -346,21 +409,272 @@ function createShapeSphereSize(){
 // }
 
 
-function createShapeRing(){
-  geometry = new THREE.RingGeometry(13, 10, 8, 13, 6, 6.283185307179586);
+// function createShapeRing(){
+//   geometry = new THREE.RingGeometry(13, 10, 8, 13, 6, 6.283185307179586);
+//   material = new THREE.MeshLambertMaterial({
+//     color: '#FFFFFF',
+//     wireframe: true,
+//     side: THREE.DoubleSide
+//   });
+//   compoCenter = new THREE.Mesh(geometry, material);
+//   compoCenter.position.set(0, 0, 0);
+//   spotLight.lookAt(compoCenter);
+
+//   // group = new THREE.Group();
+//   group.add( compoCenter );
+//   // scene.add( group );
+// }
+
+
+function createShapeRing_Vanilla(){
+  geometry = new THREE.RingGeometry(10, 13, 8, 13, 0, 6.283185307179586);
   material = new THREE.MeshLambertMaterial({
     color: '#FFFFFF',
     wireframe: true,
     side: THREE.DoubleSide
   });
   compoCenter = new THREE.Mesh(geometry, material);
-  compoCenter.position.set(0, 0, 0);
+  compoCenter.position.set(1, 10, 0);
   spotLight.lookAt(compoCenter);
 
   // group = new THREE.Group();
   group.add( compoCenter );
+  camera.position.set(1, 10, 70);
   // scene.add( group );
 }
+
+function createShapeRing_P1D0(){
+  var thickness = maxChroma/2+5
+  // console.log(thickness);
+  geometry = new THREE.RingGeometry(thickness, 13, 8, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P1D1(){
+  var custom_energy = energy*5;
+  if(custom_energy>15){
+    custom_energy = 15;
+  } else if(custom_energy<10){
+    custom_energy = custom_energy/2+5
+  }
+  var thickness = (maxChroma/2+5 + custom_energy)/2;
+
+  geometry = new THREE.RingGeometry(thickness, 13, 8, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P1D2(){
+  var custom_energy = energy*5;
+  if(custom_energy>15){
+    custom_energy = 15;
+  } else if(custom_energy<10){
+    custom_energy = custom_energy/2+5
+  }
+
+  var inner = custom_energy - custom_energy/(maxChroma+2);
+  var outer = custom_energy;
+
+  // console.log(energy);
+  geometry = new THREE.RingGeometry(inner, outer, 8, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P1D3(){
+  var custom_energy = Math.round(energy*5);
+  if(custom_energy<3){
+    custom_energy = custom_energy+3;
+  }
+  var thickness = maxChroma+2;
+  var segments = custom_energy
+  var inner = 13 - 13/thickness
+  // console.log(energy);
+  geometry = new THREE.RingGeometry(inner, 13, segments, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+
+function createShapeRing_P2D0(){
+
+  var size = (maxChroma/2+5);
+    // console.log(energy);
+  geometry = new THREE.RingGeometry(size-3, size, 8, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P2D1(){
+  var custom_energy = Math.round(energy*5)+2;
+  var size = (maxChroma/2+5);
+    // console.log(energy);
+  var inner = size - size/custom_energy;
+  var outer = size;
+  
+  geometry = new THREE.RingGeometry(inner, outer, 8, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P2D2(){
+  var custom_energy = energy*5;
+  if(custom_energy>15){
+    custom_energy = 15;
+  } else if(custom_energy<10){
+    custom_energy = custom_energy/2+5
+  }
+  var size = ((maxChroma/2+5)+custom_energy)/2;
+  geometry = new THREE.RingGeometry(size-3, size, 8, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P2D3(){
+
+  var size = (maxChroma/2+5);
+  var custom_energy = Math.round(energy*5);
+  if(custom_energy<3){
+    custom_energy = custom_energy+3;
+  }
+  var segments = custom_energy
+  // console.log(energy);
+  geometry = new THREE.RingGeometry(size-3, size, segments, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P3D0(){
+  var segments = (maxChroma+3);
+
+  // console.log(energy);
+  geometry = new THREE.RingGeometry(10, 13, segments, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+function createShapeRing_P3D1(){
+  var segments = (maxChroma+3);
+  var custom_energy = Math.round(energy*5)+2;
+  var inner = 13 - 13/custom_energy
+  // console.log(energy);
+  geometry = new THREE.RingGeometry(inner, 13, segments, 13, 0, 6.283185307179586);
+  material = new THREE.MeshLambertMaterial({
+    color: '#FFFFFF',
+    wireframe: true,
+    side: THREE.DoubleSide
+  });
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(1, 10, 0);
+  spotLight.lookAt(compoCenter);
+
+  // group = new THREE.Group();
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+  // scene.add( group );
+}
+
+
 
 function deleteBasics(){
 //   console.log(scene);
@@ -423,9 +737,101 @@ function vizInit() {
     now_geometry = 'dynamic_line_type';
   });
 
-  pitch_sphereSize.addEventListener("click", ()=>{
-    now_geometry = 'pitch_sphere_size';
-  });
+  // pitch_sphereSize.addEventListener("click", ()=>{
+  //   // now_geometry = 'pitch_sphere_size';
+  //   now_geometry = 100101;
+  // });
+
+  pitch_RingThickness.addEventListener("click", ()=>{
+    if (typeof now_geometry == 'number'){
+      var [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      geometry_type = 3;
+      if (pitch_type == 1){
+        pitch_type = 0;
+      } else {
+        pitch_type = 1;
+      }
+      now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
+    } else {
+    now_geometry = 30100;
+    }
+  })
+
+  pitch_RingSize.addEventListener("click", ()=>{
+    if (typeof now_geometry == 'number'){
+      var [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      geometry_type = 3;
+      if (pitch_type == 2){
+        pitch_type = 0;
+      } else {
+        pitch_type = 2;
+      }
+      now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
+    } else {
+    now_geometry = 30200;
+    }
+  })
+
+  pitch_RingType.addEventListener("click", ()=>{
+    if (typeof now_geometry == 'number'){
+      var [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      geometry_type = 3;
+      if (pitch_type == 3){
+        pitch_type = 0;
+      } else {
+        pitch_type = 3;
+      }
+      now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
+    } else {
+    now_geometry = 30300;
+    } 
+  })
+
+  dynamic_RingThickness.addEventListener("click", ()=>{
+    if (typeof now_geometry == 'number'){
+      var [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      geometry_type = 3;
+      if (dynamic_type == 1){
+        dynamic_type = 0;
+      } else {
+        dynamic_type = 1;
+      }
+      now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
+    } else {
+    now_geometry = 30001;
+    } 
+  })
+
+  dynamic_RingSize.addEventListener("click", ()=>{
+    if (typeof now_geometry == 'number'){
+      var [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      geometry_type = 3;
+      if (dynamic_type == 2){
+        dynamic_type = 0;
+      } else {
+        dynamic_type = 2;
+      }
+      now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
+    } else {
+    now_geometry = 30002;
+    } 
+  })
+
+  dynamic_RingType.addEventListener("click", ()=>{
+    if (typeof now_geometry == 'number'){
+      var [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      geometry_type = 3;
+      if (dynamic_type == 3){
+        dynamic_type = 0;
+      } else {
+        dynamic_type = 3;
+      }
+      now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
+    } else {
+    now_geometry = 30003;
+    } 
+  })
+
 
   // // EVENT LISTENERS
   // shape_heart.addEventListener("click", ()=>{
@@ -445,75 +851,6 @@ function vizInit() {
 }
 
 
-// async function filechanged(){
-//   file.onchange = function(){
-//     fileLabel.classList.add('normal');
-//     var files = this.files;
-//     audio.src = URL.createObjectURL(files[0]);
-//     console.log("VizInit play");
-//     src = src || audio_context.createMediaElementSource(audio);
-//     // console.log(audio);
-//     audio.load();
-//     haptic_change();
-//     // let AudioIsReady = haptic_change();
-//     // let result = await AudioIsReady;
-//     // console.log(result);
-//     audio.play();
-//     console.log("Viz Audio Starts");
-//     play(src);
-//     // async () =>{ 
-//     // AudioIsReady = await import AudioIsReady from ("./modules.js")
-//     // console.log(AudioIsReady);
-    
-//     // AudioIsReady.onchange = function(){
-//       // console.log(AudioIsReady);
-//     // }
-//     // await AudioIsReady;
-//     // AudioIsReady.onchange = ()=>{
-//     // audio.play(); // 음악이 load 되자마자 시각화 요소를 불러옴
-//     // play(src);  // play - 시각화 요소 불러오기
-//     }
-//   }
-
-//   // audio_context = new AudioContext();
-//   // src = audio_context.createMediaElementSource(audio);
-
-
-
-// AudioIsReady.onchange = function AudioPlay(){
-//   audio.play(); // 음악이 load 되자마자 시각화 요소를 불러옴
-//   play(src);  // play - 시각화 요소 불러오기
-//   // haptic_change();
-// }
-
-// function play(src) {
-//   analyser = audio_context.createAnalyser();
-//   src.connect(analyser);
-//   analyser.connect(audio_context.destination);
-//   analyser.fftSize = 512;
-//   bufferLength = analyser.frequencyBinCount;
-//   dataArray = new Uint8Array(bufferLength);
-
-//   // meyda analyser
-//   chroma = 0;
-//   maxChroma = 0;
-//   energy = 0;
-//   amplitudeSpectrum = 0;
-//   // var powerSpectrum = 0;
-
-//   const meyda_analyser = Meyda.createMeydaAnalyzer({
-//     audioContext: audio_context,
-//     source: src,
-//     buffersize: 64,
-//     featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
-//     callback: (features) => {
-//       maxChroma = features['chroma'].indexOf(max(features['chroma']))
-//       energy = features['energy']
-//       amplitudeSpectrum = features['amplitudeSpectrum']
-//     }
-//   })
-//   meyda_analyser.start();
-// }
 
 function saveColor(){
   pickr.on('save', (color, instance) => {
@@ -618,6 +955,14 @@ function avg(arr){
 
 function max(arr){
   return arr.reduce(function(a, b){ return Math.max(a, b); })
+}
+
+function GeometryAnalysis(GeometryValue){
+  var geometry_type = parseInt(GeometryValue/10000);
+  var remainder_10000 = GeometryValue%10000;
+  var pitch_type = parseInt(remainder_10000/100);
+  var dynamic_type = remainder_10000%100;
+  return [geometry_type, pitch_type, dynamic_type];
 }
 
 
