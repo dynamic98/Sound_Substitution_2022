@@ -1,5 +1,5 @@
 // import { audio, audio_context, file as target} from './modules.js';
-import { show_canvas } from './showCanvas.js'
+import { show_canvas } from './modules.js'
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
@@ -62,12 +62,15 @@ function FileChange(){
         
         wavesurfer.load(audio);
         audio.load();
-        src = src || audio_context.createMediaElementSource(audio);
+        // src = src || audio_context.createMediaElementSource(audio);
+        src = audio_context.createMediaElementSource(audio);
         
         wavesurfer.on('ready', () => {
             console.log("wavesurfer is ready");
             audio.play();
             wavesurfer.play();
+            // wavesurfer.setMute(true);
+            audio.volume = 0.2;
         })
 
         AnalyzerPlay(src);
@@ -113,7 +116,7 @@ function SyncAudio(){
 
             // console.log(AudioCurrentTime - AudioLastTime);
             var AudioDifference = AudioCurrentTime - AudioLastTime;
-            if (AudioDifference > 0.006 || AudioDifference < 0){
+            if (AudioDifference > 0.01 || AudioDifference < 0){
                 audio.currentTime = AudioCurrentTime;
                 // console.log(AudioCurrentTime - AudioLastTime);
             }
