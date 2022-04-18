@@ -152,9 +152,9 @@ function animate() {
       createShapeSphereSize();
     } else if (typeof now_geometry == 'number'){
       deleteBasics();
-      console.log(GeometryAnalysis(now_geometry));
+      // console.log(GeometryAnalysis(now_geometry));
       var [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
-      // console.log(geometry_type, pitch_type, dynamic_type);
+      console.log(geometry_type, pitch_type, dynamic_type);
       // createShapeSphereSize();
       if (geometry_type == 3){
         if (pitch_type==0 && dynamic_type==0){
