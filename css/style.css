@@ -427,11 +427,16 @@ div.visualCustomMenu{
 
 
 div#customMenu-Line {
-  background-color: #c8d9d6;
+  background-color: #ecfffb;
 }
 
 div#customMenu-Sphere {
-  background-color: #d0b3bf;
+  background-color: #ffeef5;
+}
+
+
+div#customMenu-Ring {
+  background-color: #f7f5d9;
 }
 
 
