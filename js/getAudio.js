@@ -7,17 +7,11 @@ let chroma, maxChroma, energy, amplitudeSpectrum;
 let AudioLastTime, AudioCurrentTime;
 // let target;
 
-// function titleAudio(){
-//     // target = document.getElementById('thefile');
-//     target.addEventListener('change', function(){
-//         var fileList = target.files[0].name;
-//         realTitle.innerText = fileList;
-//     });
-// }
+
 AudioLastTime = 0;
 AudioCurrentTime = 0;
 
-// LOAD MUSIC (vizIntit)
+// LOAD MUSIC (vizInit)
 function FileInit() {
     file = document.getElementById("thefile");
     audio = document.getElementById("audio");

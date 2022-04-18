@@ -366,8 +366,7 @@ p#menusmallTitle_visual{
 
 
 button.pitchMenu{
-  background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgb(33, 33, 33) 0%, rgb(162, 162, 162) 100%);
+  background: rgb(54, 53, 53);
   border: none;
   margin-left: 50px;
   width: 170px;
@@ -377,15 +376,9 @@ button.pitchMenu{
   color: white;
 }
 
-button.pitchMenu:focus{
-  background: rgb(255, 255, 255);
-  background: linear-gradient(0deg, rgb(249, 249, 249) 0%, rgb(182, 182, 182) 100%);
-  color: black;
-}
 
 button.dynamicMenu{
-  background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgb(33, 33, 33) 0%, rgb(162, 162, 162) 100%);
+  background: rgb(54, 53, 53);
   border: none;
   margin-left: 50px;
   width: 170px;
@@ -395,11 +388,11 @@ button.dynamicMenu{
   color: white;
 }
 
-button.dynamicMenu:focus{
+/* button.dynamicMenu:focus{
   background: rgb(255, 255, 255);
   background: linear-gradient(0deg, rgb(249, 249, 249) 0%, rgb(182, 182, 182) 100%);
-  color: black;
-}
+  color: white;
+} */
 
 
 button.visualButtonColors{
@@ -413,6 +406,11 @@ button.visualButtonColors{
   font-size: 18px;
   box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 }
+
+button#pitchLineHeight{
+  background-color: linear-gradient(0deg, rgb(33, 33, 33) 0%, rgb(162, 162, 162) 100%);
+}
+
 
 div.visualCustomMenu{
   position: relative;
