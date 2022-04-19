@@ -107,7 +107,7 @@ function animate() {
       if (typeof now_geometry == 'number'){
         deleteBasics();
         let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
-        console.log('GeometryAnalysis: ', [geometry_type, pitch_type, dynamic_type]);
+        // console.log('GeometryAnalysis: ', [geometry_type, pitch_type, dynamic_type]);
         
         // line custom
         if (geometry_type == 1){
@@ -669,7 +669,7 @@ function createShapeRing_P3D3(){
 
   let custom_energy = energy*5;
   let segments = Math.round((maxChroma+custom_energy)/2+3)
-  console.log(segments);
+  // console.log(segments);
 
     // console.log(energy);
   geometry = new THREE.RingGeometry(10, 13, segments, 13, 0, 6.283185307179586);
