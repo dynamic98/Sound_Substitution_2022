@@ -1,5 +1,5 @@
 // import { audio, audio_context, file as target} from './modules.js';
-import { show_canvas } from './showCanvas.js'
+import { show_canvas } from './modules.js'
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
@@ -7,17 +7,11 @@ let chroma, maxChroma, energy, amplitudeSpectrum;
 let AudioLastTime, AudioCurrentTime;
 // let target;
 
-// function titleAudio(){
-//     // target = document.getElementById('thefile');
-//     target.addEventListener('change', function(){
-//         var fileList = target.files[0].name;
-//         realTitle.innerText = fileList;
-//     });
-// }
+
 AudioLastTime = 0;
 AudioCurrentTime = 0;
 
-// LOAD MUSIC (vizIntit)
+// LOAD MUSIC (vizInit)
 function FileInit() {
     file = document.getElementById("thefile");
     audio = document.getElementById("audio");
@@ -64,12 +58,15 @@ function FileChange(){
         
         wavesurfer.load(audio);
         audio.load();
-        src = src || audio_context.createMediaElementSource(audio);
+        // src = src || audio_context.createMediaElementSource(audio);
+        src = audio_context.createMediaElementSource(audio);
         
         wavesurfer.on('ready', () => {
             console.log("wavesurfer is ready");
             audio.play();
             wavesurfer.play();
+            // wavesurfer.setMute(true);
+            audio.volume = 0.2;
         })
 
         AnalyzerPlay(src);
@@ -98,9 +95,9 @@ function AnalyzerPlay(src) {
         buffersize: 64,
         featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
         callback: (features) => {
-        maxChroma = features['chroma'].indexOf(max(features['chroma']))
-        energy = features['energy']
-        amplitudeSpectrum = features['amplitudeSpectrum']
+            maxChroma = features['chroma'].indexOf(max(features['chroma']))
+            energy = features['energy']
+            amplitudeSpectrum = features['amplitudeSpectrum']
         }
     })
     meyda_analyser.start();
@@ -115,7 +112,7 @@ function SyncAudio(){
 
             // console.log(AudioCurrentTime - AudioLastTime);
             var AudioDifference = AudioCurrentTime - AudioLastTime;
-            if (AudioDifference > 0.006 || AudioDifference < 0){
+            if (AudioDifference > 0.01 || AudioDifference < 0){
                 audio.currentTime = AudioCurrentTime;
                 // console.log(AudioCurrentTime - AudioLastTime);
             }
