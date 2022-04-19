@@ -24,7 +24,7 @@ const pitch_LineThickness = document.getElementById("pitchLineThickness");
 const pitch_LineType = document.getElementById("pitchLineType");
 const dynamic_LineHeight = document.getElementById("dynamicLineHeight");
 const dynamic_LineThickness = document.getElementById("dynamicLineThickness");
-const dynamic_LineType = document.getElementById("dynamicLineType");
+const dynamic_LineColor = document.getElementById("dynamicLineColor");
 
 // 3. Ring
 const pitch_RingThickness = document.getElementById("pitchRingThickness");
@@ -42,7 +42,6 @@ let ambientLight, spotLight;
 
 
 // BASIC EVENTS
-
 init();
 vizInit();
 animate();
@@ -85,7 +84,7 @@ function init() {
   renderer.render(scene, camera);
 
   now_geometry = "shape_ring";
-  // createShapeRing();
+
   createShapeRing_Vanilla();
 };
 
@@ -97,13 +96,14 @@ function animate() {
   changeBGColor();
   requestAnimationFrame(animate);
   FrameRate = FrameRate + 1
+
   // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
   if (FrameRate % 3 == 0){
     // music rendering
     if (dataArray){
       analyser.getByteFrequencyData(dataArray);
 
-      // Geometry Rendering
+      // geometry rendering
       if (typeof now_geometry == 'number'){
         deleteBasics();
         let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
@@ -127,7 +127,13 @@ function animate() {
               }
           } 
           else if (pitch_type == 0){
-
+              if (dynamic_type == 5){
+                createShapeLine_P0D5();
+              } else if (dynamic_type == 1){
+                createShapeLine_P0D1();
+              } else if (dynamic_type == 4){
+                createShapeLine_P0D4(); 
+              }
           }
 
         };
@@ -180,11 +186,9 @@ function animate() {
         }
       }
     }
-    // changeColorByChroma(material);
     render();
     }
   }
-  // stats.update(); // 왜냐면 여기에서 DOM 에서 바뀐 점이 업데이트되기 때문
 }
 
 
@@ -198,84 +202,9 @@ function render() {
 
 
 
-
-function createShapeLineHeightDynamics(){ 
-  geometry = new THREE.BoxGeometry( 5, energy * 1.5, 5 );
-  material = new THREE.MeshBasicMaterial( {
-    color: '#FFFFFF',
-    wireframe: false
-  } );
-
-  compoCenter = new THREE.Mesh(geometry, material);
-  compoCenter.position.set(0, -20, 0);
-
-  let compoLeft = new THREE.Mesh(geometry, material);
-  compoLeft.position.set(-20, -25, 0);
-  
-  let compoRight = new THREE.Mesh(geometry, material);
-  compoRight.position.set(20, -30, 0);
-
-  spotLight.lookAt( compoCenter );
-  spotLight.lookAt( compoLeft );
-  spotLight.lookAt( compoRight );
-  group.add( compoCenter );
-  group.add( compoLeft );
-  group.add( compoRight );
-  camera.position.set(1, 10, 100);
-
-}
-
-
-
-function createShapeLineThicknessDynamics(){ 
-  geometry = new THREE.BoxGeometry( energy, 30, 5 );
-  material = new THREE.MeshBasicMaterial( {
-    color: '#FFFFFF',
-    wireframe: false
-  } );
-
-  compoCenter = new THREE.Mesh(geometry, material);
-  compoCenter.position.set(0, 5, 0);
-
-  spotLight.lookAt( compoCenter );
-  group.add( compoCenter );
-  camera.position.set(1, 10, 70);
-
-}
-
-// 고치기!
-function createShapeLineTypeDynamics(){ 
-  geometry = new THREE.TorusKnotGeometry( energy * 0.5 , 0.1, energy * 2, 16, energy );
-  material = new THREE.MeshBasicMaterial( { 
-    color: '#FFFFFF',
-    wireframe: true
-  } );
-
-  compoCenter = new THREE.Mesh( geometry, material );
-  compoCenter.position.set(0, 10, 0);
-  spotLight.lookAt( compoCenter );
-  group.add( compoCenter );
-  camera.position.set(1, 10, 70);
-
-}
-
-
-function createShapeSphereSize(){
-  geometry = new THREE.SphereGeometry( 15, 32, 16, 0, maxChroma * 0.7 );
-  material = new THREE.MeshBasicMaterial( { 
-    color: '#FFFFFF',
-    wireframe: true
-  } );
-  compoCenter = new THREE.Mesh( geometry, material );
-  compoCenter.position.set(0, 10, 0);
-  spotLight.lookAt( compoCenter );
-  group.add( compoCenter );
-  camera.position.set(1, 10, 70);
-}
-
 // 0. Vanilla geometry
 function createShapeLine_Vanilla(){
-  geometry = new THREE.BoxGeometry( 1, 5, 30 );
+  geometry = new THREE.BoxGeometry( 50, 1, 1);
   material = new THREE.MeshBasicMaterial( {
     color: '#FFFFFF',
     wireframe: false
@@ -283,7 +212,7 @@ function createShapeLine_Vanilla(){
   compoCenter = new THREE.Mesh(geometry, material);
   spotLight.lookAt(compoCenter);
   group.add( compoCenter );
-  camera.position.set(1, 20, 100)
+  camera.position.set(1, 5, 100)
 };
 
 
@@ -298,10 +227,8 @@ function createShapeRing_Vanilla(){
   compoCenter.position.set(1, 10, 0);
   spotLight.lookAt(compoCenter);
 
-  // group = new THREE.Group();
   group.add( compoCenter );
   camera.position.set(1, 10, 70);
-  // scene.add( group );
 };
 
 
@@ -366,13 +293,68 @@ function createShapeLine_P5D0(){
 };
 
 
+function createShapeLine_P0D5(){
+  geometry = new THREE.BoxGeometry( 5, energy * 20, 5 );
+  material = new THREE.MeshBasicMaterial( {
+    color: '#FFFFFF',
+    wireframe: false
+  } );
+
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(0, -27, 0);
+
+  let compoLeft = new THREE.Mesh(geometry, material);
+  compoLeft.position.set(-20, -30, 0);
+  
+  let compoRight = new THREE.Mesh(geometry, material);
+  compoRight.position.set(20, -30, 0);
+
+  spotLight.lookAt( compoCenter );
+  spotLight.lookAt( compoLeft );
+  spotLight.lookAt( compoRight );
+  group.add( compoCenter );
+  group.add( compoLeft );
+  group.add( compoRight );
+  camera.position.set(1, -5, 100);
+}
+
+
+function createShapeLine_P0D1(){
+  geometry = new THREE.BoxGeometry( energy * 10, 30, 5 );
+  material = new THREE.MeshBasicMaterial( {
+    color: '#FFFFFF',
+    wireframe: false
+  } );
+
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(0, 0, 0);
+
+  spotLight.lookAt( compoCenter );
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+}
+
+function createShapeLine_P0D4(){
+  geometry = new THREE.BoxGeometry( 50, 1, 1 );
+  material = new THREE.MeshBasicMaterial( {
+    color: '#FFFFFF',
+    wireframe: false
+  } );
+  changeLineColorbyEnergy(material)
+  compoCenter = new THREE.Mesh(geometry, material);
+  compoCenter.position.set(0, 8, 0);
+
+  spotLight.lookAt( compoCenter );
+  group.add( compoCenter );
+  camera.position.set(1, 10, 70);
+}
 
 
 // 3. Ring geometry
 // =======
 function createShapeRing_P0D1(){
-  var thickness = energy*5+1;
-  var inner = 13 - 13/thickness
+  let thickness = energy*5+1;
+  let inner = 13 - 13/thickness
   // console.log(thickness);
   geometry = new THREE.RingGeometry(inner, 13, 8, 13, 0, 6.283185307179586);
   material = new THREE.MeshLambertMaterial({
@@ -391,14 +373,14 @@ function createShapeRing_P0D1(){
 }
 
 function createShapeRing_P0D2(){
-  var custom_energy = energy*5;
+  let custom_energy = energy*5;
   if(custom_energy>15){
     custom_energy = 15;
   } else if(custom_energy<10){
     custom_energy = custom_energy/2+5
   }
-    // console.log(energy);
-  var size = custom_energy
+
+  let size = custom_energy
   geometry = new THREE.RingGeometry(size-3, size, 8, 13, 0, 6.283185307179586);
   material = new THREE.MeshLambertMaterial({
     color: '#FFFFFF',
@@ -416,7 +398,7 @@ function createShapeRing_P0D2(){
 }
 
 function createShapeRing_P0D3(){
-  var segments = (Math.round(energy)+3);
+  let segments = (Math.round(energy)+3);
 
   // console.log(energy);
   geometry = new THREE.RingGeometry(10, 13, segments, 13, 0, 6.283185307179586);
@@ -500,10 +482,8 @@ function createShapeRing_P1D2(){
   compoCenter.position.set(1, 10, 0);
   spotLight.lookAt(compoCenter);
 
-  // group = new THREE.Group();
   group.add( compoCenter );
   camera.position.set(1, 10, 70);
-  // scene.add( group );
 }
 
 function createShapeRing_P1D3(){
@@ -514,7 +494,6 @@ function createShapeRing_P1D3(){
   let thickness = maxChroma+2;
   let segments = custom_energy
   let inner = 13 - 13/thickness
-  // console.log(energy);
   geometry = new THREE.RingGeometry(inner, 13, segments, 13, 0, 6.283185307179586);
   material = new THREE.MeshLambertMaterial({
     color: '#FFFFFF',
@@ -534,7 +513,7 @@ function createShapeRing_P1D3(){
 
 function createShapeRing_P2D0(){
 
-  var size = (maxChroma/2+5);
+  let size = (maxChroma/2+5);
   geometry = new THREE.RingGeometry(size-3, size, 8, 13, 0, 6.283185307179586);
   material = new THREE.MeshLambertMaterial({
     color: '#FFFFFF',
@@ -545,16 +524,13 @@ function createShapeRing_P2D0(){
   compoCenter.position.set(1, 10, 0);
   spotLight.lookAt(compoCenter);
 
-  // group = new THREE.Group();
   group.add( compoCenter );
   camera.position.set(1, 10, 70);
-  // scene.add( group );
 }
 
 function createShapeRing_P2D1(){
   let custom_energy = Math.round(energy*5)+2;
   let size = (maxChroma/2+5);
-    // console.log(energy);
   let inner = size - size/custom_energy;
   let outer = size;
    
@@ -672,7 +648,7 @@ function createShapeRing_P3D2(){
     custom_energy = custom_energy/2+5
   }
     // console.log(energy);
-  var size = custom_energy
+  let size = custom_energy
   geometry = new THREE.RingGeometry(size-3, size, segments, 13, 0, 6.283185307179586);
   material = new THREE.MeshLambertMaterial({
     color: '#FFFFFF',
@@ -691,8 +667,8 @@ function createShapeRing_P3D2(){
 
 function createShapeRing_P3D3(){
 
-  var custom_energy = energy*5;
-  var segments = Math.round((maxChroma+custom_energy)/2+3)
+  let custom_energy = energy*5;
+  let segments = Math.round((maxChroma+custom_energy)/2+3)
   console.log(segments);
 
     // console.log(energy);
@@ -730,7 +706,10 @@ function updateGroupGeometry( mesh, geometry ) {
 
 
 
-// LOAD MUSIC (vizInit)
+
+
+
+
 function vizInit() {
   // (1) Line EventListener
   pitch_LineHeight.addEventListener("click", ()=>{ 
@@ -793,6 +772,69 @@ function vizInit() {
       now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
     } else {
     now_geometry = 10300;
+    }
+  });
+
+
+  dynamic_LineHeight.addEventListener("click", ()=>{
+    dynamic_LineHeight.style.background = '#FF5C5C';
+    if (typeof now_geometry == 'number'){
+      let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      geometry_type = 1;
+      if (dynamic_type == 5){
+        dynamic_type = 0;
+        dynamic_LineHeight.style.background = '#221E21';
+      } else {
+        dynamic_type = 5;
+        dynamic_LineHeight.style.background = '#FF5C5C';
+        dynamic_LineThickness.style.background = '#221E21';
+        dynamic_LineColor.style.background = '#221E21';
+      }
+      now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
+    } else {
+    now_geometry = 10005;
+    }
+  });
+
+
+  dynamic_LineThickness.addEventListener("click", ()=>{
+    dynamic_LineThickness.style.background = '#FF5C5C';
+    if (typeof now_geometry == 'number'){
+      let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      geometry_type = 1;
+      if (dynamic_type == 1){
+        dynamic_type = 0;
+        dynamic_LineThickness.style.background = '#221E21';
+      } else {
+        dynamic_type = 1;
+        dynamic_LineThickness.style.background = '#FF5C5C';
+        dynamic_LineHeight.style.background = '#221E21';
+        dynamic_LineColor.style.background = '#221E21';
+      }
+      now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
+    } else {
+    now_geometry = 10001;
+    }
+  });
+
+
+  dynamic_LineColor.addEventListener("click", ()=>{
+    dynamic_LineColor.style.background = '#FF5C5C';
+    if (typeof now_geometry == 'number'){
+      let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+      geometry_type = 1;
+      if (dynamic_type == 4){
+        dynamic_type = 0;
+        dynamic_LineColor.style.background = '#221E21';
+      } else {
+        dynamic_type = 4;
+        dynamic_LineColor.style.background = '#FF5C5C';
+        dynamic_LineHeight.style.background = '#221E21';
+        dynamic_LineThickness.style.background = '#221E21';
+      }
+      now_geometry = geometry_type*10000+pitch_type*100+dynamic_type
+    } else {
+    now_geometry = 10004;
     }
   });
 
@@ -920,7 +962,18 @@ function vizInit() {
 };
 
 
+// 각 요소에 해당하는 값(100, 10000 등)으로 나누어 어떤 요소의 무엇을 호출했는지 판별하는 함수
+function GeometryAnalysis(GeometryValue){
+  let geometry_type = parseInt( GeometryValue / 10000 );
+  let remainder_10000 = GeometryValue % 10000;
+  let pitch_type = parseInt( remainder_10000 / 100 );
+  let dynamic_type = remainder_10000 % 100;
+  return [geometry_type, pitch_type, dynamic_type];
+};
 
+
+
+// 색깔 관련 함수 모음
 function saveColor(){
   pickr.on('save', (color, instance) => {
   const userColor = color.toHEXA().toString();
@@ -930,25 +983,26 @@ function saveColor(){
 }
 
 function changeBGColor(){
-var userColor = document.querySelector('#userCustom').innerHTML;
-scene.background = new THREE.Color(userColor);
+  let userColor = document.querySelector('#userCustom').innerHTML;
+  scene.background = new THREE.Color(userColor);
 }
+
 
 
 function changeLineColorbymaxChroma(Material){
   // color rendering by pitch
-  var plainRed = new THREE.Color('rgba(247, 152, 152, 1)');
-  var plainRedOrange = new THREE.Color('rgba(247, 189, 152, 1)');
-  var plainOrange = new THREE.Color('rgba(247, 206, 152, 1)');
-  var plainOrangeYellow = new THREE.Color('rgba(205, 159, 59, 1)');
-  var plainYellow = new THREE.Color('rgba(247, 233, 152, 1)');
-  var plainYeondu = new THREE.Color('rgba(203, 247, 152, 1)');
-  var plainGreen = new THREE.Color('rgba(152, 247, 177, 1)');
-  var plainCyan = new THREE.Color('rgba(152, 246, 247, 1)');
-  var plainBlue = new THREE.Color('rgba(152, 179, 247, 1)');
-  var plainViolet = new THREE.Color('rgba(178, 152, 247, 1)');
-  var plainMagenta = new THREE.Color('rgba(241, 152, 247, 1)');
-  var plainPink = new THREE.Color('rgba(247, 152, 213, 1)');
+  let plainRed = new THREE.Color('rgba(247, 152, 152)');
+  let plainRedOrange = new THREE.Color('rgba(247, 189, 152)');
+  let plainOrange = new THREE.Color('rgba(247, 206, 152)');
+  let plainOrangeYellow = new THREE.Color('rgba(205, 159, 59)');
+  let plainYellow = new THREE.Color('rgba(247, 233, 152)');
+  let plainYeondu = new THREE.Color('rgba(203, 247, 152)');
+  let plainGreen = new THREE.Color('rgba(152, 247, 177)');
+  let plainCyan = new THREE.Color('rgba(152, 246, 247)');
+  let plainBlue = new THREE.Color('rgba(152, 179, 247)');
+  let plainViolet = new THREE.Color('rgba(178, 152, 247)');
+  let plainMagenta = new THREE.Color('rgba(241, 152, 247)');
+  let plainPink = new THREE.Color('rgba(247, 152, 213)');
 
   if (maxChroma == 0){ 
     Material.color = plainRed;
@@ -1006,31 +1060,24 @@ function changeLinePositionbymaxChroma(mesh){
   }
 }
 
-// some helper functions here
-function fractionate(val, minVal, maxVal) {
-  return (val - minVal)/(maxVal - minVal);
-}
 
-function modulate(val, minVal, maxVal, outMin, outMax) {
-  var fr = fractionate(val, minVal, maxVal);
-  var delta = outMax - outMin;
-  return outMin + (fr * delta);
+function changeLineColorbyEnergy(Material){
+  let cu_energy = (Math.round(energy) + 1) * 50;
+  if (cu_energy >= 0 && cu_energy < 0.05){
+    Material.color = new THREE.Color('rgba(76, 175, 80)');
+  } else if (cu_energy >= 0.05 && cu_energy < 0.5){
+    Material.color = new THREE.Color('rgba(139, 195, 74)');
+  } else if (cu_energy >= 0.5 && cu_energy < 1){
+    Material.color = new THREE.Color('rgba(205, 220, 57)');
+  } else if (cu_energy >= 1 && cu_energy < 10){
+    Material.color = new THREE.Color('rgba(255, 235, 59)');
+  } else if (cu_energy >= 10 && cu_energy < 50){
+    Material.color = new THREE.Color('rgba(255, 193, 7)');
+  } else if (cu_energy >= 50 && cu_energy < 80){
+    Material.color = new THREE.Color('rgba(255, 144, 7)');
+  } else if (cu_energy <= 80 && cu_energy < 100){
+    Material.color = new THREE.Color('rgba(244, 67, 54)');
+  } else if (cu_energy >= 100){
+    Material.color = new THREE.Color('rgba(255, 0, 0)');
+  } 
 }
-
-function avg(arr){
-  var total = arr.reduce(function(sum, b) { return sum + b; });
-  return (total / arr.length);
-}
-
-function max(arr){
-  return arr.reduce(function(a, b){ return Math.max(a, b); })
-}
-
-// 각 요소에 해당하는 값(100, 10000 등)으로 나누어 어떤 요소의 무엇을 호출했는지 판별하는 함수
-function GeometryAnalysis(GeometryValue){
-  let geometry_type = parseInt( GeometryValue / 10000 );
-  let remainder_10000 = GeometryValue % 10000;
-  let pitch_type = parseInt( remainder_10000 / 100 );
-  let dynamic_type = remainder_10000 % 100;
-  return [geometry_type, pitch_type, dynamic_type];
-};

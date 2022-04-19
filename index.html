@@ -31,9 +31,10 @@
 
 <body>
     <script>
+       // 음악이 무조건 하나 input 으로 들어와야 메뉴를 보여주는 함수
         function check(box, delimiter) {
           target = document.getElementById('thefile');
-          if (target.files.length == 1){ // 음악이 무조건 하나 input 으로 들어와야 메뉴를 보여줌.
+          if (target.files.length == 1){
   
             if (box.checked == true) {
               document.getElementById(delimiter).style.display = "inline-block";
@@ -42,13 +43,13 @@
             }
           }
         };
-
+        // 선택한 메뉴만 highlight 해주는 함수
         function highlight(box, delimiter) {
           if (box.checked == true) {
               document.getElementById(delimiter).style.color = "rgba(255, 52, 91)";
               document.getElementById(delimiter).style.fontWeight = "600";
           } else {
-              document.getElementById(delimiter).style.backgroundColor = "rgba(255, 255, 255)";
+              document.getElementById(delimiter).style.backgroundColor = "rgba(0, 0, 0, 0)";
               document.getElementById(delimiter).style.color = "#8b8b8b";
           }
         }
@@ -151,7 +152,7 @@
         <p id="menusmallTitle_visual"> Dynamics </p>
             <button class="dynamicMenu" id="dynamicLineHeight"> Line Height </button>
             <button class="dynamicMenu" id="dynamicLineThickness"> Line Thickness </button>
-            <button class="dynamicMenu" id="dynamicLineType"> Line Type </button>
+            <button class="dynamicMenu" id="dynamicLineColor"> Line Color </button>
         <br>
         <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
             <button class="visualButtonColors" type="button"> Colors </button>

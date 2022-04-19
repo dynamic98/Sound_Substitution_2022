@@ -93,9 +93,9 @@ function AnalyzerPlay(src) {
         buffersize: 64,
         featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
         callback: (features) => {
-        maxChroma = features['chroma'].indexOf(max(features['chroma']))
-        energy = features['energy']
-        amplitudeSpectrum = features['amplitudeSpectrum']
+            maxChroma = features['chroma'].indexOf(max(features['chroma']))
+            energy = features['energy']
+            amplitudeSpectrum = features['amplitudeSpectrum']
         }
     })
     meyda_analyser.start();
