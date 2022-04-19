@@ -1,5 +1,4 @@
 # Sound_Substitution_2022
-<<<<<<< HEAD
 Sound Enjoyment for DHH(Deaf and Hard-of-Hearing)
 
 # VibvizTool
