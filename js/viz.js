@@ -351,7 +351,6 @@ function createShpaeLine_P3D0(){
   camera.position.set(0, 0, 130);
 }
 
-<<<<<<< HEAD
 function createShapeLine_P5D0(){ 
   geometry = new THREE.BoxGeometry( 100, 1, 1 );
   material = new THREE.MeshBasicMaterial( {
@@ -370,7 +369,7 @@ function createShapeLine_P5D0(){
 
 
 // 3. Ring geometry
-=======
+// =======
 function createShapeRing_P0D1(){
   var thickness = energy*5+1;
   var inner = 13 - 13/thickness
@@ -436,7 +435,7 @@ function createShapeRing_P0D3(){
   // scene.add( group );
 }
 
->>>>>>> 547641bbc724e13bf499baf9a4e6eb3b521b2734
+// >>>>>>> 547641bbc724e13bf499baf9a4e6eb3b521b2734
 function createShapeRing_P1D0(){
   let thickness = maxChroma/2+5
   geometry = new THREE.RingGeometry(thickness, 13, 8, 13, 0, 6.283185307179586);
@@ -693,7 +692,8 @@ function createShapeRing_P3D2(){
 function createShapeRing_P3D3(){
 
   var custom_energy = energy*5;
-  var segments = (maxChroma+custom_energy)/2+3
+  var segments = Math.round((maxChroma+custom_energy)/2+3)
+  console.log(segments);
 
     // console.log(energy);
   geometry = new THREE.RingGeometry(10, 13, segments, 13, 0, 6.283185307179586);
