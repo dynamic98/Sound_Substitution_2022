@@ -217,7 +217,6 @@ function SendHapticData(frequency, amplitude){
     
     view[17] = 13; // ETX 0x0D
     view[18] = 10; // ETX 0x0A
-    console.log();
     console.log(view);
     haptic_devices.send(view);
 }
@@ -256,7 +255,6 @@ function haptic_listener(event){
         console.log("WOW");
     }
 }
-
 document
     .querySelector('[data-action="SendHapticPattern"]')
     .addEventListener('click', function(event) {
