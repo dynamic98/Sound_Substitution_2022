@@ -22,10 +22,23 @@ function FileInit() {
         container: document.querySelector('#waveform'),
         waveColor: '#A8DBA8',
         progressColor: '#3B8686',
-        fillParent: false,
-        minPxPerSec: 4,
+        // fillParent: false,
+        // minPxPerSec: 6,
         cursorWidth : 5,
-        normalize: true
+        normalize: true,
+
+        // pixelRatio: 1,
+        // scrollParent: true,
+        // minimap: true,
+        // backend: 'MediaElement',
+        // plugins: [
+        //     WaveSurfer.minimap.create({
+        //         height: 30,
+        //         waveColor: '#ddd',
+        //         progressColor: '#999',
+        //         cursorColor: '#999'
+        //     })
+        // ]
         });
 
     var saveButton = document.getElementsByClassName("pcr-save");
