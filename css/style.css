@@ -200,8 +200,9 @@ aside {
         opacity: 1;
         visibility: visible;
         width: 4px; }
+
     aside .side-inner .nav-menu ul li .collapsible {
-      position: relative; }
+        position: relative; }
       aside .side-inner .nav-menu ul li .collapsible:after {
         content: "\e315";
         font-size: 18px;
@@ -274,8 +275,6 @@ label.file{
   border-radius: 4px;
   font-size: 1em;
   font-weight: 300;
-  /* box-shadow: 0 20px 60px var(--shadowColorFaint); */
-
   cursor: pointer;
 }
 
@@ -283,18 +282,12 @@ label.file{
   
 label.file:hover{
   margin-left: 90px;
-  background: rgba(247, 155, 194, 0.643);
+  background: rgb(243, 255, 13);
   transform: translate3d(-50%, -55%, 0);
   font-size: 1.2rem;
   font-weight: 445;
 }
 
-/* label.file:active{
-  margin-left: 70px;
-  transform: translate3d(-50%, -55%, 0);
-  font-size: 1.5rem;
-  font-weight: 300;
-} */
 
 audio {
   position: fixed;
@@ -309,7 +302,6 @@ audio.playing{
   bottom: 10px;
   width: calc(100% - 20px);
 }
-
 
 
 /* 시각 메뉴 스타일 */
@@ -366,8 +358,7 @@ p#menusmallTitle_visual{
 
 
 button.pitchMenu{
-  background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgb(33, 33, 33) 0%, rgb(162, 162, 162) 100%);
+  background: rgb(54, 53, 53);
   border: none;
   margin-left: 50px;
   width: 170px;
@@ -377,15 +368,9 @@ button.pitchMenu{
   color: white;
 }
 
-button.pitchMenu:focus{
-  background: rgb(255, 255, 255);
-  background: linear-gradient(0deg, rgb(249, 249, 249) 0%, rgb(182, 182, 182) 100%);
-  color: black;
-}
 
 button.dynamicMenu{
-  background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgb(33, 33, 33) 0%, rgb(162, 162, 162) 100%);
+  background: rgb(54, 53, 53);
   border: none;
   margin-left: 50px;
   width: 170px;
@@ -395,11 +380,11 @@ button.dynamicMenu{
   color: white;
 }
 
-button.dynamicMenu:focus{
+/* button.dynamicMenu:focus{
   background: rgb(255, 255, 255);
   background: linear-gradient(0deg, rgb(249, 249, 249) 0%, rgb(182, 182, 182) 100%);
-  color: black;
-}
+  color: white;
+} */
 
 
 button.visualButtonColors{
@@ -414,6 +399,11 @@ button.visualButtonColors{
   box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 }
 
+button#pitchLineHeight{
+  background-color: linear-gradient(0deg, rgb(33, 33, 33) 0%, rgb(162, 162, 162) 100%);
+}
+
+
 div.visualCustomMenu{
   position: relative;
   display: none;
@@ -427,11 +417,16 @@ div.visualCustomMenu{
 
 
 div#customMenu-Line {
-  background-color: #c8d9d6;
+  background-color: #ecfffb;
 }
 
 div#customMenu-Sphere {
-  background-color: #d0b3bf;
+  background-color: #ffeef5;
+}
+
+
+div#customMenu-Ring {
+  background-color: #f7f5d9;
 }
 
 
@@ -532,6 +527,8 @@ div#music-controls > button.btn-primary{
   padding: 10px;
   margin-right: 10px;
 }
+
+
 
 /* 반응형 웹을 위한 미디어 쿼리 (미디어 쿼리는 반드시 가장 하단에 작성) */
 

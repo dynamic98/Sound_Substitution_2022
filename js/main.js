@@ -1,1 +1,2 @@
-import {pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, wavesurfer} from './modules.js';
+// 함수, 변수
+import {pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, wavesurfer, show_canvas} from './modules.js';
