@@ -1,4 +1,4 @@
-# VizHap
+# Customization Phase for KCC (VizHap)
 Music Enjoyment by Visualization & Haptic patterns for DHH (Deaf and Hard-of-Hearing)
 ### 사용 언어   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/>
 
