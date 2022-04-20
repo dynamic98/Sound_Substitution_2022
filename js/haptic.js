@@ -1,6 +1,5 @@
 'use strict';
 import {audio, wavesurfer} from './modules.js';
-// export {haptic_change};
 
 // Create an instance
 var audio_buffer;

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>VibvizTool_Customizing</title>
+    <title>KCC-Custom</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -20,7 +20,6 @@
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- <link rel="shortcut icon" href="#"> -->
 
 </head>
 
@@ -54,18 +53,18 @@
         <div class="toggle">
           <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
                 <span></span>
-              </a>
+          </a>
         </div>
         <div class="side-inner">
   
           <div class="profile">
             <img src="images/cutecat.jpeg" alt="Image" class="img-fluid">
-            <h3 class="name">User#01</h3>
-            <span class="identity">Deaf</span>
+            <h3 class="name">사용자</h3>
+            <span class="identity">청각장애인</span>
           </div>
   
           <div id="sidebar-content">
-            <label for="thefile" class="file"> Pick a Music 🎺
+            <label for="thefile" class="file"> 음악을 고르세요! 🎺
                 <input type="file" id="thefile" accept="audio/mp3" />
             </label>
             <audio id="audio" controls></audio>
@@ -79,7 +78,7 @@
   
                 <p id="VisuoMenu" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsible">
                 <!-- <a href="#" id="VisuoMenu" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsible"> -->
-                  <span class="material-icons" style="font-size:25px; vertical-align: top;">palette</span> Visualization
+                  <span class="material-icons" style="font-size:25px; vertical-align: top;">palette</span>&nbsp;&nbsp;시각화 스타일
                 <!-- </a> -->
                 </p>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
@@ -87,45 +86,35 @@
                     <ul>
                       <li type="button" class="VisuoMenus" id="VisuoLine">
                         <input class="check-btn" id="check-VisuoLine" type="checkbox" onclick="check(this, 'customMenu-Line'); highlight(this, 'active-line');"> 
-                          <label for="check-VisuoLine"> <div id="active-line">Line</div> </label>
+                          <label for="check-VisuoLine"> <div id="active-line">선 모양</div> </label>
                       </li>
-                      <li type="button" class="VisuoMenus" id="VisuoSphere">
-                        <input class="check-btn" id="check-VisuoSphere" type="checkbox" onclick="check(this, 'customMenu-Sphere'); highlight(this, 'active-sphere');"> 
-                          <label for="check-VisuoSphere"> <div id="active-sphere">Sphere</div> </label>
-                      </li>
+
                       <li type="button" class="VisuoMenus" id="VisuoRing">
                         <input class="check-btn" id="check-VisuoRing" type="checkbox" onclick="check(this, 'customMenu-Ring'); highlight(this, 'active-ring');"> 
-                          <label for="check-VisuoRing"> <div id="active-ring">Ring</div> </label>
+                          <label for="check-VisuoRing"> <div id="active-ring">링 모양</div> </label>
                       </li>
-                      <li type="button" class="VisuoMenus" id="VisuoTorus">
-                        <input class="check-btn" id="check-VisuoTorus" type="checkbox" onclick="check(this, 'customMenu-Torus'); highlight(this, 'active-torus');"> 
-                          <label for="check-VisuoTorus"> <div id="active-torus">Torus</div> </label>
-                      </li>
-                      <li type="button" class="VisuoMenus" id="VisuoCone">
-                        <input class="check-btn" id="check-VisuoCone" type="checkbox" onclick="check(this, 'customMenu-Cone'); highlight(this, 'active-cone');"> 
-                          <label for="check-VisuoCone"> <div id="active-cone">Cone</div> </label>
-                      </li>
+                      
                     </ul>
                   </div>
+                  <li class="accordion">
+                    <p id="HapticMenu" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsible">
+                      <span class="material-icons" style="font-size:25px; vertical-align: top;">vibration</span>&nbsp;&nbsp;햅틱 스타일</p>
+      
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingOne">
+                      <div>
+                        <ul>
+                          <li type="button" class="HapticMenus">
+                            <input class="check-btn" id="check-Haptic" type="checkbox" onclick="check(this, 'hapticCustom'); highlight(this, 'active-haptic');"> 
+                            <label for="check-Haptic"> <div id="active-haptic">패턴 필터</div> </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
                 </div>
               </li>
               <br>
-              <li class="accordion">
-                <p id="HapticMenu" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsible">
-                  <span class="material-icons" style="font-size:25px; vertical-align: top;">vibration</span> Haptic </p>
-  
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingOne">
-                  <div>
-                    <ul>
-                      <li type="button" class="HapticMenus">
-                        <input class="check-btn" id="check-Haptic" type="checkbox" onclick="check(this, 'hapticCustom'); highlight(this, 'active-haptic');"> 
-                        <label for="check-Haptic"> <div id="active-haptic">Pattern Filter</div> </label>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-  
-              </li>
+              
             </ul>
           </div>
         </div>
@@ -137,56 +126,40 @@
   
 
       <div class="visualCustomMenu" id="customMenu-Line">
-        <h5 class="menuTitle">Line Visualization</h5>
+        <h5 class="menuTitle">선 모양 시각화</h5>
         <hr class="menuTitleHR_visual">
-        <p id="menusmallTitle_visual"> Pitch </p>
-            <button class="pitchMenu" id="pitchLineHeight"> Line Height </button>
-            <button class="pitchMenu" id="pitchLineThickness"> Line Thickness </button>
-            <button class="pitchMenu" id="pitchLineType"> Line Type </button>
+        <p id="menusmallTitle_visual"> 음악의 높이 </p>
+            <button class="pitchMenu" id="pitchLineHeight"> 선의 높이 </button>
+            <button class="pitchMenu" id="pitchLineThickness"> 선의 굵기 </button>
+            <button class="pitchMenu" id="pitchLineType"> 선의 종류 </button>
         <br>
-        <p id="menusmallTitle_visual"> Dynamics </p>
-            <button class="dynamicMenu" id="dynamicLineHeight"> Line Height </button>
-            <button class="dynamicMenu" id="dynamicLineThickness"> Line Thickness </button>
-            <button class="dynamicMenu" id="dynamicLineColor"> Line Color </button>
+        <p id="menusmallTitle_visual"> 음악의 크기 </p>
+            <button class="dynamicMenu" id="dynamicLineHeight"> 선의 높이 </button>
+            <button class="dynamicMenu" id="dynamicLineThickness"> 선의 굵기 </button>
+            <button class="dynamicMenu" id="dynamicLineColor"> 선의 색상 </button>
         <br>
-        <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
-            <button class="visualButtonColors" type="button"> Colors </button>
+        <p id="menusmallTitle_visual" class="bgcolor"> 배경 </p>
+            <button class="visualButtonColors" type="button"> 배경 색상 </button>
       </div>
   
-  
-      <div class="visualCustomMenu" id="customMenu-Sphere">
-        <h5 class="menuTitle">Sphere Visualization</h5>
-        <hr class="menuTitleHR_visual">
-        <p id="menusmallTitle_visual"> Pitch </p>
-            <button class="pitchMenu" id="pitchSphereSize"> Sphere Size </button>
-            <button class="pitchMenu" id="pitchSphereHeight"> Sphere Height </button>
-            <button class="pitchMenu" id="pitchSphereColor"> Sphere Color </button>
-        <br>
-        <p id="menusmallTitle_visual"> Dynamics </p>
-            <button class="dynamicMenu" id="dynamicSphereSize"> Sphere Size </button>
-            <button class="dynamicMenu" id="dynamicSpherePhiLength"> Sphere PhiLength </button>
-            <button class="dynamicMenu" id="dynamicSphereThetaStart"> Sphere ThetaStart </button>
-        <br>
-        <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
-            <button class="visualButtonColors" type="button"> Colors </button>
-      </div>
+
 
 
       <div class="visualCustomMenu" id="customMenu-Ring">
-        <h5 class="menuTitle">Ring Visualization</h5>
+        <h5 class="menuTitle">링 모양 시각화</h5>
         <hr class="menuTitleHR_visual">
-        <p id="menusmallTitle_visual"> Pitch </p>
-            <button class="pitchMenu" id="pitchRingThickness"> Ring Thickness </button>
-            <button class="pitchMenu" id="pitchRingSize"> Ring Size </button>
-            <button class="pitchMenu" id="pitchRingType"> Ring Type </button>
+        <p id="menusmallTitle_visual"> 음악의 높이 </p>
+            <button class="pitchMenu" id="pitchRingThickness"> 링의 굵기 </button>
+            <button class="pitchMenu" id="pitchRingSize"> 링의 크기 </button>
+            <button class="pitchMenu" id="pitchRingType"> 링의 종류 </button>
         <br>
-        <p id="menusmallTitle_visual"> Dynamics </p>
-            <button class="dynamicMenu" id="dynamicRingThickness"> Ring Thickness </button>
-            <button class="dynamicMenu" id="dynamicRingSize"> Ring Size </button>
-            <button class="dynamicMenu" id="dynamicRingType"> Ring Type </button>
+        <p id="menusmallTitle_visual"> 음악의 크기 </p>
+            <button class="dynamicMenu" id="dynamicRingThickness"> 링의 굵기 </button>
+            <button class="dynamicMenu" id="dynamicRingSize"> 링의 크기 </button>
+            <button class="dynamicMenu" id="dynamicRingType"> 링의 종류 </button>
         <br>
-        <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
-            <button class="visualButtonColors" type="button"> Colors </button>
+        <p id="menusmallTitle_visual" class="bgcolor"> 배경 </p>
+            <button class="visualButtonColors" type="button"> 배경 색상 </button>
       </div>
   
 
@@ -197,96 +170,95 @@
           </div>
         </div>
 
-        <!-- 햅틱 output -->
         <div id="demo">
           <div id="waveform">
           </div>
         </div>
-
+      
         <div id="music-controls">
           <br>
             <button class="btn btn-primary" data-action="play">
                 <i class="glyphicon glyphicon-play"></i>
-                Play
+                음악 재생
                 /
                 <i class="glyphicon glyphicon-pause"></i>
-                Pause
+                일시정지
             </button>
-            <button class="btn btn-success" data-action="toHaptic">
-              Select Instruments & toHaptic
-            </button>
-            <button class="btn btn-info" data-action="SearchHapticDevice">
-              SearchHapticDevice
-            </button>
-            <button class="btn btn-info" data-action="SendHapticPattern">
-              <i class="glyphicon glyphicon-play"></i>
-                SendHapticPattern
-            </button>
-            <button class="btn btn-info" data-action="DisconnectHapticDevice">
-              <i class="glyphicon glyphicon-stop"></i>
-                DisconnectHapticDevice
-            </button>
-        </div>
+      </div>
 
-        <div class="haptic-container">
-          <div class="hapticCustomMenu" id="hapticCustom">
-            <div class="haptic-controls">
-                <h5 class="menuTitle"> Haptic Pattern Filter </h5>
-                <br>
-                <p id="menusmallTitle_haptic"> Tempo </p>
-                <div class="haptic-tempo">
-                    <input data-action="tempo" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
-                    &larr; Empty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full vibration &rarr;
-                </div>
-                <br>
-
-                <p id="menusmallTitle_haptic"> Frequency </p>
-                <div class="haptic-frequency">
-                  <input data-action="frequency" type="range" min="0" max="22" value="11" style="width: 100%"/>
-                    &larr; Rough &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sharp &rarr;
-                </div>
-                <br>
-
-                <p id="menusmallTitle_haptic"> Amplitude </p>
-                <div class="haptic-amplitude">
-                  <input data-action="amplitude" type="range" min="0" max="100" value="50" style="width: 100%"/>
-                    &larr; Sharp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strong &rarr;
-                </div>
-                <br>
-
-                <p id="menusmallTitle_haptic"> Timbre </p>
-                <div class="haptic-timbre">
-                    <input data-action="symmetry" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
-                    &larr; Asymmetry &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symmetry &rarr;
-                </div>
+    <div class="haptic-container">
+      <div class="hapticCustomMenu" id="hapticCustom">
+        <div class="haptic-controls">
+            <h5 class="menuTitle"> 햅틱 패턴 필터 </h5>
+            <br>
+            <!-- <p id="menusmallTitle_haptic"> Tempo </p>
+            <div class="haptic-tempo">
+                <input data-action="tempo" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                &larr; Empty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full vibration &rarr;
+            </div>
+            <br> -->
+            <p id="menusmallTitle_haptic"> 음악의 진동 </p>
+            <div class="haptic-frequency">
+              <input data-action="frequency" type="range" min="0" max="22" value="11" style="width: 100%"/>
+                &larr; 둔탁하게 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                &nbsp;&nbsp;&nbsp; 날카롭게 &rarr;
+                <!-- &larr; 둔탁하게 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;날카롭게 &rarr; -->
+            </div>
+            <br>
+            <p id="menusmallTitle_haptic"> 음악의 진폭 </p>
+            <div class="haptic-amplitude">
+              <input data-action="amplitude" type="range" min="0" max="100" value="50" style="width: 100%"/>
+                &larr; 약하게 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 강하게 &rarr;
+            </div>
+            <br>
           </div>
-          </div>
-        </div>
-
+            <div class="hapticDevice">
+              <button class="btn btn-success" data-action="toHaptic">
+                악기 선택하기
+              </button>
+              <button class="btn btn-info" data-action="SearchHapticDevice">
+                연결 디바이스 찾기
+              </button>
+              <br>
+              <br>
+              <button class="btn btn-info" data-action="SendHapticPattern">
+                <i class="glyphicon glyphicon-play"></i>
+                햅틱 패턴 보내기
+              </button>
+              <button class="btn btn-info" data-action="DisconnectHapticDevice">
+                <i class="glyphicon glyphicon-stop"></i>
+                햅틱 패턴 끊기
+              </button>
+            </div>
+            <!-- <p id="menusmallTitle_haptic"> Timbre </p>
+            <div class="haptic-timbre">
+                <input data-action="symmetry" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                &larr; Asymmetry &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symmetry &rarr;
+            </div> -->
+      </div>
+    </div>
+           
     </main>
-    <!-- Javascript -->
+
     <script type="module" defer src="./js/main.js"></script>
     <script type="module" defer src="./js/showCanvas.js"></script>
     <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>

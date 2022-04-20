@@ -40,27 +40,27 @@ a {
     text-decoration: none !important; }
 
 p#VisuoMenu{
-  font-size: 20px;
+  font-size: 28px;
 }
 
 p#HapticMenu{
-  font-size: 20px;
+  font-size: 28px;
 }
 
 a#VisuoMenu{
-  font-size: 20px;
+  font-size: 25px;
 }
 
 a#HapticMenu{
-  font-size: 20px;
+  font-size: 25px;
 }
 
 li.VisuoMenus{
-  font-size: 18px;
+  font-size: 23px;
 }
 
 li.HapticMenus{
-  font-size: 18px;
+  font-size: 23px;
 }
 
 h2 {
@@ -267,25 +267,29 @@ div#userCustom{
   z-index: 1;
 }
 
+
 label.file{
   display: inline-block;
   position: relative;
   transform: translate3d(-50%, -50%, 0);
-  margin-left: 90px;
+  margin-left: 120px;
   border-radius: 4px;
-  font-size: 1em;
-  font-weight: 300;
+  font-size: 1.2em;
+  font-weight: 400;
   cursor: pointer;
 }
 
 
-  
 label.file:hover{
-  margin-left: 90px;
   background: rgb(243, 255, 13);
-  transform: translate3d(-50%, -55%, 0);
-  font-size: 1.2rem;
-  font-weight: 445;
+  display: inline-block;
+  position: relative;
+  transform: translate3d(-50%, -50%, 0);
+  margin-left: 120px;
+  border-radius: 4px;
+  font-size: 1.2em;
+  font-weight: 400;
+  cursor: pointer;
 }
 
 
@@ -380,11 +384,6 @@ button.dynamicMenu{
   color: white;
 }
 
-/* button.dynamicMenu:focus{
-  background: rgb(255, 255, 255);
-  background: linear-gradient(0deg, rgb(249, 249, 249) 0%, rgb(182, 182, 182) 100%);
-  color: white;
-} */
 
 
 button.visualButtonColors{
@@ -417,16 +416,13 @@ div.visualCustomMenu{
 
 
 div#customMenu-Line {
-  background-color: #ecfffb;
+  background-color: #a9ffec;
 }
 
-div#customMenu-Sphere {
-  background-color: #ffeef5;
-}
 
 
 div#customMenu-Ring {
-  background-color: #f7f5d9;
+  background-color: #fff9a3;
 }
 
 
@@ -457,30 +453,40 @@ div.haptic-container{
 }
 
 
+div.hapticDevice{
+  margin-top: -40px;
+  margin-left: 90px;
+}
+
 div.haptic-controls{
   width: 800px;
   height: 300px;
 }
+
+
 
 div.hapticCustomMenu{
   display: none;
   position: relative;
   margin-left: 985px;
   margin-top: -195px;
-  background-color: #e2e2e2;
+  /* margin-top: 35px;
+  margin-right: 50px; */
   width: 700px;
   height: 400px;
   border-radius: 8px;
+  background-color: #e2e2e2;
 }
 
 p#menusmallTitle_haptic{
   margin-top: 0.01px;
   margin-bottom: 3px;
   margin-left: 30px;
-  width: 10px;
-  height: 0px;
+  width: 150px;
+  height: 20px;
   color: black;
   font-size: 22px;
+  font-weight: 400px;
 }
 
 div.haptic-tempo{
@@ -489,11 +495,13 @@ div.haptic-tempo{
 }
 
 div.haptic-frequency{
+  margin-top: -22px;
   margin-left: 160px;
   width: 500px;
 }
 
 div.haptic-amplitude{
+  margin-top: -22px;
   margin-left: 160px;
   width: 500px;
 }
@@ -533,12 +541,31 @@ div#music-controls > button.btn-primary{
 /* 반응형 웹을 위한 미디어 쿼리 (미디어 쿼리는 반드시 가장 하단에 작성) */
 
 @media (max-width: 1600px) {
-  div.customMenu {
+  div.visualCustomMenu {
     width: 420px;
     height: 410px;
   }
+
+  hr.menuTitleHR_visual{
+    width: 420px;
+  }
+
+  div.hapticCustomMenu {
+    margin-left: 730px;
+    margin-top: -200px;
+    width: 420px;
+    height: 360px;
+  }
+
+  div#demo > div#waveform > wave {
+    width: 715px;
+    margin-top: 20px;
+    margin-left: 370px;
+    background-color: rgb(29, 47, 92);
+  }
+
   h5.menuTitle{
-    margin-left: 120px;
+    margin-left: 10px;
     font-size: 22px;
   }
 
@@ -547,6 +574,7 @@ div#music-controls > button.btn-primary{
     margin-top: 15px;
     margin-bottom: -20px;
     font-size: 20px;
+    font-weight: 400px;
     padding: 0px;
     width: 70px;
   }
@@ -574,5 +602,34 @@ div#music-controls > button.btn-primary{
   hr.menuTitleHR{
     margin-top: 0.001px;
     margin-bottom: 0.001px;
+  }
+
+  p#menusmallTitle_visual{
+    font-size: 1.2rem;
+    margin-left: 10px;
+    width: 100px;
+    
+  }
+
+  div.hapticDevice{
+    margin-top: -90px;
+    margin-left: 90px;
+  }
+
+  p#menusmallTitle_haptic{
+    font-size: 1.2rem;
+    margin-left: 10px;
+    width: 100px;
+    font-weight: 400px;
+  }
+
+  div.haptic-frequency{
+    margin-left: 120px;
+    width: 260px;
+  }
+
+  div.haptic-amplitude{
+    margin-left: 120px;
+    width: 260px;
   }
 }

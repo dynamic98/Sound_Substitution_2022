@@ -108,9 +108,14 @@ function AnalyzerPlay(src) {
         buffersize: 64,
         featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
         callback: (features) => {
+            chroma = features['chroma']
             maxChroma = features['chroma'].indexOf(max(features['chroma']))
             energy = features['energy']
             amplitudeSpectrum = features['amplitudeSpectrum']
+
+            console.log('전체', chroma);
+            console.log('최댓값', maxChroma);
+            // console.log(amplitudeSpectrum);
         }
     })
     meyda_analyser.start();
@@ -167,9 +172,6 @@ function fractionate(val, minVal, maxVal) {
     return arr.reduce(function(a, b){ return Math.max(a, b); })
   }
   
-  // export {audio};
-// const button = document.getElementById("thefile");
-// button.addEventListener('click', titleAudio);
 
 
 export {audio, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};
