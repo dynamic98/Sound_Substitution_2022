@@ -1,6 +1,6 @@
 // Explore Phase (Pitch)
 
-const C3 = document.getElementById("pitch_do");
+const pitch_do = document.getElementById("pitch_do");
 const pitch_re = document.getElementById("pitch_re");
 const pitch_mi = document.getElementById("pitch_mi");
 const pitch_fa = document.getElementById("pitch_fa");
@@ -37,7 +37,7 @@ function FileInit(pitchButton) {
         });
     
     document
-    .querySelector('[data-action="play"]')
+    .querySelector(`#${pitch}`)
     .addEventListener('click', ()=>{ 
         console.log("PlayPause button pressed");
         wavesurfer.playPause();
@@ -110,17 +110,17 @@ function AnalyzerPlay(src) {
     meyda_analyser.start();
 }
 
-
+// 여기에서 싱크가 잘 안맞는듯?
 function SyncAudio(){
     wavesurfer.on('audioprocess', function() {
         if(wavesurfer.isPlaying()) {
             AudioCurrentTime = wavesurfer.getCurrentTime();
 
-            // console.log(AudioCurrentTime - AudioLastTime);
+            console.log('sync before', AudioCurrentTime - AudioLastTime);
             let AudioDifference = AudioCurrentTime - AudioLastTime;
-            if (AudioDifference > 0.01 || AudioDifference < 0){
+            if (AudioDifference > 0.005 || AudioDifference < 0){
                 audio.currentTime = AudioCurrentTime;
-                // console.log(AudioCurrentTime - AudioLastTime);
+                console.log('sync after', AudioCurrentTime - AudioLastTime);
             }
             AudioLastTime = AudioCurrentTime;
         }
@@ -139,6 +139,6 @@ function TogglePlay(){
 
 
 
-FileInit(C3);
-eventListenPitch(C3);
+FileInit(pitch_do);
+eventListenPitch(pitch_do);
 SyncAudio();

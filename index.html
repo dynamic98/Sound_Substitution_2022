@@ -173,26 +173,16 @@
           </div>
         </div>
       
-        <div id="music-controls">
-          <br>
-            <button class="btn btn-primary" data-action="play">
-                <i class="glyphicon glyphicon-play"></i>
-                음악 재생
-                /
-                <i class="glyphicon glyphicon-pause"></i>
-                일시정지
-            </button>
-        </div>
 
         <div class="pitchExplore">
           <p class="pitchExploreTitle"> 음의 높낮이</p>
-            <button class="pitchExploreButton" id="pitch_do"> 도 </button>
-            <button class="pitchExploreButton" id="pitch_re"> 레 </button>
-            <button class="pitchExploreButton" id="pitch_mi"> 미 </button>
-            <button class="pitchExploreButton" id="pitch_fa"> 파 </button>
-            <button class="pitchExploreButton" id="pitch_sol"> 솔 </button>
-            <button class="pitchExploreButton" id="pitch_la"> 라 </button>
-            <button class="pitchExploreButton" id="pitch_si"> 시 </button>
+            <button class="pitchExploreButton" id="pitch_do" data-action="play"> 도 </button>
+            <button class="pitchExploreButton" id="pitch_re" data-action="play"> 레 </button>
+            <button class="pitchExploreButton" id="pitch_mi" data-action="play"> 미 </button>
+            <button class="pitchExploreButton" id="pitch_fa" data-action="play"> 파 </button>
+            <button class="pitchExploreButton" id="pitch_sol" data-action="play"> 솔 </button>
+            <button class="pitchExploreButton" id="pitch_la" data-action="play"> 라 </button>
+            <button class="pitchExploreButton" id="pitch_si" data-action="play"> 시 </button>
         </div>
 
 
@@ -279,7 +269,6 @@
 
     <script type="module" defer src="./js/main.js"></script>
     <script type="module" defer src="./js/showCanvas.js"></script>
-    <script type="module" defer src="./js/pitchButton.js"></script>
     <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
     <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.minimap.js"></script>
     <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
