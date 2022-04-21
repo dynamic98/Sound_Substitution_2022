@@ -54,7 +54,7 @@ function init() {
   // canvas
   renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth / 2.24, window.innerHeight / 2.1);
+  renderer.setSize(window.innerWidth / 2.24, window.innerHeight / 1.35);
   camera = new THREE.PerspectiveCamera(30, renderer.domElement.width/renderer.domElement.height, 2, 2000);
   camera.position.set(1, 20, 100);
 
