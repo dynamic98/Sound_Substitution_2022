@@ -155,7 +155,7 @@
 //   function max(arr){
 //     return arr.reduce(function(a, b){ return Math.max(a, b); })
 //   }
-  
 
 
-// // export {audio, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};
+
+// export {audio, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};

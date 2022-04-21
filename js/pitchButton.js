@@ -15,7 +15,6 @@ let analyser, wavesurfer, src, bufferLength, dataArray;
 let chroma, maxChroma, energy, amplitudeSpectrum;
 let AudioLastTime, AudioCurrentTime;
 
-let audioPlayer = document.getElementById("player");
 
 const red = '#FF5C5C';
 const black = '#221E21';
@@ -40,7 +39,7 @@ let si_count = 0;
 
 // meyda analyzer 실행 함수
 function AnalyzerPlay(audio_context, src) {
-    console.log("AnalyzerPlay starts");
+    console.log("pitch meyda analyzer starts");
     analyser = audio_context.createAnalyser();
     src.connect(analyser);
     analyser.connect(audio_context.destination);
@@ -58,13 +57,14 @@ function AnalyzerPlay(audio_context, src) {
         audioContext: audio_context,
         source: src,
         buffersize: 64,
-        featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
+        featureExtractors: ["chroma"],
         callback: (features) => {
             chroma = Array.from(features['chroma']);
             energy = features['energy'];
             amplitudeSpectrum = features['amplitudeSpectrum'];  
 
-            console.log('pitch', chroma);
+            console.log('max pitch', maxChroma);
+            
         }
     })
     meyda_analyser.start();
@@ -77,11 +77,10 @@ function AnalyzerPlay(audio_context, src) {
 
 
 // EVENT LISTENERS
-
 document.querySelector('#pitch_do').addEventListener('click', ()=>{
     do_count = do_count + 1;
     if (do_count % 2 != 0){
-        audioPath = './pitch_audio/pitch_do.mp3'
+        audioPath = './audio/pitch_do.mp3'
 
         audio_do = new Audio(audioPath);
         audio_context_do = audio_context_do || new AudioContext();
@@ -105,7 +104,7 @@ document.querySelector('#pitch_re').addEventListener('click', ()=>{
     re_count = re_count + 1;
 
     if (re_count % 2 != 0){
-        audioPath = './pitch_audio/pitch_re.mp3'
+        audioPath = './audio/pitch_re.mp3'
 
         audio_re = new Audio(audioPath);
         audio_context_re = audio_context_re || new AudioContext();
@@ -131,7 +130,7 @@ document.querySelector('#pitch_mi').addEventListener('click', ()=>{
     mi_count = mi_count + 1;
 
     if (mi_count % 2 != 0){
-        audioPath = './pitch_audio/pitch_mi.mp3'
+        audioPath = './audio/pitch_mi.mp3'
 
         audio_mi = new Audio(audioPath);
         audio_context_mi = audio_context_mi || new AudioContext();
@@ -157,7 +156,7 @@ document.querySelector('#pitch_fa').addEventListener('click', ()=>{
     fa_count = fa_count + 1;
 
     if (fa_count % 2 != 0){
-        audioPath = './pitch_audio/pitch_fa.mp3'
+        audioPath = './audio/pitch_fa.mp3'
 
         audio_fa = new Audio(audioPath);
         audio_context_fa = audio_context_fa || new AudioContext();
@@ -183,7 +182,7 @@ document.querySelector('#pitch_sol').addEventListener('click', ()=>{
     sol_count = sol_count + 1;
 
     if (sol_count % 2 != 0){
-        audioPath = './pitch_audio/pitch_sol.mp3'
+        audioPath = './audio/pitch_sol.mp3'
 
         audio_sol = new Audio(audioPath);
         audio_context_sol = audio_context_sol || new AudioContext();
@@ -209,7 +208,7 @@ document.querySelector('#pitch_la').addEventListener('click', ()=>{
     la_count = la_count + 1;
 
     if (la_count % 2 != 0){
-        audioPath = './pitch_audio/pitch_la.mp3'
+        audioPath = './audio/pitch_la.mp3'
 
         audio_la = new Audio(audioPath);
         audio_context_la = audio_context_la || new AudioContext();
