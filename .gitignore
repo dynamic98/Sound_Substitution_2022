@@ -105,3 +105,6 @@ dist
 
 # AudioBPM file
 .AudioBPM/
+
+# MP3 file
+.sampleMP3/
