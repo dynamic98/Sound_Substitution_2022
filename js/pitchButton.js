@@ -63,6 +63,8 @@ function AnalyzerPlay(audio_context, src) {
             chroma = Array.from(features['chroma']);
             energy = features['energy'];
             amplitudeSpectrum = features['amplitudeSpectrum'];
+
+            console.log('pitch', chroma);
         }
     })
     meyda_analyser.start();
