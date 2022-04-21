@@ -4,7 +4,7 @@ import * as THREE from 'three';
 // import Stats from 'three/examples/jsm/libs/stats.module.js';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline/src/THREE.MeshLine.js';
-import { pickr, analyser, maxChroma, energy, dataArray } from './modules.js';
+import { pickr, analyser, maxChroma, energy, dataArray, PitchORDynamic } from './modules.js';
 
 
 // let controls;
@@ -243,7 +243,7 @@ function createShapeRing_Vanilla(){
 
 // 1. Line geometry
 function createShapeLine_P1D0(){
-  geometry = new THREE.BoxGeometry( 100, maxChroma * 1.5, 1 );
+  geometry = new THREE.BoxGeometry( 100, (maxChroma + 1) * 2, 1 );
   material = new THREE.MeshBasicMaterial( {
     color: '#FFFFFF',
     wireframe: false
@@ -271,7 +271,7 @@ function createShpaeLine_P3D0(){
   }
 
   const path = new CustomSinCurve( 40 );
-  let custom_maxChroma = maxChroma + 1
+  let custom_maxChroma = (maxChroma + 1) * 5
   geometry = new THREE.TubeGeometry( path, custom_maxChroma, 2, custom_maxChroma, false );
 
   material = new THREE.MeshBasicMaterial( { 
@@ -288,7 +288,7 @@ function createShpaeLine_P3D0(){
 }
 
 function createShapeLine_P5D0(){ 
-  geometry = new THREE.BoxGeometry( 100, 0.5, 1 );
+  geometry = new THREE.BoxGeometry( 100, 1, 1 );
   material = new THREE.MeshBasicMaterial( {
     color: '#FFFFFF',
     wireframe: false
@@ -298,7 +298,7 @@ function createShapeLine_P5D0(){
   changeLinePositionbymaxChroma(compoCenter);
   spotLight.lookAt(compoCenter);
   group.add( compoCenter );
-  camera.position.set(20, 10, 50);
+  camera.position.set(20, 10, 80);
 };
 
 
@@ -360,7 +360,8 @@ function createShapeLine_P0D4(){
 
 
 function createShapeLine_P5D1(){
-  let thickness = (maxChroma + 1) * 0.5
+  let thickness = energy * 0.2
+  console.log('thickness', thickness);
   geometry = new THREE.BoxGeometry( 100, thickness, 1 );
   material = new THREE.MeshBasicMaterial( {
     color: '#FFFFFF',
@@ -383,7 +384,11 @@ function createShapeLine_P5D4(){
   } );
 
   compoCenter = new THREE.Mesh(geometry, material);
-  changeLineColorbymaxChroma(material);
+  if (PitchORDynamic == 'pitch'){
+    changeLineColorbymaxChroma(material);
+  } else {
+    changeLineColorbyEnergy(material);
+  }
   changeLinePositionbymaxChroma(compoCenter);
   spotLight.lookAt(compoCenter);
   group.add( compoCenter );
@@ -424,7 +429,11 @@ function createShapeLine_P1D4(){
     wireframe: false
   } );
 
-  changeLineColorbymaxChroma(material);
+  if (PitchORDynamic == 'pitch'){
+    changeLineColorbymaxChroma(material);
+  } else {
+    changeLineColorbyEnergy(material);
+  }
 
   compoCenter = new THREE.Mesh(geometry, material);
   spotLight.lookAt(compoCenter);
@@ -448,7 +457,7 @@ function createShapeLine_P3D1(){
   }
 
   const path = new CustomSinCurve( 40 );
-  let custom_maxChroma = maxChroma + 1;
+  let custom_maxChroma = (maxChroma + 1) * 3
   let thickness = energy * 5;
   geometry = new THREE.TubeGeometry( path, custom_maxChroma, thickness, custom_maxChroma, false );
 
@@ -481,15 +490,18 @@ function createShapeLine_P3D4(){
   }
 
   const path = new CustomSinCurve( 40 );
-  let custom_maxChroma = maxChroma + 1
+  let custom_maxChroma = (maxChroma + 1) * 5
   geometry = new THREE.TubeGeometry( path, custom_maxChroma, 2, custom_maxChroma, false );
 
   material = new THREE.MeshBasicMaterial( { 
     color: '#FFFFFF',
     wireframe: false
   } );
-
-  changeLineColorbymaxChroma(material);
+  if (PitchORDynamic == 'pitch'){
+    changeLineColorbymaxChroma(material);
+  } else {
+    changeLineColorbyEnergy(material);
+  }
   compoCenter = new THREE.Mesh( geometry, material );
   compoCenter.position.set(0, 0, 0);
   spotLight.lookAt(compoCenter);
@@ -513,9 +525,8 @@ function createShapeLine_P3D5(){
   }
 
   const path = new CustomSinCurve( 40 );
-  let custom_maxChroma = maxChroma + 1
-  let height = energy * 10
-  console.log('위치(높이)', height)
+  let custom_maxChroma = (maxChroma + 1) * 5
+  let height = energy * 4
   geometry = new THREE.TubeGeometry( path, custom_maxChroma, 2, custom_maxChroma, false );
 
   material = new THREE.MeshBasicMaterial( { 
@@ -1213,21 +1224,43 @@ function changeLinePositionbymaxChroma(mesh){
 
 function changeLineColorbyEnergy(Material){
   let cu_energy = (Math.round(energy) + 1) * 50;
-  if (cu_energy >= 0 && cu_energy < 0.05){
-    Material.color = new THREE.Color('rgba(76, 175, 80)');
+  if (cu_energy >= 0 && cu_energy < 0.005){
+    Material.color = new THREE.Color('rgba(178, 246, 255)');
+  } else if (cu_energy >= 0.005 && cu_energy < 0.05){
+    Material.color = new THREE.Color('rgba(101, 237, 255)');
   } else if (cu_energy >= 0.05 && cu_energy < 0.5){
-    Material.color = new THREE.Color('rgba(139, 195, 74)');
+    Material.color = new THREE.Color('rgba(11, 226, 255)');
   } else if (cu_energy >= 0.5 && cu_energy < 1){
-    Material.color = new THREE.Color('rgba(205, 220, 57)');
+    Material.color = new THREE.Color('rgba(15, 216, 197)');
   } else if (cu_energy >= 1 && cu_energy < 10){
-    Material.color = new THREE.Color('rgba(255, 235, 59)');
-  } else if (cu_energy >= 10 && cu_energy < 50){
-    Material.color = new THREE.Color('rgba(255, 193, 7)');
-  } else if (cu_energy >= 50 && cu_energy < 80){
-    Material.color = new THREE.Color('rgba(255, 144, 7)');
-  } else if (cu_energy <= 80 && cu_energy < 100){
-    Material.color = new THREE.Color('rgba(244, 67, 54)');
-  } else if (cu_energy >= 100){
-    Material.color = new THREE.Color('rgba(255, 0, 0)');
+    Material.color = new THREE.Color('rgba(64, 224, 71)');
+  } else if (cu_energy >= 10 && cu_energy < 30){
+    Material.color = new THREE.Color('rgba(117, 204, 17)');
+  } else if (cu_energy >= 30 && cu_energy < 50){
+    Material.color = new THREE.Color('rgba(206, 222, 47)');
+  } else if (cu_energy >= 50 && cu_energy < 70){
+    Material.color = new THREE.Color('rgba(195, 214, 15)');
+  } else if (cu_energy >= 70 && cu_energy < 90){
+    Material.color = new THREE.Color('rgba(255, 233, 41)');
+  } else if (cu_energy >= 90 && cu_energy < 110){
+    Material.color = new THREE.Color('rgba(255, 212, 0)');
+  } else if (cu_energy >= 110 && cu_energy < 140){
+    Material.color = new THREE.Color('rgba(253, 199, 37)');
+  } else if (cu_energy >= 140 && cu_energy < 170){
+    Material.color = new THREE.Color('rgba(255, 115, 105)');
+  } else if (cu_energy >= 170 && cu_energy < 200){
+    Material.color = new THREE.Color('rgba(255, 68, 54)');
+  } else if (cu_energy >= 200 && cu_energy < 250){
+    Material.color = new THREE.Color('rgba(255, 18, 0)');
+  } else if (cu_energy >= 250 && cu_energy < 350){
+    Material.color = new THREE.Color('rgba(233, 30, 99)');
+  } else if (cu_energy >= 350 && cu_energy < 400){
+    Material.color = new THREE.Color('rgba(255, 0, 87)');
+  } else if (cu_energy >= 400 && cu_energy < 460){
+    Material.color = new THREE.Color('rgba(225, 52, 255)');
+  } else if (cu_energy >= 460 && cu_energy < 500){
+    Material.color = new THREE.Color('rgba(100, 12, 255)');
+  } else if (cu_energy >= 500){
+    Material.color = new THREE.Color('rgba(82, 2, 166)');
   } 
 }
