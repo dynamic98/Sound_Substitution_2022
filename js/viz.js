@@ -303,7 +303,7 @@ function createShapeLine_P5D0(){
 
 
 function createShapeLine_P0D5(){
-  geometry = new THREE.BoxGeometry( 5, energy * 20, 5 );
+  geometry = new THREE.BoxGeometry( 5, energy * 15, 5 );
   material = new THREE.MeshBasicMaterial( {
     color: '#FFFFFF',
     wireframe: false
@@ -329,7 +329,7 @@ function createShapeLine_P0D5(){
 
 
 function createShapeLine_P0D1(){
-  geometry = new THREE.BoxGeometry( energy * 10, 30, 5 );
+  geometry = new THREE.BoxGeometry( energy * 5, 30, 5 );
   material = new THREE.MeshBasicMaterial( {
     color: '#FFFFFF',
     wireframe: false
@@ -360,7 +360,7 @@ function createShapeLine_P0D4(){
 
 
 function createShapeLine_P5D1(){
-  let thickness = energy * 0.2
+  let thickness = energy * 2
   console.log('thickness', thickness);
   geometry = new THREE.BoxGeometry( 100, thickness, 1 );
   material = new THREE.MeshBasicMaterial( {
@@ -397,7 +397,7 @@ function createShapeLine_P5D4(){
 
 
 function createShapeLine_P1D5(){
-  geometry = new THREE.BoxGeometry( maxChroma, energy * 20, 5 );
+  geometry = new THREE.BoxGeometry( maxChroma, energy * 13, 5 );
   material = new THREE.MeshBasicMaterial( {
     color: '#FFFFFF',
     wireframe: false
@@ -423,7 +423,7 @@ function createShapeLine_P1D5(){
 
 
 function createShapeLine_P1D4(){
-  geometry = new THREE.BoxGeometry( 100, maxChroma * 1.5, 1 );
+  geometry = new THREE.BoxGeometry( 100, (maxChroma + 1) * 2, 1 );
   material = new THREE.MeshBasicMaterial( {
     color: '#FFFFFF',
     wireframe: false
@@ -458,7 +458,7 @@ function createShapeLine_P3D1(){
 
   const path = new CustomSinCurve( 40 );
   let custom_maxChroma = (maxChroma + 1) * 3
-  let thickness = energy * 5;
+  let thickness = energy * 2.5;
   geometry = new THREE.TubeGeometry( path, custom_maxChroma, thickness, custom_maxChroma, false );
 
   material = new THREE.MeshBasicMaterial( { 

@@ -74,26 +74,26 @@ function AnalyzerPlay(audio_context, src) {
 
     // meyda analyser
     chroma = 0;
-    // maxChroma = 0;
     energy = 0;
-    amplitudeSpectrum = 0;
 
     const meyda_analyser = Meyda.createMeydaAnalyzer({
         audioContext: audio_context,
         source: src,
         buffersize: 64,
-        featureExtractors: ["chroma"],
+        featureExtractors: ["chroma", "energy"],
         callback: (features) => {
+            energy = features['energy'];
             chroma = Array.from(features['chroma']);
-            amplitudeSpectrum = features['amplitudeSpectrum'];  
             if(PitchORDynamic=='dynamic'){
                 maxChroma = 5;
-                energy = features['energy']*0.4;
+                if (energy <= 0.1){
+                    energy = energy * 500
+                }
+                console.log(energy);
                 
             } else if (PitchORDynamic=='pitch'){
-                energy = 0.4;
+                energy = 3;
             }
-            console.log('max pitch', maxChroma);
             
         }
     })
@@ -446,8 +446,7 @@ document.querySelector('#veryloudMusic').addEventListener('click', ()=>{
     };
     LastAudio = CurrentAudio;
     veryloud_count = veryloud_count + 1;
-
-    if (veryloud_count % 2 != 0){
+    if (veryloud_count % 2 != 0){   
         audioPath = './audio/veryloud.mp3';
 
         audio_veryloud = new Audio(audioPath);
