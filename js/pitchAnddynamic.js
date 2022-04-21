@@ -13,7 +13,10 @@ let file, audio, fileLabel, audio_context;
 
 let analyser, wavesurfer, src, bufferLength, dataArray;
 let chroma, maxChroma, energy, amplitudeSpectrum;
-let AudioLastTime, AudioCurrentTime;
+// let AudioLastTime, AudioCurrentTime;
+
+let LastAudio = '';
+let CurrentAudio = '';
 
 let PitchORDynamic = 'pitch' 
 
@@ -85,10 +88,10 @@ function AnalyzerPlay(audio_context, src) {
             amplitudeSpectrum = features['amplitudeSpectrum'];  
             if(PitchORDynamic=='dynamic'){
                 maxChroma = 5;
-                energy = features['energy'];
+                energy = features['energy']*0.4;
                 
             } else if (PitchORDynamic=='pitch'){
-                energy = 20;
+                energy = 0.4;
             }
             console.log('max pitch', maxChroma);
             
@@ -98,7 +101,16 @@ function AnalyzerPlay(audio_context, src) {
 }
 
 
-
+function LastPause(LastAudio){
+    console.log(LastAudio);
+    if (LastAudio != ''){
+    let AudioList = [audio_do, audio_re, audio_mi, audio_fa, audio_sol, audio_la, audio_si, audio_verysmall, audio_small, audio_loud, audio_veryloud];
+    let PitchList = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si', 'verysmall', 'small', 'loud', 'veryloud']
+    let ButtonList = [pitch_do, pitch_re, pitch_mi, pitch_fa, pitch_sol, pitch_la, pitch_si, verysmallMusic, smallMusic, loudMusic, veryloudMusic];
+    AudioList[PitchList.indexOf(LastAudio)].pause();
+    ButtonList[PitchList.indexOf(LastAudio)].style.background = black;
+    };
+}
 
 
 
@@ -106,6 +118,13 @@ function AnalyzerPlay(audio_context, src) {
 // EVENT LISTENERS
 document.querySelector('#pitch_do').addEventListener('click', ()=>{
     PitchORDynamic = 'pitch';
+    CurrentAudio = 'do';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        do_count = 0;
+    };
+    LastAudio = CurrentAudio;
+
     do_count = do_count + 1;
     if (do_count % 2 != 0){
         audioPath = './audio/pitch_do.mp3'
@@ -129,6 +148,13 @@ document.querySelector('#pitch_do').addEventListener('click', ()=>{
 
 
 document.querySelector('#pitch_re').addEventListener('click', ()=>{
+    PitchORDynamic = 'pitch';
+    CurrentAudio = 're';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        re_count = 0;
+    };
+    LastAudio = CurrentAudio;
     re_count = re_count + 1;
 
     if (re_count % 2 != 0){
@@ -155,6 +181,13 @@ document.querySelector('#pitch_re').addEventListener('click', ()=>{
 
 
 document.querySelector('#pitch_mi').addEventListener('click', ()=>{
+    PitchORDynamic = 'pitch';
+    CurrentAudio = 'mi';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        mi_count = 0;
+    };
+    LastAudio = CurrentAudio;
     mi_count = mi_count + 1;
 
     if (mi_count % 2 != 0){
@@ -181,10 +214,17 @@ document.querySelector('#pitch_mi').addEventListener('click', ()=>{
 
 
 document.querySelector('#pitch_fa').addEventListener('click', ()=>{
+    PitchORDynamic = 'pitch';
+    CurrentAudio = 'fa';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        fa_count = 0;
+    };
+    LastAudio = CurrentAudio;
     fa_count = fa_count + 1;
 
     if (fa_count % 2 != 0){
-        audioPath = './audio/pitch_fa.mp3'
+        audioPath = './audio/pitch_fa.mp3';
 
         audio_fa = new Audio(audioPath);
         audio_context_fa = audio_context_fa || new AudioContext();
@@ -207,6 +247,13 @@ document.querySelector('#pitch_fa').addEventListener('click', ()=>{
 
 
 document.querySelector('#pitch_sol').addEventListener('click', ()=>{
+    PitchORDynamic = 'pitch';
+    CurrentAudio = 'sol';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        sol_count = 0;
+    };
+    LastAudio = CurrentAudio;
     sol_count = sol_count + 1;
 
     if (sol_count % 2 != 0){
@@ -233,6 +280,13 @@ document.querySelector('#pitch_sol').addEventListener('click', ()=>{
 
 
 document.querySelector('#pitch_la').addEventListener('click', ()=>{
+    PitchORDynamic = 'pitch';
+    CurrentAudio = 'la';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        la_count = 0;
+    };
+    LastAudio = CurrentAudio;
     la_count = la_count + 1;
 
     if (la_count % 2 != 0){
@@ -259,6 +313,13 @@ document.querySelector('#pitch_la').addEventListener('click', ()=>{
 
 
 document.querySelector('#pitch_si').addEventListener('click', ()=>{
+    PitchORDynamic = 'pitch';
+    CurrentAudio = 'si';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        si_count = 0;
+    };
+    LastAudio = CurrentAudio;
     si_count = si_count + 1;
 
     if (si_count % 2 != 0){
@@ -284,6 +345,14 @@ document.querySelector('#pitch_si').addEventListener('click', ()=>{
 
 // EVENT LISTENERS
 document.querySelector('#verysmallMusic').addEventListener('click', ()=>{
+    PitchORDynamic = 'dynamic';
+    CurrentAudio = 'verysmall';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        verysmall_count = 0;
+    };
+    LastAudio = CurrentAudio;
+
     verysmall_count = verysmall_count + 1;
 
     if (verysmall_count % 2 != 0){
@@ -308,6 +377,13 @@ document.querySelector('#verysmallMusic').addEventListener('click', ()=>{
 
 
 document.querySelector('#smallMusic').addEventListener('click', ()=>{
+    PitchORDynamic = 'dynamic';
+    CurrentAudio = 'small';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        small_count = 0;
+    };
+    LastAudio = CurrentAudio;
     small_count = small_count + 1;
 
     if (small_count % 2 != 0){
@@ -332,6 +408,13 @@ document.querySelector('#smallMusic').addEventListener('click', ()=>{
 
 
 document.querySelector('#loudMusic').addEventListener('click', ()=>{
+    PitchORDynamic = 'dynamic';
+    CurrentAudio = 'loud';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        loud_count = 0;
+    };
+    LastAudio = CurrentAudio;
     loud_count = loud_count + 1;
 
     if (loud_count % 2 != 0){
@@ -355,6 +438,13 @@ document.querySelector('#loudMusic').addEventListener('click', ()=>{
 
 
 document.querySelector('#veryloudMusic').addEventListener('click', ()=>{
+    PitchORDynamic = 'dynamic';
+    CurrentAudio = 'veryloud';
+    if (CurrentAudio!=LastAudio){
+        LastPause(LastAudio);
+        veryloud_count = 0;
+    };
+    LastAudio = CurrentAudio;
     veryloud_count = veryloud_count + 1;
 
     if (veryloud_count % 2 != 0){
