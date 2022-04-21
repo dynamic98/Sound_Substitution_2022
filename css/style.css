@@ -388,10 +388,11 @@ button.dynamicMenu{
 
 button.visualButtonColors{
   background: rgb(255, 255, 255);
+  float: right;
   background: linear-gradient(0deg, rgb(248, 140, 140) 0%, rgb(255, 251, 124) 33%, rgb(179, 234, 139) 67%);
   color: black;
   border: none;
-  margin-left: 50px;
+  margin-left: 100px;
   width: 170px;
   height: 50px;
   font-size: 18px;
@@ -407,7 +408,7 @@ div.visualCustomMenu{
   position: relative;
   display: none;
   float: right;
-  margin-top: 35px;
+  margin-top: 150px;
   margin-right: 50px;
   width: 700px;
   height: 500px;
@@ -595,6 +596,40 @@ button#verysmallMusic{
   display: none;
 }
 
+
+/* COlor Explore 메뉴 */
+p.colorExploreTitle{
+  margin-top: -100px;
+  margin-left: 450px;
+  font-size: 25px;
+  color: black;
+  width: 600px;
+  font-weight: bold;
+}
+
+div.colorExplore{
+  margin-top: -100px;
+  margin-left: 760px;
+  width: 600px;
+  height: 100px;
+}
+
+button.visualButtonColors{
+  margin-left: 20px;
+  width: 110px;
+  font-size: 14px;
+  height: 40px;
+}
+
+p#menusmallTitle_color{
+  padding-left: 5px;
+  font-size: 20px;
+  font-weight: 400px;
+  width: 70px;
+}
+
+
+
 /* 반응형 웹을 위한 미디어 쿼리 (미디어 쿼리는 반드시 가장 하단에 작성) */
 
 @media (max-width: 1600px) {
@@ -651,11 +686,7 @@ button#verysmallMusic{
     font-size: 14px;
   }
 
-  button.visualButtonColors{
-    margin-left: 20px;
-    width: 110px;
-    font-size: 14px;
-  }
+
 
   hr.menuTitleHR{
     margin-top: 0.001px;
