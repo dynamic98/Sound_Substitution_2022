@@ -467,4 +467,4 @@ document.querySelector('#veryloudMusic').addEventListener('click', ()=>{
 });
 
 
-export { analyser, maxChroma, energy, bufferLength, dataArray };
+export { analyser, maxChroma, energy, bufferLength, dataArray, PitchORDynamic };
