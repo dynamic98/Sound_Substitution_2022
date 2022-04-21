@@ -262,7 +262,7 @@ document.querySelector('#pitch_si').addEventListener('click', ()=>{
     si_count = si_count + 1;
 
     if (si_count % 2 != 0){
-        audioPath = './pitch_audio/pitch_si.mp3'
+        audioPath = './audio/pitch_si.mp3'
 
         audio_si = new Audio(audioPath);
         audio_context_si = audio_context_si || new AudioContext();
