@@ -4,7 +4,7 @@ import * as THREE from 'three';
 // import Stats from 'three/examples/jsm/libs/stats.module.js';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline/src/THREE.MeshLine.js';
-import { pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio} from './modules.js';
+import { audio_do, audio_re, audio_mi, audio_fa, audio_sol, audio_la, audio_si, pickr, analyser, chroma, maxChroma, energy, dataArray } from './modules.js';
 
 // let controls;
 let camera, scene, renderer;

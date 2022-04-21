@@ -269,7 +269,7 @@ div#userCustom{
 
 
 label.file{
-  display: inline-block;
+  display: none;
   position: relative;
   transform: translate3d(-50%, -50%, 0);
   margin-left: 120px;

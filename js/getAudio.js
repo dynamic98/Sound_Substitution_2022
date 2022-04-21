@@ -1,161 +1,161 @@
-// import { audio, audio_context, file as target} from './modules.js';
-import { show_canvas } from './modules.js'
-let file, audio, fileLabel, audio_context;
-let realTitle = document.getElementById('title');
-let analyser, wavesurfer, src, bufferLength, dataArray;
-let chroma, maxChroma, energy, amplitudeSpectrum;
-let AudioLastTime, AudioCurrentTime;
-// let target;
+// // import { audio, audio_context, file as target} from './modules.js';
+// import { show_canvas } from './modules.js'
+// let file, audio, fileLabel, audio_context;
+// let realTitle = document.getElementById('title');
+// let analyser, wavesurfer, src, bufferLength, dataArray;
+// let chroma, maxChroma, energy, amplitudeSpectrum;
+// let AudioLastTime, AudioCurrentTime;
+// // let target;
 
 
-AudioLastTime = 0;
-AudioCurrentTime = 0;
+// AudioLastTime = 0;
+// AudioCurrentTime = 0;
 
-// LOAD MUSIC (vizInit)
-function FileInit() {
-    file = document.getElementById("thefile");
-    audio = document.getElementById("audio");
-    fileLabel = document.querySelector("label.file");
-    audio_context = audio_context || new AudioContext();
+// // LOAD MUSIC (vizInit)
+// function FileInit() {
+//     file = document.getElementById("thefile");
+//     audio = document.getElementById("audio");
+//     fileLabel = document.querySelector("label.file");
+//     audio_context = audio_context || new AudioContext();
 
-    wavesurfer = WaveSurfer.create({
-        container: document.querySelector('#waveform'),
-        waveColor: '#A8DBA8',
-        progressColor: '#3B8686',
-        cursorWidth : 5,
-        normalize: true,
-        });
+//     wavesurfer = WaveSurfer.create({
+//         container: document.querySelector('#waveform'),
+//         waveColor: '#A8DBA8',
+//         progressColor: '#3B8686',
+//         cursorWidth : 5,
+//         normalize: true,
+//         });
 
-    console.log('audio input completed')
-    document
-    .querySelector('[data-action="play"]')
-    .addEventListener('click', ()=>{ 
-        console.log("PlayPause button pressed");
-        wavesurfer.playPause();
+//     console.log('audio input completed')
+//     document
+//     .querySelector('[data-action="play"]')
+//     .addEventListener('click', ()=>{ 
+//         console.log("PlayPause button pressed");
+//         wavesurfer.playPause();
 
-        TogglePlay();
-    })
-  }
+//         TogglePlay();
+//     })
+//   }
 
 
-function FileChange(){
-    file.onchange = function(){
-        // canvas rendering by file input
-        // show_canvas("canvas"); // visual-canvas
-        // show_canvas("demo");   // haptic-canvas
-        // show_canvas("music-controls") // music controller
+// function FileChange(){
+//     file.onchange = function(){
+//         // canvas rendering by file input
+//         // show_canvas("canvas"); // visual-canvas
+//         // show_canvas("demo");   // haptic-canvas
+//         // show_canvas("music-controls") // music controller
 
-        fileLabel.classList.add('normal');
-        let files = this.files;
-        audio.src = URL.createObjectURL(files[0]);
-        console.log("Music Play!");
+//         fileLabel.classList.add('normal');
+//         let files = this.files;
+//         audio.src = URL.createObjectURL(files[0]);
+//         console.log("Music Play!");
         
-        let fileList = file.files[0].name;
-        realTitle.innerText = fileList;
+//         let fileList = file.files[0].name;
+//         realTitle.innerText = fileList;
         
-        wavesurfer.load(audio);
-        audio.load();
-        // src = src || audio_context.createMediaElementSource(audio);
-        src = audio_context.createMediaElementSource(audio);
+//         wavesurfer.load(audio);
+//         audio.load();
+//         // src = src || audio_context.createMediaElementSource(audio);
+//         src = audio_context.createMediaElementSource(audio);
         
-        wavesurfer.on('ready', () => {
-            console.log("wavesurfer is ready");
-            audio.play();
-            wavesurfer.play();
-            // wavesurfer.setMute(true);
-            audio.volume = 0.2;
-        })
+//         wavesurfer.on('ready', () => {
+//             console.log("wavesurfer is ready");
+//             audio.play();
+//             wavesurfer.play();
+//             // wavesurfer.setMute(true);
+//             audio.volume = 0.2;
+//         })
 
-        AnalyzerPlay(src);
-        }
-}
+//         AnalyzerPlay(src);
+//         }
+// }
   
-function AnalyzerPlay(src) {
-    console.log("AnalyzerPlay starts");
-    analyser = audio_context.createAnalyser();
-    src.connect(analyser);
-    analyser.connect(audio_context.destination);
-    analyser.fftSize = 512;
-    bufferLength = analyser.frequencyBinCount;
-    dataArray = new Uint8Array(bufferLength);
+// function AnalyzerPlay(src) {
+//     console.log("AnalyzerPlay starts");
+//     analyser = audio_context.createAnalyser();
+//     src.connect(analyser);
+//     analyser.connect(audio_context.destination);
+//     analyser.fftSize = 512;
+//     bufferLength = analyser.frequencyBinCount;
+//     dataArray = new Uint8Array(bufferLength);
 
-    // meyda analyser
-    chroma = 0;
-    maxChroma = 0;
-    energy = 0;
-    amplitudeSpectrum = 0;
-    // var powerSpectrum = 0;
+//     // meyda analyser
+//     chroma = 0;
+//     maxChroma = 0;
+//     energy = 0;
+//     amplitudeSpectrum = 0;
+//     // var powerSpectrum = 0;
 
-    const meyda_analyser = Meyda.createMeydaAnalyzer({
-        audioContext: audio_context,
-        source: src,
-        buffersize: 64,
-        featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
-        callback: (features) => {
-            chroma = features['chroma']
-            maxChroma = features['chroma'].indexOf(max(features['chroma']))
-            energy = features['energy']
-            amplitudeSpectrum = features['amplitudeSpectrum']
+//     const meyda_analyser = Meyda.createMeydaAnalyzer({
+//         audioContext: audio_context,
+//         source: src,
+//         buffersize: 64,
+//         featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
+//         callback: (features) => {
+//             chroma = features['chroma']
+//             maxChroma = features['chroma'].indexOf(max(features['chroma']))
+//             energy = features['energy']
+//             amplitudeSpectrum = features['amplitudeSpectrum']
 
-            console.log('전체', chroma);
-            console.log('최댓값', maxChroma);
-            // console.log(amplitudeSpectrum);
-        }
-    })
-    meyda_analyser.start();
-}
-
-
-function SyncAudio(){
-    wavesurfer.on('audioprocess', function() {
-        if(wavesurfer.isPlaying()) {
-            // var totalTime = wavesurfer.getDuration(),
-            AudioCurrentTime = wavesurfer.getCurrentTime();
-
-            // console.log(AudioCurrentTime - AudioLastTime);
-            let AudioDifference = AudioCurrentTime - AudioLastTime;
-            if (AudioDifference > 0.01 || AudioDifference < 0){
-                audio.currentTime = AudioCurrentTime;
-                // console.log(AudioCurrentTime - AudioLastTime);
-            }
-            AudioLastTime = AudioCurrentTime;
-        }
-    })
-}
-
-function TogglePlay(){
-    if (audio.paused){
-        audio.play();
-    } else {
-        audio.pause();
-    }
-}
-
-FileInit();
-FileChange();
-SyncAudio();
+//             console.log('전체', chroma);
+//             console.log('최댓값', maxChroma);
+//             // console.log(amplitudeSpectrum);
+//         }
+//     })
+//     meyda_analyser.start();
+// }
 
 
-// some helper functions here
-function fractionate(val, minVal, maxVal) {
-    return (val - minVal)/(maxVal - minVal);
-  }
+// function SyncAudio(){
+//     wavesurfer.on('audioprocess', function() {
+//         if(wavesurfer.isPlaying()) {
+//             // var totalTime = wavesurfer.getDuration(),
+//             AudioCurrentTime = wavesurfer.getCurrentTime();
+
+//             // console.log(AudioCurrentTime - AudioLastTime);
+//             let AudioDifference = AudioCurrentTime - AudioLastTime;
+//             if (AudioDifference > 0.01 || AudioDifference < 0){
+//                 audio.currentTime = AudioCurrentTime;
+//                 // console.log(AudioCurrentTime - AudioLastTime);
+//             }
+//             AudioLastTime = AudioCurrentTime;
+//         }
+//     })
+// }
+
+// function TogglePlay(){
+//     if (audio.paused){
+//         audio.play();
+//     } else {
+//         audio.pause();
+//     }
+// }
+
+// FileInit();
+// FileChange();
+// SyncAudio();
+
+
+// // some helper functions here
+// function fractionate(val, minVal, maxVal) {
+//     return (val - minVal)/(maxVal - minVal);
+//   }
   
-  function modulate(val, minVal, maxVal, outMin, outMax) {
-    var fr = fractionate(val, minVal, maxVal);
-    var delta = outMax - outMin;
-    return outMin + (fr * delta);
-  }
+//   function modulate(val, minVal, maxVal, outMin, outMax) {
+//     var fr = fractionate(val, minVal, maxVal);
+//     var delta = outMax - outMin;
+//     return outMin + (fr * delta);
+//   }
   
-  function avg(arr){
-    var total = arr.reduce(function(sum, b) { return sum + b; });
-    return (total / arr.length);
-  }
+//   function avg(arr){
+//     var total = arr.reduce(function(sum, b) { return sum + b; });
+//     return (total / arr.length);
+//   }
   
-  function max(arr){
-    return arr.reduce(function(a, b){ return Math.max(a, b); })
-  }
+//   function max(arr){
+//     return arr.reduce(function(a, b){ return Math.max(a, b); })
+//   }
   
 
 
-export {audio, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};
+// // export {audio, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};
