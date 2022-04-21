@@ -85,12 +85,13 @@ function AnalyzerPlay(src) {
         buffersize: 64,
         featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
         callback: (features) => {
-            chroma = features['chroma']
-            // maxChroma = features['chroma'].indexOf(max(features['chroma']))
-            energy = features['energy']
-            amplitudeSpectrum = features['amplitudeSpectrum']
+            chroma = Array.from(features['chroma']);
+            // maxChroma = chroma.indexOf(max(chroma));
+            energy = features['energy'];
+            amplitudeSpectrum = features['amplitudeSpectrum'];
 
-            // console.log('전체', chroma);
+            console.log('전체', typeof chroma);
+            // console.log(Array.from(chroma));
             // console.log('최댓값', maxChroma);
         }
     })
@@ -144,4 +145,6 @@ function SyncAudio(){
 
 
 FileInit(pitch_do);
+FileInit(pitch_re);
+FileInit(pitch_mi);
 // SyncAudio();
