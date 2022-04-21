@@ -60,6 +60,7 @@ function FileChange(){
         show_canvas("canvas"); // visual-canvas
         show_canvas("demo");   // haptic-canvas
         show_canvas("music-controls") // music controller
+        show_canvas("colorExplore") // background -color
 
         fileLabel.classList.add('normal');
         var files = this.files;
@@ -113,8 +114,8 @@ function AnalyzerPlay(src) {
             energy = features['energy']
             amplitudeSpectrum = features['amplitudeSpectrum']
 
-            console.log('전체', chroma);
-            console.log('최댓값', maxChroma);
+            // console.log('전체', chroma);
+            // console.log('최댓값', maxChroma);
             // console.log(amplitudeSpectrum);
         }
     })

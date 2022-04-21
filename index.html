@@ -25,28 +25,73 @@
 
 <body>
     <script>
-       // 음악이 무조건 하나 input 으로 들어와야 메뉴를 보여주는 함수
+      // 음악이 무조건 하나 input 으로 들어와야 메뉴를 보여주는 함수
+      let CheckCount = 0;
         function check(box, delimiter) {
-          target = document.getElementById('thefile');
-          if (target.files.length == 1){
-  
-            if (box.checked == true) {
-              document.getElementById(delimiter).style.display = "inline-block";
-            } else {
-              document.getElementById(delimiter).style.display = "none";
-            }
+          // console.log(document.getElementById('check-VisuoLine'));
+          // console.log(box);
+          let OtherOption;
+          if(delimiter=='customMenu-Line'){
+            OtherOption = 'customMenu-Ring'
+            document.getElementById('check-VisuoRing').checked = false;
+          }else if(delimiter=='customMenu-Ring'){
+            OtherOption = 'customMenu-Line'
+            document.getElementById('check-VisuoLine').checked = false;
+
+          }
+          if (box.checked == true) {
+            document.getElementById(delimiter).style.display = "inline-block";
+            document.getElementById(OtherOption).style.display = "none";
+            
+          } else {
+            document.getElementById(delimiter).style.display = "none";
           }
         };
+        
         // 선택한 메뉴만 highlight 해주는 함수
         function highlight(box, delimiter) {
+          // console.log(document.getElementById('check-VisuoLine'));
+          let OtherOption;
+          if(delimiter=='active-line'){
+            OtherOption = 'active-ring'
+          }else if(delimiter=='active-ring'){
+            OtherOption = 'active-line'
+          }
+          // console.log(OtherOption);
           if (box.checked == true) {
               document.getElementById(delimiter).style.color = "rgba(255, 52, 91)";
               document.getElementById(delimiter).style.fontWeight = "600";
+
+              document.getElementById(OtherOption).style.backgroundColor = "rgba(0, 0, 0, 0)";
+              document.getElementById(OtherOption).style.color = "#8b8b8b";
+
           } else {
               document.getElementById(delimiter).style.backgroundColor = "rgba(0, 0, 0, 0)";
               document.getElementById(delimiter).style.color = "#8b8b8b";
           }
         }
+      //  // 음악이 무조건 하나 input 으로 들어와야 메뉴를 보여주는 함수
+      //   function check(box, delimiter) {
+      //     target = document.getElementById('thefile');
+      //     if (target.files.length == 1){
+  
+      //       if (box.checked == true) {
+      //         document.getElementById(delimiter).style.display = "inline-block";
+      //       } else {
+      //         document.getElementById(delimiter).style.display = "none";
+      //       }
+      //     }
+      //   };
+      //   // 선택한 메뉴만 highlight 해주는 함수
+      //   function highlight(box, delimiter) {
+      //     if (box.checked == true) {
+      //         document.getElementById(delimiter).style.color = "rgba(255, 52, 91)";
+      //         document.getElementById(delimiter).style.fontWeight = "600";
+      //     } else {
+      //         document.getElementById(delimiter).style.backgroundColor = "rgba(0, 0, 0, 0)";
+      //         document.getElementById(delimiter).style.color = "#8b8b8b";
+      //     }
+      //   }
     </script>
       
       <aside class="sidebar">
@@ -96,7 +141,7 @@
                       
                     </ul>
                   </div>
-                  <li class="accordion">
+                  <!-- <li class="accordion">
                     <p id="HapticMenu" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsible">
                       <span class="material-icons" style="font-size:25px; vertical-align: top;">vibration</span>&nbsp;&nbsp;햅틱 스타일</p>
       
@@ -110,7 +155,7 @@
                         </ul>
                       </div>
                     </div>
-                  </li>
+                  </li> -->
                 </div>
               </li>
               <br>
@@ -138,8 +183,8 @@
             <button class="dynamicMenu" id="dynamicLineThickness"> 선의 굵기 </button>
             <button class="dynamicMenu" id="dynamicLineColor"> 선의 색상 </button>
         <br>
-        <p id="menusmallTitle_visual" class="bgcolor"> 배경 </p>
-            <button class="visualButtonColors" type="button"> 배경 색상 </button>
+        <!-- <p id="menusmallTitle_visual" class="bgcolor"> 배경 </p>
+            <button class="visualButtonColors" type="button"> 배경 색상 </button> -->
       </div>
   
 
@@ -158,8 +203,8 @@
             <button class="dynamicMenu" id="dynamicRingSize"> 링의 크기 </button>
             <button class="dynamicMenu" id="dynamicRingType"> 링의 종류 </button>
         <br>
-        <p id="menusmallTitle_visual" class="bgcolor"> 배경 </p>
-            <button class="visualButtonColors" type="button"> 배경 색상 </button>
+        <!-- <p id="menusmallTitle_visual" class="bgcolor"> 배경 </p>
+            <button class="visualButtonColors" type="button"> 배경 색상 </button> -->
       </div>
   
 
@@ -184,7 +229,12 @@
                 <i class="glyphicon glyphicon-pause"></i>
                 일시정지
             </button>
-      </div>
+        </div>
+
+        <div class="colorExplore" id="colorExplore">
+          <p class="colorExploreTitle"> 시각화 배경 </p>
+          <button class="visualButtonColors" type="button"> 배경 색상 고르기 </button>
+        </div>
 
     <div class="haptic-container">
       <div class="hapticCustomMenu" id="hapticCustom">

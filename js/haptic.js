@@ -5,7 +5,7 @@ import {audio, wavesurfer} from './modules.js';
 var audio_buffer;
 var AudioIsReady = '';
 
-const sending_delay = 0.20
+let sending_delay = 0.20
 var ch0_data;
 var ch1_data;
 var freq = 11;
@@ -105,6 +105,7 @@ class HapticDevice {
       .then(characteristic => characteristic.writeValue(data))
       .catch(error => {
         console.log('Argh! ' + error);
+        sending_delay = 1.2;
       });
     }
   
@@ -263,6 +264,9 @@ document
             var difference_time = current_time - last_time
             if (difference_time > sending_delay || difference_time < 0){
                 var freq_amp = haptic_pattern_gen();
+                if (sending_delay > 1.0){
+                    sending_delay = 0.20
+                }
                 
                 SendHapticData(freq_amp[0], freq_amp[1]);
 

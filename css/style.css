@@ -407,7 +407,7 @@ div.visualCustomMenu{
   position: relative;
   display: none;
   float: right;
-  margin-top: 35px;
+  margin-top: 150px;
   margin-right: 50px;
   width: 700px;
   height: 500px;
@@ -523,6 +523,38 @@ div#demo{
 }
 
 
+/* Color Explore 메뉴 */
+p.colorExploreTitle{
+  margin-top: -100px;
+  margin-left: 450px;
+  font-size: 25px;
+  color: black;
+  width: 600px;
+  font-weight: bold;
+}
+
+div.colorExplore{
+  visibility: hidden;
+  margin-left: 370px;
+  width: 600px;
+  height: 100px;
+}
+
+button.visualButtonColors{
+  margin-left: 260px;
+  width: 190px;
+  font-size: 16px;
+  height: 50px;
+}
+
+p#menusmallTitle_color{
+  padding-left: 5px;
+  font-size: 20px;
+  font-weight: 400px;
+  width: 70px;
+}
+
+
 /* 음악 컨트롤 메뉴 */
 
 div#music-controls{
@@ -594,7 +626,7 @@ div#music-controls > button.btn-primary{
   }
 
   button.visualButtonColors{
-    margin-left: 20px;
+    margin-left: 220px;
     width: 110px;
     font-size: 14px;
   }
