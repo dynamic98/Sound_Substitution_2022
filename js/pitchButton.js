@@ -1,21 +1,31 @@
-// import { audio, audio_context, file as target} from './modules.js';
-import { show_canvas } from './modules.js'
+// Explore Phase (Pitch)
+
+const C3 = document.getElementById("pitch_do");
+const pitch_re = document.getElementById("pitch_re");
+const pitch_mi = document.getElementById("pitch_mi");
+const pitch_fa = document.getElementById("pitch_fa");
+const pitch_sol = document.getElementById("pitch_sol");
+const pitch_la = document.getElementById("pitch_la");
+const pitch_si = document.getElementById("pitch_si");
+
+let audioTitle
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
 let chroma, maxChroma, energy, amplitudeSpectrum;
 let AudioLastTime, AudioCurrentTime;
-// let target;
+
+let audioPlayer = document.getElementById("player");
+let clickCount = 0;
 
 
-AudioLastTime = 0;
-AudioCurrentTime = 0;
 
-// LOAD MUSIC (vizInit)
-function FileInit() {
-    file = document.getElementById("thefile");
-    audio = document.getElementById("audio");
-    fileLabel = document.querySelector("label.file");
+
+// REAL ONE !
+function FileInit(pitchButton) {
+    let pitch = String(pitchButton.id);
+    let audioPath = `./pitch_audio/${pitch}.mp3`
+    audio = new Audio(audioPath);
     audio_context = audio_context || new AudioContext();
 
     wavesurfer = WaveSurfer.create({
@@ -25,8 +35,7 @@ function FileInit() {
         cursorWidth : 5,
         normalize: true,
         });
-
-    console.log('audio input completed')
+    
     document
     .querySelector('[data-action="play"]')
     .addEventListener('click', ()=>{ 
@@ -35,41 +44,39 @@ function FileInit() {
 
         TogglePlay();
     })
-  }
+};
 
 
-function FileChange(){
-    file.onchange = function(){
-        // canvas rendering by file input
-        // show_canvas("canvas"); // visual-canvas
-        // show_canvas("demo");   // haptic-canvas
-        // show_canvas("music-controls") // music controller
-
-        fileLabel.classList.add('normal');
-        let files = this.files;
-        audio.src = URL.createObjectURL(files[0]);
-        console.log("Music Play!");
-        
-        let fileList = file.files[0].name;
-        realTitle.innerText = fileList;
-        
+// 알맞은 버튼 요소를 넣으면 오디오 실행해주는 함수.
+function eventListenPitch(pitchButton){
+    pitchButton.addEventListener("click", ()=>{
+        clickCount = clickCount + 1
+        let pitch = String(pitchButton.id);
+        let audioPath = `./pitch_audio/${pitch}.mp3` // 함수화 시키기위해 문자열 포매팅
+        audio = new Audio(audioPath);
         wavesurfer.load(audio);
         audio.load();
-        // src = src || audio_context.createMediaElementSource(audio);
         src = audio_context.createMediaElementSource(audio);
-        
+
         wavesurfer.on('ready', () => {
             console.log("wavesurfer is ready");
             audio.play();
             wavesurfer.play();
-            // wavesurfer.setMute(true);
+
             audio.volume = 0.2;
         })
-
         AnalyzerPlay(src);
+
+        // 버튼 색깔 바꾸기
+        if (clickCount % 2 != 0){
+            pitchButton.style.background = '#FF5C5C';
+        } else {
+            pitchButton.style.background = '#221E21';
         }
+    });
 }
-  
+
+
 function AnalyzerPlay(src) {
     console.log("AnalyzerPlay starts");
     analyser = audio_context.createAnalyser();
@@ -84,7 +91,6 @@ function AnalyzerPlay(src) {
     maxChroma = 0;
     energy = 0;
     amplitudeSpectrum = 0;
-    // var powerSpectrum = 0;
 
     const meyda_analyser = Meyda.createMeydaAnalyzer({
         audioContext: audio_context,
@@ -93,13 +99,12 @@ function AnalyzerPlay(src) {
         featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
         callback: (features) => {
             chroma = features['chroma']
-            maxChroma = features['chroma'].indexOf(max(features['chroma']))
+            // maxChroma = features['chroma'].indexOf(max(features['chroma']))
             energy = features['energy']
             amplitudeSpectrum = features['amplitudeSpectrum']
 
-            console.log('전체', chroma);
-            console.log('최댓값', maxChroma);
-            // console.log(amplitudeSpectrum);
+            // console.log('전체', chroma);
+            // console.log('최댓값', maxChroma);
         }
     })
     meyda_analyser.start();
@@ -109,7 +114,6 @@ function AnalyzerPlay(src) {
 function SyncAudio(){
     wavesurfer.on('audioprocess', function() {
         if(wavesurfer.isPlaying()) {
-            // var totalTime = wavesurfer.getDuration(),
             AudioCurrentTime = wavesurfer.getCurrentTime();
 
             // console.log(AudioCurrentTime - AudioLastTime);
@@ -123,6 +127,8 @@ function SyncAudio(){
     })
 }
 
+
+
 function TogglePlay(){
     if (audio.paused){
         audio.play();
@@ -131,31 +137,8 @@ function TogglePlay(){
     }
 }
 
-FileInit();
-FileChange();
+
+
+FileInit(C3);
+eventListenPitch(C3);
 SyncAudio();
-
-
-// some helper functions here
-function fractionate(val, minVal, maxVal) {
-    return (val - minVal)/(maxVal - minVal);
-  }
-  
-  function modulate(val, minVal, maxVal, outMin, outMax) {
-    var fr = fractionate(val, minVal, maxVal);
-    var delta = outMax - outMin;
-    return outMin + (fr * delta);
-  }
-  
-  function avg(arr){
-    var total = arr.reduce(function(sum, b) { return sum + b; });
-    return (total / arr.length);
-  }
-  
-  function max(arr){
-    return arr.reduce(function(a, b){ return Math.max(a, b); })
-  }
-  
-
-
-export {audio, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};

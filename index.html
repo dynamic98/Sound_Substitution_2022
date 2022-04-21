@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>KCC-Custom</title>
+    <title>KCC-Explore</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -27,14 +27,10 @@
     <script>
        // 음악이 무조건 하나 input 으로 들어와야 메뉴를 보여주는 함수
         function check(box, delimiter) {
-          target = document.getElementById('thefile');
-          if (target.files.length == 1){
-  
-            if (box.checked == true) {
-              document.getElementById(delimiter).style.display = "inline-block";
-            } else {
-              document.getElementById(delimiter).style.display = "none";
-            }
+          if (box.checked == true) {
+            document.getElementById(delimiter).style.display = "inline-block";
+          } else {
+            document.getElementById(delimiter).style.display = "none";
           }
         };
         // 선택한 메뉴만 highlight 해주는 함수
@@ -48,7 +44,6 @@
           }
         }
     </script>
-      
       <aside class="sidebar">
         <div class="toggle">
           <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
@@ -58,8 +53,8 @@
         <div class="side-inner">
   
           <div class="profile">
-            <img src="images/cutecat.jpeg" alt="Image" class="img-fluid">
-            <h3 class="name">사용자</h3>
+            <img src="images/dodocat.jpeg" alt="Image" class="img-fluid">
+            <h3 class="name">탐색 모드</h3>
             <span class="identity">청각장애인</span>
           </div>
   
@@ -74,13 +69,14 @@
           <div class="nav-menu">
             <ul>
               <li class="accordion">
-                <hr>
-  
+
                 <p id="VisuoMenu" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsible">
                 <!-- <a href="#" id="VisuoMenu" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsible"> -->
                   <span class="material-icons" style="font-size:25px; vertical-align: top;">palette</span>&nbsp;&nbsp;시각화 스타일
                 <!-- </a> -->
                 </p>
+
+
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
                   <div>
                     <ul>
@@ -96,6 +92,8 @@
                       
                     </ul>
                   </div>
+
+
                   <li class="accordion">
                     <p id="HapticMenu" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsible">
                       <span class="material-icons" style="font-size:25px; vertical-align: top;">vibration</span>&nbsp;&nbsp;햅틱 스타일</p>
@@ -184,7 +182,27 @@
                 <i class="glyphicon glyphicon-pause"></i>
                 일시정지
             </button>
-      </div>
+        </div>
+
+        <div class="pitchExplore">
+          <p class="pitchExploreTitle"> 음의 높낮이</p>
+            <button class="pitchExploreButton" id="pitch_do"> 도 </button>
+            <button class="pitchExploreButton" id="pitch_re"> 레 </button>
+            <button class="pitchExploreButton" id="pitch_mi"> 미 </button>
+            <button class="pitchExploreButton" id="pitch_fa"> 파 </button>
+            <button class="pitchExploreButton" id="pitch_sol"> 솔 </button>
+            <button class="pitchExploreButton" id="pitch_la"> 라 </button>
+            <button class="pitchExploreButton" id="pitch_si"> 시 </button>
+        </div>
+
+
+        <div class="dynamicExplore">
+          <p class="dynamicExploreTitle"> 음의 크기</p>
+            <button class="dynamicExploreButton"> 샘플 1 </button>
+            <button class="dynamicExploreButton"> 샘플 2 </button>
+            <button class="dynamicExploreButton"> 샘플 3 </button>
+            <button class="dynamicExploreButton"> 샘플 4 </button>
+        </div>
 
     <div class="haptic-container">
       <div class="hapticCustomMenu" id="hapticCustom">
@@ -261,6 +279,7 @@
 
     <script type="module" defer src="./js/main.js"></script>
     <script type="module" defer src="./js/showCanvas.js"></script>
+    <script type="module" defer src="./js/pitchButton.js"></script>
     <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
     <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.minimap.js"></script>
     <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>

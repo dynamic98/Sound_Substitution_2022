@@ -99,7 +99,7 @@ aside {
   left: 0;
   z-index: 1001;
   position: fixed;
-  background-color: rgba(236, 241, 240, 0.843);
+  background-color: rgba(255, 245, 245, 0.843);
   transition: 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
   -o-transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1);
   transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1);
@@ -136,7 +136,7 @@ aside {
       padding-bottom: 30px;
       border-bottom: 1px solid #efefef; }
       aside .side-inner .profile img {
-        width: 80px;
+        width: 100px;
         margin: 0 auto 20px auto;
         border-radius: 50%; }
       aside .side-inner .profile .name {
@@ -310,7 +310,7 @@ audio.playing{
 
 /* 시각 메뉴 스타일 */
 div#canvas{
-  visibility: hidden;
+  visibility: visible;
 }
 
 div#canvas > canvas{
@@ -519,15 +519,15 @@ div#demo > div#waveform > wave {
 }
 
 div#demo{
-  visibility: hidden;
+  display: none;
 }
 
 
 /* 음악 컨트롤 메뉴 */
 
 div#music-controls{
-  visibility: hidden;
-  margin-left: 370px;
+  visibility: visible;
+  margin-left: 380px;
 }
 
 div#music-controls > button.btn-primary{
@@ -538,12 +538,66 @@ div#music-controls > button.btn-primary{
 
 
 
+/* Pitch Explore 메뉴 */
+div.pitchExplore{
+  margin-top: 30px;
+  margin-left: 380px;
+  width: 600px;
+  height: 100px;
+}
+
+p.pitchExploreTitle{
+  font-size: 25px;
+  color: black;
+  font-weight: bold;
+}
+
+
+button.pitchExploreButton{
+  background: rgb(54, 53, 53);
+  border: none;
+  margin-left: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  color: white;
+}
+
+
+
+/* Dynamic Explore 메뉴 */
+div.dynamicExplore{
+  margin-top: -100px;
+  margin-left: 780px;
+  width: 300px;
+  height: 100px;
+}
+
+p.dynamicExploreTitle{
+  font-size: 25px;
+  color: black;
+  font-weight: bold;
+}
+
+button.dynamicExploreButton{
+  background: rgb(54, 53, 53);
+  border: none;
+  margin-left: 8px;
+  width: 60px;
+  height: 40px;
+  font-size: 18px;
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  color: white;
+}
+
 /* 반응형 웹을 위한 미디어 쿼리 (미디어 쿼리는 반드시 가장 하단에 작성) */
 
 @media (max-width: 1600px) {
   div.visualCustomMenu {
     width: 420px;
     height: 410px;
+    margin-bottom: -30px;
   }
 
   hr.menuTitleHR_visual{
@@ -552,7 +606,7 @@ div#music-controls > button.btn-primary{
 
   div.hapticCustomMenu {
     margin-left: 730px;
-    margin-top: -200px;
+    margin-top: -190px;
     width: 420px;
     height: 360px;
   }
@@ -632,4 +686,9 @@ div#music-controls > button.btn-primary{
     margin-left: 120px;
     width: 260px;
   }
+
+  /* div#demo > div#waveform > wave > canvas{
+    width: 302px;
+    background-color: rgb(29, 47, 92);
+  } */
 }
