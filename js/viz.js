@@ -4,7 +4,8 @@ import * as THREE from 'three';
 // import Stats from 'three/examples/jsm/libs/stats.module.js';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline/src/THREE.MeshLine.js';
-import { audio_do, audio_re, audio_mi, audio_fa, audio_sol, audio_la, audio_si, pickr, analyser, chroma, maxChroma, energy, dataArray } from './modules.js';
+import { pickr, analyser, maxChroma, energy, dataArray } from './modules.js';
+
 
 // let controls;
 let camera, scene, renderer;
@@ -92,7 +93,8 @@ function animate() {
   saveColor();
   changeBGColor();
   requestAnimationFrame(animate);
-  FrameRate = FrameRate + 1
+  FrameRate = FrameRate + 1;
+  console.log(maxChroma);
 
   // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
   if (FrameRate % 3 == 0){
