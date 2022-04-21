@@ -50,7 +50,7 @@ function AnalyzerPlay(audio_context, src) {
 
     // meyda analyser
     chroma = 0;
-    maxChroma = 0;
+    // maxChroma = 0;
     energy = 0;
     amplitudeSpectrum = 0;
 
@@ -62,7 +62,7 @@ function AnalyzerPlay(audio_context, src) {
         callback: (features) => {
             chroma = Array.from(features['chroma']);
             energy = features['energy'];
-            amplitudeSpectrum = features['amplitudeSpectrum'];
+            amplitudeSpectrum = features['amplitudeSpectrum'];  
 
             console.log('pitch', chroma);
         }
@@ -88,7 +88,7 @@ document.querySelector('#pitch_do').addEventListener('click', ()=>{
         audio_do.load();
         src_do = audio_context_do.createMediaElementSource(audio_do);
         AnalyzerPlay(audio_context_do, src_do);
-
+        maxChroma = 0;
         audio_do.play();
         pitch_do.style.background = red;
 
@@ -112,6 +112,7 @@ document.querySelector('#pitch_re').addEventListener('click', ()=>{
         audio_re.load();
         src_re = audio_context_re.createMediaElementSource(audio_re);
         AnalyzerPlay(audio_context_re, src_re);
+        maxChroma = 2;
 
         audio_re.play();
         pitch_re.style.background = red;
@@ -137,6 +138,7 @@ document.querySelector('#pitch_mi').addEventListener('click', ()=>{
         audio_mi.load();
         src_mi = audio_context_mi.createMediaElementSource(audio_mi);
         AnalyzerPlay(audio_context_mi, src_mi);
+        maxChroma = 4;
 
         audio_mi.play();
         pitch_mi.style.background = red;
@@ -162,6 +164,7 @@ document.querySelector('#pitch_fa').addEventListener('click', ()=>{
         audio_fa.load();
         src_fa = audio_context_fa.createMediaElementSource(audio_fa);
         AnalyzerPlay(audio_context_fa, src_fa);
+        maxChroma = 5;
 
         audio_fa.play();
         pitch_fa.style.background = red;
@@ -187,6 +190,7 @@ document.querySelector('#pitch_sol').addEventListener('click', ()=>{
         audio_sol.load();
         src_sol = audio_context_sol.createMediaElementSource(audio_sol);
         AnalyzerPlay(audio_context_sol, src_sol);
+        maxChroma = 7;
 
         audio_sol.play();
         pitch_sol.style.background = red;
@@ -212,6 +216,7 @@ document.querySelector('#pitch_la').addEventListener('click', ()=>{
         audio_la.load();
         src_la = audio_context_la.createMediaElementSource(audio_la);
         AnalyzerPlay(audio_context_la, src_la);
+        maxChroma = 9;
 
         audio_la.play();
         pitch_la.style.background = red;
@@ -237,6 +242,7 @@ document.querySelector('#pitch_si').addEventListener('click', ()=>{
         audio_si.load();
         src_si = audio_context_si.createMediaElementSource(audio_si);
         AnalyzerPlay(audio_context_si, src_si);
+        maxChroma = 11;
 
         audio_si.play();
         pitch_si.style.background = red;
