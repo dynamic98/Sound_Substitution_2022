@@ -94,7 +94,6 @@ function animate() {
   changeBGColor();
   requestAnimationFrame(animate);
   FrameRate = FrameRate + 1;
-  console.log(maxChroma);
 
   // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
   if (FrameRate % 3 == 0){
