@@ -7,6 +7,25 @@ let chroma, maxChroma, energy, amplitudeSpectrum;
 let AudioLastTime, AudioCurrentTime;
 // let target;
 
+const pitchClasses = [
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B"
+];
+
+let frameBuffer = new Map();
+pitchClasses.forEach((pitch) => {
+    frameBuffer.set(pitch, []);
+});
 
 AudioLastTime = 0;
 AudioCurrentTime = 0;
@@ -108,13 +127,42 @@ function AnalyzerPlay(src) {
         buffersize: 64,
         featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
         callback: (features) => {
-            maxChroma = features['chroma'].indexOf(max(features['chroma']))
+            try {
+            chroma = updateChroma(features['chroma']);
+            } catch (err){
+                console.log(err);
+            }
+
+            // console.log(chroma);
+            maxChroma = chroma.indexOf(max(chroma));
+            // console.log(chroma);
             energy = features['energy']
             amplitudeSpectrum = features['amplitudeSpectrum']
         }
     })
     meyda_analyser.start();
 }
+
+function updateChroma(pitchValues){
+    let result = [];
+    pitchValues.forEach((value, index) => {
+        // console.log(value);
+        let currentPitch = pitchClasses[index];
+        // console.log(frameBuffer);
+        let currentPitchBuffer = frameBuffer.get(currentPitch);
+        // console.log(typeof currentPitchBuffer);
+        currentPitchBuffer.push(value);
+        let framesToBuffer = 20;
+        while (currentPitchBuffer.length > framesToBuffer) {
+            currentPitchBuffer.shift();
+        }
+        let framesAverage = 
+            currentPitchBuffer.reduce((total, value) => total+value, 0)/currentPitchBuffer.length;
+        framesAverage = Math.pow(framesAverage, 5);
+        result.push(framesAverage);
+    });
+    return result;
+};
 
 
 function SyncAudio(){
