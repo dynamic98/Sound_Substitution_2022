@@ -3,14 +3,14 @@ import {audio, wavesurfer} from './modules.js';
 // export {haptic_change};
 
 // Create an instance
-var audio_buffer;
-var AudioIsReady = '';
+let audio_buffer;
+let AudioIsReady = '';
 
-const sending_delay = 0.20
-var ch0_data;
-var ch1_data;
-var freq = 11;
-var amp = 50;
+let sending_delay = 0.20
+let ch0_data;
+let ch1_data;
+let freq = 11;
+let amp = 50;
 let last_time = 0;
 let freqPanner = document.querySelector('[data-action="frequency"]');
 freqPanner.addEventListener('input', event => {
@@ -65,7 +65,7 @@ class HapticArray{
         return fin;
     }
 }
-var haptic_devices = new HapticArray();
+let haptic_devices = new HapticArray();
 
 class HapticDevice {
 
@@ -106,6 +106,7 @@ class HapticDevice {
       .then(characteristic => characteristic.writeValue(data))
       .catch(error => {
         console.log('Argh! ' + error);
+        sending_delay = 1.2;
       });
     }
   
@@ -170,16 +171,16 @@ function fourbyte_float_to_onebyte(origin){
 }
 
 function haptic_pattern_gen(){
-    var fftsize = wavesurfer.backend.analyser.frequencyBinCount;
-    var _freq = 1;
-    var _index = 0;
+    let fftsize = wavesurfer.backend.analyser.frequencyBinCount;
+    let _freq = 1;
+    let _index = 0;
     let ampArray = new Float32Array(fftsize);
     let dataArray = [0, 0];
     const _HzIndex =  new Int16Array([10, 23, 46, 70, 93, 117, 140, 164, 187, 210, 234, 257, 281,
                                         304, 328, 351, 375, 398, 421, 445, 468, 492, 500]);
     wavesurfer.backend.analyser.getFloatTimeDomainData(ampArray);
 
-    for (var i = 0;i < fftsize; i++){
+    for (let i = 0;i < fftsize; i++){
         if (ampArray[i] > 0.01) {
             dataArray.push(ampArray[i]);
         }
@@ -190,7 +191,7 @@ function haptic_pattern_gen(){
     _freq = parseInt(dataArray.length/freq);
     _freq = parseInt(_index/_freq);
 
-    var _amp = parseInt(Math.max(...dataArray)* 2 * amp);
+    let _amp = parseInt(Math.max(...dataArray)* 2 * amp);
     
     if (_amp >= 100){
         _amp = 100;
@@ -208,7 +209,7 @@ function SendHapticData(frequency, amplitude){
     view[0] = 36; // STX 0x24
     view[1] = 2; // TYPE 0x02
     
-    var tmp = twobyte_int_to_onebyte(frequency);
+    let tmp = twobyte_int_to_onebyte(frequency);
     view[2] = tmp[0];
     view[3] = tmp[1];
     tmp = twobyte_int_to_onebyte(amplitude);
@@ -225,7 +226,7 @@ function haptic_listener(event){
     let data_buffer = new ArrayBuffer(19);
     let view = new Uint8Array(data_buffer);
 
-    for (var i = 0; i<19;i++){
+    for (let i = 0; i<19;i++){
         view[i] = event.currentTarget.value.getInt8(i);
     }
     console.log(view);
@@ -260,11 +261,13 @@ document
     .addEventListener('click', function(event) {
         // TODO : real time send
         wavesurfer.on('audioprocess', function() {
-            var current_time = wavesurfer.getCurrentTime()
-            var difference_time = current_time - last_time
+            let current_time = wavesurfer.getCurrentTime()
+            let difference_time = current_time - last_time
             if (difference_time > sending_delay || difference_time < 0){
-                var freq_amp = haptic_pattern_gen();
-                
+                let freq_amp = haptic_pattern_gen();
+                if (sending_delay > 1.0){
+                    sending_delay = 0.20;
+                }
                 SendHapticData(freq_amp[0], freq_amp[1]);
 
                 last_time = current_time;
@@ -289,7 +292,7 @@ document
         let flag = await device.connect();
         if (flag){
             await device.startNotifications(haptic_listener);
-            var tmp = haptic_devices.find_index(device.device.id)
+            let tmp = haptic_devices.find_index(device.device.id)
             if (tmp==-1){
                 haptic_devices.add(device);
             }else{
@@ -314,9 +317,9 @@ document
 
         const hz = 100;
         const volume = 1.0;
-        const sineWaveArray = new Float32Array(wavesurfer.backend.buffer.length);
-        var i;
-        var sampleTime;
+        let sineWaveArray = new Float32Array(wavesurfer.backend.buffer.length);
+        let i;
+        let sampleTime;
 
         for (i = 0; i < sineWaveArray.length; i++) {
             sampleTime = i / wavesurfer.backend.buffer.sampleRate;
@@ -325,8 +328,8 @@ document
             sineWaveArray[i] = Math.sin(sampleTime * Math.PI * 2 * hz) * volume;
         }
         
-        const ch0_haptic = new Float32Array(wavesurfer.backend.buffer.length);
-        const ch1_haptic = new Float32Array(wavesurfer.backend.buffer.length);
+        let ch0_haptic = new Float32Array(wavesurfer.backend.buffer.length);
+        let ch1_haptic = new Float32Array(wavesurfer.backend.buffer.length);
 
         for (i = 0; i < sineWaveArray.length; i++) {
             ch0_haptic[i] = sineWaveArray[i]*Math.abs(ch0_data[i]);
