@@ -12,6 +12,38 @@ let container, stats;
 let customMenu;
 let FrameRate = 0;
 
+const GeomertyMap = new Map([
+  [10000, createShapeLine_Vanilla],
+  [10001, createShapeLine_P0D1],
+  [10004, createShapeLine_P0D4],
+  [10005, createShapeLine_P0D5],
+  [10100, createShapeLine_P1D0],
+  [10104, createShapeLine_P1D4],
+  [10105, createShapeLine_P1D5],
+  [10300, createShpaeLine_P3D0],
+  [10301, createShapeLine_P3D1],
+  [10304, createShapeLine_P3D4],
+  [10305, createShapeLine_P3D5],
+  [10500, createShapeLine_P5D0],
+  [10501, createShapeLine_P5D1],
+  [10504, createShapeLine_P5D4],
+  [30000, createShapeRing_Vanilla],
+  [30001, createShapeRing_P0D1],
+  [30002, createShapeRing_P0D2],
+  [30003, createShapeRing_P0D3],
+  [30100, createShapeRing_P1D0],
+  [30101, createShapeRing_P1D1],
+  [30102, createShapeRing_P1D2],
+  [30103, createShapeRing_P1D3],
+  [30200, createShapeRing_P2D0],
+  [30201, createShapeRing_P2D1],
+  [30202, createShapeRing_P2D2],
+  [30203, createShapeRing_P2D3],
+  [30300, createShapeRing_P3D0],
+  [30301, createShapeRing_P3D1],
+  [30302, createShapeRing_P3D2],
+  [30303, createShapeRing_P3D3]
+])
 
 
 // Geometry 별 Detail 요소
@@ -104,97 +136,101 @@ function animate() {
       if (typeof now_geometry == 'number'){
         deleteBasics();
         let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
-        
-        // line custom
-        if (geometry_type == 1){
-          if (pitch_type == 0 && dynamic_type == 0){
-            createShapeLine_Vanilla();
-          } else if (pitch_type == 1){
-              if (dynamic_type == 0){
-                createShapeLine_P1D0();
-              } else if (dynamic_type == 5){
-                createShapeLine_P1D5();
-              } else if (dynamic_type == 4){
-                createShapeLine_P1D4();
-              }
-          } else if (pitch_type == 3){
-              if (dynamic_type == 0){
-                createShpaeLine_P3D0();
-              } else if (dynamic_type == 1){
-                createShapeLine_P3D1();
-              } else if (dynamic_type == 4){
-                createShapeLine_P3D4();
-              } else if (dynamic_type == 5){
-                createShapeLine_P3D5();
-              }
-          } else if (pitch_type == 5){
-              if (dynamic_type == 0){
-                createShapeLine_P5D0();
-              } else if (dynamic_type == 1){
-                createShapeLine_P5D1();
-              } else if (dynamic_type == 4){
-                createShapeLine_P5D4();
-              }
-          } 
-          else if (pitch_type == 0){
-              if (dynamic_type == 5){
-                createShapeLine_P0D5();
-              } else if (dynamic_type == 1){
-                createShapeLine_P0D1();
-              } else if (dynamic_type == 4){
-                createShapeLine_P0D4(); 
-              }
-          }
+        let NowShapeFunction = GeomertyMap.get(now_geometry);
+        NowShapeFunction();
+        // console.log(typeof NowShapeFunction, now_geometry);
+        // console.log(GeomertyMap[now_geometry]);
+        // nowShape;        
+      //   // line custom
+      //   if (geometry_type == 1){
+      //     if (pitch_type == 0 && dynamic_type == 0){
+      //       createShapeLine_Vanilla();
+      //     } else if (pitch_type == 1){
+      //         if (dynamic_type == 0){
+      //           createShapeLine_P1D0();
+      //         } else if (dynamic_type == 5){
+      //           createShapeLine_P1D5();
+      //         } else if (dynamic_type == 4){
+      //           createShapeLine_P1D4();
+      //         }
+      //     } else if (pitch_type == 3){
+      //         if (dynamic_type == 0){
+      //           createShpaeLine_P3D0();
+      //         } else if (dynamic_type == 1){
+      //           createShapeLine_P3D1();
+      //         } else if (dynamic_type == 4){
+      //           createShapeLine_P3D4();
+      //         } else if (dynamic_type == 5){
+      //           createShapeLine_P3D5();
+      //         }
+      //     } else if (pitch_type == 5){
+      //         if (dynamic_type == 0){
+      //           createShapeLine_P5D0();
+      //         } else if (dynamic_type == 1){
+      //           createShapeLine_P5D1();
+      //         } else if (dynamic_type == 4){
+      //           createShapeLine_P5D4();
+      //         }
+      //     } 
+      //     else if (pitch_type == 0){
+      //         if (dynamic_type == 5){
+      //           createShapeLine_P0D5();
+      //         } else if (dynamic_type == 1){
+      //           createShapeLine_P0D1();
+      //         } else if (dynamic_type == 4){
+      //           createShapeLine_P0D4(); 
+      //         }
+      //     }
 
-        };
+      //   };
 
-        // ring custom
-        if (geometry_type == 3){
-          if (pitch_type == 0 && dynamic_type == 0){
-            createShapeRing_Vanilla();
-          } else if(pitch_type == 0){
-              if (dynamic_type == 1){
-              createShapeRing_P0D1();
-            } else if (dynamic_type == 2){
-              createShapeRing_P0D2();
-            } else if (dynamic_type == 3){
-              createShapeRing_P0D3();
-            }
-          }  
-          else if(pitch_type == 1){
-            if (dynamic_type == 0){
-              createShapeRing_P1D0();
-            } else if (dynamic_type == 1){
-              createShapeRing_P1D1();
-            } else if (dynamic_type == 2){
-              createShapeRing_P1D2();
-            } else if (dynamic_type == 3){
-              createShapeRing_P1D3();
-            }
-          } 
-          else if(pitch_type == 2){
-            if (dynamic_type == 0){
-              createShapeRing_P2D0();
-            } else if (dynamic_type == 1){
-              createShapeRing_P2D1();
-            } else if (dynamic_type == 2){
-              createShapeRing_P2D2();
-            } else if (dynamic_type == 3){
-              createShapeRing_P2D3();
-            }
-          } 
-          else if(pitch_type == 3){
-            if (dynamic_type == 0){
-              createShapeRing_P3D0();
-            } else if (dynamic_type == 1){
-              createShapeRing_P3D1();
-            } else if (dynamic_type == 2){
-              createShapeRing_P3D2();
-            } else if (dynamic_type == 3){
-              createShapeRing_P3D3();
-            }
-        }
-      }
+      //   // ring custom
+      //   if (geometry_type == 3){
+      //     if (pitch_type == 0 && dynamic_type == 0){
+      //       createShapeRing_Vanilla();
+      //     } else if(pitch_type == 0){
+      //         if (dynamic_type == 1){
+      //         createShapeRing_P0D1();
+      //       } else if (dynamic_type == 2){
+      //         createShapeRing_P0D2();
+      //       } else if (dynamic_type == 3){
+      //         createShapeRing_P0D3();
+      //       }
+      //     }  
+      //     else if(pitch_type == 1){
+      //       if (dynamic_type == 0){
+      //         createShapeRing_P1D0();
+      //       } else if (dynamic_type == 1){
+      //         createShapeRing_P1D1();
+      //       } else if (dynamic_type == 2){
+      //         createShapeRing_P1D2();
+      //       } else if (dynamic_type == 3){
+      //         createShapeRing_P1D3();
+      //       }
+      //     } 
+      //     else if(pitch_type == 2){
+      //       if (dynamic_type == 0){
+      //         createShapeRing_P2D0();
+      //       } else if (dynamic_type == 1){
+      //         createShapeRing_P2D1();
+      //       } else if (dynamic_type == 2){
+      //         createShapeRing_P2D2();
+      //       } else if (dynamic_type == 3){
+      //         createShapeRing_P2D3();
+      //       }
+      //     } 
+      //     else if(pitch_type == 3){
+      //       if (dynamic_type == 0){
+      //         createShapeRing_P3D0();
+      //       } else if (dynamic_type == 1){
+      //         createShapeRing_P3D1();
+      //       } else if (dynamic_type == 2){
+      //         createShapeRing_P3D2();
+      //       } else if (dynamic_type == 3){
+      //         createShapeRing_P3D3();
+      //       }
+      //   }
+      // }
     }
     render();
     }
