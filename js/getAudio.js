@@ -45,28 +45,14 @@ function FileInit() {
         // minPxPerSec: 6,
         cursorWidth : 5,
         normalize: true,
+    });
 
-        // pixelRatio: 1,
-        // scrollParent: true,
-        // minimap: true,
-        // backend: 'MediaElement',
-        // plugins: [
-        //     WaveSurfer.minimap.create({
-        //         height: 30,
-        //         waveColor: '#ddd',
-        //         progressColor: '#999',
-        //         cursorColor: '#999'
-        //     })
-        // ]
-        });
-
-    var saveButton = document.getElementsByClassName("pcr-save");
     console.log('audio input completed')
     document
     .querySelector('[data-action="play"]')
     .addEventListener('click', ()=>{ 
         console.log("PlayPause button pressed");
-        wavesurfer.playPause();
+        // wavesurfer.playPause();
         // audio.pause();
         TogglePlay();
     })
@@ -81,32 +67,32 @@ function FileChange(){
         show_canvas("music-controls") // music controller
 
         fileLabel.classList.add('normal');
-        var files = this.files;
+        let files = this.files;
         audio.src = URL.createObjectURL(files[0]);
         console.log("VizInit play");
         
-        var fileList = file.files[0].name;
+        let fileList = file.files[0].name;
         realTitle.innerText = fileList;
         
         wavesurfer.load(audio);
         audio.load();
-        // src = src || audio_context.createMediaElementSource(audio);
         src = audio_context.createMediaElementSource(audio);
-        
+        audio.volume = 1;
+
         wavesurfer.on('ready', () => {
             console.log("wavesurfer is ready");
             audio.play();
             wavesurfer.play();
-            // wavesurfer.setMute(true);
-            audio.volume = 0.2;
+            wavesurfer.setVolume(1);
+            // audio.volume = 1;
         })
-
-        AnalyzerPlay(src);
-        }
+        
+        AnalyzerPlay(audio_context, src);
+    }
 }
   
-function AnalyzerPlay(src) {
-    console.log("AnalyzerPlay starts");
+function AnalyzerPlay(audio_context, src) {
+    console.log("pitch meyda analyzer starts");
     analyser = audio_context.createAnalyser();
     src.connect(analyser);
     analyser.connect(audio_context.destination);
@@ -119,13 +105,12 @@ function AnalyzerPlay(src) {
     maxChroma = 0;
     energy = 0;
     amplitudeSpectrum = 0;
-    // var powerSpectrum = 0;
 
     const meyda_analyser = Meyda.createMeydaAnalyzer({
         audioContext: audio_context,
         source: src,
-        buffersize: 64,
-        featureExtractors: ["energy", "chroma", "amplitudeSpectrum"],
+        buffersize: 1024,
+        featureExtractors: ["energy", "chroma"],
         callback: (features) => {
             try {
             chroma = updateChroma(features['chroma']);
@@ -137,11 +122,11 @@ function AnalyzerPlay(src) {
             maxChroma = chroma.indexOf(max(chroma));
             // console.log(chroma);
             energy = features['energy']
-            amplitudeSpectrum = features['amplitudeSpectrum']
         }
     })
     meyda_analyser.start();
 }
+
 
 function updateChroma(pitchValues){
     let result = [];
@@ -165,22 +150,22 @@ function updateChroma(pitchValues){
 };
 
 
-function SyncAudio(){
-    wavesurfer.on('audioprocess', function() {
-        if(wavesurfer.isPlaying()) {
-            // var totalTime = wavesurfer.getDuration(),
-            AudioCurrentTime = wavesurfer.getCurrentTime();
 
-            // console.log(AudioCurrentTime - AudioLastTime);
-            var AudioDifference = AudioCurrentTime - AudioLastTime;
-            if (AudioDifference > 0.01 || AudioDifference < 0){
-                audio.currentTime = AudioCurrentTime;
-                // console.log(AudioCurrentTime - AudioLastTime);
-            }
-            AudioLastTime = AudioCurrentTime;
-        }
-    })
-}
+// function SyncAudio(){
+//     wavesurfer.on('audioprocess', function() {
+//         if(wavesurfer.isPlaying()) {
+//             AudioCurrentTime = wavesurfer.getCurrentTime();
+
+//             // console.log(AudioCurrentTime - AudioLastTime);
+//             let AudioDifference = AudioCurrentTime - AudioLastTime;
+//             if (AudioDifference > 0.01 || AudioDifference < 0){
+//                 audio.currentTime = AudioCurrentTime;
+//                 console.log(AudioCurrentTime - AudioLastTime);
+//             }
+//             AudioLastTime = AudioCurrentTime;
+//         }
+//     })
+// }
 
 function TogglePlay(){
     if (audio.paused){
@@ -192,7 +177,7 @@ function TogglePlay(){
 
 FileInit();
 FileChange();
-SyncAudio();
+// SyncAudio();
 
 
 // some helper functions here
@@ -220,4 +205,4 @@ function fractionate(val, minVal, maxVal) {
 // button.addEventListener('click', titleAudio);
 
 
-export {audio, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};
+export {audio, audio_context, src, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray};
