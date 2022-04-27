@@ -4,7 +4,7 @@ import * as THREE from 'three';
 // import Stats from 'three/examples/jsm/libs/stats.module.js';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline/src/THREE.MeshLine.js';
-import { pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio} from './modules.js';
+import { pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, audio_context, src } from './modules.js';
 
 // let controls;
 let camera, scene, renderer;
@@ -27,6 +27,7 @@ const GeomertyMap = new Map([
   [10500, createShapeLine_P5D0],
   [10501, createShapeLine_P5D1],
   [10504, createShapeLine_P5D4],
+
   [30000, createShapeRing_Vanilla],
   [30001, createShapeRing_P0D1],
   [30002, createShapeRing_P0D2],
@@ -95,8 +96,6 @@ function init() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
 
-
-
   ambientLight = new THREE.AmbientLight(0xaaaaaa);
   scene.add(ambientLight);
 
@@ -131,106 +130,13 @@ function animate() {
     // music rendering
     if (dataArray){
       analyser.getByteFrequencyData(dataArray);
-
+      
       // geometry rendering
       if (typeof now_geometry == 'number'){
         deleteBasics();
         let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
         let NowShapeFunction = GeomertyMap.get(now_geometry);
-        NowShapeFunction();
-        // console.log(typeof NowShapeFunction, now_geometry);
-        // console.log(GeomertyMap[now_geometry]);
-        // nowShape;        
-      //   // line custom
-      //   if (geometry_type == 1){
-      //     if (pitch_type == 0 && dynamic_type == 0){
-      //       createShapeLine_Vanilla();
-      //     } else if (pitch_type == 1){
-      //         if (dynamic_type == 0){
-      //           createShapeLine_P1D0();
-      //         } else if (dynamic_type == 5){
-      //           createShapeLine_P1D5();
-      //         } else if (dynamic_type == 4){
-      //           createShapeLine_P1D4();
-      //         }
-      //     } else if (pitch_type == 3){
-      //         if (dynamic_type == 0){
-      //           createShpaeLine_P3D0();
-      //         } else if (dynamic_type == 1){
-      //           createShapeLine_P3D1();
-      //         } else if (dynamic_type == 4){
-      //           createShapeLine_P3D4();
-      //         } else if (dynamic_type == 5){
-      //           createShapeLine_P3D5();
-      //         }
-      //     } else if (pitch_type == 5){
-      //         if (dynamic_type == 0){
-      //           createShapeLine_P5D0();
-      //         } else if (dynamic_type == 1){
-      //           createShapeLine_P5D1();
-      //         } else if (dynamic_type == 4){
-      //           createShapeLine_P5D4();
-      //         }
-      //     } 
-      //     else if (pitch_type == 0){
-      //         if (dynamic_type == 5){
-      //           createShapeLine_P0D5();
-      //         } else if (dynamic_type == 1){
-      //           createShapeLine_P0D1();
-      //         } else if (dynamic_type == 4){
-      //           createShapeLine_P0D4(); 
-      //         }
-      //     }
-
-      //   };
-
-      //   // ring custom
-      //   if (geometry_type == 3){
-      //     if (pitch_type == 0 && dynamic_type == 0){
-      //       createShapeRing_Vanilla();
-      //     } else if(pitch_type == 0){
-      //         if (dynamic_type == 1){
-      //         createShapeRing_P0D1();
-      //       } else if (dynamic_type == 2){
-      //         createShapeRing_P0D2();
-      //       } else if (dynamic_type == 3){
-      //         createShapeRing_P0D3();
-      //       }
-      //     }  
-      //     else if(pitch_type == 1){
-      //       if (dynamic_type == 0){
-      //         createShapeRing_P1D0();
-      //       } else if (dynamic_type == 1){
-      //         createShapeRing_P1D1();
-      //       } else if (dynamic_type == 2){
-      //         createShapeRing_P1D2();
-      //       } else if (dynamic_type == 3){
-      //         createShapeRing_P1D3();
-      //       }
-      //     } 
-      //     else if(pitch_type == 2){
-      //       if (dynamic_type == 0){
-      //         createShapeRing_P2D0();
-      //       } else if (dynamic_type == 1){
-      //         createShapeRing_P2D1();
-      //       } else if (dynamic_type == 2){
-      //         createShapeRing_P2D2();
-      //       } else if (dynamic_type == 3){
-      //         createShapeRing_P2D3();
-      //       }
-      //     } 
-      //     else if(pitch_type == 3){
-      //       if (dynamic_type == 0){
-      //         createShapeRing_P3D0();
-      //       } else if (dynamic_type == 1){
-      //         createShapeRing_P3D1();
-      //       } else if (dynamic_type == 2){
-      //         createShapeRing_P3D2();
-      //       } else if (dynamic_type == 3){
-      //         createShapeRing_P3D3();
-      //       }
-      //   }
-      // }
+        NowShapeFunction(); // 딕셔너리에서 불러온 함수 실행
     }
     render();
     }
@@ -550,7 +456,6 @@ function createShapeLine_P3D5(){
   const path = new CustomSinCurve( 40 );
   let custom_maxChroma = maxChroma + 1
   let height = energy * 10
-  console.log('위치(높이)', height)
   geometry = new THREE.TubeGeometry( path, custom_maxChroma, 2, custom_maxChroma, false );
 
   material = new THREE.MeshBasicMaterial( { 
@@ -898,7 +803,8 @@ function updateGroupGeometry( mesh, geometry ) {
 
 function vizInit() {
   // (1) Line EventListener
-  pitch_LineHeight.addEventListener("click", ()=>{ 
+  pitch_LineHeight.addEventListener("click", ()=>{
+    console.log('button clicked!');
     pitch_LineHeight.style.background = '#FF5C5C'; // 빨강(활성)
     if (typeof now_geometry == 'number'){
       let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
