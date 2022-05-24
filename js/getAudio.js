@@ -22,6 +22,7 @@ const pitchClasses = [
     "B"
 ];
 
+const waveSurfer = document.getElementById("waveform");
 let frameBuffer = new Map();
 pitchClasses.forEach((pitch) => {
     frameBuffer.set(pitch, []);
@@ -52,8 +53,7 @@ function FileInit() {
     .querySelector('[data-action="play"]')
     .addEventListener('click', ()=>{ 
         console.log("PlayPause button pressed");
-        // wavesurfer.playPause();
-        // audio.pause();
+        wavesurfer.playPause();
         TogglePlay();
     })
   }
@@ -81,10 +81,10 @@ function FileChange(){
 
         wavesurfer.on('ready', () => {
             console.log("wavesurfer is ready");
-            audio.play();
             wavesurfer.play();
-            wavesurfer.setVolume(1);
-            // audio.volume = 1;
+            audio.play();
+            // wavesurfer.setVolume(0);
+            audio.volume = 0;
         })
         
         AnalyzerPlay(audio_context, src);
@@ -150,6 +150,17 @@ function updateChroma(pitchValues){
 };
 
 
+function AudioSync(){
+    waveSurfer.addEventListener("click", ()=>{
+        AudioCurrentTime = wavesurfer.getCurrentTime();
+        console.log("Wavesurfer:" ,AudioCurrentTime, "Audio:", audio.currentTime)
+        audio.currentTime = AudioCurrentTime
+        console.log("after", AudioCurrentTime, audio.currentTime)
+    })
+};
+
+
+
 
 // function SyncAudio(){
 //     wavesurfer.on('audioprocess', function() {
@@ -158,7 +169,7 @@ function updateChroma(pitchValues){
 
 //             // console.log(AudioCurrentTime - AudioLastTime);
 //             let AudioDifference = AudioCurrentTime - AudioLastTime;
-//             if (AudioDifference > 0.01 || AudioDifference < 0){
+//             if (AudioDifference > 0.05 || AudioDifference < 0){
 //                 audio.currentTime = AudioCurrentTime;
 //                 console.log(AudioCurrentTime - AudioLastTime);
 //             }
@@ -177,6 +188,7 @@ function TogglePlay(){
 
 FileInit();
 FileChange();
+AudioSync();
 // SyncAudio();
 
 
