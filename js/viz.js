@@ -473,7 +473,6 @@ function createShapeLine_P3D5(){
 
 // =======================================================================
 
-
 // 3. Ring geometry
 function createShapeRing_P0D1(){
   let thickness = energy*5+1;

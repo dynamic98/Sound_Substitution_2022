@@ -89,9 +89,6 @@ function FileChange(){
             audio.play();
             let audioCurrentTime = wavesurfer.getCurrentTime();
             AudioDifference = audioCurrentTime - audio.currentTime
-            console.log(AudioDifference);
-            // wavesurfer.setVolume(0);
-            // audio.volume = 0;
         })
         
         AnalyzerPlay(audio_context, src);
@@ -99,7 +96,6 @@ function FileChange(){
 }
   
 function AnalyzerPlay(audio_context, src) {
-    console.log("pitch meyda analyzer starts");
     analyser = audio_context.createAnalyser();
     src.connect(analyser);
     analyser.connect(audio_context.destination);
@@ -138,11 +134,8 @@ function AnalyzerPlay(audio_context, src) {
 function updateChroma(pitchValues){
     let result = [];
     pitchValues.forEach((value, index) => {
-        // console.log(value);
         let currentPitch = pitchClasses[index];
-        // console.log(frameBuffer);
         let currentPitchBuffer = frameBuffer.get(currentPitch);
-        // console.log(typeof currentPitchBuffer);
         currentPitchBuffer.push(value);
         let framesToBuffer = 20;
         while (currentPitchBuffer.length > framesToBuffer) {
@@ -157,20 +150,6 @@ function updateChroma(pitchValues){
 };
 
 
-// function AudioSync(){
-//     wavesurferclick.addEventListener("click", ()=>{
-//         console.log("before", audio.currentTime);
-//         let Waveduration = wavesurfer.getDuration();
-//         let audioduration = audio.duration;
-//         let AudioCurrentTime = wavesurfer.getCurrentTime();
-//         audio.currentTime = AudioCurrentTime;
-//         console.log(Waveduration, audioduration, AudioCurrentTime, audio.currentTime);
-//         // AudioCurrentTime = wavesurfer.getCurrentTime();
-//         // console.log("Wavesurfer:" ,AudioCurrentTime, "Audio:", audio.currentTime)
-//         // audio.currentTime = AudioCurrentTime
-//         // console.log("after", AudioCurrentTime, audio.currentTime)
-//     })
-// };
 function sleep(ms) {
     return new Promise((r) => setTimeout(r, ms));
   }
