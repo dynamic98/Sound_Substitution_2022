@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>VibvizTool_Customizing</title>
+    <title>VizHap :: SCI_LAB</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -23,7 +23,30 @@
 
 <body>
     <script>
-       // 음악이 무조건 하나 input 으로 들어와야 메뉴를 보여주는 함수
+        // 다중메뉴 - 한번에 하나만 보여주기 & 오디오 인풋 들어오면 보여주기
+        function change(box, delimiter) {
+          target = document.getElementById('thefile');
+          let OtherOption;
+          if(delimiter=='customMenu-Line'){
+            OtherOption = 'customMenu-Ring'
+            document.getElementById('check-VisuoRing').checked = false;
+          }else if(delimiter=='customMenu-Ring'){
+            OtherOption = 'customMenu-Line'
+            document.getElementById('check-VisuoLine').checked = false;
+
+          }
+          if (target.files.length == 1){
+            if (box.checked == true) {
+              document.getElementById(delimiter).style.display = "inline-block";
+              document.getElementById(OtherOption).style.display = "none";
+              
+            } else {
+              document.getElementById(delimiter).style.display = "none";
+            }
+          }
+        };
+
+        // 단일메뉴 - 그냥 클릭하면 보여주기 & 오디오 인풋 들어오면 보여주기
         function check(box, delimiter) {
           target = document.getElementById('thefile');
           if (target.files.length == 1){
@@ -35,8 +58,33 @@
             }
           }
         };
-        // 선택한 메뉴만 highlight 해주는 함수
-        function highlight(box, delimiter) {
+
+
+
+        // 시각 하이라이트(강조)
+        function highlight_visual(box, delimiter) {
+          let OtherOption;
+          if(delimiter=='active-line'){
+            OtherOption = 'active-ring'
+          }else if(delimiter=='active-ring'){
+            OtherOption = 'active-line'
+          }
+          if (box.checked == true) {
+              document.getElementById(delimiter).style.color = "rgba(255, 52, 91)";
+              document.getElementById(delimiter).style.fontWeight = "600";
+
+              document.getElementById(OtherOption).style.backgroundColor = "rgba(0, 0, 0, 0)";
+              document.getElementById(OtherOption).style.color = "#8b8b8b";
+
+          } else {
+              document.getElementById(delimiter).style.backgroundColor = "rgba(0, 0, 0, 0)";
+              document.getElementById(delimiter).style.color = "#8b8b8b";
+          }
+        }
+
+        
+        // 햅틱 하이라이트(강조)
+        function highlight_haptic(box, delimiter) {
           if (box.checked == true) {
               document.getElementById(delimiter).style.color = "rgba(255, 52, 91)";
               document.getElementById(delimiter).style.fontWeight = "600";
@@ -82,7 +130,7 @@
                   <div>
                     <ul>
                       <li type="button" class="VisuoMenus" id="VisuoLine">
-                        <input class="check-btn" id="check-VisuoLine" type="checkbox" onclick="check(this, 'customMenu-Line'); highlight(this, 'active-line');"> 
+                        <input class="check-btn" id="check-VisuoLine" type="checkbox" onclick="change(this, 'customMenu-Line'); highlight_visual(this, 'active-line');"> 
                           <label for="check-VisuoLine"> <div id="active-line">Line</div> </label>
                       </li>
                       <!-- <li type="button" class="VisuoMenus" id="VisuoSphere">
@@ -90,7 +138,7 @@
                           <label for="check-VisuoSphere"> <div id="active-sphere">Sphere</div> </label>
                       </li> -->
                       <li type="button" class="VisuoMenus" id="VisuoRing">
-                        <input class="check-btn" id="check-VisuoRing" type="checkbox" onclick="check(this, 'customMenu-Ring'); highlight(this, 'active-ring');"> 
+                        <input class="check-btn" id="check-VisuoRing" type="checkbox" onclick="change(this, 'customMenu-Ring'); highlight_visual(this, 'active-ring');"> 
                           <label for="check-VisuoRing"> <div id="active-ring">Ring</div> </label>
                       </li>
                       <!-- <li type="button" class="VisuoMenus" id="VisuoTorus">
@@ -114,7 +162,7 @@
                   <div>
                     <ul>
                       <li type="button" class="HapticMenus">
-                        <input class="check-btn" id="check-Haptic" type="checkbox" onclick="check(this, 'hapticCustom'); highlight(this, 'active-haptic');"> 
+                        <input class="check-btn" id="check-Haptic" type="checkbox" onclick="check(this, 'hapticCustom'); highlight_haptic(this, 'active-haptic');"> 
                         <label for="check-Haptic"> <div id="active-haptic">Pattern Filter</div> </label>
                       </li>
                     </ul>
