@@ -1,10 +1,12 @@
 // import { audio, audio_context, file as target} from './modules.js';
+import { SkeletonHelper } from 'three';
 import { show_canvas } from './modules.js'
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
 let chroma, maxChroma, energy, amplitudeSpectrum;
-let AudioLastTime, AudioCurrentTime;
+let AudioDifference;
+let AudioCurrentTime, AudioLastTime;
 // let target;
 
 const pitchClasses = [
@@ -22,14 +24,16 @@ const pitchClasses = [
     "B"
 ];
 
-const waveSurfer = document.getElementById("waveform");
+// const waveSurfer = document.getElementById("waveform");
+const wavesurferclick = document.querySelector("#waveform");
+
 let frameBuffer = new Map();
 pitchClasses.forEach((pitch) => {
     frameBuffer.set(pitch, []);
 });
 
-AudioLastTime = 0;
-AudioCurrentTime = 0;
+// AudioLastTime = 0;
+// AudioCurrentTime = 0;
 
 // LOAD MUSIC (vizInit)
 function FileInit() {
@@ -83,8 +87,11 @@ function FileChange(){
             console.log("wavesurfer is ready");
             wavesurfer.play();
             audio.play();
+            let audioCurrentTime = wavesurfer.getCurrentTime();
+            AudioDifference = audioCurrentTime - audio.currentTime
+            console.log(AudioDifference);
             // wavesurfer.setVolume(0);
-            audio.volume = 0;
+            // audio.volume = 0;
         })
         
         AnalyzerPlay(audio_context, src);
@@ -150,33 +157,47 @@ function updateChroma(pitchValues){
 };
 
 
-function AudioSync(){
-    waveSurfer.addEventListener("click", ()=>{
-        AudioCurrentTime = wavesurfer.getCurrentTime();
-        console.log("Wavesurfer:" ,AudioCurrentTime, "Audio:", audio.currentTime)
-        audio.currentTime = AudioCurrentTime
-        console.log("after", AudioCurrentTime, audio.currentTime)
-    })
-};
-
-
-
-
-// function SyncAudio(){
-//     wavesurfer.on('audioprocess', function() {
-//         if(wavesurfer.isPlaying()) {
-//             AudioCurrentTime = wavesurfer.getCurrentTime();
-
-//             // console.log(AudioCurrentTime - AudioLastTime);
-//             let AudioDifference = AudioCurrentTime - AudioLastTime;
-//             if (AudioDifference > 0.05 || AudioDifference < 0){
-//                 audio.currentTime = AudioCurrentTime;
-//                 console.log(AudioCurrentTime - AudioLastTime);
-//             }
-//             AudioLastTime = AudioCurrentTime;
-//         }
+// function AudioSync(){
+//     wavesurferclick.addEventListener("click", ()=>{
+//         console.log("before", audio.currentTime);
+//         let Waveduration = wavesurfer.getDuration();
+//         let audioduration = audio.duration;
+//         let AudioCurrentTime = wavesurfer.getCurrentTime();
+//         audio.currentTime = AudioCurrentTime;
+//         console.log(Waveduration, audioduration, AudioCurrentTime, audio.currentTime);
+//         // AudioCurrentTime = wavesurfer.getCurrentTime();
+//         // console.log("Wavesurfer:" ,AudioCurrentTime, "Audio:", audio.currentTime)
+//         // audio.currentTime = AudioCurrentTime
+//         // console.log("after", AudioCurrentTime, audio.currentTime)
 //     })
-// }
+// };
+function sleep(ms) {
+    return new Promise((r) => setTimeout(r, ms));
+  }
+
+function SyncAudio(){
+    wavesurferclick.addEventListener("click", async ()=>{
+        await sleep(1);
+        AudioCurrentTime = wavesurfer.getCurrentTime();
+        audio.currentTime = AudioCurrentTime;
+        // console.log(AudioCurrentTime);
+
+    // wavesurfer.on('audioprocess', function() {
+        // if(wavesurfer.isPlaying()) {
+
+                // AudioCurrentTime = wavesurfer.getCurrentTime();
+                // audio.currentTime = AudioCurrentTime;
+                // // console.log(AudioCurrentTime - AudioLastTime);
+                // let AudioDifference = AudioCurrentTime - AudioLastTime;
+                // if (AudioDifference > 0.05 || AudioDifference < 0){
+                //     audio.currentTime = AudioCurrentTime;
+                //     console.log(AudioCurrentTime - AudioLastTime);
+                // }
+                // AudioLastTime = AudioCurrentTime;
+})}
+
+
+
 
 function TogglePlay(){
     if (audio.paused){
@@ -188,8 +209,8 @@ function TogglePlay(){
 
 FileInit();
 FileChange();
-AudioSync();
-// SyncAudio();
+// AudioSync();
+SyncAudio();
 
 
 // some helper functions here
