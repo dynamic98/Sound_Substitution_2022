@@ -84,7 +84,7 @@ function FileChange(){
             wavesurfer.play();
             audio.play();
             // wavesurfer.setVolume(0);
-            audio.volume = 0;
+            audio.volume = 1;
         })
         
         AnalyzerPlay(audio_context, src);
