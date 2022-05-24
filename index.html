@@ -19,9 +19,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- <link rel="shortcut icon" href="#"> -->
-
 </head>
 
 <body>
@@ -53,8 +50,7 @@
       <aside class="sidebar">
         <div class="toggle">
           <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
-                <span></span>
-              </a>
+          </a>
         </div>
         <div class="side-inner">
   
@@ -89,22 +85,22 @@
                         <input class="check-btn" id="check-VisuoLine" type="checkbox" onclick="check(this, 'customMenu-Line'); highlight(this, 'active-line');"> 
                           <label for="check-VisuoLine"> <div id="active-line">Line</div> </label>
                       </li>
-                      <li type="button" class="VisuoMenus" id="VisuoSphere">
+                      <!-- <li type="button" class="VisuoMenus" id="VisuoSphere">
                         <input class="check-btn" id="check-VisuoSphere" type="checkbox" onclick="check(this, 'customMenu-Sphere'); highlight(this, 'active-sphere');"> 
                           <label for="check-VisuoSphere"> <div id="active-sphere">Sphere</div> </label>
-                      </li>
+                      </li> -->
                       <li type="button" class="VisuoMenus" id="VisuoRing">
                         <input class="check-btn" id="check-VisuoRing" type="checkbox" onclick="check(this, 'customMenu-Ring'); highlight(this, 'active-ring');"> 
                           <label for="check-VisuoRing"> <div id="active-ring">Ring</div> </label>
                       </li>
-                      <li type="button" class="VisuoMenus" id="VisuoTorus">
+                      <!-- <li type="button" class="VisuoMenus" id="VisuoTorus">
                         <input class="check-btn" id="check-VisuoTorus" type="checkbox" onclick="check(this, 'customMenu-Torus'); highlight(this, 'active-torus');"> 
                           <label for="check-VisuoTorus"> <div id="active-torus">Torus</div> </label>
                       </li>
                       <li type="button" class="VisuoMenus" id="VisuoCone">
                         <input class="check-btn" id="check-VisuoCone" type="checkbox" onclick="check(this, 'customMenu-Cone'); highlight(this, 'active-cone');"> 
                           <label for="check-VisuoCone"> <div id="active-cone">Cone</div> </label>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                 </div>
@@ -135,7 +131,7 @@
   
       <div id="userCustom">#000000</div>
   
-
+      <div class="customMenu">
       <div class="visualCustomMenu" id="customMenu-Line">
         <h5 class="menuTitle">Line Visualization</h5>
         <hr class="menuTitleHR_visual">
@@ -188,7 +184,7 @@
         <p id="menusmallTitle_visual" class="bgcolor"> Background </p>
             <button class="visualButtonColors" type="button"> Colors </button>
       </div>
-  
+      </div>
 
     <main>
         <!--시각 output-->
@@ -229,59 +225,61 @@
         </div>
 
         <div class="haptic-container">
-          <div class="hapticCustomMenu" id="hapticCustom">
-            <div class="haptic-controls">
-                <h5 class="menuTitle"> Haptic Pattern Filter </h5>
-                <br>
-                <p id="menusmallTitle_haptic"> Tempo </p>
-                <div class="haptic-tempo">
-                    <input data-action="tempo" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
-                    &larr; Empty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full vibration &rarr;
-                </div>
-                <br>
+          <div class="customMenu">
+            <div class="hapticCustomMenu" id="hapticCustom">
+              <div class="haptic-controls">
+                  <h5 class="menuTitle"> Haptic Pattern Filter </h5>
+                  <br>
+                  <p id="menusmallTitle_haptic"> Tempo </p>
+                  <div class="haptic-tempo">
+                      <input data-action="tempo" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                      &larr; Empty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full vibration &rarr;
+                  </div>
+                  <br>
 
-                <p id="menusmallTitle_haptic"> Frequency </p>
-                <div class="haptic-frequency">
-                  <input data-action="frequency" type="range" min="0" max="22" value="11" style="width: 100%"/>
-                    &larr; Rough &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sharp &rarr;
-                </div>
-                <br>
+                  <p id="menusmallTitle_haptic"> Frequency </p>
+                  <div class="haptic-frequency">
+                    <input data-action="frequency" type="range" min="0" max="22" value="11" style="width: 100%"/>
+                      &larr; Rough &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sharp &rarr;
+                  </div>
+                  <br>
 
-                <p id="menusmallTitle_haptic"> Amplitude </p>
-                <div class="haptic-amplitude">
-                  <input data-action="amplitude" type="range" min="0" max="100" value="50" style="width: 100%"/>
-                    &larr; Sharp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strong &rarr;
-                </div>
-                <br>
+                  <p id="menusmallTitle_haptic"> Amplitude </p>
+                  <div class="haptic-amplitude">
+                    <input data-action="amplitude" type="range" min="0" max="100" value="50" style="width: 100%"/>
+                      &larr; Sharp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strong &rarr;
+                  </div>
+                  <br>
 
-                <p id="menusmallTitle_haptic"> Timbre </p>
-                <div class="haptic-timbre">
-                    <input data-action="symmetry" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
-                    &larr; Asymmetry &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symmetry &rarr;
-                </div>
-          </div>
+                  <p id="menusmallTitle_haptic"> Timbre </p>
+                  <div class="haptic-timbre">
+                      <input data-action="symmetry" type="range" min="-45" max="45" value="0" style="width: 100%" /> 
+                      &larr; Asymmetry &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symmetry &rarr;
+                  </div>
+            </div>
+            </div>
           </div>
         </div>
 
