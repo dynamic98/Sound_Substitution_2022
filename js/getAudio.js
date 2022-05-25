@@ -87,8 +87,10 @@ function FileChange(){
             console.log("wavesurfer is ready");
             wavesurfer.play();
             audio.play();
-            let audioCurrentTime = wavesurfer.getCurrentTime();
-            AudioDifference = audioCurrentTime - audio.currentTime
+            AudioCurrentTime = wavesurfer.getCurrentTime();
+            // console.log(AudioCurrentTime);
+            audio.currentTime = AudioCurrentTime;
+
         })
         
         AnalyzerPlay(audio_context, src);
