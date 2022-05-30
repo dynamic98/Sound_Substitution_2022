@@ -22,6 +22,5 @@ npm install
 2. git clone this repository
 3. change to your root directory
 4. type 'npm run dev' on the terminal
-5. enter to http://localhost:3000/
-6. press 'Choose A Music to Visualize!' button and pick a music in the mp3 format
-7. visualize!
+5. enter to http://localhost:3000/Face/Face.html
+6. Face !!
