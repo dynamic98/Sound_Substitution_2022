@@ -13,14 +13,23 @@
 
 			import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 
-            let promise;
 
+            let promise = new Promise(function(resolve, reject)
+			{	
+				try{
+					resolve()
+				}catch (err){
+					reject(new Error ("not defined yet"));
+				}
+			});
 			
             init();
 
 			function init() {
 
 				let mixer;
+				let mesh;
+				let head;
 
 				const clock = new THREE.Clock();
 
@@ -31,8 +40,7 @@
 				camera.position.set( - 1.8, 0.8, 3 );
 
 				const scene = new THREE.Scene();
-				let mesh;
-				let head;
+
 
 				const renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -56,7 +64,7 @@
 						mesh = gltf.scene.children[ 0 ];
 
 						scene.add( mesh );
-
+						
 						// mixer = new THREE.AnimationMixer( mesh );
 
 						// mixer.clipAction( gltf.animations[ 0 ] ).play();
@@ -65,8 +73,7 @@
 
 						// const head = mesh.getObjectByName( 'mesh_2' );
 						head = mesh.getObjectByName( 'mesh_2' );
-
-						// console.log(head)
+						
 						// head = mesh.getObjectByName( 'mesh_2' );
 						const influences = head.morphTargetInfluences;
 
@@ -80,18 +87,8 @@
 								.listen( influences );
 
 						}
-						promise = new Promise((resolve, reject) =>{
-                            console.log(mesh);
-							if (mesh.getObjectByName('mesh_2')){
-								return resolve('success');
-							}
-							else{
-                                console.log('rejected');
-								return reject();
-							}});
 						return promise;
-						});
-                    // });
+                    });
 
 				const environment = new RoomEnvironment();
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
@@ -110,6 +107,7 @@
 
 				const stats = new Stats();
 				container.appendChild( stats.dom );
+				let TimeisGold = 0;
 				renderer.setAnimationLoop( async () => {
 
 					const delta = clock.getDelta();
@@ -123,19 +121,25 @@
 
 					// console.log(head.morphTargetDictionary);
 					// console.log(mesh);
-
+					// console.log(promise);
 					promise.then(()=>{
 						// head.morphTargetDictionary = 51;
 						let face = head.morphTargetInfluences;
 						// console.log(face);
 						// face['browInnerUp'] = 50;
-						face[0] = 1;
+						TimeisGold = TimeisGold+delta
+						if (TimeisGold > 1){
+							TimeisGold = 0;
+						}
+						face[0] = TimeisGold;
 						face[1] = 1;
 						face[4] = 1;
 
 						// console.log(head.morphTargetDictionary['browInnerUp']);
 						// console.log(mesh.getObjectByName('mesh_2'));
-					}).catch(error => console.log(error));
+					}).catch((err)=>{
+						// console.log("not defined Yet")
+					});
 
 					renderer.render( scene, camera );
 
