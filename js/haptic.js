@@ -76,12 +76,16 @@ class HapticDevice {
     
     async request() {
       let options = {
-        "filters": [{
-          "namePrefix": "Haptic"
-        }],
-        "optionalServices": ["6e400001-b5a3-f393-e0a9-e50e24dcca9e"]
+        "filters": [
+          {"namePrefix": "Haptic"},
+          {"name": "TactsuitX40"}
+        ],
+        "optionalServices": ["6e400001-b5a3-f393-e0a9-e50e24dcca9e",'battery_service']
       };
       this.device = await navigator.bluetooth.requestDevice(options);
+      console.log(this.device.name);
+      console.log(this.device.gatt.connect());
+    //   this.device = await navigator.bluetooth.requestDevice({acceptAllDevices:true});
       if (!this.device) {
         throw "No device selected";
       }
@@ -94,6 +98,7 @@ class HapticDevice {
         return 0
       }
       await this.device.gatt.connect();
+
       return 1
     }
     
