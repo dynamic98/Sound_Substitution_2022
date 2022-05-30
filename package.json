@@ -1,0 +1,29 @@
+{
+  "name": "vibviztool",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.8.4"
+  },
+  "dependencies": {
+    "@simonwep/pickr": "^1.8.2",
+    "bpm-detective": "^2.0.5",
+    "meyda": "^5.3.0",
+    "nodemon": "^2.0.15",
+    "p5": "^1.4.1",
+    "pickr": "^0.1.4",
+    "three": "^0.138.3",
+    "three.meshline": "^1.4.0",
+    "wavesurfer.js": "^6.0.4"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
