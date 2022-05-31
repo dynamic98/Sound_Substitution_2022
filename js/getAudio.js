@@ -114,16 +114,18 @@ function AnalyzerPlay(audio_context, src) {
     const meyda_analyser = Meyda.createMeydaAnalyzer({
         audioContext: audio_context,
         source: src,
-        buffersize: 1024,
-        featureExtractors: ["energy", "chroma"],
+        buffersize: 512,
+        sampleRate: 44100,
+        featureExtractors: ["amplitudeSpectrum","energy", "chroma"],
         callback: (features) => {
             try {
             chroma = updateChroma(features['chroma']);
             } catch (err){
                 console.log(err);
             }
-
             // console.log(chroma);
+            amplitudeSpectrum = features['amplitudeSpectrum'];
+            console.log(amplitudeSpectrum);
             maxChroma = chroma.indexOf(max(chroma));
             // console.log(chroma);
             energy = features['energy']
