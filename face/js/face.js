@@ -12,7 +12,20 @@
 			import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
 			import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
+			import { pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, audio_context, src } from './modules.js';
+			let scene;
+			let renderer;
+			let camera;
+			const container = document.getElementById( "canvas" );
 
+
+			function saveColor(){
+				pickr.on('save', (color, instance) => {
+				const userColor = color.toHEXA().toString();
+				document.querySelector('#userCustom').innerHTML = userColor;
+				
+			  })
+			  }
 
             let promise = new Promise(function(resolve, reject)
 			{	
@@ -30,21 +43,26 @@
 				let mixer;
 				let mesh;
 				let head;
+				
 
 				const clock = new THREE.Clock();
+				
 
-				const container = document.createElement( 'div' );
-				document.body.appendChild( container );
-
-				const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 20 );
+				renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
+				renderer.setPixelRatio(window.devicePixelRatio);
+				renderer.setSize(window.innerWidth / 2.24, window.innerHeight / 2.1);
+				camera = new THREE.PerspectiveCamera(30, renderer.domElement.width/renderer.domElement.height, 2, 2000);
+				// camera.position.set(1, 20, 100);
 				camera.position.set( - 1.8, 0.8, 3 );
 
-				const scene = new THREE.Scene();
+			  
 
+				container.appendChild( renderer.domElement )
 
-				const renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
+				// const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 20 );
+
+				scene = new THREE.Scene();
+
 
 				renderer.toneMapping = THREE.ACESFilmicToneMapping;
 				renderer.outputEncoding = THREE.sRGBEncoding;
@@ -111,7 +129,7 @@
 				renderer.setAnimationLoop( async () => {
 
 					const delta = clock.getDelta();
-
+					// console.log(maxChroma);
 					// if ( mixer ) {
 
 					// 	mixer.update( delta );
@@ -127,13 +145,22 @@
 						let face = head.morphTargetInfluences;
 						// console.log(face);
 						// face['browInnerUp'] = 50;
-						TimeisGold = TimeisGold+delta
-						if (TimeisGold > 1){
-							TimeisGold = 0;
-						}
-						face[0] = TimeisGold;
-						face[1] = 1;
-						face[4] = 1;
+						// TimeisGold = TimeisGold+delta
+						// if (TimeisGold > 1){
+						// 	TimeisGold = 0;
+						// }
+						// face[0] = TimeisGold;
+						face[0] = maxChroma/12;
+						face[5] = chroma[0]/12;
+						face[6] = chroma[0]/12;
+
+						face[13] = chroma[5]/12;
+						face[14] = chroma[5]/12;
+						// face[8] = maxChroma/12;
+						// console.log(energy);
+						face[37] = energy/70;
+						face[38] = energy/70;
+
 
 						// console.log(head.morphTargetDictionary['browInnerUp']);
 						// console.log(mesh.getObjectByName('mesh_2'));

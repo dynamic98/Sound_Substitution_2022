@@ -1,35 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - morph targets - face</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link type="text/css" rel="stylesheet" href="main.css">
-		<style>
-			body {
-				background-color: #666666;
-			}
-		</style>
+		<title>VizHap :: SCI_LAB</title>
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Sharp|Material+Icons+Two+Tone|Material+Icons+Outlined" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+	
+		<link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+	
+		<link rel="stylesheet" href="../fonts/icomoon/style.css">
+		<link rel="stylesheet" href="../css/owl.carousel.min.css">
+		<link href="../css/style.css" media="screen and (min-width: 512px) and (max-width: 1024px)" rel="stylesheet">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Style -->
+		<link rel="stylesheet" href="../css/style.css">
+
 	</head>
 	<body>
+		<div id="userCustom">#000000</div>
 
-		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> webgl - morph targets - face<br/>
-			model by <a href="https://www.bannaflak.com/face-cap" target="_blank" rel="noopener">Face Cap</a>
-		</div>
+		<script>
+			// 다중메뉴 - 한번에 하나만 보여주기 & 오디오 인풋 들어오면 보여주기
+			function change(box, delimiter) {
+			  target = document.getElementById('thefile');
+			  let OtherOption;
+			  if(delimiter=='customMenu-Line'){
+				OtherOption = 'customMenu-Ring'
+				document.getElementById('check-VisuoRing').checked = false;
+			  }else if(delimiter=='customMenu-Ring'){
+				OtherOption = 'customMenu-Line'
+				document.getElementById('check-VisuoLine').checked = false;
+	
+			  }
+			  if (target.files.length == 1){
+				if (box.checked == true) {
+				  document.getElementById(delimiter).style.display = "inline-block";
+				  document.getElementById(OtherOption).style.display = "none";
+				  
+				} else {
+				  document.getElementById(delimiter).style.display = "none";
+				}
+			  }
+			};
+	
+			// 단일메뉴 - 그냥 클릭하면 보여주기 & 오디오 인풋 들어오면 보여주기
+			function check(box, delimiter) {
+			  target = document.getElementById('thefile');
+			  if (target.files.length == 1){
+	  
+				if (box.checked == true) {
+				  document.getElementById(delimiter).style.display = "inline-block";
+				} else {
+				  document.getElementById(delimiter).style.display = "none";
+				}
+			  }
+			};
+	
+	
+	
+			// 시각 하이라이트(강조)
+			function highlight_visual(box, delimiter) {
+			  let OtherOption;
+			  if(delimiter=='active-line'){
+				OtherOption = 'active-ring'
+			  }else if(delimiter=='active-ring'){
+				OtherOption = 'active-line'
+			  }
+			  if (box.checked == true) {
+				  document.getElementById(delimiter).style.color = "rgba(255, 52, 91)";
+				  document.getElementById(delimiter).style.fontWeight = "600";
+	
+				  document.getElementById(OtherOption).style.backgroundColor = "rgba(0, 0, 0, 0)";
+				  document.getElementById(OtherOption).style.color = "#8b8b8b";
+	
+			  } else {
+				  document.getElementById(delimiter).style.backgroundColor = "rgba(0, 0, 0, 0)";
+				  document.getElementById(delimiter).style.color = "#8b8b8b";
+			  }
+			}
+	
+			
+			// 햅틱 하이라이트(강조)
+			function highlight_haptic(box, delimiter) {
+			  if (box.checked == true) {
+				  document.getElementById(delimiter).style.color = "rgba(255, 52, 91)";
+				  document.getElementById(delimiter).style.fontWeight = "600";
+			  } else {
+				  document.getElementById(delimiter).style.backgroundColor = "rgba(0, 0, 0, 0)";
+				  document.getElementById(delimiter).style.color = "#8b8b8b";
+			  }
+			}
+		</script>
+		  
+		  <aside class="sidebar">
+			<div class="toggle">
+			  <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+			  </a>
+			</div>
+			<div class="side-inner">
+	  
+			  <div class="profile">
+				<img src="../images/cutecat.jpeg" alt="Image" class="img-fluid">
+				<h3 class="name">User#01</h3>
+				<span class="identity">Deaf</span>
+			  </div>
+	  
+			  <div id="sidebar-content">
+				<label for="thefile" class="file"> Pick a Music 🎺
+					<input type="file" id="thefile" accept="audio/mp3" />
+				</label>
+				<audio id="audio" controls></audio>
+				<div class="thetitle" id="title"></div>
+			  </div>
+			  </div>
+			  </aside>
 
+			  <main>
+				<!--시각 output-->
+				<div class="visual-container">
+				  <div id="canvas">
+				  </div>
+				</div>
+		
+				<!-- 햅틱 output -->
+				<div id="demo">
+				  <div id="waveform">
+				  </div>
+				</div>
+		
+				<div id="music-controls">
+				  <br>
+					<button class="btn btn-primary" data-action="play">
+						<i class="glyphicon glyphicon-play"></i>
+						Play
+						/
+						<i class="glyphicon glyphicon-pause"></i>
+						Pause
+					</button>
+					</div>
+		
+			</main>
 		<!-- Import maps polyfill -->
 		<!-- Remove this when import maps will be widely supported -->
 		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
 
-		<!-- <script type="importmap">
-			{
-				"imports": {
-					"three": ../build/three.module.js"
-				}
-			} -->
-		<!-- </script> -->
 
-		<script type="module" src="./main.js" defer> </script>
+		<!-- Javascript -->
+		<script type="module" defer src="./js/main.js"></script>
+		<script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
+		<script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.minimap.js"></script>
+		<script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
+		<script src="../js/jquery-3.3.1.min.js"></script>
+		<script src="../js/popper.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/bootstrapmain.js"></script>
+
 	</body>
 </html>

@@ -9,7 +9,6 @@ let AudioDifference;
 let AudioCurrentTime, AudioLastTime;
 // let target;
 
-console.log('why?');
 
 const pitchClasses = [
     "C",
@@ -29,10 +28,12 @@ const pitchClasses = [
 // const waveSurfer = document.getElementById("waveform");
 const wavesurferclick = document.querySelector("#waveform");
 
-let frameBuffer = new Map();
+let framePitchBuffer = new Map();
 pitchClasses.forEach((pitch) => {
-    frameBuffer.set(pitch, []);
+    framePitchBuffer.set(pitch, []);
 });
+
+let frameEnergyBuffer = [];
 
 // AudioLastTime = 0;
 // AudioCurrentTime = 0;
@@ -87,9 +88,10 @@ function FileChange(){
         console.log("www")
         wavesurfer.on('ready', () => {
             console.log("wavesurfer is ready");
-            wavesurfer.play();
             audio.play();
+            wavesurfer.play();
             AudioCurrentTime = wavesurfer.getCurrentTime();
+            wavesurfer.volume = 0;
             // console.log(AudioCurrentTime);
             audio.currentTime = AudioCurrentTime;
 
@@ -122,6 +124,7 @@ function AnalyzerPlay(audio_context, src) {
         callback: (features) => {
             try {
             chroma = updateChroma(features['chroma']);
+            energy = updateEnergy(features['energy']);
             } catch (err){
                 console.log(err);
             }
@@ -130,7 +133,8 @@ function AnalyzerPlay(audio_context, src) {
             // console.log(amplitudeSpectrum);
             maxChroma = chroma.indexOf(max(chroma));
             // console.log(chroma);
-            energy = features['energy']
+            // energy = features['energy']
+
         }
     })
     meyda_analyser.start();
@@ -141,7 +145,7 @@ function updateChroma(pitchValues){
     let result = [];
     pitchValues.forEach((value, index) => {
         let currentPitch = pitchClasses[index];
-        let currentPitchBuffer = frameBuffer.get(currentPitch);
+        let currentPitchBuffer = framePitchBuffer.get(currentPitch);
         currentPitchBuffer.push(value);
         let framesToBuffer = 20;
         while (currentPitchBuffer.length > framesToBuffer) {
@@ -154,6 +158,23 @@ function updateChroma(pitchValues){
     });
     return result;
 };
+
+
+function updateEnergy(energyValue){
+    let result;
+    let currentEnergyBuffer = frameEnergyBuffer;
+    currentEnergyBuffer.push(energyValue);
+    let framesToBuffer = 10;
+    while (currentEnergyBuffer.length > framesToBuffer){
+        currentEnergyBuffer.shift();
+    }
+    let framesAverage = 
+        currentEnergyBuffer.reduce((total, value) => total+value, 0)/currentEnergyBuffer.length;
+    // framesAverage = Math.pow(framesAverage, 5);
+    result = framesAverage;
+
+    return result;
+}
 
 
 function sleep(ms) {
