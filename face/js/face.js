@@ -145,19 +145,20 @@
 						let face = head.morphTargetInfluences;
 						// console.log(face);
 						// face['browInnerUp'] = 50;
-						// TimeisGold = TimeisGold+delta
-						// if (TimeisGold > 1){
-						// 	TimeisGold = 0;
-						// }
-						// face[0] = TimeisGold;
-						face[0] = maxChroma/12;
-						face[5] = chroma[0]/12;
-						face[6] = chroma[0]/12;
+						TimeisGold = TimeisGold+delta
+						if (TimeisGold > 1){
+							TimeisGold = 0;
+						}
+						// face[28] = Math.sin(TimeisGold*2*Math.PI);
+						face[0] = energy/70;
+						face[5] = chroma[0];
+						face[6] = chroma[0];
 
-						face[13] = chroma[5]/12;
-						face[14] = chroma[5]/12;
+						face[13] = chroma[5];
+						face[14] = chroma[5];
 						// face[8] = maxChroma/12;
 						// console.log(energy);
+						face[28] = energy/70;
 						face[37] = energy/70;
 						face[38] = energy/70;
 
