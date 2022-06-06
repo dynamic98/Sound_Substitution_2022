@@ -111,7 +111,7 @@
 				const environment = new RoomEnvironment();
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
 
-				scene.background = new THREE.Color( 0x666666 );
+				scene.background = new THREE.Color( 0x000000 );
 				scene.environment = pmremGenerator.fromScene( environment ).texture;
 
 				const controls = new OrbitControls( camera, renderer.domElement );
