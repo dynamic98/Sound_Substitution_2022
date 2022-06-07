@@ -1,13 +1,6 @@
 'use strict';
 
 import * as THREE from 'three';
-
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
-import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass.js';
-import { CopyShader } from 'three/examples/jsm/shaders/CopyShader.js';
-
 // import Stats from 'three/examples/jsm/libs/stats.module.js';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { pickr, analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, audio_context, src } from './modules.js';
@@ -17,9 +10,6 @@ let camera, scene, renderer;
 let container, stats;
 let customMenu;
 let FrameRate = 0;
-
-
-const meshes = [], materials = [], xgrid = 20, ygrid = 10;
 
 const GeomertyMap = new Map([
   [10000, createShapeLine_Vanilla],
@@ -79,9 +69,6 @@ let now_geometry;
 let group, geometry, material, compoCenter;
 let ambientLight, spotLight;
 
-let video, texture, videoMaterial, videoMesh;
-let plane;
-let composer;
 
 // BASIC EVENTS
 init();
@@ -89,17 +76,11 @@ vizInit();
 animate();
 
 
-
 // REQUIRED FUNCTIONS
 // init function
 function init() {
   console.log("Main is Initiated");
   scene = new THREE.Scene();
-
-
-  video = document.getElementById( 'video' );
-  video.play();
-
 
   // canvas
   renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
@@ -126,31 +107,6 @@ function init() {
 
   group = new THREE.Group();
   scene.add(group);
-
-
-  texture = new THREE.VideoTexture( video );
-
-  material = new THREE.MeshLambertMaterial({ map : texture });
-  plane = new THREE.Mesh(new THREE.PlaneGeometry(1920, 1080), material);
-  plane.material.side = THREE.DoubleSide;
-  plane.position.x = 0;
-  // plane.position.y = 
-  plane.position.z = -1900;
-
-
-  scene.add(plane);
-
-  const renderModel = new RenderPass( scene, camera );
-  // const effectBloom = new BloomPass( 1.3 );
-  // const effectBloom = new BloomPass( 1 );
-  const effectCopy = new ShaderPass( CopyShader );
-
-  composer = new EffectComposer( renderer );
-
-  composer.addPass( renderModel );
-  // composer.addPass( effectBloom );
-  composer.addPass( effectCopy );
-
 
   renderer.render(scene, camera);
 
