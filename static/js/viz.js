@@ -1,8 +1,6 @@
 'use strict';
 
 import * as THREE from 'three';
-// import Stats from 'three/examples/jsm/libs/stats.module.js';
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, audio_context, src } from './modules.js';
 
 // let controls;
@@ -110,7 +108,7 @@ function init() {
 
   renderer.render(scene, camera);
 
-  now_geometry = "shape_ring";
+  now_geometry = 30000;
 
   createShapeRing_Vanilla();
 };
@@ -134,8 +132,13 @@ function animate() {
       if (typeof now_geometry == 'number'){
         deleteBasics();
         let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+        console.log('now geometry', [geometry_type, pitch_type, dynamic_type]);
         let NowShapeFunction = GeomertyMap.get(now_geometry);
-        NowShapeFunction(); // 딕셔너리에서 불러온 함수 실행 << 이 부분이 잘못 되었다 !
+        if (now_geometry == 10505 || now_geometry == 10101){ // 안 되는 조합 예외처리
+          // pass
+        } else {
+          NowShapeFunction(); // 딕셔너리에서 불러온 함수 실행
+        }
     }
     render();
     }

@@ -30,8 +30,8 @@ pitchClasses.forEach((pitch) => {
     frameBuffer.set(pitch, []);
 });
 
-// AudioLastTime = 0;
-// AudioCurrentTime = 0;
+AudioLastTime = 0;
+AudioCurrentTime = 0;
 
 // LOAD MUSIC (vizInit)
 function FileInit() {
@@ -44,8 +44,6 @@ function FileInit() {
         container: document.querySelector('#waveform'),
         waveColor: '#A8DBA8',
         progressColor: '#3B8686',
-        // fillParent: false,
-        // minPxPerSec: 6,
         cursorWidth : 5,
         normalize: true,
     });
@@ -86,7 +84,7 @@ function FileChange(){
             wavesurfer.play();
             audio.play();
             AudioCurrentTime = wavesurfer.getCurrentTime();
-            // console.log(AudioCurrentTime);
+            console.log(AudioCurrentTime);
             audio.currentTime = AudioCurrentTime;
 
         })
@@ -121,9 +119,7 @@ function AnalyzerPlay(audio_context, src) {
                 console.log(err);
             }
 
-            // console.log(chroma);
             maxChroma = chroma.indexOf(max(chroma));
-            // console.log(chroma);
             energy = features['energy']
         }
     })
@@ -159,20 +155,6 @@ function SyncAudio(){
         await sleep(1);
         AudioCurrentTime = wavesurfer.getCurrentTime();
         audio.currentTime = AudioCurrentTime;
-        // console.log(AudioCurrentTime);
-
-    // wavesurfer.on('audioprocess', function() {
-        // if(wavesurfer.isPlaying()) {
-
-                // AudioCurrentTime = wavesurfer.getCurrentTime();
-                // audio.currentTime = AudioCurrentTime;
-                // // console.log(AudioCurrentTime - AudioLastTime);
-                // let AudioDifference = AudioCurrentTime - AudioLastTime;
-                // if (AudioDifference > 0.05 || AudioDifference < 0){
-                //     audio.currentTime = AudioCurrentTime;
-                //     console.log(AudioCurrentTime - AudioLastTime);
-                // }
-                // AudioLastTime = AudioCurrentTime;
 })}
 
 
@@ -188,7 +170,6 @@ function TogglePlay(){
 
 FileInit();
 FileChange();
-// AudioSync();
 SyncAudio();
 
 
@@ -211,10 +192,7 @@ function fractionate(val, minVal, maxVal) {
   function max(arr){
     return arr.reduce(function(a, b){ return Math.max(a, b); })
   }
-  
-  // export {audio};
-// const button = document.getElementById("thefile");
-// button.addEventListener('click', titleAudio);
+
 
 
 export { audio, audio_context, src, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray };
