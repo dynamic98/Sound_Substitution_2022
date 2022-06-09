@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from featureExtraction import extract_feature
 from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 
@@ -42,7 +43,7 @@ def concrete():
 
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
 
 
 
