@@ -20,7 +20,7 @@
     <!-- Form to send Flask-->
     <form action="/abstract" method="POST" form autocomplete="off" enctype="multipart/form-data">
         <label for="thefile" class="file"> Pick a Music for Abstract 🎺
-            <input type="file" id="abs_input" name="thefile" accept="audio/mp3" />
+            <input type="file" id="abs_input" name="thefile" accept="audio/mp3" multiple/>
         </label>
         <button type="submit" id="abstract" value="abstractVisualization" class="button-73" role="button">Abstract Visualization + Haptic</button>
     </form>

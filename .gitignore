@@ -111,3 +111,5 @@ dist
 
 # MP3 file
 .sampleMP3/
+
+.static/music/

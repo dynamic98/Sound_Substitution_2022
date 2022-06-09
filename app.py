@@ -19,14 +19,23 @@ def index():
 # abstact 페이지에서는 오디오 파일을 변수에 저장만 하기
 @app.route('/abstract', methods=['POST'])
 def abstract():
-  if request.method == 'POST':
-      file = request.files['thefile']
-      file.save(os.path.join(folder, secure_filename(file.filename)))
-      print('file has saved!')
-      return render_template('abstract.html')
-  else:
-    print('file was not saved!')
-    return render_template('mainMenu.html')
+  filelist = os.listdir(os.path.join('static/music'))
+  filestrlist = ''
+  for n, i in enumerate(filelist):
+    if not n == len(filelist):
+      filestrlist = filestrlist + i + ', '
+    else:
+      filestrlist = filestrlist + i
+  print(filestrlist)
+    # if request.method == 'POST':
+    #     file = request.files['thefile']
+    #     file.save(os.path.join(folder, secure_filename(file.filename)))
+    #     print('file has saved!')
+    #     return render_template('abstract.html')
+    # else:
+    #   print('file was not saved!')
+    #   return render_template('mainMenu.html')
+  return render_template('abstract.html', filelist=filestrlist)
   
 
 
