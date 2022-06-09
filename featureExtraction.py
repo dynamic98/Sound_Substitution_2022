@@ -18,8 +18,8 @@ from pydub import AudioSegment
 '''
 
 
-def extract_feature(path):
-    id = 1  # Song ID
+def extract_feature(file_data):
+    # id = 1  # Song ID
     feature_set = pd.DataFrame()  # Feature Matrix
 
     # Individual Feature Vectors
@@ -80,104 +80,103 @@ def extract_feature(path):
     frame_var = pd.Series()
 
     # Traversing over each file in path
-    file_data = [f for f in listdir(path) if isfile(join(path, f))]
+    # file_data = [f for f in listdir(path) if isfile(join(path, f))]
     print(file_data)
+
     # # audio_data = AudioSegment.from_file("path", format="mp3")
-    for _ in file_data:
-        line = file_data[1]
+    # for _ in file_data:
+    #     line = file_data[1]
         # if (line[-1:] == '\n'):
         #     line = line[1]
         #     print(line)
 
         # Reading Song
-        songname = path + line # 음원이 들어있는 최종 경로 + 파일 이름
-        print(songname)
+        # songname = path + line # 음원이 들어있는 최종 경로 + 파일 이름
+        # print(songname)
         # songname = AudioSegment.from_file(songname, format="mp3")
-        y, sr = librosa.load(songname, duration=60)
-        S = np.abs(librosa.stft(y))
+    y, sr = librosa.load(file_data, duration=60)
+    S = np.abs(librosa.stft(y))
 
         # Extracting Features
-        tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
-        chroma_stft = librosa.feature.chroma_stft(y=y, sr=sr)
-        chroma_cq = librosa.feature.chroma_cqt(y=y, sr=sr)
-        chroma_cens = librosa.feature.chroma_cens(y=y, sr=sr)
-        melspectrogram = librosa.feature.melspectrogram(y=y, sr=sr)
-        rmse = librosa.feature.rms(y=y)
-        cent = librosa.feature.spectral_centroid(y=y, sr=sr)
-        spec_bw = librosa.feature.spectral_bandwidth(y=y, sr=sr)
-        contrast = librosa.feature.spectral_contrast(S=S, sr=sr)
-        rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr)
-        poly_features = librosa.feature.poly_features(S=S, sr=sr)
-        tonnetz = librosa.feature.tonnetz(y=y, sr=sr)
-        zcr = librosa.feature.zero_crossing_rate(y)
-        harmonic = librosa.effects.harmonic(y)
-        percussive = librosa.effects.percussive(y)
+    tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
+    chroma_stft = librosa.feature.chroma_stft(y=y, sr=sr)
+    chroma_cq = librosa.feature.chroma_cqt(y=y, sr=sr)
+    chroma_cens = librosa.feature.chroma_cens(y=y, sr=sr)
+    melspectrogram = librosa.feature.melspectrogram(y=y, sr=sr)
+    rmse = librosa.feature.rms(y=y)
+    cent = librosa.feature.spectral_centroid(y=y, sr=sr)
+    spec_bw = librosa.feature.spectral_bandwidth(y=y, sr=sr)
+    contrast = librosa.feature.spectral_contrast(S=S, sr=sr)
+    rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr)
+    poly_features = librosa.feature.poly_features(S=S, sr=sr)
+    tonnetz = librosa.feature.tonnetz(y=y, sr=sr)
+    zcr = librosa.feature.zero_crossing_rate(y)
+    harmonic = librosa.effects.harmonic(y)
+    percussive = librosa.effects.percussive(y)
 
-        mfcc = librosa.feature.mfcc(y=y, sr=sr)
-        mfcc_delta = librosa.feature.delta(mfcc)
+    mfcc = librosa.feature.mfcc(y=y, sr=sr)
+    mfcc_delta = librosa.feature.delta(mfcc)
 
-        onset_frames = librosa.onset.onset_detect(y=y, sr=sr)
-        frames_to_time = librosa.frames_to_time(onset_frames[:20], sr=sr)
+    onset_frames = librosa.onset.onset_detect(y=y, sr=sr)
+    frames_to_time = librosa.frames_to_time(onset_frames[:20], sr=sr)
 
-        # Transforming Features
-        songname_vector.set_value(id, line)  # song name
-        tempo_vector.set_value(id, tempo)  # tempo
-        total_beats.set_value(id, sum(beats))  # beats
-        average_beats.set_value(id, np.average(beats))
-        chroma_stft_mean.set_value(id, np.mean(chroma_stft))  # chroma stft
-        chroma_stft_std.set_value(id, np.std(chroma_stft))
-        chroma_stft_var.set_value(id, np.var(chroma_stft))
-        chroma_cq_mean.set_value(id, np.mean(chroma_cq))  # chroma cq
-        chroma_cq_std.set_value(id, np.std(chroma_cq))
-        chroma_cq_var.set_value(id, np.var(chroma_cq))
-        chroma_cens_mean.set_value(id, np.mean(chroma_cens))  # chroma cens
-        chroma_cens_std.set_value(id, np.std(chroma_cens))
-        chroma_cens_var.set_value(id, np.var(chroma_cens))
-        mel_mean.set_value(id, np.mean(melspectrogram))  # melspectrogram
-        mel_std.set_value(id, np.std(melspectrogram))
-        mel_var.set_value(id, np.var(melspectrogram))
-        mfcc_mean.set_value(id, np.mean(mfcc))  # mfcc
-        mfcc_std.set_value(id, np.std(mfcc))
-        mfcc_var.set_value(id, np.var(mfcc))
-        mfcc_delta_mean.set_value(id, np.mean(mfcc_delta))  # mfcc delta
-        mfcc_delta_std.set_value(id, np.std(mfcc_delta))
-        mfcc_delta_var.set_value(id, np.var(mfcc_delta))
-        rmse_mean.set_value(id, np.mean(rmse))  # rmse
-        rmse_std.set_value(id, np.std(rmse))
-        rmse_var.set_value(id, np.var(rmse))
-        cent_mean.set_value(id, np.mean(cent))  # cent
-        cent_std.set_value(id, np.std(cent))
-        cent_var.set_value(id, np.var(cent))
-        spec_bw_mean.set_value(id, np.mean(spec_bw))  # spectral bandwidth
-        spec_bw_std.set_value(id, np.std(spec_bw))
-        spec_bw_var.set_value(id, np.var(spec_bw))
-        contrast_mean.set_value(id, np.mean(contrast))  # contrast
-        contrast_std.set_value(id, np.std(contrast))
-        contrast_var.set_value(id, np.var(contrast))
-        rolloff_mean.set_value(id, np.mean(rolloff))  # rolloff
-        rolloff_std.set_value(id, np.std(rolloff))
-        rolloff_var.set_value(id, np.var(rolloff))
-        poly_mean.set_value(id, np.mean(poly_features))  # poly features
-        poly_std.set_value(id, np.std(poly_features))
-        poly_var.set_value(id, np.var(poly_features))
-        tonnetz_mean.set_value(id, np.mean(tonnetz))  # tonnetz
-        tonnetz_std.set_value(id, np.std(tonnetz))
-        tonnetz_var.set_value(id, np.var(tonnetz))
-        zcr_mean.set_value(id, np.mean(zcr))  # zero crossing rate
-        zcr_std.set_value(id, np.std(zcr))
-        zcr_var.set_value(id, np.var(zcr))
-        harm_mean.set_value(id, np.mean(harmonic))  # harmonic
-        harm_std.set_value(id, np.std(harmonic))
-        harm_var.set_value(id, np.var(harmonic))
-        perc_mean.set_value(id, np.mean(percussive))  # percussive
-        perc_std.set_value(id, np.std(percussive))
-        perc_var.set_value(id, np.var(percussive))
-        frame_mean.set_value(id, np.mean(frames_to_time))  # frames
-        frame_std.set_value(id, np.std(frames_to_time))
-        frame_var.set_value(id, np.var(frames_to_time))
+    # Transforming Features
+    songname_vector.set_value(id, line)  # song name
+    tempo_vector.set_value(id, tempo)  # tempo
+    total_beats.set_value(id, sum(beats))  # beats
+    average_beats.set_value(id, np.average(beats))
+    chroma_stft_mean.set_value(id, np.mean(chroma_stft))  # chroma stft
+    chroma_stft_std.set_value(id, np.std(chroma_stft))
+    chroma_stft_var.set_value(id, np.var(chroma_stft))
+    chroma_cq_mean.set_value(id, np.mean(chroma_cq))  # chroma cq
+    chroma_cq_std.set_value(id, np.std(chroma_cq))
+    chroma_cq_var.set_value(id, np.var(chroma_cq))
+    chroma_cens_mean.set_value(id, np.mean(chroma_cens))  # chroma cens
+    chroma_cens_std.set_value(id, np.std(chroma_cens))
+    chroma_cens_var.set_value(id, np.var(chroma_cens))
+    mel_mean.set_value(id, np.mean(melspectrogram))  # melspectrogram
+    mel_std.set_value(id, np.std(melspectrogram))
+    mel_var.set_value(id, np.var(melspectrogram))
+    mfcc_mean.set_value(id, np.mean(mfcc))  # mfcc
+    mfcc_std.set_value(id, np.std(mfcc))
+    mfcc_var.set_value(id, np.var(mfcc))
+    mfcc_delta_mean.set_value(id, np.mean(mfcc_delta))  # mfcc delta
+    mfcc_delta_std.set_value(id, np.std(mfcc_delta))
+    mfcc_delta_var.set_value(id, np.var(mfcc_delta))
+    rmse_mean.set_value(id, np.mean(rmse))  # rmse
+    rmse_std.set_value(id, np.std(rmse))
+    rmse_var.set_value(id, np.var(rmse))
+    cent_mean.set_value(id, np.mean(cent))  # cent
+    cent_std.set_value(id, np.std(cent))
+    cent_var.set_value(id, np.var(cent))
+    spec_bw_mean.set_value(id, np.mean(spec_bw))  # spectral bandwidth
+    spec_bw_std.set_value(id, np.std(spec_bw))
+    spec_bw_var.set_value(id, np.var(spec_bw))
+    contrast_mean.set_value(id, np.mean(contrast))  # contrast
+    contrast_std.set_value(id, np.std(contrast))
+    contrast_var.set_value(id, np.var(contrast))
+    rolloff_mean.set_value(id, np.mean(rolloff))  # rolloff
+    rolloff_std.set_value(id, np.std(rolloff))
+    rolloff_var.set_value(id, np.var(rolloff))
+    poly_mean.set_value(id, np.mean(poly_features))  # poly features
+    poly_std.set_value(id, np.std(poly_features))
+    poly_var.set_value(id, np.var(poly_features))
+    tonnetz_mean.set_value(id, np.mean(tonnetz))  # tonnetz
+    tonnetz_std.set_value(id, np.std(tonnetz))
+    tonnetz_var.set_value(id, np.var(tonnetz))
+    zcr_mean.set_value(id, np.mean(zcr))  # zero crossing rate
+    zcr_std.set_value(id, np.std(zcr))
+    zcr_var.set_value(id, np.var(zcr))
+    harm_mean.set_value(id, np.mean(harmonic))  # harmonic
+    harm_std.set_value(id, np.std(harmonic))
+    harm_var.set_value(id, np.var(harmonic))
+    perc_mean.set_value(id, np.mean(percussive))  # percussive
+    perc_std.set_value(id, np.std(percussive))
+    perc_var.set_value(id, np.var(percussive))
+    frame_mean.set_value(id, np.mean(frames_to_time))  # frames
+    frame_std.set_value(id, np.std(frames_to_time))
+    frame_var.set_value(id, np.var(frames_to_time))
 
-        print(songname)
-        id = id + 1
 
     # Concatenating Features into one csv and json format
     feature_set['song_name'] = songname_vector  # song name
@@ -241,8 +240,6 @@ def extract_feature(path):
     feature_set.to_json('Emotion_features.json')
 
 
-
-
 # Extracting Feature Function Call
-
-extract_feature('/Users/lifeofpy/PycharmProjects/musicClassification/music-emotion-classifier/Dataset/')
+# Dataset 아래에 mp3 파일을 두고 음악 요소 추출 (librosa)
+# extract_feature('/Users/lifeofpy/PycharmProjects/musicClassification/music-emotion-classifier/Dataset/')
