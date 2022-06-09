@@ -84,7 +84,7 @@ function FileChange(){
             wavesurfer.play();
             audio.play();
             AudioCurrentTime = wavesurfer.getCurrentTime();
-            console.log(AudioCurrentTime);
+            // console.log(AudioCurrentTime);
             audio.currentTime = AudioCurrentTime;
 
         })
@@ -168,10 +168,11 @@ function TogglePlay(){
     }
 }
 
+window.onload = function(){
 FileInit();
 FileChange();
 SyncAudio();
-
+}
 
 // some helper functions here
 function fractionate(val, minVal, maxVal) {

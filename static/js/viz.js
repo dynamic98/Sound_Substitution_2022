@@ -127,12 +127,13 @@ function animate() {
     // music rendering
     if (dataArray){
       analyser.getByteFrequencyData(dataArray);
+      // console.log(dataArray);
       
       // geometry rendering
       if (typeof now_geometry == 'number'){
         deleteBasics();
         let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
-        console.log('now geometry', [geometry_type, pitch_type, dynamic_type]);
+        // console.log('now geometry', [geometry_type, pitch_type, dynamic_type]);
         let NowShapeFunction = GeomertyMap.get(now_geometry);
         if (now_geometry == 10505 || now_geometry == 10101){ // 안 되는 조합 예외처리
           // pass
