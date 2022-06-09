@@ -1,3 +1,21 @@
+label.file{
+  margin-left: 300px;
+  margin-top: 50px;
+  font-size: 1.5rem;
+}
+
+input#abs_input{
+  font-size: 1.5rem;
+}
+
+input#con_input{
+  font-size: 1.5rem;
+}
+
+
+
+
+
 button.button-73 {
   appearance: none;
   background-color: #FFFFFF;
@@ -21,6 +39,7 @@ button.button-73 {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+
 }
 
 button.button-73:hover {
@@ -36,7 +55,7 @@ button.button-73:active {
 
 @media (min-width: 1440px) {
 button.button-73 {
-    margin-top: 180px;
+    margin-top: 100px;
     margin-left: 560px;
     width: 400px;
     height: 120px;
@@ -48,9 +67,9 @@ button.button-73 {
 
 @media (min-width: 1600px) {
 button.button-73 {
-    margin-top: 230px;
+    /* margin-top: 230px; */
     margin-left: 770px;
-    width: 400px;
+    width: 500px;
     height: 120px;
     font-size: 1.5rem;
     padding: .75rem 2rem;
