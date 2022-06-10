@@ -19,6 +19,7 @@
 
 <body>
     <script>
+
         // 다중메뉴 - 한번에 하나만 보여주기 & 오디오 인풋 들어오면 보여주기
         function change(box, delimiter) {
           target = document.getElementById('thefile');
@@ -103,7 +104,9 @@
             <h3 class="name">User#01</h3>
             <span class="identity">Deaf</span>
             <h3>hello, this is our filelist</h3>
-            <h4>{{filelist}}</h4>
+            <div id="filelist" hidden> {{filelist}} </div>
+            <select id="select-music">
+            </select>
           </div>
   
           <div id="sidebar-content">
@@ -164,6 +167,7 @@
               </li>
             </ul>
           </div>
+
         </div>
         
       </aside>
@@ -331,5 +335,30 @@
     <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
     <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.minimap.js"></script>
     <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
+
+    <script>
+      let myobject = {
+            ValueA : 'Text A',
+            ValueB : 'Text B',
+            ValueC : 'Text C'
+          };
+      console.log(myobject);
+
+      let filelistText = document.getElementById("filelist").innerText;
+      let filelist = filelistText.split(', ');
+
+      let fileobject = new Object;
+      filelist.forEach((file, index) => {
+        fileobject[index] = file;
+      });
+      console.log(fileobject);
+
+      let select = document.getElementById("select-music");
+      for(index in fileobject) {
+          select.options[select.options.length] = new Option(fileobject[index], index);
+        }
+
+;
+    </script>
 </body>
 </html>

@@ -22,11 +22,10 @@ def abstract():
   filelist = os.listdir(os.path.join('static/music'))
   filestrlist = ''
   for n, i in enumerate(filelist):
-    if not n == len(filelist):
+    if n != len(filelist)-1:
       filestrlist = filestrlist + i + ', '
     else:
       filestrlist = filestrlist + i
-  print(filestrlist)
     # if request.method == 'POST':
     #     file = request.files['thefile']
     #     file.save(os.path.join(folder, secure_filename(file.filename)))
@@ -35,7 +34,9 @@ def abstract():
     # else:
     #   print('file was not saved!')
     #   return render_template('mainMenu.html')
-  return render_template('abstract.html', filelist=filestrlist)
+
+    result = {'a':3, 'b':4, 'c':9}
+  return render_template('abstract.html', filelist=filestrlist, result=result)
   
 
 
