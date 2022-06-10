@@ -5,8 +5,7 @@ import os
 
 
 app = Flask(__name__)
-folder = os.path.join('static/music')
-
+folder = os.path.join('./static/music/')
 
 os.makedirs(folder, exist_ok=True)
 
@@ -19,28 +18,28 @@ def index():
 # abstact 페이지에서는 오디오 파일을 변수에 저장만 하기
 @app.route('/abstract', methods=['POST'])
 def abstract():
+  features = ''
   if request.method == 'POST':
     file = request.files['thefile']
     if os.path.isdir(os.path.join(folder, secure_filename(file.filename))):
       pass
     else: 
       file.save(os.path.join(folder, secure_filename(file.filename)))
-      print('file has saved!')
-    
+      extract_feature(folder) # 내가 원하는 음악의 Feature 추출
+      # 이것을 classifier.ts 와 연결
+
+
   filelist = os.listdir(os.path.join('static/music'))
   print(filelist)
   filelist.sort(key=lambda x: os.path.getmtime(os.path.join('static/music', x)), reverse=True)
   filestrlist = ''
+
   for n, i in enumerate(filelist):
     if n != len(filelist)-1:
       filestrlist = filestrlist + i + ', '
     else:
       filestrlist = filestrlist + i
 
-    #     return render_template('abstract.html')
-    # else:
-    #   print('file was not saved!')
-    #   return render_template('mainMenu.html')
   return render_template('abstract.html', filelist=filestrlist)
   
 

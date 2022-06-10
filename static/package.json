@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "parcel-plugin-json-url-loader": "^0.1.1",
+    "typescript": "^3.0.1",
     "vite": "^2.8.4"
   },
   "dependencies": {
@@ -16,9 +18,11 @@
     "meyda": "^5.3.0",
     "nodemon": "^2.0.15",
     "p5": "^1.4.1",
+    "parcel-plugin-json-url-loader": "^0.1.1",
     "pickr": "^0.1.4",
     "three": "^0.138.3",
     "three.meshline": "^1.4.0",
+    "typescript": "^3.0.1",
     "wavesurfer.js": "^6.0.4"
   },
   "main": "index.js",
