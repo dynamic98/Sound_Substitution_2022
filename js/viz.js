@@ -98,7 +98,7 @@ function init() {
 
 
   video = document.getElementById( 'video' );
-  video.play();
+  // video.play();
 
 
   // canvas

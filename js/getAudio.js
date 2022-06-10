@@ -24,9 +24,6 @@ const pitchClasses = [
     "B"
 ];
 
-// const waveSurfer = document.getElementById("waveform");
-const wavesurferclick = document.querySelector("#waveform");
-
 let frameBuffer = new Map();
 pitchClasses.forEach((pitch) => {
     frameBuffer.set(pitch, []);
@@ -41,23 +38,18 @@ function FileInit() {
     audio = document.getElementById("audio");
     fileLabel = document.querySelector("label.file");
     audio_context = audio_context || new AudioContext();
+    let video = document.getElementById('video');
+    const UsrAg = navigator.userAgent;
+    let stream = null;
+    if (UsrAg.indexOf('Firefox') > -1) { stream = video.mozCaptureStream(); }
+    else { stream = video.captureStream(); }
 
-    wavesurfer = WaveSurfer.create({
-        container: document.querySelector('#waveform'),
-        waveColor: '#A8DBA8',
-        progressColor: '#3B8686',
-        // fillParent: false,
-        // minPxPerSec: 6,
-        cursorWidth : 5,
-        normalize: true,
-    });
 
     console.log('audio input completed')
     document
     .querySelector('[data-action="play"]')
     .addEventListener('click', ()=>{ 
         console.log("PlayPause button pressed");
-        wavesurfer.playPause();
         TogglePlay();
     })
   }
@@ -77,21 +69,15 @@ function FileChange(){
         
         let fileList = file.files[0].name;
         realTitle.innerText = fileList;
-        
-        wavesurfer.load(audio);
-        audio.load();
-        src = audio_context.createMediaElementSource(audio);
-        audio.volume = 1;
 
-        wavesurfer.on('ready', () => {
-            console.log("wavesurfer is ready");
-            wavesurfer.play();
-            audio.play();
-            AudioCurrentTime = wavesurfer.getCurrentTime();
-            // console.log(AudioCurrentTime);
-            audio.currentTime = AudioCurrentTime;
+        // audio.load();
+        video.load();
+        // src = audio_context.createMediaElementSource(audio);
+        src = audio_context.createMediaElementSource(video);
+        // src = audio_context.createMediaStreamSource(video);
+        // video.volume = 1;
+        video.play()
 
-        })
         
         AnalyzerPlay(audio_context, src);
     }
@@ -156,28 +142,6 @@ function sleep(ms) {
     return new Promise((r) => setTimeout(r, ms));
   }
 
-function SyncAudio(){
-    wavesurferclick.addEventListener("click", async ()=>{
-        await sleep(1);
-        AudioCurrentTime = wavesurfer.getCurrentTime();
-        audio.currentTime = AudioCurrentTime;
-        // console.log(AudioCurrentTime);
-
-    // wavesurfer.on('audioprocess', function() {
-        // if(wavesurfer.isPlaying()) {
-
-                // AudioCurrentTime = wavesurfer.getCurrentTime();
-                // audio.currentTime = AudioCurrentTime;
-                // // console.log(AudioCurrentTime - AudioLastTime);
-                // let AudioDifference = AudioCurrentTime - AudioLastTime;
-                // if (AudioDifference > 0.05 || AudioDifference < 0){
-                //     audio.currentTime = AudioCurrentTime;
-                //     console.log(AudioCurrentTime - AudioLastTime);
-                // }
-                // AudioLastTime = AudioCurrentTime;
-})}
-
-
 
 
 function TogglePlay(){
@@ -191,7 +155,7 @@ function TogglePlay(){
 FileInit();
 FileChange();
 // AudioSync();
-SyncAudio();
+// SyncAudio();
 
 
 // some helper functions here

@@ -294,7 +294,7 @@ label.file:hover{
 
 audio {
   position: fixed;
-  visibility: hidden;
+  /* visibility: hidden; */
   left: 90px;
   bottom: 40px;
   width: 910px;
