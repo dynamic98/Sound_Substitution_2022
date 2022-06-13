@@ -18,9 +18,7 @@
 </head>
 
 <body>
-    <p> {{ features }} </p>
     <script>
-
         // 다중메뉴 - 한번에 하나만 보여주기 & 오디오 인풋 들어오면 보여주기
         function change(box, delimiter) {
           target = document.getElementById('thefile');
@@ -104,10 +102,13 @@
             <img src="../static/images/cutecat.jpeg" alt="Image" class="img-fluid">
             <h3 class="name">User#01</h3>
             <span class="identity">Deaf</span>
-            <h3>hello, this is our filelist</h3>
+            <br id="musiclist">
+            <p id="musiclist">Music List<p>
             <div id="filelist" hidden> {{filelist}} </div>
             <select id="select-music">
             </select>
+            <br id="musiclist">
+            <button id="music_submit"> Submit </button>
           </div>
   
           <div id="sidebar-content">
@@ -127,7 +128,7 @@
             <ul>
               <li class="accordion">
                 <hr>
-  
+
                 <p id="VisuoMenu" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsible">
                 <!-- <a href="#" id="VisuoMenu" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsible"> -->
                   🎨 Visualization
@@ -149,7 +150,9 @@
                   </div>
                 </div>
               </li>
+
               <br>
+              
               <li class="accordion">
                 <p id="HapticMenu" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsible">
                   👋 Haptic </p>
@@ -166,6 +169,29 @@
                 </div>
   
               </li>
+
+              <br>
+
+              <li class="accordion">
+                <p id="EmoticMenu" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsible">
+                  🤩 Emotion </p>
+  
+                <div id="collapseThree" class="collapse" aria-labelledby="headingOne">
+                  <div>
+                    <ul>
+                      <li type="button" class="EmoticMenus">
+                        <input class="check-btn" id="check-Emotic" type="checkbox" onclick="highlight_haptic(this, 'active-Emotic');"> 
+                        <label for="check-Emotic"> <div id="active-Emotic">Predict Emotion</div> </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+  
+              </li>
+
+              <br>
+
+
             </ul>
           </div>
 
@@ -313,20 +339,21 @@
         </div>
 
     </main>
+
     <!-- Javascript -->
     <!-- Have to link importmap to use NPM modules...-->
-    <!-- <script type="text/javascript", src="{{ url_for('static', filename='node_modules/three/build/three.module.js') }}"></script> -->
-    <!-- <script type="text/javascript", src="{{ url_for('static', filename='node_modules/@simonwep/pickr/dist/pickr.min.js') }}"></script> -->
     <script type="importmap">
       {
           "imports": {
-              "three": "../static/node_modules/three/build/three.module.js"
+              "three": "../static/node_modules/three/build/three.module.js",
+              "@tensorflow/tfjs": "../tatic/node_modules/@tensorflow/tfjs"
           }
       }
     </script>
 
     <script type="module" defer src="../static/js/main.js"></script>
     <script type="module" defer src="../static/js/showCanvas.js"></script>
+    <script type="module" defer src="../static/ts/classifier.js"></script>
     <script src="../static/js/jquery-3.3.1.min.js"></script>
     <script src="../static/js/popper.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>

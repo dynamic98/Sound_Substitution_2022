@@ -8,17 +8,18 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "parcel-plugin-json-url-loader": "^0.1.1",
+    "parcel-plugin-json-url-loader": "^0.1.2",
     "typescript": "^3.0.1",
     "vite": "^2.8.4"
   },
   "dependencies": {
     "@simonwep/pickr": "^1.8.2",
+    "@tensorflow/tfjs": "^3.18.0",
     "bpm-detective": "^2.0.5",
+    "data": "^0.6.1",
     "meyda": "^5.3.0",
     "nodemon": "^2.0.15",
     "p5": "^1.4.1",
-    "parcel-plugin-json-url-loader": "^0.1.1",
     "pickr": "^0.1.4",
     "three": "^0.138.3",
     "three.meshline": "^1.4.0",

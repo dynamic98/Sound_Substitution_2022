@@ -1,14 +1,14 @@
 'use strict';
 
-// -------- Options --------
-
-
 // Import data
+import * as tf from '@tensorflow/tfjs';
 import * as dataset from "../data/Emotion_data.json";
-import * as toClassify from "../toClassify/Emotion_features.json";
+import * as toClassify from "../../toClassify/Emotion_features.json";
 
 // Import functions to convert data
 import * as SD from "./ShapeData";
+
+
 
 const ShapeData = new SD.ShapeData;
 
@@ -16,26 +16,27 @@ const ShapeData = new SD.ShapeData;
 let labelList = ["sad", "happy", "relax", "angry"];
 
 
-// document.querySelector(`#submit`).addEventListener('click', () => {
-//     // Get the values from HTML
-//     const epochs = parseInt((<HTMLInputElement>document.querySelector(`#epochs`)).value);
-//     const learningRate = parseFloat((<HTMLInputElement>document.querySelector(`#learningRate`)).value);
-//     const validationSplit = parseFloat((<HTMLInputElement>document.querySelector(`#validationSplit`)).value);
-//     const unitsHiddenLayer = parseInt((<HTMLInputElement>document.querySelector(`#epochs`)).value);
-//     const hiddenLayerActivation = String((<HTMLInputElement>document.querySelector(`#hiddenLayerActivation`)).value);
-//     const outputLayerActivation = String((<HTMLInputElement>document.querySelector(`#outputLayerActivation`)).value);
+document.querySelector('#music_submit').addEventListener('click', () => {
+    classify();
+    // Get the values from HTML
+    // const epochs = parseInt((<HTMLInputElement>document.querySelector(`#epochs`)).value);
+    // const learningRate = parseFloat((<HTMLInputElement>document.querySelector(`#learningRate`)).value);
+    // const validationSplit = parseFloat((<HTMLInputElement>document.querySelector(`#validationSplit`)).value);
+    // const unitsHiddenLayer = parseInt((<HTMLInputElement>document.querySelector(`#epochs`)).value);
+    // const hiddenLayerActivation = String((<HTMLInputElement>document.querySelector(`#hiddenLayerActivation`)).value);
+    // const outputLayerActivation = String((<HTMLInputElement>document.querySelector(`#outputLayerActivation`)).value);
 
-//     classify(
-//         epochs,
-//         learningRate,
-//         validationSplit,
-//         unitsHiddenLayer,
-//         hiddenLayerActivation,
-//         outputLayerActivation
-//     );
-// });
+    // classify(
+    //     epochs,
+    //     learningRate,
+    //     validationSplit,
+    //     unitsHiddenLayer,
+    //     hiddenLayerActivation,
+    //     outputLayerActivation
+    // );
+});
 
-classify();
+// classify();
 
 function classify(
     epochs: number = 30,

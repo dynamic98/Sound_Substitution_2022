@@ -49,6 +49,17 @@ a {
   a, a:hover {
     text-decoration: none !important; }
 
+
+p#musiclist{
+  font-style: black;
+  font-size: 18px;
+}
+
+br#musiclist{
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
 p#VisuoMenu{
   font-size: 20px;
 }
@@ -72,6 +83,21 @@ li.VisuoMenus{
 li.HapticMenus{
   font-size: 18px;
 }
+
+p#EmoticMenu{
+  font-size: 20px;
+}
+
+a#EmoticMenu{
+  font-size: 20px;
+}
+
+li.EmoticMenus{
+  font-size: 18px;
+}
+
+
+
 
 h2 {
   font-size: 20px; }
