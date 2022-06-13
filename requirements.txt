@@ -191,6 +191,7 @@ QtPy @ file:///opt/conda/conda-bld/qtpy_1649073884068/work
 regex @ file:///opt/concourse/worker/volumes/live/bb3c765f-1198-43fb-7d54-0f944c2cd073/volume/regex_1629302103632/work
 requests @ file:///opt/conda/conda-bld/requests_1641824580448/work
 resampy==0.2.2
+<<<<<<< HEAD
 rope @ file:///opt/conda/conda-bld/rope_1643788605236/work
 Rtree @ file:///opt/concourse/worker/volumes/live/6a237633-b901-4775-4c12-9d387f981643/volume/rtree_1618420833446/work
 ruamel-yaml-conda @ file:///opt/concourse/worker/volumes/live/3691cad8-1bba-497e-4109-460bac08a255/volume/ruamel_yaml_1616016694353/work
@@ -206,6 +207,13 @@ sniffio @ file:///opt/concourse/worker/volumes/live/dc6540d5-d03a-4e11-5711-bc51
 snowballstemmer @ file:///tmp/build/80754af9/snowballstemmer_1637937080595/work
 sortedcollections @ file:///tmp/build/80754af9/sortedcollections_1611172717284/work
 sortedcontainers @ file:///tmp/build/80754af9/sortedcontainers_1623949099177/work
+=======
+sacremoses==0.0.53
+scikit-learn==0.24.2
+scipy==1.5.4
+sentencepiece==0.1.91
+smart-open==6.0.0
+>>>>>>> 9574013a6374457ff8154c7ffecf9c14def82a49
 SoundFile==0.10.3.post1
 soupsieve @ file:///tmp/build/80754af9/soupsieve_1636706018808/work
 Sphinx @ file:///opt/conda/conda-bld/sphinx_1643644169832/work
