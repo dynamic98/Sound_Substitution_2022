@@ -1,3 +1,4 @@
+import { RectAreaLight } from 'three';
 import { show_canvas } from './modules.js'
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
@@ -5,6 +6,7 @@ let analyser, wavesurfer, src, bufferLength, dataArray;
 let chroma, maxChroma, energy, amplitudeSpectrum;
 let AudioDifference;
 let AudioCurrentTime, AudioLastTime;
+let selectedMusic, selectMusicText;
 // let target;
 
 const pitchClasses = [
@@ -24,6 +26,7 @@ const pitchClasses = [
 
 // const waveSurfer = document.getElementById("waveform");
 const wavesurferclick = document.querySelector("#waveform");
+const musicSelect = document.getElementById("select-music");
 
 let frameBuffer = new Map();
 pitchClasses.forEach((pitch) => {
@@ -35,9 +38,15 @@ AudioCurrentTime = 0;
 
 // LOAD MUSIC (vizInit)
 function FileInit() {
-    file = document.getElementById("thefile");
+    // file = document.getElementById("thefile");
     audio = document.getElementById("audio");
-    fileLabel = document.querySelector("label.file");
+    // fileLabel = document.querySelector("label.file");
+    changeMusicSelect();
+    musicSelect.onchange = function(){
+        changeMusicSelect();
+    };
+
+    // audio.src = URL.createObjectURL()
     audio_context = audio_context || new AudioContext();
 
     wavesurfer = WaveSurfer.create({
@@ -56,41 +65,72 @@ function FileInit() {
         wavesurfer.playPause();
         TogglePlay();
     })
-  }
+
+  } 
 
 
 function FileChange(){
-    file.onchange = function(){
+    // file.onchange = function(){
         // canvas rendering by file input
         show_canvas("canvas"); // visual-canvas
         show_canvas("demo");   // haptic-canvas
         show_canvas("music-controls") // music controller
 
-        fileLabel.classList.add('normal');
-        let files = this.files;
-        audio.src = URL.createObjectURL(files[0]);
-        console.log("VizInit play");
+        // fileLabel.classList.add('normal');
+        // let files = this.files;
+        // audio.src = URL.createObjectURL(files[0]);
+        fetch(selectedMusic).then(res => res.blob())
+        .then(blob =>{
+            console.log(blob);
+            audio.src = URL.createObjectURL(blob);
+            console.log("VizInit play");
         
-        let fileList = file.files[0].name;
-        realTitle.innerText = fileList;
-        
-        wavesurfer.load(audio);
-        audio.load();
-        src = audio_context.createMediaElementSource(audio);
-        audio.volume = 1;
+            // let fileList = file.files[0].name;
+            // realTitle.innerText = fileList;
+            // console.log(file);
+            // file.files[0].name = selectMusicText;
+            audio_context.resume();
+            wavesurfer.load(audio);
+            audio.load();
+            src = audio_context.createMediaElementSource(audio);
+            audio.volume = 1;
+    
+            wavesurfer.on('ready', async () => {
+                console.log("wavesurfer is ready");
+                wavesurfer.play();
+                audio.play();
 
-        wavesurfer.on('ready', () => {
-            console.log("wavesurfer is ready");
-            wavesurfer.play();
-            audio.play();
-            AudioCurrentTime = wavesurfer.getCurrentTime();
-            // console.log(AudioCurrentTime);
-            audio.currentTime = AudioCurrentTime;
-
+                await sleep(1);
+                AudioCurrentTime = wavesurfer.getCurrentTime();
+                audio.currentTime = AudioCurrentTime;
+    
+            })
+            
+            AnalyzerPlay(audio_context, src);
         })
+        // audio.src = URL.createObjectURL(selectedMusic);
+        // console.log("VizInit play");
         
-        AnalyzerPlay(audio_context, src);
-    }
+        // // let fileList = file.files[0].name;
+        // // realTitle.innerText = fileList;
+        
+        // wavesurfer.load(audio);
+        // audio.load();
+        // src = audio_context.createMediaElementSource(audio);
+        // audio.volume = 1;
+
+        // wavesurfer.on('ready', () => {
+        //     console.log("wavesurfer is ready");
+        //     wavesurfer.play();
+        //     audio.play();
+        //     AudioCurrentTime = wavesurfer.getCurrentTime();
+        //     // console.log(AudioCurrentTime);
+        //     audio.currentTime = AudioCurrentTime;
+
+        // })
+        
+        // AnalyzerPlay(audio_context, src);
+    // }
 }
   
 function AnalyzerPlay(audio_context, src) {
@@ -125,6 +165,18 @@ function AnalyzerPlay(audio_context, src) {
     })
     meyda_analyser.start();
 }
+
+function changeMusicSelect(){
+    let selectValue = musicSelect.options[musicSelect.selectedIndex].value;
+    selectMusicText = musicSelect.options[musicSelect.selectedIndex].text;
+    // console.log("changeMusicSelect", selectValue, selectText);
+    // selectedMusic = new File("../static/music/"+selectText);
+    // selectedMusic = 'http://192.168.0.34:8080/static/music/'+selectMusicText;
+    selectedMusic = 'static/music/'+selectMusicText;
+    FileChange();
+    console.log(selectedMusic)
+}
+
 
 
 function updateChroma(pitchValues){
@@ -170,9 +222,13 @@ function TogglePlay(){
 
 window.onload = function(){
 FileInit();
-FileChange();
-SyncAudio();
+// FileChange();
+// SyncAudio();
 }
+window.addEventListener("DOMContentLoaded", ()=>{
+    FileChange();
+    SyncAudio();
+})
 
 // some helper functions here
 function fractionate(val, minVal, maxVal) {

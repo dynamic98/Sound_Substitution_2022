@@ -23,7 +23,7 @@
 
         // 다중메뉴 - 한번에 하나만 보여주기 & 오디오 인풋 들어오면 보여주기
         function change(box, delimiter) {
-          target = document.getElementById('thefile');
+          // target = document.getElementById('thefile');
           let OtherOption;
           if(delimiter=='customMenu-Line'){
             OtherOption = 'customMenu-Ring'
@@ -33,7 +33,7 @@
             document.getElementById('check-VisuoLine').checked = false;
 
           }
-          if (target.files.length == 1){
+          // if (target.files.length == 1){
             if (box.checked == true) {
               document.getElementById(delimiter).style.display = "inline-block";
               document.getElementById(OtherOption).style.display = "none";
@@ -41,20 +41,20 @@
             } else {
               document.getElementById(delimiter).style.display = "none";
             }
-          }
+          // }
         };
 
         // 단일메뉴 - 그냥 클릭하면 보여주기 & 오디오 인풋 들어오면 보여주기
         function check(box, delimiter) {
-          target = document.getElementById('thefile');
-          if (target.files.length == 1){
+          // target = document.getElementById('thefile');
+          // if (target.files.length == 1){
   
             if (box.checked == true) {
               document.getElementById(delimiter).style.display = "inline-block";
             } else {
               document.getElementById(delimiter).style.display = "none";
             }
-          }
+          // }
         };
 
 
