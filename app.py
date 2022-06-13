@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from featureExtraction import extract_feature
 from werkzeug.utils import secure_filename
 import os
-
+import selenium
 
 app = Flask(__name__)
 folder = os.path.join('./static/music/')
@@ -45,8 +45,6 @@ def abstract():
 
 
 
-
-
 @app.route('/concrete', methods=['POST'])
 def concrete():
   if request.method == 'POST':
@@ -54,6 +52,8 @@ def concrete():
   else:
     pass
   return render_template('concrete.html', word=word)
+
+
 
 
 @app.route('/hapticCustom', methods=['POST'])

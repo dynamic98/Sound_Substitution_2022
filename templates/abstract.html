@@ -164,8 +164,17 @@
                         <input class="check-btn" id="check-Haptic" type="checkbox" onclick="check(this, 'hapticCustom'); highlight_haptic(this, 'active-haptic');"> 
                         <label for="check-Haptic"> <div id="active-haptic">Pattern Filter</div> </label>
                       </li>
-                      <li><a href="https://google.com" target="_blank">Haptic custom<form action="/hapticCustom" method="POST"></form>
-                      </a></li>
+                      
+                      <form action="/hapticCustom" method="POST" form autocomplete="off" enctype="multipart/form-data">
+                        <button type="submit" class="button-73" role="button">Haptic custom</button>
+                      </form>
+
+                      <!-- <li><a href="/hapticCustom" target="_blank">Haptic custom
+                        <form action="/hapticCustom" method="POST"></form>
+                      </a>
+                      </li> -->
+
+
                     </ul>
                   </div>
                 </div>
