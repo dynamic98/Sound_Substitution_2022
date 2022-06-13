@@ -56,6 +56,15 @@ def concrete():
   return render_template('concrete.html', word=word)
 
 
+@app.route('/hapticCustom', methods=['POST'])
+def hapticCustom():
+  if request.method == 'POST':
+      word = '구상적 시각화 페이지 입니다.'
+  else:
+    pass
+  return render_template('hapticCustom.html')
+
+
 if __name__ == '__main__':
   app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
 
