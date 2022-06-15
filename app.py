@@ -3,6 +3,8 @@ from featureExtraction import extract_feature
 from werkzeug.utils import secure_filename
 import os
 import selenium
+import webbrowser
+
 
 app = Flask(__name__)
 folder = os.path.join('./static/music/')
@@ -63,6 +65,10 @@ def hapticCustom():
   else:
     pass
   return render_template('hapticCustom.html')
+  
+
+
+
 
 
 if __name__ == '__main__':
