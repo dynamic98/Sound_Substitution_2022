@@ -25,7 +25,7 @@ def abstract():
       pass
     else: 
       file.save(os.path.join(folder, secure_filename(file.filename)))
-      features = extract_feature(folder) # 내가 원하는 음악의 Feature 추출
+      extract_feature(folder) # 내가 원하는 음악의 Feature 추출
       # 이것을 classifier.ts 와 연결
 
 
@@ -42,10 +42,6 @@ def abstract():
 
   return render_template('abstract.html', filelist=filestrlist)
   
-
-
-
-
 
 @app.route('/concrete', methods=['POST'])
 def concrete():
@@ -67,6 +63,7 @@ def hapticCustom():
 
 if __name__ == '__main__':
   app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
+
 
 
 
