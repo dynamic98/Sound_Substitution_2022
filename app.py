@@ -32,7 +32,7 @@ def abstract():
 
 
   filelist = os.listdir(os.path.join('static/music'))
-  print(filelist)
+  filelist.remove('mdx_extra_q')
   filelist.sort(key=lambda x: os.path.getmtime(os.path.join('static/music', x)), reverse=True)
   filestrlist = ''
 
@@ -65,11 +65,33 @@ def hapticCustom():
   else:
     pass
   return render_template('hapticCustom.html')
-  
 
 
+@app.route('/separate', methods=['POST'])
+def separate():
+  if request.method == 'POST':
+    word = '구상적 시각화 페이지 입니다.'
+  else:
+    pass
+  return render_template('separate.html')
 
 
+@app.route('/loading', methods=['POST'])
+def loading():
+  features = ''
+  if request.method == 'POST':
+    file = request.files['SSfile']
+    print(file)
+    if os.path.isdir(os.path.join(folder, secure_filename(file.filename))):
+      pass
+    else:
+      file.save(os.path.join(folder, secure_filename(file.filename)))
+      os.system("python -m demucs --mp3 static\\music\\%s -o static\\music" % secure_filename(file.filename))
+
+      # features = extract_feature(folder) # 내가 원하는 음악의 Feature 추출
+      # 이것을 classifier.ts 와 연결
+
+  return render_template('mainMenu.html')
 
 if __name__ == '__main__':
   app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
