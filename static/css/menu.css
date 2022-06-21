@@ -1,0 +1,55 @@
+body {
+    background: linear-gradient(90deg, #ffeb55 0%, #e30f75 100%);
+  }
+
+
+button.mainMenu{
+    border-radius: 6px;
+    width: 300px;
+    height: 500px;
+    text-transform: uppercase;
+    outline: 0;
+    /* width: 60%; */
+    border: 0;
+    border-radius: 5px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 32px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+button#customMenu{
+    background-color: #F9D371;
+}
+
+button#customMenu:hover{
+    background-color: #f8c33e;
+}
+
+button#exploreMenu{
+    background-color: #f0642d;
+}
+
+button#exploreMenu:hover{
+    background-color: #e9551a;
+}
+
+button#listenMenu{
+    background-color: #8843F2;
+}
+
+button#listenMenu:hover{
+    background-color: #621ec7;
+}
+
+form.menu-form{
+    display: inline;
+}
+
+div.menuForm{
+    margin: 200px auto;
+    text-align: center;
+}

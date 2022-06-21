@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>VizHap :: SCI_LAB</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../static/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- Style -->
+    <link type="text/css" href="../static/css/index_login.css" rel="stylesheet">
+</head>
+
+<body>
+    <form action="/menu" method="POST" id="joinForm">
+        <ul class="join_box">
+            <li class="checkBox check02">
+                <ul class="clearfix">
+                    <li> 실험 소개
+                    </li>
+                </ul>
+                <textarea id="yeongu">이 실험은 청각장애인의 음악 요소 이해와 향유를 돕기 위한 Tool 을 직접 사용해보고 효과를 측정하는 실험입니다. 우리는 이 논문을 통해 베를린에 가고싶다. 배고프다..떡볶이 빨리 왔으면 좋겠어
+                </textarea>
+            </li>
+
+            <li class="checkBox check02">
+                <ul class="clearfix">
+                    <li> 개인정보 수집 동의서 (필수)
+                    </li>
+                    <li class="checkBtn">
+                        <input type="checkbox" name="chk" required>
+                    </li>
+
+                </ul>
+                <textarea id="yeongu">광주과학기술원은 개인정보보호법에 의거하여 귀하의 개인정보를 다음과 같은 목적으로 수집 및 이용하기 위하여 동의를 받고자 합니다. 내용 확인 후 동의하시는 경우 체크해 주시기 바랍니다. 개인정보 수집·이용 내역, 고유식별정보 수집·이용 내역, 민감정보 수집·이용 내역.
+                </textarea>
+            </li>
+
+            <li class="checkBox check02">
+                <ul class="clearfix">
+                    <li> 연구대상자용 설명문 및 동의서 (필수) </li>
+                    <li class="checkBtn">
+                        <input type="checkbox" name="chk" required> 
+                    
+            </li>
+            
+            </ul>
+        <textarea id="yeongu">본 연구는 청각장애인의 음악 향유를 위한 음악 및 댄스 실감 가시화 기술 개발 연구입니다. 귀하는 본 연구에 참여할 것인지 여부를 결정하기 전에, 설명서와 동의서를 신중하게 읽어보셔야 합니다. 이 연구가 왜 수행되며, 무엇을 수행하는지 귀하가 이해하는 것이 중요합니다. 이 연구를 수행하는 담당 연구원이 귀하에게 이 연구에 대해 설명해 줄 것입니다. 이 연구는 자발적으로 참여 의사를 밝히신 분에 한하여 수행 될 것입니다. 다음 내용을 신중히 읽어보신 후 참여 의사를 밝혀 주시길 바라며, 필요하다면 가족이나 친구들과 의논해 보십시오. 만일 어떠한 질문이 있다면 담당 연구원이 자세하게 설명해 줄 것입니다.</textarea>
+        </ul>
+        </form>
+        <div id="nextAction">
+            <form action="/" method="POST" class="start">
+                <button type="submit" class="start" id="back">뒤로 가기</button>
+            </form>
+
+            <form action="/menu" method="POST" class="start">
+                <button type="submit" class="start" id="forward">시작하기</button>
+            </form>
+        </div>
+
+
+</body>
+</html>

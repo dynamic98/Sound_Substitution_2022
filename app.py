@@ -7,68 +7,25 @@ import webbrowser
 
 
 app = Flask(__name__)
-folder = os.path.join('./static/music/')
 
-os.makedirs(folder, exist_ok=True)
+# os.makedirs(folder, exist_ok=True)
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
-  return render_template('mainMenu.html')
+  return render_template('index.html')
 
 
-# abstact 페이지에서는 오디오 파일을 변수에 저장만 하기
-@app.route('/abstract', methods=['POST'])
-def abstract():
-  features = ''
-  if request.method == 'POST':
-    file = request.files['thefile']
-    if os.path.isdir(os.path.join(folder, secure_filename(file.filename))):
-      pass
-    else: 
-      file.save(os.path.join(folder, secure_filename(file.filename)))
-      features = extract_feature(folder) # 내가 원하는 음악의 Feature 추출
-      # 이것을 classifier.ts 와 연결
+@app.route('/login', methods=['POST'])
+def login():
+  return render_template('login.html')
 
 
-  filelist = os.listdir(os.path.join('static/music'))
-  print(filelist)
-  filelist.sort(key=lambda x: os.path.getmtime(os.path.join('static/music', x)), reverse=True)
-  filestrlist = ''
 
-  for n, i in enumerate(filelist):
-    if n != len(filelist)-1:
-      filestrlist = filestrlist + i + ', '
-    else:
-      filestrlist = filestrlist + i
-
-  return render_template('abstract.html', filelist=filestrlist)
+@app.route('/menu', methods=['POST'])
+def menu():
+  return render_template('menu.html')
   
-
-
-
-@app.route('/concrete', methods=['POST'])
-def concrete():
-  if request.method == 'POST':
-      word = '구상적 시각화 페이지 입니다.'
-  else:
-    pass
-  return render_template('concrete.html', word=word)
-
-
-
-
-@app.route('/hapticCustom', methods=['POST'])
-def hapticCustom():
-  if request.method == 'POST':
-      word = '구상적 시각화 페이지 입니다.'
-  else:
-    pass
-  return render_template('hapticCustom.html')
-  
-
-
-
 
 
 if __name__ == '__main__':
