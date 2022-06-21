@@ -3,7 +3,7 @@
 // Import data
 import * as tf from '@tensorflow/tfjs';
 import * as dataset from "../data/Emotion_data.json";
-import * as toClassify from "../../toClassify/Emotion_features.json";
+import * as toClassify from "../toClassify/Emotion_features.json";
 
 // Import functions to convert data
 import * as SD from "./ShapeData";
