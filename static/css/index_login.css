@@ -55,7 +55,7 @@ p {
   font-family: 'Comfortaa', cursive;
   text-transform: uppercase;
   outline: 0;
-  background: #000000;
+  background: #404040;
   width: 100%;
   border: 0;
   border-radius: 5px;
@@ -68,13 +68,13 @@ p {
 }
 
 .form button:hover {
-  background: #94084e;
+  background: #000000;
 }
 
-.form span {
+/* .form span {
   font-size: 75px;
   color: #9f1a4d;
-}
+} */
 
 
 
@@ -96,7 +96,7 @@ a{
 
 #joinForm{
   width: 900px;
-  margin: 200px auto;
+  margin: 150px auto;
 }
 
 ul.join_box{border: 0px solid #ddd;background-color: #fff; border-radius: 6px;}
@@ -149,6 +149,7 @@ form.start{
 
 
 div#nextAction{
-  margin-top: -150px;
-  margin-left: 400px;
+  margin-top: -110px;
+  margin-left: -170px;
+  text-align: center;
 }

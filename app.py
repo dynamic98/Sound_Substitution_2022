@@ -21,10 +21,17 @@ def login():
   return render_template('login.html')
 
 
-
 @app.route('/menu', methods=['POST'])
 def menu():
   return render_template('menu.html')
+
+
+@app.route('/custom', methods=['POST'])
+def custompitch():
+  return render_template('custompitch.html')
+
+
+
   
 
 

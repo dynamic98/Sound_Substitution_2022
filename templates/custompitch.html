@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>VizHap :: SCI_LAB</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../static/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- Style -->
+    <link type="text/css" href="../static/css/pitch.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+    <script defer src=https://cdn.JsDelivr.net/npm/p5></script>
+</head>
+
+<body>
+    <div id="canvas"></div>
+    <body>
+        <section id="wrap">
+          <section id="main">
+            <div class="keys">
+              <div data-key="65" class="key" data-note="C">
+                  <span>도</span>
+              </div>
+              <div data-key="87" class="key sharp" data-note="C#">
+              </div>
+              <div data-key="83" class="key" data-note="D">
+                <span>레</span>
+              </div>
+              <div data-key="69" class="key sharp" data-note="D#">
+              </div>
+              <div data-key="68" class="key" data-note="E">
+                <span>미</span>
+              </div>
+              <div data-key="70" class="key" data-note="F">
+                <span>파</span>
+              </div>
+              <div data-key="84" class="key sharp" data-note="F#">
+              </div>
+              <div data-key="71" class="key" data-note="G">
+                <span>솔</span>
+              </div>
+              <div data-key="89" class="key sharp" data-note="G#">
+              </div>
+              <div data-key="72" class="key" data-note="A">
+                <span>라</span>
+              </div>
+              <div data-key="85" class="key sharp" data-note="A#">
+
+              </div>
+              <div data-key="74" class="key" data-note="B">
+                <span>시</span>
+              </div>
+              <div data-key="75" class="key" data-note="C">
+                <span>도</span>
+              </div>
+            </div>
+      
+            <audio data-key="65" src="http://carolinegabriel.com/demo/js-keyboard/sounds/040.wav"></audio>
+            <audio data-key="87" src="http://carolinegabriel.com/demo/js-keyboard/sounds/041.wav"></audio>
+            <audio data-key="83" src="http://carolinegabriel.com/demo/js-keyboard/sounds/042.wav"></audio>
+            <audio data-key="69" src="http://carolinegabriel.com/demo/js-keyboard/sounds/043.wav"></audio>
+            <audio data-key="68" src="http://carolinegabriel.com/demo/js-keyboard/sounds/044.wav"></audio>
+            <audio data-key="70" src="http://carolinegabriel.com/demo/js-keyboard/sounds/045.wav"></audio>
+            <audio data-key="84" src="http://carolinegabriel.com/demo/js-keyboard/sounds/046.wav"></audio>
+            <audio data-key="71" src="http://carolinegabriel.com/demo/js-keyboard/sounds/047.wav"></audio>
+            <audio data-key="89" src="http://carolinegabriel.com/demo/js-keyboard/sounds/048.wav"></audio>
+            <audio data-key="72" src="http://carolinegabriel.com/demo/js-keyboard/sounds/049.wav"></audio>
+            <audio data-key="85" src="http://carolinegabriel.com/demo/js-keyboard/sounds/050.wav"></audio>
+            <audio data-key="74" src="http://carolinegabriel.com/demo/js-keyboard/sounds/051.wav"></audio>
+            <audio data-key="75" src="http://carolinegabriel.com/demo/js-keyboard/sounds/052.wav"></audio>
+            <audio data-key="79" src="http://carolinegabriel.com/demo/js-keyboard/sounds/053.wav"></audio>
+            <audio data-key="76" src="http://carolinegabriel.com/demo/js-keyboard/sounds/054.wav"></audio>
+            <audio data-key="80" src="http://carolinegabriel.com/demo/js-keyboard/sounds/055.wav"></audio>
+            <audio data-key="186" src="http://carolinegabriel.com/demo/js-keyboard/sounds/056.wav"></audio>
+            </section>
+        </section>
+        <div class="templatePitch">
+            <button class="pitchVisual"> 템플릿 1 </button>
+            <button class="pitchVisual"> 템플릿 2 </button>
+            <div style="line-height:170%;">
+                <br>
+            </div>
+            <button class="pitchVisual"> 템플릿 3 </button>
+            <button class="pitchVisual"> 자유 템플릿 </button>
+        </div>
+        </body>
+    <!-- Javascript -->
+    <!-- Have to link importmap to use NPM modules...-->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "../static/node_modules/three/build/three.module.js"
+            }
+        }
+    </script>
+    <script type="module" src="../static/js/canvas.js"></script>
+</body>
+</html>
