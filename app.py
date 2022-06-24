@@ -26,9 +26,19 @@ def menu():
   return render_template('menu.html')
 
 
-@app.route('/custom', methods=['POST'])
+@app.route('/custom/pitch', methods=['POST'])
 def custompitch():
   return render_template('custompitch.html')
+
+
+@app.route('/custom/dynamics', methods=['POST'])
+def customdynamics():
+  return render_template('customdynamics.html')
+
+
+@app.route('/custom/timbre', methods=['POST'])
+def customtimbre():
+  return render_template('customtimbre.html')
 
 
 

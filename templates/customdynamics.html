@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>VizHap :: SCI_LAB</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../static/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- Style -->
+    <link type="text/css" href="../static/css/custom.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+    <script defer src=https://cdn.JsDelivr.net/npm/p5></script>
+</head>
+
+<body>
+    <div id="canvas"></div>
+    <body>
+        <section id="volume">
+            <!-- <span id="rangeValue"> 0</span> -->
+            <input class="range" type="range" name "" value="0" min="0" max="100" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)"></Input>
+        </section>
+
+        <script type="text/javascript">
+            function rangeSlide(value) {
+                document.getElementById('rangeValue').innerHTML = value;
+            }
+        </script>
+
+
+        <div class="goSomewhere" id="goBackwardDynamics">
+          <form action="/custom/pitch" method="POST">
+            <button id="goBackwardDynamics"> ◀ </button>
+          </form>
+        </div>
+
+        <div class="templateCustom" id="templateDynamic">
+            <button class="dynamicVisual"> 템플릿 1 </button>
+            <button class="dynamicVisual"> 템플릿 2 </button>
+            <button class="dynamicVisual"> 템플릿 3 </button>
+            <button class="dynamicVisual"> 자유 템플릿 </button>
+        </div>
+
+        <div class="goSomewhere" id="goForwardDynamics">
+          <form action="/custom/timbre" method="POST">
+            <button id="goForwardDynamics"> ▶ </button>
+          </form>
+        </div>
+
+        </body>
+
+    <!-- Javascript -->
+    <!-- Have to link importmap to use NPM modules...-->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "../static/node_modules/three/build/three.module.js"
+            }
+        }
+    </script>
+    <script type="module" src="../static/js/canvas.js"></script>
+</body>
+</html>

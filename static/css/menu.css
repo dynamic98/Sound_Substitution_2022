@@ -18,6 +18,7 @@ button.mainMenu{
     transition: all 0.3 ease;
     cursor: pointer;
     margin-right: 50px;
+    box-shadow: 5px 5px 5px;
 }
 
 button#customMenu{

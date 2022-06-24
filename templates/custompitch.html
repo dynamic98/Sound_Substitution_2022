@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <!-- Style -->
-    <link type="text/css" href="../static/css/pitch.css" rel="stylesheet">
+    <link type="text/css" href="../static/css/custom.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
     <script defer src=https://cdn.JsDelivr.net/npm/p5></script>
 </head>
@@ -49,7 +49,6 @@
                 <span>라</span>
               </div>
               <div data-key="85" class="key sharp" data-note="A#">
-
               </div>
               <div data-key="74" class="key" data-note="B">
                 <span>시</span>
@@ -78,7 +77,14 @@
             <audio data-key="186" src="http://carolinegabriel.com/demo/js-keyboard/sounds/056.wav"></audio>
             </section>
         </section>
-        <div class="templatePitch">
+
+        <div class="goSomewhere" id="goBackwardPitch">
+          <form action="/menu" method="POST">
+            <button id="goBackwardPitch"> ◀ </button>
+          </form>
+        </div>
+
+        <div class="templateCustom" id="templatePitch">
             <button class="pitchVisual"> 템플릿 1 </button>
             <button class="pitchVisual"> 템플릿 2 </button>
             <div style="line-height:170%;">
@@ -87,7 +93,15 @@
             <button class="pitchVisual"> 템플릿 3 </button>
             <button class="pitchVisual"> 자유 템플릿 </button>
         </div>
+
+        <div class="goSomewhere" id="goForwardPitch">
+          <form action="/custom/dynamics" method="POST">
+            <button id="goForwardPitch"> ▶ </button>
+          </form>
+        </div>
+
         </body>
+
     <!-- Javascript -->
     <!-- Have to link importmap to use NPM modules...-->
     <script type="importmap">
