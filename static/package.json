@@ -24,7 +24,8 @@
     "three": "^0.138.3",
     "three.meshline": "^1.4.0",
     "typescript": "^3.0.1",
-    "wavesurfer.js": "^6.0.4"
+    "wavesurfer.js": "^6.0.4",
+    "yinjs": "^0.1.0"
   },
   "main": "index.js",
   "keywords": [],

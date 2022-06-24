@@ -1,5 +1,6 @@
 import { RectAreaLight } from 'three';
 import { show_canvas } from './modules.js'
+import {yin} from './yin.js'
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
@@ -137,9 +138,14 @@ function AnalyzerPlay(audio_context, src) {
     analyser = audio_context.createAnalyser();
     src.connect(analyser);
     analyser.connect(audio_context.destination);
-    analyser.fftSize = 512;
-    bufferLength = analyser.frequencyBinCount;
-    dataArray = new Uint8Array(bufferLength);
+    // analyser.fftSize = 512;
+    // bufferLength = analyser.frequencyBinCount;
+    // dataArray = new Uint8Array(bufferLength);
+
+    analyser.fftSize = Math.pow(2,13);
+    let sampleRate = audio_context.sampleRate;
+    let data = new Float32Array(analyser.fftSize);
+
 
     // meyda analyser
     chroma = 0;
