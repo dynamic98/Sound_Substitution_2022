@@ -54,3 +54,26 @@ div.menuForm{
     margin: 130px auto;
     text-align: center;
 }
+
+
+/* 반응형 웹을 위한 미디어 쿼리 (미디어 쿼리는 반드시 가장 하단에 작성) */
+
+@media (max-width: 1600px) {
+  button.mainMenu{
+    border-radius: 10px;
+    width: 330px;
+    height: 500px;
+    text-transform: uppercase;
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    /* padding: 15px; */
+    color: #FFFFFF;
+    font-size: 32px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    margin-right: 50px;
+    box-shadow: 5px 5px 5px;
+    }
+}

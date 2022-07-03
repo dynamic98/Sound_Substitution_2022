@@ -9,7 +9,7 @@ canvas {
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
-    display: block;
+    display: inline;
     width: 800px;
 }
 
@@ -433,7 +433,79 @@ div#goBackwardTimbre{
 }
 
 
+/* 반응형 웹을 위한 미디어 쿼리 (미디어 쿼리는 반드시 가장 하단에 작성) */
 
+@media (max-width: 1600px) {
+  .keys {
+    height: 250px;
+    max-width: 650px;
+    margin: 40px auto;
+  } 
+
+  section#wrap{
+    margin-top: -10px;
+    margin-left: -330px;
+  }
+
+  button.pitchVisual{
+    width: 230px;
+    height: 100px;
+    margin-left: 10px;
+  }
+
+  div#templatePitch{
+    margin-top: -280px;
+  }
+
+
+  div#templateDynamic{
+    width: 1000px;
+    margin-left: 50px;
+  }
+
+  button.dynamicVisual{
+    width: 200px;
+    height: 100px;
+    margin-left: 30px;
+  }
+
+  div#templateTimbre{
+    width: 1000px;
+    margin-left: 50px;
+  }
+
+  button.timbreVisual{
+    width: 200px;
+    height: 100px;
+    margin-left: 30px;
+  }
+
+
+  button#goBackwardPitch{
+    margin-top: -10px;
+  }
+
+  button#goForwardPitch{
+    margin-top: -10px;
+  }
+
+  button#goBackwardDynamics{
+    margin-top: -10px;
+  }
+
+  button#goForwardDynamics{
+    margin-top: -10px;
+  }
+
+  button#goBackwardTimbre{
+    margin-top: -10px;
+  }
+
+  button#goForwardTibre{
+    margin-top: -10px;
+  }
+
+}
 
 
 

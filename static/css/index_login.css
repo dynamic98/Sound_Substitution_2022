@@ -153,3 +153,10 @@ div#nextAction{
   margin-left: -170px;
   text-align: center;
 }
+
+
+/* 반응형 웹을 위한 미디어 쿼리 (미디어 쿼리는 반드시 가장 하단에 작성) */
+
+@media (max-width: 1600px) {
+
+}
