@@ -1,6 +1,5 @@
 import { RectAreaLight } from 'three';
 import { show_canvas } from './modules.js'
-import {yin} from './yin.js'
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
@@ -8,6 +7,7 @@ let chroma, maxChroma, energy, amplitudeSpectrum;
 let AudioDifference;
 let AudioCurrentTime, AudioLastTime;
 let selectedMusic, selectMusicText;
+let data, sampleRate;
 // let target;
 
 const pitchClasses = [
@@ -143,8 +143,8 @@ function AnalyzerPlay(audio_context, src) {
     // dataArray = new Uint8Array(bufferLength);
 
     analyser.fftSize = Math.pow(2,13);
-    let sampleRate = audio_context.sampleRate;
-    let data = new Float32Array(analyser.fftSize);
+    data = new Float32Array(analyser.fftSize);
+    sampleRate = audio_context.sampleRate;
 
 
     // meyda analyser
@@ -258,4 +258,4 @@ function fractionate(val, minVal, maxVal) {
 
 
 
-export { audio, audio_context, src, analyser, wavesurfer, chroma, maxChroma, energy, amplitudeSpectrum, bufferLength, dataArray };
+export { audio, audio_context, src, analyser, wavesurfer, chroma, maxChroma, energy, data, sampleRate};

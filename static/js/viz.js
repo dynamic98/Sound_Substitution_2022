@@ -1,7 +1,8 @@
 'use strict';
 
 import * as THREE from 'three';
-import { analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, audio_context, src } from './modules.js';
+import { analyser, chroma, maxChroma, energy, audio, audio_context, src, sampleRate, data} from './modules.js';
+import {yin} from './yin.js'
 
 // let controls;
 let camera, scene, renderer;
@@ -125,8 +126,11 @@ function animate() {
   // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
   if (FrameRate % 3 == 0){
     // music rendering
-    if (dataArray){
-      analyser.getByteFrequencyData(dataArray);
+    if (data){
+      // analyser.getByteFrequencyData(dataArray);
+      analyser.getFloatTimeDomainData(data);
+      let frequency = yin(data, sampleRate);
+      console.log(frequency);
       // console.log(dataArray);
       
       // geometry rendering
