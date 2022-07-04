@@ -13,10 +13,10 @@ Music Enjoyment by Visualization & Haptic patterns for DHH (Deaf and Hard-of-Hea
 <img width="1204" alt="스크린샷 2022-05-30 오후 3 17 18" src="https://user-images.githubusercontent.com/43838273/170929097-2c7ceeea-ca34-4d2f-bb55-89d616ae3b13.png">
 
 ### Python libraries 
-flask
-ibrosa
-numpy
-pandas
+flask  
+librosa  
+numpy  
+pandas  
 
 ### How To RUN
 1. select python virtual env (Recommened to develop using virtual-env)
