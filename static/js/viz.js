@@ -125,17 +125,12 @@ function animate() {
   // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
   if (FrameRate % 3 == 0){
     // music rendering
-<<<<<<< Updated upstream
-    if (dataArray){
-      analyser.getByteFrequencyData(dataArray);
-=======
     if (data){
       // analyser.getByteFrequencyData(dataArray);
       analyser.getFloatTimeDomainData(data);
       let frequency = yin(data, sampleRate);
       let pitch_number = 12*Math.log2(frequency/440);
       console.log(frequency, pitch_number);
->>>>>>> Stashed changes
       // console.log(dataArray);
       
       // geometry rendering
