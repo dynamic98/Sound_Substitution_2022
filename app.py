@@ -16,7 +16,6 @@ os.makedirs(folder, exist_ok=True)
 def index():
   return render_template('mainMenu.html')
 
-
 # abstact 페이지에서는 오디오 파일을 변수에 저장만 하기
 @app.route('/abstract', methods=['POST'])
 def abstract():
@@ -45,20 +44,6 @@ def abstract():
   return render_template('abstract.html', filelist=filestrlist)
   
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 53c02e3 (``)
-=======
->>>>>>> 53c02e3 (``)
-=======
->>>>>>> 53c02e3 (``)
->>>>>>> refs/remotes/origin/Flask
 @app.route('/concrete', methods=['POST'])
 def concrete():
   if request.method == 'POST':
