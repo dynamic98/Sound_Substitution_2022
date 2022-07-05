@@ -1,5 +1,7 @@
 import { RectAreaLight } from 'three';
 import { show_canvas } from './modules.js'
+import {getPeaks, getIntervals} from './getBPM.js'
+
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
@@ -48,22 +50,14 @@ function FileInit() {
     };
 
     // audio.src = URL.createObjectURL()
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
     audio_context = audio_context || new AudioContext();
-
-    wavesurfer = WaveSurfer.create({
-        container: document.querySelector('#waveform'),
-        waveColor: '#A8DBA8',
-        progressColor: '#3B8686',
-        cursorWidth : 5,
-        normalize: true,
-    });
 
     console.log('audio input completed')
     document
     .querySelector('[data-action="play"]')
     .addEventListener('click', ()=>{ 
         console.log("PlayPause button pressed");
-        wavesurfer.playPause();
         TogglePlay();
     })
 
@@ -80,6 +74,57 @@ function FileChange(){
         // fileLabel.classList.add('normal');
         // let files = this.files;
         // audio.src = URL.createObjectURL(files[0]);
+
+        fetch(selectedMusic).then(res => res.arrayBuffer())
+        .then(arrayBuffer =>{
+            let OfflineAudioContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+            let offlineCtx = new OfflineAudioContext(2, 30*44100, 44100);
+            offlineCtx.decodeAudioData(arrayBuffer, function(buffer){
+                let source = offlineCtx.createBufferSource();
+                source.buffer = buffer;
+                let lowpass = offlineCtx.createBiquadFilter();
+                lowpass.type = "lowpass";
+                lowpass.frequency.value = 150;
+                lowpass.Q.value = 1;
+
+                // Run the output of the source through the low pass.
+
+                source.connect(lowpass);
+
+                // Now a highpass to remove the bassline.
+
+                let highpass = offlineCtx.createBiquadFilter();
+                highpass.type = "highpass";
+                highpass.frequency.value = 100;
+                highpass.Q.value = 1;
+
+                // Run the output of the lowpass through the highpass.
+
+                lowpass.connect(highpass);
+
+                // Run the output of the highpass through our offline context.
+
+                highpass.connect(offlineCtx.destination);
+
+                // Start the source, and render the output into the offline conext.
+
+                source.start(0);
+                offlineCtx.startRendering();
+                });
+
+                offlineCtx.oncomplete = function(e) {
+                    var buffer = e.renderedBuffer;
+                    var peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
+                    var groups = getIntervals(peaks);
+          
+                    var top = groups.sort(function(intA, intB) {
+                      return intB.count - intA.count;
+                    }).splice(0, 5);
+                    console.log("tempo",Math.round(top[0].tempo), top[1].tempo);
+                  };
+
+            })
+
         fetch(selectedMusic).then(res => res.blob())
         .then(blob =>{
             console.log(blob);
@@ -91,61 +136,23 @@ function FileChange(){
             // console.log(file);
             // file.files[0].name = selectMusicText;
             audio_context.resume();
-            wavesurfer.load(audio);
             audio.load();
             src = audio_context.createMediaElementSource(audio);
             audio.volume = 1;
-    
-            wavesurfer.on('ready', async () => {
-                console.log("wavesurfer is ready");
-                wavesurfer.play();
-                audio.play();
-
-                await sleep(1);
-                AudioCurrentTime = wavesurfer.getCurrentTime();
-                audio.currentTime = AudioCurrentTime;
-    
-            })
+            // audio.play();
             
             AnalyzerPlay(audio_context, src);
         })
-        // audio.src = URL.createObjectURL(selectedMusic);
-        // console.log("VizInit play");
-        
-        // // let fileList = file.files[0].name;
-        // // realTitle.innerText = fileList;
-        
-        // wavesurfer.load(audio);
-        // audio.load();
-        // src = audio_context.createMediaElementSource(audio);
-        // audio.volume = 1;
-
-        // wavesurfer.on('ready', () => {
-        //     console.log("wavesurfer is ready");
-        //     wavesurfer.play();
-        //     audio.play();
-        //     AudioCurrentTime = wavesurfer.getCurrentTime();
-        //     // console.log(AudioCurrentTime);
-        //     audio.currentTime = AudioCurrentTime;
-
-        // })
-        
-        // AnalyzerPlay(audio_context, src);
-    // }
 }
   
 function AnalyzerPlay(audio_context, src) {
     analyser = audio_context.createAnalyser();
     src.connect(analyser);
     analyser.connect(audio_context.destination);
-    // analyser.fftSize = 512;
-    // bufferLength = analyser.frequencyBinCount;
-    // dataArray = new Uint8Array(bufferLength);
 
     analyser.fftSize = Math.pow(2,13);
     data = new Float32Array(analyser.fftSize);
     sampleRate = audio_context.sampleRate;
-
 
     // meyda analyser
     chroma = 0;
@@ -258,4 +265,4 @@ function fractionate(val, minVal, maxVal) {
 
 
 
-export { audio, audio_context, src, analyser, wavesurfer, chroma, maxChroma, energy, data, sampleRate};
+export { audio, audio_context, src, wavesurfer, analyser, chroma, maxChroma, energy, data, sampleRate };

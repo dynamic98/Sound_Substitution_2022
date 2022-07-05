@@ -1,7 +1,7 @@
 'use strict';
 
 import * as THREE from 'three';
-import { analyser, chroma, maxChroma, energy, audio, audio_context, src, sampleRate, data} from './modules.js';
+import { analyser, chroma, maxChroma, energy, data, sampleRate} from './modules.js';
 import {yin} from './yin.js'
 
 // let controls;
@@ -9,6 +9,12 @@ let camera, scene, renderer;
 let container, stats;
 let customMenu;
 let FrameRate = 0;
+let bpm = 80;
+let BeatTime = 60/bpm*1000;
+
+const startTime = new Date();
+let LastTime = startTime.getTime();
+
 
 const GeomertyMap = new Map([
   [10000, createShapeLine_Vanilla],
@@ -43,6 +49,9 @@ const GeomertyMap = new Map([
   [30302, createShapeRing_P3D2],
   [30303, createShapeRing_P3D3]
 ])
+
+let DictPitch = {0:"C",1:"C#",2:"D",3:"D#",4:"E",5:"F",6:"F#",7:"G",8:"G#",9:"A",10:"A#",11:"B"};
+let PitchNote = [], EnergyNote = [];
 
 
 // Geometry 별 Detail 요소
@@ -117,38 +126,50 @@ function init() {
 
 // animate function
 function animate() {
+
+  requestAnimationFrame(animate);
+
   // color rendering
   // saveColor();
   // changeBGColor();
-  requestAnimationFrame(animate);
-  FrameRate = FrameRate + 1
-
-  // 여기를 기점으로 색깔 등 요소 변경을 추가하면됨
-  if (FrameRate % 3 == 0){
-    // music rendering
-    if (data){
-      // analyser.getByteFrequencyData(dataArray);
-      analyser.getFloatTimeDomainData(data);
-      let frequency = yin(data, sampleRate);
-      console.log(frequency);
-      // console.log(dataArray);
-      
-      // geometry rendering
-      if (typeof now_geometry == 'number'){
-        deleteBasics();
-        let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
-        // console.log('now geometry', [geometry_type, pitch_type, dynamic_type]);
-        let NowShapeFunction = GeomertyMap.get(now_geometry);
-        if (now_geometry == 10505 || now_geometry == 10101){ // 안 되는 조합 예외처리
-          // pass
-        } else {
-          NowShapeFunction(); // 딕셔너리에서 불러온 함수 실행
-        }
-    }
-    render();
-    }
+  const d = new Date();
+  let CurrentTime = d.getTime();
+  let DeltaTime = CurrentTime - LastTime;
+  if (DeltaTime>BeatTime*4){
+    LastTime = CurrentTime;
+    PitchNote = [];
+    EnergyNote = [];
+    // console.log('reset!!!');
   }
+
+  if (data){
+    // analyser.getByteFrequencyData(dataArray);
+    analyser.getFloatTimeDomainData(data);
+    let frequency = yin(data, sampleRate);
+    let pitch_number = 12*Math.log2(frequency/440);
+
+    // let pitch_number = Math.floor(Math.random()*21)-10;
+    PitchNote.push(pitch_number);
+    let AdjustEnergy = sigmoid(10, energy);
+    EnergyNote.push(AdjustEnergy);
+
+    // geometry rendering
+    if (typeof now_geometry == 'number'){
+      deleteBasics();
+      let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
+
+      let NowShapeFunction = GeomertyMap.get(now_geometry);
+      if (now_geometry == 10505 || now_geometry == 10101){ // 안 되는 조합 예외처리
+        // pass
+      } else {
+        NowShapeFunction(); // 딕셔너리에서 불러온 함수 실행
+      }
+  }
+  render();
+  }
+
 }
+
 
 
 // render function
@@ -174,17 +195,57 @@ function createShapeLine_Vanilla(){
 
 
 function createShapeRing_Vanilla(){
-  geometry = new THREE.RingGeometry(10, 13, 8, 13, 0, 6.28);
-  material = new THREE.MeshLambertMaterial({
-    color: '#FFFFFF',
-    wireframe: true,
-    side: THREE.DoubleSide
-  });
-  compoCenter = new THREE.Mesh(geometry, material);
-  compoCenter.position.set(1, 10, 0);
-  spotLight.lookAt(compoCenter);
+  let CanvasWidth = window.innerWidth / 2.24, CanvasHeight = window.innerHeight / 2.1;
+  let PitchHeight = 40/59;
+  let PitchWidth = 40/(60*4*13/bpm)
 
-  group.add( compoCenter );
+
+  // let PitchSize = PitchHeight*AdjustEnergy;
+  for (let i=0; i<PitchNote.length; i++){
+    let i_Pitch = PitchNote[i];
+
+    let octave = Math.floor((i_Pitch-3)/12)+5;
+    let tone = (i_Pitch-3)%12;
+    if (tone<0){
+      // Make reminder positive integer
+      tone = tone+12
+    }
+    let i_Energy = EnergyNote[i];
+    if (i_Energy<0.01){
+      i_Energy = 0;
+    }
+    let i_PosX = i*PitchWidth-20;
+    let i_PosY = PitchHeight*(i_Pitch+33)-10;
+    let i_Radius = PitchHeight*(i_Energy*5);
+
+    // let geometry = new THREE.CircleGeometry(i_Radius*10, 32);
+    let geometry = new THREE.CircleGeometry(i_Radius, 32);
+    let Color = new THREE.Color();
+    Color.setHSL(tone/12, (octave-1)/5, (octave-1)/5)
+    let material = new THREE.MeshLambertMaterial({color: Color});
+
+    let compoCenter = new THREE.Mesh(geometry, material);
+    // compoCenter.position.x = i_PosX+1;
+    // compoCenter.position.y = i_PosY+10;
+
+    compoCenter.position.set(i_PosX,i_PosY,0);
+    // spotLight.lookAt(compoCenter);
+
+    group.add(compoCenter);
+
+  }
+
+  // geometry = new THREE.RingGeometry(10, 13, 8, 13, 0, 6.28);
+  // material = new THREE.MeshLambertMaterial({
+  //   color: '#FFFFFF',
+  //   wireframe: true,
+  //   side: THREE.DoubleSide
+  // });
+  // compoCenter = new THREE.Mesh(geometry, material);
+  // compoCenter.position.set(1, 10, 0);
+  // spotLight.lookAt(compoCenter);
+
+  // group.add( compoCenter );
   camera.position.set(1, 10, 70);
 };
 
@@ -792,8 +853,8 @@ function deleteBasics(){
   group = new THREE.Group();
   scene.add(group);
   
-  compoCenter.geometry.dispose();
-  compoCenter.material.dispose();
+  // compoCenter.geometry.dispose();
+  // compoCenter.material.dispose();
 
 }
 
@@ -1179,6 +1240,9 @@ function changeLineColorbyEnergy(Material){
   } 
 }
 
+function sigmoid(scale, z){
+  return 1/(1+Math.exp(-(z-(scale*2))/scale))
+}
 
 
 
