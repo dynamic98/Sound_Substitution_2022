@@ -1,5 +1,4 @@
 import { RectAreaLight } from 'three';
-import { show_canvas } from './modules.js'
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
@@ -38,9 +37,7 @@ AudioCurrentTime = 0;
 
 // LOAD MUSIC (vizInit)
 function FileInit() {
-    // file = document.getElementById("thefile");
     audio = document.getElementById("audio");
-    // fileLabel = document.querySelector("label.file");
     changeMusicSelect();
     musicSelect.onchange = function(){
         changeMusicSelect();
@@ -71,10 +68,6 @@ function FileInit() {
 
 function FileChange(){
     // file.onchange = function(){
-        // canvas rendering by file input
-        show_canvas("canvas"); // visual-canvas
-        show_canvas("demo");   // haptic-canvas
-        show_canvas("music-controls") // music controller
 
         // fileLabel.classList.add('normal');
         // let files = this.files;
