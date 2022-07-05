@@ -341,9 +341,6 @@ audio.playing{
 
 
 /* 시각 메뉴 스타일 */
-div#canvas{
-  visibility: hidden;
-}
 
 div#canvas > canvas{
   background-color: black;
@@ -547,17 +544,9 @@ div#demo > div#waveform > wave {
 
 
 
-div#demo{
-  visibility: hidden;
-}
-
-
-
-
 /* 음악 컨트롤 메뉴 */
 
 div#music-controls{
-  visibility: hidden;
   margin-left: 450px;
 }
 

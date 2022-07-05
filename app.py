@@ -26,7 +26,7 @@ def abstract():
       pass
     else: 
       file.save(os.path.join(folder, secure_filename(file.filename)))
-      extract_feature(folder) # 내가 원하는 음악의 Feature 추출
+      # extract_feature(folder) # 내가 원하는 음악의 Feature 추출
       # 이것을 classifier.ts 와 연결
 
 
