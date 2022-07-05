@@ -46,20 +46,11 @@ function FileInit() {
     // audio.src = URL.createObjectURL()
     audio_context = audio_context || new AudioContext();
 
-    wavesurfer = WaveSurfer.create({
-        container: document.querySelector('#waveform'),
-        waveColor: '#A8DBA8',
-        progressColor: '#3B8686',
-        cursorWidth : 5,
-        normalize: true,
-    });
-
     console.log('audio input completed')
     document
     .querySelector('[data-action="play"]')
     .addEventListener('click', ()=>{ 
         console.log("PlayPause button pressed");
-        wavesurfer.playPause();
         TogglePlay();
     })
 
@@ -83,56 +74,29 @@ function FileChange(){
             // console.log(file);
             // file.files[0].name = selectMusicText;
             audio_context.resume();
-            wavesurfer.load(audio);
             audio.load();
             src = audio_context.createMediaElementSource(audio);
             audio.volume = 1;
-    
-            wavesurfer.on('ready', async () => {
-                console.log("wavesurfer is ready");
-                wavesurfer.play();
-                audio.play();
-
-                await sleep(1);
-                AudioCurrentTime = wavesurfer.getCurrentTime();
-                audio.currentTime = AudioCurrentTime;
-    
-            })
+            // audio.play();
             
             AnalyzerPlay(audio_context, src);
         })
-        // audio.src = URL.createObjectURL(selectedMusic);
-        // console.log("VizInit play");
-        
-        // // let fileList = file.files[0].name;
-        // // realTitle.innerText = fileList;
-        
-        // wavesurfer.load(audio);
-        // audio.load();
-        // src = audio_context.createMediaElementSource(audio);
-        // audio.volume = 1;
-
-        // wavesurfer.on('ready', () => {
-        //     console.log("wavesurfer is ready");
-        //     wavesurfer.play();
-        //     audio.play();
-        //     AudioCurrentTime = wavesurfer.getCurrentTime();
-        //     // console.log(AudioCurrentTime);
-        //     audio.currentTime = AudioCurrentTime;
-
-        // })
-        
-        // AnalyzerPlay(audio_context, src);
-    // }
 }
   
 function AnalyzerPlay(audio_context, src) {
     analyser = audio_context.createAnalyser();
     src.connect(analyser);
     analyser.connect(audio_context.destination);
+<<<<<<< Updated upstream
     analyser.fftSize = 512;
     bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
+=======
+
+    analyser.fftSize = Math.pow(2,13);
+    data = new Float32Array(analyser.fftSize);
+    sampleRate = audio_context.sampleRate;
+>>>>>>> Stashed changes
 
     // meyda analyser
     chroma = 0;
