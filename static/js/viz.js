@@ -135,7 +135,7 @@ function animate() {
   let CurrentTime = d.getTime();
   let DeltaTime = CurrentTime - LastTime;
   let FourBeatTime = 60/bpm*1000*4;
-  console.log("DeltaTime", DeltaTime, "FourBeatTime", FourBeatTime);
+  // console.log("DeltaTime", DeltaTime, "FourBeatTime", FourBeatTime);
   if (DeltaTime>FourBeatTime){
     LastTime = CurrentTime;
     PitchNote = [];
@@ -209,6 +209,9 @@ function createShapeRing_Vanilla(){
 
   for (let i=0; i<PitchNote.length; i++){
     let i_Pitch = PitchNote[i];
+    if(i_Pitch<-33){
+      i_Pitch = 0
+    }
 
     let octave = Math.floor((i_Pitch-3)/12)+5;
     let tone = (i_Pitch-3)%12;
@@ -217,7 +220,8 @@ function createShapeRing_Vanilla(){
       tone = tone+12
     }
     let i_Energy = EnergyNote[i];
-    if (i_Energy<0.01){
+    // console.log(i_Energy);
+    if (i_Energy<0.15){
       i_Energy = 0;
     }
     let i_PosX = i*PitchWidth-20;
@@ -227,7 +231,7 @@ function createShapeRing_Vanilla(){
     // let geometry = new THREE.CircleGeometry(i_Radius*10, 32);
     let geometry = new THREE.CircleGeometry(i_Radius, 32);
     let Color = new THREE.Color();
-    Color.setHSL(tone/12, (octave-1)/5, (octave-1)/5)
+    Color.setHSL(tone/12, (octave-1)/5, 0.5)
     let material = new THREE.MeshLambertMaterial({color: Color});
 
     let compoCenter = new THREE.Mesh(geometry, material);
