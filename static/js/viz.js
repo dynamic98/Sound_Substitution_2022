@@ -1,7 +1,7 @@
 'use strict';
 
 import * as THREE from 'three';
-import { analyser, chroma, maxChroma, energy, data, sampleRate} from './modules.js';
+import { analyser, chroma, maxChroma, energy, data, sampleRate, bpm} from './modules.js';
 import {yin} from './yin.js'
 
 // let controls;
@@ -9,8 +9,7 @@ let camera, scene, renderer;
 let container, stats;
 let customMenu;
 let FrameRate = 0;
-let bpm = 80;
-let BeatTime = 60/bpm*1000;
+// let bpm = 80;
 
 const startTime = new Date();
 let LastTime = startTime.getTime();
@@ -135,7 +134,9 @@ function animate() {
   const d = new Date();
   let CurrentTime = d.getTime();
   let DeltaTime = CurrentTime - LastTime;
-  if (DeltaTime>BeatTime*4){
+  let FourBeatTime = 60/bpm*1000*4;
+  console.log("DeltaTime", DeltaTime, "FourBeatTime", FourBeatTime);
+  if (DeltaTime>FourBeatTime){
     LastTime = CurrentTime;
     PitchNote = [];
     EnergyNote = [];
@@ -153,7 +154,14 @@ function animate() {
     let AdjustEnergy = sigmoid(10, energy);
     EnergyNote.push(AdjustEnergy);
 
-    // geometry rendering
+    // // geometry rendering
+    // if (now_geometry == 30000){
+    //   console.log(PitchNote);
+    // }
+    // else 
+    
+
+
     if (typeof now_geometry == 'number'){
       deleteBasics();
       let [geometry_type, pitch_type, dynamic_type] = GeometryAnalysis(now_geometry);
@@ -164,8 +172,8 @@ function animate() {
       } else {
         NowShapeFunction(); // 딕셔너리에서 불러온 함수 실행
       }
-  }
-  render();
+    }
+    render();
   }
 
 }
@@ -195,12 +203,10 @@ function createShapeLine_Vanilla(){
 
 
 function createShapeRing_Vanilla(){
-  let CanvasWidth = window.innerWidth / 2.24, CanvasHeight = window.innerHeight / 2.1;
+
   let PitchHeight = 40/59;
   let PitchWidth = 40/(60*4*13/bpm)
 
-
-  // let PitchSize = PitchHeight*AdjustEnergy;
   for (let i=0; i<PitchNote.length; i++){
     let i_Pitch = PitchNote[i];
 
@@ -227,25 +233,13 @@ function createShapeRing_Vanilla(){
     let compoCenter = new THREE.Mesh(geometry, material);
     // compoCenter.position.x = i_PosX+1;
     // compoCenter.position.y = i_PosY+10;
-
     compoCenter.position.set(i_PosX,i_PosY,0);
     // spotLight.lookAt(compoCenter);
 
     group.add(compoCenter);
 
   }
-
-  // geometry = new THREE.RingGeometry(10, 13, 8, 13, 0, 6.28);
-  // material = new THREE.MeshLambertMaterial({
-  //   color: '#FFFFFF',
-  //   wireframe: true,
-  //   side: THREE.DoubleSide
-  // });
-  // compoCenter = new THREE.Mesh(geometry, material);
-  // compoCenter.position.set(1, 10, 0);
-  // spotLight.lookAt(compoCenter);
-
-  // group.add( compoCenter );
+  // console.log(PitchNote, EnergyNote);
   camera.position.set(1, 10, 70);
 };
 

@@ -10,7 +10,7 @@ let AudioDifference;
 let AudioCurrentTime, AudioLastTime;
 let selectedMusic, selectMusicText;
 let data, sampleRate;
-// let target;
+let bpm = null;
 
 const pitchClasses = [
     "C",
@@ -113,13 +113,14 @@ function FileChange(){
                 });
 
                 offlineCtx.oncomplete = function(e) {
-                    var buffer = e.renderedBuffer;
-                    var peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
-                    var groups = getIntervals(peaks);
+                    let buffer = e.renderedBuffer;
+                    let peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
+                    let groups = getIntervals(peaks);
           
-                    var top = groups.sort(function(intA, intB) {
+                    let top = groups.sort(function(intA, intB) {
                       return intB.count - intA.count;
                     }).splice(0, 5);
+                    bpm = Math.round(top[0].tempo);
                     console.log("tempo",Math.round(top[0].tempo), top[1].tempo);
                   };
 
@@ -166,13 +167,13 @@ function AnalyzerPlay(audio_context, src) {
         buffersize: 1024,
         featureExtractors: ["energy", "chroma"],
         callback: (features) => {
-            try {
-            chroma = updateChroma(features['chroma']);
-            } catch (err){
-                console.log(err);
-            }
+            // try {
+            // chroma = updateChroma(features['chroma']);
+            // } catch (err){
+            //     console.log(err);
+            // }
 
-            maxChroma = chroma.indexOf(max(chroma));
+            // maxChroma = chroma.indexOf(max(chroma));
             energy = features['energy']
         }
     })
@@ -265,4 +266,4 @@ function fractionate(val, minVal, maxVal) {
 
 
 
-export { audio, audio_context, src, wavesurfer, analyser, chroma, maxChroma, energy, data, sampleRate };
+export { audio, audio_context, src, wavesurfer, analyser, chroma, maxChroma, energy, data, sampleRate, bpm};
