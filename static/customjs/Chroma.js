@@ -1,9 +1,17 @@
-import{Utility} from '../customjs/Utility.js';
+//libraries
+//----------------------------------------------------//
+import {
+    Utility
+} from '../customjs/Utility.js';
 
-export class Chroma{
 
-    constructor(){
-        this.pitchClasses=[
+// Please Add Description
+//----------------------------------------------------//
+export class Chroma {
+
+    // creates buffers for each pitch
+    constructor() {
+        this.pitchClasses = [
             "C",
             "C#",
             "D",
@@ -26,17 +34,19 @@ export class Chroma{
 
     }
 
-    updateChroma(features){
+    //callback function that is called in MyAudioContext's unitializeMeydaAnalyser
+    updateChroma(features) {
         try {
             this.chroma = this.update(features['chroma']);
-            } catch (err){
-                console.log(err);
-            }
-            this.maxChroma=  this.chroma.indexOf(Utility.max(this.chroma));
-            this.energy = features['energy']
+        } catch (err) {
+            console.log(err);
+        }
+        this.maxChroma = this.chroma.indexOf(Utility.max(this.chroma));
+        this.energy = features['energy']
     }
 
-    update(pitchValues){
+    //Please add description
+    update(pitchValues) {
         let result = [];
         pitchValues.forEach((value, index) => {
             let currentPitch = this.pitchClasses[index];
@@ -46,13 +56,13 @@ export class Chroma{
             while (currentPitchBuffer.length > framesToBuffer) {
                 currentPitchBuffer.shift();
             }
-            let framesAverage = 
-                currentPitchBuffer.reduce((total, value) => total+value, 0)/currentPitchBuffer.length;
+            let framesAverage =
+                currentPitchBuffer.reduce((total, value) => total + value, 0) / currentPitchBuffer.length;
             framesAverage = Math.pow(framesAverage, 5);
             result.push(framesAverage);
         });
         return result;
     };
-    
+
 
 }

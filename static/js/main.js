@@ -1,40 +1,64 @@
+//old way. Erase the comments for the line below and comment out the rest of the code to return to the old way. 
 // import {analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, wavesurfer, show_canvas, audio_context, src } from './modules.js';
 
-//원래 코드로 실행하려면 이 밑의 전부 주석처리를 하고 윗 줄 하나의 주석을 풀먼 된다. 
-import{FileHandler} from '../customjs/FileHandler.js';
+//libraries
+//----------------------------------------------------//
+import{AudioElementHandler} from '../customjs/AudioElementHandler.js';
 import{MyWaveSurfer} from '../customjs/MyWaveSurfer.js';
 import{MyAudioContext} from '../customjs/MyAudioContext.js';
 import{Chroma} from '../customjs/Chroma.js';
 
-let fileHandler= new FileHandler();
+
+//class instances
+//----------------------------------------------------//
+let audioElementHandler= new AudioElementHandler();
 let myWaveSurfer = new MyWaveSurfer();
 let myAudioContext = new MyAudioContext();
 // let chroma= new Chroma();
 
+
+//event handlers
+//----------------------------------------------------//
+//whenever the wavesurfer's play button is pressed execute
 document.querySelector('[data-action="play"]').addEventListener('click', ()=>{ 
     myWaveSurfer.togglePlay();
-    fileHandler.togglePlay();
+    audioElementHandler.togglePlay();
 })
 
-fileHandler.getElement().onchange=()=>{
-    fileHandler.changeAudio();
-    
+//whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
+audioElementHandler.getSelectMusicElement().onchange=()=>{
+    audioElementHandler.initializeDirectory();
+
+    audioElementHandler.fetchSelectedMusic().then(response=>{
+        audioElementHandler.initializeAudio(response);
+        myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
+    })
 }
     
+//----------------------------------------------------//
 main();
 
 function main(){
     
-    fileHandler.fileImport().then(response=>{
+    //import the files from html src
+    audioElementHandler.fetchSelectedMusic().then(response=>{
 
-    fileHandler.initializeFile(response);
-    myAudioContext.initialize(fileHandler.getAudio());
-    myWaveSurfer.initialize(fileHandler.getAudio());
+    //connect the audio to its soruce and set the initial settings
+    audioElementHandler.initializeAudio(response);
+    //createmediaelementsource e.g. node and uses it to create an analyser
+    myAudioContext.initializeAnalyser(audioElementHandler.getAudioElement());
+    //conntect wave surfer to audio source 
+    myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
 
-    myAudioContext.initializeAnalyser();
+    //initializes with settings
+    myWaveSurfer.initialize(audioElementHandler.getAudioElement());
+
+    //match the waveserfer timeline to audio source/ event handler
+    myWaveSurfer.sync();
+
     // myAudioContext.initializeMeydaAnalyser(chroma.updateChroma);
 
-    myWaveSurfer.initialize(fileHandler.getAudio());
     })
 }
 
+//----------------------------------------------------//
