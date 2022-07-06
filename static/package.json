@@ -1,34 +1,39 @@
 {
   "name": "vibviztool",
   "version": "0.0.0",
-  "type": "module",
+  "author": "",
+  "license": "GPL-3",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "webpack --mode development",
+    "build": "webpack",
+    "start": "npm run build && http-server"
   },
   "devDependencies": {
+    "esmify": "^2.1.1",
+    "html-webpack-plugin": "^5.5.0",
     "parcel-plugin-json-url-loader": "^0.1.2",
     "typescript": "^3.0.1",
-    "vite": "^2.8.4"
+    "vite": "^2.8.4",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {
     "@simonwep/pickr": "^1.8.2",
     "@tensorflow/tfjs": "^3.18.0",
     "bpm-detective": "^2.0.5",
+    "browserify": "^17.0.0",
     "data": "^0.6.1",
     "meyda": "^5.3.0",
     "nodemon": "^2.0.15",
     "p5": "^1.4.1",
     "pickr": "^0.1.4",
+    "pitchfinder": "^2.0.9",
     "three": "^0.138.3",
     "three.meshline": "^1.4.0",
+    "tone": "^13.3.10",
+    "tone-modular": "^0.6.0",
     "typescript": "^3.0.1",
-    "wavesurfer.js": "^6.0.4"
-  },
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+    "wavesurfer.js": "^6.0.4",
+    "webpack": "^5.73.0",
+    "webpack-dev-server": "^4.9.3"
+  }
 }

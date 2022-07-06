@@ -2,7 +2,7 @@
 //----------------------------------------------------//
 import {
     Utility
-} from '../customjs/Utility.js';
+} from './Utility.js';
 
 
 // Please Add Description
