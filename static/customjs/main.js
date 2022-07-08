@@ -47,6 +47,7 @@ function main() {
 
         //connect the audio to its soruce and set the initial settings
         audioElementHandler.initializeAudio(response);
+
         //Audio Routing
         //----------------------------------------------------//
         //connects source to gain node
@@ -61,6 +62,8 @@ function main() {
             console.log(pitch.getPitch())
         });
         //----------------------------------------------------//
+
+        
         //connect wave surfer to audio source 
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
         //initializes with settings

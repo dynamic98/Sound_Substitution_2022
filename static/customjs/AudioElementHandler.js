@@ -33,7 +33,10 @@ export class AudioElementHandler {
     initializeAudio(response) {
         this.audioElement.src = response.url;
         console.log("VizInit play", this.audioElement.src);
-        this.audioElement.play(); //must play in order to analyse
+        
+        //must play in order to analyse but using the wavesurfer to play it 
+       //by using the following code:  backend: 'MediaElement',
+        //this.audioElement.play(); /
     }
 
     //creates a gain Node nad connects with mediaElementSource
