@@ -17,15 +17,9 @@ export class Pitch {
 		this._pichfinder = Pitchfinder.Macleod({ sampleRate : Tone.context.sampleRate })
 		this._smoothedPitches = []
 		this._smoothedProb = 0
-		
-	 }
-	connectAnalyser(source){
 		this._analyser = new Tone.Waveform(1024)
-		Tone.connect(source,this._analyser)
-		console.log(this._analyser)
-	}
-	
- 
+	 }
+
 	 _getMedian(){
 		 return this._smoothedPitches.slice().sort()[Math.floor(this._smoothedPitches.length/2)]
 	 }
@@ -58,7 +52,7 @@ export class Pitch {
 			 note, midi
 		 }
 	 }
-	 getLastNode(){
+	 getAnalyser(){
 		return this._analyser
 	}
  }

@@ -5,11 +5,6 @@ export class AudioElementHandler {
     constructor() {
         this.selectMusicElement = document.getElementById("select-music");
         this.audioElement = document.getElementById("audio")
-
-        this.audioContext = new AudioContext();
-
-        Tone.setContext(this.audioContext);
-
         this.initializeDirectory();
     }
 
@@ -39,22 +34,9 @@ export class AudioElementHandler {
         //this.audioElement.play(); /
     }
 
-    //creates a gain Node nad connects with mediaElementSource
-    connectAudioToGain() {
-        this.src = this.audioContext.createMediaElementSource(this.audioElement);
-        this.gainNode = this.audioContext.createGain();
-        Tone.connect(this.src, this.gainNode);
-    }
-
     //play or pause
     togglePlay() {
         this.audioElement.paused? this.audioElement.pause : this.audioElement.play()
-    }
-
-    //coonects node to final destination
-    connect(node) {
-        Tone.connect(node, this.audioContext.destination)
-        console.log("last node connected")
     }
 
     //getter for this.audioElement;
@@ -65,10 +47,6 @@ export class AudioElementHandler {
     //getter for this.selectMusicElement;
     getSelectMusicElement() {
         return this.selectMusicElement;
-    }
-
-    getGainNode() {
-        return this.gainNode
     }
 
 }

@@ -13,11 +13,16 @@ import {
     Pitch
 } from '../libs/pitchfind.js';
 
+import {
+    AudioNodeManager
+}from '../customJS/AudioNodeManager.js'
+
 //class instances
 //----------------------------------------------------//
 let audioElementHandler = new AudioElementHandler();
 let myWaveSurfer = new MyWaveSurfer();
 let pitch = new Pitch()
+let audioNodeManager;
 
 //event handlers
 //----------------------------------------------------//
@@ -44,26 +49,28 @@ main();
 function main() {
     //import the files from html src
     audioElementHandler.fetchSelectedMusic().then(response => {
-
         //connect the audio to its soruce and set the initial settings
         audioElementHandler.initializeAudio(response);
 
+
         //Audio Routing
         //----------------------------------------------------//
-        //connects source to gain node
-        audioElementHandler.connectAudioToGain()
-        //connects gain Node to pitch detector
-        pitch.connectAnalyser(audioElementHandler.getGainNode());
+        //initialize nodeManager. 
+        audioNodeManager=new AudioNodeManager(audioElementHandler.getAudioElement());
+        audioNodeManager.addNode(
+            audioNodeManager.getSource(), // 0
+         // meydaAnalyser node 필요하면 여기에 추가하면 됨                            // 1 Analyser
+            audioNodeManager.getGainNode(), //2 Gain Node
+            pitch.getAnalyser()//3 Pitch 
+        )
+        audioNodeManager.connectAllNodes();
+        //----------------------------------------------------//
 
-        //connects the pitch analyser to destination 
-        audioElementHandler.connect(pitch.getLastNode());
-
+        //아무 키보드나 누르면 피치값 생성됨. 
         document.addEventListener("keypress", function (event) {
             console.log(pitch.getPitch())
         });
-        //----------------------------------------------------//
 
-        
         //connect wave surfer to audio source 
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
         //initializes with settings
