@@ -4,7 +4,7 @@ export class AudioNodeManager {
     constructor(audioElement) {
         this.src = Tone.context.createMediaElementSource(audioElement);
         this.gainNode = new Tone.Gain();
-        
+
         this.nodeList = [];
     }
 

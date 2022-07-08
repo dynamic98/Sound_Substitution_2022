@@ -35,10 +35,8 @@ document.querySelector('[data-action="play"]').addEventListener('click', () => {
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
 audioElementHandler.getSelectMusicElement().onchange = () => {
     audioElementHandler.initializeDirectory();
-
     audioElementHandler.fetchSelectedMusic().then(response => {
         audioElementHandler.initializeAudio(response);
-
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
     })
 }
@@ -51,7 +49,6 @@ function main() {
     audioElementHandler.fetchSelectedMusic().then(response => {
         //connect the audio to its soruce and set the initial settings
         audioElementHandler.initializeAudio(response);
-
 
         //Audio Routing
         //----------------------------------------------------//
