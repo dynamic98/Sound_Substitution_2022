@@ -1,5 +1,6 @@
 import { RectAreaLight } from 'three';
 import { show_canvas } from './modules.js'
+import {Pitch} from '../libs/pitchfind.js';
 let file, audio, fileLabel, audio_context;
 let realTitle = document.getElementById('title');
 let analyser, wavesurfer, src, bufferLength, dataArray;
@@ -134,9 +135,23 @@ function FileChange(){
 }
   
 function AnalyzerPlay(audio_context, src) {
+
+    console.log("!!!",audio_context, src)
+    
+    Tone.setContext(audio_context);
     analyser = audio_context.createAnalyser();
-    src.connect(analyser);
-    analyser.connect(audio_context.destination);
+    Tone.connect(src, analyser)
+
+    let gain=audio_context.createGain()
+    Tone.connect(analyser,gain)
+    let pitch= new Pitch(gain);
+    Tone.connect(pitch.getLastNode(),audio_context.destination);
+
+    document.addEventListener("keypress", function(event) {
+        console.log(pitch.getPitch())
+       });
+     
+
     analyser.fftSize = 512;
     bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);

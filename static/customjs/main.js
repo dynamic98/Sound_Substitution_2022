@@ -3,72 +3,69 @@
 
 //libraries
 //----------------------------------------------------//
-import{AudioElementHandler} from '../customJS/AudioElementHandler.js';
-import{MyWaveSurfer} from '../customJS/MyWaveSurfer.js';
-import{MyAudioContext} from '../customJS/MyAudioContext.js';
-import{Chroma} from '../customJS/Chroma.js';
-
-
-import {Pitch} from '../libs/pitchfind.js';
-
-
+import {
+    AudioElementHandler
+} from '../customJS/AudioElementHandler.js';
+import {
+    MyWaveSurfer
+} from '../customJS/MyWaveSurfer.js'
+import {
+    Pitch
+} from '../libs/pitchfind.js';
 
 //class instances
 //----------------------------------------------------//
-let audioElementHandler= new AudioElementHandler();
+let audioElementHandler = new AudioElementHandler();
 let myWaveSurfer = new MyWaveSurfer();
-let myAudioContext = new MyAudioContext();
-// let chroma= new Chroma();
-
-let pitchfinder = new Pitch(new Tone.Gain());
-
-console.log("gain: ", pitchfinder.getPitch());
-
-
-
+let pitch = new Pitch()
 
 //event handlers
 //----------------------------------------------------//
 //whenever the wavesurfer's play button is pressed execute
-document.querySelector('[data-action="play"]').addEventListener('click', ()=>{ 
+document.querySelector('[data-action="play"]').addEventListener('click', () => {
     myWaveSurfer.togglePlay();
     audioElementHandler.togglePlay();
 })
 
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
-audioElementHandler.getSelectMusicElement().onchange=()=>{
+audioElementHandler.getSelectMusicElement().onchange = () => {
     audioElementHandler.initializeDirectory();
 
-    audioElementHandler.fetchSelectedMusic().then(response=>{
+    audioElementHandler.fetchSelectedMusic().then(response => {
         audioElementHandler.initializeAudio(response);
+
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
     })
 }
-    
+
 //----------------------------------------------------//
 main();
 
-function main(){
-    
+function main() {
     //import the files from html src
-    audioElementHandler.fetchSelectedMusic().then(response=>{
+    audioElementHandler.fetchSelectedMusic().then(response => {
 
-    //connect the audio to its soruce and set the initial settings
-    audioElementHandler.initializeAudio(response);
-    //createmediaelementsource e.g. node and uses it to create an analyser
-    myAudioContext.initializeAnalyser(audioElementHandler.getAudioElement());
-    //conntect wave surfer to audio source 
-    myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
+        //connect the audio to its soruce and set the initial settings
+        audioElementHandler.initializeAudio(response);
+        //Audio Routing
+        //----------------------------------------------------//
+        //connects source to gain node
+        audioElementHandler.connectAudioToGain()
+        //connects gain Node to pitch detector
+        pitch.connectAnalyser(audioElementHandler.getGainNode());
 
-    //initializes with settings
-    myWaveSurfer.initialize(audioElementHandler.getAudioElement());
+        //connects the pitch analyser to destination 
+        audioElementHandler.connect(pitch.getLastNode());
 
-    //match the waveserfer timeline to audio source/ event handler
-    myWaveSurfer.sync();
-
-    // myAudioContext.initializeMeydaAnalyser(chroma.updateChroma);
+        document.addEventListener("keypress", function (event) {
+            console.log(pitch.getPitch())
+        });
+        //----------------------------------------------------//
+        //connect wave surfer to audio source 
+        myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
+        //initializes with settings
+        myWaveSurfer.initialize(audioElementHandler.getAudioElement());
 
     })
 }
-
-//----------------------------------------------------//
+//

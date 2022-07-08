@@ -13,17 +13,18 @@
 
  import Pitchfinder from 'pitchfinder'
 export class Pitch {
-	 constructor(source){
-		console.log("created Pitch Instance");
-		 this._analyser = new Tone.Waveform(1024)
-		 source.connect(this._analyser)
- 
-		 this._pichfinder = Pitchfinder.Macleod({ sampleRate : Tone.context.sampleRate })
- 
-		 this._smoothedPitches = []
- 
-		 this._smoothedProb = 0
+	 constructor(){
+		this._pichfinder = Pitchfinder.Macleod({ sampleRate : Tone.context.sampleRate })
+		this._smoothedPitches = []
+		this._smoothedProb = 0
+		
 	 }
+	connectAnalyser(source){
+		this._analyser = new Tone.Waveform(1024)
+		Tone.connect(source,this._analyser)
+		console.log(this._analyser)
+	}
+	
  
 	 _getMedian(){
 		 return this._smoothedPitches.slice().sort()[Math.floor(this._smoothedPitches.length/2)]
@@ -48,8 +49,8 @@ export class Pitch {
  
 		 const pitch = this._getMedian()
  
-		 const note = pitch === -1 ? 0 : Frequency(pitch).toNote()
-		 const midi = pitch === -1 ? 0 : Frequency(pitch).toMidi()
+		 const note = pitch === -1 ? 0 : Tone.Frequency(pitch).toNote()
+		 const midi = pitch === -1 ? 0 : Tone.Frequency(pitch).toMidi()
  
 		 return {
 			 frequency : pitch,
@@ -57,4 +58,7 @@ export class Pitch {
 			 note, midi
 		 }
 	 }
+	 getLastNode(){
+		return this._analyser
+	}
  }
