@@ -35,6 +35,15 @@ export class AudioNodeManager {
         }
     }
 
+    //show the elements and also the connetion of the nodes.
+    showConnection(){
+        console.log("printing nodeList: ")
+        for(let i = 0; i < this.nodeList.length ; i++){
+            console.log(i,this.nodeList[i])
+        }
+        console.log("End Of nodeList ")
+    }
+
     getSource() {
         return this.src
     }
