@@ -1,5 +1,7 @@
 //오디오 노드가 뻇다 삭제하고 추가하고 등등 복잡하여 이 클래스의 객체로 관리
+
 //Helper class for Webaudio Node Connection
+//----------------------------------------------------//
 export class AudioNodeManager {
     constructor(audioElement) {
         this.src = Tone.context.createMediaElementSource(audioElement);

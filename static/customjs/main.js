@@ -12,15 +12,12 @@ import {
 import {
     Pitch
 } from '../libs/pitchfind.js';
-
 import {
     AudioNodeManager
 } from '../customJS/AudioNodeManager.js'
-
 import {
-    MeydaAnalyzer
-} from '../customJS/AudioNodeManager.js'
-import { MeydaAnalyser } from './MeydaAnalyzer.js';
+    MeydaAnalyser
+} from './MeydaAnalyzer.js';
 
 //class instances
 //----------------------------------------------------//
@@ -28,7 +25,7 @@ let audioElementHandler = new AudioElementHandler();
 let myWaveSurfer = new MyWaveSurfer();
 let pitch = new Pitch()
 let audioNodeManager;
-let meydaAnalyer= new MeydaAnalyser();
+let meydaAnalyer = new MeydaAnalyser();
 
 //event handlers
 //----------------------------------------------------//
@@ -54,7 +51,8 @@ function main() {
     //import the files from html src
     audioElementHandler.fetchSelectedMusic().then(response => {
         //connect the audio to its soruce and set the initial settings
-        audioElementHandler.initializeAudio(response);    
+        audioElementHandler.initializeAudio(response);
+
         //Audio Routing
         //----------------------------------------------------//
         audioNodeManager = new AudioNodeManager(audioElementHandler.getAudioElement());
@@ -63,17 +61,12 @@ function main() {
             audioNodeManager.getGainNode(), //1 Gain Node
             pitch.getAnalyser() //2 Pitch 
         )
+        //connect all the nodes 
         audioNodeManager.connectAllNodes();
         //----------------------------------------------------//
 
-        //meydaAnalyser
+        //meydaAnalyser create and start
         meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
-
-        //아무 키보드나 누르면 피치값 생성됨. 
-        document.addEventListener("keypress", function (event) {
-            console.log("pitch:",pitch.getPitch())
-            console.log("Meyda Energy: ",meydaAnalyer.getEnergy())
-        });
 
         //connect wave surfer to audio source 
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
@@ -81,4 +74,14 @@ function main() {
         myWaveSurfer.initialize(audioElementHandler.getAudioElement());
     })
 }
-//
+//----------------------------------------------------//
+
+
+//디버깅
+//----------------------------------------------------//
+//아무 키보드나 누르면 피치값, 메이다 에너지 출력시킴
+document.addEventListener("keypress", function (event) {
+    console.log("pitch:", pitch.getPitch())
+    console.log("Meyda Energy: ", meydaAnalyer.getEnergy())
+});
+//----------------------------------------------------//

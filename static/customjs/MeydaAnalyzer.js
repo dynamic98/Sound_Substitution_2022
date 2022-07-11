@@ -1,7 +1,13 @@
+//libraries
+//----------------------------------------------------//
 import {
     Utility
 } from './Utility.js';
+//----------------------------------------------------//
 
+
+//MeydaAnalyser Controller Class
+//----------------------------------------------------//
 export class MeydaAnalyser {
     constructor() {
         this.pitchClasses = [
@@ -25,6 +31,7 @@ export class MeydaAnalyser {
         });
     }
 
+    //intitialize with source(AudioElement) and audioContext
     initializeMeydaAnalyser(source) {
         console.log(Tone.context._context._nativeAudioContext)
         this.meydaAnalyser = Meyda.createMeydaAnalyzer({
