@@ -26,11 +26,7 @@ import {
 } from './MyViz.js';
 import {
     Utility
-<<<<<<< HEAD
 } from './Utility.js'
-=======
-} from './Utility.js';
->>>>>>> 175e77f (Visualization)
 
 //class instances
 //----------------------------------------------------//
@@ -61,10 +57,6 @@ audioElementHandler.getSelectMusicElement().onchange = async () => {
 //----------------------------------------------------//
 const startTime = new Date();
 let LastTime = startTime.getTime();
-<<<<<<< HEAD
-=======
-
->>>>>>> 175e77f (Visualization)
 main();
 
 async function main() {
