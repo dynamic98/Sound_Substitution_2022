@@ -40,55 +40,47 @@ document.querySelector('[data-action="play"]').addEventListener('click', () => {
 })
 
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
-audioElementHandler.getSelectMusicElement().onchange = () => {
+audioElementHandler.getSelectMusicElement().onchange = async () => {
     audioElementHandler.initializeDirectory();
-    audioElementHandler.fetchSelectedMusic().then(response => {
-        audioElementHandler.initializeAudio(response);
-        myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
-        response.arrayBuffer().then(
-            arrayBuffer =>{
-                myOffCxt.initialize(arrayBuffer);
-            }
-        )
-    })
+    let response = await audioElementHandler.fetchSelectedMusic();
+    audioElementHandler.initializeAudio(response);
+    myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
+    myOffCxt.initialize(await response.arrayBuffer());
 }
 
 //----------------------------------------------------//
 main();
 
-function main() {
+async function main() {
     //import the files from html src
+    let response = await audioElementHandler.fetchSelectedMusic()
+    //connect the audio to its soruce and set the initial settings
+    audioElementHandler.initializeAudio(response);
+    //Audio Routing
+    //----------------------------------------------------//
+    audioNodeManager = new AudioNodeManager(audioElementHandler.getAudioElement());
+    audioNodeManager.addNode(
+        audioNodeManager.getSource(), // 0
+        audioNodeManager.getGainNode(), //1 Gain Node
+        pitch.getAnalyser() //2 Pitch 
+    )
+    // connect all the nodes 
+    audioNodeManager.showConnection()
+    audioNodeManager.connectAllNodes();
+    // ----------------------------------------------------//
 
-    audioElementHandler.fetchSelectedMusic().then(response => {
-        //connect the audio to its soruce and set the initial settings
-        audioElementHandler.initializeAudio(response);
-        //Audio Routing
-        //----------------------------------------------------//
-        audioNodeManager = new AudioNodeManager(audioElementHandler.getAudioElement());
-        audioNodeManager.addNode(
-            audioNodeManager.getSource(), // 0
-            audioNodeManager.getGainNode(), //1 Gain Node
-            pitch.getAnalyser() //2 Pitch 
-        )
-        // connect all the nodes 
-        audioNodeManager.showConnection()
-        audioNodeManager.connectAllNodes();
-        // ----------------------------------------------------//
+    // meydaAnalyser create and start
+    meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
 
-        // meydaAnalyser create and start
-        meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
+    //connect wave surfer to audio source 
+    myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
+    //initializes with settings
+    myWaveSurfer.initialize(audioElementHandler.getAudioElement());
 
-        //connect wave surfer to audio source 
-        myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
-        //initializes with settings
-        myWaveSurfer.initialize(audioElementHandler.getAudioElement());
+    let arrayBuffer = await response.arrayBuffer()
+    myOffCxt.initialize(arrayBuffer);
 
-        response.arrayBuffer().then(
-            arrayBuffer =>{
-                myOffCxt.initialize(arrayBuffer);
-            }
-        )
-    })};
+};
 
 //디버깅
 //----------------------------------------------------//
