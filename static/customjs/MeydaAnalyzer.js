@@ -1,15 +1,8 @@
-//libraries
-//----------------------------------------------------//
 import {
     Utility
 } from './Utility.js';
 
-
-// Please Add Description
-//----------------------------------------------------//
-export class Chroma {
-
-    // creates buffers for each pitch
+export class MeydaAnalyser {
     constructor() {
         this.pitchClasses = [
             "C",
@@ -27,26 +20,34 @@ export class Chroma {
         ];
 
         this.frameBuffer = new Map();
-
         this.pitchClasses.forEach((pitch) => {
             this.frameBuffer.set(pitch, []);
         });
-
     }
 
-    //callback function that is called in MyAudioContext's unitializeMeydaAnalyser
-    updateChroma(features) {
-        try {
-            this.chroma = this.update(features['chroma']);
-        } catch (err) {
-            console.log(err);
-        }
-        this.maxChroma = this.chroma.indexOf(Utility.max(this.chroma));
-        this.energy = features['energy']
+    initializeMeydaAnalyser(source) {
+        console.log(source._nativeAudioNode)
+        this.meydaAnalyser = Meyda.createMeydaAnalyzer({
+            audioContext: Tone.context.rawContext._nativeAudioContext,
+            source: source._nativeAudioNode,
+            buffersize: 1024,
+            featureExtractors: ["energy", "chroma"],
+            callback: (features) => {
+                try {
+                    this.chroma = this.updateChroma(features['chroma']);
+                } catch (err) {
+                    console.log(err);
+                }
+
+                this.maxChroma = this.chroma.indexOf(Utility.max(this.chroma));
+                this.energy = features['energy']
+            }
+        })
+        console.log("Meyda:", this.meydaAnalyser)
+        this.meydaAnalyser.start();
     }
 
-    //Please add description
-    update(pitchValues) {
+    updateChroma(pitchValues) {
         let result = [];
         pitchValues.forEach((value, index) => {
             let currentPitch = this.pitchClasses[index];
@@ -63,6 +64,4 @@ export class Chroma {
         });
         return result;
     };
-
-
 }

@@ -15,7 +15,12 @@ import {
 
 import {
     AudioNodeManager
-}from '../customJS/AudioNodeManager.js'
+} from '../customJS/AudioNodeManager.js'
+
+import {
+    MeydaAnalyzer
+} from '../customJS/AudioNodeManager.js'
+import { MeydaAnalyser } from './MeydaAnalyzer.js';
 
 //class instances
 //----------------------------------------------------//
@@ -23,6 +28,7 @@ let audioElementHandler = new AudioElementHandler();
 let myWaveSurfer = new MyWaveSurfer();
 let pitch = new Pitch()
 let audioNodeManager;
+let meydaAnalyer= new MeydaAnalyser();
 
 //event handlers
 //----------------------------------------------------//
@@ -48,20 +54,20 @@ function main() {
     //import the files from html src
     audioElementHandler.fetchSelectedMusic().then(response => {
         //connect the audio to its soruce and set the initial settings
-        audioElementHandler.initializeAudio(response);
-
+        audioElementHandler.initializeAudio(response);    
         //Audio Routing
         //----------------------------------------------------//
-        //initialize nodeManager. 
-        audioNodeManager=new AudioNodeManager(audioElementHandler.getAudioElement());
+        audioNodeManager = new AudioNodeManager(audioElementHandler.getAudioElement());
         audioNodeManager.addNode(
             audioNodeManager.getSource(), // 0
-         // meydaAnalyser node 필요하면 여기에 추가하면 됨                            // 1 Analyser
-            audioNodeManager.getGainNode(), //2 Gain Node
-            pitch.getAnalyser()//3 Pitch 
+            audioNodeManager.getGainNode(), //1 Gain Node
+            pitch.getAnalyser() //2 Pitch 
         )
         audioNodeManager.connectAllNodes();
         //----------------------------------------------------//
+
+        //meydaAnalyser
+        meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
 
         //아무 키보드나 누르면 피치값 생성됨. 
         document.addEventListener("keypress", function (event) {
@@ -72,7 +78,6 @@ function main() {
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
         //initializes with settings
         myWaveSurfer.initialize(audioElementHandler.getAudioElement());
-
     })
 }
 //
