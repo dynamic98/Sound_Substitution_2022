@@ -19,13 +19,14 @@ import {
     MeydaAnalyser
 } from './MeydaAnalyzer.js';
 
+console.log("bye")
 //class instances
 //----------------------------------------------------//
 let audioElementHandler = new AudioElementHandler();
 let myWaveSurfer = new MyWaveSurfer();
 let pitch = new Pitch()
 let audioNodeManager;
- let meydaAnalyer = new MeydaAnalyser();
+let meydaAnalyer = new MeydaAnalyser();
 
 //event handlers
 //----------------------------------------------------//
@@ -60,6 +61,7 @@ function main() {
             audioNodeManager.getSource(), // 0
             audioNodeManager.getGainNode(), //1 Gain Node
             pitch.getAnalyser() //2 Pitch 
+
         )
         //connect all the nodes 
         audioNodeManager.connectAllNodes();

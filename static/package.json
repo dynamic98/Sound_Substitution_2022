@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack",
+    "watch": "webpack --watch",
     "start": "npm run build && http-server"
   },
   "devDependencies": {
