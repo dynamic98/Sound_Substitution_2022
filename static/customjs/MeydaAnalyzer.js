@@ -75,4 +75,7 @@ export class MeydaAnalyser {
     getEnergy(){
         return this.energy
     }
+    getMaxChroma(){
+        return this.maxChroma
+    }
 }

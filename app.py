@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
 from featureExtraction import extract_feature
 from werkzeug.utils import secure_filename
@@ -5,9 +6,10 @@ import os
 import selenium
 import webbrowser
 
-
 app = Flask(__name__)
+
 folder = os.path.join('./static/music/')
+
 
 os.makedirs(folder, exist_ok=True)
 
