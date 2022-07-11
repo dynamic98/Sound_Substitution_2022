@@ -77,7 +77,7 @@ let AbsCount, LoopAmount, TotalCount, NoteInterval, OneLoopMusicLength, LoopCoun
 let MyUserCustom = new GetUserCustom();
 let pitch_palette;
 
-document.body.appendChild(stats.dom);
+// document.body.appendChild(stats.dom);
 
 
 main()

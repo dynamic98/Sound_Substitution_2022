@@ -24,7 +24,7 @@ from './Utility/GetUserCustom.js'
 let visualization = new Visualization(5)
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
-document.body.appendChild(stats.dom);
+// document.body.appendChild(stats.dom);
 let sourceContainer;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")

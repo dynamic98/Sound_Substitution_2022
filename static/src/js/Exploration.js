@@ -192,7 +192,7 @@ checkbox.addEventListener('change', (event) => {
 let MeshAmount=20, NoteInterval;
 let counter = 0
 let pitch_palette;
-document.body.appendChild(stats.dom);
+// document.body.appendChild(stats.dom);
 
 main()
 
