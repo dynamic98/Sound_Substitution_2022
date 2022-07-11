@@ -25,7 +25,7 @@ let audioElementHandler = new AudioElementHandler();
 let myWaveSurfer = new MyWaveSurfer();
 let pitch = new Pitch()
 let audioNodeManager;
-let meydaAnalyer = new MeydaAnalyser();
+ let meydaAnalyer = new MeydaAnalyser();
 
 //event handlers
 //----------------------------------------------------//
@@ -72,16 +72,14 @@ function main() {
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
         //initializes with settings
         myWaveSurfer.initialize(audioElementHandler.getAudioElement());
+
+        //디버깅
+        //----------------------------------------------------//
+        //아무 키보드나 누르면 피치값, 메이다 에너지 출력시킴
+        document.addEventListener("keypress", function (event) {
+            console.log("pitch:", pitch.getPitch())
+            console.log("Meyda Energy: ", meydaAnalyer.getEnergy())
+        });
+        //----------------------------------------------------//
     })
 }
-//----------------------------------------------------//
-
-
-//디버깅
-//----------------------------------------------------//
-//아무 키보드나 누르면 피치값, 메이다 에너지 출력시킴
-document.addEventListener("keypress", function (event) {
-    console.log("pitch:", pitch.getPitch())
-    console.log("Meyda Energy: ", meydaAnalyer.getEnergy())
-});
-//----------------------------------------------------//

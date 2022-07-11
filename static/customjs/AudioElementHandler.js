@@ -28,19 +28,23 @@ export class AudioElementHandler {
     initializeAudio(response) {
         this.audioElement.src = response.url;
         console.log("VizInit play", this.audioElement.src);
-        
+
         //must play in order to analyse but using the wavesurfer to play it 
-       //by using the following code:  backend: 'MediaElement',
+        //by using the following code:  backend: 'MediaElement',
         //this.audioElement.play(); /
     }
 
     //play or pause
     togglePlay() {
-        this.audioElement.paused? this.audioElement.pause : this.audioElement.play()
+        this.audioElement.paused ? this.audioElement.pause : this.audioElement.play()
     }
 
     //getter for this.audioElement;
     getAudioElement() {
         return this.audioElement;
+    }
+    getSelectMusicElement() {
+        return this.selectMusicElement
+
     }
 }
