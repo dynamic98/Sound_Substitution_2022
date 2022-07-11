@@ -26,9 +26,9 @@ export class MeydaAnalyser {
     }
 
     initializeMeydaAnalyser(source) {
-        console.log(source._nativeAudioNode)
+        console.log(Tone.context._context._nativeAudioContext)
         this.meydaAnalyser = Meyda.createMeydaAnalyzer({
-            audioContext: Tone.context.rawContext._nativeAudioContext,
+            audioContext: Tone.context._context._nativeAudioContext,
             source: source._nativeAudioNode,
             buffersize: 1024,
             featureExtractors: ["energy", "chroma"],
@@ -64,4 +64,8 @@ export class MeydaAnalyser {
         });
         return result;
     };
+
+    getEnergy(){
+        return this.energy
+    }
 }

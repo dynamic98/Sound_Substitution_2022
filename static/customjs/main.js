@@ -71,7 +71,8 @@ function main() {
 
         //아무 키보드나 누르면 피치값 생성됨. 
         document.addEventListener("keypress", function (event) {
-            console.log(pitch.getPitch())
+            console.log("pitch:",pitch.getPitch())
+            console.log("Meyda Energy: ",meydaAnalyer.getEnergy())
         });
 
         //connect wave surfer to audio source 
