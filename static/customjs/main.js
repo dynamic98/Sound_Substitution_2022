@@ -18,8 +18,10 @@ import {
 import {
     MeydaAnalyser
 } from './MeydaAnalyzer.js';
+import {
+    OffCxt
+} from './OffCxt.js';
 
-console.log("bye")
 //class instances
 //----------------------------------------------------//
 let audioElementHandler = new AudioElementHandler();
@@ -27,6 +29,7 @@ let myWaveSurfer = new MyWaveSurfer();
 let pitch = new Pitch()
 let audioNodeManager;
 let meydaAnalyer = new MeydaAnalyser();
+let myOffCxt = new OffCxt();
 
 //event handlers
 //----------------------------------------------------//
@@ -42,6 +45,11 @@ audioElementHandler.getSelectMusicElement().onchange = () => {
     audioElementHandler.fetchSelectedMusic().then(response => {
         audioElementHandler.initializeAudio(response);
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
+        response.arrayBuffer().then(
+            arrayBuffer =>{
+                myOffCxt.initialize(arrayBuffer);
+            }
+        )
     })
 }
 
@@ -50,10 +58,10 @@ main();
 
 function main() {
     //import the files from html src
+
     audioElementHandler.fetchSelectedMusic().then(response => {
         //connect the audio to its soruce and set the initial settings
         audioElementHandler.initializeAudio(response);
-
         //Audio Routing
         //----------------------------------------------------//
         audioNodeManager = new AudioNodeManager(audioElementHandler.getAudioElement());
@@ -61,27 +69,32 @@ function main() {
             audioNodeManager.getSource(), // 0
             audioNodeManager.getGainNode(), //1 Gain Node
             pitch.getAnalyser() //2 Pitch 
-
         )
-        //connect all the nodes 
+        // connect all the nodes 
+        audioNodeManager.showConnection()
         audioNodeManager.connectAllNodes();
-        //----------------------------------------------------//
+        // ----------------------------------------------------//
 
-        //meydaAnalyser create and start
-        meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
+        // meydaAnalyser create and start
+        //meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
 
         //connect wave surfer to audio source 
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
         //initializes with settings
         myWaveSurfer.initialize(audioElementHandler.getAudioElement());
 
-        //디버깅
-        //----------------------------------------------------//
-        //아무 키보드나 누르면 피치값, 메이다 에너지 출력시킴
-        document.addEventListener("keypress", function (event) {
-            console.log("pitch:", pitch.getPitch())
-            console.log("Meyda Energy: ", meydaAnalyer.getEnergy())
-        });
-        //----------------------------------------------------//
-    })
-}
+        response.arrayBuffer().then(
+            arrayBuffer =>{
+                myOffCxt.initialize(arrayBuffer);
+            }
+        )
+    })};
+
+//디버깅
+//----------------------------------------------------//
+//아무 키보드나 누르면 피치값, 메이다 에너지 출력시킴
+document.addEventListener("keypress", function (event) {
+    console.log("pitch:", pitch.getPitch())
+    console.log("Meyda Energy: ", meydaAnalyer.getEnergy())
+    console.log(myOffCxt.getbpm());
+});
