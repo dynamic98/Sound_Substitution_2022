@@ -43,10 +43,4 @@ export class AudioElementHandler {
     getAudioElement() {
         return this.audioElement;
     }
-
-    //getter for this.selectMusicElement;
-    getSelectMusicElement() {
-        return this.selectMusicElement;
-    }
-
 }
