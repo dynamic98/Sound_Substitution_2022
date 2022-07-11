@@ -76,7 +76,7 @@ function main() {
         // ----------------------------------------------------//
 
         // meydaAnalyser create and start
-        //meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
+        meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
 
         //connect wave surfer to audio source 
         myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());

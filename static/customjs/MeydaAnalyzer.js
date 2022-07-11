@@ -45,7 +45,7 @@ export class MeydaAnalyser {
                 } catch (err) {
                     console.log(err);
                 }
-
+ 
                 this.maxChroma = this.chroma.indexOf(Utility.max(this.chroma));
                 this.energy = features['energy']
             }
