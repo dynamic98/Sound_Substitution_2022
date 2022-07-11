@@ -5,16 +5,16 @@
 //----------------------------------------------------//
 import {
     AudioElementHandler
-} from '../customJS/AudioElementHandler.js';
+} from './AudioElementHandler.js';
 import {
     MyWaveSurfer
-} from '../customJS/MyWaveSurfer.js'
+} from './MyWaveSurfer.js'
 import {
     Pitch
 } from '../libs/pitchfind.js';
 import {
     AudioNodeManager
-} from '../customJS/AudioNodeManager.js'
+} from './AudioNodeManager.js'
 import {
     MeydaAnalyser
 } from './MeydaAnalyzer.js';
@@ -77,8 +77,7 @@ async function main() {
     //initializes with settings
     myWaveSurfer.initialize(audioElementHandler.getAudioElement());
 
-    let arrayBuffer = await response.arrayBuffer()
-    myOffCxt.initialize(arrayBuffer);
+    myOffCxt.initialize(await response.arrayBuffer());
 
 };
 
