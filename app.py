@@ -75,6 +75,14 @@ def separate():
   return render_template('separate.html')
 
 
+@app.route('/making_tool', methods=['POST'])
+def making_tool():
+  if request.method=='POST':
+    word = '구상적 시각화 페이지 입니다.'
+  else:
+    pass
+  return render_template('making_tool.html')
+
 @app.route('/loading', methods=['POST'])
 def loading():
   features = ''
