@@ -9,13 +9,17 @@ export class Visualizer {
     constructor() {
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer({
-            antialias: true
+            antialias: true,
+            physicallyCorrectLights:true,
         });
         this.scene.add(this.directionalLight);
         this.camera = new THREE.PerspectiveCamera(30, this.renderer.domElement.width / this.renderer.domElement.height, 2, 2000);
         this.container = document.getElementById("canvas");
         this.ambientLight = new THREE.AmbientLight(0xaaaaaa, 100);
-        this.spotLight = new THREE.SpotLight(0xffffff);
+        this.directionalLight = new THREE.DirectionalLight( 0xffffff,1 );
+        this.pointLight = new THREE.PointLight(0xffffff, 30, 10);
+        this.pointLight.castShadow=true;
+
         this.group = new THREE.Group();
         this.now_geometry = 30000;
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
@@ -43,18 +47,17 @@ export class Visualizer {
         //카메라 위치가 중간에 있지 않다.  
         this.camera.position.set(100, 0, 150);
         this.container.appendChild(this.renderer.domElement);
-        // this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        this.directionalLight.position.set(100,100,100)
         this.scene.add(this.ambientLight);
-        this.spotLight.intensity = 0.9;
-        this.spotLight.position.set(-10, 40, 20);
-        this.spotLight.castShadow = true;
-        this.scene.add(this.spotLight);
+        this.scene.add(this.directionalLight)
+        this.scene.add(this.pointLight);
         this.scene.add(this.group);
+    
         this.renderer.render(this.scene, this.camera);
         this.options = {
             transmission: 0.99,
-            thickness: 1.2,
-            roughness: 0.6,
+            thickness: 0.1,
+            roughness: 0.1,
             clearcoat: 1,
             clearcoatRoughness: 0.1,
         };
@@ -79,7 +82,7 @@ export class Visualizer {
         if (i_Energy < 0.15) {
             i_Energy = 0;
         }
-        this.i_PosX = this.counter * PitchWidth - 20;
+        this.i_PosX = this.counter * PitchWidth;
         this.i_PosY = PitchHeight * (i_Pitch - 60) - 10;
         this.i_Radius = PitchHeight * (i_Energy * 5);
         this.counter += 1;
@@ -87,6 +90,8 @@ export class Visualizer {
 
     createGeometry() {
         let geometry = new THREE.SphereGeometry(this.i_Radius, 16, 8);
+        this.pointLight.position.set(this.i_PosX, this.i_PosY,0);
+
         let Color = new THREE.Color();
         Color.setHSL(this.tone / 12, (this.octave - 1) / 5, 0.5) //도를 빨강으로 hsv 12 normalize, s는 적당히
         const material = new THREE.MeshPhysicalMaterial({
@@ -100,6 +105,7 @@ export class Visualizer {
         let mesh = new THREE.Mesh(geometry, material);
         mesh.position.set(this.i_PosX, this.i_PosY, 0);
         this.group.add(mesh);
+
     }
 
     cameraUpdate() {

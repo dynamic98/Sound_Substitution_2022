@@ -28,6 +28,7 @@ import {
     BPMTimer
 } from './BPMTimer.js'
 
+
 //class instances
 //----------------------------------------------------//
 let audioElementHandler = new AudioElementHandler();
@@ -38,6 +39,7 @@ let meydaAnalyer = new MeydaAnalyser();
 let myOffCxt = new OffCxt();
 let myViz = new Visualizer();
 let bpmTimer = new BPMTimer();
+let stats = new Stats();
 
 
 //event handlers
@@ -92,11 +94,14 @@ async function main() {
 
 function animate() {
     requestAnimationFrame(animate);
+    stats.begin()
     bpmTimer.updateBPM(myOffCxt.getbpm())
 
-
+    if (!bpmTimer.isUnderFourBeat()) {
+        myViz.deleteBasics();
+    }
     //under 4 beat = calculate and create Geomtry 
-    if (bpmTimer.isUnderFourBeat()) {
+    else if (bpmTimer.isUnderFourBeat()) {
         let pitchAndEnergy = bpmTimer.getPitchAndEnergy(pitch.getPitch(), meydaAnalyer.getEnergy(), meydaAnalyer.getMaxChroma())
         myViz.Kandinsky(myOffCxt.getbpm(), pitchAndEnergy);
         myViz.createGeometry();
@@ -105,10 +110,8 @@ function animate() {
 
         //over 4 beat. erase 
     }
-    if (!bpmTimer.isUnderFourBeat()) {
-        console.log(bpmTimer.isUnderFourBeat())
-        myViz.deleteBasics();
-    }
     myViz.render();
+    stats.end();
 
 }
+document.body.appendChild( stats.dom );
