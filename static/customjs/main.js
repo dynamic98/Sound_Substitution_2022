@@ -28,8 +28,6 @@ import {
     BPMTimer
 } from './BPMTimer.js'
 
-
-
 //class instances
 //----------------------------------------------------//
 let audioElementHandler = new AudioElementHandler();
@@ -61,9 +59,7 @@ audioElementHandler.getSelectMusicElement().onchange = async () => {
 }
 
 //----------------------------------------------------//
-
 main();
-
 async function main() {
     //import the files from html src
     let response = await audioElementHandler.fetchSelectedMusic()
@@ -90,22 +86,26 @@ async function main() {
     //initializes with settings
     myWaveSurfer.initialize(audioElementHandler.getAudioElement());
 
-    myOffCxt.initialize(await response.arrayBuffer(),);
-
+    myOffCxt.initialize(await response.arrayBuffer(), );
+    
     animate();
 };
 
 function animate() {
     requestAnimationFrame(animate);
     stats.begin();
-
     bpmTimer.updateBPM(myOffCxt.getbpm())
-    let newValue= bpmTimer.getPitchAndEnergy(pitch.getPitch(),meydaAnalyer.getEnergy(),meydaAnalyer.getMaxChroma())
-    if(newValue|| newValue[0]){
-        myViz.Kandinsky(myOffCxt.getbpm(),newValue);
+
+    //under 4 beat = calculate and create Geomtry 
+    if (bpmTimer.isUnderFourBeat()) {
+        let pitchAndEnergy = bpmTimer.getPitchAndEnergy(pitch.getPitch(), meydaAnalyer.getEnergy(), meydaAnalyer.getMaxChroma())
+        myViz.Kandinsky(myOffCxt.getbpm(), pitchAndEnergy);
         myViz.createGeometry();
-    }
-    else if(!newValue){
+        //tracking the movement of the animation
+        //  myViz.cameraUpdate();
+
+    //over 4 beat. erase 
+    } else if (!bpmTimer.isUnderFourBeat()) {
         myViz.deleteBasics();
     }
     myViz.render();

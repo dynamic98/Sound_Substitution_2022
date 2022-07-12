@@ -16,7 +16,7 @@ export class BPMTimer {
         this.bpm = bpm
     }
 
-    getPitchAndEnergy( pitch, energy, maxChroma) {
+    isUnderFourBeat(){
         let CurrentTime = new Date().getTime()
         let DeltaTime = CurrentTime - this.LastTime;
         let FourBeatTime = 60 / this.bpm * 1000 * 4; //one beat in millisecond 60,000 / bpm *4= four beat
@@ -26,7 +26,12 @@ export class BPMTimer {
             this.LastTime = CurrentTime;
             return false
         }
+        else{
+            return true
+        }
+    }
 
+    getPitchAndEnergy( pitch, energy, maxChroma) {
         let midi = null;
         if (pitch.frequency == this.error) {
             midi = maxChroma + 72
