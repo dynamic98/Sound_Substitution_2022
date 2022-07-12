@@ -15,7 +15,7 @@ export class Visualizer {
         this.container = document.getElementById("canvas");
         this.ambientLight = new THREE.AmbientLight(0xaaaaaa, 100);
         this.directionalLight = new THREE.DirectionalLight( 0xffffff,1 );
-        this.pointLight = new THREE.PointLight(0xffffff, 30, 10);
+        this.pointLight = new THREE.PointLight(0xffffff, 30, 15);
         this.pointLight.castShadow=true;
 
         this.group = new THREE.Group();
