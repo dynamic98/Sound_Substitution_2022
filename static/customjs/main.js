@@ -21,6 +21,14 @@ import {
 import {
     OffCxt
 } from './OffCxt.js';
+import {
+    Visualizer
+} from './MyViz.js';
+import {
+    BPMTimer
+} from './BPMTimer.js'
+
+
 
 //class instances
 //----------------------------------------------------//
@@ -30,6 +38,10 @@ let pitch = new Pitch()
 let audioNodeManager;
 let meydaAnalyer = new MeydaAnalyser();
 let myOffCxt = new OffCxt();
+let myViz = new Visualizer();
+let stats = new Stats();
+let bpmTimer = new BPMTimer();
+
 
 //event handlers
 //----------------------------------------------------//
@@ -49,6 +61,7 @@ audioElementHandler.getSelectMusicElement().onchange = async () => {
 }
 
 //----------------------------------------------------//
+
 main();
 
 async function main() {
@@ -77,15 +90,36 @@ async function main() {
     //initializes with settings
     myWaveSurfer.initialize(audioElementHandler.getAudioElement());
 
-    myOffCxt.initialize(await response.arrayBuffer());
+    myOffCxt.initialize(await response.arrayBuffer(),);
 
+    animate();
 };
+
+function animate() {
+    requestAnimationFrame(animate);
+    stats.begin();
+
+    bpmTimer.updateBPM(myOffCxt.getbpm())
+    let newValue= bpmTimer.getPitchAndEnergy(pitch.getPitch(),meydaAnalyer.getEnergy(),meydaAnalyer.getMaxChroma())
+    if(newValue|| newValue[0]){
+        myViz.Kandinsky(myOffCxt.getbpm(),newValue);
+        myViz.createGeometry();
+    }
+    else if(!newValue){
+        myViz.deleteBasics();
+    }
+    myViz.render();
+    stats.end();
+}
 
 //디버깅
 //----------------------------------------------------//
 //아무 키보드나 누르면 피치값, 메이다 에너지 출력시킴
 document.addEventListener("keypress", function (event) {
-    console.log("pitch:", pitch.getPitch())
-    console.log("Meyda Energy: ", meydaAnalyer.getEnergy())
+    console.log("pitch:", pitch.getPitch());
+    console.log("Meyda Energy: ", meydaAnalyer.getEnergy());
+    console.log("Meyda Pitch: ", meydaAnalyer.getMaxChroma());
     console.log(myOffCxt.getbpm());
 });
+
+document.body.appendChild(stats.dom);

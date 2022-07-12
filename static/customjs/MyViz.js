@@ -1,26 +1,51 @@
 import * as THREE from 'three'
-
-export class Visualizer{
-    constructor(){
+import {
+    OrbitControls
+} from 'three/examples/jsm/controls/OrbitControls'
+import {
+    RGBELoader
+} from 'three/examples/jsm/loaders/RGBELoader'
+export class Visualizer {
+    constructor() {
         this.scene = new THREE.Scene();
-        this.renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
-        this.camera = new THREE.PerspectiveCamera(30, this.renderer.domElement.width/this.renderer.domElement.height, 2, 2000);
-        this.container = document.getElementById( "canvas" );
-        this.ambientLight = new THREE.AmbientLight(0xaaaaaa);
+        this.renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
+
+        this.scene.add(this.directionalLight);
+        this.camera = new THREE.PerspectiveCamera(30, this.renderer.domElement.width / this.renderer.domElement.height, 2, 2000);
+        this.container = document.getElementById("canvas");
+        this.ambientLight = new THREE.AmbientLight(0xaaaaaa, 100);
         this.spotLight = new THREE.SpotLight(0xffffff);
         this.group = new THREE.Group();
         this.now_geometry = 30000;
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.initialize();
-        this.DictPitch = {0:"C",1:"C#",2:"D",3:"D#",4:"E",5:"F",6:"F#",7:"G",8:"G#",9:"A",10:"A#",11:"B"};
+        this.DictPitch = {
+            0: "C",
+            1: "C#",
+            2: "D",
+            3: "D#",
+            4: "E",
+            5: "F",
+            6: "F#",
+            7: "G",
+            8: "G#",
+            9: "A",
+            10: "A#",
+            11: "B"
+        };
         this.PitchNote = [], this.EnergyNote = [];
+        this.counter=0;
 
     }
-    initialize(){
+    initialize() {
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth / 2.24, window.innerHeight / 2.1);
-        this.camera.position.set(1,10,70);
+        //카메라 위치가 중간에 있지 않다.  
+        this.camera.position.set(100, 0, 100);
         this.container.appendChild(this.renderer.domElement);
-        this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        // this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
         this.scene.add(this.ambientLight);
         this.spotLight.intensity = 0.9;
         this.spotLight.position.set(-10, 40, 20);
@@ -28,52 +53,64 @@ export class Visualizer{
         this.scene.add(this.spotLight);
         this.scene.add(this.group);
         this.renderer.render(this.scene, this.camera);
+        this.options = {
+            transmission: 0.99,
+            thickness: 1.2,
+            roughness: 0.6,
+            clearcoat: 1,
+            clearcoatRoughness: 0.1,
+        };
+
     }
 
-    render(){
+    render() {
         this.renderer.render(this.scene, this.camera);
     }
 
-    Kandinsky(bpm){
-        let PitchHeight = 40/59;
-        let PitchWidth = 40/(60*4*13/bpm)
-      
-        for (let i=0; i<this.PitchNote.length; i++){
-            let i_Pitch = this.PitchNote[i];      
-            let octave = Math.floor((i_Pitch)/12)-1;
-            let tone = (i_Pitch)%12;
+    Kandinsky(bpm,[pitch,energy]) {
+        let PitchHeight = 40 / 59; //40은 캔버스 59는 미디 범위 c0가 0인가 1 음 간격 수직 
+        let PitchWidth = 40 / (60 * 4 * 13 / bpm) // 음사이의 간격. 수평 13 프레임레이트. 
+
+            let i_Pitch = pitch
+            this.octave = Math.floor((i_Pitch) / 12) - 1; //옥타브 구하는 방식
+            this.tone = (i_Pitch) % 12;
             // Make reminder positive integer
 
-            if (tone<0){
-                tone = tone+12
-            }
-            let i_Energy = this.EnergyNote[i];
+            let i_Energy = energy
             // console.log(i_Energy);
-            if (i_Energy<0.15){
+            if (i_Energy < 0.15) {
                 i_Energy = 0;
             }
-            let i_PosX = i*PitchWidth-20;
-            let i_PosY = PitchHeight*(i_Pitch-60)-10;
-            let i_Radius = PitchHeight*(i_Energy*5);
-      
-            // let geometry = new THREE.CircleGeometry(i_Radius*10, 32);
-            let geometry = new THREE.CircleGeometry(i_Radius, 32);
-            let Color = new THREE.Color();
-            Color.setHSL(tone/12, (octave-1)/5, 0.5)
-            let material = new THREE.MeshLambertMaterial({color: Color});
-            let mesh = new THREE.Mesh(geometry, material);
-            mesh.position.set(i_PosX,i_PosY,0);
-            this.group.add(mesh);
-        }
-        // console.log(PitchNote, EnergyNote);
-        // this.camera.position.set(1, 10, 70);
-
+            this.i_PosX = this.counter*PitchWidth-20;
+            this.i_PosY = PitchHeight*(i_Pitch-60)-10;
+            this.i_Radius = PitchHeight*(i_Energy*5);
+            this.counter+=1;
     }
 
-    deleteBasics(){
+    createGeometry() {
+        let geometry = new THREE.SphereGeometry(this.i_Radius, 16, 8);
+        let Color = new THREE.Color();
+        Color.setHSL(this.tone / 12, (this.octave - 1) / 5, 0.5) //도를 빨강으로 hsv 12 normalize, s는 적당히
+        const material = new THREE.MeshPhysicalMaterial({
+            transmission: this.options.transmission,
+            thickness: this.options.thickness,
+            roughness: this.options.roughness,
+            color: Color,
+            clearcoat: this.options.clearcoat,
+            clearcoatRoughness: this.options.clearcoatRoughness,
+        });
+        let mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(this.i_PosX, this.i_PosY, 0);
+        this.group.add(mesh);
+    }
+
+
+    deleteBasics() {
         this.group.parent.remove(this.group);
         this.group = new THREE.Group();
         this.scene.add(this.group);
-    }
 
+        this.PitchNote, this.EnergyNote=[]
+        this.counter=0;
+    }
 }
