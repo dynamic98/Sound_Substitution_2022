@@ -57,7 +57,7 @@ export class OffCxt{
               return intB.count - intA.count;
             }).splice(0, 5);
             bpm = Math.round(top[0].tempo);
-            console.log("tempo",Math.round(top[0].tempo), top[1].tempo);
+            // console.log("tempo",Math.round(top[0].tempo), top[1].tempo);
         }
 
     }

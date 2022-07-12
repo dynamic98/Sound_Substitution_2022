@@ -29,4 +29,8 @@ export class Utility {
     return (total / arr.length);
   }
 
+  static sigmoid(scale, z){
+    return 1/(1+Math.exp(-(z-(scale*2))/scale))
+  }
+
 }
