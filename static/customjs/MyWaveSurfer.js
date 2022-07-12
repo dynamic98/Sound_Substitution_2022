@@ -23,7 +23,7 @@ export class MyWaveSurfer {
     }
 
      //initializes with settings
-    initialize(audioElement) {
+    initialize(audioElement,offline) {
 
         this.wavesurfer.on('ready', async () =>
          {
@@ -31,6 +31,14 @@ export class MyWaveSurfer {
             this.wavesurfer.play()
             audioElement.currentTime = this.wavesurfer.getCurrentTime();
         })
+
+    
+    }
+    setInteractionEventHandler(thisReference){
+        this.wavesurfer.on('interaction', () =>
+        {
+            thisReference.deleteDrawing()
+       })
     }
 
     //play/pause

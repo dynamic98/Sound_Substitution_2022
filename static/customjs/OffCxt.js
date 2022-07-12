@@ -16,9 +16,8 @@ export class OffCxt {
         this.offlineCtx = new OfflineAudioContext(2, 30 * 44100, 44100);
         // this.bpm;
         this.source = this.offlineCtx.createBufferSource();
-        this.arrayBuffer = arrayBuffer;
 
-        let buffer = await this.offlineCtx.decodeAudioData(this.arrayBuffer)
+        let buffer = await this.offlineCtx.decodeAudioData(arrayBuffer)
         console.log('buffer~')
         this.source.buffer = buffer;
         let lowpass = this.offlineCtx.createBiquadFilter();
@@ -67,5 +66,9 @@ export class OffCxt {
     getbpm() {
         this.bpm = bpm;
         return this.bpm;
+    }
+
+    setSource(){
+        console.log(this.source)
     }
 }

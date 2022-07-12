@@ -2,9 +2,7 @@ import * as THREE from 'three'
 import {
     OrbitControls
 } from 'three/examples/jsm/controls/OrbitControls'
-import {
-    RGBELoader
-} from 'three/examples/jsm/loaders/RGBELoader'
+
 export class Visualizer {
     constructor() {
         this.scene = new THREE.Scene();
@@ -111,11 +109,14 @@ export class Visualizer {
     cameraUpdate() {
         this.camera.position.x = this.i_PosX - 60;
     }
-    deleteBasics() {
+
+    deleteDrawing() {
         this.group.parent.remove(this.group);
         this.group = new THREE.Group();
         this.scene.add(this.group)
 
         this.counter = 0;
     }
+
+
 }

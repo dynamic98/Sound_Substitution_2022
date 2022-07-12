@@ -74,8 +74,6 @@ async function main() {
         audioNodeManager.getGainNode(), //1 Gain Node
         pitch.getAnalyser() //2 Pitch 
     )
-    // connect all the nodes 
-    audioNodeManager.showConnection()
     audioNodeManager.connectAllNodes();
     // ----------------------------------------------------//
 
@@ -87,18 +85,23 @@ async function main() {
     //initializes with settings
     myWaveSurfer.initialize(audioElementHandler.getAudioElement());
 
-    myOffCxt.initialize(await response.arrayBuffer(), );
+    myWaveSurfer.setInteractionEventHandler( myViz)
+
+    myOffCxt.initialize(await response.arrayBuffer() );
 
     animate();
+
 };
 
 function animate() {
+    
     requestAnimationFrame(animate);
+
     stats.begin()
     bpmTimer.updateBPM(myOffCxt.getbpm())
 
     if (!bpmTimer.isUnderFourBeat()) {
-        myViz.deleteBasics();
+        myViz.deleteDrawing();
     }
     //under 4 beat = calculate and create Geomtry 
     else if (bpmTimer.isUnderFourBeat()) {
