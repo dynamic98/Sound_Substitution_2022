@@ -89,6 +89,8 @@ async function main() {
 
     myOffCxt.initialize(await response.arrayBuffer() );
 
+    myViz.initialize()
+    myViz.initializeBloom();
     animate();
 
 };
@@ -96,10 +98,13 @@ async function main() {
 function animate() {
     
     requestAnimationFrame(animate);
-
+    
     stats.begin()
+
+    if(!audioElementHandler.getAudioElement().paused){
     bpmTimer.updateBPM(myOffCxt.getbpm())
 
+    //over 4 beat = delet drawing
     if (!bpmTimer.isUnderFourBeat()) {
         myViz.deleteDrawing();
     }
@@ -108,12 +113,9 @@ function animate() {
         let pitchAndEnergy = bpmTimer.getPitchAndEnergy(pitch.getPitch(), meydaAnalyer.getEnergy(), meydaAnalyer.getMaxChroma())
         myViz.Kandinsky(myOffCxt.getbpm(), pitchAndEnergy);
         myViz.createGeometry();
-        //tracking the movement of the animation
-        //  myViz.cameraUpdate();
-
-        //over 4 beat. erase 
     }
     myViz.render();
+}
     stats.end();
 
 }
