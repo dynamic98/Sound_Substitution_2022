@@ -49,7 +49,6 @@ export class OffCxt {
         this.source.start(0);
         this.offlineCtx.startRendering();
 
-
         this.offlineCtx.oncomplete = function (e) {
             let buffer = e.renderedBuffer;
             let peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
@@ -61,7 +60,6 @@ export class OffCxt {
             bpm = Math.round(top[0].tempo);
             // console.log("tempo",Math.round(top[0].tempo), top[1].tempo);
         }
-
     }
     getbpm() {
         this.bpm = bpm;

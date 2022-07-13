@@ -1,8 +1,8 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
+import { Mesh } from 'three';
 import {
     OrbitControls
 } from 'three/examples/jsm/controls/OrbitControls'
-
 import {
     EffectComposer
 } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -10,9 +10,8 @@ import {
     RenderPass
 } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import {
-    GlitchPass
-} from 'three/examples/jsm/postprocessing/GlitchPass.js';
-
+    ShaderPass
+} from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import {
     UnrealBloomPass
 } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
@@ -24,18 +23,12 @@ export class Visualizer {
             antialias: true,
             physicallyCorrectLights: true,
         });
-        this.scene.add(this.directionalLight);
         this.camera = new THREE.PerspectiveCamera(30, this.renderer.domElement.width / this.renderer.domElement.height, 2, 2000);
-        this.container = document.getElementById("canvas");
         this.ambientLight = new THREE.AmbientLight(0xaaaaaa, 100);
         this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
         this.pointLight = new THREE.PointLight(0xffffff, 30, 15);
         this.pointLight.castShadow = true;
-
         this.group = new THREE.Group();
-        this.now_geometry = 30000;
-
-        this.initialize();
         this.DictPitch = {
             0: "C",
             1: "C#",
@@ -51,15 +44,21 @@ export class Visualizer {
             11: "B"
         };
         this.counter = 0;
-
+        this.materials = []
     }
+
     initialize() {
         this.camera.position.set(0, 0, 150);
+
+        this.darkMaterial = new THREE.MeshBasicMaterial({
+            color: 'black'
+        });
+
 
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth / 2.24, window.innerHeight / 2.1);
         this.renderer.toneMapping = THREE.ReinhardToneMapping;
-        this.container.appendChild(this.renderer.domElement);
+        document.getElementById("canvas").appendChild(this.renderer.domElement);
 
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
@@ -72,8 +71,8 @@ export class Visualizer {
 
         this.options = {
             transmission: 0.99,
-            thickness: 0.1,
-            roughness: 0.1,
+            thickness: 0.9,
+            roughness: 0.9,
             clearcoat: 1,
             clearcoatRoughness: 0.1,
         };
@@ -81,7 +80,9 @@ export class Visualizer {
     }
 
     render() {
-        this.renderer.render(this.scene, this.camera);
+        this.renderBloom();
+        this.finalComposer.render();
+
     }
 
     Kandinsky(bpm, [pitch, energy]) {
@@ -98,10 +99,11 @@ export class Visualizer {
         if (i_Energy < 0.15) {
             i_Energy = 0;
         }
-        this.i_PosX = this.counter * PitchWidth-100
+        this.i_PosX = this.counter * PitchWidth - 100
         this.i_PosY = PitchHeight * (i_Pitch - 60) - 10;
         this.i_Radius = PitchHeight * (i_Energy * 5);
-        this.counter += 1;
+
+
     }
 
     createGeometry() {
@@ -119,9 +121,17 @@ export class Visualizer {
             clearcoatRoughness: this.options.clearcoatRoughness,
         });
         let mesh = new THREE.Mesh(geometry, material);
+
+        mesh.renderOrder=1
         mesh.position.set(this.i_PosX, this.i_PosY, 0);
         this.group.add(mesh);
 
+
+        if (this.counter > 5) {
+            this.group.children[this.counter - 6].renderOrder=0
+        }
+        this.counter += 1;
+        console.log(this.counter)
     }
 
     cameraUpdate() {
@@ -135,32 +145,78 @@ export class Visualizer {
 
         this.counter = 0;
     }
-    
-    initializeBloom(){
-        this.renderScene = new RenderPass(this.scene, this.camera);
 
-        const bloomLayer = new THREE.Layers();
-        bloomLayer.set( BLOOM_SCENE );
-        const ENTIRE_SCENE = 0,
-            BLOOM_SCENE = 1;
-        bloomLayer.set(BLOOM_SCENE);
+    initializeBloom() {
+
+        const BLOOM_SCENE = 1;
+        this.bloomLayer = new THREE.Layers();
+        this.bloomLayer.set(BLOOM_SCENE);
 
         const params = {
-            exposure: 1,
+            exposure: 0,
             bloomStrength: 5,
             bloomThreshold: 0,
             bloomRadius: 0,
         };
+
+        this.renderScene = new RenderPass(this.scene, this.camera);
 
         this.bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth / 2.24, window.innerHeight / 2.1), 1.5, 0.4, 0.85);
         this.bloomPass.threshold = params.bloomThreshold;
         this.bloomPass.strength = params.bloomStrength;
         this.bloomPass.radius = params.bloomRadius;
 
-        this.bloomComposer = new EffectComposer( this.renderer );
+        this.bloomComposer = new EffectComposer(this.renderer);
+        this.bloomComposer.addPass(this.renderScene);
+        this.bloomComposer.addPass(this.bloomPass)
         this.bloomComposer.renderToScreen = false;
-        bloomComposer.addPass( this.renderScene );
-        bloomComposer.addPass( this.bloomPass );
+
+        const finalPass = new ShaderPass(
+            new THREE.ShaderMaterial({
+                uniforms: {
+                    baseTexture: {
+                        value: null
+                    },
+                    bloomTexture: {
+                        value: this.bloomComposer.renderTarget2.texture
+                    }
+                },
+                vertexShader: document.getElementById('vertexshader').textContent,
+                fragmentShader: document.getElementById('fragmentshader').textContent,
+                defines: {}
+            }), 'baseTexture'
+        );
+        finalPass.needsSwap = true;
+
+        this.finalComposer = new EffectComposer(this.renderer);
+        this.finalComposer.render();
+        this.finalComposer.addPass(this.renderScene);
+        this.finalComposer.addPass(finalPass);
+
+    }
+    renderBloom() {
+       this.scene.traverse(this.darkenNonBloomed.bind(this));
+        this.bloomComposer.render();
+        this.scene.traverse(this.restoreMaterial.bind(this));
+    }
+    darkenNonBloomed(obj) {
+        const show=1
+        if (obj.isMesh && obj.renderOrder !=show) {
+            this.materials[obj.uuid] = _.cloneDeep(obj.material.color)
+            obj.material.color.r = 0;
+            obj.material.color.g = 0;
+            obj.material.color.b = 0;
+        }
+    }
+
+    restoreMaterial(obj) {
+        if (this.materials[obj.uuid]) {
+            obj.material.color.r = this.materials[obj.uuid].r;
+            obj.material.color.g = this.materials[obj.uuid].g;
+            obj.material.color.b = this.materials[obj.uuid].b;
+            delete this.materials[obj.uuid];
+        }
+
     }
 
 }
