@@ -3,24 +3,38 @@ import {
     OrbitControls
 } from 'three/examples/jsm/controls/OrbitControls'
 
+import {
+    EffectComposer
+} from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import {
+    RenderPass
+} from 'three/examples/jsm/postprocessing/RenderPass.js';
+import {
+    GlitchPass
+} from 'three/examples/jsm/postprocessing/GlitchPass.js';
+
+import {
+    UnrealBloomPass
+} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+
 export class Visualizer {
     constructor() {
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer({
             antialias: true,
-            physicallyCorrectLights:true,
+            physicallyCorrectLights: true,
         });
         this.scene.add(this.directionalLight);
         this.camera = new THREE.PerspectiveCamera(30, this.renderer.domElement.width / this.renderer.domElement.height, 2, 2000);
         this.container = document.getElementById("canvas");
         this.ambientLight = new THREE.AmbientLight(0xaaaaaa, 100);
-        this.directionalLight = new THREE.DirectionalLight( 0xffffff,1 );
+        this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
         this.pointLight = new THREE.PointLight(0xffffff, 30, 15);
-        this.pointLight.castShadow=true;
+        this.pointLight.castShadow = true;
 
         this.group = new THREE.Group();
         this.now_geometry = 30000;
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
         this.initialize();
         this.DictPitch = {
             0: "C",
@@ -40,18 +54,22 @@ export class Visualizer {
 
     }
     initialize() {
+        this.camera.position.set(0, 0, 150);
+
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth / 2.24, window.innerHeight / 2.1);
-        //카메라 위치가 중간에 있지 않다.  
-        this.camera.position.set(100, 0, 150);
+        this.renderer.toneMapping = THREE.ReinhardToneMapping;
         this.container.appendChild(this.renderer.domElement);
-        this.directionalLight.position.set(100,100,100)
+
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
+        this.directionalLight.position.set(100, 100, 100)
+
         this.scene.add(this.ambientLight);
         this.scene.add(this.directionalLight)
         this.scene.add(this.pointLight);
         this.scene.add(this.group);
-    
-        this.renderer.render(this.scene, this.camera);
+
         this.options = {
             transmission: 0.99,
             thickness: 0.1,
@@ -80,7 +98,7 @@ export class Visualizer {
         if (i_Energy < 0.15) {
             i_Energy = 0;
         }
-        this.i_PosX = this.counter * PitchWidth;
+        this.i_PosX = this.counter * PitchWidth-100
         this.i_PosY = PitchHeight * (i_Pitch - 60) - 10;
         this.i_Radius = PitchHeight * (i_Energy * 5);
         this.counter += 1;
@@ -88,7 +106,7 @@ export class Visualizer {
 
     createGeometry() {
         let geometry = new THREE.SphereGeometry(this.i_Radius, 16, 8);
-        this.pointLight.position.set(this.i_PosX, this.i_PosY,0);
+        this.pointLight.position.set(this.i_PosX, this.i_PosY, 0);
 
         let Color = new THREE.Color();
         Color.setHSL(this.tone / 12, (this.octave - 1) / 5, 0.5) //도를 빨강으로 hsv 12 normalize, s는 적당히
@@ -117,6 +135,32 @@ export class Visualizer {
 
         this.counter = 0;
     }
+    
+    initializeBloom(){
+        this.renderScene = new RenderPass(this.scene, this.camera);
 
+        const bloomLayer = new THREE.Layers();
+        bloomLayer.set( BLOOM_SCENE );
+        const ENTIRE_SCENE = 0,
+            BLOOM_SCENE = 1;
+        bloomLayer.set(BLOOM_SCENE);
+
+        const params = {
+            exposure: 1,
+            bloomStrength: 5,
+            bloomThreshold: 0,
+            bloomRadius: 0,
+        };
+
+        this.bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth / 2.24, window.innerHeight / 2.1), 1.5, 0.4, 0.85);
+        this.bloomPass.threshold = params.bloomThreshold;
+        this.bloomPass.strength = params.bloomStrength;
+        this.bloomPass.radius = params.bloomRadius;
+
+        this.bloomComposer = new EffectComposer( this.renderer );
+        this.bloomComposer.renderToScreen = false;
+        bloomComposer.addPass( this.renderScene );
+        bloomComposer.addPass( this.bloomPass );
+    }
 
 }
