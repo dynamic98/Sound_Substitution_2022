@@ -27,96 +27,100 @@
           text-align: center;
         }
         .container {  display: grid;
-  grid-template-columns:  1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns:  repeat(25, 60px);
+  /* 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+  grid-template-rows: repeat(13, 60px);
+  /* 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
   gap: 0px 0px;
   grid-auto-flow: row;
 }
+.syllable0 {grid-area: 13 / 1 / 14 /2 ; background-color: rgb(252, 245, 245); text-align: center;  color:hsl(0, 70%, 60%); }
+.syllable1 {grid-area: 12 / 1 / 13 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(30, 70%, 60%)}
+.syllable2 {grid-area: 11 / 1 / 12 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(60, 70%, 60%)}
+.syllable3 {grid-area: 10 / 1 / 11 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(90, 70%, 60%)}
+.syllable4 {grid-area: 9 / 1 / 10 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(120, 70%, 60%)}
+.syllable5 {grid-area: 8 / 1 / 9 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(150, 70%, 60%)}
+.syllable6 {grid-area: 7 / 1 / 8 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(180, 70%, 60%)}
+.syllable7 {grid-area: 6 / 1 / 7 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(210, 70%, 60%)}
+.syllable8 {grid-area: 5 / 1 / 6 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(240, 70%, 60%)}
+.syllable9 {grid-area: 4 / 1 / 5 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(270, 70%, 60%)}
+.syllable10 {grid-area: 3 / 1 / 4 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(300, 70%, 60%)}
+.syllable11 {grid-area: 2 / 1 / 3 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(330, 70%, 60%)}
+.syllable_top {grid-area: 1 / 1 / 2 /21 ; background-color: rgb(252, 245, 245); text-align: center;}
 
-/* .p1 { grid-area: 12 / 1 / 13 / 19; color:hsl(0, 50, 50)} */
-.p1 { grid-area: 12 / 1 / 13 / 19; background-color:hsl(0, 80%, 50%); border: 1px solid rgba(128, 126, 126, 0.8);}
 
-.p2 { grid-area: 11 / 1 / 12 / 19; background-color:hsl(30, 80%, 50%)}
+.p1 { grid-area: 13 / 2 / 14 / 21; background-color:hsl(0, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p2 { grid-area: 12 / 2 / 13 / 21; background-color:hsl(30, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p3 { grid-area: 11 / 2 / 12 / 21;background-color:hsl(60, 70%, 60%); outline-style: dotted;  outline-width: 3px;}
+.p4 { grid-area: 10 / 2 / 11 / 21; background-color:hsl(90, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p5 { grid-area: 9 / 2 / 10 / 21; background-color:hsl(120, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p6 { grid-area: 8 / 2 / 9 / 21; background-color:hsl(150, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p7 { grid-area: 7 / 2 / 8 / 21; background-color:hsl(180, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p8 { grid-area: 6 / 2 / 7 / 21; background-color:hsl(210, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p9 { grid-area: 5 / 2 / 6 / 21; background-color:hsl(240, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p10 { grid-area: 4 / 2 / 5 / 21; background-color:hsl(270, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p11 { grid-area: 3 / 2 / 4 / 21; background-color:hsl(300, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+.p12 { grid-area: 2 / 2 / 3 / 21; background-color:hsl(330, 70%, 60%); outline-style: dotted; outline-width: 3px;}
 
-.p3 { grid-area: 10 / 1 / 11 / 19;background-color:hsl(60, 80%, 50%)}
-
-.p4 { grid-area: 9 / 1 / 10 / 19; background-color:hsl(90, 80%, 50%)}
-
-.p5 { grid-area: 8 / 1 / 9 / 19; background-color:hsl(120, 80%, 50%)}
-
-.p6 { grid-area: 7 / 1 / 8 / 19; background-color:hsl(150, 80%, 50%)}
-
-.p7 { grid-area: 6 / 1 / 7 / 19; background-color:hsl(180, 80%, 50%)}
-
-.p8 { grid-area: 5 / 1 / 6 / 19; background-color:hsl(210, 80%, 50%)}
-
-.p9 { grid-area: 4 / 1 / 5 / 19; background-color:hsl(240, 80%, 50%)}
-
-.p10 { grid-area: 3 / 1 / 4 / 19; background-color:hsl(270, 80%, 50%)}
-
-.p11 { grid-area: 2 / 1 / 3 / 19; background-color:hsl(300, 80%, 50%)}
-
-.p12 { grid-area: 1 / 1 / 2 / 19; background-color:hsl(330, 80%, 50%)}
-
-.t1 { grid-area: 1 / 1 / 13 / 2;border: 1px solid rgba(0, 0, 0, 0.8);}
-
-.t2 { grid-area: 1 / 2 / 13 / 3;border: 1px solid rgba(0, 0, 0, 0.8);}
-
-.t3 { grid-area: 1 / 3 / 13 / 4;}
-
-.t4 { grid-area: 1 / 4 / 13 / 5;}
-
-.t5 { grid-area: 1 / 5 / 13 / 6;}
-
-.t6 { grid-area: 1 / 6 / 13 / 7;}
-
-.t7 { grid-area: 1 / 7 / 13 / 8; }
-
-.t8 { grid-area: 1 / 8 / 13 / 9; }
-
-.t9 { grid-area: 1 / 9 / 13 / 10; }
-
-.t10 { grid-area: 1 / 10 / 13 / 11; }
-
-.t11 { grid-area: 1 / 11 / 13 / 12; }
-
-.t12 { grid-area: 1 / 12 / 13 / 13; }
-
-.t13 { grid-area: 1 / 13 / 13 / 14; }
-
-.t14 { grid-area: 1 / 14 / 13 / 15; }
-
-.t15 { grid-area: 1 / 15 / 13 / 16; }
-
-.t16 { grid-area: 1 / 16 / 13 / 17; }
-
-.t17 { grid-area: 1 / 17 / 13 / 18; }
-
-.t18 { grid-area: 1 / 18 / 13 / 19; }
+.t1 { grid-area: 2 / 2 / 14 / 3; }
+.t2 { grid-area: 2 / 3 / 14 / 4; }
+.t3 { grid-area: 2 / 4 / 14 / 5; }
+.t4 { grid-area: 2 / 5 / 14 / 6; }
+.t5 { grid-area: 2 / 6 / 14 / 7; }
+.t6 { grid-area: 2 / 7 / 14 / 8; }
+.t7 { grid-area: 2 / 8 / 14 / 9; }
+.t8 { grid-area: 2 / 9 / 14 / 10;}
+.t9 { grid-area: 2 / 10 / 14 / 11;}
+.t10 { grid-area: 2 / 11 / 14 / 12;}
+.t11 { grid-area: 2 / 12 / 14 / 13;}
+.t12 { grid-area: 2 / 13 / 14 / 14;}
+.t13 { grid-area: 2 / 14 / 14 / 15;}
+.t14 { grid-area: 2 / 13 / 14 / 16;}
+.t15 { grid-area: 2 / 16 / 14 / 17;}
+.t16 { grid-area: 2 / 17 / 14 / 18; }
+.t17 { grid-area: 2 / 18 / 14 / 19; }
+.t18 { grid-area: 2 / 19 / 14 / 20; }
+.t19 { grid-area: 2 / 20 / 14 / 21; }
+.t20 { grid-area: 2 / 21 / 14 / 22; }
+.menu {grid-area: 2 / 22/ 14 / 26;}
 
         </style>
 </head>
 
 <body>
-    <h1>Making Music tools</h1>
+    <h1 style="padding-left: 50px;">CANVAS - Draw your own melody</h1>
 
-    <p>A Grid Layout must have a parent element with the <em>display</em> property set to <em>grid</em> or <em>inline-grid</em>.</p>
+    <p style="padding-left: 50px;">A Grid Layout must have a parent element with the <em>display</em> property set to <em>grid</em> or <em>inline-grid</em>.</p>
 
-    <p>Direct child element(s) of the grid container automatically becomes grid items.</p>
+    <p style="padding-left: 50px;">Direct child element(s) of the grid container automatically becomes grid items.</p>
 
-    <div class="container">
-        <div class="p1">1</div>
-        <div class="p2">2</div>
-        <div class="p3">3</div>
-        <div class="p4">4</div>
-        <div class="p5">5</div>
-        <div class="p6">6</div>
-        <div class="p7">7</div>
-        <div class="p8">8</div>
-        <div class="p9">9</div>
-        <div class="p10">10</div>
-        <div class="p11">11</div>
-        <div class="p12">12</div>
+    <div class="container" id="full_grid">
+        <div class="syllable_top"> Making Music tool </div>
+        <div class="syllable0">C</div>
+        <div class="syllable1">C#</div>
+        <div class="syllable2">D</div>
+        <div class="syllable3">D#</div>
+        <div class="syllable4">E</div>
+        <div class="syllable5">F</div>
+        <div class="syllable6">F#</div>
+        <div class="syllable7">G</div>
+        <div class="syllable8">G#</div>
+        <div class="syllable9">A</div>
+        <div class="syllable10">A#</div>
+        <div class="syllable11">B</div>
+
+        <div class="p1"></div>
+        <div class="p2"></div>
+        <div class="p3"></div>
+        <div class="p4"></div>
+        <div class="p5"></div>
+        <div class="p6"></div>
+        <div class="p7"></div>
+        <div class="p8"></div>
+        <div class="p9"></div>
+        <div class="p10"></div>
+        <div class="p11"></div>
+        <div class="p12"></div>
         <div class="t1"></div>
         <div class="t2"></div>
         <div class="t3"></div>
@@ -135,6 +139,26 @@
         <div class="t16"></div>
         <div class="t17"></div>
         <div class="t18"></div>
+        <div class="t19"></div>
+        <div class="t20"></div>
+        <div class="menu"></div>
       </div>
+      <div id="result"></div>
+      <script src="/static/customjs/Making_tools/Mouse_Event.js">
+        onmousemove = function(e){
+        //Logging purposes
+          console.log("mouse location:", e.clientX, e.clientY);
+
+          //meat and potatoes of the snippet
+         var pos = e;
+          var dot;
+          dot = document.createElement('div');
+          dot.className = "dot";
+          dot.style.left = pos.x + "px";
+          dot.style.top = pos.y + "px";
+          document.body.appendChild(dot);
+    }   
+        
+      </script>
 </body>
 </html>
