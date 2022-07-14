@@ -1,5 +1,3 @@
-//old way. Erase the comments for the line below and comment out the rest of the code to return to the old way. 
-// import {analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, wavesurfer, show_canvas, audio_context, src } from './modules.js';
 
 //DEBUGGING
 //npm run watch -> webpack watches code changes
@@ -79,7 +77,6 @@ audioElementHandler.getSelectMusicElement().onchange = async () => {
 //----------------------------------------------------//
 main();
 async function main() {
-
     //Audio
     // ----------------------------------------------------//
     //import the files from html src
@@ -102,7 +99,6 @@ async function main() {
         pitch.getAnalyser() //2 Pitch 
     )
     audioNodeManager.connectAllNodes();
-
     // meydaAnalyser create and start
     meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
 
