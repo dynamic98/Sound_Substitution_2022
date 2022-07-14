@@ -6,13 +6,29 @@ import os
 import selenium
 import webbrowser
 
+##필요한 함수 선언 
+###################################################
+def makeHTMLWithFileList(relativePath):
+  filelist = os.listdir(os.path.join(relativePath))
+  # filelist.remove('mdx_extra_q')
+  filelist.sort(key=lambda x: os.path.getmtime(os.path.join(relativePath, x)), reverse=True)
+  filestrlist = ''
+
+  for n, i in enumerate(filelist):
+    if n != len(filelist)-1:
+      filestrlist = filestrlist + i + ', '
+    else:
+      filestrlist = filestrlist + i
+  print(filestrlist)
+  return filestrlist
+###################################################
+
+
 app = Flask(__name__)
 
 folder = os.path.join('./static/music/')
 
-
 os.makedirs(folder, exist_ok=True)
-
 
 @app.route('/')
 def index():
@@ -31,20 +47,12 @@ def abstract():
       # extract_feature(folder) # 내가 원하는 음악의 Feature 추출
       # 이것을 classifier.ts 와 연결
 
-
-  filelist = os.listdir(os.path.join('static/music'))
-  # filelist.remove('mdx_extra_q')
-  filelist.sort(key=lambda x: os.path.getmtime(os.path.join('static/music', x)), reverse=True)
-  filestrlist = ''
-
-  for n, i in enumerate(filelist):
-    if n != len(filelist)-1:
-      filestrlist = filestrlist + i + ', '
-    else:
-      filestrlist = filestrlist + i
-
-  return render_template('abstract.html', filelist=filestrlist)
+  entireSongList= makeHTMLWithFileList('static/music/original')
+  separatedSongList= makeHTMLWithFileList('static/music/separated')
   
+  return render_template('abstract.html', filelist=entireSongList, separatedFileList=separatedSongList )
+
+
 
 @app.route('/concrete', methods=['POST'])
 def concrete():

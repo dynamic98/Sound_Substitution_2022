@@ -10,8 +10,11 @@ addEventListener('keypress', (event) => {
 //libraries
 //----------------------------------------------------//
 import {
-    AudioElementHandler
-} from './Sound/AudioElementHandler.js';
+    HearingAudioElementHandler 
+} from './Sound/HearingAudioElementHandler.js';
+import {
+    SeparatedAudioElementHandler 
+} from './Sound/SeparatedAudioElementHandler.js';
 import {
     MyWaveSurfer
 } from './Sound/MyWaveSurfer.js'
@@ -40,7 +43,8 @@ import {
 
 //class instances
 //----------------------------------------------------//
-let audioElementHandler = new AudioElementHandler();
+let hearingAudioElementHandler = new HearingAudioElementHandler ("filelist");
+let separatedAudioElementHandler = new SeparatedAudioElementHandler ("separatedFileList");
 let myWaveSurfer = new MyWaveSurfer();
 let pitch = new Pitch()
 let audioNodeManager;
@@ -55,22 +59,25 @@ let kandinsky;
 //whenever the wavesurfer's play button is pressed execute
 document.querySelector('[data-action="play"]').addEventListener('click', () => {
     myWaveSurfer.togglePlay();
-    audioElementHandler.togglePlay();
+    hearingAudioElementHandler.togglePlay();
 })
 
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
-audioElementHandler.getSelectMusicElement().onchange = async () => {
-    audioElementHandler.initializeDirectory();
-    let response = await audioElementHandler.fetchSelectedMusic();
-    audioElementHandler.initializeAudio(response);
-    myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
+document.getElementById("select-music").onchange = async () => {
+    hearingAudioElementHandler.initializeDirectory();
+    let response = await hearingAudioElementHandler.fetchMusic();
+    hearingAudioElementHandler.initializeAudio(response);
+    myWaveSurfer.setAudioElementSource(hearingAudioElementHandler.getAudioElement());
     let myOffCxt = new OffCxt();
     let decodedAudio = await myOffCxt.initializeBuffer(await response.arrayBuffer());
     myOffCxt.assignSource(decodedAudio)
-    myOffCxt.connectNodes();
     await myOffCxt.calucalteBPM()
     kandinsky.setBPM(myOffCxt.getbpm())
     bpmTimer.setBPM(myOffCxt.getbpm())
+
+    //send to server that File Has Changed -> seperate the files again 
+
+
 }
 
 //----------------------------------------------------//
@@ -79,18 +86,19 @@ async function main() {
     //Audio
     // ----------------------------------------------------//
     //import the files from html src
-    let response = await audioElementHandler.fetchSelectedMusic()
+    hearingAudioElementHandler.initializeDirectory();
+    let response = await hearingAudioElementHandler.fetchMusic()
 
     let myOffCxt = new OffCxt();
     let decodedAudio = await myOffCxt.initializeBuffer(await response.arrayBuffer());
     myOffCxt.assignSource(decodedAudio)
-    myOffCxt.connectNodes();
-    await myOffCxt.calucalteBPM()
-    
-    //connect the audio to its soruce and set the initial settings
-    audioElementHandler.initializeAudio(response);
 
-    audioNodeManager = new AudioNodeManager(audioElementHandler.getAudioElement());
+    await myOffCxt.calucalteBPM()
+
+    //connect the audio to its soruce and set the initial settings
+    hearingAudioElementHandler.initializeAudio(response);
+
+    audioNodeManager = new AudioNodeManager(hearingAudioElementHandler.getAudioElement());
     audioNodeManager.addNode(
         audioNodeManager.getSource(), // 0
         audioNodeManager.getGainNode(), //1 Gain Node
@@ -101,9 +109,9 @@ async function main() {
     meydaAnalyer.initializeMeydaAnalyser(audioNodeManager.getSource())
 
     //connect wave surfer to audio source 
-    myWaveSurfer.setAudioElementSource(audioElementHandler.getAudioElement());
+    myWaveSurfer.setAudioElementSource(hearingAudioElementHandler.getAudioElement());
     //initializes with settings
-    myWaveSurfer.initialize(audioElementHandler.getAudioElement());
+    myWaveSurfer.initialize(hearingAudioElementHandler.getAudioElement());
 
     myWaveSurfer.setInteractionEventHandler(myThree)
 
@@ -124,7 +132,7 @@ function animate() {
     requestAnimationFrame(animate);
     stats.begin()
     //only loop when the music is playing
-    if (!audioElementHandler.getAudioElement().paused) {
+    if (!hearingAudioElementHandler.getAudioElement().paused) {
         //debug frame rate
         stats.begin()
         //over 4 beat = delet drawing

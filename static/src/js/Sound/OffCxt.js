@@ -5,22 +5,10 @@ import {
 
 //offlineAudioContext
 
-
 export class OffCxt {
     constructor() {
         this.bpm;
         this.offlineCtx = new OfflineAudioContext(2, 30 * 44100, 44100);
-
-        this.lowpass = this.offlineCtx.createBiquadFilter();
-        this.lowpass.type = "lowpass";
-        this.lowpass.frequency.value = 150;
-        this.lowpass.Q.value = 1;
-
-        this.highpass = this.offlineCtx.createBiquadFilter();
-        this.highpass.type = "highpass";
-        this.highpass.frequency.value = 100;
-        this.highpass.Q.value = 1;
-
     }
 
     async initializeBuffer(arrayBuffer) {
@@ -30,14 +18,8 @@ export class OffCxt {
     assignSource(decodeAudio) {
         this.source = this.offlineCtx.createBufferSource();
         this.source.buffer = decodeAudio;
-        this.source.start();
+        this.source.start()
         this.offlineCtx.startRendering();
-    }
-
-    connectNodes() {
-        this.source.connect(this.lowpass);
-        this.lowpass.connect(this.highpass);
-        this.highpass.connect(this.offlineCtx.destination);
     }
 
     calucalteBPM() {
@@ -57,6 +39,7 @@ export class OffCxt {
         });
     }
     getbpm() {
+        console.log("bpm: ", this.bpm)
         return this.bpm;
     }
 

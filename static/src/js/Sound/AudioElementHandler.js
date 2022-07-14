@@ -1,60 +1,33 @@
-//Class that handles the "audio" and 'select-music" div
-//----------------------------------------------------//
 export class AudioElementHandler {
-    //stores  "audio" and 'select-music" in memeber variables
-    constructor() {
-        let filelistText = document.getElementById("filelist").innerText;
-        let filelist = filelistText.split(', ');
-        let fileobject = new Object;
-        filelist.forEach((file, index) => {
-            fileobject[index] = file;
+    constructor(htmlElementID, folderPath) {
+        let filelistText = document.getElementById(htmlElementID).innerText;
+        this.filelist = filelistText.split(', ');
+        this.fileobject = new Object;
+
+        this.filelist.forEach((file, index) => {
+            this.fileobject[index] = file;
         });
-        this.selectMusicElement = document.getElementById("select-music");
 
-        for (let index in fileobject) {
-            this.selectMusicElement.options[this.selectMusicElement.options.length] = new Option(fileobject[index], index);
-        }
-        this.audioElement = document.getElementById("audio")
-        this.initializeDirectory();
+        this.folderPath=folderPath
     }
 
-    //creates the directory for the selected mp3 file. e.g  static/music/songname.mp3
-    initializeDirectory() {
-        this.selectedText = this.selectMusicElement.options[this.selectMusicElement.selectedIndex].text;
-        this.directory = 'static/music/' + this.selectedText;
-        console.log(this.directory)
+    initializeDirectory(fileName) {
+        this.directory = 'static/music/' + this.folderPath+ fileName
     }
 
-    //fetches selectedmusic. Returns a promise 
-    async fetchSelectedMusic() {
+    fetchMusic() {
         try {
-            return await fetch(this.directory);
+            return fetch(this.directory);
         } catch (error) {
             console.error(error);
         }
     }
 
-    //connects the Response Object to this.audioElement & plays 
-    initializeAudio(response) {
-        this.audioElement.src = response.url;
-        console.log("VizInit play", this.audioElement.src);
-
-        //must play in order to analyse but using the wavesurfer to play it 
-        //by using the following code:  backend: 'MediaElement',
-        //this.audioElement.play(); /
+    getFileObject() {
+        return this.fileobject;
     }
 
-    //play or pause
-    togglePlay() {
-        this.audioElement.paused ? this.audioElement.pause : this.audioElement.play()
-    }
-
-    //getter for this.audioElement;
-    getAudioElement() {
-        return this.audioElement;
-    }
-    getSelectMusicElement() {
-        return this.selectMusicElement
-
+    getFileList() {
+        return this.filelist
     }
 }

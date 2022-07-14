@@ -14,7 +14,7 @@ export class MyWaveSurfer {
             normalize: true,
         });
         console.log('audio input completed')
-        this.wavesurferClickElement = document.querySelector("#waveform");
+
     }
 
     //connects wave surfet to audioElement
@@ -48,9 +48,5 @@ export class MyWaveSurfer {
         return this.wavesurfer;
     }
 
-    //returns wavesurferElement
-    getWavesurferClickElement() {
-        return this.wavesurferClickElement;
-    }
 }
 //----------------------------------------------------//
