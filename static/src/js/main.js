@@ -50,7 +50,6 @@ let bpmTimer = new BPMTimer();
 let stats = new Stats();
 let kandinsky;
 
-
 //event handlers
 //----------------------------------------------------//
 //whenever the wavesurfer's play button is pressed execute
@@ -87,8 +86,7 @@ async function main() {
     myOffCxt.assignSource(decodedAudio)
     myOffCxt.connectNodes();
     await myOffCxt.calucalteBPM()
-
-
+    
     //connect the audio to its soruce and set the initial settings
     audioElementHandler.initializeAudio(response);
 

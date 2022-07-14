@@ -3,7 +3,17 @@
 export class AudioElementHandler {
     //stores  "audio" and 'select-music" in memeber variables
     constructor() {
+        let filelistText = document.getElementById("filelist").innerText;
+        let filelist = filelistText.split(', ');
+        let fileobject = new Object;
+        filelist.forEach((file, index) => {
+            fileobject[index] = file;
+        });
         this.selectMusicElement = document.getElementById("select-music");
+
+        for (let index in fileobject) {
+            this.selectMusicElement.options[this.selectMusicElement.options.length] = new Option(fileobject[index], index);
+        }
         this.audioElement = document.getElementById("audio")
         this.initializeDirectory();
     }
