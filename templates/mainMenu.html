@@ -34,10 +34,17 @@
         <button id="concrete" value="concreteVisualization" class="button-73" role="button">Concrete Visualization + Haptic</button>
     </form>
 
+    <form action="/haptic" method="POST" form autocomplete="off" enctype="multipart/form-data">
+        <button id="haptic" value="haptic" class="button-73" role="button">Haptic</button>
+    </form>
 
     <form action="/separate" method="POST" form autocomplete="off" enctype="multipart/form-data">
         <button id="separate" value="SourceSeparation" class="button-73" role="button">Instruments Separation</button>
     </form>
 
+    <form action="/login" method="POST" form autocomplete="off" enctype="multipart/form-data">
+        <button id="login" value="login" class="button-73" role="button">{{login}}</button>
+    </form>
+    <h4>You are now accessed with {{User_Name}}</h4>
 </body>
 </html>

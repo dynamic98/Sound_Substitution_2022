@@ -6,16 +6,104 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="../static/fonts/icomoon/style.css">
-    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <!-- <link rel="stylesheet" href="../static/fonts/icomoon/style.css"> -->
+    <!-- <link rel="stylesheet" href="../static/css/owl.carousel.min.css"> -->
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../static/css/bootstrap.min.css"> -->
     <!-- Style -->
-    <link type="text/css" href="../static/css/mainMenu-style.css" rel="stylesheet">
+    <link type="text/css" href="../static/css/hapticCustom.css" rel="stylesheet">
+    <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
+    <script src="../static/libs/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
     <h1>로딩중.... 기다리셈~~</h1>
+    <p id="example">AJAX</p>
+    <!-- <input type="button" id="execute" value="execute"> -->
+    <button id="execute" value="execute" class="button-73" role="button">Execute</button>
+    </form>
+    <form class="box">
+        <div class="slider">
+          <input type="range" id="input-left" min="1" max="100" value="33" />
+          <input type="range" id="input-right" min="1" max="100" value="67" />
+          <div class="track">
+            <div class="range"></div>
+            <div class="thumb left"></div>
+            <div class="thumb right"></div>
+          </div>
+        </div>
+    </form>
+
+    <script>
+        const inputLeft = document.getElementById("input-left");
+        const inputRight = document.getElementById("input-right");
+
+        const thumbLeft = document.querySelector(".thumb.left");
+        const thumbRight = document.querySelector(".thumb.right");
+
+        const range = document.querySelector(".range");
+
+        const setLeftValue = e => {
+        const _this = e.target;
+        const { value, min, max } = _this;
+
+        if (+inputRight.value - +value < 10) {
+            _this.value = +inputRight.value - 10;
+        }
+
+        const percent = ((+_this.value - +min) / (+max - +min)) * 100;
+
+        thumbLeft.style.left = `${percent}%`;
+        range.style.left = `${percent}%`;
+        };
+
+        const setRightValue = e => {
+        const _this = e.target;
+        const { value, min, max } = _this;
+
+        if (+value - +inputLeft.value < 10) {
+            _this.value = +inputLeft.value + 10;
+        }
+
+        const percent = ((+_this.value - +min) / (+max - +min)) * 100;
+
+        thumbRight.style.right = `${100 - percent}%`;
+        range.style.right = `${100 - percent}%`;
+        };
+
+        if (inputLeft && inputRight) {
+        inputLeft.addEventListener("input", setLeftValue);
+        inputRight.addEventListener("input", setRightValue);
+        }
+    </script>
+
+    <script>
+        $('#execute').click(function(){
+            var left = $('#input-left').val();
+            var right = $('#input-right').val();
+
+            var postdata = {
+                'left':left, 'right':right
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/SendHapticCustom',
+                data: JSON.stringify(postdata),
+                dataType : 'JSON',
+                contentType: "application/json",
+                success: function(data){
+                    console.log(data)
+                    alert('Haptic Customization 적용완료..')
+                },
+                error: function(request, status, error){
+                    alert('ajax 통신 실패')
+                    alert(error);
+                }
+            })
+        })
+    </script>
+    <!-- <script type="module" defer src="../static/customjs/WriteCustomHaptic.js"></script> -->
+
 
 </body>
 </html>
