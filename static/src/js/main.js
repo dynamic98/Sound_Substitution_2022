@@ -1,6 +1,14 @@
 //old way. Erase the comments for the line below and comment out the rest of the code to return to the old way. 
 // import {analyser, chroma, maxChroma, energy, amplitudeSpectrum, dataArray, bufferLength, audio, wavesurfer, show_canvas, audio_context, src } from './modules.js';
 
+//DEBUGGING
+//npm run watch -> webpack watches code changes
+//press any key in the window to reload the window
+// ----------------------------------------------------//
+addEventListener('keypress', (event) => {
+    location.reload();
+});
+
 //libraries
 //----------------------------------------------------//
 import {
@@ -145,10 +153,3 @@ function animate() {
 }
 document.body.appendChild(stats.dom);
 
-//DEBUGGING
-//npm run watch -> webpack watches code changes
-//press any key in the window to reload the window
-// ----------------------------------------------------//
-addEventListener('keypress', (event) => {
-    location.reload();
-});

@@ -3,6 +3,9 @@ import {
     Bloom
 } from './Bloom.js'
 
+import {
+    GUI
+} from 'three/examples/jsm/libs/lil-gui.module.min.js';
 
 export class MyThree {
     constructor() {
@@ -15,11 +18,14 @@ export class MyThree {
         this.pointLight = new THREE.PointLight(0xffffff, 30, 15);
         this.camera = new THREE.PerspectiveCamera(30, this.renderer.domElement.width / this.renderer.domElement.height, 2, 2000);
         this.ambientLight = new THREE.AmbientLight(0xaaaaaa, 100);
-        this.directionalLight = new THREE.DirectionalLight(0xffffff, 3);    this.directionalLight.castShadow
-    
+        this.directionalLight = new THREE.DirectionalLight(0xffffff, 3);
+        this.directionalLight.castShadow
+
         this.group = new THREE.Group();
-      
+
         this.counter = 0;
+        this.createGUI();
+
     }
 
     initialize() {
@@ -29,13 +35,13 @@ export class MyThree {
         this.renderer.toneMapping = THREE.ReinhardToneMapping;
         document.getElementById("canvas").appendChild(this.renderer.domElement);
         this.directionalLight.position.set(100, 100, 100)
-    
+
         this.scene.add(this.ambientLight);
         this.scene.add(this.directionalLight)
         this.scene.add(this.group);
         this.scene.add(this.pointLight)
 
-        this.bloom = new Bloom(this.scene,this.camera,this.renderer);
+        this.bloom = new Bloom(this.scene, this.camera, this.renderer);
         this.bloom.initialize()
     }
 
@@ -46,8 +52,8 @@ export class MyThree {
         this.bloom.renderFinal()
     }
 
-    update(){
-        this.pointLight.position.set(this.positionX,this.positionY,0)
+    update() {
+        this.pointLight.position.set(this.positionX, this.positionY, 0)
     }
 
     createColor(hue, saturation) {
@@ -56,27 +62,27 @@ export class MyThree {
         this.color.setHSL(hue, saturation, lightness)
     }
 
-    createMesh(radius,positionX,positionY) {
-        this.positionY=positionY
-        this.positionX= positionX*this.counter-100
+    createMesh(radius, positionX, positionY) {
+        this.positionY = positionY
+        this.positionX = positionX * this.counter - 100
 
-        let geometry = new THREE.SphereGeometry(radius, 16, 8);
+        this.GUIGeometry(radius)
+        // this.geometry = new THREE.SphereGeometry(radius, 16, 8);
         this.material = new THREE.MeshPhysicalMaterial({
-            transmission:  0.99,
+            transmission: 0.99,
             thickness: 0.1,
             roughness: 0.1,
             color: this.color,
-            clearcoat:1,
+            clearcoat: 1,
             clearcoatRoughness: 0.1,
         })
-        let mesh = new THREE.Mesh(geometry, this.material);
-    
+        let mesh = new THREE.Mesh(this.geometry, this.material);
 
         mesh.position.set(this.positionX, this.positionY, 0);
         mesh.renderOrder = this.bloom.getPassForSunLight()
         this.group.add(mesh);
-
     }
+
 
     pickGlowReceivers() {
         const tailStart = 5
@@ -113,6 +119,35 @@ export class MyThree {
             }
 
         })
+    }
+
+
+
+    GUIGeometry(radius) {
+        switch (this.controls.geometry) {
+            case "Sphere":
+                this.geometry = new THREE.SphereGeometry(radius, 16, 8);
+                break;
+            case "Box":
+                this.geometry = new THREE.BoxGeometry(radius * 2, radius * 2, radius * 2);
+                break;
+            case 'Cone':
+                this.geometry = new THREE.ConeGeometry(radius * 2, radius * 2, 8);
+                break;
+            case 'Cylinder':
+                this.geometry = new THREE.CylinderGeometry(radius, radius, 20, 32);
+                break;
+        }
+
+    }
+    createGUI() {
+        this.controls = {
+            geometry: "Sphere"
+        }
+        this.gui = new GUI();
+        this.guiFolder = this.gui.addFolder('Selet Geometry');
+        this.guiFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
+
     }
 
 }
