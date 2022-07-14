@@ -105,7 +105,7 @@ async function main() {
 
     myWaveSurfer.setInteractionEventHandler(myThree)
 
-    
+
     //VISUALS 
     // ----------------------------------------------------//
     myThree.initialize()
@@ -144,3 +144,11 @@ function animate() {
     stats.end();
 }
 document.body.appendChild(stats.dom);
+
+//DEBUGGING
+//npm run watch -> webpack watches code changes
+//press any key in the window to reload the window
+// ----------------------------------------------------//
+addEventListener('keypress', (event) => {
+    location.reload();
+});
