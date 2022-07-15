@@ -9,22 +9,23 @@ export class OffCxt {
     constructor() {
         this.bpm;
         this.offlineCtx = new OfflineAudioContext(2, 30 * 44100, 44100);
+        this.source = this.offlineCtx.createBufferSource();
     }
 
     async initializeBuffer(arrayBuffer) {
-        return await this.offlineCtx.decodeAudioData(arrayBuffer)
-    }
-
-    assignSource(decodeAudio) {
-        this.source = this.offlineCtx.createBufferSource();
+        let decodeAudio = await this.offlineCtx.decodeAudioData(arrayBuffer)
         this.source.buffer = decodeAudio;
-        this.source.start()
+
+        this.source.connect(this.offlineCtx.destination);
+
+        this.source.start(0)
         this.offlineCtx.startRendering();
     }
 
-    calucalteBPM() {
+    calculateBPM() {
         return new Promise((resolve, reject) => {
             this.offlineCtx.oncomplete = function (e) {
+                console.log(e)
                 let buffer = e.renderedBuffer;
                 let peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
                 let groups = getIntervals(peaks);
@@ -38,8 +39,7 @@ export class OffCxt {
             }.bind(this)
         });
     }
-    getbpm() {
-        console.log("bpm: ", this.bpm)
+    getBPM() {
         return this.bpm;
     }
 

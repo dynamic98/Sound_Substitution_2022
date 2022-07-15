@@ -13,11 +13,11 @@
 
  import Pitchfinder from 'pitchfinder'
 export class Pitch {
-	 constructor(){
+	 constructor(analyser){
 		this._pichfinder = Pitchfinder.Macleod({ sampleRate : Tone.context.sampleRate })
 		this._smoothedPitches = []
 		this._smoothedProb = 0
-		this._analyser = new Tone.Waveform(1024)
+		this.analyser=analyser
 	 }
 
 	 _getMedian(){
@@ -25,7 +25,7 @@ export class Pitch {
 	 }
  
 	 getPitch(){
-		 const values = this._analyser.getValue()
+		 const values = this.analyser.getValue()
 		 let { freq, probability } = this._pichfinder(values)
  
 		 //some smoothing
@@ -52,7 +52,5 @@ export class Pitch {
 			 note, midi
 		 }
 	 }
-	 getAnalyser(){
-		return this._analyser
-	}
+
  }

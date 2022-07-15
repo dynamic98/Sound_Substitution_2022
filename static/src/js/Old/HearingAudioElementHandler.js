@@ -1,32 +1,22 @@
-import { AudioElementHandler } from "./AudioElementHandler";
+import {
+    AudioElementHandler
+} from "../Sound/AudioElementHandler";
 
 
-export class HearingAudioElementHandler extends AudioElementHandler{
-    constructor(htmlElementId){
-        super(htmlElementId);
+export class HearingAudioElementHandler extends AudioElementHandler {
+    constructor(htmlElementId, folderPath) {
+        super(htmlElementId,folderPath);
 
-        this.audioElement = document.getElementById("audio")
         this.selectMusicElement = document.getElementById("select-music");
-        this.folderPath="original/"
     }
 
-    initializeDirectory() {
+    fetchMusic() {
         for (let index in this.fileobject) {
             this.selectMusicElement.options[this.selectMusicElement.options.length] = new Option(this.fileobject[index], index);
         }
         this.selectedText = this.selectMusicElement.options[this.selectMusicElement.selectedIndex].text;
-        super.initializeDirectory(this.selectedText)
+        return super.fetchMusic(this.selectedText)
     }
-
-    initializeAudio(response) {
-        this.audioElement.src = response.url;
-    }
-
-    getAudioElement() {
-        return this.audioElement;
-    }
-
-   
 }
 
 /*

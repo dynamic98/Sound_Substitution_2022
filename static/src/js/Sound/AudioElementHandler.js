@@ -9,13 +9,11 @@ export class AudioElementHandler {
         });
 
         this.folderPath=folderPath
+        this.audioElement = document.getElementById("audio")
     }
 
-    initializeDirectory(fileName) {
-        this.directory = 'static/music/' + this.folderPath+ fileName
-    }
-
-    fetchMusic() {
+    fetchMusic(fileName) {
+        this.directory = this.folderPath+ fileName
         try {
             return fetch(this.directory);
         } catch (error) {
@@ -30,4 +28,17 @@ export class AudioElementHandler {
     getFileList() {
         return this.filelist
     }
+
+    initializeAudio(sourceURL) {
+        this.audioElement.src = sourceURL
+    }
+
+    getAudioElement() {
+        return this.audioElement;
+    }
+       //play or pause
+       togglePlay() {
+        this.audioElement.paused ? this.audioElement.pause : this.audioElement.play()
+    }
+    
 }

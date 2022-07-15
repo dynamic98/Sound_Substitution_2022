@@ -6,6 +6,7 @@ export class AudioNodeManager {
     constructor(audioElement) {
         this.src = Tone.context.createMediaElementSource(audioElement);
         this.gainNode = new Tone.Gain();
+        this.analyser = new Tone.Waveform(1024)
 
         this.nodeList = [];
     }
@@ -25,23 +26,17 @@ export class AudioNodeManager {
 
     //connect all the nodes
     connectAllNodes() {
-        console.log("dest:", Tone.getDestination())
-        for (let i = 0; i < this.nodeList.length ; i++) {
-            if (i != this.nodeList.length - 1) {
-                Tone.connect(this.nodeList[i],this.nodeList[i + 1]);
-            }
-            //last node
-            else{
-                Tone.connect(this.nodeList[i], Tone.getDestination())
-            }
+        this.showConnection()
+        for (let i = 0; i < this.nodeList.length-1; i++) {
+            Tone.connect(this.nodeList[i], this.nodeList[i + 1]);
         }
     }
 
     //show the elements and also the connetion of the nodes.
-    showConnection(){
+    showConnection() {
         console.log("printing nodeList: ")
-        for(let i = 0; i < this.nodeList.length ; i++){
-            console.log(i,this.nodeList[i])
+        for (let i = 0; i < this.nodeList.length; i++) {
+            console.log(i, this.nodeList[i])
         }
         console.log("End Of nodeList ")
     }
@@ -52,5 +47,11 @@ export class AudioNodeManager {
 
     getGainNode() {
         return this.gainNode
+    }
+    getLastNode() {
+        return Tone.getDestination()
+    }
+    getAnalyser(){
+        return this.analyser
     }
 }
