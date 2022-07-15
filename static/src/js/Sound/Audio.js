@@ -45,9 +45,10 @@ export class Audio {
 
     createMeydaAnalyser() {
         this.meydaAnalyser = new MeydaAnalyser();
+        //provide context
         this.meydaAnalyser.initializeMeydaAnalyser(this.audioNodeManager.getSource())
     }
-    
+
     createPitchFinder() {
         this.pitch = new Pitch(this.audioNodeManager.getAnalyser())
     }
@@ -59,6 +60,10 @@ export class Audio {
     }
     getMaxChroma() {
         return this.meydaAnalyser.getMaxChroma()
+    }
+
+    getFileListLength() {
+        return this.audioElementHandler.getFileList().length;
     }
 
 }
@@ -127,10 +132,18 @@ export class Song extends Audio {
 export class Source extends Audio {
     constructor(htmlElementID, folderPath) {
         super(htmlElementID, folderPath)
+        this.sourceList;
     }
 
     fetchMusic(fileIndex) {
         let fileName = this.audioElementHandler.getFileList()[fileIndex]
-        return this.audioElementHandler.fetchMusic(fileName);
+        return this.audioElementHandler.fetchMusic(fileName.trim());
     }
+    addToSourceList(source){
+        this.sourceList.push(source)
+    }
+    getSourceList(){
+        console.log(this.sourceList)
+    }
+
 }

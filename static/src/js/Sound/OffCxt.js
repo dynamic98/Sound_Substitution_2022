@@ -2,6 +2,7 @@ import {
     getPeaks,
     getIntervals
 } from "./getBPM";
+import { MeydaAnalyser } from "./MeydaAnalyzer";
 
 //offlineAudioContext
 
@@ -10,12 +11,13 @@ export class OffCxt {
         this.bpm;
         this.offlineCtx = new OfflineAudioContext(2, 30 * 44100, 44100);
         this.source = this.offlineCtx.createBufferSource();
+
+        new MeydaAnalyser
     }
 
     async initializeBuffer(arrayBuffer) {
         let decodeAudio = await this.offlineCtx.decodeAudioData(arrayBuffer)
         this.source.buffer = decodeAudio;
-
         this.source.connect(this.offlineCtx.destination);
 
         this.source.start(0)

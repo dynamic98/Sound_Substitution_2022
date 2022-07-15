@@ -20,8 +20,9 @@ import {
 import {
     Song
 } from './Sound/Audio.js';
-
-//("separatedFileList", "static/music/separated/");
+import {
+    Source
+} from './Sound/Audio.js';
 
 //class instances
 //----------------------------------------------------//
@@ -31,6 +32,8 @@ let stats = new Stats();
 let kandinsky;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")
+
+let source = new Source("separatedFileList", "static/music/separated/")
 
 //event handlers
 //----------------------------------------------------//
@@ -59,11 +62,23 @@ async function main() {
     song.createWaveSurfer();
     song.createPitchFinder();
     await song.createOfflineContext(await response.arrayBuffer());
-    
-    myThree.initialize()
 
+
+    myThree.initialize()
     kandinsky = new Kandinsky(song.getBPM())
     bpmTimer.setBPM(song.getBPM())
+
+
+    // for (let i = 0; i < source.getFileListLength(); i++) {
+    //     let response = await source.fetchMusic(i)
+    //     source.addNodes(response.url)
+    //     source.connectNodes();
+    //     source.createMeydaAnalyser();
+    //     source.createPitchFinder();
+    //     source.addToSourceList(source)
+    // }
+
+    console.log()
 
     animate();
 };
