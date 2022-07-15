@@ -30,6 +30,7 @@
     "pickr": "^0.1.4",
     "pitchfinder": "^2.0.9",
     "stats.js": "^0.17.0",
+    "subjx": "^1.1.0",
     "three": "^0.138.3",
     "three.meshline": "^1.4.0",
     "tone": "^13.3.10",

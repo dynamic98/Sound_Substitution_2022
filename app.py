@@ -31,8 +31,10 @@ app = Flask(__name__)
 folder = os.path.join('./static/music/')
 
 UserName = 'default_user'
+ChromeBrowser = VirtualBrowser()
 
 os.makedirs(folder, exist_ok=True)
+
 
 @app.route('/')
 def index():
@@ -73,8 +75,9 @@ def ajax():
     left = data['left']
     right = data['right']
     print(UserName)
-    fileName = WHC(UserName, left, right)
-    VirtualBrowser(UserName, fileName)
+    FileName = WHC(UserName, left, right)
+    # VirtualBrowser(UserName, fileName)
+    ChromeBrowser.SendHapticCustom(UserName, FileName)
     return data
     # return jsonify(result = "success", result2= data)
 
@@ -140,8 +143,12 @@ def letsgo():
   else:
     return render_template('mainMenu.html',User_Name= UserName, login="log out")
 
+@app.route('/exploration', methods=['POST'])
+def Exploration():
+    return render_template('Exploration.html')
+
 if __name__ == '__main__':
-  app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
+  app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True, use_reloader=False)
 
 
 

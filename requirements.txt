@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: win-64
@@ -98,12 +93,6 @@ wheel=0.37.1=pyhd3eb1b0_0
 wincertstore=0.2=py37haa95532_2
 wsproto=1.1.0=pypi_0
 zipp=3.8.0=py37haa95532_0
-=======
-=======
->>>>>>> 53c02e3 (``)
-=======
->>>>>>> 53c02e3 (``)
->>>>>>> refs/remotes/origin/Flask
 appdirs==1.4.4
 audioread==2.1.9
 backports.zoneinfo==0.2.1
@@ -194,17 +183,4 @@ zope.deprecation==4.4.0
 zope.event==4.5.0
 zope.hookable==5.1.0
 zope.interface==5.4.0
-<<<<<<< HEAD
 zope.lifecycleevent==4.3
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-zope.lifecycleevent==4.3
->>>>>>> 53c02e3 (``)
-=======
-zope.lifecycleevent==4.3
->>>>>>> 53c02e3 (``)
-=======
-zope.lifecycleevent==4.3
->>>>>>> 53c02e3 (``)
->>>>>>> refs/remotes/origin/Flask
