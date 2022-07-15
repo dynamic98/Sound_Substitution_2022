@@ -13,7 +13,7 @@
     <!-- Style -->
     <link type="text/css" href="../static/css/mainMenu-style.css" rel="stylesheet">
     <style>
-       .grid-container {
+       /* .grid-container {
           display: grid;
           grid-template-columns: auto auto auto;
           background-color: #2196F3;
@@ -25,21 +25,19 @@
           padding: 20px;
           font-size: 15px;
           text-align: center;
-        }
+        } */
        .container {
           display: grid; 
-          grid-template-columns: repeat(43, 1fr);
-          grid-template-rows: repeat(32, 1fr);
-          /* grid-template-columns : repeat(43, 40px); */
-          /* grid-template-rows: repeat(32, 25px); */
-          /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;  */
-          /* grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;  */
+          grid-template-columns: repeat(47, 35px);
+          grid-template-rows: repeat(32, 25px);
+          /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+          grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
           gap: 0px 0px; 
           grid-template-areas: 
             "Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top . . ."
             "Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top . . ."
             "Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top Top . . ."
-            "menu_left menu_left menu_left menu_left menu_left blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top blank_top menu_right menu_right menu_right menu_right menu_right . . ."
+            "menu_left menu_left menu_left menu_left menu_left p24 t1_p24 t2_p24 t3_p24 t4_p24 t5_p24 t6_p24 t7_p24 t8_p24 t9_p24 t10_p24 t11_p24 t12_p24 t13_p24 t14_p24 t15_p24 t16_p24 t17_p24 t18_p24 t19_p24 t20_p24 t21_p24 t22_p24 t23_p24 t24_p24 t25_p24 t26_p24 t27_p24 t28_p24 t29_p24 t30_p24 t31_p24 t32_p24 menu_right menu_right menu_right menu_right menu_right . . ."
             "menu_left menu_left menu_left menu_left menu_left p23 t1_p23 t2_p23 t3_p23 t4_p23 t5_p23 t6_p23 t7_p23 t8_p23 t9_p23 t10_p23 t11_p23 t12_p23 t13_p23 t14_p23 t15_p23 t16_p23 t17_p23 t18_p23 t19_p23 t20_p23 t21_p23 t22_p23 t23_p23 t24_p23 t25_p23 t26_p23 t27_p23 t28_p23 t29_p23 t30_p23 t31_p23 t32_p23 menu_right menu_right menu_right menu_right menu_right . . ."
             "menu_left menu_left menu_left menu_left menu_left p22 t1_p22 t2_p22 t3_p22 t4_p22 t5_p22 t6_p22 t7_p22 t8_p22 t9_p22 t10_p22 t11_p22 t12_p22 t13_p22 t14_p22 t15_p22 t16_p22 t17_p22 t18_p22 t19_p22 t20_p22 t21_p22 t22_p22 t23_p22 t24_p22 t25_p22 t26_p22 t27_p22 t28_p22 t29_p22 t30_p22 t31_p22 t32_p22 menu_right menu_right menu_right menu_right menu_right . . ."
             "menu_left menu_left menu_left menu_left menu_left p21 t1_p21 t2_p21 t3_p21 t4_p21 t5_p21 t6_p21 t7_p21 t8_p21 t9_p21 t10_p21 t11_p21 t12_p21 t13_p21 t14_p21 t15_p21 t16_p21 t17_p21 t18_p21 t19_p21 t20_p21 t21_p21 t22_p21 t23_p21 t24_p21 t25_p21 t26_p21 t27_p21 t28_p21 t29_p21 t30_p21 t31_p21 t32_p21 menu_right menu_right menu_right menu_right menu_right . . ."
@@ -58,7 +56,7 @@
             "menu_left menu_left menu_left menu_left menu_left p8 t1_p8 t2_p8 t3_p8 t4_p8 t5_p8 t6_p8 t7_p8 t8_p8 t9_p8 t10_p8 t11_p8 t12_p8 t13_p8 t14_p8 t15_p8 t16_p8 t17_p8 t18_p8 t19_p8 t20_p8 t21_p8 t22_p8 t23_p8 t24_p8 t25_p8 t26_p8 t27_p8 t28_p8 t29_p8 t30_p8 t31_p8 t32_p8 menu_right menu_right menu_right menu_right menu_right . . ."
             "menu_left menu_left menu_left menu_left menu_left p7 t1_p7 t2_p7 t3_p7 t4_p7 t5_p7 t6_p7 t7_p7 t8_p7 t9_p7 t10_p7 t11_p7 t12_p7 t13_p7 t14_p7 t15_p7 t16_p7 t17_p7 t18_p7 t19_p7 t20_p7 t21_p7 t22_p7 t23_p7 t24_p7 t25_p7 t26_p7 t27_p7 t28_p7 t29_p7 t30_p7 t31_p7 t32_p7 menu_right menu_right menu_right menu_right menu_right . . ."
             "menu_left menu_left menu_left menu_left menu_left p6 t1_p6 t2_p6 t3_p6 t4_p6 t5_p6 t6_p6 t7_p6 t8_p6 t9_p6 t10_p6 t11_p6 t12_p6 t13_p6 t14_p6 t15_p6 t16_p6 t17_p6 t18_p6 t19_p6 t20_p6 t21_p6 t22_p6 t23_p6 t24_p6 t25_p6 t26_p6 t27_p6 t28_p6 t29_p6 t30_p6 t31_p6 t32_p6 menu_right menu_right menu_right menu_right menu_right . . ."
-            "menu_left menu_left menu_left menu_left menu_left p5 t1_p5 t2_p5 t3_p5 t4_p5 t5__p5 t6_p5 t7_p5 t8_p5 t9_p5 t10_p5 t11_p5 t12_p5 t13_p5 t14_p5 t15_p5 t16_p5 t17_p5 t18_p5 t19_p5 t20_p5 t21_p5 t22_p5 t23_p5 t24_p5 t25_p5 t26_p5 t27_p5 t28_p5 t29_p5 t30_p5 t31_p5 t32_p5 menu_right menu_right menu_right menu_right menu_right . . ."
+            "menu_left menu_left menu_left menu_left menu_left p5 t1_p5 t2_p5 t3_p5 t4_p5 t5_p5 t6_p5 t7_p5 t8_p5 t9_p5 t10_p5 t11_p5 t12_p5 t13_p5 t14_p5 t15_p5 t16_p5 t17_p5 t18_p5 t19_p5 t20_p5 t21_p5 t22_p5 t23_p5 t24_p5 t25_p5 t26_p5 t27_p5 t28_p5 t29_p5 t30_p5 t31_p5 t32_p5 menu_right menu_right menu_right menu_right menu_right . . ."
             "menu_left menu_left menu_left menu_left menu_left p4 t1_p4 t2_p4 t3_p4 t4_p4 t5_p4 t6_p4 t7_p4 t8_p4 t9_p4 t10_p4 t11_p4 t12_p4 t13_p4 t14_p4 t15_p4 t16_p4 t17_p4 t18_p4 t19_p4 t20_p4 t21_p4 t22_p4 t23_p4 t24_p4 t25_p4 t26_p4 t27_p4 t28_p4 t29_p4 t30_p4 t31_p4 t32_p4 menu_right menu_right menu_right menu_right menu_right . . ."
             "menu_left menu_left menu_left menu_left menu_left p3 t1_p3 t2_p3 t3_p3 t4_p3 t5_p3 t6_p3 t7_p3 t8_p3 t9_p3 t10_p3 t11_p3 t12_p3 t13_p3 t14_p3 t15_p3 t16_p3 t17_p3 t18_p3 t19_p3 t20_p3 t21_p3 t22_p3 t23_p3 t24_p3 t25_p3 t26_p3 t27_p3 t28_p3 t29_p3 t30_p3 t31_p3 t32_p3 menu_right menu_right menu_right menu_right menu_right . . ."
             "menu_left menu_left menu_left menu_left menu_left p2 t1_p2 t2_p2 t3_p2 t4_p2 t5_p2 t6_p2 t7_p2 t8_p2 t9_p2 t10_p2 t11_p2 t12_p2 t13_p2 t14_p2 t15_p2 t16_p2 t17_p2 t18_p2 t19_p2 t20_p2 t21_p2 t22_p2 t23_p2 t24_p2 t25_p2 t26_p2 t27_p2 t28_p2 t29_p2 t30_p2 t31_p2 t32_p2 menu_right menu_right menu_right menu_right menu_right . . ."
@@ -92,6 +90,7 @@
         .p21 { grid-area: p21; background-color: rgb(252, 245, 245); text-align: center; color:hsl(240, 70%, 40%)}
         .p22 { grid-area: p22; background-color: rgb(252, 245, 245); text-align: center; color:hsl(270, 70%, 40%)}
         .p23 { grid-area: p23; background-color: rgb(252, 245, 245); text-align: center; color:hsl(300, 70%, 40%)}
+        .p24 { grid-area: p24; background-color: rgb(252, 245, 245); text-align: center; color:hsl(330, 70%, 40%)}
         .t1 { grid-area: t1; background-color: rgb(220, 238, 252); text-align: center;}
         .t2 { grid-area: t2; background-color: rgb(220, 238, 252); text-align: center;}
         .t3 { grid-area: t3; background-color: rgb(220, 238, 252); text-align: center;}
@@ -124,7 +123,8 @@
         .t30 { grid-area: t30; background-color: rgb(220, 238, 252); text-align: center;}
         .t31 { grid-area: t31; background-color: rgb(220, 238, 252); text-align: center;}
         .t32 { grid-area: t32; background-color: rgb(220, 238, 252); text-align: center;}
-        /* .t1_p1 { grid-area: t1_p1; }
+
+        .t1_p1 { grid-area: t1_p1; }
         .t1_p2 { grid-area: t1_p2; }
         .t1_p3 { grid-area: t1_p3; }
         .t1_p4 { grid-area: t1_p4; }
@@ -147,6 +147,8 @@
         .t1_p21 { grid-area: t1_p21; }
         .t1_p22 { grid-area: t1_p22; }
         .t1_p23 { grid-area: t1_p23; }
+        .t1_p24 { grid-area: t1_p24; }
+
         .t2_p1 { grid-area: t2_p1; }
         .t2_p2 { grid-area: t2_p2; }
         .t2_p3 { grid-area: t2_p3; }
@@ -170,6 +172,8 @@
         .t2_p21 { grid-area: t2_p21; }
         .t2_p22 { grid-area: t2_p22; }
         .t2_p23 { grid-area: t2_p23; }
+        .t2_p24 { grid-area: t2_p24; }
+
         .t3_p1 { grid-area: t3_p1; }
         .t3_p2 { grid-area: t3_p2; }
         .t3_p3 { grid-area: t3_p3; }
@@ -193,6 +197,8 @@
         .t3_p21 { grid-area: t3_p21; }
         .t3_p22 { grid-area: t3_p22; }
         .t3_p23 { grid-area: t3_p23; }
+        .t3_p24 { grid-area: t3_p24; }
+
         .t4_p1 { grid-area: t4_p1; }
         .t4_p2 { grid-area: t4_p2; }
         .t4_p3 { grid-area: t4_p3; }
@@ -216,11 +222,13 @@
         .t4_p21 { grid-area: t4_p21; }
         .t4_p22 { grid-area: t4_p22; }
         .t4_p23 { grid-area: t4_p23; }
+        .t4_p24 { grid-area: t4_p24; }
+
         .t5_p1 { grid-area: t5_p1; }
         .t5_p2 { grid-area: t5_p2; }
         .t5_p3 { grid-area: t5_p3; }
         .t5_p4 { grid-area: t5_p4; }
-        .t5__p5 { grid-area: t5__p5; }
+        .t5_p5 { grid-area: t5_p5; }
         .t5_p6 { grid-area: t5_p6; }
         .t5_p7 { grid-area: t5_p7; }
         .t5_p8 { grid-area: t5_p8; }
@@ -237,8 +245,10 @@
         .t5_p19 { grid-area: t5_p19; }
         .t5_p20 { grid-area: t5_p20; }
         .t5_p21 { grid-area: t5_p21; }
-        .t5_p23 { grid-area: t5_p23; }
         .t5_p22 { grid-area: t5_p22; }
+        .t5_p23 { grid-area: t5_p23; }
+        .t5_p24 { grid-area: t5_p24; }
+
         .t6_p1 { grid-area: t6_p1; }
         .t6_p23 { grid-area: t6_p23; }
         .t6_p22 { grid-area: t6_p22; }
@@ -262,6 +272,8 @@
         .t6_p19 { grid-area: t6_p19; }
         .t6_p20 { grid-area: t6_p20; }
         .t6_p21 { grid-area: t6_p21; }
+        .t6_p24 { grid-area: t6_p24; }
+
         .t7_p1 { grid-area: t7_p1; }
         .t7_p2 { grid-area: t7_p2; }
         .t7_p3 { grid-area: t7_p3; }
@@ -285,6 +297,8 @@
         .t7_p21 { grid-area: t7_p21; }
         .t7_p22 { grid-area: t7_p22; }
         .t7_p23 { grid-area: t7_p23; }
+        .t7_p24 { grid-area: t7_p24; }
+
         .t8_p1 { grid-area: t8_p1; }
         .t8_p2 { grid-area: t8_p2; }
         .t8_p3 { grid-area: t8_p3; }
@@ -308,6 +322,8 @@
         .t8_p21 { grid-area: t8_p21; }
         .t8_p22 { grid-area: t8_p22; }
         .t8_p23 { grid-area: t8_p23; }
+        .t8_p24 { grid-area: t8_p24; }
+
         .t9_p1 { grid-area: t9_p1; }
         .t9_p2 { grid-area: t9_p2; }
         .t9_p3 { grid-area: t9_p3; }
@@ -331,6 +347,8 @@
         .t9_p21 { grid-area: t9_p21; }
         .t9_p22 { grid-area: t9_p22; }
         .t9_p23 { grid-area: t9_p23; }
+        .t9_p24 { grid-area: t9_p24; }
+        
         .t10_p1 { grid-area: t10_p1; }
         .t10_p2 { grid-area: t10_p2; }
         .t10_p3 { grid-area: t10_p3; }
@@ -354,6 +372,8 @@
         .t10_p21 { grid-area: t10_p21; }
         .t10_p22 { grid-area: t10_p22; }
         .t10_p23 { grid-area: t10_p23; }
+        .t10_p24 { grid-area: t10_p24; }
+
         .t11_p1 { grid-area: t11_p1; }
         .t11_p2 { grid-area: t11_p2; }
         .t11_p3 { grid-area: t11_p3; }
@@ -377,6 +397,8 @@
         .t11_p21 { grid-area: t11_p21; }
         .t11_p22 { grid-area: t11_p22; }
         .t11_p23 { grid-area: t11_p23; }
+        .t11_p24 { grid-area: t11_p24; }
+
         .t12_p1 { grid-area: t12_p1; }
         .t12_p2 { grid-area: t12_p2; }
         .t12_p3 { grid-area: t12_p3; }
@@ -400,6 +422,8 @@
         .t12_p21 { grid-area: t12_p21; }
         .t12_p22 { grid-area: t12_p22; }
         .t12_p23 { grid-area: t12_p23; }
+        .t12_p24 { grid-area: t12_p24; }
+
         .t13_p1 { grid-area: t13_p1; }
         .t13_p2 { grid-area: t13_p2; }
         .t13_p3 { grid-area: t13_p3; }
@@ -423,6 +447,8 @@
         .t13_p21 { grid-area: t13_p21; }
         .t13_p22 { grid-area: t13_p22; }
         .t13_p23 { grid-area: t13_p23; }
+        .t13_p24 { grid-area: t13_p24; }
+
         .t14_p1 { grid-area: t14_p1; }
         .t14_p2 { grid-area: t14_p2; }
         .t14_p3 { grid-area: t14_p3; }
@@ -446,6 +472,8 @@
         .t14_p21 { grid-area: t14_p21; }
         .t14_p22 { grid-area: t14_p22; }
         .t14_p23 { grid-area: t14_p23; }
+        .t14_p24 { grid-area: t14_p24; }
+
         .t15_p1 { grid-area: t15_p1; }
         .t15_p2 { grid-area: t15_p2; }
         .t15_p3 { grid-area: t15_p3; }
@@ -469,6 +497,8 @@
         .t15_p21 { grid-area: t15_p21; }
         .t15_p22 { grid-area: t15_p22; }
         .t15_p23 { grid-area: t15_p23; }
+        .t15_p24 { grid-area: t15_p24; }
+
         .t16_p1 { grid-area: t16_p1; }
         .t16_p2 { grid-area: t16_p2; }
         .t16_p3 { grid-area: t16_p3; }
@@ -492,6 +522,8 @@
         .t16_p21 { grid-area: t16_p21; }
         .t16_p22 { grid-area: t16_p22; }
         .t16_p23 { grid-area: t16_p23; }
+        .t16_p24 { grid-area: t16_p24; }
+
         .t17_p1 { grid-area: t17_p1; }
         .t17_p2 { grid-area: t17_p2; }
         .t17_p3 { grid-area: t17_p3; }
@@ -515,6 +547,8 @@
         .t17_p21 { grid-area: t17_p21; }
         .t17_p22 { grid-area: t17_p22; }
         .t17_p23 { grid-area: t17_p23; }
+        .t17_p24 { grid-area: t17_p24; }
+
         .t18_p1 { grid-area: t18_p1; }
         .t18_p2 { grid-area: t18_p2; }
         .t18_p3 { grid-area: t18_p3; }
@@ -538,6 +572,8 @@
         .t18_p21 { grid-area: t18_p21; }
         .t18_p22 { grid-area: t18_p22; }
         .t18_p23 { grid-area: t18_p23; }
+        .t18_p24 { grid-area: t18_p24; }
+
         .t19_p1 { grid-area: t19_p1; }
         .t19_p2 { grid-area: t19_p2; }
         .t19_p3 { grid-area: t19_p3; }
@@ -561,6 +597,8 @@
         .t19_p21 { grid-area: t19_p21; }
         .t19_p22 { grid-area: t19_p22; }
         .t19_p23 { grid-area: t19_p23; }
+        .t19_p24 { grid-area: t19_p24; }
+
         .t20_p1 { grid-area: t20_p1; }
         .t20_p2 { grid-area: t20_p2; }
         .t20_p3 { grid-area: t20_p3; }
@@ -584,6 +622,8 @@
         .t20_p21 { grid-area: t20_p21; }
         .t20_p22 { grid-area: t20_p22; }
         .t20_p23 { grid-area: t20_p23; }
+        .t20_p24 { grid-area: t20_p24; }
+
         .t21_p1 { grid-area: t21_p1; }
         .t21_p2 { grid-area: t21_p2; }
         .t21_p3 { grid-area: t21_p3; }
@@ -607,6 +647,8 @@
         .t21_p21 { grid-area: t21_p21; }
         .t21_p22 { grid-area: t21_p22; }
         .t21_p23 { grid-area: t21_p23; }
+        .t21_p24 { grid-area: t21_p24; }
+
         .t22_p1 { grid-area: t22_p1; }
         .t22_p2 { grid-area: t22_p2; }
         .t22_p3 { grid-area: t22_p3; }
@@ -630,6 +672,8 @@
         .t22_p21 { grid-area: t22_p21; }
         .t22_p22 { grid-area: t22_p22; }
         .t22_p23 { grid-area: t22_p23; }
+        .t22_p24 { grid-area: t22_p24; }
+
         .t23_p1 { grid-area: t23_p1; }
         .t23_p2 { grid-area: t23_p2; }
         .t23_p3 { grid-area: t23_p3; }
@@ -653,6 +697,8 @@
         .t23_p21 { grid-area: t23_p21; }
         .t23_p22 { grid-area: t23_p22; }
         .t23_p23 { grid-area: t23_p23; }
+        .t23_p24 { grid-area: t23_p24; }
+
         .t24_p1 { grid-area: t24_p1; }
         .t24_p2 { grid-area: t24_p2; }
         .t24_p3 { grid-area: t24_p3; }
@@ -676,6 +722,8 @@
         .t24_p21 { grid-area: t24_p21; }
         .t24_p22 { grid-area: t24_p22; }
         .t24_p23 { grid-area: t24_p23; }
+        .t24_p24 { grid-area: t24_p24; }
+
         .t25_p1 { grid-area: t25_p1; }
         .t25_p2 { grid-area: t25_p2; }
         .t25_p3 { grid-area: t25_p3; }
@@ -699,6 +747,8 @@
         .t25_p21 { grid-area: t25_p21; }
         .t25_p22 { grid-area: t25_p22; }
         .t25_p23 { grid-area: t25_p23; }
+        .t25_p24 { grid-area: t25_p24; }
+
         .t26_p1 { grid-area: t26_p1; }
         .t26_p2 { grid-area: t26_p2; }
         .t26_p3 { grid-area: t26_p3; }
@@ -722,6 +772,8 @@
         .t26_p21 { grid-area: t26_p21; }
         .t26_p22 { grid-area: t26_p22; }
         .t26_p23 { grid-area: t26_p23; }
+        .t26_p24 { grid-area: t26_p24; }
+
         .t27_p1 { grid-area: t27_p1; }
         .t27_p2 { grid-area: t27_p2; }
         .t27_p3 { grid-area: t27_p3; }
@@ -745,6 +797,8 @@
         .t27_p21 { grid-area: t27_p21; }
         .t27_p22 { grid-area: t27_p22; }
         .t27_p23 { grid-area: t27_p23; }
+        .t27_p24 { grid-area: t27_p24; }
+
         .t28_p1 { grid-area: t28_p1; }
         .t28_p2 { grid-area: t28_p2; }
         .t28_p3 { grid-area: t28_p3; }
@@ -768,6 +822,8 @@
         .t28_p21 { grid-area: t28_p21; }
         .t28_p22 { grid-area: t28_p22; }
         .t28_p23 { grid-area: t28_p23; }
+        .t28_p24 { grid-area: t28_p24; }
+
         .t29_p1 { grid-area: t29_p1; }
         .t29_p2 { grid-area: t29_p2; }
         .t29_p3 { grid-area: t29_p3; }
@@ -791,6 +847,8 @@
         .t29_p21 { grid-area: t29_p21; }
         .t29_p22 { grid-area: t29_p22; }
         .t29_p23 { grid-area: t29_p23; }
+        .t29_p24 { grid-area: t29_p24; }
+        
         .t30_p1 { grid-area: t30_p1; }
         .t30_p2 { grid-area: t30_p2; }
         .t30_p3 { grid-area: t30_p3; }
@@ -814,6 +872,8 @@
         .t30_p21 { grid-area: t30_p21; }
         .t30_p22 { grid-area: t30_p22; }
         .t30_p23 { grid-area: t30_p23; }
+        .t30_p24 { grid-area: t30_p24; }
+
         .t31_p1 { grid-area: t31_p1; }
         .t31_p2 { grid-area: t31_p2; }
         .t31_p3 { grid-area: t31_p3; }
@@ -837,6 +897,8 @@
         .t31_p21 { grid-area: t31_p21; }
         .t31_p22 { grid-area: t31_p22; }
         .t31_p23 { grid-area: t31_p23; }
+        .t31_p24 { grid-area: t31_p24; }
+
         .t32_p1 { grid-area: t32_p1; }
         .t32_p2 { grid-area: t32_p2; }
         .t32_p3 { grid-area: t32_p3; }
@@ -859,7 +921,9 @@
         .t32_p20 { grid-area: t32_p20; }
         .t32_p21 { grid-area: t32_p21; }
         .t32_p22 { grid-area: t32_p22; }
-        .t32_p23 { grid-area: t32_p23; } */
+        .t32_p23 { grid-area: t32_p23; }
+        .t32_p24 { grid-area: t32_p24; }
+
         .Top { grid-area: Top; background-color: bisque; text-align: center;}
         .blank_top { grid-area: blank_top; }
         .blank_bottom { grid-area: blank_bottom; }
@@ -875,7 +939,7 @@
 
     <p style="padding-left: 50px;">A Grid Layout must have a parent element with the <em>display</em> property set to <em>grid</em> or <em>inline-grid</em>.</p>
 
-    <div class="container" id="full_grid" style="padding: 0px; margin:0px; margin-left:30px;">
+    <div class="container" id="full_grid" style="padding: 0px; margin:0px; margin-left:200px;">
       <div class="Top"> Melody Making Tool</div>
       <div class="blank_top"></div>
       <div class="blank_bottom"></div>
@@ -894,18 +958,20 @@
       <div class="p9">G#</div>
       <div class="p10">A</div>
       <div class="p11">A#</div>
-      <div class="p12">C</div>
-      <div class="p13">C#</div>
-      <div class="p14">D</div>
-      <div class="p15">D#</div>
-      <div class="p16">E</div>
-      <div class="p17">F</div>
-      <div class="p18">F#</div>
-      <div class="p19">G</div>
-      <div class="p20">G#</div>
-      <div class="p21">A</div>
-      <div class="p22">A#</div>
-      <div class="p23">B</div>
+      <div class="p12">B</div>
+      <div class="p13">C</div>
+      <div class="p14">C#</div>
+      <div class="p15">D</div>
+      <div class="p16">D#</div>
+      <div class="p17">E</div>
+      <div class="p18">F</div>
+      <div class="p19">F#</div>
+      <div class="p20">G</div>
+      <div class="p21">G#</div>
+      <div class="p22">A</div>
+      <div class="p23">A#</div>
+      <div class="p24">B</div>
+
       <div class="t1">1</div>
       <div class="t2">2</div>
       <div class="t3">3</div>
@@ -962,6 +1028,9 @@
       <div class="t1_p21"></div>
       <div class="t1_p22"></div>
       <div class="t1_p23"></div>
+      <div class="t1_p24"></div>
+
+
       <div class="t2_p1"></div>
       <div class="t2_p2"></div>
       <div class="t2_p3"></div>
@@ -985,6 +1054,8 @@
       <div class="t2_p21"></div>
       <div class="t2_p22"></div>
       <div class="t2_p23"></div>
+      <div class="t2_p24"></div>
+
       <div class="t3_p1"></div>
       <div class="t3_p2"></div>
       <div class="t3_p3"></div>
@@ -1008,6 +1079,8 @@
       <div class="t3_p21"></div>
       <div class="t3_p22"></div>
       <div class="t3_p23"></div>
+      <div class="t3_p24"></div>
+
       <div class="t4_p1"></div>
       <div class="t4_p2"></div>
       <div class="t4_p3"></div>
@@ -1031,11 +1104,13 @@
       <div class="t4_p21"></div>
       <div class="t4_p22"></div>
       <div class="t4_p23"></div>
+      <div class="t4_p24"></div>
+
       <div class="t5_p1"></div>
       <div class="t5_p2"></div>
       <div class="t5_p3"></div>
       <div class="t5_p4"></div>
-      <div class="t5__p5"></div>
+      <div class="t5_p5"></div>
       <div class="t5_p6"></div>
       <div class="t5_p7"></div>
       <div class="t5_p8"></div>
@@ -1054,6 +1129,8 @@
       <div class="t5_p21"></div>
       <div class="t5_p23"></div>
       <div class="t5_p22"></div>
+      <div class="t5_p24"></div>
+
       <div class="t6_p1"></div>
       <div class="t6_p23"></div>
       <div class="t6_p22"></div>
@@ -1077,6 +1154,8 @@
       <div class="t6_p19"></div>
       <div class="t6_p20"></div>
       <div class="t6_p21"></div>
+      <div class="t6_p24"></div>
+
       <div class="t7_p1"></div>
       <div class="t7_p2"></div>
       <div class="t7_p3"></div>
@@ -1100,6 +1179,8 @@
       <div class="t7_p21"></div>
       <div class="t7_p22"></div>
       <div class="t7_p23"></div>
+      <div class="t7_p24"></div>
+
       <div class="t8_p1"></div>
       <div class="t8_p2"></div>
       <div class="t8_p3"></div>
@@ -1123,6 +1204,8 @@
       <div class="t8_p21"></div>
       <div class="t8_p22"></div>
       <div class="t8_p23"></div>
+      <div class="t8_p24"></div>
+
       <div class="t9_p1"></div>
       <div class="t9_p2"></div>
       <div class="t9_p3"></div>
@@ -1146,6 +1229,8 @@
       <div class="t9_p21"></div>
       <div class="t9_p22"></div>
       <div class="t9_p23"></div>
+      <div class="t9_p24"></div>
+
       <div class="t10_p1"></div>
       <div class="t10_p2"></div>
       <div class="t10_p3"></div>
@@ -1169,6 +1254,8 @@
       <div class="t10_p21"></div>
       <div class="t10_p22"></div>
       <div class="t10_p23"></div>
+      <div class="t10_p24"></div>
+
       <div class="t11_p1"></div>
       <div class="t11_p2"></div>
       <div class="t11_p3"></div>
@@ -1192,6 +1279,8 @@
       <div class="t11_p21"></div>
       <div class="t11_p22"></div>
       <div class="t11_p23"></div>
+      <div class="t11_p24"></div>
+
       <div class="t12_p1"></div>
       <div class="t12_p2"></div>
       <div class="t12_p3"></div>
@@ -1215,6 +1304,8 @@
       <div class="t12_p21"></div>
       <div class="t12_p22"></div>
       <div class="t12_p23"></div>
+      <div class="t12_p24"></div>
+
       <div class="t13_p1"></div>
       <div class="t13_p2"></div>
       <div class="t13_p3"></div>
@@ -1238,6 +1329,8 @@
       <div class="t13_p21"></div>
       <div class="t13_p22"></div>
       <div class="t13_p23"></div>
+      <div class="t13_p24"></div>
+
       <div class="t14_p1"></div>
       <div class="t14_p2"></div>
       <div class="t14_p3"></div>
@@ -1261,6 +1354,8 @@
       <div class="t14_p21"></div>
       <div class="t14_p22"></div>
       <div class="t14_p23"></div>
+      <div class="t14_p24"></div>
+
       <div class="t15_p1"></div>
       <div class="t15_p2"></div>
       <div class="t15_p3"></div>
@@ -1284,6 +1379,8 @@
       <div class="t15_p21"></div>
       <div class="t15_p22"></div>
       <div class="t15_p23"></div>
+      <div class="t15_p24"></div>
+
       <div class="t16_p1"></div>
       <div class="t16_p2"></div>
       <div class="t16_p3"></div>
@@ -1307,6 +1404,8 @@
       <div class="t16_p21"></div>
       <div class="t16_p22"></div>
       <div class="t16_p23"></div>
+      <div class="t16_p24"></div>
+
       <div class="t17_p1"></div>
       <div class="t17_p2"></div>
       <div class="t17_p3"></div>
@@ -1330,6 +1429,8 @@
       <div class="t17_p21"></div>
       <div class="t17_p22"></div>
       <div class="t17_p23"></div>
+      <div class="t17_p24"></div>
+
       <div class="t18_p1"></div>
       <div class="t18_p2"></div>
       <div class="t18_p3"></div>
@@ -1353,6 +1454,8 @@
       <div class="t18_p21"></div>
       <div class="t18_p22"></div>
       <div class="t18_p23"></div>
+      <div class="t18_p24"></div>
+
       <div class="t19_p1"></div>
       <div class="t19_p2"></div>
       <div class="t19_p3"></div>
@@ -1376,6 +1479,8 @@
       <div class="t19_p21"></div>
       <div class="t19_p22"></div>
       <div class="t19_p23"></div>
+      <div class="t19_p24"></div>
+
       <div class="t20_p1"></div>
       <div class="t20_p2"></div>
       <div class="t20_p3"></div>
@@ -1399,6 +1504,8 @@
       <div class="t20_p21"></div>
       <div class="t20_p22"></div>
       <div class="t20_p23"></div>
+      <div class="t20_p24"></div>
+
       <div class="t21_p1"></div>
       <div class="t21_p2"></div>
       <div class="t21_p3"></div>
@@ -1422,6 +1529,8 @@
       <div class="t21_p21"></div>
       <div class="t21_p22"></div>
       <div class="t21_p23"></div>
+      <div class="t21_p24"></div>
+
       <div class="t22_p1"></div>
       <div class="t22_p2"></div>
       <div class="t22_p3"></div>
@@ -1445,6 +1554,8 @@
       <div class="t22_p21"></div>
       <div class="t22_p22"></div>
       <div class="t22_p23"></div>
+      <div class="t22_p24"></div>
+
       <div class="t23_p1"></div>
       <div class="t23_p2"></div>
       <div class="t23_p3"></div>
@@ -1468,6 +1579,8 @@
       <div class="t23_p21"></div>
       <div class="t23_p22"></div>
       <div class="t23_p23"></div>
+      <div class="t23_p24"></div>
+
       <div class="t24_p1"></div>
       <div class="t24_p2"></div>
       <div class="t24_p3"></div>
@@ -1491,6 +1604,8 @@
       <div class="t24_p21"></div>
       <div class="t24_p22"></div>
       <div class="t24_p23"></div>
+      <div class="t24_p24"></div>
+
       <div class="t25_p1"></div>
       <div class="t25_p2"></div>
       <div class="t25_p3"></div>
@@ -1514,6 +1629,8 @@
       <div class="t25_p21"></div>
       <div class="t25_p22"></div>
       <div class="t25_p23"></div>
+      <div class="t25_p24"></div>
+
       <div class="t26_p1"></div>
       <div class="t26_p2"></div>
       <div class="t26_p3"></div>
@@ -1537,6 +1654,8 @@
       <div class="t26_p21"></div>
       <div class="t26_p22"></div>
       <div class="t26_p23"></div>
+      <div class="t26_p24"></div>
+
       <div class="t27_p1"></div>
       <div class="t27_p2"></div>
       <div class="t27_p3"></div>
@@ -1560,6 +1679,8 @@
       <div class="t27_p21"></div>
       <div class="t27_p22"></div>
       <div class="t27_p23"></div>
+      <div class="t27_p24"></div>
+
       <div class="t28_p1"></div>
       <div class="t28_p2"></div>
       <div class="t28_p3"></div>
@@ -1583,6 +1704,8 @@
       <div class="t28_p21"></div>
       <div class="t28_p22"></div>
       <div class="t28_p23"></div>
+      <div class="t28_p24"></div>
+
       <div class="t29_p1"></div>
       <div class="t29_p2"></div>
       <div class="t29_p3"></div>
@@ -1606,6 +1729,8 @@
       <div class="t29_p21"></div>
       <div class="t29_p22"></div>
       <div class="t29_p23"></div>
+      <div class="t29_p24"></div>
+
       <div class="t30_p1"></div>
       <div class="t30_p2"></div>
       <div class="t30_p3"></div>
@@ -1629,6 +1754,8 @@
       <div class="t30_p21"></div>
       <div class="t30_p22"></div>
       <div class="t30_p23"></div>
+      <div class="t30_p24"></div>
+
       <div class="t31_p1"></div>
       <div class="t31_p2"></div>
       <div class="t31_p3"></div>
@@ -1652,6 +1779,8 @@
       <div class="t31_p21"></div>
       <div class="t31_p22"></div>
       <div class="t31_p23"></div>
+      <div class="t31_p24"></div>
+
       <div class="t32_p1"></div>
       <div class="t32_p2"></div>
       <div class="t32_p3"></div>
@@ -1675,6 +1804,8 @@
       <div class="t32_p21"></div>
       <div class="t32_p22"></div>
       <div class="t32_p23"></div>
+      <div class="t32_p24"></div>
+
     </div>
 
     <!-- <div id="result"></div> -->
