@@ -1,6 +1,6 @@
 import {
     Utility
-} from '../Utility/Utility.js'
+} from './Utility.js'
 
 export class BPMTimer {
     constructor() {

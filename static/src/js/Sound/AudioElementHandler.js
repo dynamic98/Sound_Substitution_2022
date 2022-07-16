@@ -8,12 +8,12 @@ export class AudioElementHandler {
             this.fileobject[index] = file;
         });
 
-        this.folderPath=folderPath
+        this.folderPath = folderPath
         this.audioElement = document.getElementById("audio")
     }
 
     fetchMusic(fileName) {
-        this.directory = this.folderPath+ fileName
+        this.directory = this.folderPath + fileName
         try {
             return fetch(this.directory);
         } catch (error) {
@@ -36,9 +36,12 @@ export class AudioElementHandler {
     getAudioElement() {
         return this.audioElement;
     }
-       //play or pause
-       togglePlay() {
+    //play or pause
+    togglePlay() {
         this.audioElement.paused ? this.audioElement.pause : this.audioElement.play()
     }
-    
+    static getFileListLength(htmlElementID) {
+        return document.getElementById(htmlElementID).innerText.split(', ').length
+    }
+    static instanceCounter=0;
 }

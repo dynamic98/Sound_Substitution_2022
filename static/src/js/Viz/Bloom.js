@@ -13,15 +13,11 @@ import {
 } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 export class Bloom {
-    constructor(scene, camera, renderer) {
+    constructor(threshold,strength,radius) {
         this.bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth / 2.24, window.innerHeight / 2.1), 1.5, 0.4, 0.85);
-        this.bloomPass.threshold = 0
-        this.bloomPass.strength = 5
-        this.bloomPass.radius = 1
-
-        this.scene = scene;
-        this.camera = camera;
-        this.renderer = renderer
+        this.bloomPass.threshold = threshold
+        this.bloomPass.strength = strength
+        this.bloomPass.radius = radius
 
         this.passForSunLight = 1;
         this.passForMoonLight = 0;
@@ -29,7 +25,11 @@ export class Bloom {
         this.moonLightReceiverList = []
     }
 
-    initialize() {
+    initialize(scene,camera,renderer) {
+        this.scene = scene;
+        this.camera = camera;
+        this.renderer = renderer
+
         this.renderScene = new RenderPass(this.scene, this.camera);
         this.bloomComposer = new EffectComposer(this.renderer);
         this.bloomComposer.addPass(this.renderScene);

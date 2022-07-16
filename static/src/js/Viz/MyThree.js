@@ -23,6 +23,9 @@ export class MyThree {
 
         this.group = new THREE.Group();
 
+        //threshold, strength, radius
+        this.bloom = new Bloom(0, 5, 1);
+
         this.counter = 0;
         this.createGUI();
 
@@ -41,8 +44,7 @@ export class MyThree {
         this.scene.add(this.group);
         this.scene.add(this.pointLight)
 
-        this.bloom = new Bloom(this.scene, this.camera, this.renderer);
-        this.bloom.initialize()
+        this.bloom.initialize(this.scene,this.camera,this.renderer)
     }
 
     render() {
@@ -120,7 +122,6 @@ export class MyThree {
 
         })
     }
-
 
 
     GUIGeometry(radius) {

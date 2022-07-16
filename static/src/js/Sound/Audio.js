@@ -22,7 +22,7 @@ import {
 export class Audio {
     constructor(htmlElementID, folderPath) {
         this.audioElementHandler = new AudioElementHandler(htmlElementID, folderPath)
-
+        console.log("length!!!",AudioElementHandler.instanceCounter++)
         this.meydaAnalyer = new MeydaAnalyser();
         this.pitch;
         this.myOffCxt;
@@ -139,10 +139,10 @@ export class Source extends Audio {
         let fileName = this.audioElementHandler.getFileList()[fileIndex]
         return this.audioElementHandler.fetchMusic(fileName.trim());
     }
-    addToSourceList(source){
+    addToSourceList(source) {
         this.sourceList.push(source)
     }
-    getSourceList(){
+    getSourceList() {
         console.log(this.sourceList)
     }
 

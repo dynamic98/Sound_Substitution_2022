@@ -13,7 +13,7 @@ import {
 } from './Viz/MyThree.js';
 import {
     BPMTimer
-} from './Sound/BPMTimer.js'
+} from './Utility/BPMTimer.js'
 import {
     Kandinsky
 } from './Viz/Kandinsky.js'
