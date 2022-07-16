@@ -31,7 +31,7 @@ app = Flask(__name__)
 folder = os.path.join('./static/music/')
 
 UserName = 'default_user'
-ChromeBrowser = VirtualBrowser()
+# ChromeBrowser = VirtualBrowser()
 
 os.makedirs(folder, exist_ok=True)
 
@@ -77,7 +77,7 @@ def ajax():
     print(UserName)
     FileName = WHC(UserName, left, right)
     # VirtualBrowser(UserName, fileName)
-    ChromeBrowser.SendHapticCustom(UserName, FileName)
+    # ChromeBrowser.SendHapticCustom(UserName, FileName)
     return data
     # return jsonify(result = "success", result2= data)
 

@@ -34,16 +34,17 @@
     <section class="sheetContainer">
         <!-- 여기에 시각화 표현 -->
         <!-- canvas -->
+        <div id="canvas"></div>
     </section>
 
     <div class="visualOctave">
-        <button class="visualOctaveButton"> 2 </button>
-        <button class="visualOctaveButton"> 3 </button>
-        <button class="visualOctaveButton"> 4 </button>
-        <button class="visualOctaveButton"> 5 </button>
-        <button class="visualOctaveButton"> 6 </button>
-        <button class="visualOctaveButton"> 7 </button>
-        <button class="visualOctaveButton"> 8 </button>
+        <button class="visualOctaveButton" id="Octave2"> 2 </button>
+        <button class="visualOctaveButton" id="Octave3"> 3 </button>
+        <button class="visualOctaveButton" id="Octave4"> 4 </button>
+        <button class="visualOctaveButton" id="Octave5"> 5 </button>
+        <button class="visualOctaveButton" id="Octave6"> 6 </button>
+        <button class="visualOctaveButton" id="Octave7"> 7 </button>
+        <button class="visualOctaveButton" id="Octave8"> 8 </button>
     </div>
 
     
@@ -114,23 +115,20 @@
 
     <section class="pianoContainer">
         <ul class="set">
-            <li class="white e"></li>
-            <li class="black ds"></li>
-            <li class="white d"></li>
-            <li class="black cs"></li>
+
             <li class="white c"></li>
-            <li class="white b"></li>
-            <li class="black as"></li>
-            <li class="white a"></li>
-            <li class="black gs"></li>
-            <li class="white g"></li>
-            <li class="black fs"></li>
+            <li class="black cs"></li>
+            <li class="white d"></li>
+            <li class="black ds"></li>
+            <li class="white e"></li>
             <li class="white f"></li>
-            <li class="white b"></li>
-            <li class="black as"></li>
-            <li class="white a"></li>
-            <li class="black gs"></li>
+            <li class="black fs"></li>
             <li class="white g"></li>
+            <li class="black gs"></li>
+            <li class="white a"></li>
+            <li class="black as"></li>
+            <li class="white b"></li>
+
         </ul>
     </section>
 
@@ -215,14 +213,18 @@
       {
           "imports": {
               "three": "../static/node_modules/three/build/three.module.js",
+              "tone" : "../static/node_modules/tone/build/Tone.js.map",
               "subjx": "../static/node_modules/subjx/dist/js/subjx.esm.js"
           }
       }
     </script>
 
 
-    <script type="module" defer src="../static/src/js/libs/slider.js"></script>
-    <script type="module" defer src="../static/src/js/libs/emotionVideoShow.js"></script>
+    <!-- <script type="module" defer src="../static/src/js/libs/slider.js"></script> -->
+    <!-- <script type="module" defer src="../static/src/js/libs/emotionVideoShow.js"></script> -->
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
+    <script src="../static/src/js/Exploration.js"></script>
+
     <!-- <script type="module" defer src="../static/js/buttonShapeClick.js"></script> -->
     <!-- <script type="module" defer src="../static/js/color.js"></script> -->
 </body>
