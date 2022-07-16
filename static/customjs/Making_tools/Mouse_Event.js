@@ -5,8 +5,12 @@ let time=32
 let pitch=24
 let melody_canvas = new Array(time)
 
+let instrument=["piano", "guitar", "marimba"]
+let tool=["restart", "paint", "erase", "save"]
+let playcontrol=["play", "stop"]
+
 const tp_grid = document.getElementById('full_grid')
-init()
+init();
 function init(){
     for (var i=0; i<time; i++){
         melody_canvas[i]=new Array(pitch)
@@ -19,17 +23,32 @@ function init(){
 
 tp_grid.onclick=function(e){
     selected_className = e.path[0].className
-    logging(selected_className)
+    selected_id=e.path[0].id
+    // console.log(selected_className, e.path[0].id)
+    if((selected_className.includes('_'))&&(selected_className!="menu_left")&&(selected_className!="menu_right")){
+        logging(selected_className)
+    }
+    if (instrument.includes(selected_id)){
+        set_instrument(selected_id)
+    }
+    if (tool.includes(selected_id)){
+        set_tool(selected_id)
+    }
+    if(playcontrol.includes(selected_id)){
+        set_playcontrol(selected_id)
+    }
 }
 tp_grid.onmousedown=function(e){
     selecting = true
     selected_className = e.path[0].className
-    logging(selected_className)
+    if((selected_className.includes('_'))&&(selected_className!="menu_left")&&(selected_className!="menu_left")){
+        logging(selected_className)
+    }
 }
 tp_grid.onmousemove=function(e){
-    if(selecting==true){      
-      selected_className = e.path[0].className
-      logging(selected_className)
+    selected_className = e.path[0].className
+    if((selecting==true)&&(selected_className.includes('_')&&(selected_className!="menu_left")&&(selected_className!="menu_right"))){
+        logging(selected_className)
     }
 }
 tp_grid.onmouseup=function(e){
@@ -42,7 +61,9 @@ function logging(cord){
         var t_position= splited_cord[0].replace('t', '')
         var p_position=splited_cord[1].replace('p', '')
         melody_canvas[t_position-1][p_position-1]=parseInt(melody_canvas[t_position-1][p_position-1])+1
+        console.log(cord)
         // color_change(cord, t_position, p_position)
+
     }
     set_color()
 }
@@ -68,9 +89,21 @@ function set_color(){
             var satuation=melody_canvas[i][j]*35
             if(melody_canvas[i][j]!=0){
                 el[0].style.background='hsl('+color+', '+satuation+'%, 70%)';
-                console.log(color, satuation, melody_canvas)
+                // console.log(color, satuation, melody_canvas)
             }
         }
     }
 
+}
+
+function set_instrument(inst){
+    console.log(inst)
+}
+
+function set_tool(tool){
+    console.log(tool)
+}
+
+function set_playcontrol(play){
+    console.log(play)
 }

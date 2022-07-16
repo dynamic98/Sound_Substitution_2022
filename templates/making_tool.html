@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <!-- Style -->
     <link type="text/css" href="../static/css/mainMenu-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style>
        /* .grid-container {
           display: grid;
@@ -28,8 +31,8 @@
         } */
        .container {
           display: grid; 
-          grid-template-columns: repeat(47, 35px);
-          grid-template-rows: repeat(32, 25px);
+          grid-template-columns: repeat(47, 40px);
+          grid-template-rows: repeat(32, 20px);
           /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
           grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
           gap: 0px 0px; 
@@ -924,28 +927,156 @@
         .t32_p23 { grid-area: t32_p23; }
         .t32_p24 { grid-area: t32_p24; }
 
-        .Top { grid-area: Top; background-color: bisque; text-align: center;}
+        .Top { 
+          grid-area: Top; 
+          background-color: white; 
+          text-align: center; 
+          font-size: 30px;
+        }
         .blank_top { grid-area: blank_top; }
         .blank_bottom { grid-area: blank_bottom; }
-        .menu_left { grid-area: menu_left; background-color: beige; text-align: center;}
-        .menu_right { grid-area: menu_right; background-color: beige}
-        .Bottom { grid-area: Bottom; background-color: bisque;}
+        .menu_left { grid-area: menu_left; background-color: white; text-align: left;}
+        .menu_right { grid-area: menu_right; background-color: white; text-align: left;}
+        .Bottom { grid-area: Bottom; background-color: white;}
+        .buttonTool {
+          appearance: none;
+          background-color: #ddebff;
+          border-radius: 45em;
+          border-style: none;
+          box-shadow: #ADCFFF 0 -12px 6px inset;
+          box-sizing: border-box;
+          color: #000000;
+          cursor: pointer;
+          display: inline-block;
+          font-family: -apple-system,sans-serif;
+          font-size: 2rem;
+          font-weight: 700;
+          letter-spacing: -.24px;
+          outline: none;
+          padding: 1.4rem 2rem;
+          quotes: auto;
+          text-align: center;
+          text-decoration: none;
+          transition: all .15s;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          margin: 1rem;
+          width: 17rem;
+        }
+        .buttonTool:hover {
+          background-color: #cbe8fc;
+          box-shadow: #5483a1 0 -6px 8px inset;
+          transform: scale(1.125);
+        }
+
+        .buttonTool:active {
+          transform: scale(1.025);
+        }
+        .buttonInstrument {
+          appearance: none;
+          background-color: #fcf9d8;
+          border-radius: 45em;
+          border-style: none;
+          box-shadow: #fffaad 0 -12px 6px inset;
+          box-sizing: border-box;
+          color: #000000;
+          cursor: pointer;
+          display: inline-block;
+          font-family: -apple-system,sans-serif;
+          font-size: 2rem;
+          font-weight: 700;
+          letter-spacing: -.24px;
+          outline: none;
+          padding: 1.4rem 2rem;
+          quotes: auto;
+          text-align: center;
+          text-decoration: none;
+          transition: all .15s;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          margin: 1rem;
+          width: 20rem;
+        }
+        .buttonInstrument:hover {
+          background-color: #fcfbcb;
+          box-shadow: #8d8c47 0 -6px 8px inset;
+          transform: scale(1.125);
+        }
+
+        .buttonInstrument:active {
+          transform: scale(1.025);
+        }
+        .buttonPlayControl {
+          appearance: none;
+          background-color: #ccffcc;
+          border-radius: 45em;
+          border-style: none;
+          box-shadow: #adffad 0 -12px 6px inset;
+          box-sizing: border-box;
+          color: #000000;
+          cursor: pointer;
+          display: inline-block;
+          font-family: -apple-system,sans-serif;
+          font-size: 2rem;
+          font-weight: 700;
+          letter-spacing: -.24px;
+          outline: none;
+          padding: 1.4rem 2rem;
+          quotes: auto;
+          text-align: center;
+          text-decoration: none;
+          transition: all .15s;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          margin: 1rem;
+          width: 15rem;
+    
+        }
+        .buttonPlayControl:hover {
+          background-color: #d6fccb;
+          box-shadow: #436d33 0 -6px 8px inset;
+          transform: scale(1.125);
+        }
+
+        .buttonPlayControl:active {
+          transform: scale(1.025);
+        }
+
+        span{
+          margin-right:2rem
+        }
+        
 
     </style>
 </head>
 
 <body>
-    <h1 style="padding-left: 50px;">CANVAS - Draw your own melody</h1>
+    <h1 style="padding-left: 50px; margin-top: 25px;">CANVAS - Draw your own melody</h1>
 
-    <p style="padding-left: 50px;">A Grid Layout must have a parent element with the <em>display</em> property set to <em>grid</em> or <em>inline-grid</em>.</p>
+    <p style="padding-left: 50px; margin-bottom: 50px;">A Grid Layout must have a parent element with the <em>display</em> property set to <em>grid</em> or <em>inline-grid</em>.</p>
 
-    <div class="container" id="full_grid" style="padding: 0px; margin:0px; margin-left:200px;">
+    <div class="container" id="full_grid" style="padding: 0px; margin:0px; margin-left:50px;">
       <div class="Top"> Melody Making Tool</div>
       <div class="blank_top"></div>
       <div class="blank_bottom"></div>
-      <div class="menu_right"></div>
-      <div class="menu_left">Menu bar</div>
-      <div class="Bottom"></div>
+      <div class="menu_right">
+        <button   class="buttonInstrument" role="button" id="piano"><img id="piano" src="../static/images/grand-piano.png" style="width:60px ;height:60px; margin:5px; padding-bottom:3px; margin-right:16.5px">Piano</button>
+        <button  class="buttonInstrument" role="button" id="guitar"><img id="guitar" src="../static/images/electric-guitar.png" style="width:65px ;height:65px; margin:5px; padding-bottom:3px">Guitar</button>
+        <button   class="buttonInstrument" role="button" id="marimba"><img id="marimba" src="../static/images/marimba.png" style="width:60px ;height:60px; margin:5px; padding-bottom:3px">Marimba</button>
+      </div>
+      <div class="menu_left">
+        <button   class="buttonTool" role="button" id="restart"><span id="restart" class="glyphicon glyphicon-repeat"></span>Restart</button>
+        <button   class="buttonTool" role="button" id="paint"><span id="paint" class="glyphicon glyphicon-pencil"></span>Paint</button>
+        <button  class="buttonTool" role="button" id="erase"><span id="erase" class="glyphicon glyphicon-erase"></span>Erase</button>
+        <button   class="buttonTool" role="button" id="save"><span id="save" class="glyphicon glyphicon-saved"></span>Save</button>
+      </div>
+      <div class="Bottom" style="margin-left:200px">
+        <button  class="buttonPlayControl" role="button" id="play"><span id="play" class="glyphicon glyphicon-play"></span>Play</button>
+        <button  class="buttonPlayControl" role="button" id="stop"><span id="stop" class="glyphicon glyphicon-stop"></span>Stop</button>
+      </div>
 
       <div class="p1">C</div>
       <div class="p2">C#</div>
