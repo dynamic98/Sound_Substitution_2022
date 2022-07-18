@@ -22,7 +22,6 @@ import {
 export class Audio {
     constructor(htmlElementID, folderPath) {
         this.audioElementHandler = new AudioElementHandler(htmlElementID, folderPath)
-        console.log("length!!!",AudioElementHandler.instanceCounter++)
         this.meydaAnalyer = new MeydaAnalyser();
         this.pitch;
         this.myOffCxt;
@@ -73,16 +72,22 @@ export class Audio {
 export class Song extends Audio {
     constructor(htmlElementID, folderPath) {
         super(htmlElementID, folderPath)
+        this.htmlElementID = htmlElementID
+        this.folderPath = folderPath
+
         this.selectMusicElement = document.getElementById("select-music");
         this.myWaveSurfer = new MyWaveSurfer();
         this.myOffCxt;
-    }
 
-    fetchMusic() {
         for (let index in this.audioElementHandler.getFileObject()) {
+            console.log( this.selectMusicElement.options) 
             this.selectMusicElement.options[this.selectMusicElement.options.length] = new Option(this.audioElementHandler.getFileObject()[index], index);
         }
 
+    }
+
+    fetchMusic() {
+  
         let fileName = this.selectMusicElement.options[this.selectMusicElement.selectedIndex].text;
 
         return this.audioElementHandler.fetchMusic(fileName);
@@ -110,6 +115,7 @@ export class Song extends Audio {
         let response = await this.fetchMusic();
         this.audioElementHandler.initializeAudio(response.url)
         this.myWaveSurfer.setAudioElementSource(this.audioElementHandler.getAudioElement())
+        this.audioElement
         return this.createOfflineContext(await response.arrayBuffer())
     }
 
@@ -132,18 +138,14 @@ export class Song extends Audio {
 export class Source extends Audio {
     constructor(htmlElementID, folderPath) {
         super(htmlElementID, folderPath)
-        this.sourceList;
     }
 
     fetchMusic(fileIndex) {
         let fileName = this.audioElementHandler.getFileList()[fileIndex]
         return this.audioElementHandler.fetchMusic(fileName.trim());
     }
-    addToSourceList(source) {
-        this.sourceList.push(source)
-    }
-    getSourceList() {
-        console.log(this.sourceList)
-    }
 
+    static getFileListLength(htmlElementID) {
+        AudioElementHandler.getFileListLength(htmlElementID)
+    }
 }

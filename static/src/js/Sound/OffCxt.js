@@ -2,7 +2,9 @@ import {
     getPeaks,
     getIntervals
 } from "./getBPM";
-import { MeydaAnalyser } from "./MeydaAnalyzer";
+import {
+    MeydaAnalyser
+} from "./MeydaAnalyzer";
 
 //offlineAudioContext
 
@@ -12,7 +14,6 @@ export class OffCxt {
         this.offlineCtx = new OfflineAudioContext(2, 30 * 44100, 44100);
         this.source = this.offlineCtx.createBufferSource();
 
-        new MeydaAnalyser
     }
 
     async initializeBuffer(arrayBuffer) {
@@ -22,6 +23,9 @@ export class OffCxt {
 
         this.source.start(0)
         this.offlineCtx.startRendering();
+
+
+
     }
 
     calculateBPM() {
@@ -36,6 +40,7 @@ export class OffCxt {
                     return intB.count - intA.count;
                 }).splice(0, 5);
                 this.bpm = Math.round(top[0].tempo);
+                this.renderedBuffer = e.renderedBuffer;
                 console.log("bpm:", this.bpm)
                 resolve()
             }.bind(this)
@@ -47,5 +52,10 @@ export class OffCxt {
 
     getSource() {
         return this.source
+    }
+
+    getRenderedBuffer() {
+        
+        return this.renderedBuffer
     }
 }

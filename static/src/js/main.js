@@ -33,8 +33,6 @@ let kandinsky;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")
 
-let source = new Source("separatedFileList", "static/music/separated/")
-
 //event handlers
 //----------------------------------------------------//
 //whenever the wavesurfer's play button is pressed execute
@@ -44,7 +42,7 @@ document.querySelector('[data-action="play"]').addEventListener('click', () => {
 
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
 document.getElementById("select-music").onchange = async () => {
-    await song.changeSong();
+    await song.changeSong("filelist", "static/music/original/");
     kandinsky.setBPM(song.getBPM())
     bpmTimer.setBPM(song.getBPM())
 }
@@ -68,15 +66,18 @@ async function main() {
     kandinsky = new Kandinsky(song.getBPM())
     bpmTimer.setBPM(song.getBPM())
 
-
-    // for (let i = 0; i < source.getFileListLength(); i++) {
-    //     let response = await source.fetchMusic(i)
-    //     source.addNodes(response.url)
-    //     source.connectNodes();
-    //     source.createMeydaAnalyser();
-    //     source.createPitchFinder();
-    //     source.addToSourceList(source)
-    // }
+    let sourceList = []
+    for (let i = 0; i < Source.getFileListLength("separatedFileList"); i++) {
+        let source = new Source("separatedFileList", "static/music/separated/")
+        let response = await source.fetchMusic(i)
+        console.log(response.url)
+        source.addNodes(response.url)
+        source.connectNodes();
+        source.createMeydaAnalyser();
+        source.createPitchFinder();
+        source.addToSourceList(source)
+        sourceList.push(source)
+    }
 
     console.log()
 

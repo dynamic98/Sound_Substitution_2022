@@ -9,6 +9,7 @@ export class AudioNodeManager {
         this.analyser = new Tone.Waveform(1024)
 
         this.nodeList = [];
+        
     }
 
     //add node to the list

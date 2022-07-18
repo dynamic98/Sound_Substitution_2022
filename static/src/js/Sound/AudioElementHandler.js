@@ -1,3 +1,4 @@
+
 export class AudioElementHandler {
     constructor(htmlElementID, folderPath) {
         let filelistText = document.getElementById(htmlElementID).innerText;
@@ -9,8 +10,14 @@ export class AudioElementHandler {
         });
 
         this.folderPath = folderPath
-        this.audioElement = document.getElementById("audio")
+   
+        
+        this.audioElement= document.createElement('audio');
+        this.audioElement.setAttribute("id", AudioElementHandler.instanceCounter);
+        console.log("Instance COunter:", AudioElementHandler.instanceCounter)
+        AudioElementHandler.instanceCounter++
     }
+
 
     fetchMusic(fileName) {
         this.directory = this.folderPath + fileName
@@ -20,6 +27,7 @@ export class AudioElementHandler {
             console.error(error);
         }
     }
+
 
     getFileObject() {
         return this.fileobject;
@@ -43,5 +51,4 @@ export class AudioElementHandler {
     static getFileListLength(htmlElementID) {
         return document.getElementById(htmlElementID).innerText.split(', ').length
     }
-    static instanceCounter=0;
 }

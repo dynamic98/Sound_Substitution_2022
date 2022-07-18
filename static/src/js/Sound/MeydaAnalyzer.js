@@ -33,7 +33,6 @@ export class MeydaAnalyser {
 
     //intitialize with source(AudioElement) and audioContext
     initializeMeydaAnalyser(source) {
-        console.log(Tone.context._context._nativeAudioContext)
         this.meydaAnalyser = Meyda.createMeydaAnalyzer({
             audioContext: Tone.context._context._nativeAudioContext,
             source: source._nativeAudioNode,
