@@ -63,7 +63,7 @@ async function main() {
     song.createMeydaAnalyser();
     song.createWaveSurfer();
     song.createPitchFinder();
-    song.createOfflineContext(await response.arrayBuffer());
+    await song.createOfflineContext(await response.arrayBuffer());
 
     for (let i = 0; i < Source.getFileListLength("separatedFileList"); i++) {
         let source = new Source("separatedFileList", "static/music/separated/")
@@ -89,9 +89,7 @@ async function main() {
 };
 
 function animate() {
-    for (let i = 0; i < Source.getFileListLength("separatedFileList"); i++){
-       console.log( switcher.getPitchAndEnergy(sourceList[i].getPitch(), sourceList[i].getEnergy(), sourceList[i].getMaxChroma()))
-    }
+
 
     requestAnimationFrame(animate);
     stats.begin()
@@ -105,7 +103,7 @@ function animate() {
         //under 4 beat = calculate and create Geomtry 
         else if (bpmTimer.isUnderFourBeat()) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
-
+            console.log(pitchAndEnergy)
             kandinsky.calculate(pitchAndEnergy);
             myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
             myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
