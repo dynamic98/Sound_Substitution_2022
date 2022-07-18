@@ -42,8 +42,19 @@ export class AudioElementHandler {
     }
     //play or pause
     togglePlay() {
-        console.log()
-        this.audioElement.paused ? this.audioElement.pause : this.audioElement.play()
+        if(this.audioElement.paused){
+            this.audioElement.play()
+        }
+        else{
+            this.audioElement.pause();
+        }
+        
+    }
+    setTime(time){
+        console.log("original",this.audioElement.currentTime)
+
+        this.audioElement.currentTime=time;
+        console.log("changed",this.audioElement.currentTime)
     }
     static getFileListLength(htmlElementID) {
         return document.getElementById(htmlElementID).innerText.split(', ').length

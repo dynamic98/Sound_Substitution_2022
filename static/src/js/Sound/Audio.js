@@ -117,7 +117,6 @@ export class Song extends Audio {
         let response = await this.fetchMusic();
         this.audioElementHandler.initializeAudio(response.url)
         this.myWaveSurfer.setAudioElementSource(this.audioElementHandler.getAudioElement())
-        this.audioElement
         return this.createOfflineContext(await response.arrayBuffer())
     }
 
@@ -125,9 +124,8 @@ export class Song extends Audio {
         return this.myOffCxt.getBPM();
     }
  
-    togglePlay() {
-        super.togglePlay()
-        this.myWaveSurfer.togglePlay();
+    setWaveSurferCallback(callback){
+        this.myWaveSurfer.setInteractionEventHandler(callback)
     }
 
 }
@@ -151,4 +149,13 @@ export class Source extends Audio {
     play(){
         this.audioElementHandler.getAudioElement().play()
     }
+
+    async changeSong(index) {
+        let response = await this.fetchMusic(index);
+        this.audioElementHandler.initializeAudio(response.url)
+    }
+    setTime(time){
+        this.audioElementHandler.setTime(time);
+    }
+
 }

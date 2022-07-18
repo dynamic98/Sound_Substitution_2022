@@ -24,8 +24,9 @@ import {
     Song
 } from './Sound/Audio.js';
 import {
-    Source
-} from './Sound/Audio.js';
+    SourceContainer
+} from './Sound/SourceContainer.js';
+
 
 //class instances
 //----------------------------------------------------//
@@ -36,18 +37,20 @@ let stats = new Stats();
 let kandinsky;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")
-let sourceList = []
+let sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/");
 
 //event handlers
 //----------------------------------------------------//
 //whenever the wavesurfer's play button is pressed execute
 document.querySelector('[data-action="play"]').addEventListener('click', () => {
     song.togglePlay()
+    sourceContainer.togglePlay()
 })
 
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
 document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
+    sourceContainer.changeSong();
     kandinsky.setBPM(song.getBPM())
     bpmTimer.setBPM(song.getBPM())
 }
@@ -65,19 +68,9 @@ async function main() {
     song.createPitchFinder();
     await song.createOfflineContext(await response.arrayBuffer());
 
-    for (let i = 0; i < Source.getFileListLength("separatedFileList"); i++) {
-        let source = new Source("separatedFileList", "static/music/separated/")
-        let response = await source.fetchMusic(i)
-        console.log(response.url)
-        source.addNodes(response.url)
-        source.connectNodes();
-        source.createMeydaAnalyser();
-        source.createPitchFinder();
-        sourceList.push(source)
-    }
-    for (let i = 0; i < Source.getFileListLength("separatedFileList"); i++) {
-        sourceList[i].play()
-    }
+    await sourceContainer.initialize();
+    song.setWaveSurferCallback(sourceContainer.syncTime())
+
 
     //VISUALS & OTHERS
     // ----------------------------------------------------/
@@ -89,10 +82,18 @@ async function main() {
 };
 
 function animate() {
-
-
     requestAnimationFrame(animate);
     stats.begin()
+
+    // if (sourceContainer.getList()[0].isPlaying()) {
+    //     sourceContainer.forEach(
+    //         function (source) {
+    //             console.log(switcher.getPitchAndEnergy(source.getPitch(), source.getEnergy(), source.getMaxChroma()))
+    //         }
+    //     )
+    // }
+
+
     //only loop when the music is playing
     if (song.isPlaying()) {
         //debug frame rate
@@ -103,7 +104,7 @@ function animate() {
         //under 4 beat = calculate and create Geomtry 
         else if (bpmTimer.isUnderFourBeat()) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
-            console.log(pitchAndEnergy)
+
             kandinsky.calculate(pitchAndEnergy);
             myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
             myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())

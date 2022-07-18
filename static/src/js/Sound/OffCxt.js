@@ -24,8 +24,6 @@ export class OffCxt {
         this.source.start(0)
         this.offlineCtx.startRendering();
 
-
-
     }
 
     calculateBPM() {
@@ -55,7 +53,6 @@ export class OffCxt {
     }
 
     getRenderedBuffer() {
-        
         return this.renderedBuffer
     }
 }

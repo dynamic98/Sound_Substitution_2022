@@ -31,10 +31,11 @@ export class MyWaveSurfer {
             audioElement.currentTime = this.wavesurfer.getCurrentTime();
         })
     }
-    setInteractionEventHandler(thisReference){
+    setInteractionEventHandler(callback){
         this.wavesurfer.drawer.on('click', () =>
         {
-            thisReference.reset()
+            callback(this.wavesurfer.getCurrentTime());
+         
        })
     }
 
