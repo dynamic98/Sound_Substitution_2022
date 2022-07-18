@@ -1,8 +1,11 @@
+import { Utility } from "../Utility/Utility";
+
 export class Kandinsky {
     constructor(bpm , canvasSize= 40) {
         this.bpm = bpm;
         this.canvasSize = canvasSize
         this.midiScope=59;
+        // this.midiScope=35;
 
         this.DictPitch = {
             0: "C",
@@ -16,14 +19,14 @@ export class Kandinsky {
             8: "G#",
             9: "A",
             10: "A#",
-            11: "B"
+            11: "B" 
         };
     }
 
     calculate([pitch, energy],frameRate =13 ) {
 
         this.pitch=pitch;
-        this.energy=energy
+        this.energy = energy;
 
         this.pitchHeight = this.canvasSize / this.midiScope 
         this.pitchWidth = this.canvasSize / (60 * 4 * frameRate / this.bpm) // 
@@ -56,7 +59,7 @@ export class Kandinsky {
     getPitchEnergy(){
        return this.pitchHeight * (this.energy * 5);
     }
-
+    
     setBPM(bpm){
         this.bpm=bpm
     }

@@ -8,10 +8,7 @@ import {
 import {
     BPMTimer
 } from './Utility/BPMTimer.js'
-import {
-    Utility
-} from './Utility/Utility.js'
-
+import { Switcher } from './Utility/Switcher.js'
 let myThree = new MyThree();
 let kandinsky;
 let bpmTimer = new BPMTimer();
@@ -38,6 +35,7 @@ const synth = new Tone.Synth().toDestination();
 let CurrentOctave = 4;
 let CurrentEnergy = 0;
 let CurrentPitch = 0;
+let switcher = new Switcher();
 
 main();
 function main(){
@@ -57,7 +55,7 @@ function animate(){
     //under 4 beat = calculate and create Geomtry 
     else if (bpmTimer.isUnderFourBeat()) {
         let this_pitch = {frequency: 0, confidence: 1, note: DictPitch[CurrentPitch]+CurrentOctave.toString(), midi: ((CurrentOctave+1)*12+CurrentPitch)};
-        let pitchAndEnergy = bpmTimer.getPitchAndEnergy(this_pitch, CurrentEnergy, CurrentPitch);
+        let pitchAndEnergy = switcher.getPitchAndEnergy(this_pitch, CurrentEnergy, CurrentPitch);
         CurrentEnergy = 0;
         // console.log(this_pitch);
         // console.log(pitchAndEnergy);
