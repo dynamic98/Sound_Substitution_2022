@@ -28,9 +28,11 @@ export class Audio {
         this.audioNodeManager
     }
 
-    addNodes(sourceURL) {
-        this.audioElementHandler.initializeAudio(sourceURL);
+    initializeAudioElement(url) {
+        this.audioElementHandler.initializeAudio(url)
+    }
 
+    addNodes() {
         this.audioNodeManager = new AudioNodeManager(this.audioElementHandler.getAudioElement());
         this.audioNodeManager.addNode(
             this.audioNodeManager.getSource(), // 0
@@ -90,13 +92,14 @@ export class Song extends Audio {
         }
     }
 
+
     fetchMusic() {
         let fileName = this.selectMusicElement.options[this.selectMusicElement.selectedIndex].text;
         return this.audioElementHandler.fetchMusic(fileName);
     }
 
-    addNodes(sourceURL) {
-        super.addNodes(sourceURL);
+    addNodes() {
+        super.addNodes();
         this.audioNodeManager.addNode(
             this.audioNodeManager.getLastNode(), //Destination
         )
@@ -104,7 +107,7 @@ export class Song extends Audio {
 
     createWaveSurfer() {
         this.myWaveSurfer.setAudioElementSource(this.audioElementHandler.getAudioElement());
-        this.myWaveSurfer.initialize(this.audioElementHandler.getAudioElement());
+        this.myWaveSurfer.onReady(this.audioElementHandler.getAudioElement());
     }
 
     async createOfflineContext(arrayBuffer) {
@@ -123,8 +126,8 @@ export class Song extends Audio {
     getBPM() {
         return this.myOffCxt.getBPM();
     }
- 
-    setWaveSurferCallback(callback){
+
+    setWaveSurferCallback(callback) {
         this.myWaveSurfer.setInteractionEventHandler(callback)
     }
 
@@ -143,19 +146,16 @@ export class Source extends Audio {
     }
 
     static getFileListLength(htmlElementID) {
-       return AudioElementHandler.getFileListLength(htmlElementID)
+        return AudioElementHandler.getFileListLength(htmlElementID)
     }
-    
-    play(){
+
+    play() {
         this.audioElementHandler.getAudioElement().play()
     }
 
-    async changeSong(index) {
-        let response = await this.fetchMusic(index);
-        this.audioElementHandler.initializeAudio(response.url)
-    }
-    setTime(time){
+    setTime(time) {
         this.audioElementHandler.setTime(time);
     }
+
 
 }

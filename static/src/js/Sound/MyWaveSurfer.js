@@ -23,7 +23,7 @@ export class MyWaveSurfer {
     }
 
      //initializes with settings
-    initialize(audioElement,offline) {
+    onReady(audioElement,callback) {
         this.wavesurfer.on('ready', async () =>
          {
             console.log("wavesurfer is ready");
@@ -31,6 +31,7 @@ export class MyWaveSurfer {
             audioElement.currentTime = this.wavesurfer.getCurrentTime();
         })
     }
+
     setInteractionEventHandler(callback){
         this.wavesurfer.drawer.on('click', () =>
         {

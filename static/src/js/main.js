@@ -61,10 +61,12 @@ async function main() {
     //Audio
     // ----------------------------------------------------/
     let response = await song.fetchMusic()
-    song.addNodes(response.url)
+    song.initializeAudioElement(response.url)
+    song.addNodes()
     song.connectNodes();
     song.createMeydaAnalyser();
     song.createWaveSurfer();
+
     song.createPitchFinder();
     await song.createOfflineContext(await response.arrayBuffer());
 
