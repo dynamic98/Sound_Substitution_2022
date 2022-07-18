@@ -64,6 +64,12 @@ export class Audio {
     getFileListLength() {
         return this.audioElementHandler.getFileList().length;
     }
+    isPlaying() {
+        return !this.audioElementHandler.getAudioElement().paused
+    }
+    togglePlay() {
+        this.audioElementHandler.togglePlay();
+    }
 
 }
 
@@ -80,16 +86,12 @@ export class Song extends Audio {
         this.myOffCxt;
 
         for (let index in this.audioElementHandler.getFileObject()) {
-            console.log( this.selectMusicElement.options) 
             this.selectMusicElement.options[this.selectMusicElement.options.length] = new Option(this.audioElementHandler.getFileObject()[index], index);
         }
-
     }
 
     fetchMusic() {
-  
         let fileName = this.selectMusicElement.options[this.selectMusicElement.selectedIndex].text;
-
         return this.audioElementHandler.fetchMusic(fileName);
     }
 
@@ -122,13 +124,10 @@ export class Song extends Audio {
     getBPM() {
         return this.myOffCxt.getBPM();
     }
-
-    isPlaying() {
-        return !this.audioElementHandler.getAudioElement().paused
-    }
+ 
     togglePlay() {
+        super.togglePlay()
         this.myWaveSurfer.togglePlay();
-        this.audioElementHandler.togglePlay();
     }
 
 }
@@ -146,6 +145,10 @@ export class Source extends Audio {
     }
 
     static getFileListLength(htmlElementID) {
-        AudioElementHandler.getFileListLength(htmlElementID)
+       return AudioElementHandler.getFileListLength(htmlElementID)
+    }
+    
+    play(){
+        this.audioElementHandler.getAudioElement().play()
     }
 }

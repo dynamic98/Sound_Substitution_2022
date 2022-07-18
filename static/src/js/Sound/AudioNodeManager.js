@@ -17,7 +17,6 @@ export class AudioNodeManager {
         for (const arg of args) {
             this.nodeList.push(arg)
         }
-        console.log(this.nodeList)
     }
 
     //insert to specific index 
@@ -27,7 +26,6 @@ export class AudioNodeManager {
 
     //connect all the nodes
     connectAllNodes() {
-        this.showConnection()
         for (let i = 0; i < this.nodeList.length-1; i++) {
             Tone.connect(this.nodeList[i], this.nodeList[i + 1]);
         }

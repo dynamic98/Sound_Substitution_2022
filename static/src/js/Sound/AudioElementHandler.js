@@ -11,13 +11,10 @@ export class AudioElementHandler {
 
         this.folderPath = folderPath
    
-        
         this.audioElement= document.createElement('audio');
         this.audioElement.setAttribute("id", AudioElementHandler.instanceCounter);
-        console.log("Instance COunter:", AudioElementHandler.instanceCounter)
         AudioElementHandler.instanceCounter++
     }
-
 
     fetchMusic(fileName) {
         this.directory = this.folderPath + fileName
@@ -27,7 +24,6 @@ export class AudioElementHandler {
             console.error(error);
         }
     }
-
 
     getFileObject() {
         return this.fileobject;
@@ -46,6 +42,7 @@ export class AudioElementHandler {
     }
     //play or pause
     togglePlay() {
+        console.log()
         this.audioElement.paused ? this.audioElement.pause : this.audioElement.play()
     }
     static getFileListLength(htmlElementID) {

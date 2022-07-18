@@ -15,6 +15,9 @@ import {
     BPMTimer
 } from './Utility/BPMTimer.js'
 import {
+    Switcher
+} from './Utility/Switcher.js'
+import {
     Kandinsky
 } from './Viz/Kandinsky.js'
 import {
@@ -28,10 +31,12 @@ import {
 //----------------------------------------------------//
 let myThree = new MyThree();
 let bpmTimer = new BPMTimer();
+let switcher = new Switcher();
 let stats = new Stats();
 let kandinsky;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")
+let sourceList = []
 
 //event handlers
 //----------------------------------------------------//
@@ -53,20 +58,13 @@ async function main() {
     //Audio
     // ----------------------------------------------------/
     let response = await song.fetchMusic()
-
     song.addNodes(response.url)
     song.connectNodes();
     song.createMeydaAnalyser();
     song.createWaveSurfer();
     song.createPitchFinder();
-    await song.createOfflineContext(await response.arrayBuffer());
+    song.createOfflineContext(await response.arrayBuffer());
 
-
-    myThree.initialize()
-    kandinsky = new Kandinsky(song.getBPM())
-    bpmTimer.setBPM(song.getBPM())
-
-    let sourceList = []
     for (let i = 0; i < Source.getFileListLength("separatedFileList"); i++) {
         let source = new Source("separatedFileList", "static/music/separated/")
         let response = await source.fetchMusic(i)
@@ -75,16 +73,25 @@ async function main() {
         source.connectNodes();
         source.createMeydaAnalyser();
         source.createPitchFinder();
-        source.addToSourceList(source)
         sourceList.push(source)
     }
+    for (let i = 0; i < Source.getFileListLength("separatedFileList"); i++) {
+        sourceList[i].play()
+    }
 
-    console.log()
+    //VISUALS & OTHERS
+    // ----------------------------------------------------/
+    myThree.initialize()
+    kandinsky = new Kandinsky(song.getBPM())
+    bpmTimer.setBPM(song.getBPM())
 
     animate();
 };
 
 function animate() {
+    for (let i = 0; i < Source.getFileListLength("separatedFileList"); i++){
+       console.log( switcher.getPitchAndEnergy(sourceList[i].getPitch(), sourceList[i].getEnergy(), sourceList[i].getMaxChroma()))
+    }
 
     requestAnimationFrame(animate);
     stats.begin()
@@ -97,8 +104,8 @@ function animate() {
         }
         //under 4 beat = calculate and create Geomtry 
         else if (bpmTimer.isUnderFourBeat()) {
-            let pitchAndEnergy = bpmTimer.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
-            // console.log(pitchAndEnergy);
+            let pitchAndEnergy = switcher.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
+
             kandinsky.calculate(pitchAndEnergy);
             myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
             myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())

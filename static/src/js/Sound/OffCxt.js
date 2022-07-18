@@ -31,7 +31,7 @@ export class OffCxt {
     calculateBPM() {
         return new Promise((resolve, reject) => {
             this.offlineCtx.oncomplete = function (e) {
-                console.log(e)
+            
                 let buffer = e.renderedBuffer;
                 let peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
                 let groups = getIntervals(peaks);
