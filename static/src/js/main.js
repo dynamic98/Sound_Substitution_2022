@@ -98,6 +98,7 @@ function animate() {
         //under 4 beat = calculate and create Geomtry 
         else if (bpmTimer.isUnderFourBeat()) {
             let pitchAndEnergy = bpmTimer.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
+            // console.log(pitchAndEnergy);
             kandinsky.calculate(pitchAndEnergy);
             myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
             myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())

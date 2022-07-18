@@ -31,6 +31,7 @@
       <button type="button" class="btn btn-primary btn-star-md" id="btn-star"></button>
     </section>
     
+
     <section class="sheetContainer">
         <!-- 여기에 시각화 표현 -->
         <!-- canvas -->
@@ -209,7 +210,7 @@
 
 
     <!-- Javascript --> <!-- Have to use importmap to link NPM modules...-->
-    <script type="importmap">
+    <!-- <script type="importmap">
       {
           "imports": {
               "three": "../static/node_modules/three/build/three.module.js",
@@ -217,13 +218,31 @@
               "subjx": "../static/node_modules/subjx/dist/js/subjx.esm.js"
           }
       }
-    </script>
+    </script> -->
 
+   <!--shader script-->
+   <script type="x-shader/x-vertex" id="vertexshader">
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentshader">
+      uniform sampler2D baseTexture;
+      uniform sampler2D bloomTexture;
+      varying vec2 vUv;
+      void main() {
+        gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
+      }
+    </script>
 
     <!-- <script type="module" defer src="../static/src/js/libs/slider.js"></script> -->
     <!-- <script type="module" defer src="../static/src/js/libs/emotionVideoShow.js"></script> -->
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
-    <script src="../static/src/js/Exploration.js"></script>
+    <script type="module" defer src="../static/src/js/dist/exploration.js"></script>
+    <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
 
     <!-- <script type="module" defer src="../static/js/buttonShapeClick.js"></script> -->
     <!-- <script type="module" defer src="../static/js/color.js"></script> -->
