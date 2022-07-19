@@ -70,8 +70,8 @@ async function main() {
     song.createPitchFinder();
     await song.createOfflineContext(await response.arrayBuffer());
 
-    await sourceContainer.initialize();
-    song.setWaveSurferCallback(sourceContainer.syncTime())
+    await sourceContainer.initialize(song.getWaveSurferTime);
+    song.setWaveSurferCallback(sourceContainer.syncTime)
 
 
     //VISUALS & OTHERS

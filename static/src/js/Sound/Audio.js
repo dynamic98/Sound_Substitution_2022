@@ -130,6 +130,9 @@ export class Song extends Audio {
     setWaveSurferCallback(callback) {
         this.myWaveSurfer.setInteractionEventHandler(callback)
     }
+    getWaveSurferTime = ()=> {
+            return this.myWaveSurfer.getWavesurfer().getCurrentTime()
+    }
 
 }
 

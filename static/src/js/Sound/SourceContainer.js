@@ -9,7 +9,7 @@ export class SourceContainer {
         this.sourceList = []
     }
 
-    async initialize() {
+    async initialize(getWavesurferTime) {
 
         for (let i = 0; i < Source.getFileListLength(this.htmlElementID); i++) {
             let source = new Source(this.htmlElementID, this.path)
@@ -23,11 +23,12 @@ export class SourceContainer {
         }
 
         return new Promise((resolve, reject) => {
-            //play
+            let time=getWavesurferTime()
+            console.log("time: ", time)
             for (let source of this.sourceList) {
+                source.setTime(time)
                 source.play()
             }
-
             resolve();
         })
     }
@@ -55,20 +56,10 @@ export class SourceContainer {
         return this.sourceList
     }
 
-    syncTime() {
-        return (time) => {
+    syncTime =(time)=> {
             console.log("time:", time)
             for (let source of this.sourceList) {
                 source.setTime(time)
-            }
-        }
-    }
-
-    start(){
-        return () => {
-            for (let source of this.sourceList) {
-                source.play();
-            }
         }
     }
 }
