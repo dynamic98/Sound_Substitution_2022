@@ -13,6 +13,7 @@ export class OffCxt {
         this.bpm;
         this.offlineCtx = new OfflineAudioContext(2, 30 * 44100, 44100);
         this.source = this.offlineCtx.createBufferSource();
+        this.maxVolume;
 
     }
 
@@ -32,6 +33,8 @@ export class OffCxt {
             
                 let buffer = e.renderedBuffer;
                 let peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
+                let volumes = peaks.map(row=>row.volume)
+                this.maxVolume = volumes.reduce((acc, cur) => {return acc + cur}, 0)/volumes.length;
                 let groups = getIntervals(peaks);
 
                 let top = groups.sort(function (intA, intB) {
@@ -50,6 +53,10 @@ export class OffCxt {
 
     getSource() {
         return this.source
+    }
+
+    getMaxvolume(){
+        return this.maxVolume
     }
 
     getRenderedBuffer() {

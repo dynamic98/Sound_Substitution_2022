@@ -1,8 +1,9 @@
 import { Utility } from "../Utility/Utility";
 
 export class Kandinsky {
-    constructor(bpm , canvasSize= 40) {
+    constructor(bpm, MaxVolume, canvasSize= 40) {
         this.bpm = bpm;
+        this.MaxVolume = MaxVolume;
         this.canvasSize = canvasSize
         this.midiScope=59;
         // this.midiScope=35;
@@ -26,7 +27,8 @@ export class Kandinsky {
     calculate([pitch, energy],frameRate =13 ) {
 
         this.pitch=pitch;
-        this.energy = energy;
+        this.energy = energy/this.MaxVolume;
+        // console.log(this.MaxVolume);
 
         this.pitchHeight = this.canvasSize / this.midiScope 
         this.pitchWidth = this.canvasSize / (60 * 4 * frameRate / this.bpm) // 
@@ -64,5 +66,8 @@ export class Kandinsky {
         this.bpm=bpm
     }
     
+    setMaxVolume(MaxVolume){
+        this.MaxVolume = MaxVolume;
+    }
 
 }
