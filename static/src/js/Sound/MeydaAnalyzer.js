@@ -44,7 +44,6 @@ export class MeydaAnalyser {
                 } catch (err) {
                     console.log(err);
                 }
-                console.log(features['loudness'], "loudness");
                 this.maxChroma = this.chroma.indexOf(Utility.max(this.chroma));
                 this.energy = features['energy']
             }

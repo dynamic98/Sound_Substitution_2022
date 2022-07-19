@@ -52,6 +52,7 @@ document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
     sourceContainer.changeSong();
     kandinsky.setBPM(song.getBPM())
+    kandinsky.setMaxVolume(song.getMaxVolume())
     bpmTimer.setBPM(song.getBPM())
 }
 
@@ -77,7 +78,7 @@ async function main() {
     //VISUALS & OTHERS
     // ----------------------------------------------------/
     myThree.initialize()
-    kandinsky = new Kandinsky(song.getBPM())
+    kandinsky = new Kandinsky(song.getBPM(), song.getMaxVolume())
     bpmTimer.setBPM(song.getBPM())
 
     animate();

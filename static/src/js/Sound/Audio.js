@@ -127,6 +127,10 @@ export class Song extends Audio {
         return this.myOffCxt.getBPM();
     }
 
+    getMaxVolume(){
+        return this.myOffCxt.getMaxvolume();
+    }
+
     setWaveSurferCallback(callback) {
         this.myWaveSurfer.setInteractionEventHandler(callback)
     }
