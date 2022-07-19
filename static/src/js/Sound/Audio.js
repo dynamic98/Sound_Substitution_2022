@@ -38,6 +38,7 @@ export class Audio {
             this.audioNodeManager.getSource(), // 0
             this.audioNodeManager.getGainNode(), //1 Gain Node
             this.audioNodeManager.getAnalyser(), //2 Pitch 
+            this.audioNodeManager.getLastNode(),
         )
     }
     fetchMusic(fileName) {
@@ -99,12 +100,12 @@ export class Song extends Audio {
         return super.fetchMusic(this.fileName)
     }
 
-    addNodes() {
-        super.addNodes();
-        this.audioNodeManager.addNode(
-            this.audioNodeManager.getLastNode(), //Destination
-        )
-    }
+    // addNodes() {
+    //     super.addNodes();
+    //     this.audioNodeManager.addNode(
+    //         this.audioNodeManager.getLastNode(), //Destination
+    //     )
+    // }
 
     createWaveSurfer() {
         this.myWaveSurfer.setAudioElementSource(this.audioElementHandler.getAudioElement());

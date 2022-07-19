@@ -18,6 +18,7 @@ export class AudioElementHandler {
 
     fetchMusic(fileName) {
         this.directory = this.folderPath + fileName
+        
         try {
             return fetch(this.directory);
         } catch (error) {
@@ -56,6 +57,6 @@ export class AudioElementHandler {
         console.log("changed", this.audioElement.currentTime)
     }
     setFolderPath(folderPath) {
-        this.folderpath=folderPath
+        this.folderPath=folderPath
     }
 }
