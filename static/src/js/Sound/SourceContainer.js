@@ -25,14 +25,14 @@ export class SourceContainer {
             resolve();
         })
     }
-    
-    initialPlay(getWavesurferTime){
-        let time = getWavesurferTime()
-        console.log("time: ", time)
+
+    async initialPlay(getWavesurferTime,playWaveSurfer) {
+        playWaveSurfer()
         for (let source of this.sourceList) {
-            source.setTime(time)
-            source.play()
+            await source.play()
+            source.setTime(getWavesurferTime())
         }
+        
     }
 
     async changeSong(folderPath) {
@@ -64,9 +64,10 @@ export class SourceContainer {
     }
 
     syncTime = (time) => {
-        console.log("time:", time)
-        for (let source of this.sourceList) {
-            source.setTime(time)
+        
+        for (let i = 0; i < this.sourceList.length; i++) {
+            this.sourceList[i].setTime(time)
         }
+    
     }
 }

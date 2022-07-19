@@ -26,10 +26,12 @@ export class Audio {
         this.pitch;
         this.myOffCxt;
         this.audioNodeManager
+        this.url
     }
 
     initializeAudioElement(url) {
-        this.audioElementHandler.initializeAudio(url)
+        this.url=url;
+        this.audioElementHandler.initializeAudio(this.url)
     }
 
     addNodes() {
@@ -76,6 +78,9 @@ export class Audio {
     }
     togglePlay() {
         this.audioElementHandler.togglePlay();
+    }
+    getURL(){
+        return this.url
     }
 
 }
@@ -133,7 +138,7 @@ export class Song extends Audio {
         return this.myOffCxt.getMaxvolume();
     }
 
-    setWaveSurferCallback(callback) {
+    async setWaveSurferCallback(callback) {
         this.myWaveSurfer.setInteractionEventHandler(callback)
     }
     getWaveSurferTime = () => {
@@ -142,6 +147,9 @@ export class Song extends Audio {
     getFileName() {
         //delete .mp3 & add  / in the end
         return this.fileName.substring(0, this.fileName.length - 4) + "/"
+    }
+    playWaveSurfer=() => {
+        return this.myWaveSurfer.playWaveSurfer()
     }
 
 }
@@ -174,4 +182,6 @@ export class Source extends Audio {
     setFolderPath(folderPath){
         this.audioElementHandler.setFolderPath(folderPath)
     }
+
+    
 }
