@@ -84,7 +84,6 @@ export class Audio {
 export class Song extends Audio {
     constructor(htmlElementID, folderPath) {
         super(htmlElementID, folderPath)
-
         this.selectMusicElement = document.getElementById("select-music");
         this.myWaveSurfer = new MyWaveSurfer();
         this.myOffCxt;
@@ -94,7 +93,6 @@ export class Song extends Audio {
             this.selectMusicElement.options[this.selectMusicElement.options.length] = new Option(this.audioElementHandler.getFileObject()[index], index);
         }
     }
-
 
     fetchMusic() {
         this.fileName = this.selectMusicElement.options[this.selectMusicElement.selectedIndex].text;
@@ -141,8 +139,6 @@ export class Song extends Audio {
         return this.myWaveSurfer.getWavesurfer().getCurrentTime()
     }
     getFileName() {
-
-
         //delete .mp3 & add  / in the end
         return this.fileName.substring(0, this.fileName.length - 4) + "/"
     }
@@ -154,7 +150,6 @@ export class Song extends Audio {
 export class Source extends Audio {
     constructor(htmlElementID, folderPath) {
         super(htmlElementID, folderPath)
-
     }
     static separatedFileList = ["bass.mp3", "drums.mp3", "other.mp3", "vocals.mp3"];
 
@@ -166,10 +161,8 @@ export class Source extends Audio {
     }
 
     fetchMusic(fileIndex) {
-
         return super.fetchMusic(Source.getSeparatedFileList()[fileIndex]);
     }
-
     play() {
         this.audioElementHandler.getAudioElement().play()
     }
@@ -180,6 +173,4 @@ export class Source extends Audio {
     setFolderPath(folderPath){
         this.audioElementHandler.setFolderPath(folderPath)
     }
-
-
 }

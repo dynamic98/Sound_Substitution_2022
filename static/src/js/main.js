@@ -91,14 +91,13 @@ function animate() {
     requestAnimationFrame(animate);
     stats.begin()
 
-    if (sourceContainer.getList()[0].isPlaying()) {
-        sourceContainer.forEach(
-            function (source) {
-                console.log(switcher.getPitchAndEnergy(source.getPitch(), source.getEnergy(), source.getMaxChroma()))
-            }
-        )
-    }
-
+    // if (sourceContainer.getList()[0].isPlaying()) {
+    //     sourceContainer.forEach(
+    //         function (source) {
+    //             console.log(switcher.getPitchAndEnergy(source.getPitch(), source.getEnergy(), source.getMaxChroma()))
+    //         }
+    //     )
+    // }
 
     //only loop when the music is playing
     if (song.isPlaying()) {

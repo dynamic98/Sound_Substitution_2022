@@ -35,7 +35,6 @@ export class SourceContainer {
         }
     }
 
-
     async changeSong(folderPath) {
         for (let i = 0; i < this.sourceList.length; i++) {
             this.sourceList[i].setFolderPath(folderPath)
