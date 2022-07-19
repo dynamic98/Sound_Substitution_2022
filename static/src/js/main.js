@@ -35,9 +35,9 @@ let bpmTimer = new BPMTimer();
 let switcher = new Switcher();
 let stats = new Stats();
 let kandinsky;
+let sourceContainer;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")
-let sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/");
 
 //event handlers
 //----------------------------------------------------//
@@ -50,7 +50,9 @@ document.querySelector('[data-action="play"]').addEventListener('click', () => {
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
 document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
-    sourceContainer.changeSong();
+    await sourceContainer.changeSong("static/music/separated/" + song.getFileName());
+    sourceContainer.initialPlay(song.getWaveSurferTime)
+
     kandinsky.setBPM(song.getBPM())
     kandinsky.setMaxVolume(song.getMaxVolume())
     bpmTimer.setBPM(song.getBPM())
@@ -67,13 +69,14 @@ async function main() {
     song.connectNodes();
     song.createMeydaAnalyser();
     song.createWaveSurfer();
-
     song.createPitchFinder();
     await song.createOfflineContext(await response.arrayBuffer());
 
-    await sourceContainer.initialize(song.getWaveSurferTime);
+    sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/" + song.getFileName());
+    await sourceContainer.initialize();
+    sourceContainer.initialPlay(song.getWaveSurferTime)
+    
     song.setWaveSurferCallback(sourceContainer.syncTime)
-
 
     //VISUALS & OTHERS
     // ----------------------------------------------------/
@@ -88,13 +91,13 @@ function animate() {
     requestAnimationFrame(animate);
     stats.begin()
 
-    // if (sourceContainer.getList()[0].isPlaying()) {
-    //     sourceContainer.forEach(
-    //         function (source) {
-    //             console.log(switcher.getPitchAndEnergy(source.getPitch(), source.getEnergy(), source.getMaxChroma()))
-    //         }
-    //     )
-    // }
+    if (sourceContainer.getList()[0].isPlaying()) {
+        sourceContainer.forEach(
+            function (source) {
+                console.log(switcher.getPitchAndEnergy(source.getPitch(), source.getEnergy(), source.getMaxChroma()))
+            }
+        )
+    }
 
 
     //only loop when the music is playing

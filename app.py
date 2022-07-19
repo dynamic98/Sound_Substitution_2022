@@ -28,11 +28,12 @@ def makeHTMLWithFileList(relativePath):
 
 app = Flask(__name__)
 
-folder = os.path.join('./static/music/')
+folder = os.path.join('./static/music/separated')
 
 UserName = 'default_user'
 # ChromeBrowser = VirtualBrowser()
 
+#create the file 
 os.makedirs(folder, exist_ok=True)
 
 

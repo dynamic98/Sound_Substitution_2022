@@ -1,6 +1,6 @@
-
 export class AudioElementHandler {
     constructor(htmlElementID, folderPath) {
+        console.log(folderPath)
         let filelistText = document.getElementById(htmlElementID).innerText;
         this.filelist = filelistText.split(', ');
         this.fileobject = new Object;
@@ -10,8 +10,8 @@ export class AudioElementHandler {
         });
 
         this.folderPath = folderPath
-   
-        this.audioElement= document.createElement('audio');
+
+        this.audioElement = document.createElement('audio');
         this.audioElement.setAttribute("id", AudioElementHandler.instanceCounter);
         AudioElementHandler.instanceCounter++
     }
@@ -42,21 +42,20 @@ export class AudioElementHandler {
     }
     //play or pause
     togglePlay() {
-        if(this.audioElement.paused){
+        if (this.audioElement.paused) {
             this.audioElement.play()
-        }
-        else{
+        } else {
             this.audioElement.pause();
         }
-        
-    }
-    setTime(time){
-        console.log("original",this.audioElement.currentTime)
 
-        this.audioElement.currentTime=time;
-        console.log("changed",this.audioElement.currentTime)
     }
-    static getFileListLength(htmlElementID) {
-        return document.getElementById(htmlElementID).innerText.split(', ').length
+    setTime(time) {
+        console.log("original", this.audioElement.currentTime)
+
+        this.audioElement.currentTime = time;
+        console.log("changed", this.audioElement.currentTime)
+    }
+    setFolderPath(folderPath) {
+        this.folderpath=folderPath
     }
 }
