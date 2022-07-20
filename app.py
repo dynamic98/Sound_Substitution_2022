@@ -62,7 +62,11 @@ def menu():
 
 @app.route('/exploration', methods=['POST'])
 def explore():
-  return render_template('Exploration.html',User_Name=UserName, User_Number=UserNumber, login="log out")
+  return render_template('Exploration.html',User_Name=UserName, login="log in")
+
+@app.route('/dev', methods=['POST'])
+def dev():
+  return render_template('mainMenu.html',User_Name=UserName, login="log in")
 
 
 # abstact 페이지에서는 오디오 파일을 변수에 저장만 하기
@@ -114,13 +118,13 @@ def separate():
     pass
   return render_template('separate.html')
 
-# @app.route('/haptic', methods=['POST'])
-# def haptic():
-#   if request.method == 'POST':
-#     result = '구상적 시각화 페이지 입니다.'
-#   else:
-#     pass
-#   return render_template('hapticCustom.html')
+@app.route('/haptic', methods=['POST'])
+def haptic():
+  if request.method == 'POST':
+    result = '구상적 시각화 페이지 입니다.'
+  else:
+    pass
+  return render_template('hapticCustom.html')
 
 @app.route('/making_tool', methods=['POST'])
 def making_tool():
