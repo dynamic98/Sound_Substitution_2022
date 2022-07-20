@@ -503,27 +503,22 @@ video {
   margin-right: 750px;
 }
 
-.musicControlButton {
-  /* margin-top: 10px;
-  margin-left: 4px; */
-  display: flex;
-  width: 80px;
-  height: 40px;
-  border-radius: 6px;
-  border: none;
-  color: #fff;
+/* .musicControlButton {
+  height: 50px;
+  width: 50px;
   background: linear-gradient(180deg, #ab8199 0%, #9795c5 100%);
-  box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  font-size: 12px;
+  box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
 }
 
 .musicControlButton:focus {
   box-shadow: inset 0px 0.8px 0px -0.25px rgb(192, 120, 176), 0px 0.5px 1.5px rgb(111, 144, 206), 0px 0px 0px 3.5px rgb(202, 118, 178);
   outline: 0;
-}
+} */
 
 
 .hapticOctave {
@@ -1115,7 +1110,14 @@ div[slider] > input[type=range]::-ms-tooltip {
   #nextPage {
     background-color: #3a86ff;
   }
+  
+  .volumecontrolButton {
+    margin-top: -700px;
+  }
 
-
-
+  .volumeControl {
+    float: right;
+    margin-right: 100px;
+    margin-top: -70px;
+  }
 }
