@@ -181,7 +181,5 @@ export class Source extends Audio {
     }
     setFolderPath(folderPath){
         this.audioElementHandler.setFolderPath(folderPath)
-    }
-
-    
+    }    
 }

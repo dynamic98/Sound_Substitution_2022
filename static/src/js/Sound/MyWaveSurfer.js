@@ -1,11 +1,6 @@
 //Wrapper class for WaveSurfer
 //----------------------------------------------------//
-
-import {
-    Utility
-} from '../Utility/Utility.js'
 export class MyWaveSurfer {
-
     //creates a waveSurfer object 
     constructor() {
         this.wavesurfer = WaveSurfer.create({
@@ -16,8 +11,8 @@ export class MyWaveSurfer {
             cursorWidth: 5,
             normalize: true,
         });
-        console.log('audio input completed')
 
+        this.audioElement
     }
 
     //connects wave surfet to audioElement
@@ -26,21 +21,16 @@ export class MyWaveSurfer {
         this.wavesurfer.load(this.audioElement);
     }
 
-
     playWaveSurfer = () => {
         console.log("playing")
         return this.wavesurfer.play()
     }
 
     setInteractionEventHandler(callback) {
-
         this.wavesurfer.on('seek', async () => {
             callback(this.wavesurfer.getCurrentTime());
-            console.log("1",this.wavesurfer.getCurrentTime())
         })
-
     }
-
 
     //play/pause
     togglePlay() {
@@ -51,7 +41,5 @@ export class MyWaveSurfer {
     getWavesurfer = () => {
         return this.wavesurfer;
     }
-
-
 }
 //----------------------------------------------------//

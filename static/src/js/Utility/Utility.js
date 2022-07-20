@@ -1,4 +1,3 @@
-
 //Utility class with static functions. 
 //----------------------------------------------------//
 export class Utility {
@@ -17,20 +16,20 @@ export class Utility {
   }
 
   static modulate(val, minVal, maxVal, outMin, outMax) {
-    var fr = fractionate(val, minVal, maxVal);
-    var delta = outMax - outMin;
+    let fr = fractionate(val, minVal, maxVal);
+    let delta = outMax - outMin;
     return outMin + (fr * delta);
   }
 
   static avg(arr) {
-    var total = arr.reduce(function (sum, b) {
+    let total = arr.reduce(function (sum, b) {
       return sum + b;
     });
     return (total / arr.length);
   }
 
-  static sigmoid(scale, z){
-    return 1/(1+Math.exp(-(z-(scale*2))/scale))
+  static sigmoid(scale, z) {
+    return 1 / (1 + Math.exp(-(z - (scale * 2)) / scale))
   }
 
 }

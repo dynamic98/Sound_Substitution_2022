@@ -29,6 +29,11 @@ export class MeydaAnalyser {
         this.pitchClasses.forEach((pitch) => {
             this.frameBuffer.set(pitch, []);
         });
+        
+        this.meydaAnalyser;
+        this.energy;
+        this.chroma;
+        this.maxChroma;
     }
 
     //intitialize with source(AudioElement) and audioContext
@@ -49,7 +54,7 @@ export class MeydaAnalyser {
                 this.energy = features['energy']
             }
         })
-       
+
         this.meydaAnalyser.start();
     }
 
@@ -71,10 +76,10 @@ export class MeydaAnalyser {
         return result;
     };
 
-    getEnergy(){
+    getEnergy() {
         return this.energy
     }
-    getMaxChroma(){
+    getMaxChroma() {
         return this.maxChroma
     }
 }

@@ -2,39 +2,34 @@ import {
     getPeaks,
     getIntervals
 } from "./getBPM";
-import {
-    MeydaAnalyser
-} from "./MeydaAnalyzer";
-
-//offlineAudioContext
 
 export class OffCxt {
     constructor() {
         this.bpm;
+        this.maxVolume;
+        this.renderedBuffer
         this.offlineCtx = new OfflineAudioContext(2, 30 * 44100, 44100);
         this.source = this.offlineCtx.createBufferSource();
-        this.maxVolume;
-
     }
 
     async initializeBuffer(arrayBuffer) {
         let decodeAudio = await this.offlineCtx.decodeAudioData(arrayBuffer)
         this.source.buffer = decodeAudio;
         this.source.connect(this.offlineCtx.destination);
-
         this.source.start(0)
         this.offlineCtx.startRendering();
-
     }
 
     calculateBPM() {
         return new Promise((resolve, reject) => {
             this.offlineCtx.oncomplete = function (e) {
-            
+
                 let buffer = e.renderedBuffer;
                 let peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
-                let volumes = peaks.map(row=>row.volume)
-                this.maxVolume = volumes.reduce((acc, cur) => {return acc + cur}, 0)/volumes.length;
+                let volumes = peaks.map(row => row.volume)
+                this.maxVolume = volumes.reduce((acc, cur) => {
+                    return acc + cur
+                }, 0) / volumes.length;
                 let groups = getIntervals(peaks);
 
                 let top = groups.sort(function (intA, intB) {
@@ -47,6 +42,7 @@ export class OffCxt {
             }.bind(this)
         });
     }
+
     getBPM() {
         return this.bpm;
     }
@@ -55,7 +51,7 @@ export class OffCxt {
         return this.source
     }
 
-    getMaxvolume(){
+    getMaxvolume() {
         return this.maxVolume
     }
 
