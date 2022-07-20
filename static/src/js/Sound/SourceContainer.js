@@ -27,7 +27,7 @@ export class SourceContainer {
     }
 
     async initialPlay(getWavesurferTime,playWaveSurfer) {
-        playWaveSurfer()
+        await playWaveSurfer()
         for (let source of this.sourceList) {
             await source.play()
             source.setTime(getWavesurferTime())
@@ -64,7 +64,6 @@ export class SourceContainer {
     }
 
     syncTime = (time) => {
-        
         for (let i = 0; i < this.sourceList.length; i++) {
             this.sourceList[i].setTime(time)
         }

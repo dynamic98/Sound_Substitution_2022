@@ -22,18 +22,10 @@ export class MyWaveSurfer {
 
     //connects wave surfet to audioElement
     setAudioElementSource(audioElement) {
-        this.wavesurfer.load(audioElement);
-    }
-
-    //initializes with settings
-    onReady(audioElement, ) {
         this.audioElement = audioElement
-        this.wavesurfer.on('ready', async () => {
-            console.log("wavesurfer is ready");
-            await this.wavesurfer.play()
-
-        })
+        this.wavesurfer.load(this.audioElement);
     }
+
 
     playWaveSurfer = () => {
         console.log("playing")
@@ -41,9 +33,10 @@ export class MyWaveSurfer {
     }
 
     setInteractionEventHandler(callback) {
-        this.wavesurfer.on('seek', () => {
+
+        this.wavesurfer.on('seek', async () => {
             callback(this.wavesurfer.getCurrentTime());
-          
+            console.log("1",this.wavesurfer.getCurrentTime())
         })
 
     }

@@ -49,7 +49,7 @@ export class MeydaAnalyser {
                 this.energy = features['energy']
             }
         })
-        console.log("Meyda:", this.meydaAnalyser)
+       
         this.meydaAnalyser.start();
     }
 

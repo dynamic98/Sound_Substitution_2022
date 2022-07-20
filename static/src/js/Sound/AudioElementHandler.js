@@ -1,6 +1,6 @@
 export class AudioElementHandler {
     constructor(htmlElementID, folderPath) {
-        console.log(folderPath)
+  
         let filelistText = document.getElementById(htmlElementID).innerText;
         this.filelist = filelistText.split(', ');
         this.fileobject = new Object;
@@ -51,11 +51,9 @@ export class AudioElementHandler {
 
     }
     setTime(time) {
-        console.log("time",time)
-        console.log("original",this.audioElement.currentTime)
         this.audioElement.currentTime = time
-        console.log("new",this.audioElement.currentTime)
     }
+       
     setFolderPath(folderPath) {
         this.folderPath = folderPath
     }

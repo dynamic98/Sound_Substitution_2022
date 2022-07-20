@@ -114,7 +114,7 @@ export class Song extends Audio {
 
     createWaveSurfer() {
         this.myWaveSurfer.setAudioElementSource(this.audioElementHandler.getAudioElement());
-        this.myWaveSurfer.onReady(this.audioElementHandler.getAudioElement());
+
     }
 
     async createOfflineContext(arrayBuffer) {
