@@ -82,7 +82,6 @@ export class Audio {
     getURL(){
         return this.url
     }
-
 }
 
 //----------------------------------------------------//
@@ -94,7 +93,6 @@ export class Song extends Audio {
         this.myWaveSurfer = new MyWaveSurfer();
         this.myOffCxt;
         this.fileName;
-
         for (let index in this.audioElementHandler.getFileObject()) {
             this.selectMusicElement.options[this.selectMusicElement.options.length] = new Option(this.audioElementHandler.getFileObject()[index], index);
         }
@@ -114,7 +112,6 @@ export class Song extends Audio {
 
     createWaveSurfer() {
         this.myWaveSurfer.setAudioElementSource(this.audioElementHandler.getAudioElement());
-
     }
 
     async createOfflineContext(arrayBuffer) {
