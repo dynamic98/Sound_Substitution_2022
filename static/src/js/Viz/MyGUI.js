@@ -9,8 +9,8 @@ export class MyGUI {
             geometry: "Sphere"
         }
         this.gui = new GUI();
-        this.guiFolder = this.gui.addFolder('Selet Geometry');
-        this.guiFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
+        this.guiGeometryFolder = this.gui.addFolder('Selet Geometry');
+        this.guiGeometryFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
     }
 
     switchGeometry(radius) {
@@ -28,5 +28,7 @@ export class MyGUI {
                 return new THREE.CylinderGeometry(radius, radius, 20, 32);
         }
     }
+    
+
 
 }

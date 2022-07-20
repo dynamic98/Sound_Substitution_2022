@@ -65,6 +65,7 @@ async function main() {
     // ----------------------------------------------------/
     let response = await song.fetchMusic()
     song.initializeAudioElement(response.url)
+    console.log(response.url)
     song.addNodes()
     song.connectNodes();
     song.createMeydaAnalyser();
