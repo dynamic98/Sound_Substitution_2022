@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>VizHap :: SCI_LAB</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../static/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- Style -->
+    <link type="text/css" href="../static/css/mainMenu-style.css" rel="stylesheet">
+    <style>
+        .grid-container {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          background-color: #2196F3;
+          padding: 20px;
+        }
+        .grid-item {
+          background-color: rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(0, 0, 0, 0.8);
+          padding: 20px;
+          font-size: 15px;
+          text-align: center;
+        }
+        .container {  display: grid;
+          grid-template-columns:  repeat(30, 60px);
+           /* 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+          grid-template-rows: repeat(13, 60px);
+           /* 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+          gap: 0px 0px;
+          grid-auto-flow: row;
+        }
+        .syllable1 {grid-area: 13 / 1 / 14 /2 ; background-color: rgb(252, 245, 245); text-align: center;  color:hsl(0, 70%, 40%); }
+        .syllable2 {grid-area: 12 / 1 / 13 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(30, 70%, 40%)}
+        .syllable3 {grid-area: 11 / 1 / 12 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(60, 70%, 40%)}
+        .syllable4 {grid-area: 10 / 1 / 11 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(90, 70%, 40%)}
+        .syllable5 {grid-area: 9 / 1 / 10 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(120, 70%, 40%)}
+        .syllable6 {grid-area: 8 / 1 / 9 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(150, 70%, 40%)}
+        .syllable7 {grid-area: 7 / 1 / 8 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(180, 70%, 40%)}
+        .syllable8 {grid-area: 6 / 1 / 7 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(210, 70%, 40%)}
+        .syllable9 {grid-area: 5 / 1 / 6 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(240, 70%, 40%)}
+        .syllable10 {grid-area: 4 / 1 / 5 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(270, 70%, 40%)}
+        .syllable11 {grid-area: 3 / 1 / 4 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(300, 70%, 40%)}
+        .syllable12 {grid-area: 2 / 1 / 3 /2 ; background-color: rgb(252, 245, 245); text-align: center; color:hsl(330, 70%, 40%)}
+        .syllable_top {grid-area: 1 / 1 / 2 /22; background-color: rgb(252, 245, 245); text-align: center;}
+
+
+        .p1 { grid-area: 13 / 2 / 14 / 22; background-color:hsl(0, 70%, 60%); outline-style: dotted; outline-width: 3px; }
+        /* .p1:hover{background-color: hsl(0, 70%, 60%);} */
+        .p2 { grid-area: 12 / 2 / 13 / 22; background-color:hsl(30, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+        .p3 { grid-area: 11 / 2 / 12 / 22;background-color:hsl(60, 70%, 60%); outline-style: dotted;  outline-width: 3px;}
+        .p4 { grid-area: 10 / 2 / 11 / 22; background-color:hsl(90, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+        .p5 { grid-area: 9 / 2 / 10 / 22; background-color:hsl(120, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+        .p6 { grid-area: 8 / 2 / 9 / 22; background-color:hsl(150, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+        .p7 { grid-area: 7 / 2 / 8 / 22; background-color:hsl(180, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+        .p8 { grid-area: 6 / 2 / 7 / 22; background-color:hsl(210, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+        .p9 { grid-area: 5 / 2 / 6 / 22; background-color:hsl(240, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+        .p10 { grid-area: 4 / 2 / 5 / 22; background-color:hsl(270, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+        .p11 { grid-area: 3 / 2 / 4 / 22; background-color:hsl(300, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+        .p12 { grid-area: 2 / 2 / 3 / 22; background-color:hsl(330, 70%, 60%); outline-style: dotted; outline-width: 3px;}
+
+        .t1 { grid-area: 2 / 2 / 14 / 3; outline-style: dotted; outline-width: 0.5px}
+        .t2 { grid-area: 2 / 3 / 14 / 4; outline-style: dotted; outline-width: 0.5px}
+        .t3 { grid-area: 2 / 4 / 14 / 5; outline-style: dotted; outline-width: 0.5px}
+        .t4 { grid-area: 2 / 5 / 14 / 6; outline-style: dotted; outline-width: 0.5px}
+        .t5 { grid-area: 2 / 6 / 14 / 7; outline-style: dotted; outline-width: 0.5px}
+        .t6 { grid-area: 2 / 7 / 14 / 8; outline-style: dotted; outline-width: 0.5px}
+        .t7 { grid-area: 2 / 8 / 14 / 9; outline-style: dotted; outline-width: 0.5px}
+        .t8 { grid-area: 2 / 9 / 14 / 10;outline-style: dotted; outline-width: 0.5px}
+        .t9 { grid-area: 2 / 10 / 14 / 11;outline-style: dotted; outline-width: 0.5px}
+        .t10 { grid-area: 2 / 11 / 14 / 12;outline-style: dotted; outline-width: 0.5px}
+        .t11 { grid-area: 2 / 12 / 14 / 13;outline-style: dotted; outline-width: 0.5px}
+        .t12 { grid-area: 2 / 13 / 14 / 14;outline-style: dotted; outline-width: 0.5px}
+        .t13 { grid-area: 2 / 14 / 14 / 15;outline-style: dotted; outline-width: 0.5px}
+        .t14 { grid-area: 2 / 13 / 14 / 16;outline-style: dotted; outline-width: 0.5px}
+        .t15 { grid-area: 2 / 16 / 14 / 17;outline-style: dotted; outline-width: 0.5px}
+        .t16 { grid-area: 2 / 17 / 14 / 18; outline-style: dotted; outline-width: 0.5px}
+        .t17 { grid-area: 2 / 18 / 14 / 19; outline-style: dotted; outline-width: 0.5px}
+        .t18 { grid-area: 2 / 19 / 14 / 20; outline-style: dotted; outline-width: 0.5px}
+        .t19 { grid-area: 2 / 20 / 14 / 21; outline-style: dotted; outline-width: 0.5px}
+        .t20 { grid-area: 2 / 21 / 14 / 22; outline-style: dotted; outline-width: 0.5px}
+        .menu {grid-area: 2 / 23/ 14 / 28; background-color: rgb(223, 212, 167);}
+
+        </style>
+</head>
+
+<body>
+    <h1 style="padding-left: 50px;">CANVAS - Draw your own melody</h1>
+
+    <p style="padding-left: 50px;">A Grid Layout must have a parent element with the <em>display</em> property set to <em>grid</em> or <em>inline-grid</em>.</p>
+
+    <div class="container" id="full_grid" style="padding: 0px; margin:0px; margin-left:0px;">
+        <div class="syllable_top"> Making Music tool </div>
+        <div class="syllable1">C</div>
+        <div class="syllable2">C#</div>
+        <div class="syllable3">D</div>
+        <div class="syllable4">D#</div>
+        <div class="syllable5">E</div>
+        <div class="syllable6">F</div>
+        <div class="syllable7">F#</div>
+        <div class="syllable8">G</div>
+        <div class="syllable9">G#</div>
+        <div class="syllable10">A</div>
+        <div class="syllable11">A#</div>
+        <div class="syllable12">B</div>
+
+        <div class="p1" onclick="pitch(1)"></div>
+        <div class="p2" onclick="pitch(2)"></div>
+        <div class="p3" onclick="pitch(3)"></div>
+        <div class="p4" onclick="pitch(4)"></div>
+        <div class="p5" onclick="pitch(5)"></div>
+        <div class="p6"onclick="pitch(6)"></div>
+        <div class="p7"onclick="pitch(7)"></div>
+        <div class="p8"onclick="pitch(8)"></div>
+        <div class="p9"onclick="pitch(9)"></div>
+        <div class="p10"onclick="pitch(10)"></div>
+        <div class="p11"onclick="pitch(11)"></div>
+        <div class="p12"onclick="pitch(12)"></div>
+
+        <div class="t1" onclick="time(1)"></div>
+        <div class="t2"onclick="time(2)"></div>
+        <div class="t3"onclick="time(3)"></div>
+        <div class="t4"onclick="time(4)"></div>
+        <div class="t5"onclick="time(5)"></div>
+        <div class="t6" onclick="time(6)"></div>
+        <div class="t7" onclick="time(7)"></div>
+        <div class="t8" onclick="time(8)"></div>
+        <div class="t9" onclick="time(9)"></div>
+        <div class="t10" onclick="time(10)"></div>
+        <div class="t11" onclick="time(11)"></div>
+        <div class="t12" onclick="time(12)"></div>
+        <div class="t13" onclick="time(13)"></div>
+        <div class="t14" onclick="time(14)"></div>
+        <div class="t15" onclick="time(15)"></div>
+        <div class="t16" onclick="time(16)"></div>
+        <div class="t17" onclick="time(17)"></div>
+        <div class="t18" onclick="time(18)"></div>
+        <div class="t19" onclick="time(19)"></div>
+        <div class="t20" onclick="time(20)"></div>
+        <div class="menu"></div>
+      </div>
+      <div id="result"></div>
+      <!-- <script src="/static/customjs/Making_tools/Mouse_Event.js"> -->
+      </script>
+</body>
+</html>
