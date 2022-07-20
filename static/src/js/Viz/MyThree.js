@@ -35,9 +35,9 @@ export class MyThree {
     }
 
     initialize() {
-        this.camera.position.set(0, 0, 150);
+        this.camera.position.set(0, 0, 200);
         this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(window.innerWidth / 2.24, window.innerHeight / 2.1);
+        this.renderer.setSize(window.innerWidth / 1.8, window.innerHeight / 1.5);
         this.renderer.toneMapping = THREE.ReinhardToneMapping;
         document.getElementById("canvas").appendChild(this.renderer.domElement);
         this.directionalLight.position.set(100, 100, 100)
@@ -154,9 +154,9 @@ export class MyThree {
         this.controls = {
             geometry: "Sphere"
         }
-        this.gui = new GUI();
-        this.guiFolder = this.gui.addFolder('Selet Geometry');
-        this.guiFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
+        // this.gui = new GUI();
+        // this.guiFolder = this.gui.addFolder('Selet Geometry');
+        // this.guiFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
 
     }
 

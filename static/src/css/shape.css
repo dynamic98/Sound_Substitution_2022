@@ -259,10 +259,10 @@ body {
 
 /* canvas UI */
 .sheetContainer {
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   position: absolute;
-  /* height: 60%; */
-  /* width: 44%; */
+  /* height: 100%;
+  width: 100%; */
   border-radius: 0.3rem;
   box-shadow: 0 10px 20px #dbdbdb;
   margin-top: 30px;
@@ -272,7 +272,6 @@ body {
 
 
 /* piano UI */
-
 .pianoContainer {
   position: absolute;
   bottom: 0px;
@@ -283,6 +282,7 @@ body {
 ul {
     float:left;
     width:48%;
+    height: 10%;
     list-style-type: none;
     /* margin: 0 1% 1.5%; */
     padding: 0;
@@ -303,7 +303,6 @@ ul.x2{
 ul.x2 li{
     width:10%;
 }
-
 
 ul {
   height:12em;
@@ -357,7 +356,7 @@ ul .white:active {
   background:linear-gradient(to right,#444 0%,#222 100%)
 }
 
-.a,.g,.f,.d,.c {
+.re, .mi, .sol, .la, .si {
   margin:0 0 0 -1em
 }
 
@@ -370,15 +369,10 @@ ul li:last-child {
 }
 
 
-.controlContainer {
-
-}
-
-
-
+/* emotion container */
 
 .emotionContainer{
-  background-color: rgb(252, 252, 252);
+  background-color: rgb(184, 197, 218);
   position: absolute;
   height: 10%;
   width: 30%;
@@ -396,7 +390,6 @@ ul li:last-child {
   display: flex;
   width: 70px;
   height: 40px;
-  /* padding: 6px 14px; */
   border-radius: 6px;
   border: none;
   color: #fff;
@@ -413,15 +406,14 @@ ul li:last-child {
 }
 
 video {
-  margin-top: 10px;
-  margin-left: 20px;
-  width: 390px;
-  height: 180px;
+  margin-left: 50px;
+  margin-top: 30px;
+  width: 400px;
+  height: 300px;
 }
 
 
 /* haptic menu UI*/
-
 .hapticContainer {
     background-color: rgb(252, 252, 252);
     position: absolute;
@@ -441,7 +433,7 @@ video {
 }
 
 
-.hapticPositionButton {
+/* .hapticPositionButton {
   margin-left: 30px;
   display: flex;
   width: 100px;
@@ -450,12 +442,11 @@ video {
   border-radius: 6px;
   border: none;
   color: #fff;
-  /* background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%); */
   box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-}
+} */
 
 
 #H1 {
@@ -474,6 +465,9 @@ video {
   box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
   outline: 0;
 }
+
+
+/* visual octave */
 
 .visualOctave {
   float: right;
@@ -518,7 +512,7 @@ video {
   border-radius: 6px;
   border: none;
   color: #fff;
-  background: linear-gradient(180deg, #040650 0%, #1d16a2 100%);
+  background: linear-gradient(180deg, #ab8199 0%, #9795c5 100%);
   box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
   user-select: none;
   -webkit-user-select: none;
@@ -527,7 +521,7 @@ video {
 }
 
 .musicControlButton:focus {
-  box-shadow: inset 0px 0.8px 0px -0.25px rgb(74, 67, 198), 0px 0.5px 1.5px rgb(87, 132, 215), 0px 0px 0px 3.5px rgb(41, 85, 118);
+  box-shadow: inset 0px 0.8px 0px -0.25px rgb(192, 120, 176), 0px 0.5px 1.5px rgb(111, 144, 206), 0px 0px 0px 3.5px rgb(202, 118, 178);
   outline: 0;
 }
 
@@ -552,7 +546,7 @@ input[type="range"]{
   width:300px;
   height:20px;
   /* margin:10px 50px; */
-  background: linear-gradient(to right, #3f3c3b 0%, #9A2720 100%);
+  background: linear-gradient(to right, #3f3c3b 0%, #bc827f 100%);
   background-size:300px 10px;
   background-position:center;
   background-repeat:no-repeat;
@@ -565,7 +559,7 @@ input[type="range"]::-webkit-slider-thumb{
   -webkit-appearance:none;
   width:20px;
   height:20px;
-  background:#460505;
+  background:#dd4b0c;
   position:relative;
   z-index:3;
   box-shadow:0 0 5px 0 rgba(0,0,0,0.3);
@@ -793,4 +787,335 @@ div[slider] > input[type=range]::-ms-tooltip {
 
 [slider]:hover > div > [sign] {
   opacity: 1;
+}
+
+
+@media (min-width: 1500px) {
+  /* piano UI */
+  
+  .pianoContainer {
+    position: absolute;
+    bottom: 0px;
+    margin-left: 340px;
+    margin-bottom: -100px;
+    overflow: auto;
+  }
+
+  ul {
+      float:left;
+      width:48%;
+      list-style-type: none;
+      padding: 0;
+      display: block;
+  }
+
+  li {
+      display: block;
+      float: left;
+      width: 30%;
+  }
+
+  ul.x2{
+      width:100%;
+  }
+
+  ul.x2 li{
+      width:10%;
+  }
+
+
+  ul {
+    height:32em;
+    width:70em;
+    /* margin:5em auto; */
+    /* padding:3em 0 0 3em; */
+    position:relative;
+    border-radius:1em;
+  }
+
+  li {
+    margin:0;
+    padding:0;
+    list-style:none;
+    position:relative;
+    float:left
+  }
+
+  ul .white {
+    margin-top: 200px;
+    height:8em;
+    width:4.3em;
+    z-index:1;
+    border-left:1px solid #bbb;
+    border-bottom:1px solid #bbb;
+    border-radius:0 0 5px 5px;
+    box-shadow:-1px 0 0 rgba(255,255,255,0.8) inset,0 0 5px #ccc inset,0 0 3px rgba(0,0,0,0.2);
+    background:linear-gradient(to bottom,#eee 0%,#fff 100%)
+  }
+
+  ul .white:active {
+    margin-top: 200px;
+    border-top:1px solid #777;
+    border-left:1px solid #999;
+    border-bottom:1px solid #999;
+    box-shadow:2px 0 3px rgba(0,0,0,0.1) inset,-5px 5px 20px rgba(0,0,0,0.2) inset,0 0 3px rgba(0,0,0,0.2);
+    background:linear-gradient(to bottom,#fff 0%,#e9e9e9 100%)
+  }
+
+
+  .black {
+    height:4em;
+    width:2.6em;
+    margin:0 0 0 -1em;
+    margin-top: 200px;
+    margin-right: -1.5em;
+    margin-left: -1.5em;
+    z-index:2;
+    border:1px solid #000;
+    border-radius:0 0 3px 3px;
+    box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -5px 2px 3px rgba(0,0,0,0.6) inset,0 2px 4px rgba(0,0,0,0.5);
+    background:linear-gradient(45deg,#222 0%,#555 100%)
+  }
+
+  .black:active {
+    margin-top: 200px;
+    /* margin-left: -1em; */
+    box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -2px 2px 3px rgba(0,0,0,0.6) inset,0 1px 2px rgba(0,0,0,0.5);
+    background:linear-gradient(to right,#444 0%,#222 100%)
+  }
+
+  .a,.g,.f,.d,.c {
+    margin:0 0 0 -1em
+  }
+
+  ul li:first-child {
+    border-radius:5px 0 5px 5px
+  }
+
+  ul li:last-child {
+    border-radius:0 5px 5px 5px
+  }
+
+  /* haptic menu UI*/
+
+  .hapticContainer {
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px #dbdbdb;
+    margin-top: 530px;
+    display: inline-block;
+    margin-left: 1100px;
+    width: 500px;
+    float: right;
+    height: 15%;
+  }
+
+
+  .customMenu {
+    margin-left: 20px;
+  }
+
+
+  .hapticPositionButton {
+    margin-left: 30px;
+    display: flex;
+    width: 140px;
+    height: 30px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    /* background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%); */
+    box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+
+  #H1 {
+  background: linear-gradient(180deg, #a32323 0%, #e89292 100%);;
+  }
+
+  #H2 {
+  background: linear-gradient(180deg, #54b699 0%, #66cd40 100%);;
+  }
+
+  #H3 {
+  background: linear-gradient(180deg, #6981bc 0%, #5e82d8 100%);;
+  }
+
+  .hapticPositionButton:focus {
+  box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+  outline: 0;
+  }
+
+  .musicContainer {
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    height: 16%;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px #dbdbdb;
+    margin-top: 700px;
+    display: inline-block; 
+    margin-left: 1100px;
+    width: 500px;
+    float: right;
+  }
+  
+  h4 .bigTitle {
+    float: left;
+    font-size: 14px;
+  }
+  
+  p .smallTitle {
+    font-size: 12px;
+  }
+  
+  hr {
+    width : 80%;
+  }
+
+  /* visual octave */
+
+  .visualOctave {
+    float: right;
+    margin-top: 50px;
+    margin-right: 660px;
+  }
+
+  .visualOctaveButton {
+    margin-top: 10px;
+    margin-left: 4px;
+    display: flex;
+    width: 50px;
+    height: 70px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    background: linear-gradient(180deg, #f7994b 0%, #ff8000 100%);
+    box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-size: 12px;
+  }
+
+  .visualOctaveButton:focus {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgb(255, 122, 14), 0px 0.5px 1.5px rgb(255, 106, 0), 0px 0px 0px 3.5px rgb(255, 195, 84);
+    outline: 0;
+  }
+
+  .controlContainer {
+    margin-top: -50px;
+    margin-right: 1000px;
+  }
+
+  /* canvas UI */
+  .sheetContainer {
+    position: absolute;
+    border-radius: 0.3rem;
+    margin-top: 60px;
+    display: inline-block;
+    margin-left: 150px;
+    width: 1px;
+    height: 1px;
+  }
+
+  .shapeContainer {
+    margin-top: 50px;
+    margin-left: 40px;
+    box-shadow: 0 10px 20px #dbdbdb;
+    width: 100px;
+    height: 800px;
+    border-radius: 30px;
+    padding: 10px 0px;
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    float: left;
+  }
+
+  input[type="range"]{
+    -webkit-appearance:none;
+    margin-left: 30px;
+    width:400px;
+    height:20px;
+    /* margin:10px 50px; */
+    background: linear-gradient(to right, #e0b7aa 0%, #d64e05 100%);
+    background-size:500px 10px;
+    background-position:center;
+    background-repeat:no-repeat;
+    overflow:hidden;
+    outline: none;
+  }
+  
+  
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    background:#460505;
+    position:relative;
+    z-index:3;
+    box-shadow:0 0 5px 0 rgba(0,0,0,0.3);
+  }
+  
+  input[type="range"]::-webkit-slider-thumb:after{
+    content:" ";
+    width:00px;
+    height:10px;
+    position:absolute;
+    z-index:1;
+    right:20px;
+    top:5px;
+    background: #303030;
+    background: linear-gradient(to right, #f088fc 1%, #AC6CFF 70%);
+  }
+
+  .emotionContainer {
+    width: 500px;
+    height: 450px;
+    margin-top: 60px;
+    margin-left: 1100px;
+  }
+
+  .colorContainer {
+    width: 130px;
+  }
+
+  .musicPlay {
+    margin-left: 150px;
+  }
+
+  .videoControlButton {
+    margin-top: 30px;
+    margin-left: 50px;
+    display: flex;
+    width: 100px;
+    height: 40px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-size: 12px;
+  }
+
+  #record {
+    background: linear-gradient(180deg, #862121 0%, #a72020 100%);
+  }
+
+  #save {
+    background: linear-gradient(180deg, #090909 0%, #393939 100%);
+  }
+
+  #nextPage {
+    background-color: #3a86ff;
+  }
+
+
+
 }
