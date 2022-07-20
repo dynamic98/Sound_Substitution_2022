@@ -1,7 +1,7 @@
 import { Utility } from "../Utility/Utility";
 
 export class Kandinsky {
-    constructor(bpm, MaxVolume, canvasSize= 40) {
+    constructor(bpm, MaxVolume=1, canvasSize= 40) {
         this.bpm = bpm;
         this.MaxVolume = MaxVolume;
         this.canvasSize = canvasSize

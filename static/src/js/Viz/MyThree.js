@@ -36,6 +36,7 @@ export class MyThree {
     }
 
     initialize() {
+        // this.camera.position.set(0, 0, 150);
         this.camera.position.set(0, 0, 200);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth / 1.8, window.innerHeight / 1.5);
@@ -132,4 +133,38 @@ export class MyThree {
 
         })
     }
+
+
+    GUIGeometry(radius) {
+        switch (this.controls.geometry) {
+            case "Sphere":
+                this.geometry = new THREE.SphereGeometry(radius, 16, 8);
+                break;
+            case "Box":
+                this.geometry = new THREE.BoxGeometry(radius * 2, radius * 2, radius * 2);
+                break;
+            case 'Cone':
+                this.geometry = new THREE.ConeGeometry(radius * 2, radius * 2, 8);
+                break;
+            case 'Cylinder':
+                this.geometry = new THREE.CylinderGeometry(radius, radius, 20, 32);
+                break;
+        }
+
+    }
+    createGUI() {
+        this.controls = {
+            geometry: "Sphere"
+        }
+        // this.gui = new GUI();
+        // this.guiFolder = this.gui.addFolder('Selet Geometry');
+        // this.guiFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
+
+    }
+
+    ForceGeometryChange(ForceGeometry){
+        this.controls.geometry = ForceGeometry;
+        console.log(this.controls);
+    }
+
 }

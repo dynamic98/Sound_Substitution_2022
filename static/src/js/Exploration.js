@@ -101,3 +101,16 @@ document.getElementsByClassName("black sol-s-2")[0].addEventListener("click", ()
 document.getElementsByClassName("white la-2")[0].addEventListener("click", () =>{CurrentPitch = 9; CurrentOctave= 5; CurrentEnergy = 50; playPiano();})
 document.getElementsByClassName("black la-s-2")[0].addEventListener("click", () =>{CurrentPitch = 10; CurrentOctave= 5; CurrentEnergy = 50; playPiano();})
 document.getElementsByClassName("white si-2")[0].addEventListener("click", () =>{CurrentPitch = 11; CurrentOctave= 5; CurrentEnergy = 50; playPiano();})
+
+document.getElementById("Octave2").addEventListener("click", () =>{CurrentOctave = 2});
+document.getElementById("Octave3").addEventListener("click", () =>{CurrentOctave = 3});
+document.getElementById("Octave4").addEventListener("click", () =>{CurrentOctave = 4});
+document.getElementById("Octave5").addEventListener("click", () =>{CurrentOctave = 5});
+document.getElementById("Octave6").addEventListener("click", () =>{CurrentOctave = 6});
+document.getElementById("Octave7").addEventListener("click", () =>{CurrentOctave = 7});
+document.getElementById("Octave8").addEventListener("click", () =>{CurrentOctave = 8});
+
+document.getElementById("btn-square").addEventListener("click", ()=>{console.log("box");myThree.ForceGeometryChange("Box")});
+document.getElementById("btn-circle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Sphere")});
+document.getElementById("btn-triangle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Cone")});
+
