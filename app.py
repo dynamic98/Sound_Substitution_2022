@@ -38,8 +38,32 @@ os.makedirs(folder, exist_ok=True)
 
 
 @app.route('/')
-def index():
-  return render_template('mainMenu.html', User_Name= 'default_user', login="log in")
+def login():
+  return render_template('login.html', User_Name= 'default_user', User_Number='default_number', login="log in")
+
+
+@app.route('/menu', methods=['POST'])
+def menu():
+  if request.method == 'POST':
+      id_name = request.form['id_name']
+      id_number = request.form['id_number']
+      global UserName
+      if id_name:
+        UserName = id_name
+        UserNumber = id_number
+        os.makedirs(os.path.join('./static/user', UserName), exist_ok=True)
+        return render_template('menu.html', User_Name=UserName, User_Number=UserNumber, login="log out")
+      else:
+        UserName = 'default_user'
+        return render_template('menu.html', User_Name=UserName, User_Number=UserNumber, login="log in")
+  else:
+    return render_template('menu.html',User_Name=UserName,  User_Number=UserNumber, login="log out")
+
+
+@app.route('/exploration', methods=['POST'])
+def explore():
+  return render_template('Exploration.html',User_Name=UserName, User_Number=UserNumber, login="log out")
+
 
 # abstact 페이지에서는 오디오 파일을 변수에 저장만 하기
 @app.route('/abstract', methods=['POST'])
@@ -90,63 +114,63 @@ def separate():
     pass
   return render_template('separate.html')
 
-@app.route('/haptic', methods=['POST'])
-def haptic():
-  if request.method == 'POST':
-    result = '구상적 시각화 페이지 입니다.'
-  else:
-    pass
-  return render_template('hapticCustom.html')
+# @app.route('/haptic', methods=['POST'])
+# def haptic():
+#   if request.method == 'POST':
+#     result = '구상적 시각화 페이지 입니다.'
+#   else:
+#     pass
+#   return render_template('hapticCustom.html')
 
 
-@app.route('/loading', methods=['POST'])
-def loading():
-  features = ''
-  if request.method == 'POST':
-    file = request.files['SSfile']
-    print(file)
-    if os.path.isdir(os.path.join(folder, secure_filename(file.filename))):
-      pass
-    else:
-      file.save(os.path.join(folder, secure_filename(file.filename)))
-      os.system("python -m demucs --mp3 static\\music\\%s -o static\\music" % secure_filename(file.filename))
+# @app.route('/loading', methods=['POST'])
+# def loading():
+#   features = ''
+#   if request.method == 'POST':
+#     file = request.files['SSfile']
+#     print(file)
+#     if os.path.isdir(os.path.join(folder, secure_filename(file.filename))):
+#       pass
+#     else:
+#       file.save(os.path.join(folder, secure_filename(file.filename)))
+#       os.system("python -m demucs --mp3 static\\music\\%s -o static\\music" % secure_filename(file.filename))
     
-    if UserName == 'default_user':
-      return render_template('mainMenu.html',User_Name= UserName, login="log in")
-    else:
-      return render_template('mainMenu.html',User_Name= UserName, login="log out")
-      # features = extract_feature(folder) # 내가 원하는 음악의 Feature 추출
-      # 이것을 classifier.ts 와 연결
+#     if UserName == 'default_user':
+#       return render_template('mainMenu.html',User_Name= UserName, login="log in")
+#     else:
+#       return render_template('mainMenu.html',User_Name= UserName, login="log out")
+#       # features = extract_feature(folder) # 내가 원하는 음악의 Feature 추출
+#       # 이것을 classifier.ts 와 연결
 
-  return render_template('mainMenu.html')
+#   return render_template('mainMenu.html')
 
-@app.route('/login', methods=['POST'])
-def login():
-  # if request.method == 'POST':
-  #   print(request.form['id_name'], request.form['id_number'])
-  # else:
-  #   pass
-  return render_template('login.html')
+# @app.route('/login', methods=['POST'])
+# def login():
+#   # if request.method == 'POST':
+#   #   print(request.form['id_name'], request.form['id_number'])
+#   # else:
+#   #   pass
+#   return render_template('login.html')
 
-@app.route('/letsgo', methods=['POST'])
-def letsgo():
-  if request.method == 'POST':
-    id_name = request.form['id_name']
-    id_number = request.form['id_number']
-    global UserName
-    if id_name:
-      UserName = id_name
-      os.makedirs(os.path.join('./static/user', UserName), exist_ok=True)
-      return render_template('mainMenu.html',User_Name= UserName, login="log out")
-    else:
-      UserName = 'default_user'
-      return render_template('mainMenu.html',User_Name= UserName, login="log in")
-  else:
-    return render_template('mainMenu.html',User_Name= UserName, login="log out")
+# @app.route('/letsgo', methods=['POST'])
+# def letsgo():
+#   if request.method == 'POST':
+#     id_name = request.form['id_name']
+#     id_number = request.form['id_number']
+#     global UserName
+#     if id_name:
+#       UserName = id_name
+#       os.makedirs(os.path.join('./static/user', UserName), exist_ok=True)
+#       return render_template('mainMenu.html',User_Name= UserName, login="log out")
+#     else:
+#       UserName = 'default_user'
+#       return render_template('mainMenu.html',User_Name= UserName, login="log in")
+#   else:
+#     return render_template('mainMenu.html',User_Name= UserName, login="log out")
 
-@app.route('/exploration', methods=['POST'])
-def Exploration():
-    return render_template('Exploration.html')
+# @app.route('/exploration', methods=['POST'])
+# def Exploration():
+#     return render_template('Exploration.html')
 
 if __name__ == '__main__':
   app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True, use_reloader=False)
