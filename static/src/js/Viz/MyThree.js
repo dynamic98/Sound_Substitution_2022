@@ -2,10 +2,11 @@ import * as THREE from 'three';
 import {
     Bloom
 } from './Bloom.js'
-
 import {
-    GUI
-} from 'three/examples/jsm/libs/lil-gui.module.min.js';
+    MyGUI
+} from './MyGUI.js'
+
+
 // import {
 //     GridHelper
 // } from 'three/src/helpers/GridHelper.js';
@@ -30,7 +31,7 @@ export class MyThree {
         this.bloom = new Bloom(0, 5, 1);
 
         this.counter = 0;
-        this.createGUI();
+        this.gui = new MyGUI()
 
     }
 
@@ -47,13 +48,13 @@ export class MyThree {
         this.scene.add(this.group);
         this.scene.add(this.pointLight);
         this.GridHelper = new THREE.GridHelper(400, 100, 0x090909, 0x090909);
-        this.GridHelper.rotateX(Math.PI*0.5);
+        this.GridHelper.rotateX(Math.PI * 0.5);
         this.GridHelper.position.set(0, 0, -100);
         this.GridHelper.receiveShadow = true;
         // this.GridHelper.renderOrder = this.bloom.getPassForSunLight();
         this.scene.add(this.GridHelper);
 
-        this.bloom.initialize(this.scene,this.camera,this.renderer)
+        this.bloom.initialize(this.scene, this.camera, this.renderer)
     }
 
     render() {
@@ -77,7 +78,7 @@ export class MyThree {
         this.positionY = positionY
         this.positionX = positionX * this.counter - 100
 
-        this.GUIGeometry(radius)
+        this.geometry= this.gui.switchGeometry(radius)
         // this.geometry = new THREE.SphereGeometry(radius, 16, 8);
         this.material = new THREE.MeshPhysicalMaterial({
             transmission: 0.99,
@@ -131,33 +132,4 @@ export class MyThree {
 
         })
     }
-
-
-    GUIGeometry(radius) {
-        switch (this.controls.geometry) {
-            case "Sphere":
-                this.geometry = new THREE.SphereGeometry(radius, 16, 8);
-                break;
-            case "Box":
-                this.geometry = new THREE.BoxGeometry(radius * 2, radius * 2, radius * 2);
-                break;
-            case 'Cone':
-                this.geometry = new THREE.ConeGeometry(radius * 2, radius * 2, 8);
-                break;
-            case 'Cylinder':
-                this.geometry = new THREE.CylinderGeometry(radius, radius, 20, 32);
-                break;
-        }
-
-    }
-    createGUI() {
-        this.controls = {
-            geometry: "Sphere"
-        }
-        this.gui = new GUI();
-        this.guiFolder = this.gui.addFolder('Selet Geometry');
-        this.guiFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
-
-    }
-
 }
