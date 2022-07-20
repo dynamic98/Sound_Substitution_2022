@@ -1,6 +1,8 @@
 export class AudioElementHandler {
     constructor(htmlElementID, folderPath) {
-        console.log(folderPath)
+        this.folderPath = folderPath;
+        this.directory;
+
         let filelistText = document.getElementById(htmlElementID).innerText;
         this.filelist = filelistText.split(', ');
         this.fileobject = new Object;
@@ -8,9 +10,7 @@ export class AudioElementHandler {
         this.filelist.forEach((file, index) => {
             this.fileobject[index] = file;
         });
-
-        this.folderPath = folderPath
-
+        this.directory
         this.audioElement = document.createElement('audio');
         this.audioElement.setAttribute("id", AudioElementHandler.instanceCounter);
         AudioElementHandler.instanceCounter++
@@ -18,12 +18,20 @@ export class AudioElementHandler {
 
     fetchMusic(fileName) {
         this.directory = this.folderPath + fileName
-        
         try {
             return fetch(this.directory);
         } catch (error) {
             console.error(error);
         }
+    }
+
+    //play or pause
+    togglePlay() {
+        this.audioElement.paused ? this.audioElement.play() : this.audioElement.pause();
+    }
+
+    initializeAudio(sourceURL) {
+        this.audioElement.src = sourceURL
     }
 
     getFileObject() {
@@ -34,29 +42,15 @@ export class AudioElementHandler {
         return this.filelist
     }
 
-    initializeAudio(sourceURL) {
-        this.audioElement.src = sourceURL
-    }
-
     getAudioElement() {
         return this.audioElement;
     }
-    //play or pause
-    togglePlay() {
-        if (this.audioElement.paused) {
-            this.audioElement.play()
-        } else {
-            this.audioElement.pause();
-        }
 
-    }
     setTime(time) {
-        console.log("original", this.audioElement.currentTime)
-
-        this.audioElement.currentTime = time;
-        console.log("changed", this.audioElement.currentTime)
+        this.audioElement.currentTime = time
     }
+
     setFolderPath(folderPath) {
-        this.folderPath=folderPath
+        this.folderPath = folderPath
     }
 }

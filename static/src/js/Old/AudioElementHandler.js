@@ -23,7 +23,7 @@ export class AudioElementHandler {
     //creates the directory for the selected mp3 file. e.g  static/music/songname.mp3
     initializeDirectory() {
         this.directory = 'static/music/' + this.selectedText;
-        console.log(this.directory)
+        
     }
 
     //fetches selectedmusic. Returns a promise 

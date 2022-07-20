@@ -1,7 +1,6 @@
 //Wrapper class for WaveSurfer
 //----------------------------------------------------//
 export class MyWaveSurfer {
-
     //creates a waveSurfer object 
     constructor() {
         this.wavesurfer = WaveSurfer.create({
@@ -12,28 +11,24 @@ export class MyWaveSurfer {
             cursorWidth: 5,
             normalize: true,
         });
-        console.log('audio input completed')
 
+        this.audioElement
     }
 
     //connects wave surfet to audioElement
     setAudioElementSource(audioElement) {
-        this.wavesurfer.load(audioElement);
+        this.audioElement = audioElement
+        this.wavesurfer.load(this.audioElement);
     }
 
-    //initializes with settings
-    onReady(audioElement,) {
-        this.wavesurfer.on('ready', async () => {
-            console.log("wavesurfer is ready");
-            this.wavesurfer.play()
-            audioElement.currentTime = this.wavesurfer.getCurrentTime();
-        })
+    playWaveSurfer = () => {
+        console.log("playing")
+        return this.wavesurfer.play()
     }
 
     setInteractionEventHandler(callback) {
-        this.wavesurfer.drawer.on('click', () => {
+        this.wavesurfer.on('seek', async () => {
             callback(this.wavesurfer.getCurrentTime());
-
         })
     }
 
@@ -46,7 +41,5 @@ export class MyWaveSurfer {
     getWavesurfer = () => {
         return this.wavesurfer;
     }
-
-
 }
 //----------------------------------------------------//

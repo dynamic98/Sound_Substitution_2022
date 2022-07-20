@@ -10,7 +10,6 @@ export class SourceContainer {
     }
 
     async initialize() {
-
         for (let i = 0; i < Source.getSeparatedFileListLength(this.htmlElementID); i++) {
             let source = new Source(this.htmlElementID, this.path)
             let response = await source.fetchMusic(i)
@@ -25,13 +24,12 @@ export class SourceContainer {
             resolve();
         })
     }
-    
-    initialPlay(getWavesurferTime){
-        let time = getWavesurferTime()
-        console.log("time: ", time)
+
+    async initialPlay(getWavesurferTime, playWaveSurfer) {
+        await playWaveSurfer()
         for (let source of this.sourceList) {
-            source.setTime(time)
-            source.play()
+            await source.play()
+            source.setTime(getWavesurferTime())
         }
     }
 
@@ -51,8 +49,11 @@ export class SourceContainer {
             source.togglePlay()
         }
     }
-    forEach(callback) {
-        this.sourceList.forEach((source) => callback(source))
+
+    syncTime = (time) => {
+        for (let i = 0; i < this.sourceList.length; i++) {
+            this.sourceList[i].setTime(time)
+        }
     }
 
     getLength() {
@@ -63,10 +64,5 @@ export class SourceContainer {
         return this.sourceList
     }
 
-    syncTime = (time) => {
-        console.log("time:", time)
-        for (let source of this.sourceList) {
-            source.setTime(time)
-        }
-    }
+
 }

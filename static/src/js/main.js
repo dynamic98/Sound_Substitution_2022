@@ -51,7 +51,7 @@ document.querySelector('[data-action="play"]').addEventListener('click', () => {
 document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
     await sourceContainer.changeSong("static/music/separated/" + song.getFileName());
-    sourceContainer.initialPlay(song.getWaveSurferTime)
+    sourceContainer.initialPlay(song.getWaveSurferTime,song.playWaveSurfer)
 
     kandinsky.setBPM(song.getBPM())
     kandinsky.setMaxVolume(song.getMaxVolume())
@@ -74,7 +74,7 @@ async function main() {
 
     sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/" + song.getFileName());
     await sourceContainer.initialize();
-    sourceContainer.initialPlay(song.getWaveSurferTime)
+    sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
     
     song.setWaveSurferCallback(sourceContainer.syncTime)
 
@@ -90,14 +90,6 @@ async function main() {
 function animate() {
     requestAnimationFrame(animate);
     stats.begin()
-
-    // if (sourceContainer.getList()[0].isPlaying()) {
-    //     sourceContainer.forEach(
-    //         function (source) {
-    //             console.log(switcher.getPitchAndEnergy(source.getPitch(), source.getEnergy(), source.getMaxChroma()))
-    //         }
-    //     )
-    // }
 
     //only loop when the music is playing
     if (song.isPlaying()) {
