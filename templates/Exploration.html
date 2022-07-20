@@ -38,16 +38,6 @@
         <div id="canvas"></div>
     </section>
 
-    <div class="visualOctave">
-        <button class="visualOctaveButton" id="Octave2"> 2 </button>
-        <button class="visualOctaveButton" id="Octave3"> 3 </button>
-        <button class="visualOctaveButton" id="Octave4"> 4 </button>
-        <button class="visualOctaveButton" id="Octave5"> 5 </button>
-        <button class="visualOctaveButton" id="Octave6"> 6 </button>
-        <button class="visualOctaveButton" id="Octave7"> 7 </button>
-        <button class="visualOctaveButton" id="Octave8"> 8 </button>
-    </div>
-
     
     <section class="colorContainer">
       <div class="palette" id="paletteBasic">
@@ -109,89 +99,53 @@
       </div>
     </section>
 
-    <section class="controlContainer">
-        <button class="musicControlButton" style="display:inline;"> Play </button>
-        <button class="musicControlButton" style="display:inline;"> Pause </button>
-    </section>
 
     <section class="pianoContainer">
         <ul class="set">
+            <li class="white do-1"></li>
+            <li class="black do-s-1"></li>
+            <li class="white re-1"></li>
+            <li class="black re-s-1"></li>
+            <li class="white mi-1"></li>
+            <li class="white fa-1"></li>
+            <li class="black fa-s-1"></li>
+            <li class="white sol-1"></li>
+            <li class="black sol-s-1"></li>
+            <li class="white la-1"></li>
+            <li class="black la-s-1"></li>
+            <li class="white si-1"></li>
 
-            <li class="white c"></li>
-            <li class="black cs"></li>
-            <li class="white d"></li>
-            <li class="black ds"></li>
-            <li class="white e"></li>
-            <li class="white f"></li>
-            <li class="black fs"></li>
-            <li class="white g"></li>
-            <li class="black gs"></li>
-            <li class="white a"></li>
-            <li class="black as"></li>
-            <li class="white b"></li>
-
+            <li class="white do-2"></li>
+            <li class="black do-s-2"></li>
+            <li class="white re-2"></li>
+            <li class="black re-s-2"></li>
+            <li class="white mi-2"></li>
+            <li class="white fa-2"></li>
+            <li class="black fa-s-2"></li>
+            <li class="white sol-2"></li>
+            <li class="black sol-s-2"></li>
+            <li class="white la-2"></li>
+            <li class="black la-s-2"></li>
+            <li class="white si-2"></li>
         </ul>
     </section>
 
-    <!-- <section class="controlContainer">
-        <button> PLAY </button>
-        <button> PAUSE </button>
-    </section> -->
-
     <section class="emotionContainer">
+        <video id="theVideo" src="../static/video/happy.mp4" controls></video>
         <br>
-        <button class="emotionButton" id="happyButton" style="display:inline;"> Happy </button>
-        <button class="emotionButton" id="sadButton" style="display:inline;"> Sad </button>
-        <button class="emotionButton" id="angryButton" style="display:inline;"> Angry </button>
-        <button class="emotionButton" id="calmButton" style="display:inline;"> Calm </button>
-        <video id="theVideo" style="visibility:hidden" src="../static/video/sample.mp4" controls></video>
-
+        <button class="videoControlButton" id="record" style="display:inline;"> Record </button>
+        <button class="videoControlButton" id="save" style="display:inline;"> Save </button>
+        <button class="videoControlButton" id="nextPage" style="display:inline;"> Next Emotion </button>
     </section>
 
+
     <section class="hapticContainer">
-            <br>
-            <button class="hapticPositionButton" id="H1" style="display:inline;"> H1 </button>
-            <button class="hapticPositionButton" id="H2" style="display:inline;"> H2 </button>
-            <button class="hapticPositionButton" id="H3" style="display:inline;"> H3 </button>
-            <div slider id="slider-distance">
-                <div>
-                  <div inverse-left style="width:70%;"></div>
-                  <div inverse-right style="width:70%;"></div>
-                  <div range style="left:30%;right:40%;"></div>
-                  <span thumb style="left:30%;"></span>
-                  <span thumb style="left:60%;"></span>
-                  <div sign style="left:30%;">
-                  </div>
-                  <div sign style="left:60%;">
-                  </div>
-                </div>
-                
-                <input type="range" tabindex="0" value="30" max="100" min="0" step="1" oninput="
-                this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
-                let value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
-                let children = this.parentNode.childNodes[1].childNodes;
-                children[1].style.width=value +'%';
-                children[5].style.left=value+'%';
-                children[7].style.left=value+'%';children[11].style.left=value+'%';
-                children[11].childNodes[1].innerHTML=this.value;" />
-              
-                <input type="range" tabindex="0" value="60" max="100" min="0" step="1" oninput="
-                this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
-                let value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
-                let children = this.parentNode.childNodes[1].childNodes;
-                children[3].style.width=(100-value)+'%';
-                children[5].style.right=(100-value)+'%';
-                children[9].style.left=value+'%';children[13].style.left=value+'%';
-                children[13].childNodes[1].innerHTML=this.value;" />
-              </div>
-                            
-            
-        <br>
         <div class="customMenu">
+            <br>
             <p class="smallTitle" style="display:inline;">감도</p>
             <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
             <hr>
-            <p class="smallTitle" style="display:inline;">강도</p>
+            <p class="smallTitle" style="display:inline;">세기</p>
             <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
         </div>
     </section>
@@ -199,52 +153,37 @@
     <section class="musicContainer">
         <div class="customMenu">
             <br>
-            <!-- <h4 class="bigTitle">Music Control</h4> -->
-            <p class="smallTitle" style="display:inline;">템포</p>
-            <input class="range" type="range" name="tempo" value="0" min="0" max="100" style="display:inline;"></input>
-            <hr>
+            <div class="musicPlay">
+              <button class="musicControlButton" style="display:inline;"> Play </button>
+              <button class="musicControlButton" style="display:inline;"> Pause </button>
+            </div>
+            <br>
             <p class="smallTitle" style="display:inline;">음량</p>
             <input class="range" type="range" name="dynamics" value="0" min="0" max="100" style="display:inline;"></input>
         </div>
     </section>
 
 
-    <!-- Javascript --> <!-- Have to use importmap to link NPM modules...-->
-    <!-- <script type="importmap">
-      {
-          "imports": {
-              "three": "../static/node_modules/three/build/three.module.js",
-              "tone" : "../static/node_modules/tone/build/Tone.js.map",
-              "subjx": "../static/node_modules/subjx/dist/js/subjx.esm.js"
-          }
-      }
-    </script> -->
-
    <!--shader script-->
    <script type="x-shader/x-vertex" id="vertexshader">
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-    }
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+        }
     </script>
     <script type="x-shader/x-fragment" id="fragmentshader">
-      uniform sampler2D baseTexture;
-      uniform sampler2D bloomTexture;
-      varying vec2 vUv;
-      void main() {
-        gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
-      }
+        uniform sampler2D baseTexture;
+        uniform sampler2D bloomTexture;
+        varying vec2 vUv;
+        void main() {
+          gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
+        }
     </script>
 
-    <!-- <script type="module" defer src="../static/src/js/libs/slider.js"></script> -->
-    <!-- <script type="module" defer src="../static/src/js/libs/emotionVideoShow.js"></script> -->
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
     <script type="module" defer src="../static/src/js/dist/exploration.js"></script>
     <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
-
-    <!-- <script type="module" defer src="../static/js/buttonShapeClick.js"></script> -->
-    <!-- <script type="module" defer src="../static/js/color.js"></script> -->
 </body>
 </html>

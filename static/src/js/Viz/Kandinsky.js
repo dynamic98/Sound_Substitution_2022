@@ -5,7 +5,7 @@ export class Kandinsky {
         this.bpm = bpm;
         this.MaxVolume = MaxVolume;
         this.canvasSize = canvasSize
-        this.midiScope=59;
+        this.midiScope=23;
         // this.midiScope=35;
 
         this.DictPitch = {
@@ -30,7 +30,7 @@ export class Kandinsky {
         this.energy = energy/this.MaxVolume;
         // console.log(this.MaxVolume);
 
-        this.pitchHeight = this.canvasSize / this.midiScope 
+        this.pitchHeight = this.canvasSize / this.midiScope /2
         this.pitchWidth = this.canvasSize / (60 * 4 * frameRate / this.bpm) // 
 
         this.octave = Math.floor((pitch) / 12) - 1; //옥타브 구하는 방식
