@@ -111,9 +111,18 @@ def ajax():
     return data
     # return jsonify(result = "success", result2= data)
 
+@app.route('/WriteUserCustom', methods=['POST'])
+def wuc():
+  if request.method == 'POST':
+      word = '구상적 시각화 페이지 입니다.'
+  else:
+    pass
+  return render_template('/loading.html')
+
 @app.route('/SaveUserCustom', methods=['POST'])
-def ajax():
+def SaveUserCustom():
     data = request.get_json()
+    # print(type(data))
     WriteUserCustom(data)
     # left = data['left']
     # right = data['right']

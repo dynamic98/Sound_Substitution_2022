@@ -17,14 +17,14 @@ $('#ExecuteJson').click(function(){
     let sad_sensitivity = 0.8;
     let sad_intensity = 0.6;
 
-    let exciting_palette;
+    let exciting_palette = [];
     let exciting_shape = 'Sphere';
     let exciting_texture = 'Wood';
     let exciting_shader = 'Diffuse';
     let exciting_sensitivity = 0.8;
     let exciting_intensity = 0.6;
 
-    let peaceful_palette;
+    let peaceful_palette = [];
     let peaceful_shape = 'Box';
     let peaceful_texture = 'Wood';
     let peaceful_shader = 'Diffuse';
@@ -73,7 +73,7 @@ $('#ExecuteJson').click(function(){
     }
     $.ajax({
         type: 'POST',
-        url: '/SendHapticCustom',
+        url: '/SaveUserCustom',
         data: JSON.stringify(postdata),
         dataType : 'JSON',
         contentType: "application/json",

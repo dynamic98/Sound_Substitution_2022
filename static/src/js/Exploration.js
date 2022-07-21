@@ -105,79 +105,9 @@ document.body.appendChild(stats.dom);
 //     synth.triggerAttackRelease(DictPitch[CurrentPitch] + CurrentOctave.toString(), now);
 // }
 
-
-// document.getElementsByClassName("white do-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 0;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("black do-s-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 1;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("white re-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 2;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("black re-s-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 3;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("white mi-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 4;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("white fa-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 5;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("black fa-s-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 6;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("white sol-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 7;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("black sol-s-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 8;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("white la-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 9;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("black la-s-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 10;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
-// document.getElementsByClassName("white si-1")[0].addEventListener("click", () => {
-//     CurrentPitch = 11;
-//     CurrentOctave = 4;
-//     CurrentEnergy = 50;
-//     playPiano();
-// })
+document.getElementById("btn-square").addEventListener("click", ()=>{console.log("box");myThree.ForceGeometryChange("Box")});
+document.getElementById("btn-circle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Sphere")});
+document.getElementById("btn-triangle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Cone")});
 
 
 // document.getElementById("Octave2").addEventListener("click", () =>{CurrentOctave = 2});

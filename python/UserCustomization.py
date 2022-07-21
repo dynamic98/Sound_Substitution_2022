@@ -2,10 +2,11 @@ import os
 import json
 import time
 
-def WriteUsetCustom(data):
-    json_data = json.loads(data)
+def WriteUserCustom(data):
+
+    # json_data = json.loads(data)
     UserName = data['username']
-    print(json.dumps(json_data, indent="  "))
+    print(json.dumps(data, indent="  "))
     # # print(json_data)
     # SavePath = os.path.join(os.getcwd(), 'static', 'user', UserName)
     # with open(os.path.join(SavePath, '%d.json'%(id)), 'w') as f:
