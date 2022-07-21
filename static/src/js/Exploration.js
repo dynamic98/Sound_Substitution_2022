@@ -99,6 +99,7 @@ document.body.appendChild(stats.dom);
 
 
 
+
 // function playPiano() {
 //     console.log(CurrentPitch, DictPitch[CurrentPitch]);
 //     synth.triggerAttackRelease(DictPitch[CurrentPitch] + CurrentOctave.toString(), now);
@@ -177,6 +178,19 @@ document.body.appendChild(stats.dom);
 //     CurrentEnergy = 50;
 //     playPiano();
 // })
+
+
+// document.getElementById("Octave2").addEventListener("click", () =>{CurrentOctave = 2});
+// document.getElementById("Octave3").addEventListener("click", () =>{CurrentOctave = 3});
+// document.getElementById("Octave4").addEventListener("click", () =>{CurrentOctave = 4});
+// document.getElementById("Octave5").addEventListener("click", () =>{CurrentOctave = 5});
+// document.getElementById("Octave6").addEventListener("click", () =>{CurrentOctave = 6});
+// document.getElementById("Octave7").addEventListener("click", () =>{CurrentOctave = 7});
+// document.getElementById("Octave8").addEventListener("click", () =>{CurrentOctave = 8});
+
+// document.getElementById("btn-square").addEventListener("click", ()=>{console.log("box");myThree.ForceGeometryChange("Box")});
+// document.getElementById("btn-circle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Sphere")});
+// document.getElementById("btn-triangle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Cone")});
 
 
 // document.getElementsByClassName("white do-2")[0].addEventListener("click", () => {

@@ -26,8 +26,18 @@ export class MyThree {
         this.bloom = new Bloom(0, 5, 1);
 
         this.counter = 0;
+
         this.geometryType = defaultShape
         this.rotationSpeed = 0.01;
+
+
+        // this.gui = new MyGUI()
+
+        this.geometryType = "square"
+        this.rotationSpeed = 0.01;
+
+
+
     }
 
     initialize() {

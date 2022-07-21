@@ -24,6 +24,162 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+    <section class="shapeContainer">
+      <button type="button" class="btn btn-primary btn-square-md" id="btn-square"></button>
+      <button type="button" class="btn btn-primary btn-circle-md" id="btn-circle"></button>
+      <button type="button" class="btn btn-primary btn-triangle-md" id="btn-triangle"></button>
+      <button type="button" class="btn btn-primary btn-decagon-md" id="btn-decagon"></button>
+      <button type="button" class="btn btn-primary btn-star-md" id="btn-star"></button>
+    </section>
+    
+
+    <section class="sheetContainer">
+        <!-- 여기에 시각화 표현 -->
+        <!-- canvas -->
+        <div id="canvas"></div>
+    </section>
+
+    
+    <section class="colorContainer">
+      <div class="palette" id="palette1">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+      </div>
+
+      <div class="palette" id="palette2">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+      </div>
+
+      <div class="palette" id="palette3">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+      </div>
+
+      <div class="palette" id="palette4">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+      </div>
+
+      <div class="palette" id="palette5">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+      </div>
+
+
+      <div class="palette" id="palette6">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+      </div>
+
+
+      <div class="palette" id="palette7">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+      </div>
+    </section>
+
+
+    <section class="pianoContainer">
+        <ul class="set">
+            <li class="white do-1"></li>
+            <li class="black do-s-1"></li>
+            <li class="white re-1"></li>
+            <li class="black re-s-1"></li>
+            <li class="white mi-1"></li>
+            <li class="white fa-1"></li>
+            <li class="black fa-s-1"></li>
+            <li class="white sol-1"></li>
+            <li class="black sol-s-1"></li>
+            <li class="white la-1"></li>
+            <li class="black la-s-1"></li>
+            <li class="white si-1"></li>
+
+            <li class="white do-2"></li>
+            <li class="black do-s-2"></li>
+            <li class="white re-2"></li>
+            <li class="black re-s-2"></li>
+            <li class="white mi-2"></li>
+            <li class="white fa-2"></li>
+            <li class="black fa-s-2"></li>
+            <li class="white sol-2"></li>
+            <li class="black sol-s-2"></li>
+            <li class="white la-2"></li>
+            <li class="black la-s-2"></li>
+            <li class="white si-2"></li>
+        </ul>
+    </section>
+
+    <section class="menuEmotionContainer">
+      <button class="menuEmotionButton" id="happy"> 행복한 </button>
+      <button class="menuEmotionButton" id="sad"> 슬픈 </button>
+      <button class="menuEmotionButton" id="exciting"> 신나는 </button>
+      <button class="menuEmotionButton" id="peaceful"> 평화로운 </button>
+    </section>
+
+    <section class="emotionContainer" id="emotionContainerID">
+        <video id="theVideo" src="../static/video/happy.mp4" controls></video>
+        <br>
+        <button class="videoControlButton" id="record" style="display:inline;"> 녹화 </button>
+        <button class="videoControlButton" id="save" style="display:inline;"> 저장 </button>
+        <!-- <button class="videoControlButton" id="nextPage" style="display:inline;"> 다음 페이지 </button> -->
+    </section>
+
+
+    <section class="hapticContainer">
+        <div class="customMenu">
+            <br>
+            <p class="smallTitle" style="display:inline;">감도</p>
+            <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+            <hr>
+            <p class="smallTitle" style="display:inline;">세기</p>
+            <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+        </div>
+    </section>
+
+    <section class="musicContainer">
+        <div class="customMenu">
+            <br>
+              <div class="botón" onclick="this.classList.toggle('active')">
+                <div class="fondo" x="0" y="0" width="200" height="200"></div>
+                <div class="icono" width="200" height="200">
+                  <div class="parte izquierda" x="0" y="0" width="200" height="200" fill="#fff"></div>
+                  <div class="parte derecha" x="0" y="0" width="200" height="200" fill="#fff"></div>
+                </div>
+                <div class="puntero"></div>
+              </div>
+            <br>
+            <div class="volumeControl">
+              <p class="smallTitle" style="display:inline;">음량</p>
+                <button class="volumeControlButton" style="display:inline;"> 작게 </button>
+                <button class="volumeControlButton" style="display:inline;"> 중간 </button>
+                <button class="volumeControlButton" style="display:inline;"> 크게 </button>
+            </div>
+        </div>
+    </section>
+=======
   <section class="shapeContainer">
 
     <button type="button" class="btn btn-primary btn-square-md" id="btn-square"></button>
@@ -186,6 +342,7 @@
       </div>
     </div>
   </section>
+>>>>>>> 5e9ddb4c5718624bcebf2062de9de6fe69017a40
 
 
   <!--shader script-->
@@ -205,10 +362,19 @@
         }
     </script>
 
+<<<<<<< HEAD
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
+    <script type="module" defer src="../static/src/js/dist/exploration.js"></script>
+    <script type="module" defer src="../static/src/js/dist/buttonColor.js"></script>
+    <script type="module" defer src="../static/src/js/dist/divColor.js"></script>
+    <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
+=======
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
   <script type="module" defer src="../static/src/js/dist/exploration.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
+>>>>>>> 5e9ddb4c5718624bcebf2062de9de6fe69017a40
 </body>
 
 </html>
