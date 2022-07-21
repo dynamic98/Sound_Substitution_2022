@@ -40,7 +40,7 @@
 
     
     <section class="colorContainer">
-      <div class="palette" id="paletteBasic">
+      <div class="palette" id="palette1">
         <div class="color"></div>
         <div class="color"></div>
         <div class="color"></div>
@@ -48,7 +48,7 @@
         <div class="color"></div>
       </div>
 
-      <div class="palette" id="palettePastel">
+      <div class="palette" id="palette2">
         <div class="color"></div>
         <div class="color"></div>
         <div class="color"></div>
@@ -56,7 +56,7 @@
         <div class="color"></div>
       </div>
 
-      <div class="palette" id="paletteVivid">
+      <div class="palette" id="palette3">
         <div class="color"></div>
         <div class="color"></div>
         <div class="color"></div>
@@ -64,7 +64,7 @@
         <div class="color"></div>
       </div>
 
-      <div class="palette" id="paletteSummer">
+      <div class="palette" id="palette4">
         <div class="color"></div>
         <div class="color"></div>
         <div class="color"></div>
@@ -72,16 +72,7 @@
         <div class="color"></div>
       </div>
 
-      <div class="palette" id="paletteFall">
-        <div class="color"></div>
-        <div class="color"></div>
-        <div class="color"></div>
-        <div class="color"></div>
-        <div class="color"></div>
-      </div>
-
-
-      <div class="palette" id="paletteSalmon">
+      <div class="palette" id="palette5">
         <div class="color"></div>
         <div class="color"></div>
         <div class="color"></div>
@@ -90,7 +81,16 @@
       </div>
 
 
-      <div class="palette" id="paletteForest">
+      <div class="palette" id="palette6">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+      </div>
+
+
+      <div class="palette" id="palette7">
         <div class="color"></div>
         <div class="color"></div>
         <div class="color"></div>
@@ -130,12 +130,19 @@
         </ul>
     </section>
 
-    <section class="emotionContainer">
+    <section class="menuEmotionContainer">
+      <button class="menuEmotionButton" id="happy"> 행복한 </button>
+      <button class="menuEmotionButton" id="sad"> 슬픈 </button>
+      <button class="menuEmotionButton" id="exciting"> 신나는 </button>
+      <button class="menuEmotionButton" id="peaceful"> 평화로운 </button>
+    </section>
+
+    <section class="emotionContainer" id="emotionContainerID">
         <video id="theVideo" src="../static/video/happy.mp4" controls></video>
         <br>
         <button class="videoControlButton" id="record" style="display:inline;"> 녹화 </button>
         <button class="videoControlButton" id="save" style="display:inline;"> 저장 </button>
-        <button class="videoControlButton" id="nextPage" style="display:inline;"> 다음 페이지 </button>
+        <!-- <button class="videoControlButton" id="nextPage" style="display:inline;"> 다음 페이지 </button> -->
     </section>
 
 
@@ -192,6 +199,8 @@
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
     <script type="module" defer src="../static/src/js/dist/exploration.js"></script>
+    <script type="module" defer src="../static/src/js/dist/buttonColor.js"></script>
+    <script type="module" defer src="../static/src/js/dist/divColor.js"></script>
     <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
 </body>
 </html>

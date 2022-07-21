@@ -31,7 +31,7 @@ export class MyThree {
         this.bloom = new Bloom(0, 5, 1);
 
         this.counter = 0;
-        this.gui = new MyGUI()
+        // this.gui = new MyGUI()
 
     }
 
