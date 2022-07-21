@@ -6,6 +6,7 @@ import os
 import selenium
 import webbrowser
 from python.WriteHapticCustom import WriteHapticCustom as WHC
+from python.UserCustomization import WriteUserCustom
 from python.HapticCustomize import VirtualBrowser
 
 ##필요한 함수 선언 
@@ -109,6 +110,21 @@ def ajax():
     # ChromeBrowser.SendHapticCustom(UserName, FileName)
     return data
     # return jsonify(result = "success", result2= data)
+
+@app.route('/SaveUserCustom', methods=['POST'])
+def ajax():
+    data = request.get_json()
+    WriteUserCustom(data)
+    # left = data['left']
+    # right = data['right']
+    # print(UserName)
+    # FileName = WHC(UserName, left, right)
+    # VirtualBrowser(UserName, fileName)
+    # ChromeBrowser.SendHapticCustom(UserName, FileName)
+    return data
+    # return jsonify(result = "success", result2= data)
+
+
 
 @app.route('/separate', methods=['POST'])
 def separate():
