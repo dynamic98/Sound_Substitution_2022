@@ -3,31 +3,35 @@ $('#ExecuteJson').click(function(){
     // var right = $('#input-right').val();
     let username = 'default_user';
     let userID = 10000;
-    let happy_palette = [];
-    let happy_shape = 'Sphere';
+    let happy_palette = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+    let happy_shape = 'Circle';
     let happy_texture = 'Wood';
-    let happy_shader = 'Diffuse';
+    let happy_transmission = 0.7;
+    let happy_roughness = 0.8;
     let happy_sensitivity = 0.8;
     let happy_intensity = 0.6;
 
-    let sad_palette = [];
-    let sad_shape = 'Sphere';
+    let sad_palette = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+    let sad_shape = 'Star';
     let sad_texture = 'Wood';
-    let sad_shader = 'Diffuse';
+    let sad_transmission = 0.7;
+    let sad_roughness = 0.8;
     let sad_sensitivity = 0.8;
     let sad_intensity = 0.6;
 
-    let exciting_palette = [];
-    let exciting_shape = 'Sphere';
+    let exciting_palette = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+    let exciting_shape = 'Circle';
     let exciting_texture = 'Wood';
-    let exciting_shader = 'Diffuse';
+    let exciting_transmission = 0.7;
+    let exciting_roughness = 0.8;
     let exciting_sensitivity = 0.8;
     let exciting_intensity = 0.6;
 
-    let peaceful_palette = [];
-    let peaceful_shape = 'Box';
+    let peaceful_palette = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+    let peaceful_shape = 'Square';
     let peaceful_texture = 'Wood';
-    let peaceful_shader = 'Diffuse';
+    let peaceful_transmission = 0.7;
+    let peaceful_roughness = 0.8;
     let peaceful_sensitivity = 0.8;
     let peaceful_intensity = 0.6;
 
@@ -39,7 +43,8 @@ $('#ExecuteJson').click(function(){
                     'palette':happy_palette,
                     'shape':happy_shape,
                     'texture':happy_texture,
-                    'shader':happy_shader,
+                    'transmission':happy_transmission,
+                    'roughness':happy_roughness,
                     'sensitivity':happy_sensitivity,
                     'intensity':happy_intensity
                 },
@@ -48,7 +53,8 @@ $('#ExecuteJson').click(function(){
                     'palette':sad_palette,
                     'shape':sad_shape,
                     'texture':sad_texture,
-                    'shader':sad_shader,
+                    'transmission':sad_transmission,
+                    'roughness':sad_roughness,
                     'sensitivity':sad_sensitivity,
                     'intensity':sad_intensity
                 },
@@ -57,7 +63,8 @@ $('#ExecuteJson').click(function(){
                     'palette':exciting_palette,
                     'shape':exciting_shape,
                     'texture':exciting_texture,
-                    'shader':exciting_shader,
+                    'transmission':exciting_transmission,
+                    'roughness':exciting_roughness,
                     'sensitivity':exciting_sensitivity,
                     'intensity':exciting_intensity
                 },
@@ -66,7 +73,8 @@ $('#ExecuteJson').click(function(){
                     'palette':peaceful_palette,
                     'shape':peaceful_shape,
                     'texture':peaceful_texture,
-                    'shader':peaceful_shader,
+                    'transmission':peaceful_transmission,
+                    'roughness':peaceful_roughness,
                     'sensitivity':peaceful_sensitivity,
                     'intensity':peaceful_intensity
                 }
@@ -78,7 +86,7 @@ $('#ExecuteJson').click(function(){
         dataType : 'JSON',
         contentType: "application/json",
         success: function(data){
-            alert('Haptic Customization 저장완료..')
+            alert('Customization 저장완료..')
         },
         error: function(request, status, error){
             alert('ajax 통신 실패')
