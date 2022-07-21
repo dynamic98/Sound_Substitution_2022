@@ -34,9 +34,11 @@ function init(){
             melody_canvas[i][j]=parseInt(0)
             let el_classname="t"+(i+1).toString()+"_p"+(j+1).toString()
             let el =document.getElementsByClassName(el_classname)
+            // el[0].innerHTML="<p>A</p>"
             el[0].style.background="black"
             el[0].style.border="dotted"
             el[0].style.borderWidth ="0.01em"
+            
         }
     }
 }
@@ -100,6 +102,8 @@ function logging(cord){
         // console.log(cord, melody_canvas[t_position-1][p_position-1])
         // color_change(cord, t_position, p_position)
     }
+    
+    set_shade(t_position, p_position)
     set_color()
 }
 
@@ -132,7 +136,22 @@ function set_color(){
             }
         }
     }
+}
 
+// function set_shade(i, j){
+//     console.log(i, j)
+//     let el_classname="t"+(i+1).toString()+"_p"+(j+1).toString()
+//     let el =document.getElementsByClassName(el_classname)
+
+    
+    // let createdCanvas=document.createElement('canvas')
+    // el[0].appendChild(createdCanvas)
+    // console.log(createdCanvas)
+    // let ctx=createdCanvas.getContext("2d")
+    // ctx.beginPath();
+    // ctx.arc(5, 5, 0.5, 0, 2*Math.PI)
+    // ctx.stroke()
+    // el[0].appendChild(createdCanvas)
 }
 
 function set_instrument(inst){
