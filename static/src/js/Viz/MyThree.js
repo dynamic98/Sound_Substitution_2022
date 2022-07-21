@@ -3,8 +3,9 @@ import {
     Bloom
 } from './Bloom.js'
 import {
-    MyGUI
-} from './MyGUI.js'
+    GUI
+} from 'three/examples/jsm/libs/lil-gui.module.min.js';
+
 
 
 // import {
@@ -31,7 +32,7 @@ export class MyThree {
         this.bloom = new Bloom(0, 5, 1);
 
         this.counter = 0;
-        this.gui = new MyGUI()
+        this.createGUI()
 
     }
 
@@ -79,7 +80,7 @@ export class MyThree {
         this.positionY = positionY
         this.positionX = positionX * this.counter - 100
 
-        this.geometry= this.gui.switchGeometry(radius)
+        this.switchGeometry(radius)
         // this.geometry = new THREE.SphereGeometry(radius, 16, 8);
         this.material = new THREE.MeshPhysicalMaterial({
             transmission: 0.99,
@@ -135,7 +136,7 @@ export class MyThree {
     }
 
 
-    GUIGeometry(radius) {
+    switchGeometry(radius) {
         switch (this.controls.geometry) {
             case "Sphere":
                 this.geometry = new THREE.SphereGeometry(radius, 16, 8);
@@ -156,9 +157,9 @@ export class MyThree {
         this.controls = {
             geometry: "Sphere"
         }
-        // this.gui = new GUI();
-        // this.guiFolder = this.gui.addFolder('Selet Geometry');
-        // this.guiFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
+        this.gui = new GUI();
+        this.guiFolder = this.gui.addFolder('Selet Geometry');
+        this.guiFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
 
     }
 
@@ -166,5 +167,7 @@ export class MyThree {
         this.controls.geometry = ForceGeometry;
         console.log(this.controls);
     }
+
+
 
 }
