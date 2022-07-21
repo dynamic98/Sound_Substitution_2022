@@ -179,6 +179,16 @@
         </div>
     </section>
 
+    <section class="MaterialContainer">
+      <div class="customMenu">
+        <p class="smallTitle" style="display:inline;">Transmission</p>
+        <input class="range" id="transmission" type="range" name="intensity" value="0" min="0" max="100"
+          style="display:inline;"></input>
+  
+        <p class="smallTitle" style="display:inline;">Roughness</p>
+        <input class="range" id="roughness" type="range" name="intensity" value="0" min="0" max="100"
+          style="display:inline;"></input>
+
 
   <!--shader script-->
   <script type="x-shader/x-vertex" id="vertexshader">
@@ -197,12 +207,10 @@
         }
     </script>
 
-    <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
-    <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
     <script type="module" defer src="../static/src/js/dist/exploration.js"></script>
-    <script type="module" defer src="../static/src/js/dist/buttonColor.js"></script>
-    <script type="module" defer src="../static/src/js/dist/divColor.js"></script>
-    <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
 </body>
 
 </html>
