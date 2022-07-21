@@ -30,7 +30,7 @@ import {
 
 //class instances
 //----------------------------------------------------//
-let myThree = new MyThree();
+let myThree = new MyThree("circle");
 let bpmTimer = new BPMTimer();
 let switcher = new Switcher();
 let stats = new Stats();
@@ -51,7 +51,7 @@ document.querySelector('[data-action="play"]').addEventListener('click', () => {
 document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
     await sourceContainer.changeSong("static/music/separated/" + song.getFileName());
-    sourceContainer.initialPlay(song.getWaveSurferTime,song.playWaveSurfer)
+    sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
 
     kandinsky.setBPM(song.getBPM())
     kandinsky.setMaxVolume(song.getMaxVolume())
@@ -76,7 +76,7 @@ async function main() {
     sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/" + song.getFileName());
     await sourceContainer.initialize();
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
-    
+
     song.setWaveSurferCallback(sourceContainer.syncTime)
 
     //VISUALS & OTHERS
@@ -99,7 +99,7 @@ function animate() {
         if (!bpmTimer.isUnderFourBeat()) {
             myThree.reset();
         }
-        //under 4 beat = calculate and create Geomtry 
+        //under 4 beat = calculate and create Geometry 
         else if (bpmTimer.isUnderFourBeat()) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
 
