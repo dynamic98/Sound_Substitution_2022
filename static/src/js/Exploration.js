@@ -15,11 +15,11 @@ import {
     ButtonCustomization
 } from './Customization/ButtonCustomization.js'
 import {
-   SliderCustomization
+    SliderCustomization
 } from './Customization/SliderCustomization.js'
 
-let customization = new ButtonCustomization("shapeContainer", "click", "-btn",)
-let materialCustomization = new SliderCustomization("MaterialContainer","change")
+let geometryButtons = new ButtonCustomization("shapeContainer", "btn-")
+let materialSliders = new SliderCustomization("MaterialContainer")
 
 let myThree = new MyThree();
 let kandinsky;
@@ -57,6 +57,10 @@ function main() {
     myThree.initialize();
     kandinsky = new Kandinsky(50, 1);
     bpmTimer.setBPM(50);
+
+    geometryButtons.assignEventHandler("click", myThree.switchGeometry)
+    materialSliders.assignEventHandler("change")
+
     animate();
 }
 
@@ -86,6 +90,7 @@ function animate() {
     }
     myThree.render();
     myThree.update();
+    stats.end()
 }
 
 document.body.appendChild(stats.dom);

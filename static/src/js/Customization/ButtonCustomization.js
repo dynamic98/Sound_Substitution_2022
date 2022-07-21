@@ -1,24 +1,24 @@
 export class ButtonCustomization {
 
-    constructor(HTMLClassContainer, event, eraseText) {
+    constructor(HTMLClassContainer, eraseText) {
         this.parameter;
         this.HTMLClassContainer = HTMLClassContainer
-        this.event = event
         this.eraseText = eraseText
+    }
+
+    assignEventHandler(event, callback) {
+        for (let child of $("." + this.HTMLClassContainer)[0].children) {
+            $("#" + child.id).on(event, () => {
+                this.parameter = child.id.replace(this.eraseText, '')
+                console.log(this.parameter)
+                callback(this.parameter)
+            })
+        }
     }
 
     getParameter() {
         return this.parameter
     }
 
-
-    assignEventHandler(callback) {
-        for (let child of $("." + this.HTMLClassContainer)[0].children) {
-            $("#" + child.id).on(this.event, () => {
-                this.pararameter = child.id.replace(this.eraseText, '')
-                callback(parameter)
-            })
-        }
-    }
 
 }

@@ -32,7 +32,8 @@ export class MyThree {
         this.bloom = new Bloom(0, 5, 1);
 
         this.counter = 0;
-        this.createGUI()
+        this.geometryType = "square"
+        this.rotationSpeed = 0.01;
 
     }
 
@@ -68,6 +69,11 @@ export class MyThree {
 
     update() {
         this.pointLight.position.set(this.positionX, this.positionY, 0)
+        this.scene.traverse((obj) => {
+            if (obj.isMesh) {
+                obj.rotation.x += this.rotationSpeed
+            }
+        })
     }
 
     createColor(hue, saturation) {
@@ -77,11 +83,11 @@ export class MyThree {
     }
 
     createMesh(radius, positionX, positionY) {
+        this.radius = radius
         this.positionY = positionY
         this.positionX = positionX * this.counter - 100
 
-        this.switchGeometry(radius)
-        // this.geometry = new THREE.SphereGeometry(radius, 16, 8);
+        this.switchGeometry(this.geometryType)
         this.material = new THREE.MeshPhysicalMaterial({
             transmission: 0.99,
             thickness: 0.1,
@@ -136,38 +142,27 @@ export class MyThree {
     }
 
 
-    switchGeometry(radius) {
-        switch (this.controls.geometry) {
-            case "Sphere":
-                this.geometry = new THREE.SphereGeometry(radius, 16, 8);
+    switchGeometry = (geometry) => {
+        this.geometryType = geometry
+        switch (this.geometryType) {
+            case "circle":
+                this.geometry = new THREE.SphereGeometry(this.radius, 16, 8);
                 break;
-            case "Box":
-                this.geometry = new THREE.BoxGeometry(radius * 2, radius * 2, radius * 2);
+            case "square":
+                this.geometry = new THREE.BoxGeometry(this.radius * 2, this.radius * 2, this.radius * 2);
                 break;
-            case 'Cone':
-                this.geometry = new THREE.ConeGeometry(radius * 2, radius * 2, 8);
+            case 'triangle':
+                this.geometry = new THREE.ConeGeometry(this.radius * 2, 20, 32);
                 break;
-            case 'Cylinder':
-                this.geometry = new THREE.CylinderGeometry(radius, radius, 20, 32);
+            case 'decagon':
+                this.geometry = new THREE.CylinderGeometry(this.radius, this.radius, 10, 32);
+                break;
+            case 'star':
+                //make it yourself hahahaha
                 break;
         }
 
     }
-    createGUI() {
-        this.controls = {
-            geometry: "Sphere"
-        }
-        this.gui = new GUI();
-        this.guiFolder = this.gui.addFolder('Selet Geometry');
-        this.guiFolder.add(this.controls, 'geometry', ["Sphere", "Box", "Cone", "Cylinder"]).listen()
-
-    }
-
-    ForceGeometryChange(ForceGeometry){
-        this.controls.geometry = ForceGeometry;
-        console.log(this.controls);
-    }
-
 
 
 }

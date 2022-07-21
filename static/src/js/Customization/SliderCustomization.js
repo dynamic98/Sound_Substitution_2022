@@ -1,8 +1,11 @@
 export class SliderCustomization {
-    constructor(HTMLClassContainer, event) {
+    constructor(HTMLClassContainer) {
+        this.HTMLClassContainer = HTMLClassContainer
         this.sliderList = {}
+    }
 
-        for (let innerClass of $("." + HTMLClassContainer)[0].children) {
+    assignEventHandler(event) {
+        for (let innerClass of $("." + this.HTMLClassContainer)[0].children) {
             for (let child of innerClass.children) {
                 if (child.localName == "input") {
                     this.sliderList[child.id] = 0;
