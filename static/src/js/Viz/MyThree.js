@@ -180,12 +180,12 @@ export class MyThree {
                 starPoints.push(new THREE.Vector2(-10 / scale, 10 / scale));
 
                 let extrusionSettings = {
-                    size: 4,
+                    size: 1,
                     height: 1,
-                    curveSegments: 3,
+                    curveSegments: 1,
                     bevelThickness: 1,
                     bevelSize: 2,
-                    bevelEnabled: true,
+                    bevelEnabled: false
 
                 };
                 let shape = new THREE.Shape(starPoints);
