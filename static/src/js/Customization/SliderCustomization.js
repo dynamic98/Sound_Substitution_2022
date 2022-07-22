@@ -12,7 +12,6 @@ export class SliderCustomization {
                     $("#" + child.id).on(event, () => {
                         this.sliderList[child.id] = $("#" + child.id).val() / 100
                         callback(this.sliderList)
-
                     })
                 }
             }

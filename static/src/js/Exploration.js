@@ -62,7 +62,8 @@ function main() {
 
     geometryButtons.assignEventHandler("click", myThree.switchGeometry)
     materialSliders.assignEventHandler("change", myThree.setMateriaParamaters)
-    piano.assignEventHandler("mousedown", "mouseup", )
+    piano.assignEventOnPianoRow("mousedown", "mouseup", 1, 4)
+    piano.assignEventOnPianoRow("mousedown", "mouseup", 2, 5)
 
     animate();
 }

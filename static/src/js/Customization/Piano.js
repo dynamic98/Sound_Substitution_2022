@@ -25,44 +25,30 @@ export class Piano {
             11: "B"
         };
     }
-
-    assignEventHandler(onEvent, offEvent) {
-        let firstObject = {}
-        let firstIndex = 0;
-        let secondObject = {}
-        let secondIndex = 0;
+    assignEventOnPianoRow(onEvent, offEvent, pianoRow, pianoOctave) {
+        let object = {}
+        let index = 0;
 
         for (let innerClass of $("." + this.HTMLClassContainer)[0].children) {
             for (let child of innerClass.children) {
-                if (child.className.charAt(child.className.length - 1) == 1) {
-                    firstObject[child.className] = firstIndex;
-                    firstIndex++
+                if (child.className.charAt(child.className.length - 1) == pianoRow) {
+                    object[child.className] = index;
+                    index++
                     document.getElementsByClassName(child.className)[0].addEventListener(onEvent, () => {
-                        this.currentPitch = firstObject[child.className]
-                        this.currentOctave = 4
+                        this.currentPitch = object[child.className]
+                        this.currentOctave = pianoOctave
                         this.playing = true;
                         this.play()
-                    })
-                    document.getElementsByClassName(child.className)[0].addEventListener(offEvent, () => {
-                        this.playing = false;
                     })
 
-                } else if (child.className.charAt(child.className.length - 1) == 2) {
-                    secondObject[child.className] = secondIndex;
-                    secondIndex++
-                    document.getElementsByClassName(child.className)[0].addEventListener(onEvent, () => {
-                        this.currentPitch = secondObject[child.className]
-                        this.currentOctave = 5
-                        this.playing = true;
-                        this.play()
-                    })
-                    document.getElementsByClassName(child.className)[0].addEventListener(offEvent, () => {
-                        this.playing = false;
-                    })
                 }
             }
         }
+        document.addEventListener(offEvent, () => {
+            this.playing = false;
+        })
     }
+
 
     play() {
         this.synth.triggerAttackRelease(this.DictPitch[this.currentPitch] + this.currentOctave.toString(), this.now);
