@@ -70,8 +70,8 @@ export class MyThree {
         this.bloom.initialize(this.scene, this.camera, this.renderer)
         this.textureManager.loadTexture({
             wood: 'static/src/texture/wood.jpeg',
-            paper,
-            rock,
+            // paper,
+            // rock,
         })
     }
 
