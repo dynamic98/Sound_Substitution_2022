@@ -21,8 +21,8 @@ import {
     Piano
 } from './Customization/Piano.js'
 
-let geometryButtons = new ButtonCustomization("shapeContainer", "btn-")
-let materialSliders = new SliderCustomization("MaterialContainer")
+// let geometryButtons = new ButtonCustomization("shapeContainer", "btn-")
+// let materialSliders = new SliderCustomization("materialContainer")
 
 let myThree = new MyThree("circle");
 let kandinsky;
@@ -60,8 +60,8 @@ function main() {
     kandinsky = new Kandinsky(50, 1);
     bpmTimer.setBPM(50);
 
-    geometryButtons.assignEventHandler("click", myThree.switchGeometry)
-    materialSliders.assignEventHandler("change")
+    // geometryButtons.assignEventHandler("click", myThree.switchGeometry)
+    // materialSliders.assignEventHandler("change")
     piano.assignEventHandler("mousedown", "mouseup", )
 
     animate();

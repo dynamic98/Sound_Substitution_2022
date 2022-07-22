@@ -198,9 +198,9 @@ body {
 }
 
 .btn-square-md {
-    margin-top: 80px;
-    margin-left: 20px;
-    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-left: 35px;
+    margin-bottom: 20px;
     width: 60px !important;
     height: 60px !important;
     padding: 0px;
@@ -210,9 +210,8 @@ body {
 }
 
 .btn-circle-md {
-    margin-bottom: 50px;
-    margin-left: 20px;
-    /* margin-left: 50px; */
+    margin-bottom: 30px;
+    margin-left: 35px;
     height: 60px;
     width: 60px;
     clip-path: circle(50% at 50% 50%);
@@ -220,18 +219,16 @@ body {
 
 
 .btn-triangle-md {
-    margin-bottom: 50px;
-    margin-left: 20px;
-    /* margin-left: 50px; */
+    margin-bottom: 30px;
+    margin-left: 35px;
     width: 60px;
     height: 60px;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
 .btn-decagon-md {
-    margin-bottom: 50px;
-    margin-left: 20px;
-    /* margin-left: 50px; */
+    margin-bottom: 30px;
+    margin-left: 35px;
     width: 60px;
     height: 60px;
     clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
@@ -239,9 +236,7 @@ body {
 
 
 .btn-star-md {
-    margin-bottom: 50px;
-    margin-left: 15px;
-    /* margin-left: 50px; */
+    margin-left: 30px;
     width: 70px;
     height: 70px;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
@@ -1029,9 +1024,9 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   .shapeContainer {
     margin-top: 50px;
-    margin-left: 40px;
+    margin-left: 20px;
     box-shadow: 0 10px 20px #dbdbdb;
-    width: 100px;
+    width: 130px;
     height: 800px;
     border-radius: 30px;
     padding: 10px 0px;
@@ -1165,5 +1160,26 @@ div[slider] > input[type=range]::-ms-tooltip {
     background-color: rgb(27, 183, 131);
   }
 
+  .textureButton {
+    margin-left: 30px;
+    width: 70px;
+    height: 70px;
+  }
 
+  .textureContainer {
+      margin-top: 50px;
+      margin-left: 20px;
+      box-shadow: 0 10px 20px #dbdbdb;
+      width: 130px;
+      height: 500px;
+      border-radius: 30px;
+      padding: 10px 0px;
+      background: rgb(255, 255, 255);
+      overflow: auto;
+      float: left;
+    }
+
+  .textureButton {
+    border: 2px solid black;
+  }
 }

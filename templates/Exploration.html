@@ -23,12 +23,28 @@
 
 <body>
   <section class="shapeContainer">
-
     <button type="button" class="btn btn-primary btn-square-md" id="btn-square"></button>
     <button type="button" class="btn btn-primary btn-circle-md" id="btn-circle"></button>
     <button type="button" class="btn btn-primary btn-triangle-md" id="btn-triangle"></button>
     <button type="button" class="btn btn-primary btn-decagon-md" id="btn-decagon"></button>
     <button type="button" class="btn btn-primary btn-star-md" id="btn-star"></button>
+    <hr>
+    <button type="button" class="textureButton" id="none"></button>
+    <button type="button" class="textureButton" id="wood" style="background: url(https://i.dlpng.com/static/png/5436810-free-wood-texture-with-high-resolution-wood-textures-for-photoshop-wood-texture-png-800_600_preview.png)"></button>
+    <button type="button" class="textureButton" id="stone" style="background: url(https://images.unsplash.com/photo-1614213879054-8055538ed867?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80)"></button>
+    <button type="button" class="textureButton" id="paper" style="background: url(https://img.freepik.com/premium-photo/white-watercolor-paper-texture-seamless-square-background-tile-ready-high-quality-texture-extremely-high-resolution_463999-342.jpg)"></button>
+  </section>
+
+  <section class="materialContainer">
+    <div class="customMenu">
+      <p class="smallTitle" style="display:inline;">Transmission</p>
+      <input class="range" id="transmission" type="range" name="intensity" value="0" min="0" max="100"
+        style="display:inline;"></input>
+
+      <p class="smallTitle" style="display:inline;">Roughness</p>
+      <input class="range" id="roughness" type="range" name="intensity" value="0" min="0" max="100"
+        style="display:inline;"></input>
+    </div>
   </section>
 
 
@@ -154,18 +170,6 @@
       <hr>
       <p class="smallTitle" style="display:inline;">세기</p>
       <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
-    </div>
-  </section>
-
-  <section class="MaterialContainer">
-    <div class="customMenu">
-      <p class="smallTitle" style="display:inline;">Transmission</p>
-      <input class="range" id="transmission" type="range" name="intensity" value="0" min="0" max="100"
-        style="display:inline;"></input>
-
-      <p class="smallTitle" style="display:inline;">Roughness</p>
-      <input class="range" id="roughness" type="range" name="intensity" value="0" min="0" max="100"
-        style="display:inline;"></input>
     </div>
   </section>
 
