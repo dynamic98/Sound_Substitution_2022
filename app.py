@@ -6,6 +6,7 @@ import os
 import selenium
 import webbrowser
 from python.WriteHapticCustom import WriteHapticCustom as WHC
+from python.UserCustomization import WriteUserCustom
 from python.HapticCustomize import VirtualBrowser
 
 ##필요한 함수 선언 
@@ -109,6 +110,30 @@ def ajax():
     # ChromeBrowser.SendHapticCustom(UserName, FileName)
     return data
     # return jsonify(result = "success", result2= data)
+
+@app.route('/WriteUserCustom', methods=['POST'])
+def wuc():
+  if request.method == 'POST':
+      word = '구상적 시각화 페이지 입니다.'
+  else:
+    pass
+  return render_template('/loading.html')
+
+@app.route('/SaveUserCustom', methods=['POST'])
+def SaveUserCustom():
+    data = request.get_json()
+    # print(type(data))
+    WriteUserCustom(data)
+    # left = data['left']
+    # right = data['right']
+    # print(UserName)
+    # FileName = WHC(UserName, left, right)
+    # VirtualBrowser(UserName, fileName)
+    # ChromeBrowser.SendHapticCustom(UserName, FileName)
+    return data
+    # return jsonify(result = "success", result2= data)
+
+
 
 @app.route('/separate', methods=['POST'])
 def separate():

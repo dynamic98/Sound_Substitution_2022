@@ -2,18 +2,12 @@ import * as THREE from 'three';
 import {
     Bloom
 } from './Bloom.js'
-import {
-    GUI
-} from 'three/examples/jsm/libs/lil-gui.module.min.js';
-
-
-
 // import {
 //     GridHelper
 // } from 'three/src/helpers/GridHelper.js';
 
 export class MyThree {
-    constructor() {
+    constructor(defaultShape) {
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer({
             antialias: true,
@@ -32,8 +26,17 @@ export class MyThree {
         this.bloom = new Bloom(0, 5, 1);
 
         this.counter = 0;
+
+        this.geometryType = defaultShape
+        this.rotationSpeed = 0.01;
+
+
+        // this.gui = new MyGUI()
+
         this.geometryType = "square"
         this.rotationSpeed = 0.01;
+
+
 
     }
 
@@ -68,6 +71,7 @@ export class MyThree {
     }
 
     update() {
+        this.startTime();
         this.pointLight.position.set(this.positionX, this.positionY, 0)
         this.scene.traverse((obj) => {
             if (obj.isMesh) {
@@ -75,6 +79,11 @@ export class MyThree {
             }
         })
     }
+
+    startTime() {
+        this.counter++
+    }
+
 
     createColor(hue, saturation) {
         const lightness = 0.5
@@ -107,11 +116,11 @@ export class MyThree {
     pickGlowReceivers() {
         const tailStart = 5
         const head = tailStart + 1
-        const tailEnd = this.counter - head
-        if (this.counter > tailStart) {
+        const tailEnd = this.group.children.length - head
+        if (this.group.children.length > tailStart) {
             this.group.children[tailEnd].renderOrder = this.bloom.getPassForMoonLight()
         }
-        this.counter += 1;
+
     }
 
     reset() {
@@ -137,10 +146,8 @@ export class MyThree {
                 this.bloom.restoreToOriginalState(obj.material, obj.uuid)
                 this.bloom.deleteMoonLightPass(obj.uuid);
             }
-
         })
     }
-
 
     switchGeometry = (geometry) => {
         this.geometryType = geometry
@@ -188,6 +195,4 @@ export class MyThree {
         }
 
     }
-
-
 }
