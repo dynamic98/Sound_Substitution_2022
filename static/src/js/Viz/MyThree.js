@@ -32,12 +32,8 @@ export class MyThree {
         this.bloom = new Bloom(0, 5, 1);
 
         this.counter = 0;
-<<<<<<< HEAD
-        // this.gui = new MyGUI()
-=======
         this.geometryType = "square"
         this.rotationSpeed = 0.01;
->>>>>>> 5e9ddb4c5718624bcebf2062de9de6fe69017a40
 
     }
 
@@ -162,7 +158,32 @@ export class MyThree {
                 this.geometry = new THREE.CylinderGeometry(this.radius, this.radius, 10, 32);
                 break;
             case 'star':
-                //make it yourself hahahaha
+                let starPoints = [];
+
+                let scale = this.radius
+                starPoints.push(new THREE.Vector2(0, 10));
+                starPoints.push(new THREE.Vector2(10 / scale, 10 / scale));
+                starPoints.push(new THREE.Vector2(40 / scale, 10 / scale));
+                starPoints.push(new THREE.Vector2(20 / scale, -10 / scale));
+                starPoints.push(new THREE.Vector2(30 / scale, -50 / scale));
+                starPoints.push(new THREE.Vector2(0 / scale, -20 / scale));
+                starPoints.push(new THREE.Vector2(-30 / scale, -50 / scale));
+                starPoints.push(new THREE.Vector2(-20 / scale, -10 / scale));
+                starPoints.push(new THREE.Vector2(-40 / scale, 10 / scale));
+                starPoints.push(new THREE.Vector2(-10 / scale, 10 / scale));
+
+                let extrusionSettings = {
+                    size: 1,
+                    height: 1,
+                    curveSegments: 1,
+                    bevelThickness: 1,
+                    bevelSize: 2,
+                    bevelEnabled: false
+
+                };
+                let shape = new THREE.Shape(starPoints);
+                this.geometry = new THREE.ExtrudeGeometry(shape, extrusionSettings);
+
                 break;
         }
 
