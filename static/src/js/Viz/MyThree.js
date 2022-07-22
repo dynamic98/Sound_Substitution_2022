@@ -36,8 +36,14 @@ export class MyThree {
         this.geometryType = "square"
         this.rotationSpeed = 0.01;
 
-
-
+        this.materialParameters = {
+            transmission: 0.99,
+            thickness: 0.1,
+            roughness: 0.1,
+            color: this.color,
+            clearcoat: 1,
+            clearcoatRoughness: 0.1,
+        }
     }
 
     initialize() {
@@ -97,14 +103,7 @@ export class MyThree {
         this.positionX = positionX * this.counter - 100
 
         this.switchGeometry(this.geometryType)
-        this.material = new THREE.MeshPhysicalMaterial({
-            transmission: 0.99,
-            thickness: 0.1,
-            roughness: 0.1,
-            color: this.color,
-            clearcoat: 1,
-            clearcoatRoughness: 0.1,
-        })
+        this.material = new THREE.MeshPhysicalMaterial(this.materialParameters)
         let mesh = new THREE.Mesh(this.geometry, this.material);
 
         mesh.position.set(this.positionX, this.positionY, 0);
@@ -147,6 +146,14 @@ export class MyThree {
                 this.bloom.deleteMoonLightPass(obj.uuid);
             }
         })
+    }
+
+    setMateriaParamaters(materialParamters) {
+        this.materialParamters.transmission = materialParamters.transmission
+        this.materialParamters.roughness = materialParamters.roughness
+    }
+    setTexture(){
+        
     }
 
     switchGeometry = (geometry) => {
