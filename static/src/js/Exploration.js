@@ -33,7 +33,7 @@ let piano = new Piano("pianoContainer");
 //     0: "C",
 //     1: "C#",
 //     2: "D",
-//     3: "D#",
+//     3: "D#",3
 //     4: "E",
 //     5: "F",
 //     6: "F#",
@@ -61,7 +61,7 @@ function main() {
     bpmTimer.setBPM(50);
 
     geometryButtons.assignEventHandler("click", myThree.switchGeometry)
-    materialSliders.assignEventHandler("change")
+    materialSliders.assignEventHandler("change", myThree.setMateriaParamaters)
     piano.assignEventHandler("mousedown", "mouseup", )
 
     animate();

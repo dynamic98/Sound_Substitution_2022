@@ -1,5 +1,8 @@
 import * as THREE from 'three';
 import {
+    Utility
+} from '../Utility/Utility.js';
+import {
     Bloom
 } from './Bloom.js'
 // import {
@@ -79,11 +82,11 @@ export class MyThree {
     update() {
         this.startTime();
         this.pointLight.position.set(this.positionX, this.positionY, 0)
-        this.scene.traverse((obj) => {
-            if (obj.isMesh) {
-                obj.rotation.x += this.rotationSpeed
-            }
-        })
+        // this.scene.traverse((obj) => {
+        //     if (obj.isMesh) {
+        //         obj.rotation.x += this.rotationSpeed
+        //     }
+        // })
     }
 
     startTime() {
@@ -95,6 +98,7 @@ export class MyThree {
         const lightness = 0.5
         this.color = new THREE.Color();
         this.color.setHSL(hue, saturation, lightness)
+        this.materialParameters.color = this.color
     }
 
     createMesh(radius, positionX, positionY) {
@@ -148,9 +152,9 @@ export class MyThree {
         })
     }
 
-    setMateriaParamaters(materialParamters) {
-        this.materialParamters.transmission = materialParamters.transmission
-        this.materialParamters.roughness = materialParamters.roughness
+    setMateriaParamaters = (materialParameters) => {
+        this.materialParameters.transmission = Utility.mapRange(materialParameters.transmission, 0, 1, 0.9, 1)
+        this.materialParameters.roughness = materialParameters.roughness
     }
     setTexture() {
 
@@ -161,6 +165,7 @@ export class MyThree {
         switch (this.geometryType) {
             case "circle":
                 this.geometry = new THREE.SphereGeometry(this.radius, 16, 8);
+                //this.geometry = new THREE.CircleGeometry(this.radius, 32);
                 break;
             case "square":
                 this.geometry = new THREE.BoxGeometry(this.radius * 2, this.radius * 2, this.radius * 2);
@@ -187,8 +192,8 @@ export class MyThree {
                 starPoints.push(new THREE.Vector2(-10 / scale, 10 / scale));
 
                 let extrusionSettings = {
-                    size: 1,
-                    height: 1,
+                    size: 0,
+                    height: 0,
                     curveSegments: 1,
                     bevelThickness: 1,
                     bevelSize: 2,

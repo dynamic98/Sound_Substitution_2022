@@ -11,11 +11,10 @@ export class ButtonCustomization {
             if ($(child)[0].localName == "button") {
                 $("#" + child.id).on(event, () => {
                     this.parameter = child.id.replace(this.eraseText, '')
-                    console.log(this.parameter)
                     callback(this.parameter)
                 })
             }
-            
+
         }
     }
 
