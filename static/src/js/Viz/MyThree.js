@@ -40,7 +40,7 @@ export class MyThree {
             transmission: 0.99,
             thickness: 0.1,
             roughness: 0.1,
-            color: this.color,
+            color: [255, 255, 255],
             clearcoat: 1,
             clearcoatRoughness: 0.1,
         }
@@ -152,8 +152,8 @@ export class MyThree {
         this.materialParamters.transmission = materialParamters.transmission
         this.materialParamters.roughness = materialParamters.roughness
     }
-    setTexture(){
-        
+    setTexture() {
+
     }
 
     switchGeometry = (geometry) => {

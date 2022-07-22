@@ -105,9 +105,9 @@ document.body.appendChild(stats.dom);
 //     synth.triggerAttackRelease(DictPitch[CurrentPitch] + CurrentOctave.toString(), now);
 // }
 
-document.getElementById("btn-square").addEventListener("click", ()=>{console.log("box");myThree.ForceGeometryChange("Box")});
-document.getElementById("btn-circle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Sphere")});
-document.getElementById("btn-triangle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Cone")});
+// document.getElementById("btn-square").addEventListener("click", ()=>{console.log("box");myThree.ForceGeometryChange("Box")});
+// document.getElementById("btn-circle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Sphere")});
+// document.getElementById("btn-triangle").addEventListener("click", ()=>{myThree.ForceGeometryChange("Cone")});
 
 
 // document.getElementById("Octave2").addEventListener("click", () =>{CurrentOctave = 2});
