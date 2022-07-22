@@ -89,7 +89,7 @@ function animate() {
         kandinsky.calculate(pitchAndEnergy);
         myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
         myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-        myThree.pickGlowReceivers();
+        myThree.pickGlowReceivers(1);
     }
     myThree.render();
     myThree.update();

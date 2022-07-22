@@ -1,14 +1,11 @@
 import * as THREE from 'three';
-import {
-    Utility
-} from '../Utility/Utility.js';
+
 import {
     Bloom
 } from './Bloom.js'
-// import {
-//     GridHelper
-// } from 'three/src/helpers/GridHelper.js';
-
+import {
+    TextureManager
+} from './TextureManager.js';
 export class MyThree {
     constructor(defaultShape) {
         this.scene = new THREE.Scene();
@@ -19,8 +16,8 @@ export class MyThree {
         this.renderer.shadowMap.enabled = true;
         this.pointLight = new THREE.PointLight(0xffffff, 30, 15);
         this.camera = new THREE.PerspectiveCamera(30, this.renderer.domElement.width / this.renderer.domElement.height, 2, 2000);
-        this.ambientLight = new THREE.AmbientLight(0xaaaaaa, 100);
-        this.directionalLight = new THREE.DirectionalLight(0xffffff, 3);
+        this.ambientLight = new THREE.AmbientLight(0x000000, 100);
+        this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
         this.directionalLight.castShadow
 
         this.group = new THREE.Group();
@@ -28,25 +25,26 @@ export class MyThree {
         //threshold, strength, radius
         this.bloom = new Bloom(0, 5, 1);
 
-        this.counter = 0;
+        this.counter = 0
+        this.tailLength
 
         this.geometryType = defaultShape
         this.rotationSpeed = 0.01;
-
-
-        // this.gui = new MyGUI()
 
         this.geometryType = "square"
         this.rotationSpeed = 0.01;
 
         this.materialParameters = {
-            transmission: 0.99,
-            thickness: 0.1,
-            roughness: 0.1,
+            transmission: 0,
+            thickness: 10,
+            roughness: 0,
             color: [255, 255, 255],
             clearcoat: 1,
-            clearcoatRoughness: 0.1,
+            clearcoatRoughness: 0,
+            //texture: null,
         }
+
+        this.textureManager = new TextureManager();
     }
 
     initialize() {
@@ -70,6 +68,11 @@ export class MyThree {
         this.scene.add(this.GridHelper);
 
         this.bloom.initialize(this.scene, this.camera, this.renderer)
+        this.textureManager.loadTexture({
+            wood: 'static/src/texture/wood.jpeg',
+            paper,
+            rock,
+        })
     }
 
     render() {
@@ -106,7 +109,7 @@ export class MyThree {
             this.radius = radius
             this.positionY = positionY
             this.positionX = positionX * this.counter - 100
-
+            this.setTexture("wood")
             this.switchGeometry(this.geometryType)
             this.material = new THREE.MeshPhysicalMaterial(this.materialParameters)
             let mesh = new THREE.Mesh(this.geometry, this.material);
@@ -118,11 +121,11 @@ export class MyThree {
     }
 
 
-    pickGlowReceivers() {
-        const tailStart = 5
-        const head = tailStart + 1
+    pickGlowReceivers(tailLength) {
+        this.tailLength = tailLength
+        const head = this.tailLength + 1
         const tailEnd = this.group.children.length - head
-        if (this.group.children.length > tailStart) {
+        if (this.group.children.length > this.tailLength) {
             this.group.children[tailEnd].renderOrder = this.bloom.getPassForMoonLight()
         }
 
@@ -155,11 +158,12 @@ export class MyThree {
     }
 
     setMateriaParamaters = (materialParameters) => {
-        this.materialParameters.transmission = Utility.mapRange(materialParameters.transmission, 0, 1, 0.9, 1)
+        this.materialParameters.transmission = materialParameters.transmission
         this.materialParameters.roughness = materialParameters.roughness
     }
-    setTexture() {
+    setTexture(textureName) {
 
+        this.materialParameters.map = this.textureManager.getTexture(textureName)
     }
 
     switchGeometry = (geometry) => {

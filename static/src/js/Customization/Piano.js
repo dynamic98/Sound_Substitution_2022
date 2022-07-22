@@ -4,12 +4,10 @@ export class Piano {
         this.currentPitch = 0;
         this.currentOctave = 0;
         this.currentEnergy = 50
+        this.playing = false;
 
         this.now = Tone.now();
         this.synth = new Tone.Synth().toDestination();
-
-        this.playing = false;
-
         this.DictPitch = {
             0: "C",
             1: "C#",
@@ -25,6 +23,7 @@ export class Piano {
             11: "B"
         };
     }
+    
     assignEventOnPianoRow(onEvent, offEvent, pianoRow, pianoOctave) {
         let object = {}
         let index = 0;
@@ -40,7 +39,6 @@ export class Piano {
                         this.playing = true;
                         this.play()
                     })
-
                 }
             }
         }
