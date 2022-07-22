@@ -28,6 +28,7 @@ import {
 } from './Sound/SourceContainer.js';
 
 
+
 //class instances
 //----------------------------------------------------//
 let myThree = new MyThree("circle");
@@ -51,6 +52,7 @@ document.querySelector('[data-action="play"]').addEventListener('click', () => {
 document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
     await sourceContainer.changeSong("static/music/separated/" + song.getFileName());
+
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
 
     kandinsky.setBPM(song.getBPM())
@@ -64,8 +66,8 @@ async function main() {
     //Audio
     // ----------------------------------------------------/
     let response = await song.fetchMusic()
+    console.log(response)
     song.initializeAudioElement(response.url)
-    console.log(response.url)
     song.addNodes()
     song.connectNodes();
     song.createMeydaAnalyser();

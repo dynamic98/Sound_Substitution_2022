@@ -102,17 +102,19 @@ export class MyThree {
     }
 
     createMesh(radius, positionX, positionY) {
-        this.radius = radius
-        this.positionY = positionY
-        this.positionX = positionX * this.counter - 100
+        if (this.counter % 4 == 0) {
+            this.radius = radius
+            this.positionY = positionY
+            this.positionX = positionX * this.counter - 100
 
-        this.switchGeometry(this.geometryType)
-        this.material = new THREE.MeshPhysicalMaterial(this.materialParameters)
-        let mesh = new THREE.Mesh(this.geometry, this.material);
+            this.switchGeometry(this.geometryType)
+            this.material = new THREE.MeshPhysicalMaterial(this.materialParameters)
+            let mesh = new THREE.Mesh(this.geometry, this.material);
 
-        mesh.position.set(this.positionX, this.positionY, 0);
-        mesh.renderOrder = this.bloom.getPassForSunLight()
-        this.group.add(mesh);
+            mesh.position.set(this.positionX, this.positionY, 0);
+            mesh.renderOrder = this.bloom.getPassForSunLight()
+            this.group.add(mesh);
+        }
     }
 
 
