@@ -6,7 +6,7 @@ import os
 import selenium
 import webbrowser
 from python.WriteHapticCustom import WriteHapticCustom as WHC
-from python.UserCustomization import WriteUserCustom
+from python.UserCustomization import WriteUserCustom, GetUserCustom
 from python.HapticCustomize import VirtualBrowser
 
 ##필요한 함수 선언 
@@ -158,6 +158,14 @@ def making_tool():
   else:
     pass
   return render_template('making_tool.html')
+
+@app.route('/custom_data_dev', methods=['POST'])
+def custom_data_dev():
+  if request.method=='POST':
+    data = GetUserCustom(UserName)
+  else:
+    pass
+  return render_template('customization_dev.html', data=data)
 
 # @app.route('/loading', methods=['POST'])
 # def loading():
