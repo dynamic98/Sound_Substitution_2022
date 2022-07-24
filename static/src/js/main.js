@@ -76,8 +76,10 @@ async function main() {
     await song.createOfflineContext(await response.arrayBuffer());
 
     sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/" + song.getFileName());
-    await sourceContainer.initialize();
+    await sourceContainer.initialize().then(
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
+    );
+    // sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
 
     song.setWaveSurferCallback(sourceContainer.syncTime)
 

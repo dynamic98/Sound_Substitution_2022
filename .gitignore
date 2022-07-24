@@ -111,4 +111,6 @@ dist
 
 # MP3 file
 .sampleMP3/
-.static/music/
+.static/music/origin/
+.static/music/separated/
+*.mp3

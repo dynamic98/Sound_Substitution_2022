@@ -60,11 +60,13 @@ export class MyThree {
         this.scene.add(this.directionalLight)
         this.scene.add(this.group);
         this.scene.add(this.pointLight);
-        this.GridHelper = new THREE.GridHelper(400, 100, 0x090909, 0x090909);
+        this.GridHelper = new THREE.GridHelper(400, 100, 0x101010, 0x101010);
         this.GridHelper.rotateX(Math.PI * 0.5);
         this.GridHelper.position.set(0, 0, -100);
         this.GridHelper.receiveShadow = true;
-        // this.GridHelper.renderOrder = this.bloom.getPassForSunLight();
+        // this.GridMesh = new THREE.Mesh(this.GridHelper);
+        // console.log(this.GridMesh.isMesh);
+        this.GridHelper.renderOrder = this.bloom.getPassForMoonLight();
         this.scene.add(this.GridHelper);
 
         this.bloom.initialize(this.scene, this.camera, this.renderer)
@@ -142,7 +144,8 @@ export class MyThree {
 
     checkAllCandidatesForMoonLight() {
         this.scene.traverse((obj) => {
-            if (this.bloom.isWorthyOfMoonLight(obj.isMesh, obj.renderOrder)) {
+            // console.log(obj.type)
+            if (this.bloom.isWorthyOfMoonLight(obj.type, obj.renderOrder)) {
                 this.bloom.giveMoonLight(obj.uuid, obj.material.color)
             }
         })

@@ -73,8 +73,8 @@ export class Bloom {
         return this.passForSunLight
     }
 
-    isWorthyOfMoonLight(isMesh, renderOrder) {
-        if (isMesh && renderOrder == this.passForMoonLight)
+    isWorthyOfMoonLight(ObjType, renderOrder) {
+        if ((ObjType=='Mesh'||ObjType=='GridHelper') && renderOrder == this.passForMoonLight)
             return true
         else {
             return false
