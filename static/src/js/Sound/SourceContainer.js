@@ -20,12 +20,10 @@ export class SourceContainer {
             source.createPitchFinder();
             this.sourceList.push(source);
         }
-        return new Promise((resolve, reject) => {
-            resolve();
-        })
     }
 
     async initialPlay(getWavesurferTime, playWaveSurfer) {
+        console.log(this.sourceList)
         await playWaveSurfer()
         for (let source of this.sourceList) {
             await source.play()
