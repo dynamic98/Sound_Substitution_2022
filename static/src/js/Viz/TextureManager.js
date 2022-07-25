@@ -10,7 +10,7 @@ export class TextureManager {
             this.textureLoader.load(object[key], (texture) => {
                 texture.wrapS = THREE.RepeatWrapping;
                 texture.wrapT = THREE.RepeatWrapping;
-                texture.repeat.set(1, 1);
+                texture.repeat.set(0.1, 0.1);
                 this.textureObject[key] = texture
             })
         }
@@ -19,6 +19,10 @@ export class TextureManager {
         return this.textureObject
     }
     getTexture(textureName) {
-        return this.textureObject[textureName]
+        if (this.textureObject[textureName])
+            return this.textureObject[textureName].offeset
+        else{
+            return
+        }
     }
 }

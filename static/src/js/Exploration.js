@@ -21,7 +21,8 @@ import {
     Piano
 } from './Customization/Piano.js'
 
-let geometryButtons = new ButtonCustomization("shapeContainer", "btn-")
+let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
+let textureButtons = new ButtonCustomization("shapeContainer", "textureButton")
 let materialSliders = new SliderCustomization("materialContainer")
 
 let myThree = new MyThree("circle");
@@ -41,6 +42,7 @@ function main() {
     bpmTimer.setBPM(50);
 
     geometryButtons.assignEventHandler("click", myThree.switchGeometry)
+    textureButtons.assignEventHandler("click", myThree.setTexture)
     materialSliders.assignEventHandler("change", myThree.setMateriaParamaters)
     piano.assignEventOnPianoRow("mousedown", "mouseup", 1, 4)
     piano.assignEventOnPianoRow("mousedown", "mouseup", 2, 5)
@@ -72,6 +74,3 @@ function animate() {
 }
 
 document.body.appendChild(stats.dom);
-
-
-

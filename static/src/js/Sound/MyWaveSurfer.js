@@ -12,6 +12,7 @@ export class MyWaveSurfer {
             progressColor: '#3B8686',
             cursorWidth: 5,
             normalize: true,
+
         });
     }
 

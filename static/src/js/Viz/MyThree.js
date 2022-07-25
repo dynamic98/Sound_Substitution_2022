@@ -71,8 +71,8 @@ export class MyThree {
         this.bloom.initialize(this.scene, this.camera, this.renderer)
         this.textureManager.loadTexture({
             wood: 'static/src/texture/wood.jpeg',
-            // paper,
-            // rock,
+            paper: 'static/src/texture/paper.jpeg',
+            stone: 'static/src/texture/rock.jpeg',
         })
     }
 
@@ -110,7 +110,6 @@ export class MyThree {
             this.radius = radius
             this.positionY = positionY
             this.positionX = positionX * this.counter - 100
-            this.setTexture("wood")
             this.switchGeometry(this.geometryType)
             this.material = new THREE.MeshPhysicalMaterial(this.materialParameters)
             let mesh = new THREE.Mesh(this.geometry, this.material);
@@ -162,8 +161,8 @@ export class MyThree {
         this.materialParameters.transmission = materialParameters.transmission
         this.materialParameters.roughness = materialParameters.roughness
     }
-    setTexture(textureName) {
-
+    setTexture = (textureName) =>{
+        
         this.materialParameters.map = this.textureManager.getTexture(textureName)
     }
 
