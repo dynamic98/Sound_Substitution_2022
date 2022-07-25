@@ -40,7 +40,6 @@ export class MyThree {
             color: [255, 255, 255],
             clearcoat: 1,
             clearcoatRoughness: 0,
-            //texture: null,
         }
 
         this.textureManager = new TextureManager();
