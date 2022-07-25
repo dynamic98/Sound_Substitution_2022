@@ -51,7 +51,7 @@ document.querySelector('[data-action="play"]').addEventListener('click', () => {
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
 document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
-    await sourceContainer.changeSong("static/music/separated/" + song.getFileName());
+    sourceContainer.changeSong("static/music/separated/" + song.getFileName());
 
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
 
@@ -76,19 +76,17 @@ async function main() {
     await song.createOfflineContext(await response.arrayBuffer());
 
     sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/" + song.getFileName());
-    sourceContainer.initialize()
+    await sourceContainer.initialize()
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
-// sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
+    song.setWaveSurferCallback(sourceContainer.syncTime)
 
-song.setWaveSurferCallback(sourceContainer.syncTime)
+    //VISUALS & OTHERS
+    // ----------------------------------------------------/
+    myThree.initialize()
+    kandinsky = new Kandinsky(song.getBPM(), song.getMaxVolume())
+    bpmTimer.setBPM(song.getBPM())
 
-//VISUALS & OTHERS
-// ----------------------------------------------------/
-myThree.initialize()
-kandinsky = new Kandinsky(song.getBPM(), song.getMaxVolume())
-bpmTimer.setBPM(song.getBPM())
-
-animate();
+    animate();
 };
 
 function animate() {

@@ -30,7 +30,7 @@ export class Audio {
     }
 
     initializeAudioElement(url) {
-        this.url=url;
+        this.url = url;
         this.audioElementHandler.initializeAudio(this.url)
     }
 
@@ -76,10 +76,9 @@ export class Audio {
     isPlaying() {
         return !this.audioElementHandler.getAudioElement().paused
     }
-    togglePlay() {
-        this.audioElementHandler.togglePlay();
-    }
-    getURL(){
+
+
+    getURL() {
         return this.url
     }
     setTime(time) {
@@ -151,8 +150,11 @@ export class Song extends Audio {
         //delete .mp3 & add  / in the end
         return this.fileName.substring(0, this.fileName.length - 4) + "/"
     }
-    playWaveSurfer=() => {
+    playWaveSurfer = () => {
         return this.myWaveSurfer.playWaveSurfer()
+    }
+    togglePlay() {
+        this.myWaveSurfer.togglePlay();
     }
 
 }
@@ -163,12 +165,17 @@ export class Source extends Audio {
     constructor(htmlElementID, folderPath) {
         super(htmlElementID, folderPath)
     }
+
     static separatedFileList = ["bass.mp3", "drums.mp3", "other.mp3", "vocals.mp3"];
 
     static getSeparatedFileListLength() {
-        return  Source.separatedFileList.length
+        return Source.separatedFileList.length
     }
-    static getSeparatedFileList(){
+    togglePlay() {
+        this.audioElementHandler.togglePlay();
+    }
+
+    static getSeparatedFileList() {
         return this.separatedFileList
     }
 
@@ -179,7 +186,7 @@ export class Source extends Audio {
         this.audioElementHandler.getAudioElement().play()
     }
 
-    setFolderPath(folderPath){
+    setFolderPath(folderPath) {
         this.audioElementHandler.setFolderPath(folderPath)
-    }    
+    }
 }

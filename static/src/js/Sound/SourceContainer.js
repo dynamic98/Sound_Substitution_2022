@@ -20,16 +20,18 @@ export class SourceContainer {
             source.createPitchFinder();
             this.sourceList.push(source);
         }
+        return new Promise((resolve, reject) => {
+            resolve();
+        })
     }
 
     async initialPlay(getWavesurferTime, playWaveSurfer) {
-        console.log(this.sourceList)
-        await playWaveSurfer()
+
         for (let source of this.sourceList) {
             await source.play()
             source.setTime(getWavesurferTime())
-            source.volume=0.1;
         }
+        playWaveSurfer()
     }
 
     async changeSong(folderPath) {
@@ -62,6 +64,7 @@ export class SourceContainer {
     getList() {
         return this.sourceList
     }
+
 
 
 }
