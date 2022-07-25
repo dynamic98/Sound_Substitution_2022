@@ -78,6 +78,8 @@ async function main() {
     sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/" + song.getFileName());
     sourceContainer.initialize()
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
+    );
+    // sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
 
     song.setWaveSurferCallback(sourceContainer.syncTime)
 
