@@ -10,8 +10,9 @@ export class ThreeSystem {
         this.renderer.shadowMap.enabled = true;
         this.pointLight = new THREE.PointLight(0xffffff, 30, 15);
         this.camera = new THREE.PerspectiveCamera(30, this.renderer.domElement.width / this.renderer.domElement.height, 2, 2000);
-        this.ambientLight = new THREE.AmbientLight(0x000000, 100);
+        this.ambientLight = new THREE.AmbientLight(0xaaaaaa, 100);
         this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
+        this.directionalLight.castShadow
         this.group = new THREE.Group();
     }
 
