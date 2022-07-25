@@ -78,18 +78,17 @@ async function main() {
     sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/" + song.getFileName());
     sourceContainer.initialize()
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
-    );
-    // sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
+// sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
 
-    song.setWaveSurferCallback(sourceContainer.syncTime)
+song.setWaveSurferCallback(sourceContainer.syncTime)
 
-    //VISUALS & OTHERS
-    // ----------------------------------------------------/
-    myThree.initialize()
-    kandinsky = new Kandinsky(song.getBPM(), song.getMaxVolume())
-    bpmTimer.setBPM(song.getBPM())
+//VISUALS & OTHERS
+// ----------------------------------------------------/
+myThree.initialize()
+kandinsky = new Kandinsky(song.getBPM(), song.getMaxVolume())
+bpmTimer.setBPM(song.getBPM())
 
-    animate();
+animate();
 };
 
 function animate() {
