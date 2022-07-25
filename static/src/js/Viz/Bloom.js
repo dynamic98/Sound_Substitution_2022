@@ -19,8 +19,8 @@ export class Bloom {
         this.bloomPass.strength = strength
         this.bloomPass.radius = radius
 
-        this.passForSunLight = 1;
-        this.passForMoonLight = 0;
+        this.PASSFORSUNLIGHT = 1;
+        this.PASSFORMOONLIGHT = 0;
 
         this.moonLightReceiverList = []
     }
@@ -66,15 +66,15 @@ export class Bloom {
     }
 
     getPassForMoonLight() {
-        return this.passForMoonLight
+        return this.PASSFORMOONLIGHT
     }
 
     getPassForSunLight() {
-        return this.passForSunLight
+        return this.PASSFORSUNLIGHT
     }
 
     isWorthyOfMoonLight(isMesh, renderOrder) {
-        if (isMesh && renderOrder == this.passForMoonLight)
+        if (isMesh && renderOrder == this.PASSFORMOONLIGHT)
             return true
         else {
             return false

@@ -32,7 +32,6 @@ export class MyThree {
         this.rotationSpeed = 0.01;
 
         this.geometryType = "square"
-        this.rotationSpeed = 0.01;
 
         this.materialParameters = {
             transmission: 0,
