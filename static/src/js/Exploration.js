@@ -1,7 +1,7 @@
 // import * as Tone from "tone";
 import {
-    MyThree
-} from './Viz/MyThree.js';
+    Visualization
+} from './Viz/Visualization.js'
 import {
     Kandinsky
 } from './Viz/Kandinsky.js'
@@ -15,35 +15,30 @@ import {
     ButtonCustomization
 } from './Customization/ButtonCustomization.js'
 import {
-    SliderCustomization
-} from './Customization/SliderCustomization.js'
-import {
     Piano
 } from './Customization/Piano.js'
 
 let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
 let textureButtons = new ButtonCustomization("shapeContainer", "textureButton")
-let materialSliders = new SliderCustomization("materialContainer")
 
-let myThree = new MyThree("circle");
 let kandinsky;
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
 let piano = new Piano("pianoContainer");
 
 let switcher = new Switcher();
+let visualization = new Visualization()
 
 
 main();
 
 function main() {
-    myThree.initialize();
+    visualization.initialize();
     kandinsky = new Kandinsky(50, 1);
     bpmTimer.setBPM(50);
 
-    geometryButtons.assignEventHandler("click", myThree.switchGeometry)
-    textureButtons.assignEventHandler("click", myThree.setTexture)
-    materialSliders.assignEventHandler("change", myThree.setMateriaParamaters)
+    geometryButtons.assignEventHandler("click", visualization.getGeometryManager().setGeometryType)
+    textureButtons.assignEventHandler("click", visualization.getTextureManager().setTexture)
     piano.assignEventOnPianoRow("mousedown", "mouseup", 1, 4)
     piano.assignEventOnPianoRow("mousedown", "mouseup", 2, 5)
 
@@ -54,22 +49,21 @@ function animate() {
     requestAnimationFrame(animate);
     stats.begin()
     if (!bpmTimer.isUnderFourBeat()) {
-        myThree.reset();
+        visualization.reset();
     }
     //under 4 beat = calculate and create Geomtry 
     else if (bpmTimer.isUnderFourBeat() & piano.isPlaying()) {
 
-
         let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
 
-
         kandinsky.calculate(pitchAndEnergy);
-        myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-        myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-        myThree.pickGlowReceivers(1);
+        //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+        visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+        
     }
-    myThree.render();
-    myThree.update();
+
+    visualization.render();
+    visualization.update();
     stats.end()
 }
 

@@ -7,7 +7,7 @@ export class SourceContainer {
         this.htmlElementID = htmlElementID
         this.path = path;
         this.sourceList = []
-    }
+    }V
 
     async initialize() {
         for (let i = 0; i < Source.getSeparatedFileListLength(this.htmlElementID); i++) {

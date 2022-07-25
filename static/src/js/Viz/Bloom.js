@@ -13,7 +13,7 @@ import {
 } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 export class Bloom {
-    constructor(threshold, strength, radius) {
+    constructor(threshold, strength, radius, tailLength) {
         this.bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth / 2.24, window.innerHeight / 2.1), 1.5, 0.4, 0.85);
         this.bloomPass.threshold = threshold
         this.bloomPass.strength = strength
@@ -23,6 +23,11 @@ export class Bloom {
         this.PASSFORMOONLIGHT = 0;
 
         this.moonLightReceiverList = []
+
+        this.tailLength = tailLength
+        this.head = this.tailLength + 1;
+
+
     }
 
     initialize(scene, camera, renderer) {
@@ -74,7 +79,7 @@ export class Bloom {
     }
 
     isWorthyOfMoonLight(ObjType, renderOrder) {
-        if ((ObjType == 'Mesh' || ObjType == 'GridHelper') && renderOrder ==  this.PASSFORMOONLIGHT) {
+        if ((ObjType == 'Mesh' || ObjType == 'GridHelper') && renderOrder == this.PASSFORMOONLIGHT) {
             return true
         } else {
             return false
@@ -107,5 +112,12 @@ export class Bloom {
 
     deleteMoonLightPass(name) {
         delete this.moonLightReceiverList[name];
+    }
+
+    pickGlowReceivers(groupChildren) {
+        const tailEnd = groupChildren.length - this.head
+        if (groupChildren.length > this.tailLength) {
+            groupChildren[tailEnd].renderOrder = this.getPassForMoonLight()
+        }
     }
 }
