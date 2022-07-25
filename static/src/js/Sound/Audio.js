@@ -82,6 +82,9 @@ export class Audio {
     getURL(){
         return this.url
     }
+    setTime(time) {
+        this.audioElementHandler.setTime(time);
+    }
 }
 
 //----------------------------------------------------//
@@ -173,9 +176,6 @@ export class Source extends Audio {
         this.audioElementHandler.getAudioElement().play()
     }
 
-    setTime(time) {
-        this.audioElementHandler.setTime(time);
-    }
     setFolderPath(folderPath){
         this.audioElementHandler.setFolderPath(folderPath)
     }    
