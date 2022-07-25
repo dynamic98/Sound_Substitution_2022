@@ -28,6 +28,7 @@ export class SourceContainer {
         for (let source of this.sourceList) {
             await source.play()
             source.setTime(getWavesurferTime())
+            source.volume=0.1;
         }
     }
 

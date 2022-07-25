@@ -144,6 +144,9 @@ export class Song extends Audio {
     getWaveSurferTime = () => {
         return this.myWaveSurfer.getWavesurfer().getCurrentTime()
     }
+    setTime(time) {
+        this.audioElementHandler.setTime(time);
+    }
     getFileName() {
         //delete .mp3 & add  / in the end
         return this.fileName.substring(0, this.fileName.length - 4) + "/"

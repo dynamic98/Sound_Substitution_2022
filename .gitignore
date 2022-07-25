@@ -111,6 +111,7 @@ dist
 
 # MP3 file
 .sampleMP3/
+
 .static/music/
 static/music/original/1-11_Staring_At_The_Sun_Feat._SZA.mp3
 static/music/original/1-17_Wow..mp3
@@ -147,3 +148,7 @@ static/music/separated/tiny_riot/bass.mp3
 static/music/separated/tiny_riot/drums.mp3
 static/music/separated/tiny_riot/other.mp3
 static/music/separated/tiny_riot/vocals.mp3
+.static/music/origin/
+.static/music/separated/
+*.mp3
+
