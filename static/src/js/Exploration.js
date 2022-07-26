@@ -29,42 +29,40 @@ let piano = new Piano("pianoContainer");
 let switcher = new Switcher();
 let visualization = new Visualization()
 
+document.body.appendChild(stats.dom);
 
-main();
+
+main()
 
 function main() {
     visualization.initialize();
-    kandinsky = new Kandinsky(50, 1);
-    bpmTimer.setBPM(50);
+    bpmTimer.setBPMByMeshCount(8)
+    kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
 
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
-    piano.assignEventOnPianoRow("mousedown", "mouseup", 1, 4)
-    piano.assignEventOnPianoRow("mousedown", "mouseup", 2, 5)
+    piano.assignEventOnPianoRow("click", draw, 1, 4)
+    piano.assignEventOnPianoRow("click", draw, 2, 5)
 
-    animate();
+    update();
 }
 
-function animate() {
-    requestAnimationFrame(animate);
+function update() {
     stats.begin()
+    requestAnimationFrame(update);
     if (!bpmTimer.isUnderFourBeat()) {
         visualization.reset();
+    } else {
+        visualization.render();
+        visualization.update();
     }
-    //under 4 beat = calculate and create Geomtry 
-    else if (bpmTimer.isUnderFourBeat() & piano.isPlaying()) {
-
-        let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
-
-        kandinsky.calculate(pitchAndEnergy);
-        //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-        visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-        visualization.createConnectonLine()
-    }
-
-    visualization.render();
-    visualization.update();
-    stats.end()
+    stats.end();
 }
 
-document.body.appendChild(stats.dom);
+function draw() {
+    let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
+    kandinsky.calculate(pitchAndEnergy);
+    //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+    visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+    visualization.createConnectonLine()
+}

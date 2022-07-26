@@ -40,16 +40,15 @@ export class Visualization {
         this.threeSystem = new ThreeSystem()
         //size, color,position
         this.grid = new Grid([400, 100], 0x101010, [0, 0, -100])
-        //threshold, strength, radius
-        this.bloom = new Bloom(0, 5, 1, 5);
+        //threshold, strength, radius // tail 
+        this.bloom = new Bloom(0, 5, 1, 1, this.threeSystem.getRendererSize());
         this.textureManager = new TextureManager();
         this.materialManager = new MaterialManager()
         this.geometryManager = new GeometryManager("circle")
 
-
         this.visualNoteList = []
         this.color = new Color(1, 1, 1)
-        this.counterTimer = new CounterTimer();
+        this.counterTimer = new CounterTimer(1);
         this.visualNoteList = []
 
     }
@@ -72,11 +71,10 @@ export class Visualization {
 
         this.grid.setRenderOption(this.bloom.getPassForMoonLight())
         this.threeSystem.addToScene(this.grid.getGrid())
+        // this.counterTimer.setSpeed(this.threeSystem.getRendererSize().width, 100)
     }
 
     createVisualNote(radius, positionX, positionY) {
-
-
         this.geometryManager.setRadius(radius)
         let newPositionX = positionX * this.counterTimer.getTimer() - 100
         this.threeSystem.updateLightPosition(newPositionX, positionY)
@@ -94,7 +92,6 @@ export class Visualization {
         visualNote.setRenderOption(this.bloom.getPassForSunLight())
         this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
         this.visualNoteList.push(visualNote)
-
     }
 
     createConnectonLine() {
@@ -108,7 +105,6 @@ export class Visualization {
     }
 
     render() {
-
         this.checkAllCandidatesForMoonLight()
         this.bloom.renderBloom()
         this.checkAllCandidatesForRestoration()
@@ -142,8 +138,11 @@ export class Visualization {
             }
         })
     }
-    setColor() {
-        return this.color.setColor
+
+    //getter & settter
+    //------------------------------------------------------------------// 
+    setColor(hue, saturation) {
+        this.color.setColor(hue, saturation)
     }
 
     setGeometryType = (geometryType) => {
@@ -151,6 +150,9 @@ export class Visualization {
     }
     setTexture = (textureType) => {
         return this.textureManager.setTexture(textureType)
+    }
+    getRendererSize() {
+        return this.threeSystem.getRendererSize()
     }
 
 }

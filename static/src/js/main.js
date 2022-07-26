@@ -105,9 +105,9 @@ function animate() {
             let pitchAndEnergy = switcher.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
 
             kandinsky.calculate(pitchAndEnergy);
-            visualization.getColor().setColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+            visualization.setColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
             visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-           
+
         }
         visualization.render();
         visualization.update();

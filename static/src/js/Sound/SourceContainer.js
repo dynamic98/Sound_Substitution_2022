@@ -6,8 +6,8 @@ export class SourceContainer {
     constructor(htmlElementID, path) {
         this.htmlElementID = htmlElementID
         this.path = path;
-        this.sourceList = []
-    }V
+        this.sourceList = [] // 0 bass, 1 drums 2 other 3 vocals
+    }
 
     async initialize() {
         for (let i = 0; i < Source.getSeparatedFileListLength(this.htmlElementID); i++) {
@@ -65,6 +65,13 @@ export class SourceContainer {
         return this.sourceList
     }
 
-
-
+    // 0 bass, 1 drums 2 other 3 vocals
+    getSource(sourceName) {
+        for (let source of this.sourceList) {
+            if (sourceName == source.getFileName()) {
+                return source
+            }
+        }
+        console.error(`Source Name Incorrect. Only "bass", "drums", "other", "vocals" are available`)
+    }
 }

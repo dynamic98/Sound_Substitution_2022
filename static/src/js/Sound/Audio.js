@@ -27,6 +27,7 @@ export class Audio {
         this.myOffCxt;
         this.audioNodeManager
         this.url
+        this.fileName;
     }
 
     initializeAudioElement(url) {
@@ -77,7 +78,6 @@ export class Audio {
         return !this.audioElementHandler.getAudioElement().paused
     }
 
-
     getURL() {
         return this.url
     }
@@ -94,7 +94,7 @@ export class Song extends Audio {
         this.selectMusicElement = document.getElementById("select-music");
         this.myWaveSurfer = new MyWaveSurfer();
         this.myOffCxt;
-        this.fileName;
+
         for (let index in this.audioElementHandler.getFileObject()) {
             this.selectMusicElement.options[this.selectMusicElement.options.length] = new Option(this.audioElementHandler.getFileObject()[index], index);
         }
@@ -180,7 +180,8 @@ export class Source extends Audio {
     }
 
     fetchMusic(fileIndex) {
-        return super.fetchMusic(Source.getSeparatedFileList()[fileIndex]);
+        this.fileName = Source.getSeparatedFileList()[fileIndex]
+        return super.fetchMusic(this.fileName);
     }
     play() {
         this.audioElementHandler.getAudioElement().play()
@@ -188,5 +189,8 @@ export class Source extends Audio {
 
     setFolderPath(folderPath) {
         this.audioElementHandler.setFolderPath(folderPath)
+    }
+    getFileName() {
+        return this.fileName.substring(0, this.fileName.length - 4)
     }
 }

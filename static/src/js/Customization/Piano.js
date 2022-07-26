@@ -4,7 +4,7 @@ export class Piano {
         this.currentPitch = 0;
         this.currentOctave = 0;
         this.currentEnergy = 50
-        this.playing = false;
+
 
         this.now = Tone.now();
         this.synth = new Tone.Synth().toDestination();
@@ -24,7 +24,7 @@ export class Piano {
         };
     }
 
-    assignEventOnPianoRow(onEvent, offEvent, pianoRow, pianoOctave) {
+    assignEventOnPianoRow(onEvent, callback, pianoRow, pianoOctave) {
         let object = {}
         let index = 0;
 
@@ -36,15 +36,13 @@ export class Piano {
                     document.getElementsByClassName(child.className)[0].addEventListener(onEvent, () => {
                         this.currentPitch = object[child.className]
                         this.currentOctave = pianoOctave
-                        this.playing = true;
+                        callback();
                         this.play()
                     })
                 }
             }
         }
-        document.addEventListener(offEvent, () => {
-            this.playing = false;
-        })
+
     }
 
 
@@ -70,10 +68,7 @@ export class Piano {
     setCurrentEnergy(value) {
         this.currentEnergy = value
     }
-    isPlaying() {
 
-        return this.playing
-    }
 }
 
 

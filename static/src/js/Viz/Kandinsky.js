@@ -3,10 +3,11 @@ import {
 } from "../Utility/Utility";
 
 export class Kandinsky {
-    constructor(bpm, MaxVolume = 1, canvasSize = 40) {
+    constructor(bpm, MaxVolume = 1, ) {
         this.bpm = bpm;
         this.MaxVolume = MaxVolume;
-        this.canvasSize = canvasSize
+        this.canvasSizeY = 40
+        this.canvasSizeX = 200
         this.MIDISCOPE = 23;
         // this.midiScope=35;
 
@@ -31,22 +32,21 @@ export class Kandinsky {
         this.tone;
     }
 
-    calculate([pitch, energy], frameRate = 13) {
+    calculate([pitch, energy], frameRate = 60) {
 
         this.pitch = pitch;
         this.energy = energy / this.MaxVolume;
         // console.log(this.MaxVolume);
-
-        this.pitchHeight = this.canvasSize / this.MIDISCOPE / 2
-        this.pitchWidth = this.canvasSize / (60 * 4 * frameRate / this.bpm) // 
-
+        this.pitchHeight = this.canvasSizeY / this.MIDISCOPE / 2
+        this.pitchWidth = this.canvasSizeX / (60 * frameRate / this.bpm * 4) // 
+        //total frameRate per minute   / 4 bpm 
         this.octave = Math.floor((pitch) / 12) - 1; //옥타브 구하는 방식
         this.tone = (pitch) % 12;
         // Make reminder positive integer
 
-        if (this.energy < 0.15) {
-            this.energy = 0;
-        }
+        // if (this.energy < 0.15) {
+        //     this.energy = 0;
+        // }
     }
 
     getNormalizedTone() {
