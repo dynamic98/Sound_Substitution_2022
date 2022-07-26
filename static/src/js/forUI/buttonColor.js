@@ -18,9 +18,16 @@ const texture_stone = document.getElementById("stone");
 const texture_paper = document.getElementById("paper");
 
 
+const pitch_button = document.getElementById("pitchButton");
+const beat_button = document.getElementById("beatButton");
+
+
 const transparent = '#FFFFFF';
 const red = '#FF5C5C';
 const black = '#221E21';
+const green = '#00AE68';
+
+
 
 let now_shape = '';
 
@@ -28,6 +35,7 @@ let now_shape = '';
 shapeColorChange();
 paletteColorChange();
 textureColorChange();
+menuColorChange();
 
 
 function shapeColorChange() {
@@ -155,9 +163,43 @@ function paletteColorChange() {
 
 function textureColorChange() {
     texture_none.addEventListener("click", () => {
-        texture_none.style.borderColor = red;
-        texture_wood.style.borderColor = transparent;
+        texture_none.style.outlineColor = red;
+        texture_wood.style.outlineColor = transparent;
         texture_stone.style.borderColor = transparent;
         texture_paper.style.borderColor = transparent;
+    });
+
+    texture_wood.addEventListener("click", () => {
+        texture_none.style.borderColor = transparent;
+        texture_wood.style.borderColor = red;
+        texture_stone.style.borderColor = transparent;
+        texture_paper.style.borderColor = transparent;
+    });
+
+    texture_stone.addEventListener("click", () => {
+        texture_none.style.borderColor = transparent;
+        texture_wood.style.borderColor = transparent;
+        texture_stone.style.borderColor = red;
+        texture_paper.style.borderColor = transparent;
+    });
+
+    texture_paper.addEventListener("click", () => {
+        texture_none.style.borderColor = transparent;
+        texture_wood.style.borderColor = transparent;
+        texture_stone.style.borderColor = transparent;
+        texture_paper.style.borderColor = red;
+    });
+}
+
+
+function menuColorChange() {
+    pitch_button.addEventListener("click", () => {
+        pitch_button.style.background = red;
+        beat_button.style.background = green;
+    });
+
+    beat_button.addEventListener("click", () => {
+        pitch_button.style.background = green;
+        beat_button.style.background = red;
     });
 }

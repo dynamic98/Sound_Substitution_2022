@@ -27,7 +27,7 @@ export class Pitch {
 	 getPitch(){
 		 const values = this.analyser.getValue()
 		 let { freq, probability } = this._pichfinder(values)
- 
+		
 		 //some smoothing
 		 if (freq < 30){
 			 probability = 0
@@ -42,10 +42,10 @@ export class Pitch {
 		 }
  
 		 const pitch = this._getMedian()
- 
+		 
 		 const note = pitch === -1 ? 0 : Tone.Frequency(pitch).toNote()
 		 const midi = pitch === -1 ? 0 : Tone.Frequency(pitch).toMidi()
- 
+
 		 return {
 			 frequency : pitch,
 			 confidence : this._smoothedProb,

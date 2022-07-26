@@ -100,6 +100,15 @@ function animate() {
     if (song.isPlaying()) {
         //debug frame rate
         //over 4 beat = delet drawing
+        // console.log('original pitch', song.getPitch()) // mixed song
+        // console.log('original max chroma', song.getMaxChroma())
+        console.log('vocal pitch', sourceContainer.getList()[3].getPitch());  // vocal
+        // console.log('bass max chorma', sourceContainer.getList()[3].getMaxChroma())
+        // console.log(sourceContainer.getList()[0].getEnergy(), "Bass")
+        // console.log(sourceContainer.getList()[1].getEnergy(), "drums")
+        // console.log(sourceContainer.getList()[2].getEnergy(), "other")
+        // console.log(sourceContainer.getList()[3].getEnergy(), "vocals")
+
         if (!bpmTimer.isUnderFourBeat()) {
             myThree.reset();
         }

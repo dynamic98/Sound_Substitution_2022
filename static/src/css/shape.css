@@ -8,7 +8,7 @@ body {
 
 
 .colorContainer {
-  margin-top: 40px;
+  margin-top: 10px;
   height: 85%;
   width: 8%;
   border-radius: 1rem;
@@ -22,7 +22,7 @@ body {
   display: flex;
   height: 10%;
   width: 100%;
-  border: 7px solid transparent;
+  border: 5px solid transparent;
 }
 
 .palette .color {
@@ -181,7 +181,7 @@ body {
 
 
 .shapeContainer {
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: 30px;
     box-shadow: 0 10px 20px #dbdbdb;
     width: 100px;
@@ -227,11 +227,11 @@ body {
 }
 
 .btn-decagon-md {
-    margin-bottom: 30px;
-    margin-left: 35px;
-    width: 60px;
-    height: 60px;
-    clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+  margin-bottom: 30px;
+  margin-left: 35px;
+  width: 60px;
+  height: 60px;
+  clip-path: polygon(61% 25%, 53% 0%, 42% 24%, 15% 5%, 26% 32%, 2% 25%, 24% 47%, 1% 54%, 25% 61%, 5% 82%, 35% 75%, 30% 96%, 52% 77%, 79% 95%, 73% 74%, 100% 83%, 80% 62%, 100% 42%, 76% 37%, 87% 10%);
 }
 
 
@@ -778,6 +778,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   border-top-color: transparent;
 }
 
+
 [slider] > div > [sign] > span {
   font-size: 12px;
   font-weight: 700;
@@ -789,14 +790,56 @@ div[slider] > input[type=range]::-ms-tooltip {
 }
 
 
+.btnBlueGreen {
+  width: 100px;
+  height: 50px;
+  padding: 0;
+  margin: 10px 20px 10px 0;
+  font-weight: 600;
+  text-align: center;
+  line-height: 50px;
+  color: #FFF;
+  border-radius: 5px;
+  transition: all 0.2s ;
+  background: #00AE68;
+}
+
+.btnBlueGreen.btnPush {
+  box-shadow: 0px 5px 0px 0px #104630;
+}
+
+
+
+
 @media (min-width: 1500px) {
+  .menuContainer {
+    margin-top: 10px;
+    margin-left: 40px;
+  }
+
+  #pitchButton{
+    width: 100px;
+    height: 50px;
+  }
+
+  #beatButton{
+    width: 100px;
+    height: 50px;
+  }
+
+  /* .separator{
+    width: 300px;
+    height: 800px;
+  } */
+
+
   /* piano UI */
   
   .pianoContainer {
     position: absolute;
     bottom: 0px;
-    margin-left: 340px;
-    margin-bottom: -100px;
+    margin-left: 300px;
+    margin-bottom: -150px;
     overflow: auto;
   }
 
@@ -843,7 +886,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   ul .white {
     margin-top: 200px;
     height:8em;
-    width:4.3em;
+    width:3.2em;
     z-index:1;
     border-left:1px solid #bbb;
     border-bottom:1px solid #bbb;
@@ -864,11 +907,11 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   .black {
     height:4em;
-    width:2.6em;
+    width:2.2em;
     margin:0 0 0 -1em;
     margin-top: 200px;
     margin-right: -1.5em;
-    margin-left: -1.5em;
+    margin-left: -1.2em;
     z-index:2;
     border:1px solid #000;
     border-radius:0 0 3px 3px;
@@ -878,7 +921,6 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   .black:active {
     margin-top: 200px;
-    /* margin-left: -1em; */
     box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -2px 2px 3px rgba(0,0,0,0.6) inset,0 1px 2px rgba(0,0,0,0.5);
     background:linear-gradient(to right,#444 0%,#222 100%)
   }
@@ -893,6 +935,40 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   ul li:last-child {
     border-radius:0 5px 5px 5px
+  }
+
+
+  /* visual menu UI*/
+
+  .visualContainer_pitch {
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px #dbdbdb;
+    margin-top: 130px;
+    display: inline-block;
+    margin-left: 1100px;
+    width: 500px;
+    float: right;
+    height: 20%;
+  }
+
+  .visualContainer_beat {
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px #dbdbdb;
+    margin-top: 370px;
+    display: inline-block;
+    margin-left: 1100px;
+    width: 500px;
+    float: right;
+    height: 8%;
+  }
+
+
+  .customMenu {
+    margin-left: 20px;
   }
 
   /* haptic menu UI*/
@@ -1015,15 +1091,14 @@ div[slider] > input[type=range]::-ms-tooltip {
   .sheetContainer {
     position: absolute;
     border-radius: 0.3rem;
-    margin-top: 60px;
+    margin-top: 20px;
     display: inline-block;
-    margin-left: 150px;
+    margin-left: 20px;
     width: 1px;
     height: 1px;
   }
 
   .shapeContainer {
-    margin-top: 50px;
     margin-left: 20px;
     box-shadow: 0 10px 20px #dbdbdb;
     width: 130px;
@@ -1161,9 +1236,11 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
 
   .textureButton {
-    margin-left: 30px;
-    width: 70px;
-    height: 70px;
+    margin-top: 10px;
+    margin-left: 40px;
+    width: 60px;
+    height: 60px;
+    outline: 5px solid transparent;
   }
 
   .textureContainer {
@@ -1179,7 +1256,4 @@ div[slider] > input[type=range]::-ms-tooltip {
       float: left;
     }
 
-  .textureButton {
-    border: 2px solid black;
-  }
 }
