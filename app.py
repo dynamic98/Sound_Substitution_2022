@@ -157,7 +157,7 @@ def making_tool():
     word = '구상적 시각화 페이지 입니다.'
   else:
     pass
-  return render_template('making_tool.html')
+  return render_template('Exploration copy.html')
 
 @app.route('/custom_data_dev', methods=['POST'])
 def custom_data_dev():
