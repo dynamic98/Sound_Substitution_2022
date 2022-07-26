@@ -15,8 +15,10 @@ import {
 } from "./Bloom";
 
 import {
+    ConnectionLine,
     VisualNote
-} from "./VisualNote";
+} from "./Mesh";
+
 import {
     GeometryManager
 } from "./GeometryManager";
@@ -32,6 +34,7 @@ import {
     CounterTimer
 } from "../Utility/CounterTimer";
 
+
 export class Visualization {
     constructor() {
         this.threeSystem = new ThreeSystem()
@@ -41,10 +44,13 @@ export class Visualization {
         this.bloom = new Bloom(0, 5, 1, 5);
         this.textureManager = new TextureManager();
         this.materialManager = new MaterialManager()
-        this.geometryManager = new GeometryManager("circle");
+        this.geometryManager = new GeometryManager("circle")
+
+
         this.visualNoteList = []
         this.color = new Color(1, 1, 1)
         this.counterTimer = new CounterTimer();
+        this.visualNoteList = []
 
     }
 
@@ -69,28 +75,40 @@ export class Visualization {
     }
 
     createVisualNote(radius, positionX, positionY) {
-        if (this.counterTimer.getTimer() % 100) {
-            this.geometryManager.setRadius(radius)
-            let newPositionX = positionX * this.counterTimer.getTimer() - 100
-            this.threeSystem.updateLightPosition(newPositionX, positionY)
 
-            let texture = this.textureManager.getTexture()
-            let color = this.color.getColor();
-            let visualNote = new VisualNote(
 
-                this.materialManager.createMaterial(color, texture),
+        this.geometryManager.setRadius(radius)
+        let newPositionX = positionX * this.counterTimer.getTimer() - 100
+        this.threeSystem.updateLightPosition(newPositionX, positionY)
 
-                this.geometryManager.getGeometry(),
-                newPositionX,
-                positionY
-            )
-            visualNote.setRenderOption(this.bloom.getPassForSunLight())
-            this.threeSystem.addToGroup(visualNote.getMesh())
-        }
+        let texture = this.textureManager.getTexture()
+        let color = this.color.getColor();
+        let visualNote = new VisualNote(
+
+            this.materialManager.createMaterial(color, texture),
+
+            this.geometryManager.getGeometry(),
+            newPositionX,
+            positionY
+        )
+        visualNote.setRenderOption(this.bloom.getPassForSunLight())
+        this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
+        this.visualNoteList.push(visualNote)
 
     }
 
+    createConnectonLine() {
+        if (this.visualNoteList.length > 1 && ConnectionLine.isVisible()) {
+            let secondLastPoint = this.visualNoteList[this.visualNoteList.length - 2].getPosition()
+            let lastPoint = this.visualNoteList[this.visualNoteList.length - 1].getPosition()
+
+            let connectionLine = new ConnectionLine(secondLastPoint, lastPoint);
+            this.threeSystem.addToGroup(connectionLine.getMesh(), ConnectionLine.name)
+        }
+    }
+
     render() {
+
         this.checkAllCandidatesForMoonLight()
         this.bloom.renderBloom()
         this.checkAllCandidatesForRestoration()
@@ -99,13 +117,13 @@ export class Visualization {
 
     update() {
         this.counterTimer.start();
-
-        this.bloom.pickGlowReceivers(this.threeSystem.getElementsInScene())
+        this.bloom.pickGlowReceivers(this.visualNoteList)
     }
 
     reset() {
         this.threeSystem.reset()
         this.counterTimer.reset();
+        this.visualNoteList = []
     }
 
     checkAllCandidatesForMoonLight() {
@@ -124,14 +142,15 @@ export class Visualization {
             }
         })
     }
-    getColor(){
-        return this.color
+    setColor() {
+        return this.color.setColor
     }
 
-    getGeometryManager() {
-        return this.geometryManager
+    setGeometryType = (geometryType) => {
+        return this.geometryManager.setGeometryType(geometryType)
     }
-    getTextureManager() {
-        return this.textureManager
+    setTexture = (textureType) => {
+        return this.textureManager.setTexture(textureType)
     }
+
 }

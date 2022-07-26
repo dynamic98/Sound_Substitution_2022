@@ -13,7 +13,9 @@ export class ThreeSystem {
         this.ambientLight = new THREE.AmbientLight(0xaaaaaa, 100);
         this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
         this.directionalLight.castShadow
-        this.group = new THREE.Group();
+        this.groups = {
+
+        }
     }
 
     initialize() {
@@ -27,16 +29,13 @@ export class ThreeSystem {
 
         this.scene.add(this.ambientLight);
         this.scene.add(this.directionalLight)
-        this.scene.add(this.group);
         this.scene.add(this.pointLight);
     }
 
     getScene() {
         return this.scene
     }
-    getGroup() {
-        return this.group
-    }
+
     getCamera() {
         return this.camera
     }
@@ -46,12 +45,14 @@ export class ThreeSystem {
     addToScene(element) {
         this.scene.add(element)
     }
-    addToGroup(element) {
-        console.log(this.group)
-        this.group.add(element)
-    }
-    getElementsInScene() {
-        return this.group.children
+
+    addToGroup(element, groupName) {
+
+        if (this.groups[groupName] == undefined) {
+            this.groups[groupName] = new THREE.Group();
+            this.scene.add(this.groups[groupName])
+        }
+        this.groups[groupName].add(element)
     }
 
     forEach(callback) {
@@ -65,9 +66,14 @@ export class ThreeSystem {
     }
 
     reset() {
-        this.group.parent.remove(this.group);
-        this.group = new THREE.Group();
-        this.scene.add(this.group)
+        for (let index in this.groups) {
+
+            this.scene.remove(this.groups[index])
+            this.groups[index] = new THREE.Group();
+            this.scene.add(this.groups[index])
+
+
+        }
     }
 
 

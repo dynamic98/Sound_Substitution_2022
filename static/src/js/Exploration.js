@@ -37,8 +37,8 @@ function main() {
     kandinsky = new Kandinsky(50, 1);
     bpmTimer.setBPM(50);
 
-    geometryButtons.assignEventHandler("click", visualization.getGeometryManager().setGeometryType)
-    textureButtons.assignEventHandler("click", visualization.getTextureManager().setTexture)
+    geometryButtons.assignEventHandler("click", visualization.setGeometryType)
+    textureButtons.assignEventHandler("click", visualization.setTexture)
     piano.assignEventOnPianoRow("mousedown", "mouseup", 1, 4)
     piano.assignEventOnPianoRow("mousedown", "mouseup", 2, 5)
 
@@ -59,7 +59,7 @@ function animate() {
         kandinsky.calculate(pitchAndEnergy);
         //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
         visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-        
+        visualization.createConnectonLine()
     }
 
     visualization.render();

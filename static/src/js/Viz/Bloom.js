@@ -115,9 +115,11 @@ export class Bloom {
     }
 
     pickGlowReceivers(groupChildren) {
+
         const tailEnd = groupChildren.length - this.head
+    
         if (groupChildren.length > this.tailLength) {
-            groupChildren[tailEnd].renderOrder = this.getPassForMoonLight()
+            groupChildren[tailEnd].setRenderOption(this.getPassForMoonLight())
         }
     }
 }

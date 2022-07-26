@@ -7,12 +7,10 @@ export class Color {
 
     setColor = (hue, saturation, lightness) => {
         this.color.setHSL(hue, saturation, 0.5)
-
     }
 
     getColor() {
         return this.color
     }
-
-
+    
 }

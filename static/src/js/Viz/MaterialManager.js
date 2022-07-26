@@ -20,4 +20,6 @@ export class MaterialManager {
         this.material = new THREE.MeshPhysicalMaterial(this.materialParameters)
         return this.material
     }
+
+    
 }
