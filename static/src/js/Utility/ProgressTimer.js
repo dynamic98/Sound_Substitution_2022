@@ -6,7 +6,7 @@ export class ProgressTimer{
         this.duration = duration*1000;
         this.counter = 1;
         this.play();
-        document.getElementById('reset').addEventListener("click", () =>{
+        document.getElementById('play').addEventListener("click", () =>{
             this.counter ++;
             if(this.counter%2 == 0){
                 this.pause();

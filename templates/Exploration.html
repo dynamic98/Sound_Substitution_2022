@@ -151,28 +151,9 @@
     <!-- 여기에 시각화 표현 -->
     <!-- canvas -->
     <div id="canvas"></div>
-  <section class="ProgressTimer">
-    <div>
-      <progress value="0" max="15000" id="ProgressBar"></progress>
-    </div>
   </section>
 
-  <section class="menuEmotionContainer">
-    <button class="menuEmotionButton" id="happy"> 행복한 </button>
-    <button class="menuEmotionButton" id="sad"> 슬픈 </button>
-    <button class="menuEmotionButton" id="exciting"> 신나는 </button>
-    <button class="menuEmotionButton" id="peaceful"> 평화로운 </button>
-  </section>
-
-  <section class="emotionContainer" id="emotionContainerID">
-      <video id="theVideo" src="../static/video/happy.mp4" controls></video>
-      <br>
-      <button class="videoControlButton" id="reset" style="display:inline;"> Play/Pause </button>
-      <button class="videoControlButton" id="save" style="display:inline;"> 저장 </button>
-      <!-- <button class="videoControlButton" id="nextPage" style="display:inline;"> 다음 페이지 </button> -->
-  </section>
-
-
+  <progress value="0" max="15000" id="ProgressBar"></progress>
 
 
   <section class="visualContainer_pitch">
@@ -207,6 +188,43 @@
       <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
     </div>
   </section>
+
+  <section class="musicContainer">
+    <div class="customMenu">
+      <br>
+      <div class="botón" onclick="this.classList.toggle('active')" id="play">
+        <div class="fondo" x="0" y="0" width="200" height="200"></div>
+        <div class="icono" width="200" height="200">
+          <div class="parte izquierda" x="0" y="0" width="200" height="200" fill="#fff"></div>
+          <div class="parte derecha" x="0" y="0" width="200" height="200" fill="#fff"></div>
+        </div>
+        <div class="puntero"></div>
+      </div>
+      <br>
+      <div class="volumeControl">
+        <p class="smallTitle" style="display:inline;">음량</p>
+        <button class="volumeControlButton" style="display:inline;"> 작게 </button>
+        <button class="volumeControlButton" style="display:inline;"> 중간 </button>
+        <button class="volumeControlButton" style="display:inline;"> 크게 </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- <section class="musicContainer" id="emotionContainerID">
+    <div class="botón" onclick="this.classList.toggle('active')" id="play">
+      <div class="fondo" x="0" y="0" width="300" height="300"></div>
+      <div class="icono" width="300" height="300">
+        <div class="parte izquierda" x="0" y="0" width="200" height="200" fill="#fff"></div>
+        <div class="parte derecha" x="0" y="0" width="200" height="200" fill="#fff"></div>
+      </div>
+      <div class="puntero"></div>
+    </div>
+
+    <button class="videoControlButton" id="play" style="display:inline;"> 재생/멈춤 </button>
+    <button class="videoControlButton" id="save" style="display:inline;"> 저장 </button>
+    <button class="videoControlButton" id="reset" style="display:inline;"> 초기화 </button>
+  </section> -->
 
 
   <!--shader script-->

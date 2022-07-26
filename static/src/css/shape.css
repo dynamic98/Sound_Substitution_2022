@@ -578,12 +578,12 @@ input[type="range"]::-webkit-slider-thumb:after{
 
 
 .musicContainer {
-  background-color: rgb(252, 252, 252);
+  /* background-color: rgb(252, 252, 252); */
   position: absolute;
   height: 20%;
   width: 30%;
   border-radius: 1rem;
-  box-shadow: 0 10px 20px #dbdbdb;
+  /* box-shadow: 0 10px 20px #dbdbdb; */
   margin-top: 560px;
   display: inline-block; 
   margin-left: 720px;
@@ -839,7 +839,7 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     bottom: 0px;
     margin-left: 300px;
-    margin-bottom: -150px;
+    margin-bottom: -120px;
     overflow: auto;
   }
 
@@ -945,9 +945,9 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 130px;
+    margin-top: 0px;
     display: inline-block;
-    margin-left: 1100px;
+    margin-left: 10px;
     width: 500px;
     float: right;
     height: 20%;
@@ -958,9 +958,9 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 370px;
+    margin-top: 260px;
     display: inline-block;
-    margin-left: 1100px;
+    margin-left: 10px;
     width: 500px;
     float: right;
     height: 8%;
@@ -978,9 +978,9 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 530px;
+    margin-top: 400px;
     display: inline-block;
-    margin-left: 1100px;
+    margin-left: 10px;
     width: 500px;
     float: right;
     height: 15%;
@@ -1022,21 +1022,20 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
 
   .hapticPositionButton:focus {
-  box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
-  outline: 0;
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+    outline: 0;
   }
 
   .musicContainer {
-    background-color: rgb(252, 252, 252);
+    background-color: transparent;
     position: absolute;
-    height: 16%;
+    height: 20%;
     border-radius: 1rem;
-    box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 700px;
+    /* box-shadow: 0 10px 20px #dbdbdb; */
+    margin-top: 600px;
     display: inline-block; 
-    margin-left: 1100px;
-    width: 500px;
-    float: right;
+    margin-left: 100px;
+    width: 300px;
   }
   
   h4 .bigTitle {
@@ -1091,7 +1090,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   .sheetContainer {
     position: absolute;
     border-radius: 0.3rem;
-    margin-top: 20px;
+    margin-top: -50px;
     display: inline-block;
     margin-left: 20px;
     width: 1px;
@@ -1255,5 +1254,13 @@ div[slider] > input[type=range]::-ms-tooltip {
       overflow: auto;
       float: left;
     }
+
+
+  #ProgressBar{
+    margin-left: 20px;
+    margin-top: 600px;
+    width: 1070px;
+    height: 60px;
+  }
 
 }
