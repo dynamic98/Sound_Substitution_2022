@@ -210,7 +210,7 @@ body {
 }
 
 .btn-circle-md {
-    margin-bottom: 30px;
+    margin-top: 30px;
     margin-left: 35px;
     height: 60px;
     width: 60px;
@@ -219,15 +219,14 @@ body {
 
 
 .btn-triangle-md {
-    margin-bottom: 30px;
-    margin-left: 35px;
-    width: 60px;
-    height: 60px;
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  margin-left: 35px;
+  margin-bottom: 20px;
+  width: 60px;
+  height: 60px;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
 .btn-decagon-md {
-  margin-bottom: 30px;
   margin-left: 35px;
   width: 60px;
   height: 60px;
@@ -237,6 +236,7 @@ body {
 
 .btn-star-md {
     margin-left: 30px;
+    margin-bottom: 20px;
     width: 70px;
     height: 70px;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
@@ -433,7 +433,8 @@ video {
 
 
 .customMenu {
-  margin-left: 20px;
+
+  margin-left: 0px;
 }
 
 
@@ -581,7 +582,7 @@ input[type="range"]::-webkit-slider-thumb:after{
   /* background-color: rgb(252, 252, 252); */
   position: absolute;
   height: 20%;
-  width: 30%;
+  width: 50%;
   border-radius: 1rem;
   /* box-shadow: 0 10px 20px #dbdbdb; */
   margin-top: 560px;
@@ -801,7 +802,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   color: #FFF;
   border-radius: 5px;
   transition: all 0.2s ;
-  background: #00AE68;
+  background: #767676;
 }
 
 .btnBlueGreen.btnPush {
@@ -838,8 +839,8 @@ div[slider] > input[type=range]::-ms-tooltip {
   .pianoContainer {
     position: absolute;
     bottom: 0px;
-    margin-left: 300px;
-    margin-bottom: -120px;
+    margin-left: 320px;
+    margin-bottom: -60px;
     overflow: auto;
   }
 
@@ -868,7 +869,7 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   ul {
     height:32em;
-    width:70em;
+    width:80em;
     /* margin:5em auto; */
     /* padding:3em 0 0 3em; */
     position:relative;
@@ -885,8 +886,8 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   ul .white {
     margin-top: 200px;
-    height:8em;
-    width:3.2em;
+    height:9em;
+    width:3.6em;
     z-index:1;
     border-left:1px solid #bbb;
     border-bottom:1px solid #bbb;
@@ -906,7 +907,7 @@ div[slider] > input[type=range]::-ms-tooltip {
 
 
   .black {
-    height:4em;
+    height:4.5em;
     width:2.2em;
     margin:0 0 0 -1em;
     margin-top: 200px;
@@ -945,7 +946,7 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 0px;
+    margin-top: -10px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
@@ -958,7 +959,20 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 260px;
+    margin-top: 230px;
+    display: inline-block;
+    margin-left: 10px;
+    width: 500px;
+    float: right;
+    height: 8%;
+  }
+
+  .visualContainer_canvas {
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px #dbdbdb;
+    margin-top: 350px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
@@ -967,9 +981,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
 
 
-  .customMenu {
-    margin-left: 20px;
-  }
+
 
   /* haptic menu UI*/
 
@@ -978,7 +990,7 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 400px;
+    margin-top: 490px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
@@ -1032,10 +1044,10 @@ div[slider] > input[type=range]::-ms-tooltip {
     height: 20%;
     border-radius: 1rem;
     /* box-shadow: 0 10px 20px #dbdbdb; */
-    margin-top: 600px;
+    margin-top: 670px;
     display: inline-block; 
-    margin-left: 100px;
-    width: 300px;
+    margin-left: 60px;
+    width: 400px;
   }
   
   h4 .bigTitle {
@@ -1098,7 +1110,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
 
   .shapeContainer {
-    margin-left: 20px;
+    margin-left: 30px;
     box-shadow: 0 10px 20px #dbdbdb;
     width: 130px;
     height: 800px;
@@ -1163,10 +1175,10 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   .videoControlButton {
     margin-top: 10px;
-    margin-left: 100px;
+    margin-left: 10px;
     display: flex;
     width: 100px;
-    height: 40px;
+    height: 100px;
     border-radius: 6px;
     border: none;
     color: #fff;
@@ -1177,16 +1189,48 @@ div[slider] > input[type=range]::-ms-tooltip {
     font-size: 12px;
   }
 
-  #record {
-    background: linear-gradient(180deg, #862121 0%, #a72020 100%);
+  #play {
+    background-color: #f4471f;
+    color: white;
+    border: none;
+    padding: 5px;
+    font-size: 31px;
+    height: 100px;
+    width: 100px;
+    box-shadow: 0 2px 4px darkslategray;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 70%;
+    margin-left: 20px;
   }
 
   #save {
-    background: linear-gradient(180deg, #090909 0%, #393939 100%);
+    background-color: #48abe0;
+    color: white;
+    border: none;
+    padding: 5px;
+    font-size: 31px;
+    height: 100px;
+    width: 100px;
+    box-shadow: 0 2px 4px darkslategray;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 70%;
+    margin-left: 20px;
   }
 
-  #nextPage {
-    background-color: #3a86ff;
+  #reset {
+    background-color: #2a9d8f;
+    border: none;
+    padding: 5px;
+    font-size: 31px;
+    height: 100px;
+    width: 100px;
+    box-shadow: 0 2px 4px darkslategray;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 70%;
+    margin-left: 20px;
   }
   
   .volumecontrolButton {
@@ -1262,5 +1306,55 @@ div[slider] > input[type=range]::-ms-tooltip {
     width: 1070px;
     height: 60px;
   }
+
+  #playGlyph{
+    margin-left: 20px;
+  }
+
+  #saveGlyph{
+    margin-left: 20px;
+  }
+
+  #eraseGlyph{
+    margin-left: 20px;
+  }
+
+
+  span{
+    margin-right:2rem
+  }
+   
+   .color{
+     display:inline;
+     
+   }
+   
+   
+   .Palette{
+     padding: 5px;
+     padding-left: 10px;
+   }
+
+   .Palette:hover {
+     /* color: rgb(31, 51, 231); */
+     background-color: rgb(196, 226, 255);
+     /* background-color: rgb(233, 152, 152); */
+     border-radius: 10px;
+     /* color:rgb(248, 87, 87); */
+   }
+   .Picker{
+     padding: 5px;
+     padding-left: 10px;
+   }
+   .Picker:hover{
+     /* color: rgb(31, 51, 231); */
+     background-color: rgb(196, 226, 255);
+     border-radius: 10px;
+   }
+   
+   .IroSlider{
+     visibility: hidden;
+   }
+
 
 }
