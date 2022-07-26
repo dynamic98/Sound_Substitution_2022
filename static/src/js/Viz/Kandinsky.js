@@ -1,11 +1,13 @@
-import { Utility } from "../Utility/Utility";
+import {
+    Utility
+} from "../Utility/Utility";
 
 export class Kandinsky {
-    constructor(bpm, MaxVolume=1, canvasSize= 40) {
+    constructor(bpm, MaxVolume = 1, canvasSize = 40) {
         this.bpm = bpm;
         this.MaxVolume = MaxVolume;
         this.canvasSize = canvasSize
-        this.midiScope=23;
+        this.MIDISCOPE = 23;
         // this.midiScope=35;
 
         this.DictPitch = {
@@ -20,17 +22,22 @@ export class Kandinsky {
             8: "G#",
             9: "A",
             10: "A#",
-            11: "B" 
+            11: "B"
         };
+        this.pitch;
+        this.energy;
+        this.pitchHeight
+        this.octave;
+        this.tone;
     }
 
-    calculate([pitch, energy],frameRate =13 ) {
+    calculate([pitch, energy], frameRate = 13) {
 
-        this.pitch=pitch;
-        this.energy = energy/this.MaxVolume;
+        this.pitch = pitch;
+        this.energy = energy / this.MaxVolume;
         // console.log(this.MaxVolume);
 
-        this.pitchHeight = this.canvasSize / this.midiScope /2
+        this.pitchHeight = this.canvasSize / this.MIDISCOPE / 2
         this.pitchWidth = this.canvasSize / (60 * 4 * frameRate / this.bpm) // 
 
         this.octave = Math.floor((pitch) / 12) - 1; //옥타브 구하는 방식
@@ -45,28 +52,28 @@ export class Kandinsky {
     getNormalizedTone() {
         return this.tone / 12
     }
-    getNormalizedOctave(){
+    getNormalizedOctave() {
         return (this.octave - 1) / 5
     }
 
-    getPitchWidth(){
+    getPitchWidth() {
         // this.positionX= this.counter * this.pitchWidth - 100
-        return this.pitchWidth 
+        return this.pitchWidth
     }
-    
-    getPitchHeight(){
+
+    getPitchHeight() {
         return this.pitchHeight * (this.pitch - 60) - 10;
     }
 
-    getPitchEnergy(){
-       return this.pitchHeight * (this.energy * 5);
+    getPitchEnergy() {
+        return this.pitchHeight * (this.energy * 5);
     }
-    
-    setBPM(bpm){
-        this.bpm=bpm
+
+    setBPM(bpm) {
+        this.bpm = bpm
     }
-    
-    setMaxVolume(MaxVolume){
+
+    setMaxVolume(MaxVolume) {
         this.MaxVolume = MaxVolume;
     }
 

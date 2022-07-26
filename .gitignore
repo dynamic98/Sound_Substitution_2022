@@ -111,6 +111,44 @@ dist
 
 # MP3 file
 .sampleMP3/
+
+.static/music/
+static/music/original/1-11_Staring_At_The_Sun_Feat._SZA.mp3
+static/music/original/1-17_Wow..mp3
+static/music/original/Elisabeth Wentland - Kuhlau fantasy for flute solo op. 38 D major.mp3
+static/music/original/Joe_Hisaishi_-_Summer_High_Quality.mp3
+static/music/original/Kate Bush - Running Up That Hill (Lyrics) - From Stranger Things Season 4 Soundtrack.mp3
+static/music/original/Pink_Floyd_-_Wish_You_Were_Here_Wish_You_Were_Here.mp3
+static/music/original/tiny_riot.mp3
+static/music/separated/1-11_Staring_At_The_Sun_Feat._SZA/bass.mp3
+static/music/separated/1-11_Staring_At_The_Sun_Feat._SZA/drums.mp3
+static/music/separated/1-11_Staring_At_The_Sun_Feat._SZA/other.mp3
+static/music/separated/1-11_Staring_At_The_Sun_Feat._SZA/vocals.mp3
+static/music/separated/1-17_Wow/bass.mp3
+static/music/separated/1-17_Wow/drums.mp3
+static/music/separated/1-17_Wow/other.mp3
+static/music/separated/1-17_Wow/vocals.mp3
+static/music/separated/Elisabeth Wentland - Kuhlau fantasy for flute solo op. 38 D major/bass.mp3
+static/music/separated/Elisabeth Wentland - Kuhlau fantasy for flute solo op. 38 D major/drums.mp3
+static/music/separated/Elisabeth Wentland - Kuhlau fantasy for flute solo op. 38 D major/other.mp3
+static/music/separated/Elisabeth Wentland - Kuhlau fantasy for flute solo op. 38 D major/vocals.mp3
+static/music/separated/Joe_Hisaishi_-_Summer_High_Quality/bass.mp3
+static/music/separated/Joe_Hisaishi_-_Summer_High_Quality/drums.mp3
+static/music/separated/Joe_Hisaishi_-_Summer_High_Quality/other.mp3
+static/music/separated/Joe_Hisaishi_-_Summer_High_Quality/vocals.mp3
+static/music/separated/Kate Bush - Running Up That Hill (Lyrics) - From Stranger Things Season 4 Soundtrack/bass.mp3
+static/music/separated/Kate Bush - Running Up That Hill (Lyrics) - From Stranger Things Season 4 Soundtrack/drums.mp3
+static/music/separated/Kate Bush - Running Up That Hill (Lyrics) - From Stranger Things Season 4 Soundtrack/other.mp3
+static/music/separated/Kate Bush - Running Up That Hill (Lyrics) - From Stranger Things Season 4 Soundtrack/vocals.mp3
+static/music/separated/Pink_Floyd_-_Wish_You_Were_Here_Wish_You_Were_Here/bass.mp3
+static/music/separated/Pink_Floyd_-_Wish_You_Were_Here_Wish_You_Were_Here/drums.mp3
+static/music/separated/Pink_Floyd_-_Wish_You_Were_Here_Wish_You_Were_Here/other.mp3
+static/music/separated/Pink_Floyd_-_Wish_You_Were_Here_Wish_You_Were_Here/vocals.mp3
+static/music/separated/tiny_riot/bass.mp3
+static/music/separated/tiny_riot/drums.mp3
+static/music/separated/tiny_riot/other.mp3
+static/music/separated/tiny_riot/vocals.mp3
 .static/music/origin/
 .static/music/separated/
 *.mp3
+

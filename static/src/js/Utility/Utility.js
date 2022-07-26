@@ -43,5 +43,8 @@ export class Utility {
       return this.constrain(newval, stop2, start2);
     }
   }
+  static delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
 
 }

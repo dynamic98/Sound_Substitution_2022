@@ -7,7 +7,7 @@ export class SourceContainer {
         this.htmlElementID = htmlElementID
         this.path = path;
         this.sourceList = []
-    }
+    }V
 
     async initialize() {
         for (let i = 0; i < Source.getSeparatedFileListLength(this.htmlElementID); i++) {
@@ -26,12 +26,12 @@ export class SourceContainer {
     }
 
     async initialPlay(getWavesurferTime, playWaveSurfer) {
-        await playWaveSurfer()
+
         for (let source of this.sourceList) {
             await source.play()
             source.setTime(getWavesurferTime())
-            source.volume=0.1;
         }
+        playWaveSurfer()
     }
 
     async changeSong(folderPath) {
@@ -64,6 +64,7 @@ export class SourceContainer {
     getList() {
         return this.sourceList
     }
+
 
 
 }
