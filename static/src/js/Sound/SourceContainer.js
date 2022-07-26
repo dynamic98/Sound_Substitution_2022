@@ -6,7 +6,7 @@ export class SourceContainer {
     constructor(htmlElementID, path) {
         this.htmlElementID = htmlElementID
         this.path = path;
-        this.sourceList = []
+        this.sourceList = [] // 0 bass, 1 drums 2 other 3 vocals
     }
 
     async initialize() {
@@ -26,12 +26,12 @@ export class SourceContainer {
     }
 
     async initialPlay(getWavesurferTime, playWaveSurfer) {
-        await playWaveSurfer()
+
         for (let source of this.sourceList) {
             await source.play()
             source.setTime(getWavesurferTime())
-            source.volume=0.1;
         }
+        playWaveSurfer()
     }
 
     async changeSong(folderPath) {
@@ -65,5 +65,13 @@ export class SourceContainer {
         return this.sourceList
     }
 
-
+    // 0 bass, 1 drums 2 other 3 vocals
+    getSource(sourceName) {
+        for (let source of this.sourceList) {
+            if (sourceName == source.getFileName()) {
+                return source
+            }
+        }
+        console.error(`Source Name Incorrect. Only "bass", "drums", "other", "vocals" are available`)
+    }
 }

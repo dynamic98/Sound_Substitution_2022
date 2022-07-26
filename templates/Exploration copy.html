@@ -16,20 +16,12 @@
   <!-- Styles -->
   <link type="text/css" href="../static/src/css/shape.css" rel="stylesheet">
   <link type="text/css" href="../static/src/css/play.css" rel="stylesheet">
-  <link type="text/css" href="../static/src/css/navi.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
   <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
-
-  <section class="menuContainer">
-    <button type="button" class="button btnPush btnBlueGreen" id="pitchButton">음계</button>
-    <button type="button" class="button btnPush btnBlueGreen" id="beatButton">비트</button>
-  </section>
-
-
   <section class="shapeContainer">
     <button type="button" class="btn btn-primary btn-square-md" id="btn-square"></button>
     <button type="button" class="btn btn-primary btn-circle-md" id="btn-circle"></button>
@@ -38,10 +30,30 @@
     <button type="button" class="btn btn-primary btn-star-md" id="btn-star"></button>
     <hr>
     <button type="button" class="textureButton" id="none"></button>
-    <button type="button" class="textureButton" id="wood" style="background: url(https://i.pinimg.com/736x/5a/f5/e3/5af5e3390ad19b67f22d44adf257af6c.jpg)"></button>
+    <button type="button" class="textureButton" id="wood" style="background: url(https://i.dlpng.com/static/png/5436810-free-wood-texture-with-high-resolution-wood-textures-for-photoshop-wood-texture-png-800_600_preview.png)"></button>
     <button type="button" class="textureButton" id="stone" style="background: url(https://images.unsplash.com/photo-1614213879054-8055538ed867?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80)"></button>
     <button type="button" class="textureButton" id="paper" style="background: url(https://st.depositphotos.com/1000533/2662/i/450/depositphotos_26627183-stock-photo-crumpled-paper-texture.jpg)"></button>
   </section>
+
+  <section class="materialContainer">
+    <div class="customMenu">
+      <p class="smallTitle" style="display:inline;">Transmission</p>
+      <input class="range" id="transmission" type="range" name="intensity" value="0" min="0" max="100"
+        style="display:inline;"></input>
+
+      <p class="smallTitle" style="display:inline;">Roughness</p>
+      <input class="range" id="roughness" type="range" name="intensity" value="0" min="0" max="100"
+        style="display:inline;"></input>
+    </div>
+  </section>
+
+
+  <section class="sheetContainer">
+    <!-- 여기에 시각화 표현 -->
+    <!-- canvas -->
+    <div id="canvas"></div>
+  </section>
+
 
   <section class="colorContainer">
     <div class="palette" id="palette1">
@@ -103,6 +115,7 @@
     </div>
   </section>
 
+
   <section class="pianoContainer">
     <ul class="set">
       <li class="white do-1"></li>
@@ -130,31 +143,7 @@
       <li class="white la-2"></li>
       <li class="black la-s-2"></li>
       <li class="white si-2"></li>
-
-      <li class="white do-3"></li>
-      <li class="black do-s-3"></li>
-      <li class="white re-3"></li>
-      <li class="black re-s-3"></li>
-      <li class="white mi-3"></li>
-      <li class="white fa-3"></li>
-      <li class="black fa-s-3"></li>
-      <li class="white sol-3"></li>
-      <li class="black sol-s-3"></li>
-      <li class="white la-3"></li>
-      <li class="black la-s-3"></li>
-      <li class="white si-3"></li>
     </ul>
-  </section>
-
-
-  <section class="sheetContainer">
-    <!-- 여기에 시각화 표현 -->
-    <!-- canvas -->
-    <div id="canvas"></div>
-  <section class="ProgressTimer">
-    <div>
-      <progress value="0" max="15000" id="ProgressBar"></progress>
-    </div>
   </section>
 
   <section class="menuEmotionContainer">
@@ -167,35 +156,11 @@
   <section class="emotionContainer" id="emotionContainerID">
       <video id="theVideo" src="../static/video/happy.mp4" controls></video>
       <br>
-      <button class="videoControlButton" id="reset" style="display:inline;"> Play/Pause </button>
+      <button class="videoControlButton" id="record" style="display:inline;"> 녹화 </button>
       <button class="videoControlButton" id="save" style="display:inline;"> 저장 </button>
       <!-- <button class="videoControlButton" id="nextPage" style="display:inline;"> 다음 페이지 </button> -->
   </section>
 
-
-
-
-  <section class="visualContainer_pitch">
-    <div class="customMenu">
-      <br>
-      <p class="smallTitle" style="display:inline;">간격</p>
-      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
-      <hr>
-      <p class="smallTitle" style="display:inline;">크기</p>
-      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
-      <hr>
-      <p class="smallTitle" style="display:inline;">선의 유무</p>
-      <input type="checkbox">
-    </div>
-  </section>
-
-  <section class="visualContainer_beat">
-    <div class="customMenu">
-      <br>
-      <p class="smallTitle" style="display:inline;">크기</p>
-      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
-    </div>
-  </section>
 
   <section class="hapticContainer">
     <div class="customMenu">
@@ -205,6 +170,27 @@
       <hr>
       <p class="smallTitle" style="display:inline;">세기</p>
       <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+    </div>
+  </section>
+
+  <section class="musicContainer">
+    <div class="customMenu">
+      <br>
+      <div class="botón" onclick="this.classList.toggle('active')">
+        <div class="fondo" x="0" y="0" width="200" height="200"></div>
+        <div class="icono" width="200" height="200">
+          <div class="parte izquierda" x="0" y="0" width="200" height="200" fill="#fff"></div>
+          <div class="parte derecha" x="0" y="0" width="200" height="200" fill="#fff"></div>
+        </div>
+        <div class="puntero"></div>
+      </div>
+      <br>
+      <div class="volumeControl">
+        <p class="smallTitle" style="display:inline;">음량</p>
+        <button class="volumeControlButton" style="display:inline;"> 작게 </button>
+        <button class="volumeControlButton" style="display:inline;"> 중간 </button>
+        <button class="volumeControlButton" style="display:inline;"> 크게 </button>
+      </div>
     </div>
   </section>
 

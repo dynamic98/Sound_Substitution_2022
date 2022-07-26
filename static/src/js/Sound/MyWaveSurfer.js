@@ -1,5 +1,6 @@
 //Wrapper class for WaveSurfer
 //----------------------------------------------------//
+
 export class MyWaveSurfer {
     //creates a waveSurfer object 
     constructor() {
@@ -7,12 +8,12 @@ export class MyWaveSurfer {
             container: document.querySelector('#waveform'),
             backend: 'MediaElement',
             waveColor: '#A8DBA8',
+            audioRate: 1,
             progressColor: '#3B8686',
             cursorWidth: 5,
             normalize: true,
-        });
 
-        this.audioElement
+        });
     }
 
     //connects wave surfet to audioElement
@@ -28,9 +29,12 @@ export class MyWaveSurfer {
 
     setInteractionEventHandler(callback) {
         this.wavesurfer.on('seek', async () => {
-            callback(this.wavesurfer.getCurrentTime());
+
+            callback(this.wavesurfer.getCurrentTime())
         })
     }
+
+
 
     //play/pause
     togglePlay() {
@@ -41,5 +45,6 @@ export class MyWaveSurfer {
     getWavesurfer = () => {
         return this.wavesurfer;
     }
+
 }
 //----------------------------------------------------//

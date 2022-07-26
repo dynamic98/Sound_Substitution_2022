@@ -27,10 +27,11 @@ export class Audio {
         this.myOffCxt;
         this.audioNodeManager
         this.url
+        this.fileName;
     }
 
     initializeAudioElement(url) {
-        this.url=url;
+        this.url = url;
         this.audioElementHandler.initializeAudio(this.url)
     }
 
@@ -76,11 +77,12 @@ export class Audio {
     isPlaying() {
         return !this.audioElementHandler.getAudioElement().paused
     }
-    togglePlay() {
-        this.audioElementHandler.togglePlay();
-    }
-    getURL(){
+
+    getURL() {
         return this.url
+    }
+    setTime(time) {
+        this.audioElementHandler.setTime(time);
     }
 }
 
@@ -92,7 +94,7 @@ export class Song extends Audio {
         this.selectMusicElement = document.getElementById("select-music");
         this.myWaveSurfer = new MyWaveSurfer();
         this.myOffCxt;
-        this.fileName;
+
         for (let index in this.audioElementHandler.getFileObject()) {
             this.selectMusicElement.options[this.selectMusicElement.options.length] = new Option(this.audioElementHandler.getFileObject()[index], index);
         }
@@ -148,8 +150,11 @@ export class Song extends Audio {
         //delete .mp3 & add  / in the end
         return this.fileName.substring(0, this.fileName.length - 4) + "/"
     }
-    playWaveSurfer=() => {
+    playWaveSurfer = () => {
         return this.myWaveSurfer.playWaveSurfer()
+    }
+    togglePlay() {
+        this.myWaveSurfer.togglePlay();
     }
 
 }
@@ -160,26 +165,32 @@ export class Source extends Audio {
     constructor(htmlElementID, folderPath) {
         super(htmlElementID, folderPath)
     }
+
     static separatedFileList = ["bass.mp3", "drums.mp3", "other.mp3", "vocals.mp3"];
 
     static getSeparatedFileListLength() {
-        return  Source.separatedFileList.length
+        return Source.separatedFileList.length
     }
-    static getSeparatedFileList(){
+    togglePlay() {
+        this.audioElementHandler.togglePlay();
+    }
+
+    static getSeparatedFileList() {
         return this.separatedFileList
     }
 
     fetchMusic(fileIndex) {
-        return super.fetchMusic(Source.getSeparatedFileList()[fileIndex]);
+        this.fileName = Source.getSeparatedFileList()[fileIndex]
+        return super.fetchMusic(this.fileName);
     }
     play() {
         this.audioElementHandler.getAudioElement().play()
     }
 
-    setTime(time) {
-        this.audioElementHandler.setTime(time);
-    }
-    setFolderPath(folderPath){
+    setFolderPath(folderPath) {
         this.audioElementHandler.setFolderPath(folderPath)
-    }    
+    }
+    getFileName() {
+        return this.fileName.substring(0, this.fileName.length - 4)
+    }
 }

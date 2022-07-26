@@ -26,6 +26,7 @@ export class Pitch {
  
 	 getPitch(){
 		 const values = this.analyser.getValue()
+		 
 		 let { freq, probability } = this._pichfinder(values)
 		
 		 //some smoothing
