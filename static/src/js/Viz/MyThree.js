@@ -107,7 +107,7 @@ export class MyThree {
     }
 
     createMesh(radius, positionX, positionY) {
-        // if (this.counter % 4 == 0) {
+        if (this.counter % 4 == 0) {
             this.radius = radius
             this.positionY = positionY
             this.positionX = positionX * this.counter - 100
@@ -119,7 +119,7 @@ export class MyThree {
             mesh.position.set(this.positionX, this.positionY, 0);
             mesh.renderOrder = this.bloom.getPassForSunLight()
             this.group.add(mesh);
-        // }
+        }
     }
 
 

@@ -40,8 +40,8 @@ export class Visualization {
         this.threeSystem = new ThreeSystem()
         //size, color,position
         this.grid = new Grid([400, 100], 0x101010, [0, 0, -100])
-        //threshold, strength, radius // tail 
-        this.bloom = new Bloom(0, 5, 1, 1, this.threeSystem.getRendererSize());
+        //threshold, strength, radius
+        this.bloom = new Bloom(0, 5, 1, 1);
         this.textureManager = new TextureManager();
         this.materialManager = new MaterialManager()
         this.geometryManager = new GeometryManager("circle")
