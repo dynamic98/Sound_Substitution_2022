@@ -1,91 +1,34 @@
-export class Piano {
-    constructor(HTMLClassContainer, MusicSheet, ProgressTimer) {
-        this.HTMLClassContainer = HTMLClassContainer
-        this.currentPitch = 0;
-        this.currentOctave = 0;
-        this.currentEnergy = 50
-        this.duration = 50
-        this.noteDuration = 300;
-        this.playing = false;
-        this.MusicSheet = MusicSheet;
-        this.ProgressTimer = ProgressTimer;
-        this.now = Tone.now();
-        this.synth = new Tone.Synth().toDestination();
-        this.DictPitch = {
-            0: "C",
-            1: "C#",
-            2: "D",
-            3: "D#",
-            4: "E",
-            5: "F",
-            6: "F#",
-            7: "G",
-            8: "G#",
-            9: "A",
-            10: "A#",
-            11: "B"
-        };
-    }
+// import * as Tone from "tone";
+import {
+    MyThree
+} from './Viz/MyThree.js';
+import {
+    Kandinsky
+} from './Viz/Kandinsky.js'
+import {
+    BPMTimer
+} from './Utility/BPMTimer.js'
+import {
+    Switcher
+} from './Utility/Switcher.js'
+import {
+    ButtonCustomization
+} from './Customization/ButtonCustomization.js'
+import {
+    SliderCustomization
+} from './Customization/SliderCustomization.js'
+import {
+    Piano
+} from './Customization/Piano.js'
 
-    assignEventOnPianoRow(onEvent, offEvent, pianoRow, pianoOctave) {
-        let object = {}
-        let index = 0;
+let geometryButtons = new ButtonCustomization("shapeContainer", "btn-")
+let materialSliders = new SliderCustomization("materialContainer")
 
-        for (let innerClass of $("." + this.HTMLClassContainer)[0].children) {
-            for (let child of innerClass.children) {
-                if (child.className.charAt(child.className.length - 1) == pianoRow) {
-                    object[child.className] = index;
-                    index++
-                    document.getElementsByClassName(child.className)[0].addEventListener(onEvent, () => {
-                        this.currentPitch = object[child.className]
-                        this.currentOctave = pianoOctave
-                        this.playing = true;
-                        this.play()
-                    })
-                }
-            }
-        }
-        document.addEventListener(offEvent, () => {
-            this.playing = false;
-        })
-    }
-
-
-    play() {
-        let CurrentIndex = Math.round(this.ProgressTimer.getThisSeconds()/this.noteDuration)
-        if(CurrentIndex==50){
-            CurrentIndex = 0;
-        }
-        this.MusicSheet.setMusicArray(CurrentIndex, this.getAudioData(), 50);
-        this.synth.triggerAttackRelease(this.DictPitch[this.currentPitch] + this.currentOctave.toString(), this.now);
-
-    }
-    getAudioData() {
-        return this.audioData = {
-            frequency: 0,
-            confidence: 1,
-            note: this.DictPitch[this.currentPitch] + this.currentOctave.toString(),
-            midi: ((this.currentOctave + 1) * 12 + this.currentPitch)
-        };
-    }
-    getEnergy() {
-        return this.currentEnergy
-    }
-    getPitch() {
-        return this.currentPitch
-    }
-
-    setCurrentEnergy(value) {
-        this.currentEnergy = value
-    }
-    isPlaying() {
-
-        return this.playing
-    }
-<<<<<<< HEAD
-}
-
-
+let myThree = new MyThree("circle");
+let kandinsky;
+let bpmTimer = new BPMTimer();
+let stats = new Stats();
+let piano = new Piano("pianoContainer");
 // let DictPitch = {
 //     0: "C",
 //     1: "C#",
@@ -107,16 +50,54 @@ export class Piano {
 // let CurrentOctave = 4;
 // let CurrentEnergy = 0;
 // let CurrentPitch = 0;
+let switcher = new Switcher();
 
 
+main();
+
+function main() {
+    myThree.initialize();
+    kandinsky = new Kandinsky(50, 1);
+    bpmTimer.setBPM(50);
+
+    geometryButtons.assignEventHandler("click", myThree.switchGeometry)
+    materialSliders.assignEventHandler("change", myThree.setMateriaParamaters)
+    piano.assignEventOnPianoRow("mousedown", "mouseup", 1, 4)
+    piano.assignEventOnPianoRow("mousedown", "mouseup", 2, 5)
+
+    animate();
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    stats.begin()
+    if (!bpmTimer.isUnderFourBeat()) {
+        myThree.reset();
+    }
+    //under 4 beat = calculate and create Geomtry 
+    else if (bpmTimer.isUnderFourBeat() & piano.isPlaying()) {
+        // let this_pitch = {
+        //     frequency: 0,
+        //     confidence: 1,
+        //     note: DictPitch[CurrentPitch] + CurrentOctave.toString(),
+        //     midi: ((CurrentOctave + 1) * 12 + CurrentPitch)
+        // };
+
+        let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
 
 
-// let this_pitch = {
-//     frequency: 0,
-//     confidence: 1,
-//     note: DictPitch[CurrentPitch] + CurrentOctave.toString(),
-//     midi: ((CurrentOctave + 1) * 12 + CurrentPitch)
-// };
+        kandinsky.calculate(pitchAndEnergy);
+        myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+        myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+        myThree.pickGlowReceivers(1);
+    }
+    myThree.render();
+    myThree.update();
+    stats.end()
+}
+
+document.body.appendChild(stats.dom);
+
 
 
 
@@ -248,9 +229,3 @@ export class Piano {
 // document.getElementById("btn-triangle").addEventListener("click", () => {
 //     myThree.ForceGeometryChange("Cone")
 // });
-=======
-    setNoteDuration(value){
-        this.noteDuration = value
-    }
-}
->>>>>>> 41c4801 (Play Music Sheet)
