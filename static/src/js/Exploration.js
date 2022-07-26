@@ -34,7 +34,7 @@ let switcher = new Switcher();
 let MyProgressTimer = new ProgressTimer(15, document.getElementById("ProgressBar"));
 let MyMusicSheet = new MusicSheet(50);
 let piano = new Piano("pianoContainer", MyMusicSheet, MyProgressTimer);
-let LastIndex = 0;
+let LastIndex = -1;
 
 main();
 
@@ -59,7 +59,7 @@ function animate() {
     if(CurrentIndex == 50){
         CurrentIndex = 0;
     }
-    console.log(CurrentIndex);
+    // console.log(CurrentIndex);
     // console.log(MyProgressTimer.getThisSeconds(), Math.round(MyProgressTimer.getThisSeconds()/375));
     // console.log(CurrentIndex, MyMusicSheet.getMusicArray(CurrentIndex));
     let CurrentMusicArray = MyMusicSheet.getMusicArray(CurrentIndex)
@@ -80,12 +80,13 @@ function animate() {
             myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
             myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
             myThree.pickGlowReceivers(1);
-
-        }else if(CurrentKeyboardEnergy>0){
+            }
+        else if(CurrentKeyboardEnergy>0 && (CurrentIndex!=LastIndex)){
             let pitchAndEnergy = switcher.getPitchAndEnergy(CurrentKeyboardPitch, CurrentKeyboardEnergy, CurrentKeyboardNote);
             kandinsky.calculate(pitchAndEnergy);
             myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
             myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+            console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
             myThree.pickGlowReceivers(1);
         }
         // let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
