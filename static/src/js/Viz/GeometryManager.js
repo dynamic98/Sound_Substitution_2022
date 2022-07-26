@@ -56,7 +56,7 @@ export class GeometryManager {
 
     }
     getGeometry() {
-        console.log(this.selectedGeometryType)
+      
         switch (this.selectedGeometryType) {
             case "circle":
                 this.geometry = new THREE.SphereGeometry(

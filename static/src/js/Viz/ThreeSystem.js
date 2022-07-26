@@ -16,12 +16,17 @@ export class ThreeSystem {
         this.groups = {
 
         }
+
+        this.rendererSize = {
+            width: window.innerWidth / 1.8,
+            height: window.innerHeight / 1.5
+        }
     }
 
     initialize() {
         this.camera.position.set(0, 0, 200);
         this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(window.innerWidth / 1.8, window.innerHeight / 1.5);
+        this.renderer.setSize(this.rendererSize.width, this.rendererSize.height);
         this.renderer.toneMapping = THREE.ReinhardToneMapping;
 
         document.getElementById("canvas").appendChild(this.renderer.domElement);
@@ -41,6 +46,9 @@ export class ThreeSystem {
     }
     getRenderer() {
         return this.renderer
+    }
+    getRendererSize() {
+        return this.rendererSize
     }
     addToScene(element) {
         this.scene.add(element)
