@@ -1,16 +1,19 @@
 export class ButtonCustomization {
 
-    constructor(HTMLClassContainer, eraseText) {
+    constructor(HTMLClassContainer, className, eraseTextFromIDName='') {
         this.parameter;
         this.HTMLClassContainer = HTMLClassContainer
-        this.eraseText = eraseText
+        this.className = className
+        this.eraseTextFromIDName= eraseTextFromIDName
     }
 
     assignEventHandler(event, callback) {
         for (let child of $("." + this.HTMLClassContainer)[0].children) {
-            if ($(child)[0].localName == "button") {
+            if ($(child)[0].className.includes(this.className)) {
                 $("#" + child.id).on(event, () => {
-                    this.parameter = child.id.replace(this.eraseText, '')
+   
+                    this.parameter = child.id.replace(this.eraseTextFromIDName, '')
+                    console.log(this.parameter)
                     callback(this.parameter)
                 })
             }
@@ -21,6 +24,5 @@ export class ButtonCustomization {
     getParameter() {
         return this.parameter
     }
-
 
 }

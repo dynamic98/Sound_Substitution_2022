@@ -2,7 +2,7 @@ export class BPMTimer {
     constructor() {
         this.startTime = new Date()
         this.LastTime = this.startTime.getTime();
-        this.cFive = 5
+        this.CFIVE = 5
         this.bpm;
     }
 

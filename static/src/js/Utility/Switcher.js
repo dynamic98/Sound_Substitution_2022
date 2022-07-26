@@ -4,12 +4,12 @@ import {
 
 export class Switcher{
     constructor(){
-        this.error = -1;
+        this.ERROR = -1;
     }
 
     getPitchAndEnergy( pitch, energy, maxChroma) {
         let midi = null;
-        if (pitch.frequency == this.error) {
+        if (pitch.frequency == this.ERROR) {
             midi = maxChroma + 72
         } else {
             midi = pitch.midi;

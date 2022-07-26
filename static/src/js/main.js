@@ -9,8 +9,8 @@ addEventListener('keypress', (event) => {
 //libraries
 //----------------------------------------------------//
 import {
-    MyThree
-} from './Viz/MyThree.js';
+    Visualization
+} from './Viz/Visualization.js'
 import {
     BPMTimer
 } from './Utility/BPMTimer.js'
@@ -31,7 +31,7 @@ import {
 
 //class instances
 //----------------------------------------------------//
-let myThree = new MyThree("circle");
+let visualization = new Visualization()
 let bpmTimer = new BPMTimer();
 let switcher = new Switcher();
 let stats = new Stats();
@@ -51,7 +51,7 @@ document.querySelector('[data-action="play"]').addEventListener('click', () => {
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
 document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
-    await sourceContainer.changeSong("static/music/separated/" + song.getFileName());
+    sourceContainer.changeSong("static/music/separated/" + song.getFileName());
 
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
 
@@ -76,16 +76,13 @@ async function main() {
     await song.createOfflineContext(await response.arrayBuffer());
 
     sourceContainer = new SourceContainer("separatedFileList", "static/music/separated/" + song.getFileName());
-    await sourceContainer.initialize().then(
+    await sourceContainer.initialize()
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
-    );
-    // sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
-
     song.setWaveSurferCallback(sourceContainer.syncTime)
 
     //VISUALS & OTHERS
     // ----------------------------------------------------/
-    myThree.initialize()
+    visualization.initialize();
     kandinsky = new Kandinsky(song.getBPM(), song.getMaxVolume())
     bpmTimer.setBPM(song.getBPM())
 
@@ -101,19 +98,19 @@ function animate() {
         //debug frame rate
         //over 4 beat = delet drawing
         if (!bpmTimer.isUnderFourBeat()) {
-            myThree.reset();
+            visualization.reset();
         }
         //under 4 beat = calculate and create Geometry 
         else if (bpmTimer.isUnderFourBeat()) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
 
             kandinsky.calculate(pitchAndEnergy);
-            myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-            myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-            myThree.pickGlowReceivers(5);
+            visualization.getColor().setColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+            visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+           
         }
-        myThree.render();
-        myThree.update();
+        visualization.render();
+        visualization.update();
     }
     stats.end();
 }
