@@ -31,30 +31,38 @@ let kandinsky;
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
 let switcher = new Switcher();
+let visualization = new Visualization()
+
+document.body.appendChild(stats.dom);
+
 let MyProgressTimer = new ProgressTimer(15, document.getElementById("ProgressBar"));
 let MyMusicSheet = new MusicSheet(50);
 let piano = new Piano("pianoContainer", MyMusicSheet, MyProgressTimer);
 let LastIndex = -1;
 
-main();
+
+main()
 
 function main() {
     visualization.initialize();
-    kandinsky = new Kandinsky(50, 1);
-    bpmTimer.setBPM(50);
+
+    bpmTimer.setBPMByMeshCount(8)
+    kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     piano.setNoteDuration(300);
 
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
-    piano.assignEventOnPianoRow("mousedown", "mouseup", 1, 4)
-    piano.assignEventOnPianoRow("mousedown", "mouseup", 2, 5)
+    piano.assignEventOnPianoRow("click", draw, 1, 4)
+    piano.assignEventOnPianoRow("click", draw, 2, 5)
 
-    animate();
+    update();
 }
 
-function animate() {
-    requestAnimationFrame(animate);
+function update() {
     stats.begin()
+
+    requestAnimationFrame(update);
+
     let CurrentIndex = Math.round(MyProgressTimer.getThisSeconds()/300)
     if(CurrentIndex == 50){
         CurrentIndex = 0;
@@ -67,36 +75,33 @@ function animate() {
     let CurrentKeyboardEnergy = CurrentMusicArray.keyboard_energy
     let CurrentKeyboardNote = CurrentKeyboardPitch.midi%12
 
+
     if (!bpmTimer.isUnderFourBeat()) {
         visualization.reset();
-    }
-    //under 4 beat = calculate and create Geomtry 
-    // else if (bpmTimer.isUnderFourBeat() & (piano.isPlaying())) {
+    } 
     else if (bpmTimer.isUnderFourBeat()) {
-
-        if(piano.isPlaying()){
-            let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
-            kandinsky.calculate(pitchAndEnergy);
-            myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-            myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-            myThree.pickGlowReceivers(1);
-            }
-        else if(CurrentKeyboardEnergy>0 && (CurrentIndex!=LastIndex)){
+        if(CurrentKeyboardEnergy>0 && (CurrentIndex!=LastIndex)){
             let pitchAndEnergy = switcher.getPitchAndEnergy(CurrentKeyboardPitch, CurrentKeyboardEnergy, CurrentKeyboardNote);
             kandinsky.calculate(pitchAndEnergy);
-            myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-            myThree.createMesh(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+            visualization.setColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+            visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
             console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
-            myThree.pickGlowReceivers(1);
+            visualization.createConnectonLine()
         }
         // let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
     }
+        visualization.render();
+        visualization.update();
+        stats.end();
+        LastIndex = CurrentIndex;
+}
 
-    visualization.render();
-    visualization.update();
-    stats.end()
-    LastIndex = CurrentIndex;
-
+function draw() {
+    let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
+    kandinsky.calculate(pitchAndEnergy);
+    //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+    visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+    visualization.createConnectonLine()
 }
 
 document.body.appendChild(stats.dom);

@@ -3,24 +3,30 @@ export class BPMTimer {
         this.startTime = new Date()
         this.LastTime = this.startTime.getTime();
         this.CFIVE = 5
+        this.FOUR = 4
         this.bpm;
     }
 
-    setBPM(bpm) {
+    setBPM = (bpm) => {
         this.bpm = bpm
     }
 
-    isUnderFourBeat(){
-        let CurrentTime = new Date().getTime()
+    isUnderFourBeat() {
+        let CurrentTime = new Date().getTime() //millisecond. 
         let DeltaTime = CurrentTime - this.LastTime;
-        let FourBeatTime = 60 / this.bpm * 1000 * 4; //one beat in millisecond 60,000 / bpm *4= four beat
+        let FourBeatTime = (60 * 1000) / this.bpm * 4; // convert 4beat per minue to millisecond
         //reset
         if (DeltaTime > FourBeatTime) {
             this.LastTime = CurrentTime;
             return false
-        }
-        else{
+        } else {
             return true
         }
+    }
+    getBPM() {
+        return this.bpm
+    }
+    setBPMByMeshCount(meshCount) {
+        this.bpm = meshCount * (60 / 4)
     }
 }

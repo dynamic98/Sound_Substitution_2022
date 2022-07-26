@@ -13,8 +13,8 @@ import {
 } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 export class Bloom {
-    constructor(threshold, strength, radius, tailLength) {
-        this.bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth / 2.24, window.innerHeight / 2.1), 1.5, 0.4, 0.85);
+    constructor(threshold, strength, radius, tailLength, rendererSize) {
+        this.bloomPass = new UnrealBloomPass(new THREE.Vector2(rendererSize.width, rendererSize.height), 1.5, 0.4, 0.85);
         this.bloomPass.threshold = threshold
         this.bloomPass.strength = strength
         this.bloomPass.radius = radius
@@ -26,8 +26,6 @@ export class Bloom {
 
         this.tailLength = tailLength
         this.head = this.tailLength + 1;
-
-
     }
 
     initialize(scene, camera, renderer) {
@@ -117,7 +115,7 @@ export class Bloom {
     pickGlowReceivers(groupChildren) {
 
         const tailEnd = groupChildren.length - this.head
-    
+
         if (groupChildren.length > this.tailLength) {
             groupChildren[tailEnd].setRenderOption(this.getPassForMoonLight())
         }
