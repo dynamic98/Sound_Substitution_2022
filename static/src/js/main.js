@@ -31,7 +31,7 @@ import {
 
 //class instances
 //----------------------------------------------------//
-let visualization = new Visualization()
+let visualization = new Visualization(1)
 let bpmTimer = new BPMTimer();
 let switcher = new Switcher();
 let stats = new Stats();
