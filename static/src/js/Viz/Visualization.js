@@ -46,7 +46,9 @@ export class Visualization {
 
         this.instruments = {
             piano: {},
-            drum: {}
+            input_piano: {},
+            drum: {},
+            input_drum: {}
         }
         for (let instrumentType in this.instruments) {
             this.instruments[instrumentType].visualNoteList = []
@@ -73,7 +75,7 @@ export class Visualization {
 
     createVisualNote(instrumentType, radius, positionX, positionY) {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
         } else {
             let instrument = this.instruments[instrumentType]
 
@@ -99,7 +101,7 @@ export class Visualization {
 
     createConnectionLine(instrumentType) {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
 
         } else if (this.instruments[instrumentType].visualNoteList.length > 1 && Line.isVisible()) {
             let visualNoteList = this.instruments[instrumentType].visualNoteList
@@ -155,7 +157,7 @@ export class Visualization {
     //------------------------------------------------------------------// 
     setColor(instrumentType, hue, saturation) {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
         } else {
             this.instruments[instrumentType].colorManager.setColor(hue, saturation)
         }
@@ -163,7 +165,7 @@ export class Visualization {
 
     setGeometryType = (instrumentType, geometryType) => {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
         } else {
             return this.instruments[instrumentType].geometryManager.setGeometryType(geometryType)
         }
@@ -171,7 +173,7 @@ export class Visualization {
 
     setTexture = (instrumentType, textureType) => {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
         } else {
             return this.instruments[instrumentType].textureManager.setTexture(textureType)
         }

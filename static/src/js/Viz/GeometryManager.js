@@ -91,7 +91,6 @@ export class GeometryManager {
 
             case 'decagon':
                 let decagonshape = new THREE.Shape()
-<<<<<<< HEAD
                     .moveTo(-20 / this.radius, 0 / this.radius)
                     .lineTo(-9.96 / this.radius, 3.13 / this.radius)
                     .lineTo(-16.06 / this.radius, 12.35 / this.radius)
@@ -113,29 +112,6 @@ export class GeometryManager {
                     .lineTo(-16.06 / this.radius, -12.35 / this.radius)
                     .lineTo(-9.96 / this.radius, -3.13 / this.radius)
                     .lineTo(-20 / this.radius, 0 / this.radius);
-=======
-                                    .moveTo(-20/this.radius, 0/this.radius)
-                                    .lineTo(-9.96/this.radius, 3.13/this.radius)
-                                    .lineTo(-16.06/this.radius, 12.35/this.radius)
-                                    .lineTo(-6.17/this.radius, 8.1/this.radius)
-                                    .lineTo(-6.07/this.radius, 20/this.radius)
-                                    .lineTo(0/this.radius, 10/this.radius)
-                                    .lineTo(6.07/this.radius, 20/this.radius)
-                                    .lineTo(6.17/this.radius, 8.1/this.radius)
-                                    .lineTo(16.06/this.radius, 12.35/this.radius)
-                                    .lineTo(9.96/this.radius, 3.13/this.radius)
-                                    .lineTo(20/this.radius, 0/this.radius)
-                                    .lineTo(9.96/this.radius, -3.13/this.radius)
-                                    .lineTo(16.06/this.radius, -12.35/this.radius)
-                                    .lineTo(6.17/this.radius, -8.1/this.radius)
-                                    .lineTo(6.07/this.radius, -20/this.radius)
-                                    .lineTo(0/this.radius, -10/this.radius)
-                                    .lineTo(-6.07/this.radius, -20/this.radius)
-                                    .lineTo(-6.17/this.radius, -8.1/this.radius)
-                                    .lineTo(-16.06/this.radius, -12.35/this.radius)
-                                    .lineTo(-9.96/this.radius, -3.13/this.radius)
-                                    .lineTo(-20/this.radius, 0/this.radius);
->>>>>>> 0bddaec (jr)
                 this.geometry = new THREE.ShapeGeometry(decagonshape);
                 return this.geometry
 
