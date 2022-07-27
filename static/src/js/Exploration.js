@@ -54,6 +54,7 @@ function main() {
     textureButtons.assignEventHandler("click", visualization.setTexture)
     piano.assignEventOnPianoRow("mousedown", draw, 1, 4)
     piano.assignEventOnPianoRow("mousedown", draw, 2, 5)
+    piano.assignEventOnPianoRow("mousedown", draw, 3, 6)
 
     update();
 }

@@ -33,7 +33,7 @@ let now_shape = '';
 
 
 shapeColorChange();
-paletteColorChange();
+// paletteColorChange();
 textureColorChange();
 menuColorChange();
 
@@ -86,79 +86,79 @@ function shapeColorChange() {
 }
 
 
-function paletteColorChange() {
-    palette_1.addEventListener("click", () => {
-        palette_1.style.borderColor = red;
-        palette_2.style.borderColor = transparent;
-        palette_3.style.borderColor = transparent;
-        palette_4.style.borderColor = transparent;
-        palette_5.style.borderColor = transparent;
-        palette_6.style.borderColor = transparent;
-        palette_7.style.borderColor = transparent;
-    });
+// function paletteColorChange() {
+//     palette_1.addEventListener("click", () => {
+//         palette_1.style.borderColor = red;
+//         palette_2.style.borderColor = transparent;
+//         palette_3.style.borderColor = transparent;
+//         palette_4.style.borderColor = transparent;
+//         palette_5.style.borderColor = transparent;
+//         palette_6.style.borderColor = transparent;
+//         palette_7.style.borderColor = transparent;
+//     });
 
-    palette_2.addEventListener("click", () => {
-        palette_1.style.borderColor = transparent;
-        palette_2.style.borderColor = red;
-        palette_3.style.borderColor = transparent;
-        palette_4.style.borderColor = transparent;
-        palette_5.style.borderColor = transparent;
-        palette_6.style.borderColor = transparent;
-        palette_7.style.borderColor = transparent;
-    });
+//     palette_2.addEventListener("click", () => {
+//         palette_1.style.borderColor = transparent;
+//         palette_2.style.borderColor = red;
+//         palette_3.style.borderColor = transparent;
+//         palette_4.style.borderColor = transparent;
+//         palette_5.style.borderColor = transparent;
+//         palette_6.style.borderColor = transparent;
+//         palette_7.style.borderColor = transparent;
+//     });
 
 
-    palette_3.addEventListener("click", () => {
-        palette_1.style.borderColor = transparent;
-        palette_2.style.borderColor = transparent;
-        palette_3.style.borderColor = red;
-        palette_4.style.borderColor = transparent;
-        palette_5.style.borderColor = transparent;
-        palette_6.style.borderColor = transparent;
-        palette_7.style.borderColor = transparent;
-    });
+//     palette_3.addEventListener("click", () => {
+//         palette_1.style.borderColor = transparent;
+//         palette_2.style.borderColor = transparent;
+//         palette_3.style.borderColor = red;
+//         palette_4.style.borderColor = transparent;
+//         palette_5.style.borderColor = transparent;
+//         palette_6.style.borderColor = transparent;
+//         palette_7.style.borderColor = transparent;
+//     });
 
-    palette_4.addEventListener("click", () => {
-        palette_1.style.borderColor = transparent;
-        palette_2.style.borderColor = transparent;
-        palette_3.style.borderColor = transparent;
-        palette_4.style.borderColor = red;
-        palette_5.style.borderColor = transparent;
-        palette_6.style.borderColor = transparent;
-        palette_7.style.borderColor = transparent;
-    });
+//     palette_4.addEventListener("click", () => {
+//         palette_1.style.borderColor = transparent;
+//         palette_2.style.borderColor = transparent;
+//         palette_3.style.borderColor = transparent;
+//         palette_4.style.borderColor = red;
+//         palette_5.style.borderColor = transparent;
+//         palette_6.style.borderColor = transparent;
+//         palette_7.style.borderColor = transparent;
+//     });
 
-    palette_5.addEventListener("click", () => {
-        palette_1.style.borderColor = transparent;
-        palette_2.style.borderColor = transparent;
-        palette_3.style.borderColor = transparent;
-        palette_4.style.borderColor = transparent;
-        palette_5.style.borderColor = red;
-        palette_6.style.borderColor = transparent;
-        palette_7.style.borderColor = transparent;
-    });
+//     palette_5.addEventListener("click", () => {
+//         palette_1.style.borderColor = transparent;
+//         palette_2.style.borderColor = transparent;
+//         palette_3.style.borderColor = transparent;
+//         palette_4.style.borderColor = transparent;
+//         palette_5.style.borderColor = red;
+//         palette_6.style.borderColor = transparent;
+//         palette_7.style.borderColor = transparent;
+//     });
 
-    palette_6.addEventListener("click", () => {
-        palette_1.style.borderColor = transparent;
-        palette_2.style.borderColor = transparent;
-        palette_3.style.borderColor = transparent;
-        palette_4.style.borderColor = transparent;
-        palette_5.style.borderColor = transparent;
-        palette_6.style.borderColor = red;
-        palette_7.style.borderColor = transparent;
-    });
+//     palette_6.addEventListener("click", () => {
+//         palette_1.style.borderColor = transparent;
+//         palette_2.style.borderColor = transparent;
+//         palette_3.style.borderColor = transparent;
+//         palette_4.style.borderColor = transparent;
+//         palette_5.style.borderColor = transparent;
+//         palette_6.style.borderColor = red;
+//         palette_7.style.borderColor = transparent;
+//     });
 
-    palette_7.addEventListener("click", () => {
-        palette_1.style.borderColor = transparent;
-        palette_2.style.borderColor = transparent;
-        palette_3.style.borderColor = transparent;
-        palette_4.style.borderColor = transparent;
-        palette_5.style.borderColor = transparent;
-        palette_6.style.borderColor = transparent;
-        palette_7.style.borderColor = red;
-    });
+//     palette_7.addEventListener("click", () => {
+//         palette_1.style.borderColor = transparent;
+//         palette_2.style.borderColor = transparent;
+//         palette_3.style.borderColor = transparent;
+//         palette_4.style.borderColor = transparent;
+//         palette_5.style.borderColor = transparent;
+//         palette_6.style.borderColor = transparent;
+//         palette_7.style.borderColor = red;
+//     });
 
-}
+// }
 
 
 function textureColorChange() {

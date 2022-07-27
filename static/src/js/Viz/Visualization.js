@@ -65,7 +65,7 @@ export class Visualization {
         this.textureManager.loadTexture({
             wood: 'static/src/texture/wood.jpeg',
             paper: 'static/src/texture/paper.jpeg',
-            stone: 'static/src/texture/rock.jpeg',
+            stone: 'static/src/texture/stone.jpeg',
         })
         this.textureManager.setTexture('none')
 
