@@ -43,8 +43,8 @@ let song = new Song("filelist", "static/music/original/")
 //event handlers
 //----------------------------------------------------//
 //whenever the wavesurfer's play button is pressed execute
-document.querySelector('[data-action="play"]').addEventListener('click', () => {
-    song.togglePlay()
+document.querySelector('[data-action="play"]').addEventListener('click', async () => {
+    await song.togglePlay()
     sourceContainer.togglePlay()
 })
 

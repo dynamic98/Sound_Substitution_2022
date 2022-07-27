@@ -76,6 +76,7 @@ export class Visualization {
 
     createVisualNote(radius, positionX, positionY) {
         this.geometryManager.setRadius(radius)
+      
         let newPositionX = positionX * this.counterTimer.getTimer() - 100
         this.threeSystem.updateLightPosition(newPositionX, positionY)
 

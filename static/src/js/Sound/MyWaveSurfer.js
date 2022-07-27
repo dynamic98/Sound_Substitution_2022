@@ -5,7 +5,7 @@ export class MyWaveSurfer {
     //creates a waveSurfer object 
     constructor() {
         this.wavesurfer = WaveSurfer.create({
-            container: document.querySelector('#waveform'),
+            container: '#waveform',
             backend: 'MediaElement',
             waveColor: '#A8DBA8',
             audioRate: 1,
@@ -20,6 +20,7 @@ export class MyWaveSurfer {
     setAudioElementSource(audioElement) {
         this.audioElement = audioElement
         this.wavesurfer.load(this.audioElement);
+
     }
 
     playWaveSurfer = () => {
@@ -28,17 +29,11 @@ export class MyWaveSurfer {
     }
 
     setInteractionEventHandler(callback) {
-        this.wavesurfer.on('seek', async () => {
+        this.wavesurfer.on('seek', async (position) => {
 
-            callback(this.wavesurfer.getCurrentTime())
+            callback(position * this.wavesurfer.getDuration())
+
         })
-    }
-
-
-
-    //play/pause
-    togglePlay() {
-        this.wavesurfer.playPause();
     }
 
     //returns wavesurfer

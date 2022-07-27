@@ -46,7 +46,8 @@ main()
 function main() {
     visualization.initialize();
 
-    bpmTimer.setBPMByMeshCount(8)
+    bpmTimer.setBPM(100)
+    bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     piano.setNoteDuration(300);
 
@@ -63,8 +64,8 @@ function update() {
 
     requestAnimationFrame(update);
 
-    let CurrentIndex = Math.round(MyProgressTimer.getThisSeconds()/300)
-    if(CurrentIndex == 50){
+    let CurrentIndex = Math.round(MyProgressTimer.getThisSeconds() / 300)
+    if (CurrentIndex == 50) {
         CurrentIndex = 0;
     }
     // console.log(CurrentIndex);
@@ -73,14 +74,13 @@ function update() {
     let CurrentMusicArray = MyMusicSheet.getMusicArray(CurrentIndex)
     let CurrentKeyboardPitch = CurrentMusicArray.keyboard_pitch
     let CurrentKeyboardEnergy = CurrentMusicArray.keyboard_energy
-    let CurrentKeyboardNote = CurrentKeyboardPitch.midi%12
+    let CurrentKeyboardNote = CurrentKeyboardPitch.midi % 12
 
 
     if (!bpmTimer.isUnderFourBeat()) {
         visualization.reset();
-    } 
-    else if (bpmTimer.isUnderFourBeat()) {
-        if(CurrentKeyboardEnergy>0 && (CurrentIndex!=LastIndex)){
+    } else if (bpmTimer.isUnderFourBeat()) {
+        if (CurrentKeyboardEnergy > 0 && (CurrentIndex != LastIndex)) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(CurrentKeyboardPitch, CurrentKeyboardEnergy, CurrentKeyboardNote);
             kandinsky.calculate(pitchAndEnergy);
             visualization.setColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
@@ -90,10 +90,10 @@ function update() {
         }
         // let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
     }
-        visualization.render();
-        visualization.update();
-        stats.end();
-        LastIndex = CurrentIndex;
+    visualization.render();
+    visualization.update();
+    stats.end();
+    LastIndex = CurrentIndex;
 }
 
 function draw() {
