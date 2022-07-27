@@ -66,7 +66,7 @@ export class Visualization {
             this.threeSystem.getCamera(),
             this.threeSystem.getRenderer(),
         )
-
+       
         this.grid.setRenderOption(this.bloom.getPassForMoonLight())
         this.threeSystem.addToScene(this.grid.getGrid())
     }

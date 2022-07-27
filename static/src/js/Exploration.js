@@ -47,8 +47,11 @@ function main() {
     piano.setNoteDuration(300);
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
+
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 1, 4)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 2, 5)
+    piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 3, 6)
+
 
     update();
 }

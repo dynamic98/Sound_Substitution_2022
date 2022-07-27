@@ -18,11 +18,10 @@
 
   <!-- Styles -->
   <link type="text/css" href="../static/src/css/shape.css" rel="stylesheet">
-  <!-- <link type="text/css" href="../static/src/css/play.css" rel="stylesheet"> -->
   <link type="text/css" href="../static/src/css/navi.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
-  <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> <script
-    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -41,9 +40,9 @@
     <button type="button" class="btn btn-primary btn-decagon-md" id="btn-decagon"></button>
     <hr>
     <button type="button" class="textureButton" id="none"></button>
-    <button type="button" class="textureButton" id="wood" style="background: url(https://media.istockphoto.com/photos/laminate-wooden-floor-texture-background-picture-id1083302826?b=1&k=20&m=1083302826&s=170667a&w=0&h=ePdma8I7u7KHs2YbehQSVcCX9qay5iPr3wynsWnzFZ0=)"></button>
-    <button type="button" class="textureButton" id="stone" style="background: url(https://images.unsplash.com/photo-1614213879054-8055538ed867?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80)"></button>
-    <button type="button" class="textureButton" id="paper" style="background: url(https://st.depositphotos.com/1000533/2662/i/450/depositphotos_26627183-stock-photo-crumpled-paper-texture.jpg)"></button>
+    <button type="button" class="textureButton" id="wood" style="background: url(../static/src/texture/wood.jpeg)"></button>
+    <button type="button" class="textureButton" id="stone" style="background: url(../static/src/texture/stone.jpeg)"></button>
+    <button type="button" class="textureButton" id="paper" style="background: url(../static/src/texture/paper.jpeg)"></button>
   </section>
 
   <section class="colorContainer"  style="margin-left: 5px;  background-color: rgb(250, 250, 250);">
@@ -214,21 +213,6 @@
   </section>
 
 
-  <!-- <section class="musicContainer" id="emotionContainerID">
-    <div class="botón" onclick="this.classList.toggle('active')" id="play">
-      <div class="fondo" x="0" y="0" width="300" height="300"></div>
-      <div class="icono" width="300" height="300">
-        <div class="parte izquierda" x="0" y="0" width="200" height="200" fill="#fff"></div>
-        <div class="parte derecha" x="0" y="0" width="200" height="200" fill="#fff"></div>
-      </div>
-      <div class="puntero"></div>
-    </div>
-
-    <button class="videoControlButton" id="play" style="display:inline;"> 재생/멈춤 </button>
-    <button class="videoControlButton" id="save" style="display:inline;"> 저장 </button>
-    <button class="videoControlButton" id="reset" style="display:inline;"> 초기화 </button>
-  </section> -->
-
 
   <!--shader script-->
   <script type="x-shader/x-vertex" id="vertexshader">
@@ -250,7 +234,7 @@
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
   <script type="module" defer src="../static/src/js/dist/exploration.js"></script>
   <script type="module" defer src="../static/src/js/forUI/buttonColor.js"></script>
-  <script type="module" defer src="../static/src/js/forUI/divColor.js"></script>
+  <script type="module" defer src="../static/src/js/forUI/changePlay.js"></script>
   <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
   <script type="module" src="/static/src/js/forUI/ColorPicker.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
