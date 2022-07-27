@@ -1,18 +1,14 @@
 export class Piano {
-    constructor(HTMLClassContainer, MusicSheet, ProgressTimer) {
+    constructor(HTMLClassContainer) {
         this.HTMLClassContainer = HTMLClassContainer
         this.currentPitch = 0;
         this.currentOctave = 0;
         this.currentEnergy = 50
 
-
-
-
         this.duration = 50
         this.noteDuration = 300;
         this.playing = false;
-        this.MusicSheet = MusicSheet;
-        this.ProgressTimer = ProgressTimer;
+
 
         this.now = Tone.now();
         this.synth = new Tone.Synth().toDestination();
@@ -32,7 +28,7 @@ export class Piano {
         };
     }
 
-    assignEventOnPianoRow(onEvent, callback, pianoRow, pianoOctave) {
+    assignEventOnPianoRow(onEvent, drawNote, setMusicArray, pianoRow, pianoOctave) {
         let object = {}
         let index = 0;
 
@@ -44,22 +40,17 @@ export class Piano {
                     document.getElementsByClassName(child.className)[0].addEventListener(onEvent, () => {
                         this.currentPitch = object[child.className]
                         this.currentOctave = pianoOctave
-                        callback();
+                        drawNote(this.getAudioData(), this.getEnergy(), this.getPitch());
+                        setMusicArray(this.getAudioData(), 50)
                         this.play()
                     })
                 }
             }
         }
-
     }
 
 
     play() {
-        let CurrentIndex = Math.round(this.ProgressTimer.getThisSeconds()/this.noteDuration)
-        if(CurrentIndex==50){
-            CurrentIndex = 0;
-        }
-        this.MusicSheet.setMusicArray(CurrentIndex, this.getAudioData(), 50);
         this.synth.triggerAttackRelease(this.DictPitch[this.currentPitch] + this.currentOctave.toString(), this.now);
 
     }
@@ -81,8 +72,8 @@ export class Piano {
     setCurrentEnergy(value) {
         this.currentEnergy = value
     }
-    
-     setNoteDuration(value){
+
+    setNoteDuration(value) {
         this.noteDuration = value
     }
 
@@ -251,5 +242,3 @@ export class Piano {
 // document.getElementById("btn-triangle").addEventListener("click", () => {
 //     myThree.ForceGeometryChange("Cone")
 // });
-
-   

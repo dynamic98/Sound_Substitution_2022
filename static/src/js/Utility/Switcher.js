@@ -5,19 +5,19 @@ import {
 export class Switcher{
     constructor(){
         this.ERROR = -1;
+        this.midi = null;
     }
 
-    getPitchAndEnergy( pitch, energy, maxChroma) {
-        let midi = null;
+    getPitchAndEnergy( pitch, energy, midi) {
         if (pitch.frequency == this.ERROR) {
-            midi = maxChroma + 72
+            this.midi =midi + 72
         } else {
-            midi = pitch.midi;
+            this.midi = pitch.midi;
         }
         //return midi and adjust the energy 
-        if (midi) {
+        if (this.midi) {
             let AdjustEnergy = Utility.sigmoid(10, energy);
-            return [midi, AdjustEnergy]
+            return [this.midi, AdjustEnergy]
         }
     }
 

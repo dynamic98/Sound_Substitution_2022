@@ -1,12 +1,10 @@
 import * as THREE from 'three';
 export class TextureManager {
-    constructor(texture) {
+    constructor(object) {
         this.textureLoader = new THREE.TextureLoader();
         this.textureObject = {}
         this.texture;
-    }
 
-    loadTexture(object) {
         for (const key in object) {
             this.textureLoader.load(object[key], (texture) => {
                 texture.wrapS = THREE.RepeatWrapping;
@@ -23,14 +21,14 @@ export class TextureManager {
     }
 
     setTexture = (textureType) => {
-        if (this.textureObject[textureType])
+        if (this.textureObject[textureType]) {
             this.texture = this.textureObject[textureType]
-        else if (textureType == 'none') {
+        } else if (textureType == 'none') {
+            this.texture = null
+        } else {
+            console.error(textureType, ": Unsupported Texture Type only the following are supported", Object.keys(this.textureObject))
             this.texture = null
 
-        } else {
-            console.error("Unsupported Texture Type")
-            return null;
         }
     }
 
