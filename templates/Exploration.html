@@ -12,107 +12,100 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../static/src/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <!-- Styles -->
   <link type="text/css" href="../static/src/css/shape.css" rel="stylesheet">
-  <link type="text/css" href="../static/src/css/play.css" rel="stylesheet">
+  <!-- <link type="text/css" href="../static/src/css/play.css" rel="stylesheet"> -->
+  <link type="text/css" href="../static/src/css/navi.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
   <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
+
+  <section class="menuContainer">
+    <button type="button" class="button btnPush btnBlueGreen" id="pitchButton">음계</button>
+    <button type="button" class="button btnPush btnBlueGreen" id="beatButton">비트</button>
+  </section>
+
+
   <section class="shapeContainer">
-    <button type="button" class="btn btn-primary btn-square-md" id="btn-square"></button>
     <button type="button" class="btn btn-primary btn-circle-md" id="btn-circle"></button>
+    <button type="button" class="btn btn-primary btn-square-md" id="btn-square"></button>
     <button type="button" class="btn btn-primary btn-triangle-md" id="btn-triangle"></button>
-    <button type="button" class="btn btn-primary btn-decagon-md" id="btn-decagon"><span class="glyphicon glyphicon-certificate"></span></button>
     <button type="button" class="btn btn-primary btn-star-md" id="btn-star"></button>
+    <button type="button" class="btn btn-primary btn-decagon-md" id="btn-decagon"></button>
     <hr>
     <button type="button" class="textureButton" id="none"></button>
-    <button type="button" class="textureButton" id="wood" style="background: url(https://i.dlpng.com/static/png/5436810-free-wood-texture-with-high-resolution-wood-textures-for-photoshop-wood-texture-png-800_600_preview.png)"></button>
+    <button type="button" class="textureButton" id="wood" style="background: url(https://media.istockphoto.com/photos/laminate-wooden-floor-texture-background-picture-id1083302826?b=1&k=20&m=1083302826&s=170667a&w=0&h=ePdma8I7u7KHs2YbehQSVcCX9qay5iPr3wynsWnzFZ0=)"></button>
     <button type="button" class="textureButton" id="stone" style="background: url(https://images.unsplash.com/photo-1614213879054-8055538ed867?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80)"></button>
     <button type="button" class="textureButton" id="paper" style="background: url(https://st.depositphotos.com/1000533/2662/i/450/depositphotos_26627183-stock-photo-crumpled-paper-texture.jpg)"></button>
   </section>
 
-  <section class="materialContainer">
-    <div class="customMenu">
-      <p class="smallTitle" style="display:inline;">Transmission</p>
-      <input class="range" id="transmission" type="range" name="intensity" value="0" min="0" max="100"
-        style="display:inline;"></input>
+  <section class="colorContainer"  style="margin-left: 5px;  background-color: rgb(250, 250, 250);">
+    <div >
+      <!-- <h1>Color-Picker</h1> -->
+      <div class="color" id="color_picker"></div>
+             <div id="picker" style="padding:15px; padding-bottom:0px"></div>
+      <div class="picker" id="picker_type"></div>
+      <div class="Picker" id="picker_satu">
+      <p style="margin:0px"> Saturation</p> <div class="color" id="s_1" >&nbsp&nbsp</div><div class="color" id="s_2">&nbsp&nbsp</div><div class="color" id="s_3">&nbsp&nbsp</div><div class="color" id="s_4">&nbsp&nbsp</div><div class="color" id="s_5">&nbsp&nbsp</div><div class="color" id="s_6">&nbsp&nbsp</div><div class="color" id="s_7">&nbsp&nbsp</div><div class="color" id="s_8">&nbsp&nbsp</div><div class="color" id="s_9">&nbsp&nbsp</div><div class="color" id="s_10">&nbsp&nbsp</div><div class="color" id="s_11">&nbsp&nbsp</div><div class="color" id="s_12">&nbsp&nbsp</div>
+            </div>
+         <!-- <div style="margin:5px"></div> -->
 
-      <p class="smallTitle" style="display:inline;">Roughness</p>
-      <input class="range" id="roughness" type="range" name="intensity" value="0" min="0" max="100"
-        style="display:inline;"></input>
-    </div>
-  </section>
-
-
-  <section class="sheetContainer">
-    <!-- 여기에 시각화 표현 -->
-    <!-- canvas -->
-    <div id="canvas"></div>
-  </section>
+      <div class="Picker" id="picker_light">
+      <p style="margin:0px;"> Lightness</p>
+      <div class="color" id="l_1" >&nbsp&nbsp</div><div class="color" id="l_2">&nbsp&nbsp</div><div class="color" id="l_3">&nbsp&nbsp</div><div class="color" id="l_4">&nbsp&nbsp</div><div class="color" id="l_5">&nbsp&nbsp</div><div class="color" id="l_6">&nbsp&nbsp</div><div class="color" id="l_7">&nbsp&nbsp</div><div class="color" id="l_8">&nbsp&nbsp</div><div class="color" id="l_9">&nbsp&nbsp</div><div class="color" id="l_10">&nbsp&nbsp</div><div class="color" id="l_11">&nbsp&nbsp</div><div class="color" id="l_12">&nbsp&nbsp</div>
+              </div>
+              <hr>
 
 
-  <section class="colorContainer">
-    <div class="palette" id="palette1">
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
     </div>
 
-    <div class="palette" id="palette2">
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-    </div>
+      <!-- <h1>Palette</h1> -->
+      <section class="color_candidate" id="palettes_candi">
+            <div class="Palette" id="palette1">
+              <p style="margin:0px;"> RGB</p>
+              <div class="color" id="p1_1" >&nbsp&nbsp</div><div class="color" id="p1_2">&nbsp&nbsp</div><div class="color" id="p1_3">&nbsp&nbsp</div><div class="color" id="p1_4">&nbsp&nbsp</div><div class="color" id="p1_5">&nbsp&nbsp</div><div class="color" id="p1_6">&nbsp&nbsp</div><div class="color" id="p1_7">&nbsp&nbsp</div><div class="color" id="p1_8">&nbsp&nbsp</div><div class="color" id="p1_9">&nbsp&nbsp</div><div class="color" id="p1_10">&nbsp&nbsp</div><div class="color" id="p1_11">&nbsp&nbsp</div><div class="color" id="p1_12">&nbsp&nbsp</div>
+           </div>
+          <div class="Palette" id="palette2">
+            <p  style="margin:0px;"> OGP</p>
+            <div class="color" id="p2_1">&nbsp&nbsp</div><div class="color" id="p2_2">&nbsp&nbsp</div><div class="color" id="p2_3">&nbsp&nbsp</div><div class="color" id="p2_4">&nbsp&nbsp</div><div class="color" id="p2_5">&nbsp&nbsp</div><div class="color" id="p2_6">&nbsp&nbsp</div><div class="color" id="p2_7">&nbsp&nbsp</div><div class="color" id="p2_8">&nbsp&nbsp</div><div class="color" id="p2_9">&nbsp&nbsp</div><div class="color" id="p2_10">&nbsp&nbsp</div><div class="color" id="p2_11">&nbsp&nbsp</div><div class="color" id="p2_12">&nbsp&nbsp</div>
+            </div>
+            <div class="Palette" id="palette3">
+              <p style="margin:0px;">YBP</p>
+              <div class="color" id="p3_1">&nbsp&nbsp</div><div class="color" id="p3_2">&nbsp&nbsp</div><div class="color" id="p3_3">&nbsp&nbsp</div><div class="color" id="p3_4">&nbsp&nbsp</div><div class="color" id="p3_5">&nbsp&nbsp</div><div class="color" id="p3_6">&nbsp&nbsp</div><div class="color" id="p3_7">&nbsp&nbsp</div><div class="color" id="p3_8">&nbsp&nbsp</div><div class="color" id="p3_9">&nbsp&nbsp</div><div class="color" id="p3_10">&nbsp&nbsp</div><div class="color" id="p3_11">&nbsp&nbsp</div><div class="color" id="p3_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette4">
+            <p style="margin:0px;"> GBP</p>
+            <div class="color" id="p4_1">&nbsp&nbsp</div><div class="color" id="p4_2">&nbsp&nbsp</div><div class="color" id="p4_3">&nbsp&nbsp</div><div class="color" id="p4_4">&nbsp&nbsp</div><div class="color" id="p4_5">&nbsp&nbsp</div><div class="color" id="p4_6">&nbsp&nbsp</div><div class="color" id="p4_7">&nbsp&nbsp</div><div class="color" id="p4_8">&nbsp&nbsp</div><div class="color" id="p4_9">&nbsp&nbsp</div><div class="color" id="p4_10">&nbsp&nbsp</div><div class="color" id="p4_11">&nbsp&nbsp</div><div class="color" id="p4_12">&nbsp&nbsp</div>
+          </div>
+          
+          <div class="Palette" id="palette5">
+            <p style="margin:0px;"> Rainbow</p>
+            <div class="color" id="p5_1">&nbsp&nbsp</div><div class="color" id="p5_2">&nbsp&nbsp</div><div class="color" id="p5_3">&nbsp&nbsp</div><div class="color" id="p5_4">&nbsp&nbsp</div><div class="color" id="p5_5">&nbsp&nbsp</div><div class="color" id="p5_6">&nbsp&nbsp</div><div class="color" id="p5_7">&nbsp&nbsp</div><div class="color" id="p5_8">&nbsp&nbsp</div><div class="color" id="p5_9">&nbsp&nbsp</div><div class="color" id="p5_10">&nbsp&nbsp</div><div class="color" id="p5_11">&nbsp&nbsp</div><div class="color" id="p5_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette6">
+            <p style="margin:0px;"> Sunset</p>
+            <div class="color" id="p6_1">&nbsp&nbsp</div><div class="color" id="p6_2">&nbsp&nbsp</div><div class="color" id="p6_3">&nbsp&nbsp</div><div class="color" id="p6_4">&nbsp&nbsp</div><div class="color" id="p6_5">&nbsp&nbsp</div><div class="color" id="p6_6">&nbsp&nbsp</div><div class="color" id="p6_7">&nbsp&nbsp</div><div class="color" id="p6_8">&nbsp&nbsp</div><div class="color" id="p6_9">&nbsp&nbsp</div><div class="color" id="p6_10">&nbsp&nbsp</div><div class="color" id="p6_11">&nbsp&nbsp</div><div class="color" id="p6_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette7">
+            <p style="margin:0px;"> Aqua</p>
+            <div class="color" id="p7_1">&nbsp&nbsp</div><div class="color" id="p7_2">&nbsp&nbsp</div><div class="color" id="p7_3">&nbsp&nbsp</div><div class="color" id="p7_4">&nbsp&nbsp</div><div class="color" id="p7_5">&nbsp&nbsp</div><div class="color" id="p7_6">&nbsp&nbsp</div><div class="color" id="p7_7">&nbsp&nbsp</div><div class="color" id="p7_8">&nbsp&nbsp</div><div class="color" id="p7_9">&nbsp&nbsp</div><div class="color" id="p7_10">&nbsp&nbsp</div><div class="color" id="p7_11">&nbsp&nbsp</div><div class="color" id="p7_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette8">
+            <p style="margin:0px;"> Aurora</p>
+            <div class="color" id="p8_1">&nbsp&nbsp</div><div class="color" id="p8_2">&nbsp&nbsp</div><div class="color" id="p8_3">&nbsp&nbsp</div><div class="color" id="p8_4">&nbsp&nbsp</div><div class="color" id="p8_5">&nbsp&nbsp</div><div class="color" id="p8_6">&nbsp&nbsp</div><div class="color" id="p8_7">&nbsp&nbsp</div><div class="color" id="p8_8">&nbsp&nbsp</div><div class="color" id="p8_9">&nbsp&nbsp</div><div class="color" id="p8_10">&nbsp&nbsp</div><div class="color" id="p8_11">&nbsp&nbsp</div><div class="color" id="p8_12">&nbsp&nbsp</div>
+          </div>
+    
+      </section>
+  </div>
+</div>
 
-    <div class="palette" id="palette3">
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-    </div>
-
-    <div class="palette" id="palette4">
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-    </div>
-
-    <div class="palette" id="palette5">
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-    </div>
-
-
-    <div class="palette" id="palette6">
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-    </div>
-
-
-    <div class="palette" id="palette7">
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-      <div class="color"></div>
-    </div>
   </section>
 
 
@@ -143,32 +136,67 @@
       <li class="white la-2"></li>
       <li class="black la-s-2"></li>
       <li class="white si-2"></li>
+
+      <li class="white do-3"></li>
+      <li class="black do-s-3"></li>
+      <li class="white re-3"></li>
+      <li class="black re-s-3"></li>
+      <li class="white mi-3"></li>
+      <li class="white fa-3"></li>
+      <li class="black fa-s-3"></li>
+      <li class="white sol-3"></li>
+      <li class="black sol-s-3"></li>
+      <li class="white la-3"></li>
+      <li class="black la-s-3"></li>
+      <li class="white si-3"></li>
     </ul>
   </section>
 
-  <section class="ProgressTimer">
-    <div>
-      <progress value="0" max="15000" id="ProgressBar"></progress>
+
+  <section class="sheetContainer">
+    <!-- 여기에 시각화 표현 -->
+    <!-- canvas -->
+    <div id="canvas"></div>
+  </section>
+
+  <progress value="0" max="15000" id="ProgressBar"></progress>
+
+
+  <section class="visualContainer_pitch">
+    <div class="pitchDIV">Pitch Custom</div>
+    <div class="customMenu">
+      <br>
+      <p class="smallTitle" style="display:inline;">간격</p>
+      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+      <hr>
+      <p class="smallTitle" style="display:inline;">크기</p>
+      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+      <hr>
+      <p class="smallTitle" style="display:inline;">선의 유무</p>
+      <input type="checkbox">
     </div>
   </section>
 
-  <section class="menuEmotionContainer">
-    <button class="menuEmotionButton" id="happy"> 행복한 </button>
-    <button class="menuEmotionButton" id="sad"> 슬픈 </button>
-    <button class="menuEmotionButton" id="exciting"> 신나는 </button>
-    <button class="menuEmotionButton" id="peaceful"> 평화로운 </button>
-  </section>
-
-  <section class="emotionContainer" id="emotionContainerID">
-      <video id="theVideo" src="../static/video/happy.mp4" controls></video>
+  <section class="visualContainer_beat">
+    <div class="beatDIV">Beat Custom</div>
+    <div class="customMenu">
       <br>
-      <button class="videoControlButton" id="reset" style="display:inline;"> Play/Pause </button>
-      <button class="videoControlButton" id="save" style="display:inline;"> 저장 </button>
-      <!-- <button class="videoControlButton" id="nextPage" style="display:inline;"> 다음 페이지 </button> -->
+      <p class="smallTitle" style="display:inline;">크기</p>
+      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+    </div>
   </section>
 
+  <section class="visualContainer_canvas">
+    <div class="canvasDIV">Canvas Custom</div>
+    <div class="customMenu">
+      <br>
+      <p class="smallTitle" style="display:inline;">화면</p>
+      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+    </div>
+  </section>
 
   <section class="hapticContainer">
+    <div class="canvasDIV">Haptic Custom</div>
     <div class="customMenu">
       <br>
       <p class="smallTitle" style="display:inline;">감도</p>
@@ -180,25 +208,26 @@
   </section>
 
   <section class="musicContainer">
-    <div class="customMenu">
-      <br>
-      <div class="botón" onclick="this.classList.toggle('active')">
-        <div class="fondo" x="0" y="0" width="200" height="200"></div>
-        <div class="icono" width="200" height="200">
-          <div class="parte izquierda" x="0" y="0" width="200" height="200" fill="#fff"></div>
-          <div class="parte derecha" x="0" y="0" width="200" height="200" fill="#fff"></div>
-        </div>
-        <div class="puntero"></div>
-      </div>
-      <br>
-      <div class="volumeControl">
-        <p class="smallTitle" style="display:inline;">음량</p>
-        <button class="volumeControlButton" style="display:inline;"> 작게 </button>
-        <button class="volumeControlButton" style="display:inline;"> 중간 </button>
-        <button class="volumeControlButton" style="display:inline;"> 크게 </button>
-      </div>
-    </div>
+    <button class="videoControlButton" id="play" style="display:inline;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
+    <button class="videoControlButton" id="save" style="display:inline;"><span class="glyphicon glyphicon-save" id="saveGlyph"></span></button>
+    <button class="videoControlButton" id="reset" style="display:inline;"><span class="glyphicon glyphicon-erase" id="eraseGlyph"></span></button>
   </section>
+
+
+  <!-- <section class="musicContainer" id="emotionContainerID">
+    <div class="botón" onclick="this.classList.toggle('active')" id="play">
+      <div class="fondo" x="0" y="0" width="300" height="300"></div>
+      <div class="icono" width="300" height="300">
+        <div class="parte izquierda" x="0" y="0" width="200" height="200" fill="#fff"></div>
+        <div class="parte derecha" x="0" y="0" width="200" height="200" fill="#fff"></div>
+      </div>
+      <div class="puntero"></div>
+    </div>
+
+    <button class="videoControlButton" id="play" style="display:inline;"> 재생/멈춤 </button>
+    <button class="videoControlButton" id="save" style="display:inline;"> 저장 </button>
+    <button class="videoControlButton" id="reset" style="display:inline;"> 초기화 </button>
+  </section> -->
 
 
   <!--shader script-->
@@ -223,6 +252,9 @@
   <script type="module" defer src="../static/src/js/forUI/buttonColor.js"></script>
   <script type="module" defer src="../static/src/js/forUI/divColor.js"></script>
   <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
+  <script type="module" src="/static/src/js/forUI/ColorPicker.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
 </body>
 
 </html>

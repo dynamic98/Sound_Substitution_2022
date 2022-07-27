@@ -53,8 +53,8 @@ function main() {
 
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
-    piano.assignEventOnPianoRow("click", draw, 1, 4)
-    piano.assignEventOnPianoRow("click", draw, 2, 5)
+    piano.assignEventOnPianoRow("mousedown", draw, 1, 4)
+    piano.assignEventOnPianoRow("mousedown", draw, 2, 5)
 
     update();
 }
@@ -105,3 +105,4 @@ function draw() {
 }
 
 document.body.appendChild(stats.dom);
+

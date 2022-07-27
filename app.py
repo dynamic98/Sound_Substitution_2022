@@ -157,7 +157,7 @@ def making_tool():
     word = '구상적 시각화 페이지 입니다.'
   else:
     pass
-  return render_template('making_tool.html')
+  return render_template('Exploration copy.html')
 
 @app.route('/custom_data_dev', methods=['POST'])
 def custom_data_dev():
@@ -167,26 +167,26 @@ def custom_data_dev():
     pass
   return render_template('customization_dev.html', data=data)
 
-# @app.route('/loading', methods=['POST'])
-# def loading():
-#   features = ''
-#   if request.method == 'POST':
-#     file = request.files['SSfile']
-#     print(file)
-#     if os.path.isdir(os.path.join(folder, secure_filename(file.filename))):
-#       pass
-#     else:
-#       file.save(os.path.join(folder, secure_filename(file.filename)))
-#       os.system("python -m demucs --mp3 static\\music\\%s -o static\\music" % secure_filename(file.filename))
+@app.route('/loading', methods=['POST'])
+def loading():
+  features = ''
+  if request.method == 'POST':
+    file = request.files['SSfile']
+    print(file)
+    if os.path.isdir(os.path.join(folder, secure_filename(file.filename))):
+      pass
+    else:
+      file.save(os.path.join(folder, secure_filename(file.filename)))
+      os.system("python -m demucs --mp3 static\\music\\%s -o static\\music" % secure_filename(file.filename))
     
-#     if UserName == 'default_user':
-#       return render_template('mainMenu.html',User_Name= UserName, login="log in")
-#     else:
-#       return render_template('mainMenu.html',User_Name= UserName, login="log out")
-#       # features = extract_feature(folder) # 내가 원하는 음악의 Feature 추출
-#       # 이것을 classifier.ts 와 연결
+    if UserName == 'default_user':
+      return render_template('mainMenu.html',User_Name= UserName, login="log in")
+    else:
+      return render_template('mainMenu.html',User_Name= UserName, login="log out")
+      # features = extract_feature(folder) # 내가 원하는 음악의 Feature 추출
+      # 이것을 classifier.ts 와 연결
 
-#   return render_template('mainMenu.html')
+  return render_template('mainMenu.html')
 
 # @app.route('/login', methods=['POST'])
 # def login():
