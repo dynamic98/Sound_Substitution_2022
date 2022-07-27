@@ -26,12 +26,15 @@ export class SourceContainer {
     }
 
     async initialPlay(getWavesurferTime, playWaveSurfer) {
-
+        playWaveSurfer()
         for (let source of this.sourceList) {
             await source.play()
             source.setTime(getWavesurferTime())
         }
-        playWaveSurfer()
+        return new Promise((resolve, reject) => {
+            resolve();
+        })
+
     }
 
     async changeSong(folderPath) {
@@ -45,9 +48,9 @@ export class SourceContainer {
         })
     }
 
-    togglePlay() {
+    async togglePlay() {
         for (let source of this.sourceList) {
-            source.togglePlay()
+            await source.togglePlay()
         }
     }
 
