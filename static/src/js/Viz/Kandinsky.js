@@ -67,7 +67,7 @@ export class Kandinsky {
     }
 
     getPitchEnergy() {
-        return this.pitchRadius * (this.energy * 5) / 2;
+        return this.pitchRadius * (this.energy * 5);
     }
 
     setBPM(bpm) {

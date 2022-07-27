@@ -51,6 +51,14 @@ export class Piano {
 
 
     play() {
+<<<<<<< HEAD
+=======
+        let CurrentIndex = Math.round(this.ProgressTimer.getThisSeconds()/this.noteDuration)
+        if(CurrentIndex==50){
+            CurrentIndex = 0;
+        }
+        this.MusicSheet.setMusicArray(CurrentIndex, this.getAudioData(), this.currentEnergy);
+>>>>>>> 0bddaec (jr)
         this.synth.triggerAttackRelease(this.DictPitch[this.currentPitch] + this.currentOctave.toString(), this.now);
 
     }
