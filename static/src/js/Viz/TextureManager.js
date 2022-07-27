@@ -21,14 +21,14 @@ export class TextureManager {
     }
 
     setTexture = (textureType) => {
-        if (this.textureObject[textureType])
+        if (this.textureObject[textureType]) {
             this.texture = this.textureObject[textureType]
-        else if (textureType == 'none') {
+        } else if (textureType == 'none') {
+            this.texture = null
+        } else {
+            console.error(textureType, ": Unsupported Texture Type only the following are supported", Object.keys(this.textureObject))
             this.texture = null
 
-        } else {
-            console.error("Unsupported Texture Type")
-            return null;
         }
     }
 

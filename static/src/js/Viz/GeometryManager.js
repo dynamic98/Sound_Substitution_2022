@@ -21,7 +21,7 @@ export class GeometryManager {
 
         this.coneParameters = {
             radius: null,
-            height: 5,
+            height: 10,
             radialSegments: 32
         }
 

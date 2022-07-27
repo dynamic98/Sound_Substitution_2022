@@ -56,7 +56,7 @@ export class Visualization {
             this.instruments[instrumentType].textureManager = new TextureManager({
                 wood: 'static/src/texture/wood.jpeg',
                 paper: 'static/src/texture/paper.jpeg',
-                stone: 'static/src/texture/rock.jpeg',
+                stone: 'static/src/texture/stone.jpeg',
             })
             this.instruments[instrumentType].textureManager.setTexture('none')
         }
@@ -66,7 +66,7 @@ export class Visualization {
             this.threeSystem.getCamera(),
             this.threeSystem.getRenderer(),
         )
-       
+
         this.grid.setRenderOption(this.bloom.getPassForMoonLight())
         this.threeSystem.addToScene(this.grid.getGrid())
     }
