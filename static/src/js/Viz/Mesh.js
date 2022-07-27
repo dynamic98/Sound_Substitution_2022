@@ -28,7 +28,7 @@ export class VisualNote extends Mesh {
     }
 }
 
-export class ConnectionLine extends Mesh {
+export class Line extends Mesh {
     constructor(firstPoint, secondPoint) {
         super();
         this.material = new THREE.LineBasicMaterial({

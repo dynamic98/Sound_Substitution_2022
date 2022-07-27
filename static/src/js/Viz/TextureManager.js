@@ -1,12 +1,10 @@
 import * as THREE from 'three';
 export class TextureManager {
-    constructor(texture) {
+    constructor(object) {
         this.textureLoader = new THREE.TextureLoader();
         this.textureObject = {}
         this.texture;
-    }
 
-    loadTexture(object) {
         for (const key in object) {
             this.textureLoader.load(object[key], (texture) => {
                 texture.wrapS = THREE.RepeatWrapping;

@@ -2,10 +2,10 @@ import * as THREE from 'three';
 
 import {
     Bloom
-} from './Bloom.js'
+} from '../Viz/Bloom.js'
 import {
     TextureManager
-} from './TextureManager.js';
+} from '../Viz/TextureManager.js';
 export class MyThree {
     constructor(defaultShape) {
         this.scene = new THREE.Scene();

@@ -40,6 +40,14 @@ export class GeometryManager {
             bevelSize: 2,
             bevelEnabled: false
         }
+        this.decagonParameter = {
+            size: 0,
+            height: 0,
+            curveSegments: 1,
+            bevelThickness: 1,
+            bevelSize: 2,
+            bevelEnabled: false
+        }
 
     }
 
@@ -56,7 +64,7 @@ export class GeometryManager {
 
     }
     getGeometry() {
-      
+
         switch (this.selectedGeometryType) {
             case "circle":
                 this.geometry = new THREE.SphereGeometry(
@@ -82,12 +90,29 @@ export class GeometryManager {
                 return this.geometry
 
             case 'decagon':
-                this.geometry = new THREE.CylinderGeometry(
-                    this.radius,
-                    this.radius,
-                    this.cylinderParameters.height,
-                    this.cylinderParameters.radialSegments
-                );
+                let decagonshape = new THREE.Shape()
+                    .moveTo(-20 / this.radius, 0 / this.radius)
+                    .lineTo(-9.96 / this.radius, 3.13 / this.radius)
+                    .lineTo(-16.06 / this.radius, 12.35 / this.radius)
+                    .lineTo(-6.17 / this.radius, 8.1 / this.radius)
+                    .lineTo(-6.07 / this.radius, 20 / this.radius)
+                    .lineTo(0 / this.radius, 10 / this.radius)
+                    .lineTo(6.07 / this.radius, 20 / this.radius)
+                    .lineTo(6.17 / this.radius, 8.1 / this.radius)
+                    .lineTo(16.06 / this.radius, 12.35 / this.radius)
+                    .lineTo(9.96 / this.radius, 3.13 / this.radius)
+                    .lineTo(20 / this.radius, 0 / this.radius)
+                    .lineTo(9.96 / this.radius, -3.13 / this.radius)
+                    .lineTo(16.06 / this.radius, -12.35 / this.radius)
+                    .lineTo(6.17 / this.radius, -8.1 / this.radius)
+                    .lineTo(6.07 / this.radius, -20 / this.radius)
+                    .lineTo(0 / this.radius, -10 / this.radius)
+                    .lineTo(-6.07 / this.radius, -20 / this.radius)
+                    .lineTo(-6.17 / this.radius, -8.1 / this.radius)
+                    .lineTo(-16.06 / this.radius, -12.35 / this.radius)
+                    .lineTo(-9.96 / this.radius, -3.13 / this.radius)
+                    .lineTo(-20 / this.radius, 0 / this.radius);
+                this.geometry = new THREE.ShapeGeometry(decagonshape);
                 return this.geometry
 
             case 'star':
@@ -103,8 +128,8 @@ export class GeometryManager {
                 starPoints.push(new THREE.Vector2(-40 / this.radius, 10 / this.radius));
                 starPoints.push(new THREE.Vector2(-10 / this.radius, 10 / this.radius));
 
-                let shape = new THREE.Shape(starPoints);
-                this.geometry = new THREE.ExtrudeGeometry(shape, this.starParameter);
+                let starShape = new THREE.Shape(starPoints);
+                this.geometry = new THREE.ExtrudeGeometry(starShape, this.starParameter);
                 return this.geometry
 
         }

@@ -5,7 +5,7 @@ export class ThreeSystem {
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer({
             antialias: true,
-            physicallyCorrectLights: true,
+
         });
         this.renderer.shadowMap.enabled = true;
         this.pointLight = new THREE.PointLight(0xffffff, 30, 15);
@@ -21,9 +21,7 @@ export class ThreeSystem {
             width: window.innerWidth / 1.8,
             height: window.innerHeight / 1.5
         }
-    }
 
-    initialize() {
         this.camera.position.set(0, 0, 200);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(this.rendererSize.width, this.rendererSize.height);

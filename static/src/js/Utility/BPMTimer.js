@@ -30,4 +30,7 @@ export class BPMTimer {
     setBPMByMeshCount(meshCount) {
         this.bpm = this.bpm / meshCount * 15 //그냥 때려박은 숫자 ㅋ
     }
+    restart(){
+        
+    }
 }

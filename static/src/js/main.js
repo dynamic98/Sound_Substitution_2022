@@ -82,7 +82,6 @@ async function main() {
 
     //VISUALS & OTHERS
     // ----------------------------------------------------/
-    visualization.initialize();
     kandinsky = new Kandinsky(song.getBPM(), song.getMaxVolume())
     bpmTimer.setBPM(song.getBPM())
 
@@ -100,7 +99,7 @@ function animate() {
         //over 4 beat = delet drawing
         // console.log('original pitch', song.getPitch()) // mixed song
         // console.log('original max chroma', song.getMaxChroma())
-        console.log('vocal pitch', sourceContainer.getList()[3].getPitch());  // vocal
+        console.log('vocal pitch', sourceContainer.getList()[3].getPitch()); // vocal
         // console.log('bass max chorma', sourceContainer.getList()[3].getMaxChroma())
         // console.log(sourceContainer.getList()[0].getEnergy(), "Bass")
         // console.log(sourceContainer.getList()[1].getEnergy(), "drums")
@@ -116,8 +115,8 @@ function animate() {
             console.log(sourceContainer.getList()[3].getPitch());
 
             kandinsky.calculate(pitchAndEnergy);
-            visualization.setColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-            visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+            visualization.setColor("piano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+            visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
 
         }
         visualization.render();

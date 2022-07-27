@@ -31,78 +31,63 @@ let kandinsky;
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
 let switcher = new Switcher();
-let visualization = new Visualization()
-
-document.body.appendChild(stats.dom);
-
-let MyProgressTimer = new ProgressTimer(15, document.getElementById("ProgressBar"));
-let MyMusicSheet = new MusicSheet(50);
-let piano = new Piano("pianoContainer", MyMusicSheet, MyProgressTimer);
-let LastIndex = -1;
+//bloom length 
+let visualization = new Visualization(1)
+let progressTimer = new ProgressTimer(15, document.getElementById("ProgressBar"));
+let musicSheet = new MusicSheet(50);
+let piano = new Piano("pianoContainer");
 
 
 main()
 
 function main() {
-    visualization.initialize();
-
     bpmTimer.setBPM(100)
     bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     piano.setNoteDuration(300);
-
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
-    piano.assignEventOnPianoRow("mousedown", draw, 1, 4)
-    piano.assignEventOnPianoRow("mousedown", draw, 2, 5)
+    piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 1, 4)
+    piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 2, 5)
 
     update();
 }
 
 function update() {
     stats.begin()
-
     requestAnimationFrame(update);
-
-    let CurrentIndex = Math.round(MyProgressTimer.getThisSeconds() / 300)
-    if (CurrentIndex == 50) {
-        CurrentIndex = 0;
-    }
-    // console.log(CurrentIndex);
-    // console.log(MyProgressTimer.getThisSeconds(), Math.round(MyProgressTimer.getThisSeconds()/375));
-    // console.log(CurrentIndex, MyMusicSheet.getMusicArray(CurrentIndex));
-    let CurrentMusicArray = MyMusicSheet.getMusicArray(CurrentIndex)
-    let CurrentKeyboardPitch = CurrentMusicArray.keyboard_pitch
-    let CurrentKeyboardEnergy = CurrentMusicArray.keyboard_energy
-    let CurrentKeyboardNote = CurrentKeyboardPitch.midi % 12
-
+    musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / 300))
 
     if (!bpmTimer.isUnderFourBeat()) {
         visualization.reset();
     } else if (bpmTimer.isUnderFourBeat()) {
-        if (CurrentKeyboardEnergy > 0 && (CurrentIndex != LastIndex)) {
-            let pitchAndEnergy = switcher.getPitchAndEnergy(CurrentKeyboardPitch, CurrentKeyboardEnergy, CurrentKeyboardNote);
+
+        if (musicSheet.getKeyboardEnergy() > 0 && (musicSheet.isCurrentIndexUpdated())) {
+            let pitchAndEnergy = switcher.getPitchAndEnergy(
+                musicSheet.getKeyboardPitch(),
+                musicSheet.getKeyboardEnergy(),
+                musicSheet.getKeyboardNote()
+            )
             kandinsky.calculate(pitchAndEnergy);
-            visualization.setColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-            visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-            console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
-            visualization.createConnectonLine()
+            //visualization.setColor("piano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+            visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+            console.log("Create Mesh!!", musicSheet.getCurrentIndex(), musicSheet.getLastIndex(), musicSheet.getKeyboardPitch());
+            visualization.createConnectionLine("piano")
         }
-        // let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
     }
     visualization.render();
     visualization.update();
     stats.end();
-    LastIndex = CurrentIndex;
+    musicSheet.setLastIndex(musicSheet.getCurrentIndex())
 }
 
-function draw() {
-    let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
+
+//callback for each Instrument 
+//drum class must have the same getPitch Energy, getPitchWidth and getPitchHeight Functions. 
+function draw(pitch, energy, midi) {
+    let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
     //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-    visualization.createVisualNote(kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-    visualization.createConnectonLine()
+    visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+    visualization.createConnectionLine("piano")
 }
-
-document.body.appendChild(stats.dom);
-
