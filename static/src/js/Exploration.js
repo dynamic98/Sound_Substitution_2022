@@ -15,6 +15,9 @@ import {
     ButtonCustomization
 } from './Customization/ButtonCustomization.js'
 import {
+    SliderCustomization
+} from './Customization/SlideCustomization.js'
+import {
     Piano
 } from './Customization/Piano.js'
 import {
@@ -26,6 +29,7 @@ import {
 
 let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
 let textureButtons = new ButtonCustomization("shapeContainer", "textureButton")
+let pitchslide = new SliderCustomization("visualContainer_pitch", "customMenu", "range")
 
 let kandinsky;
 let bpmTimer = new BPMTimer();
@@ -34,7 +38,8 @@ let switcher = new Switcher();
 //bloom length 
 let visualization = new Visualization(1)
 let progressTimer = new ProgressTimer(15, document.getElementById("ProgressBar"));
-let musicSheet = new MusicSheet(50);
+let MusicLength = 50;
+let musicSheet = new MusicSheet(MusicLength);
 let piano = new Piano("pianoContainer");
 
 
@@ -47,6 +52,13 @@ function main() {
     piano.setNoteDuration(300);
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
+    pitchslide.assignEventHandler("click", (para, value)=>{
+        if(para=="slide-pitch-interval"){
+            kandinsky.setRange(value)
+        }else if(para=="slide-pitch-size"){
+            piano.setCurrentEnergy(value)
+        }
+    })
 
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 1, 4)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 2, 5)
@@ -59,7 +71,7 @@ function main() {
 function update() {
     stats.begin()
     requestAnimationFrame(update);
-    musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / 300))
+    musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000/MusicLength)))
 
     if (!bpmTimer.isUnderFourBeat()) {
         visualization.reset();
