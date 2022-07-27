@@ -36,6 +36,27 @@ let visualization = new Visualization(1)
 let progressTimer = new ProgressTimer(15, document.getElementById("ProgressBar"));
 let musicSheet = new MusicSheet(50);
 let piano = new Piano("pianoContainer");
+let mode_pitchbeat="pitch"
+
+let pitch_type = document.getElementById('pitchButton')
+let beat_type=document.getElementById('beatButton')
+let piano_container=document.getElementsByClassName("set")
+let drum_container=document.getElementsByClassName("set2")
+
+pitch_type.onclick=function(e){
+    // console.log("pitch mode")
+    mode_pitchbeat="pitch"
+    piano_container[0].style.display=''
+    drum_container[0].style.display='none'
+}
+beat_type.onclick=function(e){
+    // console.log("beat mode")
+    mode_pitchbeat="beat"
+    piano_container[0].style.display='none'
+    drum_container[0].style.display=''
+    // console.log(piano_container[0])
+}
+
 
 
 main()
