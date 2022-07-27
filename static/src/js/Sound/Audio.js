@@ -84,6 +84,9 @@ export class Audio {
     setTime(time) {
         this.audioElementHandler.setTime(time);
     }
+    togglePlay() {
+        return this.audioElementHandler.togglePlay();
+    }
 }
 
 //----------------------------------------------------//
@@ -153,9 +156,7 @@ export class Song extends Audio {
     playWaveSurfer = () => {
         return this.myWaveSurfer.playWaveSurfer()
     }
-    togglePlay() {
-        this.myWaveSurfer.togglePlay();
-    }
+
 
 }
 
@@ -171,9 +172,7 @@ export class Source extends Audio {
     static getSeparatedFileListLength() {
         return Source.separatedFileList.length
     }
-    togglePlay() {
-        this.audioElementHandler.togglePlay();
-    }
+
 
     static getSeparatedFileList() {
         return this.separatedFileList
@@ -184,7 +183,7 @@ export class Source extends Audio {
         return super.fetchMusic(this.fileName);
     }
     play() {
-        this.audioElementHandler.getAudioElement().play()
+        return this.audioElementHandler.getAudioElement().play()
     }
 
     setFolderPath(folderPath) {

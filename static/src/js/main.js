@@ -43,15 +43,15 @@ let song = new Song("filelist", "static/music/original/")
 //event handlers
 //----------------------------------------------------//
 //whenever the wavesurfer's play button is pressed execute
-document.querySelector('[data-action="play"]').addEventListener('click', () => {
-    song.togglePlay()
+document.querySelector('[data-action="play"]').addEventListener('click', async () => {
+    await song.togglePlay()
     sourceContainer.togglePlay()
 })
 
 //whenever the sound source changes reset directory, import from directory, reset the sound and wavesurfer settings. 
 document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
-    sourceContainer.changeSong("static/music/separated/" + song.getFileName());
+    await sourceContainer.changeSong("static/music/separated/" + song.getFileName());
 
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
 
@@ -90,6 +90,7 @@ async function main() {
 };
 
 function animate() {
+    console.log(sourceContainer.getSource("vocals").getPitch())
     requestAnimationFrame(animate);
     stats.begin()
 

@@ -27,7 +27,7 @@ export class AudioElementHandler {
 
     //play or pause
     togglePlay() {
-        this.audioElement.paused ? this.audioElement.play() : this.audioElement.pause();
+        return this.audioElement.paused ? this.audioElement.play() : this.audioElement.pause();
     }
 
     initializeAudio(sourceURL) {
@@ -47,7 +47,10 @@ export class AudioElementHandler {
     }
 
     setTime(time) {
+
+
         this.audioElement.currentTime = time
+        console.log(this.audioElement.currentTime)
     }
 
     setFolderPath(folderPath) {
