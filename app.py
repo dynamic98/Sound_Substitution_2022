@@ -109,11 +109,7 @@ def abstract():
 
 @app.route('/concrete', methods=['POST'])
 def concrete():
-  if request.method == 'POST':
-      word = '구상적 시각화 페이지 입니다.'
-  else:
-    pass
-  return render_template('concrete.html', word=word)
+  return render_template('Task_dev.html',User_Name=UserName, login="log in")
 
 
 @app.route('/SendHapticCustom', methods=['POST'])

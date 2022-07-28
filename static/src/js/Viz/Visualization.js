@@ -43,12 +43,14 @@ export class Visualization {
         //threshold, strength, radius , bloomLength
         this.bloom = new Bloom(0, 5, 1, bloomLength, this.threeSystem.getRendererSize());
         this.counterTimer = new CounterTimer(1);
+        this.Bias_X = 115;
 
         this.instruments = {
             piano: {},
             drum: {},
             savedPiano: {},
-            savedDrum: {}
+            savedDrum: {},
+            NowLocation: {}
         }
         for (let instrumentType in this.instruments) {
             this.instruments[instrumentType].visualNoteList = []
@@ -79,7 +81,7 @@ export class Visualization {
             let instrument = this.instruments[instrumentType]
 
             instrument.geometryManager.setRadius(radius)
-            let newPositionX = positionX * this.counterTimer.getTimer() - 115
+            let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
 
             let texture = instrument.textureManager.getTexture()
             let color = instrument.colorManager.getColor();
@@ -98,6 +100,31 @@ export class Visualization {
 
 
             this.threeSystem.updateLightPosition(newPositionX, positionY)
+        }
+    }
+
+    createVisualAbsNote(instrumentType, radius, positionX, positionY) {
+        if (this.instruments[instrumentType] == undefined || null) {
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
+        } else {
+            let instrument = this.instruments[instrumentType]
+
+            instrument.geometryManager.setRadius(radius)
+
+            let texture = instrument.textureManager.getTexture()
+            let color = instrument.colorManager.getColor();
+
+
+            let visualNote = new VisualNote(
+                instrument.materialManager.createMaterial(color, texture),
+                instrument.geometryManager.getGeometry(),
+                positionX-this.Bias_X,
+                positionY
+            )
+
+            visualNote.setRenderOption(this.bloom.getPassForMoonLight())
+            this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
+            instrument.visualNoteList.push(visualNote)
         }
     }
 
@@ -120,14 +147,14 @@ export class Visualization {
             let instrument = this.instruments["NowLocation"]
 
             // instrument.geometryManager.setRadius(10)
-            let newPositionX = positionX * this.counterTimer.getTimer() - 100
+            let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
             this.instruments[instrumentType].geometryManager.selectedGeometryType = "NowLocation"
             let positionY = 0;
-            this.instruments[instrumentType].colorManager.setColor(0.7, 50);
+            this.instruments[instrumentType].colorManager.setColor(0.7, 0.8, 0.9);
 
             let texture = instrument.textureManager.getTexture()
             let color = instrument.colorManager.getColor();
-            let transmission = 0.4
+            let transmission = 0.01
 
             let visualNote = new VisualNote(
                 instrument.materialManager.createMaterial(color, texture, transmission),
@@ -135,7 +162,7 @@ export class Visualization {
                 newPositionX,
                 positionY
             )
-            visualNote.getMesh().position.setZ(-15);
+            visualNote.getMesh().position.setZ(1);
             visualNote.setRenderOption(this.bloom.getPassForMoonLight())
             this.threeSystem.addToGroup(visualNote.getMesh(), "NowLocation")
             instrument.visualNoteList.push(visualNote)
@@ -144,7 +171,7 @@ export class Visualization {
 
     MoveNowLocation(positionX) {
         let thisMesh = this.threeSystem.getGroup("NowLocation").children[0]
-        let newPositionX = positionX * this.counterTimer.getTimer() - 100
+        let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
         thisMesh.position.setX(newPositionX)
 
     }

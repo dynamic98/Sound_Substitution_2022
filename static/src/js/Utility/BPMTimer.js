@@ -26,6 +26,9 @@ export class BPMTimer {
     getBPM() {
         return this.bpm
     }
+    getFourBeatTime(){
+        return (60 * 1000) / this.bpm * 4;
+    }
 
     setBPMByMeshCount(meshCount) {
         this.bpm = this.bpm / meshCount * 15 //그냥 때려박은 숫자 ㅋ
