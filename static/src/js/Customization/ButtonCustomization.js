@@ -1,11 +1,11 @@
 export class ButtonCustomization {
 
-    constructor(HTMLClassContainer, className, eraseTextFromIDName='') {
+    constructor(HTMLClassContainer, className, eraseTextFromIDName = '') {
         this.parameter;
         this.HTMLClassContainer = HTMLClassContainer
         this.className = className
-        this.eraseTextFromIDName= eraseTextFromIDName
-        
+        this.eraseTextFromIDName = eraseTextFromIDName
+
     }
 
     assignEventHandler(event, callback) {
@@ -14,8 +14,9 @@ export class ButtonCustomization {
                 $("#" + child.id).on(event, () => {
                     this.parameter = child.id.replace(this.eraseTextFromIDName, '')
                     console.log(this.parameter)
-                    callback("piano",this.parameter)
-                    callback("input_piano", this.parameter)
+                
+                    callback("piano", this.parameter)
+                    callback("savedPiano", this.parameter)
                 })
             }
 

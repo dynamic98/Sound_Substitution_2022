@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 export class GeometryManager {
     constructor(selectedGeometryType) {
-        this.geometryTypeList = ['circle', 'square', 'triangle', 'decagon', 'star', 'NowLocation']
+        this.geometryTypeList = ['circle', 'square', 'triangle', 'decagon', 'star']
         this.selectedGeometryType = selectedGeometryType
         this.geometry;
         this.radius
@@ -64,7 +64,6 @@ export class GeometryManager {
 
     }
     getGeometry() {
-
         switch (this.selectedGeometryType) {
             case "circle":
                 this.geometry = new THREE.SphereGeometry(
@@ -131,14 +130,8 @@ export class GeometryManager {
                 let starShape = new THREE.Shape(starPoints);
                 this.geometry = new THREE.ExtrudeGeometry(starShape, this.starParameter);
                 return this.geometry
-            
-            case "NowLocation":
-                this.geometry = new THREE.BoxGeometry(
-                    15,
-                    150,
-                    1
-                );
-                return this.geometry
+
+
 
         }
 
