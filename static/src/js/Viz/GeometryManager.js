@@ -118,15 +118,15 @@ export class GeometryManager {
             case 'star':
                 let starPoints = [];
                 starPoints.push(new THREE.Vector2(0, 10));
-                starPoints.push(new THREE.Vector2(10 / this.radius, 10 / this.radius));
-                starPoints.push(new THREE.Vector2(40 / this.radius, 10 / this.radius));
-                starPoints.push(new THREE.Vector2(20 / this.radius, -10 / this.radius));
-                starPoints.push(new THREE.Vector2(30 / this.radius, -50 / this.radius));
-                starPoints.push(new THREE.Vector2(0 / this.radius, -20 / this.radius));
-                starPoints.push(new THREE.Vector2(-30 / this.radius, -50 / this.radius));
-                starPoints.push(new THREE.Vector2(-20 / this.radius, -10 / this.radius));
-                starPoints.push(new THREE.Vector2(-40 / this.radius, 10 / this.radius));
-                starPoints.push(new THREE.Vector2(-10 / this.radius, 10 / this.radius));
+                starPoints.push(new THREE.Vector2(10 / this.radius / 2, 10 / this.radius / 2));
+                starPoints.push(new THREE.Vector2(40 / this.radius / 2, 10 / this.radius / 2));
+                starPoints.push(new THREE.Vector2(20 / this.radius / 2, -10 / this.radius / 2));
+                starPoints.push(new THREE.Vector2(30 / this.radius / 2, -50 / this.radius / 2));
+                starPoints.push(new THREE.Vector2(0 / this.radius / 2, -20 / this.radius / 2));
+                starPoints.push(new THREE.Vector2(-30 / this.radius / 2, -50 / this.radius / 2));
+                starPoints.push(new THREE.Vector2(-20 / this.radius / 2, -10 / this.radius / 2));
+                starPoints.push(new THREE.Vector2(-40 / this.radius / 2, 10 / this.radius / 2));
+                starPoints.push(new THREE.Vector2(-10 / this.radius / 2, 10 / this.radius / 2));
 
                 let starShape = new THREE.Shape(starPoints);
                 this.geometry = new THREE.ExtrudeGeometry(starShape, this.starParameter);

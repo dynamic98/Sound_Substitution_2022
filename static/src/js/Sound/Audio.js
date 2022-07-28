@@ -16,6 +16,12 @@ import {
 import {
     OffCxt
 } from './OffCxt.js';
+import {
+    Switcher
+} from '../Utility/Switcher.js'
+import {
+    Kandinsky
+} from '../Utility/Kandinsky.js';
 
 //----------------------------------------------------//
 
@@ -28,11 +34,24 @@ export class Audio {
         this.audioNodeManager
         this.url
         this.fileName;
+        this.kandinsky
+        this.switcher = new Switcher()
     }
 
     initializeAudioElement(url) {
         this.url = url;
         this.audioElementHandler.initializeAudio(this.url)
+    }
+    initializeKandinsky(bpm, maxVolume) {
+        this.kandinsky = new Kandinsky(bpm, maxVolume)
+    }
+    calculateSignal() {
+        let pitchAndEnergy = this.switcher.getPitchAndEnergy(
+            this.pitch.getPitch(),
+            this.meydaAnalyser.getEnergy(),
+            this.meydaAnalyser.getMaxChroma()
+        )
+        this.kandinsky.calculate(pitchAndEnergy);
     }
 
     addNodes() {
@@ -41,7 +60,7 @@ export class Audio {
             this.audioNodeManager.getSource(), // 0
             this.audioNodeManager.getGainNode(), //1 Gain Node
             this.audioNodeManager.getAnalyser(), //2 Pitch 
-            this.audioNodeManager.getLastNode(),
+          
         )
     }
     fetchMusic(fileName) {
@@ -61,32 +80,43 @@ export class Audio {
     createPitchFinder() {
         this.pitch = new Pitch(this.audioNodeManager.getAnalyser())
     }
-    getPitch() {
-        return this.pitch.getPitch()
-    }
-    getEnergy() {
-        return this.meydaAnalyser.getEnergy()
-    }
-    getMaxChroma() {
-        return this.meydaAnalyser.getMaxChroma()
-    }
-
-    getFileListLength() {
-        return this.audioElementHandler.getFileList().length;
+    togglePlay() {
+        return this.audioElementHandler.togglePlay();
     }
     isPlaying() {
         return !this.audioElementHandler.getAudioElement().paused
     }
 
+    getOriginalEnergy() {
+        return this.meydaAnalyser.getEnergy()
+    }
+
+    getNormalizedTone() {
+        return this.kandinsky.getNormalizedTone()
+    }
+    getNormalizedOctave() {
+        return this.kandinsky.getNormalizedOctave()
+    }
+    getPitchEnergy() {
+        return this.kandinsky.getPitchEnergy()
+    }
+    getPitchWidth() {
+        return this.kandinsky.getPitchWidth()
+    }
+    getPitchHeight() {
+        return this.kandinsky.getPitchHeight()
+    }
+    getFileListLength() {
+        return this.audioElementHandler.getFileList().length;
+    }
     getURL() {
         return this.url
     }
     setTime(time) {
         this.audioElementHandler.setTime(time);
     }
-    togglePlay() {
-        return this.audioElementHandler.togglePlay();
-    }
+
+
 }
 
 //----------------------------------------------------//
@@ -108,12 +138,12 @@ export class Song extends Audio {
         return super.fetchMusic(this.fileName)
     }
 
-    // addNodes() {
-    //     super.addNodes();
-    //     this.audioNodeManager.addNode(
-    //         this.audioNodeManager.getLastNode(), //Destination
-    //     )
-    // }
+    addNodes() {
+        super.addNodes();
+        this.audioNodeManager.addNode(
+            this.audioNodeManager.getLastNode(), //Destination
+        )
+    }
 
     createWaveSurfer() {
         this.myWaveSurfer.setAudioElementSource(this.audioElementHandler.getAudioElement());
@@ -132,6 +162,14 @@ export class Song extends Audio {
         return this.createOfflineContext(await response.arrayBuffer())
     }
 
+    playWaveSurfer = () => {
+        return this.myWaveSurfer.playWaveSurfer()
+    }
+    getFileName() {
+        //delete .mp3 & add  / in the end
+        return this.fileName.substring(0, this.fileName.length - 4) + "/"
+    }
+
     getBPM() {
         return this.myOffCxt.getBPM();
     }
@@ -140,24 +178,15 @@ export class Song extends Audio {
         return this.myOffCxt.getMaxvolume();
     }
 
-    async setWaveSurferCallback(callback) {
-        this.myWaveSurfer.setInteractionEventHandler(callback)
-    }
     getWaveSurferTime = () => {
         return this.myWaveSurfer.getWavesurfer().getCurrentTime()
+    }
+    async setWaveSurferCallback(callback) {
+        this.myWaveSurfer.setInteractionEventHandler(callback)
     }
     setTime(time) {
         this.audioElementHandler.setTime(time);
     }
-    getFileName() {
-        //delete .mp3 & add  / in the end
-        return this.fileName.substring(0, this.fileName.length - 4) + "/"
-    }
-    playWaveSurfer = () => {
-        return this.myWaveSurfer.playWaveSurfer()
-    }
-
-
 }
 
 //----------------------------------------------------//
@@ -172,8 +201,6 @@ export class Source extends Audio {
     static getSeparatedFileListLength() {
         return Source.separatedFileList.length
     }
-
-
     static getSeparatedFileList() {
         return this.separatedFileList
     }
@@ -185,11 +212,12 @@ export class Source extends Audio {
     play() {
         return this.audioElementHandler.getAudioElement().play()
     }
+    getFileName() {
+        return this.fileName.substring(0, this.fileName.length - 4)
+    }
 
     setFolderPath(folderPath) {
         this.audioElementHandler.setFolderPath(folderPath)
     }
-    getFileName() {
-        return this.fileName.substring(0, this.fileName.length - 4)
-    }
+
 }

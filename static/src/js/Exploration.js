@@ -1,10 +1,9 @@
-// import * as Tone from "tone";
 import {
     Visualization
 } from './Viz/Visualization.js'
 import {
     Kandinsky
-} from './Viz/Kandinsky.js'
+} from './Utility/Kandinsky.js'
 import {
     BPMTimer
 } from './Utility/BPMTimer.js'
@@ -35,7 +34,6 @@ let kandinsky;
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
 let switcher = new Switcher();
-//bloom length 
 let visualization = new Visualization(1)
 let progressTimer = new ProgressTimer(15, document.getElementById("ProgressBar"));
 let MusicLength = 50;
@@ -94,10 +92,10 @@ function main() {
     piano.setNoteDuration(300);
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
-    pitchslide.assignEventHandler("click", (para, value)=>{
-        if(para=="slide-pitch-interval"){
+    pitchslide.assignEventHandler("click", (para, value) => {
+        if (para == "slide-pitch-interval") {
             kandinsky.setRange(value)
-        }else if(para=="slide-pitch-size"){
+        } else if (para == "slide-pitch-size") {
             piano.setCurrentEnergy(value)
         }
     })
@@ -105,8 +103,6 @@ function main() {
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 1, 4)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 2, 5)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 3, 6)
-
-
     update();
 }
 
@@ -116,7 +112,7 @@ function update() {
     musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000/MusicLength)))
     // visualization.createNowLocation(0)
     // console.log(musicSheet.getCurrentIndex(), musicSheet.isCurrentIndexUpdated())
-    if ((musicSheet.getCurrentIndex()==0) && musicSheet.isCurrentIndexUpdated()){
+    if ((musicSheet.getCurrentIndex() == 0) && musicSheet.isCurrentIndexUpdated()) {
         visualization.reset();
         bpmTimer.restart()
         visualization.createNowLocation(kandinsky.getPitchWidth())
@@ -134,10 +130,10 @@ function update() {
                 musicSheet.getKeyboardNote()
             )
             kandinsky.calculate(pitchAndEnergy);
-            visualization.setColor("piano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-            visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+            visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+            visualization.createVisualNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
             // console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
-            visualization.createConnectionLine("piano")
+            visualization.createConnectionLine("savedPiano")
         }
     }
     visualization.render();
@@ -153,6 +149,6 @@ function draw(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
     //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-    visualization.createVisualNote("input_piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-    visualization.createConnectionLine("input_piano")
+    visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+    visualization.createConnectionLine("piano")
 }

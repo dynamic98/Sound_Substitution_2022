@@ -22,7 +22,7 @@ export class ThreeSystem {
             height: window.innerHeight / 1.5
         }
 
-        this.camera.position.set(0, 0, 200);
+        this.camera.position.set(0, -15, 220);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(this.rendererSize.width, this.rendererSize.height);
         this.renderer.toneMapping = THREE.ReinhardToneMapping;
