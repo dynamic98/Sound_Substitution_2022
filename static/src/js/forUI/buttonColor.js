@@ -37,7 +37,7 @@ shapeColorChange();
 textureColorChange();
 menuColorChange();
 
-
+pitch_button.click()
 function shapeColorChange() {
     shape_square.addEventListener("click", () => {
         shape_square.style.background = red;
