@@ -15,6 +15,7 @@ export class ButtonCustomization {
                     this.parameter = child.id.replace(this.eraseTextFromIDName, '')
                     console.log(this.parameter)
                     callback("piano",this.parameter)
+                    callback("input_piano", this.parameter)
                 })
             }
 

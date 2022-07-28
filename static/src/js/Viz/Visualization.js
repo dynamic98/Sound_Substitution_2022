@@ -46,7 +46,10 @@ export class Visualization {
 
         this.instruments = {
             piano: {},
-            drum: {}
+            input_piano: {},
+            drum: {},
+            input_drum: {},
+            NowLocation: {}
         }
         for (let instrumentType in this.instruments) {
             this.instruments[instrumentType].visualNoteList = []
@@ -73,7 +76,7 @@ export class Visualization {
 
     createVisualNote(instrumentType, radius, positionX, positionY) {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
         } else {
             let instrument = this.instruments[instrumentType]
 
@@ -99,7 +102,7 @@ export class Visualization {
 
     createConnectionLine(instrumentType) {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
 
         } else if (this.instruments[instrumentType].visualNoteList.length > 1 && Line.isVisible()) {
             let visualNoteList = this.instruments[instrumentType].visualNoteList
@@ -109,6 +112,41 @@ export class Visualization {
             let connectionLine = new Line(secondLastPoint, lastPoint);
             this.threeSystem.addToGroup(connectionLine.getMesh(), Line.name)
         }
+    }
+
+
+    createNowLocation(positionX) {
+            let instrumentType = "NowLocation"
+            let instrument = this.instruments["NowLocation"]
+
+            // instrument.geometryManager.setRadius(10)
+            let newPositionX = positionX * this.counterTimer.getTimer() - 100
+            this.instruments[instrumentType].geometryManager.selectedGeometryType = "NowLocation"
+            let positionY = 0;
+            this.instruments[instrumentType].colorManager.setColor(0.7, 50);
+
+            let texture = instrument.textureManager.getTexture()
+            let color = instrument.colorManager.getColor();
+            let transmission = 0.4
+
+            let visualNote = new VisualNote(
+                instrument.materialManager.createMaterial(color, texture, transmission),
+                instrument.geometryManager.getGeometry(),
+                newPositionX,
+                positionY
+            )
+            visualNote.getMesh().position.setZ(-15);
+            visualNote.setRenderOption(this.bloom.getPassForMoonLight())
+            this.threeSystem.addToGroup(visualNote.getMesh(), "NowLocation")
+            instrument.visualNoteList.push(visualNote)
+
+    }
+
+    MoveNowLocation(positionX) {
+        let thisMesh = this.threeSystem.getGroup("NowLocation").children[0]
+        let newPositionX = positionX * this.counterTimer.getTimer() - 100
+        thisMesh.position.setX(newPositionX)
+
     }
 
     render() {
@@ -155,7 +193,7 @@ export class Visualization {
     //------------------------------------------------------------------// 
     setColor(instrumentType, hue, saturation) {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
         } else {
             this.instruments[instrumentType].colorManager.setColor(hue, saturation)
         }
@@ -163,7 +201,7 @@ export class Visualization {
 
     setGeometryType = (instrumentType, geometryType) => {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
         } else {
             return this.instruments[instrumentType].geometryManager.setGeometryType(geometryType)
         }
@@ -171,7 +209,7 @@ export class Visualization {
 
     setTexture = (instrumentType, textureType) => {
         if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types Piano and Drum are available")
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
         } else {
             return this.instruments[instrumentType].textureManager.setTexture(textureType)
         }

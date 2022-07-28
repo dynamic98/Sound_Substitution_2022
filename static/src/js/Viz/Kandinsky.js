@@ -7,8 +7,9 @@ export class Kandinsky {
         this.bpm = bpm;
         this.MaxVolume = MaxVolume;
         this.canvasSizeY = 40
+        this.RangeY = 70
         this.canvasSizeX = 200
-        this.MIDISCOPE = 23;
+        this.MIDISCOPE = 35;
         // this.midiScope=35;
 
         this.DictPitch = {
@@ -30,14 +31,16 @@ export class Kandinsky {
         this.pitchHeight
         this.octave;
         this.tone;
+        this.pitchWidth = this.canvasSizeX / (60 * 60 / this.bpm * 4) // 
+
     }
 
     calculate([pitch, energy], frameRate = 60) {
 
         this.pitch = pitch;
         this.energy = energy / this.MaxVolume;
-        // console.log(this.MaxVolume);
-        this.pitchHeight = this.canvasSizeY / this.MIDISCOPE / 2
+        this.pitchRadius = this.canvasSizeY / this.MIDISCOPE / 2
+        this.pitchHeight = this.RangeY / this.MIDISCOPE
         this.pitchWidth = this.canvasSizeX / (60 * frameRate / this.bpm * 4) // 
         //total frameRate per minute   / 4 bpm 
         this.octave = Math.floor((pitch) / 12) - 1; //옥타브 구하는 방식
@@ -62,11 +65,11 @@ export class Kandinsky {
     }
 
     getPitchHeight() {
-        return this.pitchHeight * (this.pitch - 60) - 10;
+        return this.pitchHeight * (this.pitch - 65) - (this.canvasSizeY / 2);
     }
 
     getPitchEnergy() {
-        return this.pitchHeight * (this.energy * 5);
+        return this.pitchRadius * (this.energy * 5);
     }
 
     setBPM(bpm) {
@@ -75,6 +78,10 @@ export class Kandinsky {
 
     setMaxVolume(MaxVolume) {
         this.MaxVolume = MaxVolume;
+    }
+    setRange(RangeY) {
+        // RangeY 0~100 -> mapping range into 0~60
+        this.RangeY = RangeY/100*70;
     }
 
 }

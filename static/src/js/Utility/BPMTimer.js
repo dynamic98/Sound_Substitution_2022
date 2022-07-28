@@ -4,7 +4,7 @@ export class BPMTimer {
         this.LastTime = this.startTime.getTime();
         this.CFIVE = 5
         this.FOUR = 4
-        this.bpm;
+        this.bpm = 60;
     }
 
     setBPM = (bpm) => {
@@ -31,6 +31,7 @@ export class BPMTimer {
         this.bpm = this.bpm / meshCount * 15 //그냥 때려박은 숫자 ㅋ
     }
     restart(){
-        
+        this.startTime = new Date()
+        this.LastTime = this.startTime.getTime();
     }
 }
