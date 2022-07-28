@@ -46,9 +46,9 @@ export class Visualization {
 
         this.instruments = {
             piano: {},
-            input_piano: {},
             drum: {},
-            input_drum: {}
+            savedPiano: {},
+            savedDrum: {}
         }
         for (let instrumentType in this.instruments) {
             this.instruments[instrumentType].visualNoteList = []
@@ -71,12 +71,11 @@ export class Visualization {
 
         this.grid.setRenderOption(this.bloom.getPassForMoonLight())
         this.threeSystem.addToScene(this.grid.getGrid())
+
     }
 
     createVisualNote(instrumentType, radius, positionX, positionY) {
-        if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types of piano, input_piano, drum, input_drum are available")
-        } else {
+        if (this.instrumentIsValid(instrumentType)) {
             let instrument = this.instruments[instrumentType]
 
             instrument.geometryManager.setRadius(radius)
@@ -100,16 +99,15 @@ export class Visualization {
     }
 
     createConnectionLine(instrumentType) {
-        if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types of piano, input_piano, drum, input_drum are available")
+        if (this.instrumentIsValid(instrumentType)) {
+            if (this.instruments[instrumentType].visualNoteList.length > 1 && Line.isVisible()) {
+                let visualNoteList = this.instruments[instrumentType].visualNoteList
 
-        } else if (this.instruments[instrumentType].visualNoteList.length > 1 && Line.isVisible()) {
-            let visualNoteList = this.instruments[instrumentType].visualNoteList
-
-            let secondLastPoint = visualNoteList[visualNoteList.length - 2].getPosition()
-            let lastPoint = visualNoteList[visualNoteList.length - 1].getPosition()
-            let connectionLine = new Line(secondLastPoint, lastPoint);
-            this.threeSystem.addToGroup(connectionLine.getMesh(), Line.name)
+                let secondLastPoint = visualNoteList[visualNoteList.length - 2].getPosition()
+                let lastPoint = visualNoteList[visualNoteList.length - 1].getPosition()
+                let connectionLine = new Line(secondLastPoint, lastPoint);
+                this.threeSystem.addToGroup(connectionLine.getMesh(), Line.name)
+            }
         }
     }
 
@@ -156,25 +154,19 @@ export class Visualization {
     //getter & settter
     //------------------------------------------------------------------// 
     setColor(instrumentType, hue, saturation) {
-        if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types of piano, input_piano, drum, input_drum are available")
-        } else {
+        if (this.instrumentIsValid(instrumentType)) {
             this.instruments[instrumentType].colorManager.setColor(hue, saturation)
         }
     }
 
     setGeometryType = (instrumentType, geometryType) => {
-        if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types of piano, input_piano, drum, input_drum are available")
-        } else {
+        if (this.instrumentIsValid(instrumentType)) {
             return this.instruments[instrumentType].geometryManager.setGeometryType(geometryType)
         }
     }
 
     setTexture = (instrumentType, textureType) => {
-        if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types of piano, input_piano, drum, input_drum are available")
-        } else {
+        if (this.instrumentIsValid(instrumentType)) {
             return this.instruments[instrumentType].textureManager.setTexture(textureType)
         }
     }
@@ -183,4 +175,12 @@ export class Visualization {
         return this.threeSystem.getRendererSize()
     }
 
+    instrumentIsValid(instrumentType) {
+        if (this.instruments[instrumentType] == undefined || null) {
+            console.error(`Only Types ${Object.keys(this.instrumentType)} are available`)
+            return false
+        } else {
+            return true
+        }
+    }
 }

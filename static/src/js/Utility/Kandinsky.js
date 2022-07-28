@@ -1,7 +1,3 @@
-import {
-    Utility
-} from "../Utility/Utility";
-
 export class Kandinsky {
     constructor(bpm, MaxVolume = 1, ) {
         this.bpm = bpm;

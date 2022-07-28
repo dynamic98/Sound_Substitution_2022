@@ -19,7 +19,7 @@ import {
 } from './Utility/Switcher.js'
 import {
     Kandinsky
-} from './Viz/Kandinsky.js'
+} from './Utility/Kandinsky.js'
 import {
     Song
 } from './Sound/Audio.js';
