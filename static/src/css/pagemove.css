@@ -1,0 +1,49 @@
+.movepageContainer {
+    float: right;
+    margin-top: 320px;
+    margin-right: 60px;
+}
+
+
+.arrow {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    margin: 100px 0 0 100px;
+    width: 100px;
+    height: 100px;
+    border: solid 6px #999;
+    border-radius: 100%;
+    z-index: 1;
+    transition: all 0.2s linear;
+}
+.arrow:before, .arrow:after {
+    content: '';
+    position: absolute;
+    width: 35%;
+    height: 10%;
+    top: 41%;
+    left: 55%;
+    background: #999;
+    z-index: 2;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: all 0.2s linear;
+}
+.arrow:after {
+    z-index: 3;
+    top: 59%;
+    left: 55%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.arrow:hover {
+    border: solid 8px rgb(52, 13, 207);
+}
+.arrow:hover:after, .arrow:hover:before {
+    background: rgb(73, 44, 191);
+}
+.arrow:active {
+    border: solid 8px rgb(52, 13, 207);
+}
+.arrow:active:after, .arrow:active:before {
+    background: rgb(31, 0, 155);
+}

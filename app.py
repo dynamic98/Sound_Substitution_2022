@@ -65,6 +65,19 @@ def menu():
 def explore():
   return render_template('Exploration.html',User_Name=UserName, login="log in")
 
+@app.route('/pitch_task', methods=['POST'])
+def pitch_task():
+  return render_template('pitch_task_one.html',User_Name=UserName, login="log in")
+
+@app.route('/beat_task', methods=['POST'])
+def beat_task():
+  return render_template('beat_task.html',User_Name=UserName, login="log in")
+
+@app.route('/test', methods=['POST'])
+def test():
+  return render_template('test.html',User_Name=UserName, login="log in")
+
+
 @app.route('/dev', methods=['POST'])
 def dev():
   return render_template('mainMenu.html',User_Name=UserName, login="log in")

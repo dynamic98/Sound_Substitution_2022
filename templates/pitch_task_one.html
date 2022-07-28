@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Music::Palette::pitch_task</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="../static/src/fonts/icomoon/style.css">
+  <link rel="stylesheet" href="../static/src/css/owl.carousel.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../static/src/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <!-- Styles -->
+  <link type="text/css" href="../static/src/css/task.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/navi.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/pagemove.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+  <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+  <!-- <h4 class="task_title" id="task_one" style="font-size: 33px;">예제 1번</h4> -->
+  <section class="pianoContainer">
+    <ul class="set">
+      <li class="white do-1"></li>
+      <li class="black do-s-1"></li>
+      <li class="white re-1"></li>
+      <li class="black re-s-1"></li>
+      <li class="white mi-1"></li>
+      <li class="white fa-1"></li>
+      <li class="black fa-s-1"></li>
+      <li class="white sol-1"></li>
+      <li class="black sol-s-1"></li>
+      <li class="white la-1"></li>
+      <li class="black la-s-1"></li>
+      <li class="white si-1"></li>
+
+      <li class="white do-2"></li>
+      <li class="black do-s-2"></li>
+      <li class="white re-2"></li>
+      <li class="black re-s-2"></li>
+      <li class="white mi-2"></li>
+      <li class="white fa-2"></li>
+      <li class="black fa-s-2"></li>
+      <li class="white sol-2"></li>
+      <li class="black sol-s-2"></li>
+      <li class="white la-2"></li>
+      <li class="black la-s-2"></li>
+      <li class="white si-2"></li>
+
+      <li class="white do-3"></li>
+      <li class="black do-s-3"></li>
+      <li class="white re-3"></li>
+      <li class="black re-s-3"></li>
+      <li class="white mi-3"></li>
+      <li class="white fa-3"></li>
+      <li class="black fa-s-3"></li>
+      <li class="white sol-3"></li>
+      <li class="black sol-s-3"></li>
+      <li class="white la-3"></li>
+      <li class="black la-s-3"></li>
+      <li class="white si-3"></li>
+    </ul>
+  </section>
+
+  <section class="sheetContainer">
+    <!-- 여기에 시각화 표현 -->
+    <!-- canvas -->
+    <div id="canvas"></div>
+  </section>
+
+  <progress value="0"  max="15000" id="ProgressBar"></progress>
+
+
+  <section class="musicContainer">
+    <div class="task_num" id="task_one"><span id="task_one_text">예제 1번</span></div>
+    <br>
+    <button class="videoControlButton" id="play" style="display:inline;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
+    <button class="videoControlButton" id="save" style="display:inline;"><span class="glyphicon glyphicon-save" id="saveGlyph"></span></button>
+    <button class="videoControlButton" id="reset" style="display:inline;"><span class="glyphicon glyphicon-erase" id="eraseGlyph"></span></button>
+  </section>
+
+  <section class="movepageContainer">
+    <span class="arrow" id="nextpage"></span>
+  </section>
+
+
+
+  <!--shader script-->
+  <script type="x-shader/x-vertex" id="vertexshader">
+    varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+        }
+    </script>
+  <script type="x-shader/x-fragment" id="fragmentshader">
+    uniform sampler2D baseTexture;
+        uniform sampler2D bloomTexture;
+        varying vec2 vUv;
+        void main() {
+          gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
+        }
+    </script>
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
+  <script type="module" defer src="../static/src/js/dist/task.js"></script>
+  <!-- <script type="module" defer src="../static/src/js/forUI/buttonColor.js"></script> -->
+  <script type="module" defer src="../static/src/js/forUI/changePlay.js"></script>
+  <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
+</body>
+
+</html>

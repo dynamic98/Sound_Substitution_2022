@@ -10,7 +10,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  */
-
  import Pitchfinder from 'pitchfinder'
 export class Pitch {
 	 constructor(analyser){

@@ -89,31 +89,22 @@ async function main() {
     animate();
 };
 
+// let pitchList = [];
+
 function animate() {
-    console.log(sourceContainer.getSource("vocals").getPitch())
     requestAnimationFrame(animate);
     stats.begin()
 
     //only loop when the music is playing
     if (song.isPlaying()) {
-        //debug frame rate
-        //over 4 beat = delet drawing
-        // console.log('original pitch', song.getPitch()) // mixed song
-        // console.log('original max chroma', song.getMaxChroma())
-        console.log('vocal pitch', sourceContainer.getList()[3].getPitch());  // vocal
-        // console.log('bass max chorma', sourceContainer.getList()[3].getMaxChroma())
-        // console.log(sourceContainer.getList()[0].getEnergy(), "Bass")
-        // console.log(sourceContainer.getList()[1].getEnergy(), "drums")
-        // console.log(sourceContainer.getList()[2].getEnergy(), "other")
-        // console.log(sourceContainer.getList()[3].getEnergy(), "vocals")
-
+        // console.log('vocal pitch', sourceContainer.getList()[3].getPitch()['note']);  // vocal
+        pitchList.push(sourceContainer.getList()[3].getPitch()['note'])
         if (!bpmTimer.isUnderFourBeat()) {
             visualization.reset();
         }
         //under 4 beat = calculate and create Geometry 
         else if (bpmTimer.isUnderFourBeat()) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
-            console.log(sourceContainer.getList()[3].getPitch());
 
             kandinsky.calculate(pitchAndEnergy);
             visualization.setColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
@@ -124,5 +115,6 @@ function animate() {
         visualization.update();
     }
     stats.end();
+    // console.log(pitchList);
 }
 document.body.appendChild(stats.dom);

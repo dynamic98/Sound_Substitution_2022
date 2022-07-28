@@ -8,6 +8,7 @@ module.exports = {
         //이런식으로 추가하면 된다 파일 이름을. 그러면 dist 폴더에 concrete.js 가 만들어진다. 위의 경우 abstract.js이 만들어진다. 
         exploration: path.resolve(__dirname, "src", "js", "Exploration.js"),        
         //concrete: path.resolve(__dirname, "src", "concrete.js")
+        task: path.resolve(__dirname, "src", "js", "taskCanvas.js")
     },
     mode: "development",
     target: "web",
