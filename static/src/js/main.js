@@ -1,10 +1,3 @@
-//DEBUGGING
-//npm run watch -> webpack watches code changes
-//press any key in the window to reload the window
-// ----------------------------------------------------//
-addEventListener('keypress', (event) => {
-    location.reload();
-});
 
 //libraries
 //----------------------------------------------------//
@@ -23,14 +16,12 @@ import {
 } from './Sound/SourceContainer.js';
 
 
-
 //class instances
 //----------------------------------------------------//
 let visualization = new Visualization(5)
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
 document.body.appendChild(stats.dom);
-let songKandinsky;
 let sourceContainer;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")
@@ -48,10 +39,7 @@ document.querySelector('[data-action="play"]').addEventListener('click', async (
 document.getElementById("select-music").onchange = async () => {
     await song.changeSong("filelist", "static/music/original/");
     await sourceContainer.changeSong("static/music/separated/" + song.getFileName());
-
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
-
-    console.log(song.getBPM())
     bpmTimer.setBPM(song.getBPM())
 }
 
@@ -109,11 +97,8 @@ function animate() {
 function draw(instance, instrumentType) {
     // console.log(instance.getOriginalEnergy())
     if (instance.getOriginalEnergy() > 0.01) {
-
         instance.calculateSignal();
-
         if (instance.getFileName() == "drums") {
-         
             visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -60)
         } else {
             visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), instance.getPitchHeight())
@@ -122,7 +107,6 @@ function draw(instance, instrumentType) {
         visualization.createConnectionLine(instrumentType)
     }
 }
-
 
 //debug frame rate
 //over 4 beat = delet drawing
