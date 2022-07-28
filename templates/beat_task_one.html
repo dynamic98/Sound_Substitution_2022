@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Music::Palette::pitch_task</title>
+  <title>Music::Palette::beat_task</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -17,57 +17,16 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <!-- Styles -->
-  <link type="text/css" href="../static/src/css/task.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/shape.css" rel="stylesheet">
   <link type="text/css" href="../static/src/css/navi.css" rel="stylesheet">
-  <link type="text/css" href="../static/src/css/pagemove_pitch.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/task.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/pagemove_beat.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
   <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
-  <section class="pianoContainer">
-    <ul class="set">
-      <li class="white do-1"></li>
-      <li class="black do-s-1"></li>
-      <li class="white re-1"></li>
-      <li class="black re-s-1"></li>
-      <li class="white mi-1"></li>
-      <li class="white fa-1"></li>
-      <li class="black fa-s-1"></li>
-      <li class="white sol-1"></li>
-      <li class="black sol-s-1"></li>
-      <li class="white la-1"></li>
-      <li class="black la-s-1"></li>
-      <li class="white si-1"></li>
-
-      <li class="white do-2"></li>
-      <li class="black do-s-2"></li>
-      <li class="white re-2"></li>
-      <li class="black re-s-2"></li>
-      <li class="white mi-2"></li>
-      <li class="white fa-2"></li>
-      <li class="black fa-s-2"></li>
-      <li class="white sol-2"></li>
-      <li class="black sol-s-2"></li>
-      <li class="white la-2"></li>
-      <li class="black la-s-2"></li>
-      <li class="white si-2"></li>
-
-      <li class="white do-3"></li>
-      <li class="black do-s-3"></li>
-      <li class="white re-3"></li>
-      <li class="black re-s-3"></li>
-      <li class="white mi-3"></li>
-      <li class="white fa-3"></li>
-      <li class="black fa-s-3"></li>
-      <li class="white sol-3"></li>
-      <li class="black sol-s-3"></li>
-      <li class="white la-3"></li>
-      <li class="black la-s-3"></li>
-      <li class="white si-3"></li>
-    </ul>
-  </section>
 
   <section class="sheetContainer">
     <!-- 여기에 시각화 표현 -->
@@ -76,6 +35,11 @@
   </section>
 
   <progress value="0"  max="15000" id="ProgressBar"></progress>
+
+  <ul class="set2" style="margin-left: 500px;" id="drum">
+    <img src="../static/src/images/drum.png">
+    <audio src="../static/src/sound/drum.wav" id="drum_audio"></audio>
+  </ul>
 
 
   <section class="musicContainer">
@@ -110,11 +74,12 @@
     </script>
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
-  <script type="module" defer src="../static/src/js/dist/pianotask.js"></script>
+  <script type="module" defer src="../static/src/js/dist/drumTask.js"></script>
   <!-- <script type="module" defer src="../static/src/js/forUI/buttonColor.js"></script> -->
   <script type="module" defer src="../static/src/js/forUI/changePlay.js"></script>
   <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+  <audio data-key="71" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-mid.wav"></audio>
 
 </body>
 

@@ -6,6 +6,12 @@ body {
   background: #f4f7f5;
 }
 
+input[type=checkbox] {
+
+  zoom: 2.5;
+  
+}
+
 
 .colorContainer {
   margin-top: 10px;
@@ -944,8 +950,9 @@ div[slider] > input[type=range]::-ms-tooltip {
   img{
     /* size: 300px, 150px; */
     width: 220px;
-    height: 160x;
+    height: 160px;
   }
+  
   img:active{
     transform: scale(0.7);
     background-image: url(../images/shadow.png);
@@ -960,12 +967,12 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: -10px;
+    margin-top: -20px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
     float: right;
-    height: 20%;
+    height: 25%;
   }
 
   .visualContainer_beat {
@@ -973,7 +980,7 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 230px;
+    margin-top: 300px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
@@ -1070,7 +1077,11 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
   
   p .smallTitle {
-    font-size: 12px;
+    font-size: 14px;
+  }
+
+  p #liner {
+    margin-top: -40px;
   }
   
   hr {
@@ -1316,7 +1327,7 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   #ProgressBar{
     margin-left: 20px;
-    margin-top: 600px;
+    margin-top: 620px;
     width: 1070px;
     height: 60px;
   }

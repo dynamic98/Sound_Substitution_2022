@@ -37,11 +37,13 @@ document.body.appendChild(stats.dom);
 
 let MyProgressTimer = new ProgressTimer(15, document.getElementById("ProgressBar"));
 let MyMusicSheet = new MusicSheet(50);
-let piano = new Piano("pianoContainer", MyMusicSheet, MyProgressTimer);
+// let piano = new Piano("pianoContainer", MyMusicSheet, MyProgressTimer);
+let piano = new Piano("pianoContainer");
+console.log(piano)
 let LastIndex = -1;
 
 
-main()
+main();
 
 function main() {
     // visualization.initialize();
@@ -62,7 +64,7 @@ function main() {
 
 function update() {
     stats.begin()
-
+    console.log('it is updating')
     requestAnimationFrame(update);
 
     let CurrentIndex = Math.round(MyProgressTimer.getThisSeconds() / 300)
@@ -89,7 +91,7 @@ function update() {
             console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
             visualization.createConnectonLine()
         }
-        // let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
+        let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
     }
     visualization.render();
     visualization.update();
@@ -98,6 +100,7 @@ function update() {
 }
 
 function draw() {
+    console.log("piano is working")
     let pitchAndEnergy = switcher.getPitchAndEnergy(piano.getAudioData(), piano.getEnergy(), piano.getPitch());
     kandinsky.calculate(pitchAndEnergy);
     //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())

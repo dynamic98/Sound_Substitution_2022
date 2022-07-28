@@ -71,7 +71,7 @@ def pitch_task():
 
 @app.route('/beat_task', methods=['POST'])
 def beat_task():
-  return render_template('beat_task.html',User_Name=UserName, login="log in")
+  return render_template('beat_task_one.html',User_Name=UserName, login="log in")
 
 @app.route('/test', methods=['POST'])
 def test():
