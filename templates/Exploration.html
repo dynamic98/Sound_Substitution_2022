@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../static/src/fonts/icomoon/style.css">
   <link rel="stylesheet" href="../static/src/css/owl.carousel.min.css">
 
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../static/src/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -45,63 +46,64 @@
     <button type="button" class="textureButton" id="paper" style="background: url(../static/src/texture/paper.jpeg)"></button>
   </section>
 
-  <section class="colorContainer"  style="margin-left: 5px;  background-color: rgb(250, 250, 250);">
-    <div >
-      <!-- <h1>Color-Picker</h1> -->
-      <div class="color" id="color_picker"></div>
-             <div id="picker" style="padding:15px; padding-bottom:0px"></div>
-      <div class="picker" id="picker_type"></div>
+  <!-- <section class="colorContainer"  style="display:none; margin-left: 5px;  background-color: rgb(250, 250, 250);" id="beat_area">
+    <div id="beat_color">
+      <div id="picker" style="padding:15px; padding-bottom:0px"></div>
+      </div>
+  </section> -->
+
+  <section class="colorContainer"  style="margin-left: 5px;  background-color: rgb(250, 250, 250);" id="pitch_area">
+    <div id="pitch_color">
+      <div id="picker" style="padding:15px; padding-bottom:0px">
+        <div class="color" id="b_1"></div>
+      </div>
+      <div class="Picker" id="picker_beat" style="display: none;">
+        <p style="margin:0px"> Color</p> <div class="color" id="beat_color">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+      </div>
       <div class="Picker" id="picker_satu">
-      <p style="margin:0px"> Saturation</p> <div class="color" id="s_1" >&nbsp&nbsp</div><div class="color" id="s_2">&nbsp&nbsp</div><div class="color" id="s_3">&nbsp&nbsp</div><div class="color" id="s_4">&nbsp&nbsp</div><div class="color" id="s_5">&nbsp&nbsp</div><div class="color" id="s_6">&nbsp&nbsp</div><div class="color" id="s_7">&nbsp&nbsp</div><div class="color" id="s_8">&nbsp&nbsp</div><div class="color" id="s_9">&nbsp&nbsp</div><div class="color" id="s_10">&nbsp&nbsp</div><div class="color" id="s_11">&nbsp&nbsp</div><div class="color" id="s_12">&nbsp&nbsp</div>
-            </div>
-         <!-- <div style="margin:5px"></div> -->
+        <p style="margin:0px"> Saturation</p> <div class="color" id="s_1" >&nbsp&nbsp</div><div class="color" id="s_2">&nbsp&nbsp</div><div class="color" id="s_3">&nbsp&nbsp</div><div class="color" id="s_4">&nbsp&nbsp</div><div class="color" id="s_5">&nbsp&nbsp</div><div class="color" id="s_6">&nbsp&nbsp</div><div class="color" id="s_7">&nbsp&nbsp</div><div class="color" id="s_8">&nbsp&nbsp</div><div class="color" id="s_9">&nbsp&nbsp</div><div class="color" id="s_10">&nbsp&nbsp</div><div class="color" id="s_11">&nbsp&nbsp</div><div class="color" id="s_12">&nbsp&nbsp</div>
+      </div>
 
       <div class="Picker" id="picker_light">
-      <p style="margin:0px;"> Lightness</p>
-      <div class="color" id="l_1" >&nbsp&nbsp</div><div class="color" id="l_2">&nbsp&nbsp</div><div class="color" id="l_3">&nbsp&nbsp</div><div class="color" id="l_4">&nbsp&nbsp</div><div class="color" id="l_5">&nbsp&nbsp</div><div class="color" id="l_6">&nbsp&nbsp</div><div class="color" id="l_7">&nbsp&nbsp</div><div class="color" id="l_8">&nbsp&nbsp</div><div class="color" id="l_9">&nbsp&nbsp</div><div class="color" id="l_10">&nbsp&nbsp</div><div class="color" id="l_11">&nbsp&nbsp</div><div class="color" id="l_12">&nbsp&nbsp</div>
-              </div>
-              <hr>
-
-
+        <p style="margin:0px;"> Lightness</p><div class="color" id="l_1" >&nbsp&nbsp</div><div class="color" id="l_2">&nbsp&nbsp</div><div class="color" id="l_3">&nbsp&nbsp</div><div class="color" id="l_4">&nbsp&nbsp</div><div class="color" id="l_5">&nbsp&nbsp</div><div class="color" id="l_6">&nbsp&nbsp</div><div class="color" id="l_7">&nbsp&nbsp</div><div class="color" id="l_8">&nbsp&nbsp</div><div class="color" id="l_9">&nbsp&nbsp</div><div class="color" id="l_10">&nbsp&nbsp</div><div class="color" id="l_11">&nbsp&nbsp</div><div class="color" id="l_12">&nbsp&nbsp</div>
+      </div>
+      <hr>
     </div>
 
-      <!-- <h1>Palette</h1> -->
-      <section class="color_candidate" id="palettes_candi">
-            <div class="Palette" id="palette1">
-              <p style="margin:0px;"> RGB</p>
-              <div class="color" id="p1_1" >&nbsp&nbsp</div><div class="color" id="p1_2">&nbsp&nbsp</div><div class="color" id="p1_3">&nbsp&nbsp</div><div class="color" id="p1_4">&nbsp&nbsp</div><div class="color" id="p1_5">&nbsp&nbsp</div><div class="color" id="p1_6">&nbsp&nbsp</div><div class="color" id="p1_7">&nbsp&nbsp</div><div class="color" id="p1_8">&nbsp&nbsp</div><div class="color" id="p1_9">&nbsp&nbsp</div><div class="color" id="p1_10">&nbsp&nbsp</div><div class="color" id="p1_11">&nbsp&nbsp</div><div class="color" id="p1_12">&nbsp&nbsp</div>
-           </div>
-          <div class="Palette" id="palette2">
-            <p  style="margin:0px;"> OGP</p>
-            <div class="color" id="p2_1">&nbsp&nbsp</div><div class="color" id="p2_2">&nbsp&nbsp</div><div class="color" id="p2_3">&nbsp&nbsp</div><div class="color" id="p2_4">&nbsp&nbsp</div><div class="color" id="p2_5">&nbsp&nbsp</div><div class="color" id="p2_6">&nbsp&nbsp</div><div class="color" id="p2_7">&nbsp&nbsp</div><div class="color" id="p2_8">&nbsp&nbsp</div><div class="color" id="p2_9">&nbsp&nbsp</div><div class="color" id="p2_10">&nbsp&nbsp</div><div class="color" id="p2_11">&nbsp&nbsp</div><div class="color" id="p2_12">&nbsp&nbsp</div>
-            </div>
-            <div class="Palette" id="palette3">
-              <p style="margin:0px;">YBP</p>
-              <div class="color" id="p3_1">&nbsp&nbsp</div><div class="color" id="p3_2">&nbsp&nbsp</div><div class="color" id="p3_3">&nbsp&nbsp</div><div class="color" id="p3_4">&nbsp&nbsp</div><div class="color" id="p3_5">&nbsp&nbsp</div><div class="color" id="p3_6">&nbsp&nbsp</div><div class="color" id="p3_7">&nbsp&nbsp</div><div class="color" id="p3_8">&nbsp&nbsp</div><div class="color" id="p3_9">&nbsp&nbsp</div><div class="color" id="p3_10">&nbsp&nbsp</div><div class="color" id="p3_11">&nbsp&nbsp</div><div class="color" id="p3_12">&nbsp&nbsp</div>
-          </div>
-          <div class="Palette" id="palette4">
-            <p style="margin:0px;"> GBP</p>
-            <div class="color" id="p4_1">&nbsp&nbsp</div><div class="color" id="p4_2">&nbsp&nbsp</div><div class="color" id="p4_3">&nbsp&nbsp</div><div class="color" id="p4_4">&nbsp&nbsp</div><div class="color" id="p4_5">&nbsp&nbsp</div><div class="color" id="p4_6">&nbsp&nbsp</div><div class="color" id="p4_7">&nbsp&nbsp</div><div class="color" id="p4_8">&nbsp&nbsp</div><div class="color" id="p4_9">&nbsp&nbsp</div><div class="color" id="p4_10">&nbsp&nbsp</div><div class="color" id="p4_11">&nbsp&nbsp</div><div class="color" id="p4_12">&nbsp&nbsp</div>
-          </div>
-          
-          <div class="Palette" id="palette5">
-            <p style="margin:0px;"> Rainbow</p>
-            <div class="color" id="p5_1">&nbsp&nbsp</div><div class="color" id="p5_2">&nbsp&nbsp</div><div class="color" id="p5_3">&nbsp&nbsp</div><div class="color" id="p5_4">&nbsp&nbsp</div><div class="color" id="p5_5">&nbsp&nbsp</div><div class="color" id="p5_6">&nbsp&nbsp</div><div class="color" id="p5_7">&nbsp&nbsp</div><div class="color" id="p5_8">&nbsp&nbsp</div><div class="color" id="p5_9">&nbsp&nbsp</div><div class="color" id="p5_10">&nbsp&nbsp</div><div class="color" id="p5_11">&nbsp&nbsp</div><div class="color" id="p5_12">&nbsp&nbsp</div>
-          </div>
-          <div class="Palette" id="palette6">
-            <p style="margin:0px;"> Sunset</p>
-            <div class="color" id="p6_1">&nbsp&nbsp</div><div class="color" id="p6_2">&nbsp&nbsp</div><div class="color" id="p6_3">&nbsp&nbsp</div><div class="color" id="p6_4">&nbsp&nbsp</div><div class="color" id="p6_5">&nbsp&nbsp</div><div class="color" id="p6_6">&nbsp&nbsp</div><div class="color" id="p6_7">&nbsp&nbsp</div><div class="color" id="p6_8">&nbsp&nbsp</div><div class="color" id="p6_9">&nbsp&nbsp</div><div class="color" id="p6_10">&nbsp&nbsp</div><div class="color" id="p6_11">&nbsp&nbsp</div><div class="color" id="p6_12">&nbsp&nbsp</div>
-          </div>
-          <div class="Palette" id="palette7">
-            <p style="margin:0px;"> Aqua</p>
-            <div class="color" id="p7_1">&nbsp&nbsp</div><div class="color" id="p7_2">&nbsp&nbsp</div><div class="color" id="p7_3">&nbsp&nbsp</div><div class="color" id="p7_4">&nbsp&nbsp</div><div class="color" id="p7_5">&nbsp&nbsp</div><div class="color" id="p7_6">&nbsp&nbsp</div><div class="color" id="p7_7">&nbsp&nbsp</div><div class="color" id="p7_8">&nbsp&nbsp</div><div class="color" id="p7_9">&nbsp&nbsp</div><div class="color" id="p7_10">&nbsp&nbsp</div><div class="color" id="p7_11">&nbsp&nbsp</div><div class="color" id="p7_12">&nbsp&nbsp</div>
-          </div>
-          <div class="Palette" id="palette8">
-            <p style="margin:0px;"> Aurora</p>
-            <div class="color" id="p8_1">&nbsp&nbsp</div><div class="color" id="p8_2">&nbsp&nbsp</div><div class="color" id="p8_3">&nbsp&nbsp</div><div class="color" id="p8_4">&nbsp&nbsp</div><div class="color" id="p8_5">&nbsp&nbsp</div><div class="color" id="p8_6">&nbsp&nbsp</div><div class="color" id="p8_7">&nbsp&nbsp</div><div class="color" id="p8_8">&nbsp&nbsp</div><div class="color" id="p8_9">&nbsp&nbsp</div><div class="color" id="p8_10">&nbsp&nbsp</div><div class="color" id="p8_11">&nbsp&nbsp</div><div class="color" id="p8_12">&nbsp&nbsp</div>
-          </div>
-    
-      </section>
+    <section class="color_candidate" id="palettes_candi">
+      <div class="Palette" id="palette1">
+        <p style="margin:0px;"> RGB</p>
+        <div class="color" id="p1_1" >&nbsp&nbsp</div><div class="color" id="p1_2">&nbsp&nbsp</div><div class="color" id="p1_3">&nbsp&nbsp</div><div class="color" id="p1_4">&nbsp&nbsp</div><div class="color" id="p1_5">&nbsp&nbsp</div><div class="color" id="p1_6">&nbsp&nbsp</div><div class="color" id="p1_7">&nbsp&nbsp</div><div class="color" id="p1_8">&nbsp&nbsp</div><div class="color" id="p1_9">&nbsp&nbsp</div><div class="color" id="p1_10">&nbsp&nbsp</div><div class="color" id="p1_11">&nbsp&nbsp</div><div class="color" id="p1_12">&nbsp&nbsp</div>
+      </div>
+      <div class="Palette" id="palette2">
+        <p  style="margin:0px;"> OGP</p>
+        <div class="color" id="p2_1">&nbsp&nbsp</div><div class="color" id="p2_2">&nbsp&nbsp</div><div class="color" id="p2_3">&nbsp&nbsp</div><div class="color" id="p2_4">&nbsp&nbsp</div><div class="color" id="p2_5">&nbsp&nbsp</div><div class="color" id="p2_6">&nbsp&nbsp</div><div class="color" id="p2_7">&nbsp&nbsp</div><div class="color" id="p2_8">&nbsp&nbsp</div><div class="color" id="p2_9">&nbsp&nbsp</div><div class="color" id="p2_10">&nbsp&nbsp</div><div class="color" id="p2_11">&nbsp&nbsp</div><div class="color" id="p2_12">&nbsp&nbsp</div>
+      </div>
+      <div class="Palette" id="palette3">
+        <p style="margin:0px;">YBP</p>
+        <div class="color" id="p3_1">&nbsp&nbsp</div><div class="color" id="p3_2">&nbsp&nbsp</div><div class="color" id="p3_3">&nbsp&nbsp</div><div class="color" id="p3_4">&nbsp&nbsp</div><div class="color" id="p3_5">&nbsp&nbsp</div><div class="color" id="p3_6">&nbsp&nbsp</div><div class="color" id="p3_7">&nbsp&nbsp</div><div class="color" id="p3_8">&nbsp&nbsp</div><div class="color" id="p3_9">&nbsp&nbsp</div><div class="color" id="p3_10">&nbsp&nbsp</div><div class="color" id="p3_11">&nbsp&nbsp</div><div class="color" id="p3_12">&nbsp&nbsp</div>
+      </div>
+      <div class="Palette" id="palette4">
+        <p style="margin:0px;"> GBP</p>
+        <div class="color" id="p4_1">&nbsp&nbsp</div><div class="color" id="p4_2">&nbsp&nbsp</div><div class="color" id="p4_3">&nbsp&nbsp</div><div class="color" id="p4_4">&nbsp&nbsp</div><div class="color" id="p4_5">&nbsp&nbsp</div><div class="color" id="p4_6">&nbsp&nbsp</div><div class="color" id="p4_7">&nbsp&nbsp</div><div class="color" id="p4_8">&nbsp&nbsp</div><div class="color" id="p4_9">&nbsp&nbsp</div><div class="color" id="p4_10">&nbsp&nbsp</div><div class="color" id="p4_11">&nbsp&nbsp</div><div class="color" id="p4_12">&nbsp&nbsp</div>
+        </div>
+      <div class="Palette" id="palette5">
+        <p style="margin:0px;"> Rainbow</p>
+        <div class="color" id="p5_1">&nbsp&nbsp</div><div class="color" id="p5_2">&nbsp&nbsp</div><div class="color" id="p5_3">&nbsp&nbsp</div><div class="color" id="p5_4">&nbsp&nbsp</div><div class="color" id="p5_5">&nbsp&nbsp</div><div class="color" id="p5_6">&nbsp&nbsp</div><div class="color" id="p5_7">&nbsp&nbsp</div><div class="color" id="p5_8">&nbsp&nbsp</div><div class="color" id="p5_9">&nbsp&nbsp</div><div class="color" id="p5_10">&nbsp&nbsp</div><div class="color" id="p5_11">&nbsp&nbsp</div><div class="color" id="p5_12">&nbsp&nbsp</div>
+      </div>
+      <div class="Palette" id="palette6">
+        <p style="margin:0px;"> Sunset</p>
+        <div class="color" id="p6_1">&nbsp&nbsp</div><div class="color" id="p6_2">&nbsp&nbsp</div><div class="color" id="p6_3">&nbsp&nbsp</div><div class="color" id="p6_4">&nbsp&nbsp</div><div class="color" id="p6_5">&nbsp&nbsp</div><div class="color" id="p6_6">&nbsp&nbsp</div><div class="color" id="p6_7">&nbsp&nbsp</div><div class="color" id="p6_8">&nbsp&nbsp</div><div class="color" id="p6_9">&nbsp&nbsp</div><div class="color" id="p6_10">&nbsp&nbsp</div><div class="color" id="p6_11">&nbsp&nbsp</div><div class="color" id="p6_12">&nbsp&nbsp</div>
+      </div>
+      <div class="Palette" id="palette7">
+        <p style="margin:0px;"> Aqua</p>
+        <div class="color" id="p7_1">&nbsp&nbsp</div><div class="color" id="p7_2">&nbsp&nbsp</div><div class="color" id="p7_3">&nbsp&nbsp</div><div class="color" id="p7_4">&nbsp&nbsp</div><div class="color" id="p7_5">&nbsp&nbsp</div><div class="color" id="p7_6">&nbsp&nbsp</div><div class="color" id="p7_7">&nbsp&nbsp</div><div class="color" id="p7_8">&nbsp&nbsp</div><div class="color" id="p7_9">&nbsp&nbsp</div><div class="color" id="p7_10">&nbsp&nbsp</div><div class="color" id="p7_11">&nbsp&nbsp</div><div class="color" id="p7_12">&nbsp&nbsp</div>
+      </div>
+      <div class="Palette" id="palette8">
+        <p style="margin:0px;"> Aurora</p>
+        <div class="color" id="p8_1">&nbsp&nbsp</div><div class="color" id="p8_2">&nbsp&nbsp</div><div class="color" id="p8_3">&nbsp&nbsp</div><div class="color" id="p8_4">&nbsp&nbsp</div><div class="color" id="p8_5">&nbsp&nbsp</div><div class="color" id="p8_6">&nbsp&nbsp</div><div class="color" id="p8_7">&nbsp&nbsp</div><div class="color" id="p8_8">&nbsp&nbsp</div><div class="color" id="p8_9">&nbsp&nbsp</div><div class="color" id="p8_10">&nbsp&nbsp</div><div class="color" id="p8_11">&nbsp&nbsp</div><div class="color" id="p8_12">&nbsp&nbsp</div>
+      </div>
+    </section>
   </div>
 </div>
 
@@ -149,7 +151,13 @@
       <li class="black la-s-3"></li>
       <li class="white si-3"></li>
     </ul>
-  </section>
+    <!-- <ul class="set2" style="display: none;">
+      <img src="../static/src/images/drum.png">
+    </ul> -->
+  </section>  
+
+
+
 
 
   <section class="sheetContainer">
@@ -159,6 +167,12 @@
   </section>
 
   <progress value="0" max="15000" id="ProgressBar"></progress>
+  
+    <ul class="set2" style="display: none; margin-left: 400px;" id="drum">
+      <img src="../static/src/images/drum.png">
+      <audio src="../static/src/sound/drum.wav" id="drum_audio"></audio>
+    </ul>
+    
 
 
   <section class="visualContainer_pitch">
@@ -166,13 +180,13 @@
     <div class="customMenu">
       <br>
       <p class="smallTitle" style="display:inline;">간격</p>
-      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+      <input class="range" type="range" name="intensity" id="slide-pitch-interval" value="70" min="0" max="100" style="display:inline;"></input>
       <hr>
       <p class="smallTitle" style="display:inline;">크기</p>
-      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+      <input class="range" type="range" name="intensity" id="slide-pitch-size" value="50" min="0" max="100" style="display:inline;"></input>
       <hr>
       <p class="smallTitle" style="display:inline;">선의 유무</p>
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" checked>
     </div>
   </section>
 
@@ -238,6 +252,7 @@
   <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
   <script type="module" src="/static/src/js/forUI/ColorPicker.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+  <audio data-key="71" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-mid.wav"></audio>
 
 </body>
 

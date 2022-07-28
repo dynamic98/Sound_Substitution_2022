@@ -49,9 +49,16 @@ palette_candidate[6].onclick=function(e){
 palette_candidate[7].onclick=function(e){
     set_final(9)
 }
+
+function set_piano_color(color_set){
+    
+
+}
 function set_final(num){
     setted_color=selected_colors[num]
     console.log(num, setted_color)
+
+    set_piano_color(setted_color)
 
     
     const picker_class = document.getElementsByClassName('Picker')
@@ -91,6 +98,7 @@ function init(){
     }
     set_color(main_color, "saturation")
     set_color(main_color, "lightness")
+    set_beat(main_color)
     setted_color=selected_colors[0]
     // let picker_type="saturation"
     var hex = colorPicker.color.hexString;
@@ -111,9 +119,13 @@ colorPicker.on('color:change', function(color){
     main_color=color.hsl['h']
     set_color(main_color, "saturation")
     set_color(main_color, "lightness")
+    set_beat(main_color)
 })
 
-
+function set_beat(main_color){
+    var target = document.getElementById("beat_color")
+    target.style.backgroundColor="hsl("+main_color+", 100%, 50%)"
+}
 
 function set_color(main_color, picker_type){
     if (picker_type="saturation"){
@@ -133,6 +145,9 @@ function set_color(main_color, picker_type){
             target.style.backgroundColor=selected_colors[1][i]
         }
     }
+
+
+    
 }
 
 

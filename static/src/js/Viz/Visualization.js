@@ -15,7 +15,7 @@ import {
 } from "./Bloom";
 
 import {
-    ConnectionLine,
+    Line,
     VisualNote
 } from "./Mesh";
 
@@ -36,25 +36,32 @@ import {
 
 
 export class Visualization {
-    constructor() {
+    constructor(bloomLength) {
         this.threeSystem = new ThreeSystem()
         //size, color,position
         this.grid = new Grid([400, 100], 0x101010, [0, 0, -100])
-        //threshold, strength, radius
-        this.bloom = new Bloom(0, 5, 1, 1, this.threeSystem.getRendererSize());
-        this.textureManager = new TextureManager();
-        this.materialManager = new MaterialManager()
-        this.geometryManager = new GeometryManager("circle")
-
-        this.visualNoteList = []
-        this.color = new Color(1, 1, 1)
+        //threshold, strength, radius , bloomLength
+        this.bloom = new Bloom(0, 5, 1, bloomLength, this.threeSystem.getRendererSize());
         this.counterTimer = new CounterTimer(1);
-        this.visualNoteList = []
 
-    }
-
-    initialize() {
-        this.threeSystem.initialize()
+        this.instruments = {
+            piano: {},
+            drum: {},
+            savedPiano: {},
+            savedDrum: {}
+        }
+        for (let instrumentType in this.instruments) {
+            this.instruments[instrumentType].visualNoteList = []
+            this.instruments[instrumentType].materialManager = new MaterialManager();
+            this.instruments[instrumentType].geometryManager = new GeometryManager("circle");
+            this.instruments[instrumentType].colorManager = new Color(1, 1, 1)
+            this.instruments[instrumentType].textureManager = new TextureManager({
+                wood: 'static/src/texture/wood.jpeg',
+                paper: 'static/src/texture/paper.jpeg',
+                stone: 'static/src/texture/stone.jpeg',
+            })
+            this.instruments[instrumentType].textureManager.setTexture('none')
+        }
 
         this.bloom.initialize(
             this.threeSystem.getScene(),
@@ -62,47 +69,84 @@ export class Visualization {
             this.threeSystem.getRenderer(),
         )
 
-        this.textureManager.loadTexture({
-            wood: 'static/src/texture/wood.jpeg',
-            paper: 'static/src/texture/paper.jpeg',
-            stone: 'static/src/texture/stone.jpeg',
-        })
-        this.textureManager.setTexture('none')
-
         this.grid.setRenderOption(this.bloom.getPassForMoonLight())
         this.threeSystem.addToScene(this.grid.getGrid())
-        // this.counterTimer.setSpeed(this.threeSystem.getRendererSize().width, 100)
+
     }
 
-    createVisualNote(radius, positionX, positionY) {
-        this.geometryManager.setRadius(radius)
-      
-        let newPositionX = positionX * this.counterTimer.getTimer() - 100
-        this.threeSystem.updateLightPosition(newPositionX, positionY)
+    createVisualNote(instrumentType, radius, positionX, positionY) {
+        if (this.instrumentIsValid(instrumentType)) {
+            let instrument = this.instruments[instrumentType]
 
-        let texture = this.textureManager.getTexture()
-        let color = this.color.getColor();
-        let visualNote = new VisualNote(
+            instrument.geometryManager.setRadius(radius)
+            let newPositionX = positionX * this.counterTimer.getTimer() - 115
 
-            this.materialManager.createMaterial(color, texture),
+            let texture = instrument.textureManager.getTexture()
+            let color = instrument.colorManager.getColor();
 
-            this.geometryManager.getGeometry(),
-            newPositionX,
-            positionY
-        )
-        visualNote.setRenderOption(this.bloom.getPassForSunLight())
-        this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
-        this.visualNoteList.push(visualNote)
-    }
 
-    createConnectonLine() {
-        if (this.visualNoteList.length > 1 && ConnectionLine.isVisible()) {
-            let secondLastPoint = this.visualNoteList[this.visualNoteList.length - 2].getPosition()
-            let lastPoint = this.visualNoteList[this.visualNoteList.length - 1].getPosition()
+            let visualNote = new VisualNote(
+                instrument.materialManager.createMaterial(color, texture),
+                instrument.geometryManager.getGeometry(),
+                newPositionX,
+                positionY
+            )
 
-            let connectionLine = new ConnectionLine(secondLastPoint, lastPoint);
-            this.threeSystem.addToGroup(connectionLine.getMesh(), ConnectionLine.name)
+            visualNote.setRenderOption(this.bloom.getPassForSunLight())
+            this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
+            instrument.visualNoteList.push(visualNote)
+
+
+            this.threeSystem.updateLightPosition(newPositionX, positionY)
         }
+    }
+
+    createConnectionLine(instrumentType) {
+        if (this.instrumentIsValid(instrumentType)) {
+            if (this.instruments[instrumentType].visualNoteList.length > 1 && Line.isVisible()) {
+                let visualNoteList = this.instruments[instrumentType].visualNoteList
+
+                let secondLastPoint = visualNoteList[visualNoteList.length - 2].getPosition()
+                let lastPoint = visualNoteList[visualNoteList.length - 1].getPosition()
+                let connectionLine = new Line(secondLastPoint, lastPoint);
+                this.threeSystem.addToGroup(connectionLine.getMesh(), Line.name)
+            }
+        }
+    }
+
+
+    createNowLocation(positionX) {
+            let instrumentType = "NowLocation"
+            let instrument = this.instruments["NowLocation"]
+
+            // instrument.geometryManager.setRadius(10)
+            let newPositionX = positionX * this.counterTimer.getTimer() - 100
+            this.instruments[instrumentType].geometryManager.selectedGeometryType = "NowLocation"
+            let positionY = 0;
+            this.instruments[instrumentType].colorManager.setColor(0.7, 50);
+
+            let texture = instrument.textureManager.getTexture()
+            let color = instrument.colorManager.getColor();
+            let transmission = 0.4
+
+            let visualNote = new VisualNote(
+                instrument.materialManager.createMaterial(color, texture, transmission),
+                instrument.geometryManager.getGeometry(),
+                newPositionX,
+                positionY
+            )
+            visualNote.getMesh().position.setZ(-15);
+            visualNote.setRenderOption(this.bloom.getPassForMoonLight())
+            this.threeSystem.addToGroup(visualNote.getMesh(), "NowLocation")
+            instrument.visualNoteList.push(visualNote)
+
+    }
+
+    MoveNowLocation(positionX) {
+        let thisMesh = this.threeSystem.getGroup("NowLocation").children[0]
+        let newPositionX = positionX * this.counterTimer.getTimer() - 100
+        thisMesh.position.setX(newPositionX)
+
     }
 
     render() {
@@ -113,14 +157,18 @@ export class Visualization {
     }
 
     update() {
-        this.counterTimer.start();
-        this.bloom.pickGlowReceivers(this.visualNoteList)
+        this.counterTimer.run();
+        for (let instrumentType in this.instruments) {
+            this.bloom.pickGlowReceivers(this.instruments[instrumentType].visualNoteList)
+        }
     }
 
     reset() {
         this.threeSystem.reset()
         this.counterTimer.reset();
-        this.visualNoteList = []
+        for (let instrumentType in this.instruments) {
+            this.instruments[instrumentType].visualNoteList = []
+        }
     }
 
     checkAllCandidatesForMoonLight() {
@@ -142,18 +190,34 @@ export class Visualization {
 
     //getter & settter
     //------------------------------------------------------------------// 
-    setColor(hue, saturation) {
-        this.color.setColor(hue, saturation)
+    setColor(instrumentType, hue, saturation) {
+        if (this.instrumentIsValid(instrumentType)) {
+            this.instruments[instrumentType].colorManager.setColor(hue, saturation)
+        }
     }
 
-    setGeometryType = (geometryType) => {
-        return this.geometryManager.setGeometryType(geometryType)
+    setGeometryType = (instrumentType, geometryType) => {
+        if (this.instrumentIsValid(instrumentType)) {
+            return this.instruments[instrumentType].geometryManager.setGeometryType(geometryType)
+        }
     }
-    setTexture = (textureType) => {
-        return this.textureManager.setTexture(textureType)
+
+    setTexture = (instrumentType, textureType) => {
+        if (this.instrumentIsValid(instrumentType)) {
+            return this.instruments[instrumentType].textureManager.setTexture(textureType)
+        }
     }
+
     getRendererSize() {
         return this.threeSystem.getRendererSize()
     }
 
+    instrumentIsValid(instrumentType) {
+        if (this.instruments[instrumentType] == undefined || null) {
+            console.error(`Only Types ${Object.keys(this.instrumentType)} are available`)
+            return false
+        } else {
+            return true
+        }
+    }
 }

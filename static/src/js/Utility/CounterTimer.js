@@ -4,7 +4,7 @@ export class CounterTimer {
         this.counter = 0;
     }
 
-    start() {
+    run() {
         this.counter += this.speed;
     }
 

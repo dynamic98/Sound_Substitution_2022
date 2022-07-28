@@ -8,11 +8,16 @@ export class MyWaveSurfer {
             container: '#waveform',
             backend: 'MediaElement',
             waveColor: '#A8DBA8',
-            audioRate: 1,
+            audioContext: Tone.context,
             progressColor: '#3B8686',
             cursorWidth: 5,
             normalize: true,
-
+            interact: false,
+            autoCenter: true,
+            pixelRatio: 1,
+            hideScrollbar: true,
+         
+           
         });
     }
 
@@ -20,6 +25,8 @@ export class MyWaveSurfer {
     setAudioElementSource(audioElement) {
         this.audioElement = audioElement
         this.wavesurfer.load(this.audioElement);
+
+
 
     }
 

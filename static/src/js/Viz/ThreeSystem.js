@@ -5,7 +5,7 @@ export class ThreeSystem {
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer({
             antialias: true,
-            physicallyCorrectLights: true,
+
         });
         this.renderer.shadowMap.enabled = true;
         this.pointLight = new THREE.PointLight(0xffffff, 30, 15);
@@ -21,10 +21,8 @@ export class ThreeSystem {
             width: window.innerWidth / 1.8,
             height: window.innerHeight / 1.5
         }
-    }
 
-    initialize() {
-        this.camera.position.set(0, 0, 200);
+        this.camera.position.set(0, -15, 220);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(this.rendererSize.width, this.rendererSize.height);
         this.renderer.toneMapping = THREE.ReinhardToneMapping;
@@ -63,6 +61,15 @@ export class ThreeSystem {
         this.groups[groupName].add(element)
     }
 
+    getGroup(groupName) {
+        if (this.groups[groupName] == undefined) {
+            console.error("Your groupName is not defined.")
+        } else {
+            return this.groups[groupName]
+        }
+    }
+
+
     forEach(callback) {
         this.scene.traverse((obj) => {
             callback(obj)
@@ -74,12 +81,11 @@ export class ThreeSystem {
     }
 
     reset() {
+    
         for (let index in this.groups) {
-
             this.scene.remove(this.groups[index])
             this.groups[index] = new THREE.Group();
             this.scene.add(this.groups[index])
-
 
         }
     }
