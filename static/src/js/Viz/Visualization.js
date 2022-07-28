@@ -43,12 +43,14 @@ export class Visualization {
         //threshold, strength, radius , bloomLength
         this.bloom = new Bloom(0, 5, 1, bloomLength, this.threeSystem.getRendererSize());
         this.counterTimer = new CounterTimer(1);
+        this.Bias_X = 115;
 
         this.instruments = {
             piano: {},
             drum: {},
             savedPiano: {},
-            savedDrum: {}
+            savedDrum: {},
+            NowLocation: {}
         }
         for (let instrumentType in this.instruments) {
             this.instruments[instrumentType].visualNoteList = []
@@ -79,7 +81,7 @@ export class Visualization {
             let instrument = this.instruments[instrumentType]
 
             instrument.geometryManager.setRadius(radius)
-            let newPositionX = positionX * this.counterTimer.getTimer() - 115
+            let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
 
             let texture = instrument.textureManager.getTexture()
             let color = instrument.colorManager.getColor();
@@ -116,7 +118,7 @@ export class Visualization {
             let visualNote = new VisualNote(
                 instrument.materialManager.createMaterial(color, texture),
                 instrument.geometryManager.getGeometry(),
-                positionX-100,
+                positionX-this.Bias_X,
                 positionY
             )
 
@@ -145,7 +147,7 @@ export class Visualization {
             let instrument = this.instruments["NowLocation"]
 
             // instrument.geometryManager.setRadius(10)
-            let newPositionX = positionX * this.counterTimer.getTimer() - 100
+            let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
             this.instruments[instrumentType].geometryManager.selectedGeometryType = "NowLocation"
             let positionY = 0;
             this.instruments[instrumentType].colorManager.setColor(0.7, 0.8, 0.9);
@@ -169,7 +171,7 @@ export class Visualization {
 
     MoveNowLocation(positionX) {
         let thisMesh = this.threeSystem.getGroup("NowLocation").children[0]
-        let newPositionX = positionX * this.counterTimer.getTimer() - 100
+        let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
         thisMesh.position.setX(newPositionX)
 
     }
