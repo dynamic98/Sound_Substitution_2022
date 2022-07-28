@@ -41,7 +41,7 @@ export class Piano {
                         this.currentPitch = object[child.className]
                         this.currentOctave = pianoOctave
                         drawNote(this.getAudioData(), this.getEnergy(), this.getPitch());
-                        setMusicArray(this.getAudioData(), 50)
+                        setMusicArray(this.getAudioData(), this.getEnergy())
                         this.play()
                     })
                 }
