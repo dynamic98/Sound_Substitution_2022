@@ -4,7 +4,7 @@ import {
 } from './Viz/Visualization.js'
 import {
     Kandinsky
-} from './Viz/Kandinsky.js'
+} from './Utility/Kandinsky.js'
 import {
     BPMTimer
 } from './Utility/BPMTimer.js'
@@ -44,7 +44,7 @@ let LastIndex = -1;
 main()
 
 function main() {
-    visualization.initialize();
+    // visualization.initialize();
 
     bpmTimer.setBPM(100)
     bpmTimer.setBPMByMeshCount(20)
@@ -106,4 +106,3 @@ function draw() {
 }
 
 document.body.appendChild(stats.dom);
-
