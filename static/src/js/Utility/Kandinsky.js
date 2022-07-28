@@ -27,6 +27,8 @@ export class Kandinsky {
         this.pitchHeight
         this.octave;
         this.tone;
+        this.pitchWidth = this.canvasSizeX / (60 * 60 / this.bpm * 4) // 
+
     }
 
     calculate([pitch, energy], frameRate = 60) {

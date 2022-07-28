@@ -114,6 +114,41 @@ export class Visualization {
         }
     }
 
+
+    createNowLocation(positionX) {
+            let instrumentType = "NowLocation"
+            let instrument = this.instruments["NowLocation"]
+
+            // instrument.geometryManager.setRadius(10)
+            let newPositionX = positionX * this.counterTimer.getTimer() - 100
+            this.instruments[instrumentType].geometryManager.selectedGeometryType = "NowLocation"
+            let positionY = 0;
+            this.instruments[instrumentType].colorManager.setColor(0.7, 50);
+
+            let texture = instrument.textureManager.getTexture()
+            let color = instrument.colorManager.getColor();
+            let transmission = 0.4
+
+            let visualNote = new VisualNote(
+                instrument.materialManager.createMaterial(color, texture, transmission),
+                instrument.geometryManager.getGeometry(),
+                newPositionX,
+                positionY
+            )
+            visualNote.getMesh().position.setZ(-15);
+            visualNote.setRenderOption(this.bloom.getPassForMoonLight())
+            this.threeSystem.addToGroup(visualNote.getMesh(), "NowLocation")
+            instrument.visualNoteList.push(visualNote)
+
+    }
+
+    MoveNowLocation(positionX) {
+        let thisMesh = this.threeSystem.getGroup("NowLocation").children[0]
+        let newPositionX = positionX * this.counterTimer.getTimer() - 100
+        thisMesh.position.setX(newPositionX)
+
+    }
+
     render() {
         this.checkAllCandidatesForMoonLight()
         this.bloom.renderBloom()

@@ -334,6 +334,7 @@ ul .white {
   border-radius:0 0 5px 5px;
   box-shadow:-1px 0 0 rgba(255,255,255,0.8) inset,0 0 5px #ccc inset,0 0 3px rgba(0,0,0,0.2);
   background:linear-gradient(to bottom,#eee 0%,#fff 100%)
+  /* 버튼 색상 */
 }
 
 ul .white:active {
@@ -936,6 +937,19 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   ul li:last-child {
     border-radius:0 5px 5px 5px
+  }
+
+
+  /* drum UI */
+  img{
+    /* size: 300px, 150px; */
+    width: 220px;
+    height: 160x;
+  }
+  img:active{
+    transform: scale(0.7);
+    background-image: url(../images/shadow.png);
+    background-size: 220px, 160px;
   }
 
 
