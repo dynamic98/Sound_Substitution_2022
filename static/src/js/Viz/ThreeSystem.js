@@ -61,6 +61,15 @@ export class ThreeSystem {
         this.groups[groupName].add(element)
     }
 
+    getGroup(groupName) {
+        if (this.groups[groupName] == undefined) {
+            console.error("Your groupName is not defined.")
+        } else {
+            return this.groups[groupName]
+        }
+    }
+
+
     forEach(callback) {
         this.scene.traverse((obj) => {
             callback(obj)
@@ -72,12 +81,11 @@ export class ThreeSystem {
     }
 
     reset() {
+    
         for (let index in this.groups) {
-
             this.scene.remove(this.groups[index])
             this.groups[index] = new THREE.Group();
             this.scene.add(this.groups[index])
-
 
         }
     }

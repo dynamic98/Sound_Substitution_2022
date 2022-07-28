@@ -36,7 +36,6 @@ export class MusicSheet {
     }
 
     getKeyboardPitch() {
-
         return this.MusicArray[this.currentIndex].keyboard_pitch
     }
     getKeyboardEnergy() {

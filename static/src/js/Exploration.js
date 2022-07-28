@@ -72,15 +72,19 @@ function update() {
     stats.begin()
     requestAnimationFrame(update);
     musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000/MusicLength)))
+    // visualization.createNowLocation(0)
     // console.log(musicSheet.getCurrentIndex(), musicSheet.isCurrentIndexUpdated())
     if ((musicSheet.getCurrentIndex()==0) && musicSheet.isCurrentIndexUpdated()){
         visualization.reset();
         bpmTimer.restart()
+        visualization.createNowLocation(kandinsky.getPitchWidth())
     }
     if (!bpmTimer.isUnderFourBeat()) {
         visualization.reset();
-    } else if (bpmTimer.isUnderFourBeat()) {
+        visualization.createNowLocation(kandinsky.getPitchWidth())
 
+    } else if (bpmTimer.isUnderFourBeat()) {
+        visualization.MoveNowLocation(kandinsky.getPitchWidth());
         if (musicSheet.getKeyboardEnergy() > 0 && (musicSheet.isCurrentIndexUpdated())) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(
                 musicSheet.getKeyboardPitch(),

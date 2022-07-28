@@ -13,10 +13,10 @@ export class MaterialManager {
         }
     }
 
-    createMaterial(color, texture) {
+    createMaterial(color, texture, transmission=0.99) {
         this.materialParameters.map = texture;
-        this.materialParameters.color = color
-
+        this.materialParameters.color = color;
+        this.transmission = transmission;
         this.material = new THREE.MeshPhysicalMaterial(this.materialParameters)
         return this.material
     }
