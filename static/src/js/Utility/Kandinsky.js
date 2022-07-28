@@ -3,7 +3,7 @@ export class Kandinsky {
         this.bpm = bpm;
         this.MaxVolume = MaxVolume;
         this.canvasSizeY = 30
-        this.RangeY =50
+        this.RangeY = 50
         this.canvasSizeX = 200
         this.MIDISCOPE = 35;
         // this.midiScope=35;
@@ -43,7 +43,7 @@ export class Kandinsky {
         this.tone = (pitch) % 12;
         // Make reminder positive integer
 
-      
+
     }
 
     getNormalizedTone() {
@@ -75,7 +75,7 @@ export class Kandinsky {
     }
     setRange(RangeY) {
         // RangeY 0~100 -> mapping range into 0~60
-        this.RangeY = RangeY/100*70;
+        this.RangeY = RangeY / 100 * 70;
     }
 
 }
