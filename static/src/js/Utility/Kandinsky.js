@@ -2,8 +2,8 @@ export class Kandinsky {
     constructor(bpm, MaxVolume = 1, ) {
         this.bpm = bpm;
         this.MaxVolume = MaxVolume;
-        this.canvasSizeY = 40
-        this.RangeY = 70
+        this.canvasSizeY = 30
+        this.RangeY =50
         this.canvasSizeX = 200
         this.MIDISCOPE = 35;
         // this.midiScope=35;
@@ -41,9 +41,7 @@ export class Kandinsky {
         this.tone = (pitch) % 12;
         // Make reminder positive integer
 
-        // if (this.energy < 0.15) {
-        //     this.energy = 0;
-        // }
+      
     }
 
     getNormalizedTone() {

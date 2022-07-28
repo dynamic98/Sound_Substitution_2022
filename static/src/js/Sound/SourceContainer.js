@@ -31,9 +31,6 @@ export class SourceContainer {
             await source.play()
             source.setTime(getWavesurferTime())
         }
-        return new Promise((resolve, reject) => {
-            resolve();
-        })
 
     }
 
@@ -58,6 +55,7 @@ export class SourceContainer {
         for (let i = 0; i < this.sourceList.length; i++) {
             this.sourceList[i].setTime(time)
         }
+      
     }
 
     getLength() {

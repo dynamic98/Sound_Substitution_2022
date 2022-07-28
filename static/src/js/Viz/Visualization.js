@@ -79,7 +79,7 @@ export class Visualization {
             let instrument = this.instruments[instrumentType]
 
             instrument.geometryManager.setRadius(radius)
-            let newPositionX = positionX * this.counterTimer.getTimer() - 100
+            let newPositionX = positionX * this.counterTimer.getTimer() - 115
 
             let texture = instrument.textureManager.getTexture()
             let color = instrument.colorManager.getColor();
@@ -95,6 +95,9 @@ export class Visualization {
             visualNote.setRenderOption(this.bloom.getPassForSunLight())
             this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
             instrument.visualNoteList.push(visualNote)
+
+
+            this.threeSystem.updateLightPosition(newPositionX, positionY)
         }
     }
 
@@ -122,7 +125,6 @@ export class Visualization {
         this.counterTimer.run();
         for (let instrumentType in this.instruments) {
             this.bloom.pickGlowReceivers(this.instruments[instrumentType].visualNoteList)
-            //this.threeSystem.updateLightPosition(newPositionX, positionY)
         }
     }
 

@@ -14,12 +14,7 @@ import {
 import {
     BPMTimer
 } from './Utility/BPMTimer.js'
-import {
-    Switcher
-} from './Utility/Switcher.js'
-import {
-    Kandinsky
-} from './Utility/Kandinsky.js'
+
 import {
     Song
 } from './Sound/Audio.js';
@@ -31,14 +26,15 @@ import {
 
 //class instances
 //----------------------------------------------------//
-let visualization = new Visualization(1)
+let visualization = new Visualization(5)
 let bpmTimer = new BPMTimer();
-let switcher = new Switcher();
 let stats = new Stats();
-let kandinsky;
+document.body.appendChild(stats.dom);
+let songKandinsky;
 let sourceContainer;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")
+let drum;
 
 //event handlers
 //----------------------------------------------------//
@@ -55,8 +51,7 @@ document.getElementById("select-music").onchange = async () => {
 
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
 
-    kandinsky.setBPM(song.getBPM())
-    kandinsky.setMaxVolume(song.getMaxVolume())
+    console.log(song.getBPM())
     bpmTimer.setBPM(song.getBPM())
 }
 
@@ -82,46 +77,60 @@ async function main() {
 
     //VISUALS & OTHERS
     // ----------------------------------------------------/
-    kandinsky = new Kandinsky(song.getBPM(), song.getMaxVolume())
+    drum = sourceContainer.getSource("drums")
+    song.initializeKandinsky(song.getBPM(), song.getMaxVolume())
+    drum.initializeKandinsky(song.getBPM(), song.getMaxVolume())
     bpmTimer.setBPM(song.getBPM())
 
     animate();
 };
 
 function animate() {
-    console.log(sourceContainer.getSource("vocals").getPitch())
+    // console.log(sourceContainer.getSource("vocals").getPitch())
     requestAnimationFrame(animate);
     stats.begin()
 
     //only loop when the music is playing
-    if (song.isPlaying()) {
-        //debug frame rate
-        //over 4 beat = delet drawing
-        // console.log('original pitch', song.getPitch()) // mixed song
-        // console.log('original max chroma', song.getMaxChroma())
-        console.log('vocal pitch', sourceContainer.getList()[3].getPitch()); // vocal
-        // console.log('bass max chorma', sourceContainer.getList()[3].getMaxChroma())
-        // console.log(sourceContainer.getList()[0].getEnergy(), "Bass")
-        // console.log(sourceContainer.getList()[1].getEnergy(), "drums")
-        // console.log(sourceContainer.getList()[2].getEnergy(), "other")
-        // console.log(sourceContainer.getList()[3].getEnergy(), "vocals")
-
+    if (song.isPlaying() && song.getOriginalEnergy() > 0) {
         if (!bpmTimer.isUnderFourBeat()) {
             visualization.reset();
         }
         //under 4 beat = calculate and create Geometry 
         else if (bpmTimer.isUnderFourBeat()) {
-            let pitchAndEnergy = switcher.getPitchAndEnergy(song.getPitch(), song.getEnergy(), song.getMaxChroma())
-            console.log(sourceContainer.getList()[3].getPitch());
-
-            kandinsky.calculate(pitchAndEnergy);
-            visualization.setColor("piano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-            visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-
+            draw(song, "piano")
+            draw(drum, "drum")
         }
         visualization.render();
         visualization.update();
     }
     stats.end();
 }
-document.body.appendChild(stats.dom);
+
+function draw(instance, instrumentType) {
+    // console.log(instance.getOriginalEnergy())
+    if (instance.getOriginalEnergy() > 0.01) {
+
+        instance.calculateSignal();
+
+        if (instance.getFileName() == "drums") {
+         
+            visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -60)
+        } else {
+            visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), instance.getPitchHeight())
+            visualization.setColor(instrumentType, instance.getNormalizedTone(), instance.getNormalizedOctave())
+        }
+        visualization.createConnectionLine(instrumentType)
+    }
+}
+
+
+//debug frame rate
+//over 4 beat = delet drawing
+// console.log('original pitch', song.getPitch()) // mixed song
+// console.log('original max chroma', song.getMaxChroma())
+//console.log('vocal pitch', sourceContainer.getList()[3].getPitch()); // vocal
+// console.log('bass max chorma', sourceContainer.getList()[3].getMaxChroma())
+// console.log(sourceContainer.getList()[0].getEnergy(), "Bass")
+// console.log(sourceContainer.getList()[1].getEnergy(), "drums")
+// console.log(sourceContainer.getList()[2].getEnergy(), "other")
+// console.log(sourceContainer.getList()[3].getEnergy(), "vocals")
