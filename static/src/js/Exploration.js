@@ -113,9 +113,7 @@ function update() {
     stats.begin()
     requestAnimationFrame(update);
     musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000 / MusicLength)))
-
-    // visualization.createNowLocation(0)
-    // console.log(musicSheet.getCurrentIndex(), musicSheet.isCurrentIndexUpdated())
+    
     if ((musicSheet.getCurrentIndex() == 0) && musicSheet.isCurrentIndexUpdated()) {
         visualization.reset();
         bpmTimer.restart()
@@ -132,8 +130,6 @@ function update() {
                 musicSheet.getKeyboardNote()
             )
             kandinsky.calculate(pitchAndEnergy);
-            visualization.moveProgressBar(kandinsky.getPitchWidth());
-
             visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
             visualization.createVisualNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
             // console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
