@@ -49,6 +49,7 @@ def menu():
       id_name = request.form['id_name']
       id_number = request.form['id_number']
       global UserName
+      global UserNumber
       if id_name:
         UserName = id_name
         UserNumber = id_number
@@ -65,6 +66,10 @@ def menu():
 def explore():
   return render_template('Exploration.html',User_Name=UserName, login="log in")
 
+@app.route('/listening', methods=['POST'])
+def listen():
+  return render_template('listen.html',User_Name=UserName, User_Number=UserNumber, login="log in")
+
 @app.route('/pitch_task', methods=['POST'])
 def pitch_task():
   return render_template('pitch_task_one.html',User_Name=UserName, login="log in")
@@ -76,7 +81,6 @@ def beat_task():
 @app.route('/test', methods=['POST'])
 def test():
   return render_template('test.html',User_Name=UserName, login="log in")
-
 
 @app.route('/dev', methods=['POST'])
 def dev():
