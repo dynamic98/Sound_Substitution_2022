@@ -101,6 +101,31 @@ export class Visualization {
         }
     }
 
+    createVisualAbsNote(instrumentType, radius, positionX, positionY) {
+        if (this.instruments[instrumentType] == undefined || null) {
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
+        } else {
+            let instrument = this.instruments[instrumentType]
+
+            instrument.geometryManager.setRadius(radius)
+
+            let texture = instrument.textureManager.getTexture()
+            let color = instrument.colorManager.getColor();
+
+
+            let visualNote = new VisualNote(
+                instrument.materialManager.createMaterial(color, texture),
+                instrument.geometryManager.getGeometry(),
+                positionX-100,
+                positionY
+            )
+
+            visualNote.setRenderOption(this.bloom.getPassForMoonLight())
+            this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
+            instrument.visualNoteList.push(visualNote)
+        }
+    }
+
     createConnectionLine(instrumentType) {
         if (this.instrumentIsValid(instrumentType)) {
             if (this.instruments[instrumentType].visualNoteList.length > 1 && Line.isVisible()) {
@@ -123,11 +148,11 @@ export class Visualization {
             let newPositionX = positionX * this.counterTimer.getTimer() - 100
             this.instruments[instrumentType].geometryManager.selectedGeometryType = "NowLocation"
             let positionY = 0;
-            this.instruments[instrumentType].colorManager.setColor(0.7, 50);
+            this.instruments[instrumentType].colorManager.setColor(0.7, 0.8, 0.9);
 
             let texture = instrument.textureManager.getTexture()
             let color = instrument.colorManager.getColor();
-            let transmission = 0.4
+            let transmission = 0.01
 
             let visualNote = new VisualNote(
                 instrument.materialManager.createMaterial(color, texture, transmission),
@@ -135,7 +160,7 @@ export class Visualization {
                 newPositionX,
                 positionY
             )
-            visualNote.getMesh().position.setZ(-15);
+            visualNote.getMesh().position.setZ(1);
             visualNote.setRenderOption(this.bloom.getPassForMoonLight())
             this.threeSystem.addToGroup(visualNote.getMesh(), "NowLocation")
             instrument.visualNoteList.push(visualNote)

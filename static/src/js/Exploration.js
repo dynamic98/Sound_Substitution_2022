@@ -110,6 +110,7 @@ function update() {
     stats.begin()
     requestAnimationFrame(update);
     musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000/MusicLength)))
+    console.log(bpmTimer.getFourBeatTime());
     // visualization.createNowLocation(0)
     // console.log(musicSheet.getCurrentIndex(), musicSheet.isCurrentIndexUpdated())
     if ((musicSheet.getCurrentIndex() == 0) && musicSheet.isCurrentIndexUpdated()) {
