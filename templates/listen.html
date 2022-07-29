@@ -31,7 +31,6 @@
             <h3 class="name" style="font-size: 26px;">{{User_Name}}</h3>
             <span class="identity" style="font-size: 20px;">P{{User_Number}}</span>
             <br id="musiclist">
-            <br id="musiclist">
             <p id="musiclist" style="font-size: 20px; color: black;">Music List<p>
             <div id="filelist" hidden> {{filelist}} </div>
             <div id="separatedFileList" hidden> {{ separatedFileList}} </div>
@@ -45,7 +44,8 @@
             <audio id="audio" controls></audio>
             <div class="thetitle" id="title"></div>
           </div>
-          <div id="music-controls" >
+
+          <div id="music-controls">
             <button class="videoControlButton" id="play" data-action="play"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
             <!-- <button class="btn btn-primary" data-action="play">
                 <i class="glyphicon glyphicon-play"></i>
@@ -75,14 +75,31 @@
 
     </main>
 
-    <button class="button">
-        <div class="button__content">
-          <p class="button__text" id="sound">소리</p>
-          <p class="button__text" id="soundvisual">소리 + 시각</p>
-          <p class="button__text" id="soundhaptic">소리 + 햅틱</p>
-          <p class="button__text" id="everything">소리 + 혼합</p>
-        </div>
-      </button>
+    <section class="buttonContainer">
+        <button class="button">
+            <div class="button__content">
+              <p class="button__text" id="sound" style="font-size: 15px;">소리</p>
+            </div>
+        </button>
+        <br>
+        <button class="button">
+            <div class="button__content">
+              <p class="button__text" id="soundvisual" style="font-size: 15px;">소리 + 시각</p>
+            </div>
+        </button>
+        <br>
+        <button class="button">
+            <div class="button__content">
+              <p class="button__text" id="soundhaptic" style="font-size: 15px;">소리 + 햅틱</p>
+            </div>
+        </button>
+        <br>
+        <button class="button">
+            <div class="button__content">
+              <p class="button__text" id="everything" style="font-size: 15px;">소리 + 혼합</p>
+            </div>
+        </button>
+    </section>
 
    <!--shader script-->
     <script type="x-shader/x-vertex" id="vertexshader">
@@ -91,8 +108,8 @@
 				vUv = uv;
 				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 			}
-		</script>
-		<script type="x-shader/x-fragment" id="fragmentshader">
+	</script>
+	<script type="x-shader/x-fragment" id="fragmentshader">
 			uniform sampler2D baseTexture;
 			uniform sampler2D bloomTexture;
 			varying vec2 vUv;
@@ -101,8 +118,7 @@
 			}
     </script>
 
-      
-    </script>
+    
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
     <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>

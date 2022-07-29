@@ -1,11 +1,18 @@
-* {
+/* * {
 	 box-sizing: border-box;
 	 -webkit-tap-highlight-color: transparent;
 }
  html, body {
 	 height: 100%;
 	 touch-action: manipulation;
+} */
+
+.buttonContainer {
+	margin-left: 1500px;
+	margin-top: -700px;
+	margin-bottom: 140px;
 }
+
  body {
 	 display: flex;
 	 flex-direction: column;
@@ -27,6 +34,7 @@
 	 box-shadow: -6px -20px 35px #fff, -6px -10px 15px #fff, -20px 0px 30px #fff, 6px 20px 25px rgba(0, 0, 0, 0.2);
 	 transition: 0.13s ease-in-out;
 	 cursor: pointer;
+	 margin-bottom: 30px;
 }
  .button:active {
 	 box-shadow: none;
@@ -67,9 +75,12 @@
 	 fill: #aaa;
 }
  .button__text {
+	 width: 20px;
+	 
 	 position: relative;
 	 transform: translate3d(0px, -4px, 0px);
-	 margin: 0;
+	 /* margin: 0;*/
+	 margin-left: 30px;
 	 align-self: end;
 	 grid-column: 0.2;
 	 grid-row: 2;
@@ -82,6 +93,7 @@
 	 -moz-background-clip: text;
 	 background-clip: text;
 	 transition: 0.13s ease-in-out;
+	 color: black;
 }
  .credits {
 	 margin-top: 24px;

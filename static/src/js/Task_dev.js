@@ -51,12 +51,12 @@ let Task1Sheet = [
 {keyboard_pitch: {frequency: 0, confidence: 1, note: 'B4',  midi: 71} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
 {keyboard_pitch: {frequency: 0, confidence: 1, note: 'F4',  midi: 65} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
 {keyboard_pitch: {frequency: 0, confidence: 1, note: 'C6',  midi: 84} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-{keyboard_pitch: {frequency: 0, confidence: 1, note: 'C5',  midi: 72} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-{keyboard_pitch: {frequency: 0, confidence: 1, note: 'F#4', midi: 66} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+{keyboard_pitch: {frequency: 0, confidence: 1, note: 'G4',  midi: 67} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+{keyboard_pitch: {frequency: 0, confidence: 1, note: 'G4',  midi: 67} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+{keyboard_pitch: {frequency: 0, confidence: 1, note: 'G4',  midi: 67} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
 {keyboard_pitch: {frequency: 0, confidence: 1, note: 'E4',  midi: 64} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-{keyboard_pitch: {frequency: 0, confidence: 1, note: 'E4',  midi: 64} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-{keyboard_pitch: {frequency: 0, confidence: 1, note: 'A4',  midi: 69} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-{keyboard_pitch: {frequency: 0, confidence: 1, note: 'C#4', midi: 61} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+{keyboard_pitch: {frequency: 0, confidence: 1, note: 'G4',  midi: 67} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+{keyboard_pitch: {frequency: 0, confidence: 1, note: 'G4',  midi: 67} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
 ]
 let MusicLength = Task1Sheet.length;
 let WritingMusicSheet = new MusicSheet(MusicLength);
