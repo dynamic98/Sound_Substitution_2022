@@ -19,7 +19,9 @@ import {
 import {
     Piano
 } from './Customization/Piano.js'
-
+import {
+    ProgressTimer
+} from './Utility/ProgressTimer.js'
 import {
     MusicSheet
 } from './forUI/MusicSheet.js'
@@ -27,16 +29,6 @@ import {
     pitchBeatSwitcher
 }
 from './forUI/pitchBeatSwitcher.js'
-import {
-    ColorPicker
-}
-from './forUI/ColorPicker.js'
-
-import {
-    FiniteStateMachine
-} from './Utility/FiniteStateMachine.js'
-
-
 
 pitchBeatSwitcher()
 
@@ -48,17 +40,12 @@ let kandinsky;
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
 let switcher = new Switcher();
-
+let visualization = new Visualization(1)
+let progressTimer = new ProgressTimer(15, document.getElementById("ProgressBar"));
 let MusicLength = 50;
 let musicSheet = new MusicSheet(MusicLength);
-
-let bloom_length = 1
-let visualization = new Visualization(bloom_length);
-
 let piano = new Piano("pianoContainer");
 let mode_pitchbeat="pitch"
-
-let MyColorPicker = new ColorPicker();
 
 let pitch_type = document.getElementById('pitchButton')
 let beat_type=document.getElementById('beatButton')
@@ -66,7 +53,6 @@ let piano_container=document.getElementsByClassName("set")
 let drum_container=document.getElementsByClassName("set2")
 let pitch_area=document.getElementById('pitch_area')
 let beat_area=document.getElementById('beat_area')
-let reset=document.getElementById('reset')
 
 
 pitch_type.onclick=function(e){
@@ -93,35 +79,14 @@ drum.onclick=function(e){
     drum_audio.play()
 }
 
-const checkbox = document.getElementById('pitch-checkbox')
-checkbox.addEventListener('change', (event) => {
-    if (event.currentTarget.checked) {
-        console.log("checked")
-      } else {
-        console.log("not checked")
-      }
-})
 
-let MeshAmount=20, NoteInterval;
-let counter = 0
-document.body.appendChild(stats.dom);
-let pitch_palette_num = null;
-let pitch_palette_set = null;
-let beat_color = null
 main()
 
 function main() {
-    bpmTimer.setBPM(20)
-    bpmTimer.setBPMByMeshCount(MeshAmount)
+    bpmTimer.setBPM(100)
+    bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     piano.setNoteDuration(300);
-    visualization.createProgressBar(5, "#0000FF", 0.4)
-
-    //event handler
-    //---------------------------------------------------------------
-    $("input[class=checkbox]").change(() => {
-        visualization.setConnectionLineVisibility($(".checkbox")[0].checked)
-    })
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
     pitchslide.assignEventHandler("click", (para, value) => {
@@ -132,61 +97,55 @@ function main() {
         }
     })
 
-    piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setMusicArray, 1, 3)
-    piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setMusicArray, 2, 4)
-    piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setMusicArray, 3, 5)
-    MyColorPicker.PitchOnclickListener(set_pitch_palette);
-    MyColorPicker.BeatOnclickListener(set_beat_color)
-    NoteInterval = 230/MeshAmount;
-
-    reset.addEventListener("click", ()=>{
-        visualization.reset();
-        counter=0;
-    })
+    piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 1, 3)
+    piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 2, 4)
+    piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 3, 5)
+    visualization.createProgressBar(5, "#0000FF", 0.4)
 
     update();
 }
 
-
 function update() {
     stats.begin()
     requestAnimationFrame(update);
+    musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000 / MusicLength)))
 
-    if (counter>MeshAmount) {
+    if ((musicSheet.getCurrentIndex() == 0) && musicSheet.isCurrentIndexUpdated()) {
         visualization.reset();
-        counter = 0
-    } 
+        bpmTimer.restart()
+
+    }
+    if (!bpmTimer.isUnderFourBeat()) {
+        visualization.reset();
+
+    } else if (bpmTimer.isUnderFourBeat()) {
+        if (musicSheet.getKeyboardEnergy() > 0 && (musicSheet.isCurrentIndexUpdated())) {
+            let pitchAndEnergy = switcher.getPitchAndEnergy(
+                musicSheet.getKeyboardPitch(),
+                musicSheet.getKeyboardEnergy(),
+                musicSheet.getKeyboardNote()
+            )
+            kandinsky.calculate(pitchAndEnergy);
+            visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+            visualization.createVisualNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+            // console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
+            visualization.createConnectionLine("savedPiano")
+        }
+    }
+    visualization.moveProgressBar(1);
     visualization.render();
     visualization.update();
     stats.end();
+    musicSheet.setLastIndex(musicSheet.getCurrentIndex())
 }
 
 
 //callback for each Instrument 
 //drum class must have the same getPitch Energy, getPitchWidth and getPitchHeight Functions. 
-function draw_piano(pitch, energy, midi) {
+function draw(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
-
-    console.log(kandinsky.getPitchEnergy())
-    visualization.createVisualAbsNote("piano", kandinsky.getPitchEnergy(), NoteInterval*counter, kandinsky.getPitchHeight())
+    //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+    visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
     visualization.createConnectionLine("piano")
-    counter++
-}
-function draw_drum(pitch, energy, midi) {
-    let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
-    kandinsky.calculate(pitchAndEnergy);
-    console.log(kandinsky.getPitchEnergy())
-    visualization.createVisualAbsNote("drum", kandinsky.getPitchEnergy(), NoteInterval*counter, 50)
-    visualization.createConnectionLine("drum")
-    counter++
-}
-
-function set_pitch_palette(num, set){
-    pitch_palette_num = num;
-    pitch_palette_set = set;
-}
-function set_beat_color(color){
-    beat_color = color
-
 }
