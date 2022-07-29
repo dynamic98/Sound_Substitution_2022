@@ -1,4 +1,3 @@
-// import * as Tone from "tone";
 import {
     Visualization
 } from './Viz/Visualization.js'
@@ -47,7 +46,9 @@ let MusicLength = 50;
 let musicSheet = new MusicSheet(MusicLength);
 let piano = new Piano("pianoContainer");
 
+
 main()
+
 function main() {
     bpmTimer.setBPM(100)
     bpmTimer.setBPMByMeshCount(20)
@@ -67,6 +68,7 @@ function main() {
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 2, 5)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 3, 6)
     visualization.createProgressBar(5, "#0000FF", 0.4)
+
     update();
 }
 
@@ -78,10 +80,12 @@ function update() {
     if ((musicSheet.getCurrentIndex() == 0) && musicSheet.isCurrentIndexUpdated()) {
         visualization.reset();
         bpmTimer.restart()
+
     }
     if (!bpmTimer.isUnderFourBeat()) {
         visualization.reset();
-    } else if (bpmTimer.isUnderFourBeat()) 
+
+    } else if (bpmTimer.isUnderFourBeat()) {
         if (musicSheet.getKeyboardEnergy() > 0 && (musicSheet.isCurrentIndexUpdated())) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(
                 musicSheet.getKeyboardPitch(),
