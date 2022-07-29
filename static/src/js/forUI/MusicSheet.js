@@ -1,6 +1,6 @@
 export class MusicSheet {
 
-    constructor(length = 40) {
+    constructor(length = 50) {
         this.length = length
         this.MusicArray = new Array(this.length);
         this.EmptyPitch = {
@@ -34,6 +34,16 @@ export class MusicSheet {
     setLastIndex(index) {
         this.lastIndex = index
     }
+    getMusicSheet(){
+        return this.MusicArray;
+    }
+    getMusicSheetPitch(){
+        let PitchArray = new Array(this.length);
+        for (let i=0; i< this.length; i++){
+            PitchArray[i] = this.MusicArray[i].keyboard_pitch
+        }
+        return PitchArray;
+    }
 
     getKeyboardPitch() {
         return this.MusicArray[this.currentIndex].keyboard_pitch
@@ -62,6 +72,9 @@ export class MusicSheet {
     }
     isCurrentIndexUpdated() {
         return this.currentIndex != this.lastIndex
+    }
+    setMusicSheet(MusicArray){
+        this.MusicArray = MusicArray;
     }
 
     // console.log(CurrentIndex);

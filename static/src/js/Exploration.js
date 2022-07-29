@@ -25,6 +25,12 @@ import {
 import {
     MusicSheet
 } from './forUI/MusicSheet.js'
+import {
+    pitchBeatSwitcher
+}
+from './forUI/pitchBeatSwitcher.js'
+
+pitchBeatSwitcher()
 
 let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
 let textureButtons = new ButtonCustomization("shapeContainer", "textureButton")
@@ -94,43 +100,43 @@ function main() {
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 1, 4)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 2, 5)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 3, 6)
+    visualization.createProgressBar(5, "#0000FF", 0.4)
+
     update();
 }
 
 function update() {
     stats.begin()
     requestAnimationFrame(update);
-    musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000/MusicLength)))
-    // visualization.createNowLocation(0)
-    // console.log(musicSheet.getCurrentIndex(), musicSheet.isCurrentIndexUpdated())
-    // if ((musicSheet.getCurrentIndex() == 0) && musicSheet.isCurrentIndexUpdated()) {
-    //     visualization.reset();
-    //     bpmTimer.restart()
-    //     visualization.createNowLocation(kandinsky.getPitchWidth())
-    // }
-    // if (!bpmTimer.isUnderFourBeat()) {
-    //     visualization.reset();
-    //     visualization.createNowLocation(kandinsky.getPitchWidth())
+    musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000 / MusicLength)))
 
-    // } else if (bpmTimer.isUnderFourBeat()) {
-    //     visualization.MoveNowLocation(kandinsky.getPitchWidth());
-    //     if (musicSheet.getKeyboardEnergy() > 0 && (musicSheet.isCurrentIndexUpdated())) {
-    //         let pitchAndEnergy = switcher.getPitchAndEnergy(
-    //             musicSheet.getKeyboardPitch(),
-    //             musicSheet.getKeyboardEnergy(),
-    //             musicSheet.getKeyboardNote()
-    //         )
-    //         kandinsky.calculate(pitchAndEnergy);
-    //         visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-    //         visualization.createVisualNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-    //         // console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
-    //         visualization.createConnectionLine("savedPiano")
-    //     }
-    // }
-    // visualization.render();
-    // visualization.update();
-    // stats.end();
-    // musicSheet.setLastIndex(musicSheet.getCurrentIndex())
+    if ((musicSheet.getCurrentIndex() == 0) && musicSheet.isCurrentIndexUpdated()) {
+        visualization.reset();
+        bpmTimer.restart()
+
+    }
+    if (!bpmTimer.isUnderFourBeat()) {
+        visualization.reset();
+
+    } else if (bpmTimer.isUnderFourBeat()) {
+        if (musicSheet.getKeyboardEnergy() > 0 && (musicSheet.isCurrentIndexUpdated())) {
+            let pitchAndEnergy = switcher.getPitchAndEnergy(
+                musicSheet.getKeyboardPitch(),
+                musicSheet.getKeyboardEnergy(),
+                musicSheet.getKeyboardNote()
+            )
+            kandinsky.calculate(pitchAndEnergy);
+            visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+            visualization.createVisualNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+            // console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
+            visualization.createConnectionLine("savedPiano")
+        }
+    }
+    visualization.moveProgressBar(1);
+    visualization.render();
+    visualization.update();
+    stats.end();
+    musicSheet.setLastIndex(musicSheet.getCurrentIndex())
 }
 
 

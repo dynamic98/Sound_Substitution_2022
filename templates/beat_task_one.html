@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Music::Palette::beat_task</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="../static/src/fonts/icomoon/style.css">
+  <link rel="stylesheet" href="../static/src/css/owl.carousel.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../static/src/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <!-- Styles -->
+  <link type="text/css" href="../static/src/css/shape.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/navi.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/task.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/pagemove_beat.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+  <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <section class="sheetContainer">
+    <!-- 여기에 시각화 표현 -->
+    <!-- canvas -->
+    <div id="canvas"></div>
+  </section>
+
+  <progress value="0"  max="15000" id="ProgressBar"></progress>
+
+  <ul class="set2" style="margin-left: 500px;" id="drum">
+    <img src="../static/src/images/drum.png">
+    <audio src="../static/src/sound/drum.wav" id="drum_audio"></audio>
+  </ul>
+
+
+  <section class="musicContainer">
+    <div class="task_num" id="task_one"><span id="task_one_text">예제 1번</span></div>
+    <br>
+    <button class="videoControlButton" id="play" style="display:inline;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
+    <button class="videoControlButton" id="save" style="display:inline;"><span class="glyphicon glyphicon-save" id="saveGlyph"></span></button>
+    <button class="videoControlButton" id="reset" style="display:inline;"><span class="glyphicon glyphicon-erase" id="eraseGlyph"></span></button>
+  </section>
+
+  <section class="movepageContainer">
+    <span class="arrow" id="nextpage"></span>
+  </section>
+
+
+
+  <!--shader script-->
+  <script type="x-shader/x-vertex" id="vertexshader">
+    varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+        }
+    </script>
+  <script type="x-shader/x-fragment" id="fragmentshader">
+    uniform sampler2D baseTexture;
+        uniform sampler2D bloomTexture;
+        varying vec2 vUv;
+        void main() {
+          gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
+        }
+    </script>
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
+  <script type="module" defer src="../static/src/js/dist/drumTask.js"></script>
+  <!-- <script type="module" defer src="../static/src/js/forUI/buttonColor.js"></script> -->
+  <script type="module" defer src="../static/src/js/forUI/changePlay.js"></script>
+  <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+  <audio data-key="71" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-mid.wav"></audio>
+
+</body>
+
+</html>

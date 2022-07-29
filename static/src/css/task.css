@@ -6,10 +6,17 @@ body {
   background: #f4f7f5;
 }
 
-input[type=checkbox] {
+.task_num {
+    width: 500px;
+    height: 50px;
+    border-radius: 1rem;
+    background-color: #585c5c;
+}
 
-  zoom: 2.5;
-  
+#task_one_text {
+    margin-left: 200px;
+    color: white;
+    font-size: 30px;
 }
 
 
@@ -21,167 +28,6 @@ input[type=checkbox] {
   overflow: hidden;
   box-shadow: 0 10px 20px #dbdbdb;
   float: left;
-}
-
-.palette {
-  margin-top: 25px;
-  display: flex;
-  height: 10%;
-  width: 100%;
-  border: 5px solid transparent;
-}
-
-.palette .color {
-  height: 100%;
-  width: 10%;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 600;
-  font-size: 10px;
-  letter-spacing: 1px;
-  transition: flex 0.1s linear;
-}
-
-.palette .color span {
-  opacity: 0;
-  transition: opacity 0.1s linear;
-}
-
-.palette .color:hover {
-  flex: 2;
-}
-.palette .color:hover span {
-  opacity: 1;
-}
-
-/* 기본 팔레트 */
-/* #palette1 {
-  border: 2px solid transparent;
-} */
-
-#palette1 .color:nth-child(1) {
-  background: #264653;
-}
-#palette1 .color:nth-child(2) {
-  background: #2a9d8f;
-}
-#palette1 .color:nth-child(3) {
-  background: #e9c46a;
-}
-#palette1 .color:nth-child(4) {
-  background: #f4a261;
-}
-#palette1 .color:nth-child(5) {
-  background: #e76f51;
-}
-
-/* 파스텔톤 팔레트 */
-#palette2 .color:nth-child(1) {
-  background: #CDB4DB;
-}
-#palette2 .color:nth-child(2) {
-  background: #FFC8DD;
-}
-#palette2 .color:nth-child(3) {
-  background: #FFAFCC;
-}
-#palette2 .color:nth-child(4) {
-  background: #BDE0FE;
-}
-#palette2 .color:nth-child(5) {
-  background: #A2D2FF;
-}
-
-
-/* 비비드 팔레트 */
-#palette3 .color:nth-child(1) {
-  background: #ffbe0b
-}
-#palette3 .color:nth-child(2) {
-  background: #fb5607
-}
-#palette3 .color:nth-child(3) {
-  background: #ff006e;
-}
-#palette3 .color:nth-child(4) {
-  background: #8338ec;
-}
-#palette3 .color:nth-child(5) {
-  background: #3a86ff;
-}
-
-
-/* 여름 팔레트 */
-#palette4 .color:nth-child(1) {
-  background: #5aa9e6
-}
-#palette4 .color:nth-child(2) {
-  background: #7fc8f8
-}
-#palette4 .color:nth-child(3) {
-  background: #f9f9f9
-}
-#palette4 .color:nth-child(4) {
-  background: #ffe45e
-}
-#palette4 .color:nth-child(5) {
-  background: #ff6392
-}
-
-
-/* 가을 팔레트 */
-#palette5 .color:nth-child(1) {
-  background: #ea8c55
-}
-#palette5 .color:nth-child(2) {
-  background: #c75146
-}
-#palette5 .color:nth-child(3) {
-  background: #ad2e24
-}
-#palette5 .color:nth-child(4) {
-  background: #81171b
-}
-#palette5 .color:nth-child(5) {
-  background: #540804
-}
-
-/* 살몬 팔레트 */
-#palette6 .color:nth-child(1) {
-  background: #f7b267
-}
-#palette6 .color:nth-child(2) {
-  background: #f79d65
-}
-#palette6 .color:nth-child(3) {
-  background: #f4845f
-}
-#palette6 .color:nth-child(4) {
-  background: #f27059
-}
-#palette6 .color:nth-child(5) {
-  background: #f25c54
-}
-
-
-/* 포레스트 팔레트 */
-#palette7 .color:nth-child(1) {
-  background: #dad7cd
-}
-#palette7 .color:nth-child(2) {
-  background: #a3b18a
-}
-#palette7 .color:nth-child(3) {
-  background: #588157;
-}
-#palette7 .color:nth-child(4) {
-  background: #3a5a40;
-}
-#palette7 .color:nth-child(5) {
-  background: #344e41;
 }
 
 
@@ -340,7 +186,6 @@ ul .white {
   border-radius:0 0 5px 5px;
   box-shadow:-1px 0 0 rgba(255,255,255,0.8) inset,0 0 5px #ccc inset,0 0 3px rgba(0,0,0,0.2);
   background:linear-gradient(to bottom,#eee 0%,#fff 100%)
-  /* 버튼 색상 */
 }
 
 ul .white:active {
@@ -588,7 +433,7 @@ input[type="range"]::-webkit-slider-thumb:after{
 .musicContainer {
   /* background-color: rgb(252, 252, 252); */
   position: absolute;
-  height: 20%;
+  height: 10%;
   width: 50%;
   border-radius: 1rem;
   /* box-shadow: 0 10px 20px #dbdbdb; */
@@ -596,6 +441,7 @@ input[type="range"]::-webkit-slider-thumb:after{
   display: inline-block; 
   margin-left: 720px;
   float: right;
+  outline: 2px dotted gray;
 }
 
 
@@ -846,7 +692,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   .pianoContainer {
     position: absolute;
     bottom: 0px;
-    margin-left: 320px;
+    margin-left: 100px;
     margin-bottom: -60px;
     overflow: auto;
   }
@@ -946,20 +792,6 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
 
 
-  /* drum UI */
-  img{
-    /* size: 300px, 150px; */
-    width: 220px;
-    height: 160px;
-  }
-  
-  img:active{
-    transform: scale(0.7);
-    background-image: url(../images/shadow.png);
-    background-size: 220px, 160px;
-  }
-
-
   /* visual menu UI*/
 
   .visualContainer_pitch {
@@ -967,12 +799,12 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: -20px;
+    margin-top: -10px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
     float: right;
-    height: 25%;
+    height: 20%;
   }
 
   .visualContainer_beat {
@@ -980,7 +812,7 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 300px;
+    margin-top: 230px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
@@ -1062,13 +894,13 @@ div[slider] > input[type=range]::-ms-tooltip {
   .musicContainer {
     background-color: transparent;
     position: absolute;
-    height: 20%;
+    height: 23%;
     border-radius: 1rem;
     /* box-shadow: 0 10px 20px #dbdbdb; */
-    margin-top: 670px;
+    margin-top: 350px;
     display: inline-block; 
-    margin-left: 60px;
-    width: 400px;
+    margin-left: 40px;
+    width: 500px;
   }
   
   h4 .bigTitle {
@@ -1077,11 +909,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
   
   p .smallTitle {
-    font-size: 14px;
-  }
-
-  p #liner {
-    margin-top: -40px;
+    font-size: 12px;
   }
   
   hr {
@@ -1127,9 +955,9 @@ div[slider] > input[type=range]::-ms-tooltip {
   .sheetContainer {
     position: absolute;
     border-radius: 0.3rem;
-    margin-top: -50px;
+    margin-top: 30px;
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 100px;
     width: 1px;
     height: 1px;
   }
@@ -1226,7 +1054,7 @@ div[slider] > input[type=range]::-ms-tooltip {
     cursor: pointer;
     transition: all 0.2s ease;
     border-radius: 70%;
-    margin-left: 20px;
+    margin-left: 80px;
   }
 
   #save {
@@ -1326,8 +1154,8 @@ div[slider] > input[type=range]::-ms-tooltip {
 
 
   #ProgressBar{
-    margin-left: 20px;
-    margin-top: 620px;
+    margin-left: 100px;
+    margin-top: 680px;
     width: 1070px;
     height: 60px;
   }
