@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -13,48 +13,30 @@
     <h1>hello, this is data!</h1>
     <div id="custom_data" hidden>
         <ol id="custom_data_piano"> piano
-            <li id="happy_shape">{{data["happy"]["shape"]}}</li>
-            <li id="happy_texture">{{data["happy"]["texture"]}}</li>
-            <li id="piano_palette">{{data["piano"]["palette"]}}</li>
-
-            <li id="happy_transmission">{{data["happy"]["transmission"]}}</li>
-            <li id="happy_roughness">{{data["happy"]["roughness"]}}</li>
-            <li id="happy_sensitivity">{{data["happy"]["sensitivity"]}}</li>
-            <li id="happy_intensity">{{data["happy"]["intensity"]}}</li>
+            <li id="piano_shape">{{data["piano"]["shape"]}}</li>
+            <li id="piano_texture">{{data["piano"]["texture"]}}</li>
+            <li id="piano_palette_num">{{data["piano"]["palette_num"]}}</li>
+            <li id="piano_palette_set">{{data["piano"]["palette_set"]}}</li>
+            <li id="piano_interval">{{data["piano"]["interval"]}}</li>
+            <li id="piano_size">{{data["piano"]["size"]}}</li>
+            <li id="piano_line">{{data["piano"]["line"]}}</li>
         </ol>
-        <ol id="custom_data_sad"> Sad
-            <li id="sad_palette">{{data["sad"]["palette"]}}</li>
-            <li id="sad_shape">{{data["sad"]["shape"]}}</li>
-            <li id="sad_texture">{{data["sad"]["texture"]}}</li>
-            <li id="sad_transmission">{{data["sad"]["transmission"]}}</li>
-            <li id="sad_roughness">{{data["sad"]["roughness"]}}</li>
-            <li id="sad_sensitivity">{{data["sad"]["sensitivity"]}}</li>
-            <li id="sad_intensity">{{data["sad"]["intensity"]}}</li>
+        <ol id="custom_data_drum"> Drum
+            <li id="drum_shape">{{data["drum"]["shape"]}}</li>
+            <li id="drum_texture">{{data["drum"]["texture"]}}</li>
+            <li id="drum_color">{{data["drum"]["color"]}}</li>
+            <li id="drum_size">{{data["drum"]["size"]}}</li>
         </ol>
-        <ol id="custom_data_exciting"> Exciting
-            <li id="exciting_palette">{{data["exciting"]["palette"]}}</li>
-            <li id="exciting_shape">{{data["exciting"]["shape"]}}</li>
-            <li id="exciting_texture">{{data["exciting"]["texture"]}}</li>
-            <li id="exciting_transmission">{{data["exciting"]["transmission"]}}</li>
-            <li id="exciting_roughness">{{data["exciting"]["roughness"]}}</li>
-            <li id="exciting_sensitivity">{{data["exciting"]["sensitivity"]}}</li>
-            <li id="exciting_intensity">{{data["exciting"]["intensity"]}}</li>
-        </ol>
-        <ol id="custom_data_peaceful"> Peaceful
-            <li id="peaceful_palette">{{data["peaceful"]["palette"]}}</li>
-            <li id="peaceful_shape">{{data["peaceful"]["shape"]}}</li>
-            <li id="peaceful_texture">{{data["peaceful"]["texture"]}}</li>
-            <li id="peaceful_transmission">{{data["peaceful"]["transmission"]}}</li>
-            <li id="peaceful_roughness">{{data["peaceful"]["roughness"]}}</li>
-            <li id="peaceful_sensitivity">{{data["peaceful"]["sensitivity"]}}</li>
-            <li id="peaceful_intensity">{{data["peaceful"]["intensity"]}}</li>
+        <ol id="custom_data_haptic"> Haptic
+            <li id="haptic_sensitivity">{{data["haptic"]["sensitivity"]}}</li>
+            <li id="haptic_intensity">{{data["haptic"]["intensity"]}}</li>
         </ol>
     </div>
 
     <script>
         import {
              GetUserCustom
-            } from './.js';
+            } from './Utility/GetUserCustom.js';
     </script>
 </body>
-</html> -->
+</html>
