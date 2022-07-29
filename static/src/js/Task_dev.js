@@ -106,7 +106,8 @@ function update() {
         if(!Pictured){ // User first encounter this state
             visualization.reset();
             bpmTimer.restart()
-            visualization.createNowLocation(kandinsky.getPitchWidth())
+            // visualization.createNowLocation(kandinsky.getPitchWidth())
+            visualization.createProgressBar(10,(0.8, 0.5, 0.5),0.6)
             LoopCount = 0;
             for (let i=0; i<OneLoopMusicLength; i++){
                 let currentIndex = LoopCount*OneLoopMusicLength+i
@@ -127,18 +128,21 @@ function update() {
         }else{ //Pictured
             console.log("What Should We Do In this State?");
             visualization.counterTimer.reset();
-            visualization.MoveNowLocation(kandinsky.getPitchWidth())
+            // visualization.MoveNowLocation(kandinsky.getPitchWidth())
+            visualization.moveProgressBar(kandinsky.getPitchWidth())
 
         }       
     } else if(progressTimer.getThisSeconds()==15000){ // End state
         progressTimer.played = false;
         progressTimer.element.value = "0"
         Pictured=false;
+
     } else{ //progressTimer.getPlayed()==true
     if (progressTimer.getThisSeconds()==0){
         visualization.reset();
         bpmTimer.restart()
-        visualization.createNowLocation(kandinsky.getPitchWidth())
+        visualization.createProgressBar(10,(0.8, 0.5, 0.5),0.6)
+        // visualization.createNowLocation(kandinsky.getPitchWidth())
         LoopCount = 0;
         for (let i=0; i<OneLoopMusicLength; i++){
             let currentIndex = LoopCount*OneLoopMusicLength+i
@@ -160,7 +164,8 @@ function update() {
     if (!bpmTimer.isUnderFourBeat()) {
         console.log("this time");
         visualization.reset();
-        visualization.createNowLocation(kandinsky.getPitchWidth())
+        visualization.createProgressBar(10,(0.8, 0.5, 0.5),0.6)
+        // visualization.createNowLocation(kandinsky.getPitchWidth())
         LoopCount ++;
         console.log(LoopCount, Math.floor(LoopAmount))
         if(LoopCount<Math.floor(LoopAmount)){
@@ -202,7 +207,9 @@ function update() {
 
     } else if (bpmTimer.isUnderFourBeat()) {
         if(progressTimer.getPlayed()){
-        visualization.MoveNowLocation(kandinsky.getPitchWidth());
+        // visualization.MoveNowLocation(kandinsky.getPitchWidth());
+        visualization.moveProgressBar(kandinsky.getPitchWidth())
+
         }
     }
     //     if (WritingMusicSheet.getKeyboardEnergy() > 0 && (WritingMusicSheet.isCurrentIndexUpdated())) {

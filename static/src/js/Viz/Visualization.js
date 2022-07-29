@@ -156,7 +156,8 @@ export class Visualization {
         })
         this.progessBar = new THREE.Mesh(geometry, material);
         this.progessBar.renderOrder = this.bloom.getPassForMoonLight()
-        this.threeSystem.addToScene(this.progessBar, "progressBar")
+        // this.threeSystem.addToScene(this.progessBar, "progressBar")
+        this.threeSystem.addToGroup(this.progessBar, "progressBar")
         
 //    createNowLocation(positionX) {
 //            let instrumentType = "NowLocation"

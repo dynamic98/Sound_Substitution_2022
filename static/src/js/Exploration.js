@@ -81,7 +81,7 @@ function update() {
     }
     if (!bpmTimer.isUnderFourBeat()) {
         visualization.reset();
-    } else if (bpmTimer.isUnderFourBeat()) 
+    } else if (bpmTimer.isUnderFourBeat()) {
         if (musicSheet.getKeyboardEnergy() > 0 && (musicSheet.isCurrentIndexUpdated())) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(
                 musicSheet.getKeyboardPitch(),
