@@ -99,7 +99,6 @@ function update() {
             visualization.createConnectionLine("savedPiano")
         }
     }
-
     visualization.moveProgressBar(1);
     visualization.render();
     visualization.update();
