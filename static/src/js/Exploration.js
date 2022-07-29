@@ -19,6 +19,9 @@ import {
 import {
     Piano
 } from './Customization/Piano.js'
+import {
+    Drum
+} from './Customization/Drum.js'
 
 import {
     MusicSheet
@@ -56,6 +59,7 @@ let bloom_length = 1
 let visualization = new Visualization(bloom_length);
 
 let piano = new Piano("pianoContainer");
+let drum = new Drum("drum")
 let mode_pitchbeat="pitch"
 
 let MyColorPicker = new ColorPicker();
@@ -87,11 +91,11 @@ beat_type.onclick=function(e){
     beat_area.style.display=''
 }
 
-let drum=document.getElementById("drum")
-drum.onclick=function(e){
-    let drum_audio=document.getElementById("drum_audio")
-    drum_audio.play()
-}
+// let drum=document.getElementById("drum")
+// drum.onclick=function(e){
+//     let drum_audio=document.getElementById("drum_audio")
+//     drum_audio.play()
+// }
 
 const checkbox = document.getElementById('pitch-checkbox')
 checkbox.addEventListener('change', (event) => {
@@ -132,9 +136,10 @@ function main() {
         }
     })
 
-    piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setMusicArray, 1, 3)
-    piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setMusicArray, 2, 4)
-    piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setMusicArray, 3, 5)
+    piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setPitchArray, 1, 3)
+    piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setPitchArray, 2, 4)
+    piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setPitchArray, 3, 5)
+    drum.assignEventOnDrum("mousedown", draw_drum, musicSheet.setBeatArray)
     MyColorPicker.PitchOnclickListener(set_pitch_palette);
     MyColorPicker.BeatOnclickListener(set_beat_color)
     NoteInterval = 230/MeshAmount;
@@ -168,15 +173,14 @@ function draw_piano(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
     visualization.createVisualAbsNote("piano", kandinsky.getPitchEnergy(), NoteInterval*counter, kandinsky.getPitchHeight())
-    // visualization.createConnectionLine("piano")
+    visualization.createConnectionLine("piano")
     counter++
 }
 function draw_drum(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
-    // console.log(kandinsky.getPitchEnergy())
-    visualization.createVisualAbsNote("drum", kandinsky.getPitchEnergy(), NoteInterval*counter, 50)
-    // visualization.createConnectionLine("drum")
+    visualization.createVisualAbsNote("drum", kandinsky.getPitchEnergy(), NoteInterval*counter, kandinsky.getPitchHeight())
+    visualization.createConnectionLine("drum")
     counter++
 }
 

@@ -35,7 +35,7 @@ export class Kandinsky {
 
         this.pitch = pitch;
         this.energy = energy / this.MaxVolume;
-        console.log(this.energy)
+        // console.log(this.energy)
         this.pitchRadius = this.canvasSizeY / this.MIDISCOPE / 2
         this.pitchHeight = this.RangeY / this.MIDISCOPE
         this.pitchWidth = this.canvasSizeX / (60 * frameRate / this.bpm * 4) // 

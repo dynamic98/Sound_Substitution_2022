@@ -1,9 +1,10 @@
 export class Drum {
-    constructor(HTMLClassContainer) {
-        this.HTMLClassContainer = HTMLClassContainer
-        this.currentPitch = 0;
-        this.currentOctave = 0;
+    constructor(HTMLElementID) {
+        this.HTMLElement = document.getElementById(HTMLElementID);
+        this.DrumAudio = document.getElementById("drum_audio")
+
         this.currentEnergy = 50
+        this.currentPitch = 5
 
         this.duration = 50
         this.noteDuration = 300;
@@ -27,38 +28,24 @@ export class Drum {
         };
     }
 
-    assignEventOnPianoRow(onEvent, drawNote, setMusicArray, pianoRow, pianoOctave) {
-        let object = {}
-        let index = 0;
-
-        for (let innerClass of $("." + this.HTMLClassContainer)[0].children) {
-            for (let child of innerClass.children) {
-                if (child.className.charAt(child.className.length - 1) == pianoRow) {
-                    object[child.className] = index;
-                    index++
-                    document.getElementsByClassName(child.className)[0].addEventListener(onEvent, () => {
-                        this.currentPitch = object[child.className]
-                        this.currentOctave = pianoOctave
-                        drawNote(this.getAudioData(), this.getEnergy(), this.getPitch());
-                        setMusicArray(this.getAudioData(), this.getEnergy())
-                        this.play()
-                    })
-                }
-            }
-        }
+    assignEventOnDrum(onEvent, drawNote, setBeatArray) {
+        this.HTMLElement.addEventListener(onEvent, () => {
+            drawNote(this.getAudioData(), this.getEnergy(), this.getPitch());
+            setBeatArray(this.getAudioData(), this.getEnergy())
+            this.play()
+        })
     }
-
 
     play() {
-        this.synth.triggerAttackRelease(this.DictPitch[this.currentPitch] + this.currentOctave.toString(), this.now);
-
+        this.DrumAudio.play()
     }
+
     getAudioData() {
         return this.audioData = {
             frequency: 0,
             confidence: 1,
-            note: this.DictPitch[this.currentPitch] + this.currentOctave.toString(),
-            midi: ((this.currentOctave + 1) * 12 + this.currentPitch)
+            note: "F4",
+            midi: 65
         };
     }
     getEnergy() {
@@ -67,7 +54,6 @@ export class Drum {
     getPitch() {
         return this.currentPitch
     }
-
     setCurrentEnergy(value) {
         this.currentEnergy = value
     }

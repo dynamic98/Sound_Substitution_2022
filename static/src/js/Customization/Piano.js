@@ -27,7 +27,7 @@ export class Piano {
         };
     }
 
-    assignEventOnPianoRow(onEvent, drawNote, setMusicArray, pianoRow, pianoOctave) {
+    assignEventOnPianoRow(onEvent, drawNote, setPitchArray, pianoRow, pianoOctave) {
         let object = {}
         let index = 0;
 
@@ -40,7 +40,7 @@ export class Piano {
                         this.currentPitch = object[child.className]
                         this.currentOctave = pianoOctave
                         drawNote(this.getAudioData(), this.getEnergy(), this.getPitch());
-                        setMusicArray(this.getAudioData(), this.getEnergy())
+                        setPitchArray(this.getAudioData(), this.getEnergy())
                         this.play()
                     })
                 }

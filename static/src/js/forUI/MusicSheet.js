@@ -62,6 +62,14 @@ export class MusicSheet {
         this.MusicArray[this.currentIndex].drum_energy = drum_energy;
 
     }
+    setPitchArray = (keyboard_pitch = this.EmptyPitch, keyboard_energy = 0) => {
+        this.MusicArray[this.currentIndex].keyboard_pitch = keyboard_pitch;
+        this.MusicArray[this.currentIndex].keyboard_energy = keyboard_energy;
+    }
+    setBeatArray = (drum_pitch = this.EmptyPitch, drum_energy = 0) => {
+        this.MusicArray[this.currentIndex].drum_pitch = drum_pitch;
+        this.MusicArray[this.currentIndex].drum_energy = drum_energy;
+    }
     setCurrentIndex(index) {
         if (index == this.length) {
             this.currentIndex = 0

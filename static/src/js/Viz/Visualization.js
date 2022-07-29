@@ -104,15 +104,16 @@ export class Visualization {
 
 
             this.threeSystem.updateLightPosition(newPositionX, positionY)
-            console.log(Line.isVisible())
-            Line.isVisible() ? this.#createConnectionLine(instrumentType) : null
+            // console.log(Line.isVisible())
+            // Line.isVisible() ? this.createConnectionLine(instrumentType) : null
         }
     }
 
     createVisualAbsNote(instrumentType, radius, positionX, positionY) {
-        if (this.instruments[instrumentType] == undefined || null) {
-            console.error("Only Types of piano, input_piano, drum, input_drum are available")
-        } else {
+        // if (this.instruments[instrumentType] == undefined || null) {
+        //     console.error("Only Types of piano, input_piano, drum, input_drum are available")
+        // } else {
+        if (this.#instrumentIsValid(instrumentType)) {
             let instrument = this.instruments[instrumentType]
 
             instrument.geometryManager.setRadius(radius)
@@ -132,13 +133,13 @@ export class Visualization {
             this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
             instrument.visualNoteList.push(visualNote)
 
-            Line.isVisible() ? this.#createConnectionLine(instrumentType) : null
+            // Line.isVisible() ? this.createConnectionLine(instrumentType) : null
 
         }
     }
 
 
-    #createConnectionLine(instrumentType) {
+    createConnectionLine(instrumentType) {
         if (this.#instrumentIsValid(instrumentType)) {
             if (this.instruments[instrumentType].visualNoteList.length > 1 && Line.isVisible()) {
                 let visualNoteList = this.instruments[instrumentType].visualNoteList
