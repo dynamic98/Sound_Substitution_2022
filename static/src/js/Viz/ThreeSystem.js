@@ -81,7 +81,7 @@ export class ThreeSystem {
     }
 
     reset() {
-    
+
         for (let index in this.groups) {
             this.scene.remove(this.groups[index])
             this.groups[index] = new THREE.Group();

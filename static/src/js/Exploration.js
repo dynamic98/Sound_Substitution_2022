@@ -26,6 +26,12 @@ import {
 import {
     MusicSheet
 } from './forUI/MusicSheet.js'
+import {
+    pitchBeatSwitcher
+}
+from './forUI/pitchBeatSwitcher.js'
+
+pitchBeatSwitcher()
 
 let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
 let textureButtons = new ButtonCustomization("shapeContainer", "textureButton")
@@ -40,52 +46,8 @@ let progressTimer = new ProgressTimer(15, document.getElementById("ProgressBar")
 let MusicLength = 50;
 let musicSheet = new MusicSheet(MusicLength);
 let piano = new Piano("pianoContainer");
-let mode_pitchbeat="pitch"
-
-let pitch_type = document.getElementById('pitchButton')
-let beat_type=document.getElementById('beatButton')
-let piano_container=document.getElementsByClassName("set")
-let drum_container=document.getElementsByClassName("set2")
-let picker_beat=document.getElementById('picker_beat')
-let picker_satu= document.getElementById("picker_satu")
-let picker_light= document.getElementById("picker_light")
-let palettes = document.getElementsByClassName('Palette')
-
-pitch_type.onclick=function(e){
-    // console.log("pitch mode")
-    mode_pitchbeat="pitch"
-    piano_container[0].style.display=''
-    drum_container[0].style.display='none'
-    picker_satu.style.display=''
-    picker_light.style.display=''
-    picker_beat.style.display='none'
-    for(let i=0; i<8; i++){
-        palettes[i].style.display=''
-    }
-}
-beat_type.onclick=function(e){
-    // console.log("beat mode")
-    mode_pitchbeat="beat"
-    piano_container[0].style.display='none'
-    drum_container[0].style.display=''
-    picker_satu.style.display='none'
-    picker_light.style.display='none'
-    picker_beat.style.display=''
-    for(let i=0; i<8; i++){
-        palettes[i].style.display='none'
-    }
-
-}
-
-let drum=document.getElementById("drum")
-drum.onclick=function(e){
-    let drum_audio=document.getElementById("drum_audio")
-    drum_audio.play()
-}
-
 
 main()
-
 function main() {
     bpmTimer.setBPM(100)
     bpmTimer.setBPMByMeshCount(20)
@@ -104,27 +66,22 @@ function main() {
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 1, 4)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 2, 5)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 3, 6)
+    visualization.createProgressBar(5, "#0000FF", 0.4)
     update();
 }
 
 function update() {
     stats.begin()
     requestAnimationFrame(update);
-    musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000/MusicLength)))
-    console.log(bpmTimer.getFourBeatTime());
-    // visualization.createNowLocation(0)
-    // console.log(musicSheet.getCurrentIndex(), musicSheet.isCurrentIndexUpdated())
+    musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000 / MusicLength)))
+
     if ((musicSheet.getCurrentIndex() == 0) && musicSheet.isCurrentIndexUpdated()) {
         visualization.reset();
         bpmTimer.restart()
-        // visualization.createNowLocation(kandinsky.getPitchWidth())
     }
     if (!bpmTimer.isUnderFourBeat()) {
         visualization.reset();
-        // visualization.createNowLocation(kandinsky.getPitchWidth())
-
-    } else if (bpmTimer.isUnderFourBeat()) {
-        // visualization.MoveNowLocation(kandinsky.getPitchWidth());
+    } else if (bpmTimer.isUnderFourBeat()) 
         if (musicSheet.getKeyboardEnergy() > 0 && (musicSheet.isCurrentIndexUpdated())) {
             let pitchAndEnergy = switcher.getPitchAndEnergy(
                 musicSheet.getKeyboardPitch(),
@@ -138,6 +95,8 @@ function update() {
             visualization.createConnectionLine("savedPiano")
         }
     }
+
+    visualization.moveProgressBar(1);
     visualization.render();
     visualization.update();
     stats.end();
