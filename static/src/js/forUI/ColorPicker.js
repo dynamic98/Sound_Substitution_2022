@@ -4,7 +4,9 @@
 var colorPicker = new iro.ColorPicker('#picker',{
     width:100
 });
-
+var colorPicker2 = new iro.ColorPicker('#picker2',{
+    width:100
+});
 
 
 let picker = document.getElementById("picker_type");
@@ -54,9 +56,24 @@ function set_piano_color(color_set){
     
 
 }
+
+function piano_coloring(set_num, colors){
+    for(let i=0; i<36; i++){    
+        let color_num=i%12
+        let piano_set = document.getElementById("key"+(i+1).toString())
+        piano_set.style.background=colors[color_num]
+    }
+}
+
+function drum_coloring(color){
+
+}
+
+
 function set_final(num){
     setted_color=selected_colors[num]
     console.log(num, setted_color)
+    piano_coloring(num, setted_color)
 
     set_piano_color(setted_color)
 
@@ -119,12 +136,19 @@ colorPicker.on('color:change', function(color){
     main_color=color.hsl['h']
     set_color(main_color, "saturation")
     set_color(main_color, "lightness")
+    // set_beat(main_color)
+})
+
+colorPicker2.on('color:change', function(color){
+    main_color=color.hsl['h']
     set_beat(main_color)
+    drum_coloring(main_color)
 })
 
 function set_beat(main_color){
-    var target = document.getElementById("beat_color")
+    var target = document.getElementById("b_1")
     target.style.backgroundColor="hsl("+main_color+", 100%, 50%)"
+    
 }
 
 function set_color(main_color, picker_type){
