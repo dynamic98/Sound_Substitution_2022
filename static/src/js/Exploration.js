@@ -45,40 +45,6 @@ let progressTimer = new ProgressTimer(15, document.getElementById("ProgressBar")
 let MusicLength = 50;
 let musicSheet = new MusicSheet(MusicLength);
 let piano = new Piano("pianoContainer");
-let mode_pitchbeat="pitch"
-
-let pitch_type = document.getElementById('pitchButton')
-let beat_type=document.getElementById('beatButton')
-let piano_container=document.getElementsByClassName("set")
-let drum_container=document.getElementsByClassName("set2")
-let pitch_area=document.getElementById('pitch_area')
-let beat_area=document.getElementById('beat_area')
-
-
-pitch_type.onclick=function(e){
-    // console.log("pitch mode")
-    mode_pitchbeat="pitch"
-    piano_container[0].style.display=''
-    drum_container[0].style.display='none'
-    pitch_area.style.display=''
-    beat_area.style.display='none'
-
-}
-beat_type.onclick=function(e){
-    // console.log("beat mode")
-    mode_pitchbeat="beat"
-    piano_container[0].style.display='none'
-    drum_container[0].style.display=''
-    pitch_area.style.display='none'
-    beat_area.style.display=''
-}
-
-let drum=document.getElementById("drum")
-drum.onclick=function(e){
-    let drum_audio=document.getElementById("drum_audio")
-    drum_audio.play()
-}
-
 
 main()
 
@@ -87,6 +53,13 @@ function main() {
     bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     piano.setNoteDuration(300);
+    visualization.createProgressBar(5, "#0000FF", 0.4)
+
+    //event handler
+    //---------------------------------------------------------------
+    $("input[class=checkbox]").change(() => {
+        visualization.setConnectionLineVisibility($(".checkbox")[0].checked)
+    })
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
     pitchslide.assignEventHandler("click", (para, value) => {
@@ -96,18 +69,18 @@ function main() {
             piano.setCurrentEnergy(value)
         }
     })
-
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 1, 4)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 2, 5)
     piano.assignEventOnPianoRow("mousedown", draw, musicSheet.setMusicArray, 3, 6)
-    visualization.createProgressBar(5, "#0000FF", 0.4)
-
+    //---------------------------------------------------------------
     update();
 }
+
 
 function update() {
     stats.begin()
     requestAnimationFrame(update);
+
     musicSheet.setCurrentIndex(Math.round(progressTimer.getThisSeconds() / (15000 / MusicLength)))
 
     if ((musicSheet.getCurrentIndex() == 0) && musicSheet.isCurrentIndexUpdated()) {
@@ -129,7 +102,7 @@ function update() {
             visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
             visualization.createVisualNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
             // console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
-            visualization.createConnectionLine("savedPiano")
+
         }
     }
     visualization.moveProgressBar(1);
@@ -147,5 +120,5 @@ function draw(pitch, energy, midi) {
     kandinsky.calculate(pitchAndEnergy);
     //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
     visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-    visualization.createConnectionLine("piano")
+
 }
