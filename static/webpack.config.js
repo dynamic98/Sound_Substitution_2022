@@ -10,6 +10,7 @@ module.exports = {
         pianotask: path.resolve(__dirname, "src", "js", "pianoTask.js"),
         drumtask: path.resolve(__dirname, "src", "js", "drumTask.js"),
         Task_dev: path.resolve(__dirname, "src", "js", "Task_dev.js"),        
+        test: path.resolve(__dirname, "src", "js", "fortest.js"),   
 
         //concrete: path.resolve(__dirname, "src", "concrete.js")
     },
