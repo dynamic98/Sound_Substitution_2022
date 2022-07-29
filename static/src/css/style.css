@@ -344,8 +344,8 @@ audio.playing{
 
 div#canvas > canvas{
   background-color: black;
-  margin-top: 30px;
-  margin-left: 370px;
+  margin-top: 50px;
+  margin-left: 350px;
 }
 
 
@@ -535,10 +535,13 @@ div.haptic-timbre{
   width: 500px;
 }
 
+div#demo > div#waveform {
+  width: 1500px;
+}
+
 div#demo > div#waveform > wave {
-  width: 1075px;
   margin-top: 20px;
-  margin-left: 450px;
+  margin-left: 430px;
   background-color: rgb(29, 47, 92);
 }
 
@@ -546,15 +549,30 @@ div#demo > div#waveform > wave {
 
 /* 음악 컨트롤 메뉴 */
 
-div#music-controls{
-  margin-left: 450px;
+#play {
+  background-color: #f4471f;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 40px;
+  height: 100px;
+  width: 100px;
+  box-shadow: 0 2px 4px darkslategray;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 70%;
 }
 
-div#music-controls > button.btn-primary{
+div#music-controls{
+  margin-top: 250px;
+  margin-left: 140px;
+}
+
+/* div#music-controls > button.btn-primary{
   width: 200px;
   padding: 10px;
   margin-right: 10px;
-}
+} */
 
 
 

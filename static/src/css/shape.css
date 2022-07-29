@@ -820,6 +820,7 @@ div[slider] > input[type=range]::-ms-tooltip {
 
 
 @media (min-width: 1500px) {
+  
   .menuContainer {
     margin-top: 10px;
     margin-left: 40px;

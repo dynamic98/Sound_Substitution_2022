@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Music::Palette</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link type="text/css" rel="stylesheet" href="../static/src/fonts/icomoon/style.css">
+    <link type="text/css" rel="stylesheet" href="../static/src/css/owl.carousel.min.css">
+    <!-- Bootstrap CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/src/css/bootstrap.min.css">
+    <!-- Style -->
+    <link type="text/css" rel="stylesheet" href="../static/src/css/style.css?after">
+    <link type="text/css" rel="stylesheet" href="../static/src/css/listenbutton.css?after">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+      <aside class="sidebar">
+        <div class="toggle">
+          <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+          </a>
+        </div>
+        <div class="side-inner">
+  
+          <div class="profile" style="margin-top: 70px;">
+            <img src="../static/src/images/cutecat.jpeg" alt="Image" class="img-fluid" style="width: 150px;">
+            <h3 class="name" style="font-size: 26px;">{{User_Name}}</h3>
+            <span class="identity" style="font-size: 20px;">P{{User_Number}}</span>
+            <br id="musiclist">
+            <p id="musiclist" style="font-size: 20px; color: black;">Music List<p>
+            <div id="filelist" hidden> {{filelist}} </div>
+            <div id="separatedFileList" hidden> {{ separatedFileList}} </div>
+            <select id="select-music">
+            </select>
+            <!-- <br id="musiclist">
+            <button id="music_submit"> Submit </button> -->
+          </div>
+  
+          <div id="sidebar-content">
+            <audio id="audio" controls></audio>
+            <div class="thetitle" id="title"></div>
+          </div>
+
+          <div id="music-controls">
+            <button class="videoControlButton" id="play" data-action="play"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
+            <!-- <button class="btn btn-primary" data-action="play">
+                <i class="glyphicon glyphicon-play"></i>
+                재생
+                /
+                <i class="glyphicon glyphicon-pause"></i>
+                멈추기
+            </button> -->
+        </div>
+
+        </div>
+      </aside>
+  
+
+    <main>
+        <!--시각 output-->
+        <div class="visual-container">
+          <div id="canvas">
+          </div>
+        </div>
+
+        <!-- 햅틱 output -->
+        <div id="demo">
+          <div id="waveform">
+          </div>
+        </div>
+
+    </main>
+
+    <section class="buttonContainer">
+        <button class="button" id="soundButton">
+            <div class="button__content">
+              <p class="button__text" id="sound">음악</p>
+            </div>
+        </button>
+        <br>
+        <button class="button" id="soundvisualButton">
+            <div class="button__content">
+              <p class="button__text" id="soundvisual">음악 + 시각</p>
+            </div>
+        </button>
+        <br>
+        <button class="button" id="soundhapticButton">
+            <div class="button__content">
+              <p class="button__text" id="soundhaptic">음악 + 햅틱</p>
+            </div>
+        </button>
+        <br>
+        <button class="button" id="everythingButton">
+            <div class="button__content">
+              <p class="button__text" id="everything">음악 + 혼합</p>
+            </div>
+        </button>
+    </section>
+
+   <!--shader script-->
+    <script type="x-shader/x-vertex" id="vertexshader">
+			varying vec2 vUv;
+			void main() {
+				vUv = uv;
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+			}
+	</script>
+	<script type="x-shader/x-fragment" id="fragmentshader">
+			uniform sampler2D baseTexture;
+			uniform sampler2D bloomTexture;
+			varying vec2 vUv;
+			void main() {
+				gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
+			}
+    </script>
+
+    
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
+    <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
+    <script type="module" defer src="../static/src/js/dist/abstract.js"></script>
+    <script type="module" defer src="../static/src/js/forUI/changePlay.js"></script>
+    <script src="../static/src/js/libs/jquery-3.3.1.min.js"></script>
+    <script src="../static/src/js/libs/popper.min.js"></script>
+    <script src="../static/src/js/libs/bootstrap.min.js"></script>
+    <script src="../static/src/js/libs/bootstrapmain.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.minimap.js"></script>
+    <script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
+
+</body>
+</html>

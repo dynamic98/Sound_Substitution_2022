@@ -49,6 +49,7 @@ def menu():
       id_name = request.form['id_name']
       id_number = request.form['id_number']
       global UserName
+      global UserNumber
       if id_name:
         UserName = id_name
         UserNumber = id_number
@@ -65,6 +66,14 @@ def menu():
 def explore():
   return render_template('Exploration.html',User_Name=UserName, login="log in")
 
+@app.route('/listening', methods=['POST'])
+def listen():
+  entireSongList= makeHTMLWithFileList('static/music/original')
+  separatedSongList= makeHTMLWithFileList('static/music/separated')
+  return render_template('listen.html', User_Name=UserName, User_Number=UserNumber, login="log in", filelist=entireSongList, separatedFileList=separatedSongList )
+
+
+
 @app.route('/pitch_task', methods=['POST'])
 def pitch_task():
   return render_template('pitch_task_one.html',User_Name=UserName, login="log in")
@@ -77,18 +86,20 @@ def beat_task():
 def test():
   return render_template('test.html',User_Name=UserName, login="log in")
 
-
 @app.route('/dev', methods=['POST'])
 def dev():
   return render_template('mainMenu.html',User_Name=UserName, login="log in")
 
 
+
+
+
 # abstact 페이지에서는 오디오 파일을 변수에 저장만 하기
 @app.route('/abstract', methods=['POST'])
 def abstract():
-  features = ''
   if request.method == 'POST':
     file = request.files['thefile']
+    print(file)
     if os.path.isdir(os.path.join(folder, secure_filename(file.filename))):
       pass
     else: 
@@ -98,7 +109,6 @@ def abstract():
 
   entireSongList= makeHTMLWithFileList('static/music/original')
   separatedSongList= makeHTMLWithFileList('static/music/separated')
-  
   return render_template('abstract.html', filelist=entireSongList, separatedFileList=separatedSongList )
 
 
