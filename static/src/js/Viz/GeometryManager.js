@@ -134,7 +134,7 @@ export class GeometryManager {
             
             case "NowLocation":
                 this.geometry = new THREE.BoxGeometry(
-                    15,
+                    10,
                     150,
                     1
                 );

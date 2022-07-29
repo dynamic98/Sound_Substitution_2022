@@ -162,7 +162,7 @@ export class Visualization {
                 newPositionX,
                 positionY
             )
-            visualNote.getMesh().position.setZ(1);
+            visualNote.getMesh().position.setZ(0);
             visualNote.setRenderOption(this.bloom.getPassForMoonLight())
             this.threeSystem.addToGroup(visualNote.getMesh(), "NowLocation")
             instrument.visualNoteList.push(visualNote)
