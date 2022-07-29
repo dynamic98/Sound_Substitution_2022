@@ -31,11 +31,10 @@ import {
 from './forUI/pitchBeatSwitcher.js'
 
 import {
-    StageManager
-} from './Utility/stageManager.js'
+    FiniteStateMachine
+} from './Utility/FiniteStateMachine.js'
 
-// let stateManager = new StageManager("piano", "drum")
-// stateManager.getState()
+
 
 pitchBeatSwitcher()
 
