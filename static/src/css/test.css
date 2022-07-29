@@ -1,3 +1,13 @@
+.question_group{
+    margin-top: 50px;
+    margin-left: 200px;
+    background-color: antiquewhite;
+    width: 55.5%;
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+
 .questionButton {
     padding: 0;
     margin: 10px 20px 10px 0;
@@ -24,7 +34,19 @@
 }
 
 
-#submit:hover{
+#submit_groupA:hover{
+    background: #e0b30e;
+}
+
+#submit_groupB:hover{
+    background: #e0b30e;
+}
+
+#submit_groupC:hover{
+    background: #e0b30e;
+}
+
+#submit_groupD:hover{
     background: #e0b30e;
 }
 
@@ -35,7 +57,7 @@
     height: 800px;
     background-color: transparent;
     border-radius: 1rem;
-    margin-top: -730px;
+    margin-top: -800px;
     margin-right: 40px;
 }
 
@@ -44,7 +66,7 @@
 .sheetContainer {
     position: absolute;
     border-radius: 0.3rem;
-    margin-top: 50px;
+    /* margin-top: 130px; */
     display: inline-block;
     margin-left: 200px;
     width: 1px;
@@ -54,7 +76,7 @@
 
 #ProgressBar{
     margin-left: 200px;
-    margin-top: 700px;
+    margin-top: 640px;
     width: 1070px;
     height: 60px;
 }

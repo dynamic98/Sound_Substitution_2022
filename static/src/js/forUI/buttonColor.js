@@ -4,13 +4,7 @@ const shape_triangle= document.getElementById("btn-triangle");
 const shape_decagon = document.getElementById("btn-decagon");
 const shape_star = document.getElementById("btn-star");
 
-const palette_1 = document.getElementById("palette1");
-const palette_2 = document.getElementById("palette2");
-const palette_3 = document.getElementById("palette3");
-const palette_4 = document.getElementById("palette4");
-const palette_5 = document.getElementById("palette5");
-const palette_6 = document.getElementById("palette6");
-const palette_7 = document.getElementById("palette7");
+
 
 const texture_none = document.getElementById("none");
 const texture_wood = document.getElementById("wood");
@@ -85,80 +79,6 @@ function shapeColorChange() {
     });
 }
 
-
-// function paletteColorChange() {
-//     palette_1.addEventListener("click", () => {
-//         palette_1.style.borderColor = red;
-//         palette_2.style.borderColor = transparent;
-//         palette_3.style.borderColor = transparent;
-//         palette_4.style.borderColor = transparent;
-//         palette_5.style.borderColor = transparent;
-//         palette_6.style.borderColor = transparent;
-//         palette_7.style.borderColor = transparent;
-//     });
-
-//     palette_2.addEventListener("click", () => {
-//         palette_1.style.borderColor = transparent;
-//         palette_2.style.borderColor = red;
-//         palette_3.style.borderColor = transparent;
-//         palette_4.style.borderColor = transparent;
-//         palette_5.style.borderColor = transparent;
-//         palette_6.style.borderColor = transparent;
-//         palette_7.style.borderColor = transparent;
-//     });
-
-
-//     palette_3.addEventListener("click", () => {
-//         palette_1.style.borderColor = transparent;
-//         palette_2.style.borderColor = transparent;
-//         palette_3.style.borderColor = red;
-//         palette_4.style.borderColor = transparent;
-//         palette_5.style.borderColor = transparent;
-//         palette_6.style.borderColor = transparent;
-//         palette_7.style.borderColor = transparent;
-//     });
-
-//     palette_4.addEventListener("click", () => {
-//         palette_1.style.borderColor = transparent;
-//         palette_2.style.borderColor = transparent;
-//         palette_3.style.borderColor = transparent;
-//         palette_4.style.borderColor = red;
-//         palette_5.style.borderColor = transparent;
-//         palette_6.style.borderColor = transparent;
-//         palette_7.style.borderColor = transparent;
-//     });
-
-//     palette_5.addEventListener("click", () => {
-//         palette_1.style.borderColor = transparent;
-//         palette_2.style.borderColor = transparent;
-//         palette_3.style.borderColor = transparent;
-//         palette_4.style.borderColor = transparent;
-//         palette_5.style.borderColor = red;
-//         palette_6.style.borderColor = transparent;
-//         palette_7.style.borderColor = transparent;
-//     });
-
-//     palette_6.addEventListener("click", () => {
-//         palette_1.style.borderColor = transparent;
-//         palette_2.style.borderColor = transparent;
-//         palette_3.style.borderColor = transparent;
-//         palette_4.style.borderColor = transparent;
-//         palette_5.style.borderColor = transparent;
-//         palette_6.style.borderColor = red;
-//         palette_7.style.borderColor = transparent;
-//     });
-
-//     palette_7.addEventListener("click", () => {
-//         palette_1.style.borderColor = transparent;
-//         palette_2.style.borderColor = transparent;
-//         palette_3.style.borderColor = transparent;
-//         palette_4.style.borderColor = transparent;
-//         palette_5.style.borderColor = transparent;
-//         palette_6.style.borderColor = transparent;
-//         palette_7.style.borderColor = red;
-//     });
-
-// }
 
 
 function textureColorChange() {

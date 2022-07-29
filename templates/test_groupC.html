@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Music::Palette::test</title>
+  <title>Music::Palette::test-groupC</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -26,7 +26,7 @@
 </head>
 
 <body>
-
+  <div class="question_group" id="question_groupC">1. 가장 높은 음은 무엇인가요?</div>
   <section class="sheetContainer">
     <!-- 여기에 시각화 표현 -->
     <!-- canvas -->
@@ -42,15 +42,15 @@
 
 
   <section class="musicContainer">
-    <button type="button" class="questionButton">1번</button>
+    <button type="button" class="questionButton" id="question_one">1번</button>
     <br>
-    <button type="button" class="questionButton">2번</button>
+    <button type="button" class="questionButton" id="question_two">2번</button>
     <br>
-    <button type="button" class="questionButton">3번</button>
+    <button type="button" class="questionButton" id="question_three">3번</button>
     <br>
-    <button type="button" class="questionButton">모르겠음</button>
+    <button type="button" class="questionButton" id="question_mola">모르겠음</button>
     <br> <br> <br> <br>
-    <button type="button" class="questionButton" id="submit">제출하기</button>
+    <button type="button" class="questionButton" id="submit_groupC">제출하기</button>
     <button class="videoControlButton" id="play" style="display:none;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
   </section>
 
@@ -74,8 +74,8 @@
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
   <script type="module" defer src="../static/src/js/dist/drumTask.js"></script>
-  <!-- <script type="module" defer src="../static/src/js/forUI/buttonColor.js"></script> -->
-  <script type="module" defer src="../static/src/js/forUI/changePlay.js"></script>
+  <script type="module" defer src="../static/src/js/forUI/questionChange_groupC.js"></script>
+  <script type="module" defer src="../static/src/js/forUI/questionColor.js"></script>
   <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
   <audio data-key="71" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-mid.wav"></audio>

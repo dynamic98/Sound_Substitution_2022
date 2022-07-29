@@ -9,7 +9,7 @@ from python.WriteHapticCustom import WriteHapticCustom as WHC
 from python.UserCustomization import WriteUserCustom, GetUserCustom
 from python.HapticCustomize import VirtualBrowser
 
-##필요한 함수 선언 
+## 필요한 함수 선언 
 ###################################################
 def makeHTMLWithFileList(relativePath):
   filelist = os.listdir(os.path.join(relativePath))
@@ -34,7 +34,7 @@ folder = os.path.join('./static/music/separated')
 UserName = 'default_user'
 # ChromeBrowser = VirtualBrowser()
 
-#create the file 
+# create the file 
 os.makedirs(folder, exist_ok=True)
 
 
@@ -73,7 +73,6 @@ def listen():
   return render_template('listen.html', User_Name=UserName, User_Number=UserNumber, login="log in", filelist=entireSongList, separatedFileList=separatedSongList )
 
 
-
 @app.route('/pitch_task', methods=['POST'])
 def pitch_task():
   return render_template('pitch_task_one.html',User_Name=UserName, login="log in")
@@ -84,15 +83,33 @@ def beat_task():
 
 @app.route('/test', methods=['POST'])
 def test():
-  return render_template('test.html',User_Name=UserName, login="log in")
+  return render_template('testmenu.html',User_Name=UserName, login="log in")
 
 @app.route('/dev', methods=['POST'])
 def dev():
   return render_template('mainMenu.html',User_Name=UserName, login="log in")
 
+@app.route('/test/groupA', methods=['POST'])
+def groupA():
+  return render_template('test_groupA.html',User_Name=UserName, login="log in")
+
+@app.route('/test/groupB', methods=['POST'])
+def groupB():
+  return render_template('test_groupB.html',User_Name=UserName, login="log in")
+
+@app.route('/test/groupC', methods=['POST'])
+def groupC():
+  return render_template('test_groupC.html',User_Name=UserName, login="log in")
+
+@app.route('/test/groupD', methods=['POST'])
+def groupD():
+  return render_template('test_groupD.html',User_Name=UserName, login="log in")
 
 
 
+
+
+# dev 용 경로들 (나중에 최종본에는 삭제할 것)
 
 # abstact 페이지에서는 오디오 파일을 변수에 저장만 하기
 @app.route('/abstract', methods=['POST'])
