@@ -78,12 +78,10 @@ export class Visualization {
 
         this.grid.setRenderOption(this.bloom.getPassForMoonLight())
         this.threeSystem.addToScene(this.grid.getGrid())
-
-
     }
 
     createVisualNote(instrumentType, radius, positionX, positionY, ) {
-        if (this.instrumentIsValid(instrumentType)) {
+        if (this.#instrumentIsValid(instrumentType)) {
             let instrument = this.instruments[instrumentType]
 
             instrument.geometryManager.setRadius(radius)
@@ -104,8 +102,10 @@ export class Visualization {
             this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
             instrument.visualNoteList.push(visualNote)
 
-            
+
             this.threeSystem.updateLightPosition(newPositionX, positionY)
+            console.log(Line.isVisible())
+            Line.isVisible() ? this.#createConnectionLine(instrumentType) : null
         }
     }
 
@@ -124,18 +124,22 @@ export class Visualization {
             let visualNote = new VisualNote(
                 instrument.materialManager.createMaterial(color, texture),
                 instrument.geometryManager.getGeometry(),
-                positionX-this.Bias_X,
+                positionX - this.Bias_X,
                 positionY
             )
 
             visualNote.setRenderOption(this.bloom.getPassForMoonLight())
             this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
             instrument.visualNoteList.push(visualNote)
+
+            Line.isVisible() ? this.#createConnectionLine(instrumentType) : null
+
         }
     }
 
-    createConnectionLine(instrumentType) {
-        if (this.instrumentIsValid(instrumentType)) {
+
+    #createConnectionLine(instrumentType) {
+        if (this.#instrumentIsValid(instrumentType)) {
             if (this.instruments[instrumentType].visualNoteList.length > 1 && Line.isVisible()) {
                 let visualNoteList = this.instruments[instrumentType].visualNoteList
 
@@ -158,31 +162,7 @@ export class Visualization {
         this.progessBar.renderOrder = this.bloom.getPassForMoonLight()
         // this.threeSystem.addToScene(this.progessBar, "progressBar")
         this.threeSystem.addToGroup(this.progessBar, "progressBar")
-        
-//    createNowLocation(positionX) {
-//            let instrumentType = "NowLocation"
-//            let instrument = this.instruments["NowLocation"]
-//
-//            // instrument.geometryManager.setRadius(10)
-//           let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
-//            this.instruments[instrumentType].geometryManager.selectedGeometryType = "NowLocation"
-//            let positionY = 0;
-//            this.instruments[instrumentType].colorManager.setColor(0.7, 0.8, 0.9);
-//
-//            let texture = instrument.textureManager.getTexture()
-//            let color = instrument.colorManager.getColor();
-//            let transmission = 0.01
-//
-//            let visualNote = new VisualNote(
-//                instrument.materialManager.createMaterial(color, texture, transmission),
-//                instrument.geometryManager.getGeometry(),
-//                newPositionX,
-//                positionY
-//            )
-//            visualNote.getMesh().position.setZ(0);
-//            visualNote.setRenderOption(this.bloom.getPassForMoonLight())
-//            this.threeSystem.addToGroup(visualNote.getMesh(), "NowLocation")
-//            instrument.visualNoteList.push(visualNote)
+
     }
 
 
@@ -233,28 +213,34 @@ export class Visualization {
     //getter & settter
     //------------------------------------------------------------------// 
     setColor(instrumentType, hue, saturation) {
-        if (this.instrumentIsValid(instrumentType)) {
+        if (this.#instrumentIsValid(instrumentType)) {
             this.instruments[instrumentType].colorManager.setColor(hue, saturation)
         }
     }
 
     setGeometryType = (instrumentType, geometryType) => {
-        if (this.instrumentIsValid(instrumentType)) {
+        if (this.#instrumentIsValid(instrumentType)) {
             return this.instruments[instrumentType].geometryManager.setGeometryType(geometryType)
         }
     }
 
     setTexture = (instrumentType, textureType) => {
-        if (this.instrumentIsValid(instrumentType)) {
+        if (this.#instrumentIsValid(instrumentType)) {
             return this.instruments[instrumentType].textureManager.setTexture(textureType)
         }
+    }
+    setConnectionLineVisibility = (boolean) => {
+        Line.setVisibility(boolean)
     }
 
     getRendererSize() {
         return this.threeSystem.getRendererSize()
     }
 
-    instrumentIsValid(instrumentType) {
+    //helper
+    //------------------------------------------------------------------// 
+
+    #instrumentIsValid(instrumentType) {
         if (this.instruments[instrumentType] == undefined || null) {
             console.error(`Only Types ${Object.keys(this.instrumentType)} are available`)
             return false

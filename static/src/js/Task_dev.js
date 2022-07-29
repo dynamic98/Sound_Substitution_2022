@@ -38,15 +38,15 @@ let kandinsky;
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
 let switcher = new Switcher();
-//bloom length 
-let visualization = new Visualization(1)
+let bloom_length = 1
+let visualization = new Visualization(bloom_length);
 let progressTime = 15;
 let progressTimer = new ProgressTimer(progressTime, document.getElementById("ProgressBar"));
 
 let piano = new Piano("pianoContainer");
 
 let Task1Sheet = [
-{keyboard_pitch: {frequency: 0, confidence: 1, note:    0,   midi: 0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+{keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
 {keyboard_pitch: {frequency: 0, confidence: 1, note: 'E3',  midi: 52} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
 {keyboard_pitch: {frequency: 0, confidence: 1, note: 'B3',  midi: 59} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
 {keyboard_pitch: {frequency: 0, confidence: 1, note: 'F3',  midi: 53} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
@@ -241,3 +241,4 @@ function draw(pitch, energy, midi) {
     visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
     visualization.createConnectionLine("piano")
 }
+document.body.appendChild(stats.dom);

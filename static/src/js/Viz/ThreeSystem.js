@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-
 export class ThreeSystem {
     constructor() {
         this.scene = new THREE.Scene();

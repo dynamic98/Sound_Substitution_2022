@@ -31,6 +31,7 @@ export class VisualNote extends Mesh {
 export class Line extends Mesh {
     constructor(firstPoint, secondPoint) {
         super();
+
         this.material = new THREE.LineBasicMaterial({
             color: 0xffffff
         })
@@ -42,13 +43,16 @@ export class Line extends Mesh {
         )
         this.mesh = new THREE.Line(this.geometry, this.material);
     }
+    static visibility = true;
+
     static isVisible() {
         return this.visibility
     }
-    static visibility = true;
+    // static element = document.getElementsByClassName("checkbox")
+
 
     static setVisibility = (boolean) => {
+        console.log("switched")
         this.visibility = boolean
     }
-
 }
