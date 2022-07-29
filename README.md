@@ -9,4 +9,4 @@ Music Enjoyment by Visualization & Haptic patterns for DHH (Deaf and Hard-of-Hea
 - **pitchFinder** (audio pitch extraction https://github.com/googlecreativelab/creatability-seeing-music)
 - **tone.js** (audio Context, waveform etc https://tonejs.github.io/) 
 - **wavesurfer** (audio waveform visualization https://wavesurfer-js.org/) 
-
+- **flask** (server, https://flask.palletsprojects.com/en/2.1.x/)
