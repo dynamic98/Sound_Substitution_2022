@@ -34,10 +34,14 @@ import {
     ColorPicker
 }
 from './forUI/ColorPicker.js'
-
 import {
-    FiniteStateMachine
-} from './Utility/FiniteStateMachine.js'
+    GetUserCustom
+}
+from './Utility/GetUserCustom.js'
+
+// import {
+//     FiniteStateMachine
+// } from './Utility/FiniteStateMachine.js'
 
 
 
@@ -64,6 +68,10 @@ let mode_pitchbeat="pitch"
 
 let MyColorPicker = new ColorPicker();
 
+let MyUserCustom = new GetUserCustom();
+// let thisCustom = MyUserCustom.getCustomObj();
+
+
 let pitch_type = document.getElementById('pitchButton')
 let beat_type=document.getElementById('beatButton')
 let piano_container=document.getElementsByClassName("set")
@@ -76,6 +84,9 @@ let reset=document.getElementById('reset')
 pitch_type.onclick=function(e){
     // console.log("pitch mode")
     mode_pitchbeat="pitch"
+    geometryButtons.setModePitchBeat('pitch');
+    textureButtons.setModePitchBeat('pitch');
+
     piano_container[0].style.display=''
     drum_container[0].style.display='none'
     pitch_area.style.display=''
@@ -85,25 +96,24 @@ pitch_type.onclick=function(e){
 beat_type.onclick=function(e){
     // console.log("beat mode")
     mode_pitchbeat="beat"
+    geometryButtons.setModePitchBeat('beat');
+    textureButtons.setModePitchBeat('beat');
+
     piano_container[0].style.display='none'
     drum_container[0].style.display=''
     pitch_area.style.display='none'
     beat_area.style.display=''
 }
 
-// let drum=document.getElementById("drum")
-// drum.onclick=function(e){
-//     let drum_audio=document.getElementById("drum_audio")
-//     drum_audio.play()
-// }
-
 const checkbox = document.getElementById('pitch-checkbox')
 checkbox.addEventListener('change', (event) => {
     if (event.currentTarget.checked) {
         console.log("checked")
-      } else {
+        MyUserCustom.CustomObj.Piano.line = true
+    } else {
         console.log("not checked")
-      }
+        MyUserCustom.CustomObj.Piano.line = false
+    }
 })
 
 let MeshAmount=20, NoteInterval;
@@ -123,16 +133,18 @@ function main() {
 
     //event handler
     //---------------------------------------------------------------
-    $("input[class=checkbox]").change(() => {
-        visualization.setConnectionLineVisibility($(".checkbox")[0].checked)
-    })
-    geometryButtons.assignEventHandler("click", visualization.setGeometryType)
-    textureButtons.assignEventHandler("click", visualization.setTexture)
+    // $("input[class=checkbox]").change(() => {
+    //     visualization.setConnectionLineVisibility($(".checkbox")[0].checked)
+    // })
+    geometryButtons.assignEventHandler("click", visualization.setGeometryType, MyUserCustom.setCustomShape)
+    textureButtons.assignEventHandler("click", visualization.setTexture, MyUserCustom.setCustomTexture)
     pitchslide.assignEventHandler("click", (para, value) => {
         if (para == "slide-pitch-interval") {
             kandinsky.setRange(value)
+            MyUserCustom.CustomObj.Piano.interval = value;
         } else if (para == "slide-pitch-size") {
             piano.setCurrentEnergy(value)
+            MyUserCustom.CustomObj.Piano.slize = value;
         }
     })
 
@@ -156,6 +168,7 @@ function main() {
 function update() {
     stats.begin()
     requestAnimationFrame(update);
+    // console.log(MyUserCustom.getCustomObj());
 
     if (counter>MeshAmount) {
         visualization.reset();
@@ -185,10 +198,77 @@ function draw_drum(pitch, energy, midi) {
 }
 
 function set_pitch_palette(num, set){
-    pitch_palette_num = num;
-    pitch_palette_set = set;
+    this.Piano.palette_num = num;
+    this.Piano.palette_set = set;
+    console.log(num, set)
 }
 function set_beat_color(color){
-    beat_color = color
+    this.Drum.color = color
+    console.log(color)
 
 }
+
+
+$('#save').click(function(){
+    // var left = $('#input-left').val();
+    // var right = $('#input-right').val();
+    let username = 'default_user';
+    let usernumber = 10000;
+
+    let piano_shape = 'Circle';
+    let piano_texture = 'None';
+    let piano_palette_num = 0;
+    let piano_palette_set = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+    let piano_interval = 70;
+    let piano_size = 50;
+    let piano_line = true;
+
+    let drum_shape = 'Circle';
+    let drum_texture = 'None';
+    let drum_color = 100;
+    let drum_size = 50;
+
+    let haptic_sensitivity = 0.8
+    let haptic_intensity = 0.6
+
+    var postdata = {
+        'UserName':username,
+        'UserNumber':usernumber,
+        "piano":
+                {
+                    'shape':piano_shape,
+                    'texture':piano_texture,
+                    'palette_num':piano_palette_num,
+                    'palette_set':piano_palette_set,
+                    'interval':piano_interval,
+                    'size':piano_size,
+                    'line':piano_line
+                },
+        "drum":
+                {
+                    'shape':drum_shape,
+                    'texture':drum_texture,
+                    'color':drum_color,
+                    'size':drum_size
+                },
+        "haptic":
+                {
+                    'sensitivity':haptic_sensitivity,
+                    'intensity':haptic_intensity
+                }
+    }
+    $.ajax({
+        type: 'POST',
+        url: '/SaveUserCustom',
+        data: JSON.stringify(postdata),
+        dataType : 'JSON',
+        contentType: "application/json",
+        success: function(data){
+            alert('Customization 저장완료..')
+        },
+        error: function(request, status, error){
+            alert('ajax 통신 실패')
+            alert(error);
+        }
+    })
+})

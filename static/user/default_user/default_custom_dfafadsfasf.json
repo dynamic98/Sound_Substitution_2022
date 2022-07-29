@@ -1,0 +1,92 @@
+{
+  "username": "default_user",
+  "userID": 10000,
+  "happy": {
+    "palette": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150,
+      180,
+      210,
+      240,
+      270,
+      300,
+      330
+    ],
+    "shape": "Circle",
+    "texture": "Wood",
+    "transmission": 0.7,
+    "roughness": 0.8,
+    "sensitivity": 0.8,
+    "intensity": 0.6
+  },
+  "sad": {
+    "palette": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150,
+      180,
+      210,
+      240,
+      270,
+      300,
+      330
+    ],
+    "shape": "Star",
+    "texture": "Wood",
+    "transmission": 0.7,
+    "roughness": 0.8,
+    "sensitivity": 0.8,
+    "intensity": 0.6
+  },
+  "exciting": {
+    "palette": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150,
+      180,
+      210,
+      240,
+      270,
+      300,
+      330
+    ],
+    "shape": "Circle",
+    "texture": "Wood",
+    "transmission": 0.7,
+    "roughness": 0.8,
+    "sensitivity": 0.8,
+    "intensity": 0.6
+  },
+  "peaceful": {
+    "palette": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150,
+      180,
+      210,
+      240,
+      270,
+      300,
+      330
+    ],
+    "shape": "Square",
+    "texture": "Wood",
+    "transmission": 0.7,
+    "roughness": 0.8,
+    "sensitivity": 0.8,
+    "intensity": 0.6
+  }
+}

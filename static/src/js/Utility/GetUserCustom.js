@@ -3,51 +3,59 @@ export class GetUserCustom {
         this.CustomObj = new Object();
         this.CustomObj.Piano = new Object();
         this.CustomObj.Drum = new Object();
-        this.CustomObj.exciting = new Object();
-        this.CustomObj.peaceful = new Object();
+        this.CustomObj.Haptic = new Object();
+        this.PianoData = document.getElementById('custom_data_piano').getElementsByTagName('li');
+        this.DrumData = document.getElementById('custom_data_drum').getElementsByTagName('li');
+        this.HapticData = document.getElementById('custom_data_haptic').getElementsByTagName('li');
+        this.UserName = document.getElementById('user_name').innerText;
+        this.UserNumber = document.getElementById('user_number').innerText;
 
-        this.PianoData = document.getElementById('custom_data_piano');
-        this.DrumData = document.getElementById('custom_data_drum');
+        this.CustomObj.UserName = this.UserName
+        this.CustomObj.UserNumber = this.UserNumber
 
         this.initialize();
     }
 
     initialize(){
-        this.CustomObj.Piano.palette = this.PianoData[0];
-        this.CustomObj.Piano.shape = this.HappyData[1];
-        this.CustomObj.Piano.texture = this.HappyData[2];
-        this.CustomObj.Piano.transmission = this.HappyData[3];
-        this.CustomObj.Piano.roughness = this.HappyData[4];
-        this.CustomObj.Piano.sensitivity = this.HappyData[5];
-        this.CustomObj.Piano.intensity = this.HappyData[6];
+        this.CustomObj.Piano.shape = this.PianoData[0].innerText;
+        this.CustomObj.Piano.texture = this.PianoData[1].innerText;
+        this.CustomObj.Piano.palette_num = parseInt(this.PianoData[2].innerText);
+        let palette_set = this.PianoData[3].innerText;
+        palette_set = palette_set.substring(2,palette_set.length-2).split("', '")
+        this.CustomObj.Piano.palette_set = palette_set;
+        this.CustomObj.Piano.interval = parseInt(this.PianoData[4].innerText);
+        this.CustomObj.Piano.size = parseInt(this.PianoData[5].innerText);
+        this.CustomObj.Piano.line = $.parseJSON(this.PianoData[6].innerText.toLowerCase());
 
-        this.CustomObj.Drum.palette = this.SadData[0];
-        this.CustomObj.Drum.shape = this.SadData[1];
-        this.CustomObj.Drum.texture = this.SadData[2];
-        this.CustomObj.Drum.transmission = this.SadData[3];
-        this.CustomObj.Drum.roughness = this.SadData[4];
-        this.CustomObj.Drum.sensitivity = this.SadData[5];
-        this.CustomObj.Drum.intensity = this.SadData[6];
-        
-        this.CustomObj.exciting.palette = this.ExcitingData[0];
-        this.CustomObj.exciting.shape = this.ExcitingData[1];
-        this.CustomObj.exciting.texture = this.ExcitingData[2];
-        this.CustomObj.exciting.transmission = this.ExcitingData[3];
-        this.CustomObj.exciting.roughness = this.ExcitingData[4];
-        this.CustomObj.exciting.sensitivity = this.ExcitingData[5];
-        this.CustomObj.exciting.intensity = this.ExcitingData[6];
+        this.CustomObj.Drum.shape = this.DrumData[0].innerText;
+        this.CustomObj.Drum.texture = this.DrumData[1].innerText;
+        this.CustomObj.Drum.color = parseInt(this.DrumData[2].innerText);
+        this.CustomObj.Drum.size = parseInt(this.DrumData[3].innerText);
 
-        this.CustomObj.peaceful.palette = this.PeacefulData[0];
-        this.CustomObj.peaceful.shape = this.PeacefulData[1];
-        this.CustomObj.peaceful.texture = this.PeacefulData[2];
-        this.CustomObj.peaceful.transmission = this.PeacefulData[3];
-        this.CustomObj.peaceful.roughness = this.PeacefulData[4];
-        this.CustomObj.peaceful.sensitivity = this.PeacefulData[5];
-        this.CustomObj.peaceful.intensity = this.PeacefulData[6];
+        this.CustomObj.Haptic.sensitivity = parseFloat(this.HapticData[0].innerText);
+        this.CustomObj.Haptic.intensity = parseFloat(this.HapticData[1].innerText);
 
     }
 
     getCustomObj(){
         return this.CustomObj;
     }
+
+    setCustomShape = (inst, para) => {
+        if(inst=='piano'){
+            this.CustomObj.Piano.shape = para
+        }else if(inst=='drum'){
+            this.CustomObj.Drum.shape = para
+        }
+    }
+    
+    setCustomTexture = (inst, para) => {
+        if(inst=='piano'){
+            this.CustomObj.Piano.texture = para
+        }else if(inst=='drum'){
+            this.CustomObj.Drum.texture = para
+        }
+    }
+
+
 }
