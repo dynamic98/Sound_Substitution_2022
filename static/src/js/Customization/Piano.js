@@ -9,7 +9,6 @@ export class Piano {
         this.noteDuration = 300;
         this.playing = false;
 
-
         this.now = Tone.now();
         this.synth = new Tone.Synth().toDestination();
         this.DictPitch = {

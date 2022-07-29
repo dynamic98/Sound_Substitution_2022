@@ -65,6 +65,19 @@ def menu():
 def explore():
   return render_template('Exploration.html',User_Name=UserName, login="log in")
 
+@app.route('/pitch_task', methods=['POST'])
+def pitch_task():
+  return render_template('pitch_task_one.html',User_Name=UserName, login="log in")
+
+@app.route('/beat_task', methods=['POST'])
+def beat_task():
+  return render_template('beat_task_one.html',User_Name=UserName, login="log in")
+
+@app.route('/test', methods=['POST'])
+def test():
+  return render_template('test.html',User_Name=UserName, login="log in")
+
+
 @app.route('/dev', methods=['POST'])
 def dev():
   return render_template('mainMenu.html',User_Name=UserName, login="log in")
@@ -92,11 +105,7 @@ def abstract():
 
 @app.route('/concrete', methods=['POST'])
 def concrete():
-  if request.method == 'POST':
-      word = '구상적 시각화 페이지 입니다.'
-  else:
-    pass
-  return render_template('concrete.html', word=word)
+  return render_template('Task_dev.html',User_Name=UserName, login="log in")
 
 
 @app.route('/SendHapticCustom', methods=['POST'])

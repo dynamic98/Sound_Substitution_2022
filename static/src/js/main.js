@@ -73,6 +73,8 @@ async function main() {
     animate();
 };
 
+// let pitchList = [];
+
 function animate() {
     // console.log(sourceContainer.getSource("vocals").getPitch())
     requestAnimationFrame(animate);
@@ -92,6 +94,7 @@ function animate() {
         visualization.update();
     }
     stats.end();
+    // console.log(pitchList);
 }
 
 function draw(instance, instrumentType) {

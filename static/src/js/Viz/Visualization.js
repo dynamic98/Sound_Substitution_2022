@@ -47,12 +47,15 @@ export class Visualization {
         this.bloom = new Bloom(0, 5, 1, bloomLength, this.threeSystem.getRendererSize());
         this.counterTimer = new CounterTimer(1);
         this.progressBar
+        this.Bias_X = 115;
+
 
         this.instruments = {
             piano: {},
             drum: {},
             savedPiano: {},
-            savedDrum: {}
+            savedDrum: {},
+            NowLocation: {}
         }
         for (let instrumentType in this.instruments) {
             this.instruments[instrumentType].visualNoteList = []
@@ -79,12 +82,12 @@ export class Visualization {
 
     }
 
-    createVisualNote(instrumentType, radius, positionX, positionY) {
+    createVisualNote(instrumentType, radius, positionX, positionY, ) {
         if (this.instrumentIsValid(instrumentType)) {
             let instrument = this.instruments[instrumentType]
 
             instrument.geometryManager.setRadius(radius)
-            let newPositionX = positionX * this.counterTimer.getTimer() - 115
+            let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
 
             let texture = instrument.textureManager.getTexture()
             let color = instrument.colorManager.getColor();
@@ -106,6 +109,31 @@ export class Visualization {
         }
     }
 
+    createVisualAbsNote(instrumentType, radius, positionX, positionY) {
+        if (this.instruments[instrumentType] == undefined || null) {
+            console.error("Only Types of piano, input_piano, drum, input_drum are available")
+        } else {
+            let instrument = this.instruments[instrumentType]
+
+            instrument.geometryManager.setRadius(radius)
+
+            let texture = instrument.textureManager.getTexture()
+            let color = instrument.colorManager.getColor();
+
+
+            let visualNote = new VisualNote(
+                instrument.materialManager.createMaterial(color, texture),
+                instrument.geometryManager.getGeometry(),
+                positionX-this.Bias_X,
+                positionY
+            )
+
+            visualNote.setRenderOption(this.bloom.getPassForMoonLight())
+            this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
+            instrument.visualNoteList.push(visualNote)
+        }
+    }
+
     createConnectionLine(instrumentType) {
         if (this.instrumentIsValid(instrumentType)) {
             if (this.instruments[instrumentType].visualNoteList.length > 1 && Line.isVisible()) {
@@ -119,22 +147,21 @@ export class Visualization {
         }
     }
 
-
     createProgressBar(width, color, opacity) {
         let geometry = new THREE.BoxGeometry(width, 200, 1);
         let material = new THREE.MeshStandardMaterial({
             color: color,
             opacity: opacity,
             transparent: true
-
         })
         this.progessBar = new THREE.Mesh(geometry, material);
         this.progessBar.renderOrder = this.bloom.getPassForMoonLight()
         this.threeSystem.addToScene(this.progessBar, "progressBar")
     }
 
+
     moveProgressBar(positionX) {
-        let newPositionX = positionX * this.counterTimer.getTimer() - 115
+        let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
         this.progessBar.position.set(newPositionX, 0, 0)
     }
 
