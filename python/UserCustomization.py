@@ -4,10 +4,11 @@ import time
 import jinja2
 
 def WriteUserCustom(data):
-    UserName = data['username']
-    id = time.time()
+    UserName = data['UserName']
+    thisdate = time.localtime(time.time())
+    id = str(thisdate.tm_year)+'-'+str(thisdate.tm_mon)+'-'+str(thisdate.tm_mday)+'-'+str(thisdate.tm_hour)+'-'+str(thisdate.tm_min)+'-'+str(thisdate.tm_sec)
     SavePath = os.path.join(os.getcwd(), 'static', 'user', UserName)
-    with open(os.path.join(SavePath, '%d.json'%(id)), 'w') as f:
+    with open(os.path.join(SavePath, id+'.json'), 'w') as f:
         f.write(json.dumps(data, indent="  "))
 
     return "happy"

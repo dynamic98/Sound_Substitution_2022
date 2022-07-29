@@ -32,6 +32,7 @@ app = Flask(__name__)
 folder = os.path.join('./static/music/separated')
 
 UserName = 'default_user'
+UserNumber = 0
 # ChromeBrowser = VirtualBrowser()
 
 # create the file 
@@ -64,7 +65,12 @@ def menu():
 
 @app.route('/exploration', methods=['POST'])
 def explore():
-  return render_template('Exploration.html',User_Name=UserName, login="log in")
+  if request.method=='POST':
+    data = GetUserCustom(UserName)
+    print(data)
+  else:
+    pass
+  return render_template('Exploration.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
 @app.route('/listening', methods=['POST'])
 def listen():
@@ -160,12 +166,7 @@ def SaveUserCustom():
     data = request.get_json()
     # print(type(data))
     WriteUserCustom(data)
-    # left = data['left']
-    # right = data['right']
-    # print(UserName)
-    # FileName = WHC(UserName, left, right)
-    # VirtualBrowser(UserName, fileName)
-    # ChromeBrowser.SendHapticCustom(UserName, FileName)
+
     return data
     # return jsonify(result = "success", result2= data)
 

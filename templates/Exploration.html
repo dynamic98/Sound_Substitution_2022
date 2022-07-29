@@ -219,7 +219,7 @@
   </section>
 
   <section class="musicContainer">
-    <!-- <button class="videoControlButton" id="play" style="display:inline;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button> -->
+    <button class="videoControlButton" id="play" style="display:inline;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
     <button class="videoControlButton" id="save" style="display:inline;"><span class="glyphicon glyphicon-save" id="saveGlyph"></span></button>
     <button class="videoControlButton" id="reset" style="display:inline;"><span class="glyphicon glyphicon-erase" id="eraseGlyph"></span></button>
   </section>
@@ -244,7 +244,12 @@
         <li id="haptic_sensitivity">{{data["haptic"]["sensitivity"]}}</li>
         <li id="haptic_intensity">{{data["haptic"]["intensity"]}}</li>
     </ol>
-</div>
+  </div>
+
+  <div id="user_name" hidden>{{User_Name}}</div>
+  <div id="user_number" hidden>{{User_Number}}</div>
+
+
 
   <!--shader script-->
   <script type="x-shader/x-vertex" id="vertexshader">
