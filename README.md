@@ -1,6 +1,6 @@
-# VizHap
+# Music Visualization
 Music Enjoyment by Visualization & Haptic patterns for DHH (Deaf and Hard-of-Hearing)
-### 사용 언어   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/>
+### Main Language   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/>
 
 ### 사용 라이브러리
 - **three.js** (3차원 시각화, https://threejs.org/)
