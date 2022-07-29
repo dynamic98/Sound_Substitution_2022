@@ -10,3 +10,5 @@ Music Enjoyment by Visualization & Haptic patterns for DHH (Deaf and Hard-of-Hea
 - **tone.js** (audio Context, waveform etc https://tonejs.github.io/) 
 - **wavesurfer** (audio waveform visualization https://wavesurfer-js.org/) 
 - **flask** (server, https://flask.palletsprojects.com/en/2.1.x/)
+
+![alt text](https://github.com/syeminpark/Music_Visualization/blob/flask/static/src/images/screenshot/exploration.png/readmeImage.png?raw=true)
