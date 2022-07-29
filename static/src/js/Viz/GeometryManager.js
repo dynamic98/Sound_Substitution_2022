@@ -21,7 +21,7 @@ export class GeometryManager {
 
         this.coneParameters = {
             radius: null,
-            height: 10,
+            height: null,
             radialSegments: 32
         }
 
@@ -82,8 +82,8 @@ export class GeometryManager {
 
             case 'triangle':
                 this.geometry = new THREE.ConeGeometry(
-                    this.radius * 2,
-                    this.coneParameters.height,
+                    this.radius * 1.5,
+                    this.radius * 1.7,
                     this.coneParameters.radialSegments
                 );
                 return this.geometry
