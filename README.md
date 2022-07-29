@@ -1,4 +1,5 @@
-# Music Visualization
+# Sound_Substitution_2022
+
 Music Enjoyment by Visualization & Haptic patterns for DHH (Deaf and Hard-of-Hearing)
 ### Main Language   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/>
 

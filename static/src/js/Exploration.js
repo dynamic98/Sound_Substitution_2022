@@ -32,6 +32,12 @@ import {
 }
 from './forUI/ColorPicker.js'
 
+import {
+    FiniteStateMachine
+} from './Utility/FiniteStateMachine.js'
+
+
+
 pitchBeatSwitcher()
 
 let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
@@ -109,6 +115,13 @@ function main() {
     bpmTimer.setBPMByMeshCount(MeshAmount)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     piano.setNoteDuration(300);
+    visualization.createProgressBar(5, "#0000FF", 0.4)
+
+    //event handler
+    //---------------------------------------------------------------
+    $("input[class=checkbox]").change(() => {
+        visualization.setConnectionLineVisibility($(".checkbox")[0].checked)
+    })
     geometryButtons.assignEventHandler("click", visualization.setGeometryType)
     textureButtons.assignEventHandler("click", visualization.setTexture)
     pitchslide.assignEventHandler("click", (para, value) => {
@@ -130,8 +143,10 @@ function main() {
         visualization.reset();
         counter=0;
     })
+
     update();
 }
+
 
 function update() {
     stats.begin()
@@ -152,6 +167,7 @@ function update() {
 function draw_piano(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
+
     console.log(kandinsky.getPitchEnergy())
     visualization.createVisualAbsNote("piano", kandinsky.getPitchEnergy(), NoteInterval*counter, kandinsky.getPitchHeight())
     visualization.createConnectionLine("piano")
@@ -172,4 +188,5 @@ function set_pitch_palette(num, set){
 }
 function set_beat_color(color){
     beat_color = color
+
 }

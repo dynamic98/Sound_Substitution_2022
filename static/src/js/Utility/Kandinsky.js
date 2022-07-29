@@ -43,8 +43,6 @@ export class Kandinsky {
         this.octave = Math.floor((pitch) / 12) - 1; //옥타브 구하는 방식
         this.tone = (pitch) % 12;
         // Make reminder positive integer
-
-
     }
 
     getNormalizedTone() {
