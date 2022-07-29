@@ -1,9 +1,9 @@
 {
-  "UserName": "default_user",
-  "UserNumber": 10000,
+  "UserName": "junryeol jeon",
+  "UserNumber": "021",
   "piano": {
-    "shape": "Circle",
-    "texture": "None",
+    "shape": "decagon",
+    "texture": "wood",
     "palette_num": 0,
     "palette_set": [
       "hsl(0, 100%, 100%)",
@@ -19,18 +19,18 @@
       "hsl(0, 100%, 100%)",
       "hsl(0, 100%, 100%)"
     ],
-    "interval": 70,
-    "size": 50,
+    "interval": "9",
+    "size": "12",
     "line": true
   },
   "drum": {
-    "shape": "Circle",
-    "texture": "None",
+    "shape": "star",
+    "texture": "paper",
     "color": 100,
     "size": 50
   },
   "haptic": {
-    "sensitivity": 80,
-    "intensity": 60
+    "sensitivity": 0.8,
+    "intensity": 0.6
   }
 }

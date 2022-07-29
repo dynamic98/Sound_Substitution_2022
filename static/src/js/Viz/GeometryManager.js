@@ -89,43 +89,46 @@ export class GeometryManager {
                 return this.geometry
 
             case 'decagon':
+                let scaler = 12;
                 let decagonshape = new THREE.Shape()
-                    .moveTo(-20 / this.radius, 0 / this.radius)
-                    .lineTo(-9.96 / this.radius, 3.13 / this.radius)
-                    .lineTo(-16.06 / this.radius, 12.35 / this.radius)
-                    .lineTo(-6.17 / this.radius, 8.1 / this.radius)
-                    .lineTo(-6.07 / this.radius, 20 / this.radius)
-                    .lineTo(0 / this.radius, 10 / this.radius)
-                    .lineTo(6.07 / this.radius, 20 / this.radius)
-                    .lineTo(6.17 / this.radius, 8.1 / this.radius)
-                    .lineTo(16.06 / this.radius, 12.35 / this.radius)
-                    .lineTo(9.96 / this.radius, 3.13 / this.radius)
-                    .lineTo(20 / this.radius, 0 / this.radius)
-                    .lineTo(9.96 / this.radius, -3.13 / this.radius)
-                    .lineTo(16.06 / this.radius, -12.35 / this.radius)
-                    .lineTo(6.17 / this.radius, -8.1 / this.radius)
-                    .lineTo(6.07 / this.radius, -20 / this.radius)
-                    .lineTo(0 / this.radius, -10 / this.radius)
-                    .lineTo(-6.07 / this.radius, -20 / this.radius)
-                    .lineTo(-6.17 / this.radius, -8.1 / this.radius)
-                    .lineTo(-16.06 / this.radius, -12.35 / this.radius)
-                    .lineTo(-9.96 / this.radius, -3.13 / this.radius)
-                    .lineTo(-20 / this.radius, 0 / this.radius);
+                    .moveTo(-20 * this.radius/scaler, 0 * this.radius/scaler)
+                    .lineTo(-9.96 * this.radius/scaler, 3.13 * this.radius/scaler)
+                    .lineTo(-16.06 * this.radius/scaler, 12.35 * this.radius/scaler)
+                    .lineTo(-6.17 * this.radius/scaler, 8.1 * this.radius/scaler)
+                    .lineTo(-6.07 * this.radius/scaler, 20 * this.radius/scaler)
+                    .lineTo(0 * this.radius/scaler, 10 * this.radius/scaler)
+                    .lineTo(6.07 * this.radius/scaler, 20 * this.radius/scaler)
+                    .lineTo(6.17 * this.radius/scaler, 8.1 * this.radius/scaler)
+                    .lineTo(16.06 * this.radius/scaler, 12.35 * this.radius/scaler)
+                    .lineTo(9.96 * this.radius/scaler, 3.13 * this.radius/scaler)
+                    .lineTo(20 * this.radius/scaler, 0 * this.radius/scaler)
+                    .lineTo(9.96 * this.radius/scaler, -3.13 * this.radius/scaler)
+                    .lineTo(16.06 * this.radius/scaler, -12.35 * this.radius/scaler)
+                    .lineTo(6.17 * this.radius/scaler, -8.1 * this.radius/scaler)
+                    .lineTo(6.07 * this.radius/scaler, -20 * this.radius/scaler)
+                    .lineTo(0 * this.radius/scaler, -10 * this.radius/scaler)
+                    .lineTo(-6.07 * this.radius/scaler, -20 * this.radius/scaler)
+                    .lineTo(-6.17 * this.radius/scaler, -8.1 * this.radius/scaler)
+                    .lineTo(-16.06 * this.radius/scaler, -12.35 * this.radius/scaler)
+                    .lineTo(-9.96 * this.radius/scaler, -3.13 * this.radius/scaler)
+                    .lineTo(-20 * this.radius/scaler, 0 * this.radius/scaler);
                 this.geometry = new THREE.ShapeGeometry(decagonshape);
                 return this.geometry
 
             case 'star':
                 let starPoints = [];
-                starPoints.push(new THREE.Vector2(0, 10));
-                starPoints.push(new THREE.Vector2(10 / this.radius / 2, 10 / this.radius / 2));
-                starPoints.push(new THREE.Vector2(40 / this.radius / 2, 10 / this.radius / 2));
-                starPoints.push(new THREE.Vector2(20 / this.radius / 2, -10 / this.radius / 2));
-                starPoints.push(new THREE.Vector2(30 / this.radius / 2, -50 / this.radius / 2));
-                starPoints.push(new THREE.Vector2(0 / this.radius / 2, -20 / this.radius / 2));
-                starPoints.push(new THREE.Vector2(-30 / this.radius / 2, -50 / this.radius / 2));
-                starPoints.push(new THREE.Vector2(-20 / this.radius / 2, -10 / this.radius / 2));
-                starPoints.push(new THREE.Vector2(-40 / this.radius / 2, 10 / this.radius / 2));
-                starPoints.push(new THREE.Vector2(-10 / this.radius / 2, 10 / this.radius / 2));
+                let starscaler = 30;
+
+                starPoints.push(new THREE.Vector2(0*this.radius/5, 10*this.radius/5));
+                starPoints.push(new THREE.Vector2(10 * this.radius / starscaler, 10 * this.radius / starscaler));
+                starPoints.push(new THREE.Vector2(40 * this.radius / starscaler, 10 * this.radius / starscaler));
+                starPoints.push(new THREE.Vector2(20 * this.radius / starscaler, -10 * this.radius / starscaler));
+                starPoints.push(new THREE.Vector2(30 * this.radius / starscaler, -50 * this.radius / starscaler));
+                starPoints.push(new THREE.Vector2(0 * this.radius / starscaler, -20 * this.radius / starscaler));
+                starPoints.push(new THREE.Vector2(-30 * this.radius / starscaler, -50 * this.radius / starscaler));
+                starPoints.push(new THREE.Vector2(-20 * this.radius / starscaler, -10 * this.radius / starscaler));
+                starPoints.push(new THREE.Vector2(-40 * this.radius / starscaler, 10 * this.radius / starscaler));
+                starPoints.push(new THREE.Vector2(-10 * this.radius / starscaler, 10 * this.radius / starscaler));
 
                 let starShape = new THREE.Shape(starPoints);
                 this.geometry = new THREE.ExtrudeGeometry(starShape, this.starParameter);

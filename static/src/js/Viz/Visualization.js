@@ -128,8 +128,10 @@ export class Visualization {
                 positionX - this.Bias_X,
                 positionY
             )
-
+        
+            // visualNote.setRenderOption(this.bloom.getPassForSunLight())
             visualNote.setRenderOption(this.bloom.getPassForMoonLight())
+    
             this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
             instrument.visualNoteList.push(visualNote)
 
@@ -213,9 +215,9 @@ export class Visualization {
 
     //getter & settter
     //------------------------------------------------------------------// 
-    setColor(instrumentType, hue, saturation) {
+    setColor(instrumentType, hue, saturation, lightness) {
         if (this.#instrumentIsValid(instrumentType)) {
-            this.instruments[instrumentType].colorManager.setColor(hue, saturation)
+            this.instruments[instrumentType].colorManager.setColor(hue, saturation, lightness)
         }
     }
 

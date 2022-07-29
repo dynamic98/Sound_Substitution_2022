@@ -50,6 +50,8 @@ pitchBeatSwitcher()
 let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
 let textureButtons = new ButtonCustomization("shapeContainer", "textureButton")
 let pitchslide = new SlideCustomization("visualContainer_pitch", "customMenu", "range")
+let beatslide = new SlideCustomization("visualContainer_beat", "customMenu", "range")
+let hapticslide = new SlideCustomization("hapticContainer", "customMenu", "range")
 
 let kandinsky;
 let bpmTimer = new BPMTimer();
@@ -105,7 +107,7 @@ beat_type.onclick=function(e){
     beat_area.style.display=''
 }
 
-const checkbox = document.getElementById('pitch-checkbox')
+let checkbox = document.getElementById('pitch-checkbox')
 checkbox.addEventListener('change', (event) => {
     if (event.currentTarget.checked) {
         console.log("checked")
@@ -118,10 +120,9 @@ checkbox.addEventListener('change', (event) => {
 
 let MeshAmount=20, NoteInterval;
 let counter = 0
+let pitch_palette;
 document.body.appendChild(stats.dom);
-let pitch_palette_num = null;
-let pitch_palette_set = null;
-let beat_color = null
+
 main()
 
 function main() {
@@ -129,6 +130,10 @@ function main() {
     bpmTimer.setBPMByMeshCount(MeshAmount)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     piano.setNoteDuration(300);
+
+    apply_default_custom();
+    apply_default_custom_toHTML();
+    // pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set);
     // visualization.createProgressBar(5, "#0000FF", 0.4)
 
     //event handler
@@ -144,7 +149,18 @@ function main() {
             MyUserCustom.CustomObj.Piano.interval = value;
         } else if (para == "slide-pitch-size") {
             piano.setCurrentEnergy(value)
-            MyUserCustom.CustomObj.Piano.slize = value;
+            MyUserCustom.CustomObj.Piano.size = value;
+        }
+    })
+    beatslide.assignEventHandler("click", (para, value) => {
+            drum.setCurrentEnergy(value)
+            MyUserCustom.CustomObj.Drum.size = value;
+    })
+    hapticslide.assignEventHandler("click", (para, value) => {
+        if (para == "slide-haptic-sensitivity") {
+            MyUserCustom.CustomObj.Haptic.sensitivity = value;
+        } else if (para == "slide-haptic-intensity") {
+            MyUserCustom.CustomObj.Haptic.intensity = value;
         }
     })
 
@@ -185,51 +201,93 @@ function update() {
 function draw_piano(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
+    visualization.setColor("piano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
     visualization.createVisualAbsNote("piano", kandinsky.getPitchEnergy(), NoteInterval*counter, kandinsky.getPitchHeight())
+    if(MyUserCustom.CustomObj.Piano.line){
     visualization.createConnectionLine("piano")
+    }
     counter++
 }
 function draw_drum(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
+    visualization.setColor("drum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 0.5)
     visualization.createVisualAbsNote("drum", kandinsky.getPitchEnergy(), NoteInterval*counter, kandinsky.getPitchHeight())
-    visualization.createConnectionLine("drum")
+    // visualization.createConnectionLine("drum")
     counter++
 }
 
 function set_pitch_palette(num, set){
-    this.Piano.palette_num = num;
-    this.Piano.palette_set = set;
-    console.log(num, set)
+    MyUserCustom.CustomObj.Piano.palette_num = num;
+    MyUserCustom.CustomObj.Piano.palette_set = set;
+    pitch_palette = parse_pitch_palette(set);
+    // console.log(num, set)
 }
 function set_beat_color(color){
-    this.Drum.color = color
-    console.log(color)
+    MyUserCustom.CustomObj.Drum.color = color
+    // console.log(color)
 
 }
+function parse_pitch_palette(set){
+    let parsed_palette = new Array(12);
+    for(let i=0;i<12;i++){
+        let split_set = set[i].substring(4, set[i].length-1).split(",")
+        let hue = parseFloat(split_set[0])/360;
+        let saturation = parseFloat(split_set[1])/100
+        let lightness = parseFloat(split_set[2])/100
+        parsed_palette[i] = [hue, saturation, lightness]
+    }
+    return parsed_palette;
+}
 
+function apply_default_custom(){
+    visualization.instruments['piano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
+    visualization.instruments['savedPiano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
+    visualization.instruments['piano'].textureManager.setTexture(MyUserCustom.CustomObj.Piano.texture.toLowerCase())
+    visualization.instruments['savedPiano'].textureManager.setTexture(MyUserCustom.CustomObj.Piano.texture.toLowerCase())
+    pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
+    kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
+    piano.setCurrentEnergy(MyUserCustom.CustomObj.Piano.size)
+    // piano line is automatically applied
+
+    visualization.instruments['drum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
+    visualization.instruments['savedDrum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
+    visualization.instruments['drum'].textureManager.setTexture(MyUserCustom.CustomObj.Drum.texture.toLowerCase())
+    visualization.instruments['savedDrum'].textureManager.setTexture(MyUserCustom.CustomObj.Drum.texture.toLowerCase())
+    drum.setCurrentEnergy(MyUserCustom.CustomObj.Drum.size)
+    // drum color is automatically applied
+}
+
+function apply_default_custom_toHTML(){
+    document.getElementById('slide-pitch-interval').value = MyUserCustom.CustomObj.Piano.interval.toString()
+    document.getElementById('slide-pitch-size').value = MyUserCustom.CustomObj.Piano.size.toString()
+    document.getElementById('pitch-checkbox').checked = MyUserCustom.CustomObj.Piano.line
+    document.getElementById('slide-beat-size').value = MyUserCustom.CustomObj.Drum.size.toString()
+    document.getElementById('slide-haptic-sensitivity').value = MyUserCustom.CustomObj.Haptic.sensitivity.toString()
+    document.getElementById('slide-haptic-intensity').value = MyUserCustom.CustomObj.Haptic.intensity.toString()
+}
 
 $('#save').click(function(){
     // var left = $('#input-left').val();
     // var right = $('#input-right').val();
-    let username = 'default_user';
-    let usernumber = 10000;
+    let username = MyUserCustom.CustomObj.UserName;
+    let usernumber = MyUserCustom.CustomObj.UserNumber;
 
-    let piano_shape = 'Circle';
-    let piano_texture = 'None';
-    let piano_palette_num = 0;
-    let piano_palette_set = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
-    let piano_interval = 70;
-    let piano_size = 50;
-    let piano_line = true;
+    let piano_shape = MyUserCustom.CustomObj.Piano.shape;
+    let piano_texture = MyUserCustom.CustomObj.Piano.texture;
+    let piano_palette_num = MyUserCustom.CustomObj.Piano.palette_num;
+    let piano_palette_set = MyUserCustom.CustomObj.Piano.palette_set;
+    let piano_interval = MyUserCustom.CustomObj.Piano.interval;
+    let piano_size = MyUserCustom.CustomObj.Piano.size;
+    let piano_line = MyUserCustom.CustomObj.Piano.line;
 
-    let drum_shape = 'Circle';
-    let drum_texture = 'None';
-    let drum_color = 100;
-    let drum_size = 50;
+    let drum_shape = MyUserCustom.CustomObj.Drum.shape;
+    let drum_texture = MyUserCustom.CustomObj.Drum.texture;
+    let drum_color = MyUserCustom.CustomObj.Drum.color;
+    let drum_size = MyUserCustom.CustomObj.Drum.size;
 
-    let haptic_sensitivity = 0.8
-    let haptic_intensity = 0.6
+    let haptic_sensitivity = MyUserCustom.CustomObj.Haptic.sensitivity;
+    let haptic_intensity = MyUserCustom.CustomObj.Haptic.intensity;
 
     var postdata = {
         'UserName':username,

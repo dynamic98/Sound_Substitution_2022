@@ -29,7 +29,7 @@ export class GetUserCustom {
 
         this.CustomObj.Drum.shape = this.DrumData[0].innerText;
         this.CustomObj.Drum.texture = this.DrumData[1].innerText;
-        this.CustomObj.Drum.color = parseInt(this.DrumData[2].innerText);
+        this.CustomObj.Drum.color = parseFloat(this.DrumData[2].innerText);
         this.CustomObj.Drum.size = parseInt(this.DrumData[3].innerText);
 
         this.CustomObj.Haptic.sensitivity = parseFloat(this.HapticData[0].innerText);

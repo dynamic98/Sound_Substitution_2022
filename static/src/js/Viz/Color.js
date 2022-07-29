@@ -5,8 +5,8 @@ export class Color {
         this.color = new THREE.Color(hue, saturation, lightness)
     }
 
-    setColor = (hue, saturation, lightness) => {
-        this.color.setHSL(hue, saturation, 0.5)
+    setColor = (hue, saturation, lightness=0.5) => {
+        this.color.setHSL(hue, saturation, lightness)
     }
 
     getColor() {
