@@ -131,14 +131,6 @@ export class GeometryManager {
                 this.geometry = new THREE.ExtrudeGeometry(starShape, this.starParameter);
                 return this.geometry
             
-//            case "NowLocation":
-//                this.geometry = new THREE.BoxGeometry(
-//                    10,
-//                    150,
-//                    1
-//                );
-//                return this.geometry
-
         }
 
     }
