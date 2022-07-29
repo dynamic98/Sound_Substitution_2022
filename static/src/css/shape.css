@@ -1242,7 +1242,7 @@ div[slider] > input[type=range]::-ms-tooltip {
     cursor: pointer;
     transition: all 0.2s ease;
     border-radius: 70%;
-    margin-left: 20px;
+    margin-left: 80px;
   }
 
   #reset {
