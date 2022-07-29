@@ -115,7 +115,7 @@ function main() {
     bpmTimer.setBPMByMeshCount(MeshAmount)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     piano.setNoteDuration(300);
-    visualization.createProgressBar(5, "#0000FF", 0.4)
+    // visualization.createProgressBar(5, "#0000FF", 0.4)
 
     //event handler
     //---------------------------------------------------------------
@@ -167,18 +167,16 @@ function update() {
 function draw_piano(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
-
-    console.log(kandinsky.getPitchEnergy())
     visualization.createVisualAbsNote("piano", kandinsky.getPitchEnergy(), NoteInterval*counter, kandinsky.getPitchHeight())
-    visualization.createConnectionLine("piano")
+    // visualization.createConnectionLine("piano")
     counter++
 }
 function draw_drum(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
-    console.log(kandinsky.getPitchEnergy())
+    // console.log(kandinsky.getPitchEnergy())
     visualization.createVisualAbsNote("drum", kandinsky.getPitchEnergy(), NoteInterval*counter, 50)
-    visualization.createConnectionLine("drum")
+    // visualization.createConnectionLine("drum")
     counter++
 }
 
