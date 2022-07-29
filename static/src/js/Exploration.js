@@ -19,9 +19,7 @@ import {
 import {
     Piano
 } from './Customization/Piano.js'
-import {
-    ProgressTimer
-} from './Utility/ProgressTimer.js'
+
 import {
     MusicSheet
 } from './forUI/MusicSheet.js'
@@ -30,8 +28,9 @@ import {
 }
 from './forUI/pitchBeatSwitcher.js'
 import {
-    AbsolutePosition
-} from './Utility/AbsolutePosition.js'
+    ColorPicker
+}
+from './forUI/ColorPicker.js'
 
 pitchBeatSwitcher()
 
@@ -52,6 +51,8 @@ let visualization = new Visualization(bloom_length);
 
 let piano = new Piano("pianoContainer");
 let mode_pitchbeat="pitch"
+
+let MyColorPicker = new ColorPicker();
 
 let pitch_type = document.getElementById('pitchButton')
 let beat_type=document.getElementById('beatButton')
@@ -86,9 +87,21 @@ drum.onclick=function(e){
     drum_audio.play()
 }
 
+const checkbox = document.getElementById('pitch-checkbox')
+checkbox.addEventListener('change', (event) => {
+    if (event.currentTarget.checked) {
+        console.log("checked")
+      } else {
+        console.log("not checked")
+      }
+})
+
 let MeshAmount=20, NoteInterval;
 let counter = 0
 document.body.appendChild(stats.dom);
+let pitch_palette_num = null;
+let pitch_palette_set = null;
+let beat_color = null
 main()
 
 function main() {
@@ -109,7 +122,8 @@ function main() {
     piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setMusicArray, 1, 3)
     piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setMusicArray, 2, 4)
     piano.assignEventOnPianoRow("mousedown", draw_piano, musicSheet.setMusicArray, 3, 5)
-
+    MyColorPicker.PitchOnclickListener(set_pitch_palette);
+    MyColorPicker.BeatOnclickListener(set_beat_color)
     NoteInterval = 230/MeshAmount;
 
     reset.addEventListener("click", ()=>{
@@ -150,4 +164,12 @@ function draw_drum(pitch, energy, midi) {
     visualization.createVisualAbsNote("drum", kandinsky.getPitchEnergy(), NoteInterval*counter, 50)
     visualization.createConnectionLine("drum")
     counter++
+}
+
+function set_pitch_palette(num, set){
+    pitch_palette_num = num;
+    pitch_palette_set = set;
+}
+function set_beat_color(color){
+    beat_color = color
 }

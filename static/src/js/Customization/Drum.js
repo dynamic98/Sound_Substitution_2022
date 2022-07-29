@@ -1,4 +1,4 @@
-export class Piano {
+export class Drum {
     constructor(HTMLClassContainer) {
         this.HTMLClassContainer = HTMLClassContainer
         this.currentPitch = 0;

@@ -1,35 +1,33 @@
 export class GetUserCustom {
     constructor() {
         this.CustomObj = new Object();
-        this.CustomObj.happy = new Object();
-        this.CustomObj.sad = new Object();
+        this.CustomObj.Piano = new Object();
+        this.CustomObj.Drum = new Object();
         this.CustomObj.exciting = new Object();
         this.CustomObj.peaceful = new Object();
 
-        this.HappyData = document.getElementById('custom_data_happy');
-        this.SadData = document.getElementById('custom_data_sad');
-        this.ExcitingData = document.getElementById('custom_data_exciting');
-        this.PeacefulData = document.getElementById('custom_data_peaceful');
+        this.PianoData = document.getElementById('custom_data_piano');
+        this.DrumData = document.getElementById('custom_data_drum');
 
         this.initialize();
     }
 
     initialize(){
-        this.CustomObj.happy.palette = this.HappyData[0];
-        this.CustomObj.happy.shape = this.HappyData[1];
-        this.CustomObj.happy.texture = this.HappyData[2];
-        this.CustomObj.happy.transmission = this.HappyData[3];
-        this.CustomObj.happy.roughness = this.HappyData[4];
-        this.CustomObj.happy.sensitivity = this.HappyData[5];
-        this.CustomObj.happy.intensity = this.HappyData[6];
+        this.CustomObj.Piano.palette = this.PianoData[0];
+        this.CustomObj.Piano.shape = this.HappyData[1];
+        this.CustomObj.Piano.texture = this.HappyData[2];
+        this.CustomObj.Piano.transmission = this.HappyData[3];
+        this.CustomObj.Piano.roughness = this.HappyData[4];
+        this.CustomObj.Piano.sensitivity = this.HappyData[5];
+        this.CustomObj.Piano.intensity = this.HappyData[6];
 
-        this.CustomObj.sad.palette = this.SadData[0];
-        this.CustomObj.sad.shape = this.SadData[1];
-        this.CustomObj.sad.texture = this.SadData[2];
-        this.CustomObj.sad.transmission = this.SadData[3];
-        this.CustomObj.sad.roughness = this.SadData[4];
-        this.CustomObj.sad.sensitivity = this.SadData[5];
-        this.CustomObj.sad.intensity = this.SadData[6];
+        this.CustomObj.Drum.palette = this.SadData[0];
+        this.CustomObj.Drum.shape = this.SadData[1];
+        this.CustomObj.Drum.texture = this.SadData[2];
+        this.CustomObj.Drum.transmission = this.SadData[3];
+        this.CustomObj.Drum.roughness = this.SadData[4];
+        this.CustomObj.Drum.sensitivity = this.SadData[5];
+        this.CustomObj.Drum.intensity = this.SadData[6];
         
         this.CustomObj.exciting.palette = this.ExcitingData[0];
         this.CustomObj.exciting.shape = this.ExcitingData[1];
