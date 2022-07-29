@@ -98,12 +98,6 @@ img:active{
 
 
 
-.movepageContainer {
-    /* float: right;
-    margin-top: -190px;
-    margin-right: 60px; */
-}
-
 
 .arrow {
     cursor: pointer;
@@ -146,4 +140,48 @@ img:active{
 }
 .arrow:active:after, .arrow:active:before {
     background: rgb(31, 0, 155);
+}
+
+@media (max-width: 1500px) {
+    .question_group{
+        margin-top: 50px;
+        margin-left: 200px;
+        background-color: antiquewhite;
+        width: 56.2%;
+        border-radius: 5px;
+        font-size: 30px;
+    }
+    
+    .questionButton {
+        padding: 0;
+        margin: 10px 20px 10px 0;
+        font-weight: 600;
+        font-size: 22px;
+        text-align: center;
+        line-height: 50px;
+        color: #FFF;
+        border-radius: 5px;
+        transition: all 0.2s ;
+        background: #767676;
+        width: 200px;
+        height: 70px;
+    }
+
+    .musicContainer {
+        float: right;
+        width: 500px;
+        height: 800px;
+        background-color: transparent;
+        border-radius: 1rem;
+        margin-top: -750px;
+        margin-right: -100px;
+    }
+
+    #ProgressBar{
+        margin-left: 200px;
+        margin-top: 530px;
+        width: 810px;
+        height: 40px;
+    }
+    
 }

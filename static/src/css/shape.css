@@ -4,12 +4,26 @@ body {
   width: 100vw;
   font-family: 'Poppins', sans-serif;
   background: #f4f7f5;
+  position: relative;
 }
 
 input[type=checkbox] {
 
   zoom: 2.5;
   
+}
+
+
+/* drum UI */
+img{
+  width: 100px;
+  height: 80px;
+}
+
+img:active{
+  transform: scale(0.7);
+  background-image: url(../images/shadow.png);
+  background-size: 100px, 80px;
 }
 
 
@@ -57,132 +71,6 @@ input[type=checkbox] {
   opacity: 1;
 }
 
-/* 기본 팔레트 */
-/* #palette1 {
-  border: 2px solid transparent;
-} */
-
-#palette1 .color:nth-child(1) {
-  background: #264653;
-}
-#palette1 .color:nth-child(2) {
-  background: #2a9d8f;
-}
-#palette1 .color:nth-child(3) {
-  background: #e9c46a;
-}
-#palette1 .color:nth-child(4) {
-  background: #f4a261;
-}
-#palette1 .color:nth-child(5) {
-  background: #e76f51;
-}
-
-/* 파스텔톤 팔레트 */
-#palette2 .color:nth-child(1) {
-  background: #CDB4DB;
-}
-#palette2 .color:nth-child(2) {
-  background: #FFC8DD;
-}
-#palette2 .color:nth-child(3) {
-  background: #FFAFCC;
-}
-#palette2 .color:nth-child(4) {
-  background: #BDE0FE;
-}
-#palette2 .color:nth-child(5) {
-  background: #A2D2FF;
-}
-
-
-/* 비비드 팔레트 */
-#palette3 .color:nth-child(1) {
-  background: #ffbe0b
-}
-#palette3 .color:nth-child(2) {
-  background: #fb5607
-}
-#palette3 .color:nth-child(3) {
-  background: #ff006e;
-}
-#palette3 .color:nth-child(4) {
-  background: #8338ec;
-}
-#palette3 .color:nth-child(5) {
-  background: #3a86ff;
-}
-
-
-/* 여름 팔레트 */
-#palette4 .color:nth-child(1) {
-  background: #5aa9e6
-}
-#palette4 .color:nth-child(2) {
-  background: #7fc8f8
-}
-#palette4 .color:nth-child(3) {
-  background: #f9f9f9
-}
-#palette4 .color:nth-child(4) {
-  background: #ffe45e
-}
-#palette4 .color:nth-child(5) {
-  background: #ff6392
-}
-
-
-/* 가을 팔레트 */
-#palette5 .color:nth-child(1) {
-  background: #ea8c55
-}
-#palette5 .color:nth-child(2) {
-  background: #c75146
-}
-#palette5 .color:nth-child(3) {
-  background: #ad2e24
-}
-#palette5 .color:nth-child(4) {
-  background: #81171b
-}
-#palette5 .color:nth-child(5) {
-  background: #540804
-}
-
-/* 살몬 팔레트 */
-#palette6 .color:nth-child(1) {
-  background: #f7b267
-}
-#palette6 .color:nth-child(2) {
-  background: #f79d65
-}
-#palette6 .color:nth-child(3) {
-  background: #f4845f
-}
-#palette6 .color:nth-child(4) {
-  background: #f27059
-}
-#palette6 .color:nth-child(5) {
-  background: #f25c54
-}
-
-
-/* 포레스트 팔레트 */
-#palette7 .color:nth-child(1) {
-  background: #dad7cd
-}
-#palette7 .color:nth-child(2) {
-  background: #a3b18a
-}
-#palette7 .color:nth-child(3) {
-  background: #588157;
-}
-#palette7 .color:nth-child(4) {
-  background: #3a5a40;
-}
-#palette7 .color:nth-child(5) {
-  background: #344e41;
-}
 
 
 
@@ -277,7 +165,7 @@ input[type=checkbox] {
   box-shadow: 0 10px 20px #dbdbdb;
   margin-top: 30px;
   display: inline-block;
-  margin-left: 140px;
+  margin-left: 30px;
 }
 
 
@@ -819,7 +707,7 @@ div[slider] > input[type=range]::-ms-tooltip {
 
 
 
-@media (min-width: 1500px) {
+/* @media (min-width: 1500px) { */
   
   .menuContainer {
     margin-top: 10px;
@@ -1381,6 +1269,27 @@ div[slider] > input[type=range]::-ms-tooltip {
    .IroSlider{
      visibility: hidden;
    }
+
+
+/* } */
+
+
+
+@media (max-width: 1500px) {
+  /* drum UI */
+  img{
+    margin-left: -50px;
+    width: 150px;
+    height: 120px;
+  }
+
+  img:active{
+    transform: scale(0.7);
+    background-image: url(../images/shadow.png);
+    background-size: 100px, 80px;
+  }
+
+
 
 
 }

@@ -1,12 +1,3 @@
-/* * {
-	 box-sizing: border-box;
-	 -webkit-tap-highlight-color: transparent;
-}
- html, body {
-	 height: 100%;
-	 touch-action: manipulation;
-} */
-
 .buttonContainer {
 	margin-left: 1500px;
 	margin-top: -700px;
@@ -122,4 +113,126 @@
 
 #everythingButton{
 	background-color: rgb(237, 255, 214);
+}
+
+
+@media (max-width: 1500px) {
+	.buttonContainer {
+		margin-left: 1200px;
+		margin-top: -400px;
+		margin-bottom: 140px;
+	}
+	
+	 body {
+		 display: flex;
+		 flex-direction: column;
+		 justify-content: center;
+		 align-items: center;
+		 background-color: #f4f5f6;
+		 font-size: 14px;
+		 color: #666;
+	}
+	 .button {
+		 position: relative;
+		 padding: 0;
+		 width: 150px;
+		 height: 150px;
+		 border: 4px solid rgb(161, 169, 181);
+		 outline: none;
+		 /* background-color: #dbe5ee; */
+		 border-radius: 40px;
+		 box-shadow: -6px -20px 35px #fff, -6px -10px 15px #fff, -20px 0px 30px #fff, 6px 20px 25px rgba(0, 0, 0, 0.2);
+		 transition: 0.13s ease-in-out;
+		 cursor: pointer;
+		 margin-bottom: 30px;
+	}
+	 .button:active {
+		 box-shadow: none;
+	}
+	 .button:active .button__content {
+		 box-shadow: none;
+	}
+	 .button:active .button__content .button__text, .button:active .button__content .button__icon {
+		 transform: translate3d(0px, 0px, 0px);
+	}
+	 .button__content {
+		 position: relative;
+		 /* display: grid; */
+		 padding: 20px;
+		 width: 100%;
+		 height: 100%;
+		 /* grid-template-columns: 1fr 1fr 1fr 1fr;
+		 grid-template-rows: 1fr 1fr; */
+		 box-shadow: inset 0px -8px 0px #ddd, 0px -8px 0px #f4f5f6;
+		 border-radius: 40px;
+		 transition: 0.13s ease-in-out;
+		 z-index: 1;
+	}
+	 .button__icon {
+		 position: relative;
+		 display: flex;
+		 transform: translate3d(0px, -4px, 0px);
+		 /* grid-column: 4; */
+		 align-self: start;
+		 justify-self: end;
+		 width: 32px;
+		 height: 32px;
+		 transition: 0.13s ease-in-out;
+	}
+	 .button__icon svg {
+		 width: 32px;
+		 height: 32px;
+		 fill: #aaa;
+	}
+	 .button__text {
+		 width: 90px;
+		 position: relative;
+		 transform: translate3d(0px, -4px, 0px);
+		 margin-top: 40px;
+		 margin-left: 8px;
+		 align-self: end;
+		 text-align: center;
+		 background-color: #888;
+		 color: transparent;
+		 text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
+		 -webkit-background-clip: text;
+		 -moz-background-clip: text;
+		 background-clip: text;
+		 transition: 0.13s ease-in-out;
+		 color: black;
+		 font-size: 18px;
+	}
+	
+	 .credits {
+		 margin-top: 24px;
+	}
+	 .credits__reference {
+		 display: inline-block;
+		 border-bottom: 1px solid transparent;
+		 color: #09f;
+		 text-decoration: none;
+		 transition: ease-in 0.13s;
+	}
+	 .credits__reference:hover {
+		 border-bottom-color: #09f;
+	}
+	
+	
+	#soundButton{
+		background-color: aliceblue;
+	}
+	
+	#soundvisualButton{
+		background-color: rgb(255, 239, 214);
+	}
+	
+	#soundhapticButton{
+		background-color: rgb(255, 214, 214);
+	}
+	
+	#everythingButton{
+		background-color: rgb(237, 255, 214);
+	}
+	
+
 }

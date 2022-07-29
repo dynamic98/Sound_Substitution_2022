@@ -126,3 +126,11 @@ form {
 .button-82-pushable:focus:not(:focus-visible) {
   outline: none;
 }
+
+
+@media (max-width: 1500px) {
+  .testmenuGroups {
+    margin-top: 300px;
+    margin-left: 100px;
+}
+}

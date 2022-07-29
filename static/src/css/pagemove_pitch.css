@@ -47,3 +47,11 @@
 .arrow:active:after, .arrow:active:before {
     background: rgb(31, 0, 155);
 }
+
+@media (max-width: 1500px) {
+    .movepageContainer {
+        float: right;
+        margin-top: 390px;
+        margin-right: 220px;
+    }
+}

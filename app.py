@@ -158,6 +158,7 @@ def wuc():
 @app.route('/SaveUserCustom', methods=['POST'])
 def SaveUserCustom():
     data = request.get_json()
+    print('data', data)
     # print(type(data))
     WriteUserCustom(data)
     # left = data['left']
@@ -199,6 +200,7 @@ def making_tool():
 def custom_data_dev():
   if request.method=='POST':
     data = GetUserCustom(UserName)
+    print('user data', data)
   else:
     pass
   return render_template('customization_dev.html', data=data)
