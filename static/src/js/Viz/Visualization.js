@@ -55,7 +55,7 @@ export class Visualization {
             drum: {},
             savedPiano: {},
             savedDrum: {},
-            NowLocation: {}
+            // NowLocation: {}
         }
         for (let instrumentType in this.instruments) {
             this.instruments[instrumentType].visualNoteList = []
@@ -157,6 +157,31 @@ export class Visualization {
         this.progessBar = new THREE.Mesh(geometry, material);
         this.progessBar.renderOrder = this.bloom.getPassForMoonLight()
         this.threeSystem.addToScene(this.progessBar, "progressBar")
+        
+//    createNowLocation(positionX) {
+//            let instrumentType = "NowLocation"
+//            let instrument = this.instruments["NowLocation"]
+//
+//            // instrument.geometryManager.setRadius(10)
+//           let newPositionX = positionX * this.counterTimer.getTimer() - this.Bias_X
+//            this.instruments[instrumentType].geometryManager.selectedGeometryType = "NowLocation"
+//            let positionY = 0;
+//            this.instruments[instrumentType].colorManager.setColor(0.7, 0.8, 0.9);
+//
+//            let texture = instrument.textureManager.getTexture()
+//            let color = instrument.colorManager.getColor();
+//            let transmission = 0.01
+//
+//            let visualNote = new VisualNote(
+//                instrument.materialManager.createMaterial(color, texture, transmission),
+//                instrument.geometryManager.getGeometry(),
+//                newPositionX,
+//                positionY
+//            )
+//            visualNote.getMesh().position.setZ(0);
+//            visualNote.setRenderOption(this.bloom.getPassForMoonLight())
+//            this.threeSystem.addToGroup(visualNote.getMesh(), "NowLocation")
+//            instrument.visualNoteList.push(visualNote)
     }
 
 
