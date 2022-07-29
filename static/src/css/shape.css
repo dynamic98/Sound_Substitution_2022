@@ -9,7 +9,7 @@ body {
 
 input[type=checkbox] {
 
-  zoom: 2.5;
+  zoom: 2.0;
   
 }
 
@@ -327,10 +327,6 @@ video {
 }
 
 
-.customMenu {
-
-  margin-left: 0px;
-}
 
 
 /* .hapticPositionButton {
@@ -435,42 +431,7 @@ video {
 }
 
 
-input[type="range"]{
-  -webkit-appearance:none;
-  margin-left: 30px;
-  width:300px;
-  height:20px;
-  /* margin:10px 50px; */
-  background: linear-gradient(to right, #3f3c3b 0%, #bc827f 100%);
-  background-size:300px 10px;
-  background-position:center;
-  background-repeat:no-repeat;
-  overflow:hidden;
-  outline: none;
-}
 
-
-input[type="range"]::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  width:20px;
-  height:20px;
-  background:#dd4b0c;
-  position:relative;
-  z-index:3;
-  box-shadow:0 0 5px 0 rgba(0,0,0,0.3);
-}
-
-input[type="range"]::-webkit-slider-thumb:after{
-  content:" ";
-  width:300px;
-  height:10px;
-  position:absolute;
-  z-index:1;
-  right:20px;
-  top:5px;
-  background: #303030;
-  background: linear-gradient(to right, #f088fc 1%, #AC6CFF 70%);
-}
 
 
 .musicContainer {
@@ -487,7 +448,6 @@ input[type="range"]::-webkit-slider-thumb:after{
 }
 
 
-
 h4 .bigTitle {
   float: left;
   font-size: 14px;
@@ -498,192 +458,11 @@ p .smallTitle {
 }
 
 hr {
-  width : 80%;
+  width : 20%;
 }
 
 
 
-
-/* slider UI */
-
-[slider] {
-  position: relative;
-  height: 14px;
-  border-radius: 10px;
-  text-align: left;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  margin-left: 20px;
-  width: 90%
-}
-
-[slider] > div {
-  position: absolute;
-  left: 13px;
-  right: 15px;
-  height: 14px;
-}
-
-[slider] > div > [inverse-left] {
-  position: absolute;
-  left: 0;
-  height: 14px;
-  border-radius: 10px;
-  background-color: rgb(210, 80, 80);
-  margin: 0 7px;
-}
-
-[slider] > div > [inverse-right] {
-  position: absolute;
-  right: 0;
-  height: 14px;
-  border-radius: 10px;
-  background-color: rgb(99, 129, 152);
-  margin: 0 7px;
-}
-
-[slider] > div > [range] {
-  position: absolute;
-  left: 0;
-  height: 14px;
-  border-radius: 14px;
-  background-color: #529b6b;
-}
-
-[slider] > div > [thumb] {
-  position: absolute;
-  top: -7px;
-  z-index: 2;
-  height: 28px;
-  width: 28px;
-  text-align: left;
-  margin-left: -11px;
-  cursor: pointer;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-  background-color: #FFF;
-  border-radius: 50%;
-  outline: none;
-}
-
-[slider] > input[type=range] {
-  position: absolute;
-  pointer-events: none;
-  -webkit-appearance: none;
-  z-index: 3;
-  height: 14px;
-  top: -2px;
-  width: 100%;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  -moz-opacity: 0;
-  -khtml-opacity: 0;
-  opacity: 0;
-}
-
-div[slider] > input[type=range]::-ms-track {
-  -webkit-appearance: none;
-  background: transparent;
-  color: transparent;
-}
-
-div[slider] > input[type=range]::-moz-range-track {
-  -moz-appearance: none;
-  background: transparent;
-  color: transparent;
-}
-
-div[slider] > input[type=range]:focus::-webkit-slider-runnable-track {
-  background: transparent;
-  border: transparent;
-}
-
-div[slider] > input[type=range]:focus {
-  outline: none;
-}
-
-div[slider] > input[type=range]::-ms-thumb {
-  pointer-events: all;
-  width: 28px;
-  height: 28px;
-  border-radius: 0px;
-  border: 0 none;
-  background: red;
-}
-
-div[slider] > input[type=range]::-moz-range-thumb {
-  pointer-events: all;
-  width: 28px;
-  height: 28px;
-  border-radius: 0px;
-  border: 0 none;
-  background: red;
-}
-
-div[slider] > input[type=range]::-webkit-slider-thumb {
-  pointer-events: all;
-  width: 28px;
-  height: 28px;
-  border-radius: 0px;
-  border: 0 none;
-  background: red;
-  -webkit-appearance: none;
-}
-
-div[slider] > input[type=range]::-ms-fill-lower {
-  background: transparent;
-  border: 0 none;
-}
-
-div[slider] > input[type=range]::-ms-fill-upper {
-  background: transparent;
-  border: 0 none;
-}
-
-div[slider] > input[type=range]::-ms-tooltip {
-  display: none;
-}
-
-[slider] > div > [sign] {
-  opacity: 0;
-  position: absolute;
-  margin-left: -11px;
-  top: -39px;
-  z-index:3;
-  background-color: transparent;
-  color: #fff;
-  width: 28px;
-  height: 28px;
-  border-radius: 28px;
-  -webkit-border-radius: 28px;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  text-align: center;
-}
-
-[slider] > div > [sign]:after {
-  position: absolute;
-  content: '';
-  left: 0;
-  border-radius: 16px;
-  top: 19px;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-top-width: 16px;
-  border-top-style: solid;
-  border-top-color: transparent;
-}
-
-
-[slider] > div > [sign] > span {
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 30px;
-}
-
-[slider]:hover > div > [sign] {
-  opacity: 1;
-}
 
 
 .btnBlueGreen {
@@ -856,7 +635,7 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: -20px;
+    margin-top: -30px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
@@ -869,27 +648,13 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 300px;
+    margin-top: 240px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
     float: right;
-    height: 8%;
+    height: 15%;
   }
-
-  .visualContainer_canvas {
-    background-color: rgb(252, 252, 252);
-    position: absolute;
-    border-radius: 1rem;
-    box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 350px;
-    display: inline-block;
-    margin-left: 10px;
-    width: 500px;
-    float: right;
-    height: 8%;
-  }
-
 
 
 
@@ -900,12 +665,12 @@ div[slider] > input[type=range]::-ms-tooltip {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 490px;
+    margin-top: 410px;
     display: inline-block;
     margin-left: 10px;
     width: 500px;
     float: right;
-    height: 15%;
+    height: 22%;
   }
 
 
@@ -967,6 +732,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   
   p .smallTitle {
     font-size: 14px;
+
   }
 
   p #liner {
@@ -1037,11 +803,9 @@ div[slider] > input[type=range]::-ms-tooltip {
 
   input[type="range"]{
     -webkit-appearance:none;
-    margin-left: 30px;
+    margin-left: 40px;
     width:400px;
     height:20px;
-    /* margin:10px 50px; */
-    background: linear-gradient(to right, #e0b7aa 0%, #d64e05 100%);
     background-size:500px 10px;
     background-position:center;
     background-repeat:no-repeat;
@@ -1050,27 +814,7 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
   
   
-  input[type="range"]::-webkit-slider-thumb{
-    -webkit-appearance:none;
-    width:20px;
-    height:20px;
-    background:#460505;
-    position:relative;
-    z-index:3;
-    box-shadow:0 0 5px 0 rgba(0,0,0,0.3);
-  }
   
-  input[type="range"]::-webkit-slider-thumb:after{
-    content:" ";
-    width:00px;
-    height:10px;
-    position:absolute;
-    z-index:1;
-    right:20px;
-    top:5px;
-    background: #303030;
-    background: linear-gradient(to right, #f088fc 1%, #AC6CFF 70%);
-  }
 
   .emotionContainer {
     width: 500px;
@@ -1226,11 +970,11 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
 
   #saveGlyph{
-    margin-left: 20px;
+    margin-left: 30px;
   }
 
   #eraseGlyph{
-    margin-left: 20px;
+    margin-left: 30px;
   }
 
 
@@ -1278,9 +1022,10 @@ div[slider] > input[type=range]::-ms-tooltip {
 @media (max-width: 1500px) {
   /* drum UI */
   img{
-    margin-left: -50px;
-    width: 150px;
-    height: 120px;
+    margin-top: -160px;
+    margin-left: 50px;
+    width: 200px;
+    height: 150px;
   }
 
   img:active{
@@ -1289,6 +1034,259 @@ div[slider] > input[type=range]::-ms-tooltip {
     background-size: 100px, 80px;
   }
 
+  .shapeContainer {
+    margin-left: 30px;
+    box-shadow: 0 10px 20px #dbdbdb;
+    width: 130px;
+    height: 650px;
+    border-radius: 30px;
+    padding: 10px 0px;
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    float: left;
+  }
+
+  .colorContainer {
+    margin-top: 10px;
+    height: 650px;
+    width: 130px;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 20px #dbdbdb;
+    float: left;
+  }
+
+  .btn-square-md {
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    width: 50px !important;
+    height: 50px !important;
+    padding: 0px;
+    font-size:12px;
+    clip-path: inset(10% 10% 10% 10%);
+
+}
+
+  .btn-circle-md {
+      margin-top: 20px;
+      margin-left: 40px;
+      height: 50px;
+      width: 50px;
+      clip-path: circle(50% at 50% 50%);
+  }
+
+
+  .btn-triangle-md {
+      margin-left: 40px;
+      margin-bottom: 20px;
+      width: 50px;
+      height: 50px;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+
+  .btn-decagon-md {
+    margin-left: 40px;
+    width: 50px;
+    height: 50px;
+    clip-path: polygon(61% 25%, 53% 0%, 42% 24%, 15% 5%, 26% 32%, 2% 25%, 24% 47%, 1% 54%, 25% 61%, 5% 82%, 35% 75%, 30% 96%, 52% 77%, 79% 95%, 73% 74%, 100% 83%, 80% 62%, 100% 42%, 76% 37%, 87% 10%);
+  }
+
+
+  .btn-star-md {
+      margin-left: 40px;
+      margin-bottom: 20px;
+      width: 55px;
+      height: 55px;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  .textureButton {
+    margin-top: 5px;
+    margin-left: 45px;
+    width: 45px;
+    height: 45px;
+    outline: 5px solid transparent;
+  }
+
+  .pianoContainer {
+    position: absolute;
+    bottom: 0px;
+    margin-left: 330px;
+    margin-bottom: -60px;
+    overflow: auto;
+  }
+
+  ul {
+      float:left;
+      width:48%;
+      list-style-type: none;
+      padding: 0;
+      display: block;
+  }
+
+  li {
+      display: block;
+      float: left;
+      width: 30%;
+  }
+
+  ul.x2{
+      width:100%;
+  }
+
+  ul.x2 li{
+      width:10%;
+  }
+
+
+  ul {
+    height:32em;
+    width:60em;
+    /* margin:5em auto; */
+    /* padding:3em 0 0 3em; */
+    position:relative;
+    border-radius:1em;
+  }
+
+  li {
+    margin:0;
+    padding:0;
+    list-style:none;
+    position:relative;
+    float:left
+  }
+
+  ul .white {
+    margin-top: 200px;
+    height:9em;
+    width:2.6em;
+    z-index:1;
+    border-left:1px solid #bbb;
+    border-bottom:1px solid #bbb;
+    border-radius:0 0 5px 5px;
+    box-shadow:-1px 0 0 rgba(255,255,255,0.8) inset,0 0 5px #ccc inset,0 0 3px rgba(0,0,0,0.2);
+    background:linear-gradient(to bottom,#eee 0%,#fff 100%)
+  }
+
+  ul .white:active {
+    margin-top: 200px;
+    border-top:1px solid #777;
+    border-left:1px solid #999;
+    border-bottom:1px solid #999;
+    box-shadow:2px 0 3px rgba(0,0,0,0.1) inset,-5px 5px 20px rgba(0,0,0,0.2) inset,0 0 3px rgba(0,0,0,0.2);
+    background:linear-gradient(to bottom,#fff 0%,#e9e9e9 100%)
+  }
+
+
+  .black {
+    height:4.5em;
+    width:1.9em;
+    margin:0 0 0 -1em;
+    margin-top: 200px;
+    margin-right: -1.5em;
+    margin-left: -1.0em;
+    z-index:2;
+    border:1px solid #000;
+    border-radius:0 0 3px 3px;
+    box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -5px 2px 3px rgba(0,0,0,0.6) inset,0 2px 4px rgba(0,0,0,0.5);
+    background:linear-gradient(45deg,#222 0%,#555 100%)
+  }
+
+  .black:active {
+    margin-top: 200px;
+    box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -2px 2px 3px rgba(0,0,0,0.6) inset,0 1px 2px rgba(0,0,0,0.5);
+    background:linear-gradient(to right,#444 0%,#222 100%)
+  }
+
+  .a,.g,.f,.d,.c {
+    margin:0 0 0 -1em
+  }
+
+  ul li:first-child {
+    border-radius:5px 0 5px 5px
+  }
+
+  ul li:last-child {
+    border-radius:0 5px 5px 5px
+  }
+
+  #ProgressBar{
+    margin-left: 20px;
+    margin-top: 470px;
+    width: 800px;
+    height: 50px;
+  }
+
+  /* visual menu UI*/
+
+  .visualContainer_pitch {
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px #dbdbdb;
+    margin-top: -40px;
+    display: inline-block;
+    margin-left: 15px;
+    width: 280px;
+    float: right;
+    height: 30%;
+  }
+
+  .visualContainer_beat {
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px #dbdbdb;
+    margin-top: 210px;
+    display: inline-block;
+    margin-left: 15px;
+    width: 280px;
+    float: right;
+    height: 14%;
+  }
+
+
+  /* haptic menu UI*/
+
+  .hapticContainer {
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px #dbdbdb;
+    margin-top: 340px;
+    display: inline-block;
+    margin-left: 15px;
+    width: 280px;
+    float: right;
+    height: 22%;
+  }
+
+  .musicContainer {
+    background-color: transparent;
+    height: 10%;
+    border-radius: 1rem;
+    margin-top: 530px;
+    display: inline-block; 
+    margin-left: -40px;
+    width: 400px;
+  }
+
+  .videoControlButton {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-size: 12px;
+  }
 
 
 

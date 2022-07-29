@@ -19,7 +19,7 @@
 
   <!-- Styles -->
   <link type="text/css" href="../static/src/css/shape.css" rel="stylesheet">
-  <link type="text/css" href="../static/src/css/navi.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/range.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
   <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -173,15 +173,16 @@
 
 
   <section class="visualContainer_pitch">
-    <div class="pitchDIV">Pitch Custom</div>
+    <br>
+    <div class="pitchDIV" style="margin-left: 20px; font-size: 18px;">Pitch Custom</div>
     <div class="customMenu">
       <br>
       <p class="smallTitle" style="display:inline;">간격</p>
       <input class="range" type="range" name="intensity" id="slide-pitch-interval" value="70" min="0" max="100" style="display:inline;"></input>
-      <hr>
+      <hr class="hrs">
       <p class="smallTitle" style="display:inline;">크기</p>
       <input class="range" type="range" name="intensity" id="slide-pitch-size" value="50" min="0" max="100" style="display:inline;"></input>
-      <hr>
+      <hr class="hrs">
       <p class="smallTitle" id="liner" style="display:inline;">선의 유무</p>
       &nbsp&nbsp&nbsp&nbsp
       <input class="checkbox" type="checkbox" id="pitch-checkbox" checked style="display:inline;">
@@ -189,7 +190,8 @@
   </section>
 
   <section class="visualContainer_beat">
-    <div class="beatDIV">Beat Custom</div>
+    <br>
+    <div class="beatDIV" style="margin-left: 20px; font-size: 18px;">Beat Custom</div>
     <div class="customMenu">
       <br>
       <p class="smallTitle" style="display:inline;">크기</p>
@@ -197,29 +199,22 @@
     </div>
   </section>
 
-  <!-- <section class="visualContainer_canvas">
-    <div class="canvasDIV">Canvas Custom</div>
-    <div class="customMenu">
-      <br>
-      <p class="smallTitle" style="display:inline;">화면</p>
-      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
-    </div>
-  </section> -->
 
   <section class="hapticContainer">
-    <div class="canvasDIV">Haptic Custom</div>
+    <br>
+    <div class="canvasDIV" style="margin-left: 20px; font-size: 18px;">Haptic Custom</div>
     <div class="customMenu">
       <br>
       <p class="smallTitle" style="display:inline;">감도</p>
-      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
-      <hr>
+        <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+      <hr class="hrs">
       <p class="smallTitle" style="display:inline;">세기</p>
-      <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
+        <input class="range" type="range" name="intensity" value="0" min="0" max="100" style="display:inline;"></input>
     </div>
   </section>
 
   <section class="musicContainer">
-    <button class="videoControlButton" id="play" style="display:inline;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
+    <!-- <button class="videoControlButton" id="play" style="display:inline;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button> -->
     <button class="videoControlButton" id="save" style="display:inline;"><span class="glyphicon glyphicon-save" id="saveGlyph"></span></button>
     <button class="videoControlButton" id="reset" style="display:inline;"><span class="glyphicon glyphicon-erase" id="eraseGlyph"></span></button>
   </section>
@@ -271,7 +266,8 @@
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
   <script type="module" defer src="../static/src/js/dist/exploration.js"></script>
   <script type="module" defer src="../static/src/js/forUI/buttonColor.js"></script>
-  <script type="module" defer src="../static/src/js/forUI/changePlay.js"></script>
+  <!-- <script type="module" defer src="../static/src/js/forUI/changePlay.js"></script> -->
+  <script type="module" defer src="../static/src/js/forUI/rangeSlider.js"></script>
   <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
   <!-- <script type="module" src="/static/src/js/forUI/ColorPicker.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>

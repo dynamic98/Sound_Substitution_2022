@@ -1212,6 +1212,20 @@ div[slider] > input[type=range]::-ms-tooltip {
 
 /* } */
 
+  /* drum UI */
+  img{
+    margin-top: -20px;
+    margin-left: -10px;
+    width: 220px;
+    height: 190px;
+  }
+
+  img:active{
+    transform: scale(0.7);
+    background-image: url(../images/shadow.png);
+    background-size: 100px, 80px;
+  }
+
 
 @media (max-width: 1500px) {
   #ProgressBar{
@@ -1353,4 +1367,18 @@ div[slider] > input[type=range]::-ms-tooltip {
   ul li:last-child {
     border-radius:0 5px 5px 5px
   }
+
+    /* drum UI */
+    img{
+      margin-top: -20px;
+      margin-left: -90px;
+      width: 200px;
+      height: 150px;
+    }
+  
+    img:active{
+      transform: scale(0.7);
+      background-image: url(../images/shadow.png);
+      background-size: 100px, 80px;
+    }
 }
