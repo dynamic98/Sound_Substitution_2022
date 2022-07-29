@@ -70,7 +70,7 @@ function main() {
     bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     piano.setNoteDuration(300);
-    
+
     piano.assignEventOnPianoRow("mousedown", draw, WritingMusicSheet.setMusicArray, 1, 3)
     piano.assignEventOnPianoRow("mousedown", draw, WritingMusicSheet.setMusicArray, 2, 4)
     piano.assignEventOnPianoRow("mousedown", draw, WritingMusicSheet.setMusicArray, 3, 5)
@@ -118,7 +118,6 @@ function update() {
         }else{ //Pictured
             console.log("What Should We Do In this State?");
             visualization.counterTimer.reset();
-            // visualization.MoveNowLocation(kandinsky.getPitchWidth())
             visualization.moveProgressBar(kandinsky.getPitchWidth())
 
         }       
@@ -132,7 +131,6 @@ function update() {
         visualization.reset();
         bpmTimer.restart()
         visualization.createProgressBar(10,(0.8, 0.5, 0.5),0.6)
-        // visualization.createNowLocation(kandinsky.getPitchWidth())
         LoopCount = 0;
         for (let i=0; i<OneLoopMusicLength; i++){
             let currentIndex = LoopCount*OneLoopMusicLength+i
@@ -146,7 +144,6 @@ function update() {
                 kandinsky.calculate(pitchAndEnergy);
                 visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
                 visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                // console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
                 visualization.createConnectionLine("savedPiano")
             }
         }
@@ -155,7 +152,6 @@ function update() {
         console.log("this time");
         visualization.reset();
         visualization.createProgressBar(10,(0.8, 0.5, 0.5),0.6)
-        // visualization.createNowLocation(kandinsky.getPitchWidth())
         LoopCount ++;
         console.log(LoopCount, Math.floor(LoopAmount))
         if(LoopCount<Math.floor(LoopAmount)){
@@ -172,7 +168,6 @@ function update() {
                     kandinsky.calculate(pitchAndEnergy);
                     visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
                     visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                    // console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
                     visualization.createConnectionLine("savedPiano")
                 }
             }
@@ -189,7 +184,6 @@ function update() {
                         kandinsky.calculate(pitchAndEnergy);
                         visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
                         visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                        // console.log("Create Mesh!!", CurrentIndex, LastIndex, CurrentKeyboardPitch);
                         visualization.createConnectionLine("savedPiano")
                     }
             }
@@ -197,7 +191,6 @@ function update() {
 
     } else if (bpmTimer.isUnderFourBeat()) {
             if(progressTimer.getPlayed()){
-            // visualization.MoveNowLocation(kandinsky.getPitchWidth());
             visualization.moveProgressBar(kandinsky.getPitchWidth())
             }
         }
@@ -205,7 +198,6 @@ function update() {
     visualization.render();
     visualization.update();
     stats.end();
-    // WritingMusicSheet.setLastIndex(WritingMusicSheet.getCurrentIndex())
 }
 
 

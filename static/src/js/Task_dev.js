@@ -38,8 +38,8 @@ let kandinsky;
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
 let switcher = new Switcher();
-//bloom length 
-let visualization = new Visualization(1)
+let bloom_length = 1
+let visualization = new Visualization(bloom_length);
 let progressTime = 15;
 let progressTimer = new ProgressTimer(progressTime, document.getElementById("ProgressBar"));
 

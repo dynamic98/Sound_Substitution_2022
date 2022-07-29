@@ -3,7 +3,7 @@ export class Kandinsky {
         this.bpm = bpm;
         this.MaxVolume = MaxVolume;
         this.canvasSizeY = 30
-        this.RangeY = 50
+        this.RangeY = 70
         this.canvasSizeX = 200
         this.MIDISCOPE = 35;
         // this.midiScope=35;
@@ -35,6 +35,7 @@ export class Kandinsky {
 
         this.pitch = pitch;
         this.energy = energy / this.MaxVolume;
+        console.log(this.energy)
         this.pitchRadius = this.canvasSizeY / this.MIDISCOPE / 2
         this.pitchHeight = this.RangeY / this.MIDISCOPE
         this.pitchWidth = this.canvasSizeX / (60 * frameRate / this.bpm * 4) // 
@@ -59,6 +60,7 @@ export class Kandinsky {
     }
 
     getPitchHeight() {
+        // return this.pitchHeight * (this.pitch - 65) - (this.canvasSizeY / 2);
         return this.pitchHeight * (this.pitch - 65) - (this.canvasSizeY / 2);
     }
 
@@ -74,8 +76,8 @@ export class Kandinsky {
         this.MaxVolume = MaxVolume;
     }
     setRange(RangeY) {
-        // RangeY 0~100 -> mapping range into 0~60
-        this.RangeY = RangeY / 100 * 70;
+        // this.RangeY = RangeY / 100 * 70;
+        this.RangeY = RangeY
     }
 
 }
