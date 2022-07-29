@@ -30,6 +30,13 @@ import {
 }
 from './forUI/pitchBeatSwitcher.js'
 
+import {
+    StageManager
+} from './Utility/stageManager.js'
+
+// let stateManager = new StageManager("piano", "drum")
+// stateManager.getState()
+
 pitchBeatSwitcher()
 
 let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
