@@ -1047,7 +1047,7 @@ div[slider] > input[type=range]::-ms-tooltip {
     color: white;
     border: none;
     padding: 5px;
-    font-size: 31px;
+    font-size: 28px;
     height: 100px;
     width: 100px;
     box-shadow: 0 2px 4px darkslategray;
