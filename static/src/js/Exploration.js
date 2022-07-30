@@ -201,6 +201,7 @@ function update() {
 function draw_piano(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
+
     visualization.setColor("piano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
     visualization.createVisualAbsNote("piano", kandinsky.getPitchEnergy(), NoteInterval*counter, kandinsky.getPitchHeight())
     if(MyUserCustom.CustomObj.Piano.line){
@@ -211,7 +212,7 @@ function draw_piano(pitch, energy, midi) {
 function draw_drum(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
-    visualization.setColor("drum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 0.5)
+    visualization.setColor("drum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
     visualization.createVisualAbsNote("drum", kandinsky.getPitchEnergy(), NoteInterval*counter, kandinsky.getPitchHeight())
     // visualization.createConnectionLine("drum")
     counter++
@@ -221,11 +222,11 @@ function set_pitch_palette(num, set){
     MyUserCustom.CustomObj.Piano.palette_num = num;
     MyUserCustom.CustomObj.Piano.palette_set = set;
     pitch_palette = parse_pitch_palette(set);
+
     // console.log(num, set)
 }
 function set_beat_color(color){
     MyUserCustom.CustomObj.Drum.color = color
-    // console.log(color)
 
 }
 function parse_pitch_palette(set){
@@ -235,6 +236,9 @@ function parse_pitch_palette(set){
         let hue = parseFloat(split_set[0])/360;
         let saturation = parseFloat(split_set[1])/100
         let lightness = parseFloat(split_set[2])/100
+        if(MyUserCustom.CustomObj.Piano.palette_num=='10'){
+            lightness=1
+        }
         parsed_palette[i] = [hue, saturation, lightness]
     }
     return parsed_palette;

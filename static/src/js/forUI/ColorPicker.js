@@ -10,7 +10,7 @@ export class ColorPicker {
         this.palettes = document.getElementById("palettes_candi");
         this.PaletteValue = document.getElementById("PaletteValue");
         this.setted_color = new Array(12)
-        this.selected_colors = new Array(10)
+        this.selected_colors = new Array(11)
         this.main_color=0
         this.palette_colorset=[[0, 120, 240], [30, 150, 270], [60, 180, 300], [90, 210, 330]]
         this.num = null;
@@ -20,7 +20,7 @@ export class ColorPicker {
         // this.set_final(0);
     }
     initialize(){
-        for(let i=0; i<10; i++){
+        for(let i=0; i<11; i++){
             this.selected_colors[i]=new Array(12)
         }
         this.set_color(this.main_color, "saturation")
@@ -67,7 +67,7 @@ export class ColorPicker {
             }
         }
         // }
-        for(let i=0; i<8; i++){
+        for(let i=0; i<9; i++){
             this.palette_candidate[i].onclick = event => {
                 this.set_final(i+2)
                 callback(i+2, this.GetSettedColor())
@@ -78,25 +78,28 @@ export class ColorPicker {
     BeatOnclickListener(callback){
         let self = this;
         this.colorPicker2.on('color:change', function(color){
-            this.main_color=color.hsl['h']
+            this.main_color=color.hsl
+            // hue 값이 아닌 hsl 전체값이 main_color에 저장됨
             self.set_beat(this.main_color)
             callback(this.main_color)
         })
     }
 
     initial_setting(){
-        for(let j=0; j<8; j++){
+        for(let j=0; j<9; j++){
             this.set_pal(j+1)
             for(let i=0; i<12;i++){
                 let color_box=document.getElementById("p"+(j+1).toString()+"_"+(i+1).toString())
                 color_box.style.background=this.selected_colors[j+2][i]
             }
+            
+        
         }
     }
     
     set_final(num){
         this.setted_color=this.selected_colors[num]
-        // console.log(num, this.setted_color)
+        console.log(num, this.setted_color)
         this.num = num;
         this.piano_coloring(num, this.setted_color)
 
@@ -110,14 +113,14 @@ export class ColorPicker {
                     picker_class[i].style.backgroundColor="rgb(250, 250, 250)"
                 }
             }
-            for(let j=0; j<8; j++){
+            for(let j=0; j<9; j++){
                 palette_class[j].style.backgroundColor="rgb(250, 250, 250)"
             }
         }else{
             for(let i=0; i<2; i++){
                 picker_class[i].style.backgroundColor="rgb(250, 250, 250)"
             }
-            for(let j=0; j<8; j++){
+            for(let j=0; j<9; j++){
                 
                 if(j==(num-2)){
                     palette_class[j].style.backgroundColor="rgb(248, 87, 87)"
@@ -131,7 +134,7 @@ export class ColorPicker {
 
     set_beat(main_color){
         let target = document.getElementById("b_1")
-        target.style.backgroundColor="hsl("+main_color+", 100%, 50%)"
+        target.style.backgroundColor="hsl("+main_color['h']+", 100%, "+main_color['l']+"%)"
         
     }
 
@@ -148,7 +151,7 @@ export class ColorPicker {
         if(picker_type="lightness"){
             for(let i=0;i<12;i++){
                 let target = document.getElementById("l_"+(i+1).toString())
-                let light_val=i*8+2
+                let light_val=i*5+20
                 this.selected_colors[1][i]="hsl("+main_color+", 100%, "+light_val+"%)"
                 target.style.backgroundColor=this.selected_colors[1][i]
             }
@@ -188,10 +191,17 @@ export class ColorPicker {
                 this.selected_colors[9][i]="hsl("+h_val.toString()+", 75%, 50%)"
             }
         }
+        if(pal_num==9){
+            for(let i=0;i<12;i++){
+                if(i==0 || i==2||i==4||i==5 || i==7||i==9||i==11){
+                    this.selected_colors[10][i]="hsl(0, 75%, 100%)"
+                }else{
+                    this.selected_colors[10][i]="hsl(0, 75%, 0%)"
+                }
 
-    }
- 
-    set_piano_color(color_set){
+            }
+        }
+
     }
 
     piano_coloring(set_num, colors){

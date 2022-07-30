@@ -250,6 +250,9 @@ function parse_pitch_palette(set){
         let hue = parseFloat(split_set[0])/360;
         let saturation = parseFloat(split_set[1])/100
         let lightness = parseFloat(split_set[2])/100
+        if(MyUserCustom.CustomObj.Piano.palette_num=='10'){
+            lightness=1
+        }
         parsed_palette[i] = [hue, saturation, lightness]
     }
     return parsed_palette;

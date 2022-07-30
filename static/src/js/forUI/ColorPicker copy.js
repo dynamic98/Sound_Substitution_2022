@@ -52,10 +52,6 @@ palette_candidate[7].onclick=function(e){
     set_final(9)
 }
 
-function set_piano_color(color_set){
-    
-
-}
 
 function piano_coloring(set_num, colors){
     for(let i=0; i<36; i++){    
@@ -65,9 +61,6 @@ function piano_coloring(set_num, colors){
     }
 }
 
-function drum_coloring(color){
-        
-}
 
 
 function set_final(num){
@@ -143,14 +136,15 @@ colorPicker.on('color:change', function(color){
 })
 
 colorPicker2.on('color:change', function(color){
+    console.log(color)
     main_color=color.hsl['h']
-    set_beat(main_color)
-    drum_coloring(main_color)
+    main_light=color.hsl['l']
+    set_beat(main_color, main_light)
 })
 
-function set_beat(main_color){
+function set_beat(main_color, main_light){
     var target = document.getElementById("b_1")
-    target.style.backgroundColor="hsl("+main_color+", 100%, 50%)"
+    target.style.backgroundColor="hsl("+main_color+", 100%, "+main_light+"%)"
     
 }
 
