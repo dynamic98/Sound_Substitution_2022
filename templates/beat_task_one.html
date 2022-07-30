@@ -42,7 +42,7 @@
 
 
   <section class="musicContainer">
-    <div class="task_num" id="task_one"><span id="task_one_text">예제 1번</span></div>
+    <div class="task_num" id="task_one"><span id="task_one_text">예제 1번 비트</span></div>
     <br>
     <button class="videoControlButton" id="play" style="display:inline;">시작</button>
     <button class="videoControlButton" id="save" style="display:inline;"><span class="glyphicon glyphicon-save" id="saveGlyph"></span></button>
@@ -54,7 +54,30 @@
   </section>
 </div>
 
+  <div id="custom_data" hidden>
+    <ol id="custom_data_piano"> piano
+        <li id="piano_shape">{{data["piano"]["shape"]}}</li>
+        <li id="piano_texture">{{data["piano"]["texture"]}}</li>
+        <li id="piano_palette_num">{{data["piano"]["palette_num"]}}</li>
+        <li id="piano_palette_set">{{data["piano"]["palette_set"]}}</li>
+        <li id="piano_interval">{{data["piano"]["interval"]}}</li>
+        <li id="piano_size">{{data["piano"]["size"]}}</li>
+        <li id="piano_line">{{data["piano"]["line"]}}</li>
+    </ol>
+    <ol id="custom_data_drum"> Drum
+        <li id="drum_shape">{{data["drum"]["shape"]}}</li>
+        <li id="drum_texture">{{data["drum"]["texture"]}}</li>
+        <li id="drum_color">{{data["drum"]["color"]}}</li>
+        <li id="drum_size">{{data["drum"]["size"]}}</li>
+    </ol>
+    <ol id="custom_data_haptic"> Haptic
+        <li id="haptic_sensitivity">{{data["haptic"]["sensitivity"]}}</li>
+        <li id="haptic_intensity">{{data["haptic"]["intensity"]}}</li>
+    </ol>
+  </div>
 
+  <div id="user_name" hidden>{{User_Name}}</div>
+  <div id="user_number" hidden>{{User_Number}}</div>
   <!--shader script-->
   <script type="x-shader/x-vertex" id="vertexshader">
     varying vec2 vUv;

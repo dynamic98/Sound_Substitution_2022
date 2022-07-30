@@ -106,7 +106,7 @@ function draw(instance, instrumentType) {
             visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -20)
         } else {
             visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), instance.getPitchHeight())
-            console.log(instance.kandinsky.pitch)
+            // console.log(instance.kandinsky.pitch)
             visualization.setColor(instrumentType, instance.getNormalizedTone(), instance.getNormalizedOctave())
             visualization.createConnectionLine(instrumentType)
 

@@ -280,6 +280,9 @@ function apply_default_custom(){
 
 $('#reset').click(function(){
     WritingMusicSheet.resetMusicSheet();
+    // visualization.reset();
+    // progressTimer.played = true;
+    progressTimer.element.value = "0"
 })
 
 $('#save').click(function(){
