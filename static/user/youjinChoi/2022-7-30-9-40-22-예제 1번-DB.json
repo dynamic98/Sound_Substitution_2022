@@ -1,0 +1,181 @@
+{
+  "0": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "E3",
+      "midi": 52
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "1": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "D4",
+      "midi": 62
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "2": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "F3",
+      "midi": 53
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "3": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "A4",
+      "midi": 69
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "4": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "A3",
+      "midi": 57
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "5": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "E4",
+      "midi": 64
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "6": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "C5",
+      "midi": 72
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "7": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "C4",
+      "midi": 60
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "8": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "F5",
+      "midi": 77
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "9": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": "A#3",
+      "midi": 58
+    },
+    "keyboard_energy": 50,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "10": {
+    "keyboard_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "keyboard_energy": 0,
+    "drum_pitch": {
+      "frequency": 0,
+      "confidence": 1,
+      "note": 0,
+      "midi": 0
+    },
+    "drum_energy": 0
+  },
+  "UserName": "youjinChoi",
+  "UserNumber": "34",
+  "TaskNum": "\uc608\uc81c 1\ubc88"
+}

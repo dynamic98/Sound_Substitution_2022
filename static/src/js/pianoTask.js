@@ -289,6 +289,7 @@ $('#save').click(function(){
     let TaskNum = $('.task_num')[0].innerText;
     // console.log(TaskNum);
     postdata.TaskNum = TaskNum
+    WritingMusicSheet.resetMusicSheet();
     $.ajax({
         type: 'POST',
         url: '/SaveUserDB',
@@ -303,4 +304,5 @@ $('#save').click(function(){
             alert(error);
         }
     })
+
 })

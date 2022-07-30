@@ -97,8 +97,12 @@ export class Visualization {
                 newPositionX,
                 positionY
             )
-
-            visualNote.setRenderOption(this.bloom.getPassForSunLight())
+            // console.log(instrumentType);
+            if(instrumentType=="piano" || instrumentType=="SavedPiano"){
+                visualNote.setRenderOption(this.bloom.getPassForSunLight())
+            }else if(instrumentType=="drum" || instrumentType=="SavedDrum"){
+                visualNote.setRenderOption(this.bloom.getPassForMoonLight())
+            }
             this.threeSystem.addToGroup(visualNote.getMesh(), VisualNote.name)
             instrument.visualNoteList.push(visualNote)
 

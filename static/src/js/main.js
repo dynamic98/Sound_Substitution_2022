@@ -102,12 +102,15 @@ function draw(instance, instrumentType) {
     if (instance.getOriginalEnergy() > 0.01) {
         instance.calculateSignal();
         if (instance.getFileName() == "drums") {
-            visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -60)
+            // visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -60)
+            visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -20)
         } else {
             visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), instance.getPitchHeight())
+            console.log(instance.kandinsky.pitch)
             visualization.setColor(instrumentType, instance.getNormalizedTone(), instance.getNormalizedOctave())
+            visualization.createConnectionLine(instrumentType)
+
         }
-        visualization.createConnectionLine(instrumentType)
     }
 }
 
