@@ -84,7 +84,19 @@ export class MusicSheet {
     setMusicSheet(MusicArray){
         this.MusicArray = MusicArray;
     }
-
+    resetMusicSheet(){
+        this.MusicArray = new Array(this.length);
+        for (let i = 0; i < this.length; i++) {
+            this.MusicArray[i] = {
+                keyboard_pitch: this.EmptyPitch,
+                keyboard_energy: 0,
+                drum_pitch: this.EmptyPitch,
+                drum_energy: 0
+            };
+        }
+        this.currentIndex = 0;
+        this.lastIndex = -1
+    }
     // console.log(CurrentIndex);
     // console.log(MyProgressTimer.getThisSeconds(), Math.round(MyProgressTimer.getThisSeconds()/375));
     // console.log(CurrentIndex, MyMusicSheet.getMusicArray(CurrentIndex));

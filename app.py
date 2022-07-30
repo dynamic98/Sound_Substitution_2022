@@ -7,6 +7,7 @@ import selenium
 import webbrowser
 from python.WriteHapticCustom import WriteHapticCustom as WHC
 from python.UserCustomization import WriteUserCustom, GetUserCustom
+from python.UserDB import WriteUserDB
 from python.HapticCustomize import VirtualBrowser
 
 ## 필요한 함수 선언 
@@ -81,7 +82,8 @@ def listen():
 
 @app.route('/pitch_task', methods=['POST'])
 def pitch_task():
-  return render_template('pitch_task_one.html',User_Name=UserName, login="log in")
+  data = GetUserCustom(UserName)
+  return render_template('pitch_task_one.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
 @app.route('/beat_task', methods=['POST'])
 def beat_task():
@@ -164,9 +166,19 @@ def wuc():
 @app.route('/SaveUserCustom', methods=['POST'])
 def SaveUserCustom():
     data = request.get_json()
-    print('data', data)
+    # print('data', data)
     # print(type(data))
     WriteUserCustom(data)
+
+    return data
+    # return jsonify(result = "success", result2= data)
+
+@app.route('/SaveUserDB', methods=['POST'])
+def SaveUserDB():
+    data = request.get_json()
+    # print('data', data)
+    # print(type(data))
+    WriteUserDB(data)
 
     return data
     # return jsonify(result = "success", result2= data)

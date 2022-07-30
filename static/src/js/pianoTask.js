@@ -26,6 +26,11 @@ import {
 import {
     AbsolutePosition
 } from './Utility/AbsolutePosition.js'
+import {
+    GetUserCustom
+}
+from './Utility/GetUserCustom.js'
+
 
 // let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
 // let textureButtons = new ButtonCustomization("shapeContainer", "textureButton")
@@ -54,12 +59,14 @@ let Task1Sheet = [
     {keyboard_pitch: {frequency: 0, confidence: 1, note: 'A4',  midi: 69} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
     {keyboard_pitch: {frequency: 0, confidence: 1, note: 'C#4', midi: 61} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
     ]
-    let MusicLength = Task1Sheet.length;
-    let WritingMusicSheet = new MusicSheet(MusicLength);
-    let TaskMusicSheet = new MusicSheet(MusicLength);
-    TaskMusicSheet.setMusicSheet(Task1Sheet);
-    let AbsCount, LoopAmount, TotalCount, NoteInterval, OneLoopMusicLength, LoopCount, LoopRemainder, Pictured = false;
-    
+let MusicLength = Task1Sheet.length;
+let WritingMusicSheet = new MusicSheet(MusicLength);
+let TaskMusicSheet = new MusicSheet(MusicLength);
+TaskMusicSheet.setMusicSheet(Task1Sheet);
+let AbsCount, LoopAmount, TotalCount, NoteInterval, OneLoopMusicLength, LoopCount, LoopRemainder, Pictured = false;
+let MyUserCustom = new GetUserCustom();
+let pitch_palette;
+
 document.body.appendChild(stats.dom);
 
 
@@ -78,6 +85,8 @@ function main() {
     AbsCount = AbsolutePosition(bpmTimer.getFourBeatTime());
     LoopAmount = progressTime*1000 / bpmTimer.getFourBeatTime();
     // if(LoopAmount<1){LoopAmount = 1}
+
+    apply_default_custom()
     TotalCount = AbsCount*LoopAmount;
     NoteInterval = TotalCount/MusicLength;
     OneLoopMusicLength = Math.floor(MusicLength/LoopAmount)
@@ -109,9 +118,11 @@ function update() {
                             TaskMusicSheet.getKeyboardNote()
                         )
                     kandinsky.calculate(pitchAndEnergy);
-                    visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+                    visualization.setColor("savedPiano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
                     visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                    visualization.createConnectionLine("savedPiano")
+                    if(MyUserCustom.CustomObj.Piano.line){
+                        visualization.createConnectionLine("savedPiano")
+                    }
                 }
             Pictured=true;
             }
@@ -142,9 +153,11 @@ function update() {
                         TaskMusicSheet.getKeyboardNote()
                     )
                 kandinsky.calculate(pitchAndEnergy);
-                visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+                visualization.setColor("savedPiano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
                 visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                visualization.createConnectionLine("savedPiano")
+                if(MyUserCustom.CustomObj.Piano.line){
+                    visualization.createConnectionLine("savedPiano")
+                }
             }
         }
     }
@@ -166,9 +179,11 @@ function update() {
                             TaskMusicSheet.getKeyboardNote()
                         )
                     kandinsky.calculate(pitchAndEnergy);
-                    visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+                    visualization.setColor("savedPiano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
                     visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                    visualization.createConnectionLine("savedPiano")
+                    if(MyUserCustom.CustomObj.Piano.line){
+                        visualization.createConnectionLine("savedPiano")
+                    }
                 }
             }
         }else{
@@ -182,9 +197,11 @@ function update() {
                                 TaskMusicSheet.getKeyboardNote()
                             )
                         kandinsky.calculate(pitchAndEnergy);
-                        visualization.setColor("savedPiano", kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
+                        visualization.setColor("savedPiano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
                         visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                        visualization.createConnectionLine("savedPiano")
+                        if(MyUserCustom.CustomObj.Piano.line){
+                            visualization.createConnectionLine("savedPiano")
+                            }
                     }
             }
         }
@@ -206,7 +223,84 @@ function update() {
 function draw(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
+    visualization.setColor("piano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
     //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
     visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-    visualization.createConnectionLine("piano")
+    if(MyUserCustom.CustomObj.Piano.line){
+        visualization.createConnectionLine("piano")
+        }
 }
+
+
+function set_pitch_palette(num, set){
+    MyUserCustom.CustomObj.Piano.palette_num = num;
+    MyUserCustom.CustomObj.Piano.palette_set = set;
+    pitch_palette = parse_pitch_palette(set);
+    // console.log(num, set)
+}
+function set_beat_color(color){
+    MyUserCustom.CustomObj.Drum.color = color
+    // console.log(color)
+}
+
+function parse_pitch_palette(set){
+    let parsed_palette = new Array(12);
+    for(let i=0;i<12;i++){
+        let split_set = set[i].substring(4, set[i].length-1).split(",")
+        let hue = parseFloat(split_set[0])/360;
+        let saturation = parseFloat(split_set[1])/100
+        let lightness = parseFloat(split_set[2])/100
+        parsed_palette[i] = [hue, saturation, lightness]
+    }
+    return parsed_palette;
+}
+function apply_default_custom(){
+    console.log(visualization.instruments['piano'].textureManager)
+    visualization.instruments['piano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
+    visualization.instruments['savedPiano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
+    visualization.instruments['piano'].textureManager.texture = visualization.instruments['piano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
+    visualization.instruments['savedPiano'].textureManager.texture = visualization.instruments['savedPiano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
+    // visualization.instruments['piano'].textureManager.setTexture(MyUserCustom.CustomObj.Piano.texture.toLowerCase())
+    // visualization.instruments['savedPiano'].textureManager.setTexture(MyUserCustom.CustomObj.Piano.texture.toLowerCase())
+    pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
+    kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
+    // piano.setCurrentEnergy(MyUserCustom.CustomObj.Piano.size)
+    piano.setCurrentEnergy(50)
+    // piano line is automatically applied
+
+    visualization.instruments['drum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
+    visualization.instruments['savedDrum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
+    // visualization.instruments['drum'].textureManager.setTexture(MyUserCustom.CustomObj.Drum.texture.toLowerCase())
+    // visualization.instruments['savedDrum'].textureManager.setTexture(MyUserCustom.CustomObj.Drum.texture.toLowerCase())
+    visualization.instruments['drum'].textureManager.texture = visualization.instruments['drum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
+    visualization.instruments['savedDrum'].textureManager.texture = visualization.instruments['savedDrum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
+    // drum.setCurrentEnergy(MyUserCustom.CustomObj.Drum.size)
+    // drum color is automatically applied
+}
+
+$('#reset').click(function(){
+    WritingMusicSheet.resetMusicSheet();
+})
+
+$('#save').click(function(){
+    let postdata = Object.assign({}, WritingMusicSheet.getMusicSheet())
+    postdata.UserName=MyUserCustom.CustomObj.UserName;
+    postdata.UserNumber=MyUserCustom.CustomObj.UserNumber;
+    let TaskNum = $('.task_num')[0].innerText;
+    // console.log(TaskNum);
+    postdata.TaskNum = TaskNum
+    $.ajax({
+        type: 'POST',
+        url: '/SaveUserDB',
+        data: JSON.stringify(postdata),
+        dataType : 'JSON',
+        contentType: "application/json",
+        success: function(data){
+            alert('DB 저장완료..')
+        },
+        error: function(request, status, error){
+            alert('ajax 통신 실패')
+            alert(error);
+        }
+    })
+})
