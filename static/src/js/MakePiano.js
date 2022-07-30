@@ -47,20 +47,29 @@ let progressTimer = new ProgressTimer(progressTime, document.getElementById("Pro
 let piano = new Piano("pianoContainer");
 
 let Task1Sheet = [
-    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    // {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'E3',  midi: 52} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'B3',  midi: 59} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'F3',  midi: 53} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'C5',  midi: 72} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'C4',  midi: 60} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'F#3', midi: 54} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'E5',  midi: 76} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'E4',  midi: 64} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'A4',  midi: 69} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'C#4', midi: 61} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65} , keyboard_energy:  50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
     ]
 let MusicLength = Task1Sheet.length;
 let WritingMusicSheet = new MusicSheet(MusicLength);
@@ -295,6 +304,11 @@ $('#save').click(function(){
     let TaskNum = $('.task_num')[0].innerText;
     // console.log(TaskNum);
     postdata.TaskNum = TaskNum
+
+    // let TaskIndex = $('#task_index').value;
+    // postdata.TaskIndex = TaskIndex
+    // console.log(TaskIndex);
+
     WritingMusicSheet.resetMusicSheet();
     $.ajax({
         type: 'POST',

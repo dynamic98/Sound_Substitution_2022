@@ -270,6 +270,7 @@ function apply_default_custom_toHTML(){
     document.getElementById('slide-beat-size').value = MyUserCustom.CustomObj.Drum.size.toString()
     document.getElementById('slide-haptic-sensitivity').value = MyUserCustom.CustomObj.Haptic.sensitivity.toString()
     document.getElementById('slide-haptic-intensity').value = MyUserCustom.CustomObj.Haptic.intensity.toString()
+    MyColorPicker.piano_coloring(MyUserCustom.CustomObj.Piano.palette_num, MyUserCustom.CustomObj.Piano.palette_set)
 }
 
 $('#save').click(function(){
