@@ -14,10 +14,7 @@ import {
 import {
     SourceContainer
 } from './Sound/SourceContainer.js';
-import {
-    GetUserCustom
-}
-from './Utility/GetUserCustom.js'
+
 
 //class instances
 //----------------------------------------------------//
@@ -29,9 +26,6 @@ let sourceContainer;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")
 let drum;
-let MyUserCustom = new GetUserCustom();
-let pitch_palette;
-
 
 //event handlers
 //----------------------------------------------------//
@@ -75,8 +69,6 @@ async function main() {
     song.initializeKandinsky(song.getBPM(), song.getMaxVolume())
     drum.initializeKandinsky(song.getBPM(), song.getMaxVolume())
     bpmTimer.setBPM(song.getBPM())
-    apply_default_custom();
-
 
     animate();
 };
@@ -111,49 +103,17 @@ function draw(instance, instrumentType) {
         instance.calculateSignal();
         if (instance.getFileName() == "drums") {
             // visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -60)
-            visualization.setColor(instrumentType,MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
             visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -20)
         } else {
-            // console.log(instance.kandinsky.pitch)
-            visualization.setColor(instrumentType, pitch_palette[instance.kandinsky.tone][0], pitch_palette[instance.kandinsky.tone][2], pitch_palette[instance.kandinsky.tone][2])
             visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), instance.getPitchHeight())
-            
+            // console.log(instance.kandinsky.pitch)
+            visualization.setColor(instrumentType, instance.getNormalizedTone(), instance.getNormalizedOctave())
             visualization.createConnectionLine(instrumentType)
 
         }
     }
 }
 
-
-function parse_pitch_palette(set){
-    let parsed_palette = new Array(12);
-    for(let i=0;i<12;i++){
-        let split_set = set[i].substring(4, set[i].length-1).split(",")
-        let hue = parseFloat(split_set[0])/360;
-        let saturation = parseFloat(split_set[1])/100
-        let lightness = parseFloat(split_set[2])/100
-        if(MyUserCustom.CustomObj.Piano.palette_num=='10'){
-            lightness=1
-        }
-        parsed_palette[i] = [hue, saturation, lightness]
-    }
-    return parsed_palette;
-}
-function apply_default_custom(){
-    visualization.instruments['piano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
-    visualization.instruments['piano'].textureManager.texture = visualization.instruments['piano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
-    pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
-    kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
-    piano.setCurrentEnergy(MyUserCustom.CustomObj.Piano.size)
-    MyColorPicker.piano_coloring(MyUserCustom.CustomObj.Piano.palette_num, MyUserCustom.CustomObj.Piano.palette_set)
-
-    // piano line is automatically applied
-
-    visualization.instruments['drum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
-    visualization.instruments['drum'].textureManager.texture = visualization.instruments['drum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
-    drum.setCurrentEnergy(MyUserCustom.CustomObj.Drum.size)
-    // drum color is automatically applied
-}
 //debug frame rate
 //over 4 beat = delet drawing
 // console.log('original pitch', song.getPitch()) // mixed song

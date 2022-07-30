@@ -29,7 +29,10 @@ export class GetUserCustom {
 
         this.CustomObj.Drum.shape = this.DrumData[0].innerText;
         this.CustomObj.Drum.texture = this.DrumData[1].innerText;
-        this.CustomObj.Drum.color = parseFloat(this.DrumData[2].innerText);
+        let Drum_color = this.DrumData[2].innerText;
+        Drum_color = Drum_color.substring(1, Drum_color.length-1).split(/:|,/)
+        let Drum_object = {h:parseInt(Drum_color[1]), s:parseInt(Drum_color[3]), l:parseInt(Drum_color[5])}
+        this.CustomObj.Drum.color = Drum_object;
         this.CustomObj.Drum.size = parseInt(this.DrumData[3].innerText);
 
         this.CustomObj.Haptic.sensitivity = parseFloat(this.HapticData[0].innerText);

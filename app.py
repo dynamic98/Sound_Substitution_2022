@@ -133,9 +133,10 @@ def abstract():
       # extract_feature(folder) # 내가 원하는 음악의 Feature 추출
       # 이것을 classifier.ts 와 연결
 
-  entireSongList= makeHTMLWithFileList('static/music/original')
-  separatedSongList= makeHTMLWithFileList('static/music/separated')
-  return render_template('abstract.html', filelist=entireSongList, separatedFileList=separatedSongList )
+    entireSongList= makeHTMLWithFileList('static/music/original')
+    separatedSongList= makeHTMLWithFileList('static/music/separated')
+    data = GetUserCustom(UserName)
+  return render_template('abstract.html', filelist=entireSongList, separatedFileList=separatedSongList, User_Name=UserName, User_Number = UserNumber, data = data )
 
 
 

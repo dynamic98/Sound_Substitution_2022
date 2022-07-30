@@ -114,7 +114,7 @@ function update() {
                             TaskMusicSheet.getDrumNote()
                         )
                     kandinsky.calculate(pitchAndEnergy);
-                    visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 1)
+                    visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
                     visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
                 }
             Pictured=true;
@@ -147,7 +147,7 @@ function update() {
                         TaskMusicSheet.getDrumNote()
                     )
                 kandinsky.calculate(pitchAndEnergy);
-                visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 1)
+                visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
                 visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
             }
         }
@@ -170,7 +170,7 @@ function update() {
                             TaskMusicSheet.getDrumNote()
                         )
                     kandinsky.calculate(pitchAndEnergy);
-                    visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 1)
+                    visualization.setColor("savedDrum",  MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
                     visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
                 }
             }
@@ -185,7 +185,7 @@ function update() {
                                 TaskMusicSheet.getDrumNote()
                             )
                         kandinsky.calculate(pitchAndEnergy);
-                        visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 1)
+                        visualization.setColor("savedDrum",  MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
                         visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
                     }
             }

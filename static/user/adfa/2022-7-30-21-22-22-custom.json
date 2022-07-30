@@ -1,5 +1,5 @@
 {
-  "UserName": "yg",
+  "UserName": "adfa",
   "UserNumber": "11",
   "piano": {
     "shape": "Circle",
@@ -26,7 +26,11 @@
   "drum": {
     "shape": "Circle",
     "texture": "None",
-    "color": "{h:0, s:50, l:100}",
+    "color": {
+      "h": 24,
+      "s": 100,
+      "l": 50
+    },
     "size": 50
   },
   "haptic": {
