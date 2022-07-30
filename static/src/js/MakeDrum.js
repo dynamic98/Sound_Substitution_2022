@@ -15,8 +15,8 @@ import {
     ButtonCustomization
 } from './Customization/ButtonCustomization.js'
 import {
-    Piano
-} from './Customization/Piano.js'
+    Drum
+} from './Customization/Drum.js'
 import {
     ProgressTimer
 } from './Utility/ProgressTimer.js'
@@ -44,23 +44,32 @@ let visualization = new Visualization(bloom_length);
 let progressTime = 15;
 let progressTimer = new ProgressTimer(progressTime, document.getElementById("ProgressBar"));
 
-let piano = new Piano("pianoContainer");
+let drum = new Drum("drum");
 
 let Task1Sheet = [
-    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    // {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'E3',  midi: 52} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'B3',  midi: 59} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'F3',  midi: 53} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'C5',  midi: 72} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'C4',  midi: 60} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'F#3', midi: 54} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'E5',  midi: 76} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'E4',  midi: 64} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'A4',  midi: 69} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
-    {keyboard_pitch: {frequency: 0, confidence: 1, note: 'C#4', midi: 61} , keyboard_energy: 50, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
+    {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: "F4", midi: 65}, drum_energy: 50},
     ]
 let MusicLength = Task1Sheet.length;
 let WritingMusicSheet = new MusicSheet(MusicLength);
@@ -68,7 +77,6 @@ let TaskMusicSheet = new MusicSheet(MusicLength);
 TaskMusicSheet.setMusicSheet(Task1Sheet);
 let AbsCount, LoopAmount, TotalCount, NoteInterval, OneLoopMusicLength, LoopCount, LoopRemainder, Pictured = false;
 let MyUserCustom = new GetUserCustom();
-let pitch_palette;
 
 document.body.appendChild(stats.dom);
 
@@ -79,11 +87,8 @@ function main() {
     bpmTimer.setBPM(20)
     bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
-    piano.setNoteDuration(300);
 
-    piano.assignEventOnPianoRow("mousedown", draw, WritingMusicSheet.setMusicArray, 1, 3)
-    piano.assignEventOnPianoRow("mousedown", draw, WritingMusicSheet.setMusicArray, 2, 4)
-    piano.assignEventOnPianoRow("mousedown", draw, WritingMusicSheet.setMusicArray, 3, 5)
+    drum.assignEventOnDrum("mousedown", draw, WritingMusicSheet.setBeatArray)
 
     AbsCount = AbsolutePosition(bpmTimer.getFourBeatTime());
     LoopAmount = progressTime*1000 / bpmTimer.getFourBeatTime();
@@ -114,18 +119,15 @@ function update() {
             for (let i=0; i<OneLoopMusicLength; i++){
                 let currentIndex = LoopCount*OneLoopMusicLength+i
                 TaskMusicSheet.setCurrentIndex(currentIndex)
-                if(TaskMusicSheet.getKeyboardEnergy()!=0){
+                if(TaskMusicSheet.getDrumEnergy()!=0){
                     let pitchAndEnergy = switcher.getPitchAndEnergy(
-                            TaskMusicSheet.getKeyboardPitch(),
-                            TaskMusicSheet.getKeyboardEnergy(),
-                            TaskMusicSheet.getKeyboardNote()
+                            TaskMusicSheet.getDrumPitch(),
+                            TaskMusicSheet.getDrumEnergy(),
+                            TaskMusicSheet.getDrumNote()
                         )
                     kandinsky.calculate(pitchAndEnergy);
-                    visualization.setColor("savedPiano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
-                    visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                    if(MyUserCustom.CustomObj.Piano.line){
-                        visualization.createConnectionLine("savedPiano")
-                    }
+                    visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 1)
+                    visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
                 }
             Pictured=true;
             }
@@ -133,6 +135,7 @@ function update() {
             console.log("What Should We Do In this State?");
             visualization.counterTimer.reset();
             visualization.moveProgressBar(kandinsky.getPitchWidth())
+
 
         }       
     } else if(progressTimer.getThisSeconds()==15000){ // End state
@@ -149,18 +152,15 @@ function update() {
         for (let i=0; i<OneLoopMusicLength; i++){
             let currentIndex = LoopCount*OneLoopMusicLength+i
             TaskMusicSheet.setCurrentIndex(currentIndex)
-            if(TaskMusicSheet.getKeyboardEnergy()!=0){
+            if(TaskMusicSheet.getDrumEnergy()!=0){
                 let pitchAndEnergy = switcher.getPitchAndEnergy(
-                        TaskMusicSheet.getKeyboardPitch(),
-                        TaskMusicSheet.getKeyboardEnergy(),
-                        TaskMusicSheet.getKeyboardNote()
+                        TaskMusicSheet.getDrumPitch(),
+                        TaskMusicSheet.getDrumEnergy(),
+                        TaskMusicSheet.getDrumNote()
                     )
                 kandinsky.calculate(pitchAndEnergy);
-                visualization.setColor("savedPiano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
-                visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                if(MyUserCustom.CustomObj.Piano.line){
-                    visualization.createConnectionLine("savedPiano")
-                }
+                visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 1)
+                visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
             }
         }
     }
@@ -174,37 +174,31 @@ function update() {
             for (let i=0; i<OneLoopMusicLength; i++){
                 let currentIndex = LoopCount*OneLoopMusicLength+i
                 TaskMusicSheet.setCurrentIndex(currentIndex)
-                if(TaskMusicSheet.getKeyboardEnergy()!=0){
+                if(TaskMusicSheet.getDrumEnergy()!=0){
 
                     let pitchAndEnergy = switcher.getPitchAndEnergy(
-                            TaskMusicSheet.getKeyboardPitch(),
-                            TaskMusicSheet.getKeyboardEnergy(),
-                            TaskMusicSheet.getKeyboardNote()
+                            TaskMusicSheet.getDrumPitch(),
+                            TaskMusicSheet.getDrumEnergy(),
+                            TaskMusicSheet.getDrumNote()
                         )
                     kandinsky.calculate(pitchAndEnergy);
-                    visualization.setColor("savedPiano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
-                    visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                    if(MyUserCustom.CustomObj.Piano.line){
-                        visualization.createConnectionLine("savedPiano")
-                    }
+                    visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 1)
+                    visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
                 }
             }
         }else{
             for (let i=0; i<LoopRemainder; i++){
                     let currentIndex = LoopCount*OneLoopMusicLength+i
                     TaskMusicSheet.setCurrentIndex(currentIndex)
-                    if(TaskMusicSheet.getKeyboardEnergy()!=0){
+                    if(TaskMusicSheet.getDrumEnergy()!=0){
                         let pitchAndEnergy = switcher.getPitchAndEnergy(
-                                TaskMusicSheet.getKeyboardPitch(),
-                                TaskMusicSheet.getKeyboardEnergy(),
-                                TaskMusicSheet.getKeyboardNote()
+                                TaskMusicSheet.getDrumPitch(),
+                                TaskMusicSheet.getDrumEnergy(),
+                                TaskMusicSheet.getDrumNote()
                             )
                         kandinsky.calculate(pitchAndEnergy);
-                        visualization.setColor("savedPiano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
-                        visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
-                        if(MyUserCustom.CustomObj.Piano.line){
-                            visualization.createConnectionLine("savedPiano")
-                            }
+                        visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 1)
+                        visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
                     }
             }
         }
@@ -221,71 +215,47 @@ function update() {
 }
 
 
-//callback for each Instrument 
-//drum class must have the same getPitch Energy, getPitchWidth and getPitchHeight Functions. 
 function draw(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
-    visualization.setColor("piano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
+    visualization.setColor("drum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 0.5)
     //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-    visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
-    if(MyUserCustom.CustomObj.Piano.line){
-        visualization.createConnectionLine("piano")
-        }
+    visualization.createVisualNote("drum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+
 }
 
+document.body.appendChild(stats.dom);
 
-function set_pitch_palette(num, set){
-    MyUserCustom.CustomObj.Piano.palette_num = num;
-    MyUserCustom.CustomObj.Piano.palette_set = set;
-    pitch_palette = parse_pitch_palette(set);
-    // console.log(num, set)
-}
-function set_beat_color(color){
-    MyUserCustom.CustomObj.Drum.color = color
-    // console.log(color)
-}
-
-function parse_pitch_palette(set){
-    let parsed_palette = new Array(12);
-    for(let i=0;i<12;i++){
-        let split_set = set[i].substring(4, set[i].length-1).split(",")
-        let hue = parseFloat(split_set[0])/360;
-        let saturation = parseFloat(split_set[1])/100
-        let lightness = parseFloat(split_set[2])/100
-        if(MyUserCustom.CustomObj.Piano.palette_num=='10'){
-            lightness=1
-        }
-        parsed_palette[i] = [hue, saturation, lightness]
-    }
-    return parsed_palette;
-}
 function apply_default_custom(){
     console.log(visualization.instruments['piano'].textureManager)
     visualization.instruments['piano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
     visualization.instruments['savedPiano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
     visualization.instruments['piano'].textureManager.texture = visualization.instruments['piano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
     visualization.instruments['savedPiano'].textureManager.texture = visualization.instruments['savedPiano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
-    pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
+    // visualization.instruments['piano'].textureManager.setTexture(MyUserCustom.CustomObj.Piano.texture.toLowerCase())
+    // visualization.instruments['savedPiano'].textureManager.setTexture(MyUserCustom.CustomObj.Piano.texture.toLowerCase())
+    // pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
     kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
-    piano.setCurrentEnergy(50)
-    MyColorPicker.piano_coloring(MyUserCustom.CustomObj.Piano.palette_num, MyUserCustom.CustomObj.Piano.palette_set)
-
+    // piano.setCurrentEnergy(MyUserCustom.CustomObj.Piano.size)
+    // piano.setCurrentEnergy(50)
     // piano line is automatically applied
 
     visualization.instruments['drum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
     visualization.instruments['savedDrum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
+    // visualization.instruments['drum'].textureManager.setTexture(MyUserCustom.CustomObj.Drum.texture.toLowerCase())
+    // visualization.instruments['savedDrum'].textureManager.setTexture(MyUserCustom.CustomObj.Drum.texture.toLowerCase())
     visualization.instruments['drum'].textureManager.texture = visualization.instruments['drum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
     visualization.instruments['savedDrum'].textureManager.texture = visualization.instruments['savedDrum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
     // drum.setCurrentEnergy(MyUserCustom.CustomObj.Drum.size)
     // drum color is automatically applied
+    drum.setCurrentEnergy(50)
 }
 
 $('#reset').click(function(){
     WritingMusicSheet.resetMusicSheet();
     // visualization.reset();
-    // progressTimer.played = true;
     progressTimer.element.value = "0"
+
 })
 
 $('#save').click(function(){
@@ -293,8 +263,12 @@ $('#save').click(function(){
     postdata.UserName=MyUserCustom.CustomObj.UserName;
     postdata.UserNumber=MyUserCustom.CustomObj.UserNumber;
     let TaskNum = $('.task_num')[0].innerText;
+
     // console.log(TaskNum);
     postdata.TaskNum = TaskNum
+    // let TaskIndex = $('#task_index').value;
+    // postdata.TaskIndex = TaskIndex
+
     WritingMusicSheet.resetMusicSheet();
     $.ajax({
         type: 'POST',

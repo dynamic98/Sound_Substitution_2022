@@ -240,6 +240,16 @@ def loading():
 
   return render_template('mainMenu.html')
 
+@app.route('/making_piano', methods=['POST'])
+def making_piano():
+  data = GetUserCustom(UserName)
+  return render_template('making_pitch_task.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+@app.route('/making_drum', methods=['POST'])
+def making_drum():
+  data = GetUserCustom(UserName)
+  return render_template('making_beat_task.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
 # @app.route('/login', methods=['POST'])
 # def login():
 #   # if request.method == 'POST':

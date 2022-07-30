@@ -255,6 +255,8 @@ function apply_default_custom(){
     pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
     kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
     piano.setCurrentEnergy(MyUserCustom.CustomObj.Piano.size)
+    MyColorPicker.piano_coloring(MyUserCustom.CustomObj.Piano.palette_num, MyUserCustom.CustomObj.Piano.palette_set)
+
     // piano line is automatically applied
 
     visualization.instruments['drum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
