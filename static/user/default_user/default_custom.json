@@ -1,6 +1,6 @@
 {
-  "UserName": "yg",
-  "UserNumber": "11",
+  "UserName": "default_user",
+  "UserNumber": "",
   "piano": {
     "shape": "Circle",
     "texture": "None",
@@ -26,11 +26,15 @@
   "drum": {
     "shape": "Circle",
     "texture": "None",
-    "color": "{h:0, s:50, l:100}",
+    "color": {
+      "h": 0,
+      "s": 50,
+      "l": 100
+    },
     "size": 50
   },
   "haptic": {
-    "sensitivity": 80,
-    "intensity": 60
+    "sensitivity": "31",
+    "intensity": "19"
   }
 }

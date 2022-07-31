@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Music::Palette::test-groupC</title>
+  <title>Music::Palette::test-groupA</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -36,23 +36,48 @@
   <progress value="0"  max="15000" id="ProgressBar"></progress>
 
   <ul class="set2" style="margin-left: 600px;" id="drum">
-    <img src="../static/src/images/drum.png">
+    <!-- <img src="../static/src/images/drum.png"> -->
     <audio src="../static/src/sound/drum.wav" id="drum_audio"></audio>
   </ul>
 
-
-  <section class="musicContainer">
+  <div>
     <button type="button" class="questionButton" id="question_one">1번</button>
-    <br>
+    <!-- <br> -->
     <button type="button" class="questionButton" id="question_two">2번</button>
-    <br>
+    <!-- <br> -->
     <button type="button" class="questionButton" id="question_three">3번</button>
-    <br>
+    <!-- <br> -->
     <button type="button" class="questionButton" id="question_mola">모르겠음</button>
-    <br> <br> <br> <br>
+    <!-- <br> <br> <br> <br> -->
     <button type="button" class="questionButton" id="submit_groupC">제출하기</button>
     <button class="videoControlButton" id="play" style="display:none;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
-  </section>
+  </div>
+
+  
+  <div id="custom_data" hidden>
+    <ol id="custom_data_piano"> piano
+        <li id="piano_shape">{{data["piano"]["shape"]}}</li>
+        <li id="piano_texture">{{data["piano"]["texture"]}}</li>
+        <li id="piano_palette_num">{{data["piano"]["palette_num"]}}</li>
+        <li id="piano_palette_set">{{data["piano"]["palette_set"]}}</li>
+        <li id="piano_interval">{{data["piano"]["interval"]}}</li>
+        <li id="piano_size">{{data["piano"]["size"]}}</li>
+        <li id="piano_line">{{data["piano"]["line"]}}</li>
+    </ol>
+    <ol id="custom_data_drum"> Drum
+        <li id="drum_shape">{{data["drum"]["shape"]}}</li>
+        <li id="drum_texture">{{data["drum"]["texture"]}}</li>
+        <li id="drum_color">{{data["drum"]["color"]}}</li>
+        <li id="drum_size">{{data["drum"]["size"]}}</li>
+    </ol>
+    <ol id="custom_data_haptic"> Haptic
+        <li id="haptic_sensitivity">{{data["haptic"]["sensitivity"]}}</li>
+        <li id="haptic_intensity">{{data["haptic"]["intensity"]}}</li>
+    </ol>
+  </div>
+
+  <div id="user_name" hidden>{{User_Name}}</div>
+  <div id="user_number" hidden>{{User_Number}}</div>
 
 
   <!--shader script-->
@@ -71,13 +96,15 @@
           gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
         }
     </script>
+
+
+
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
-  <script type="module" defer src="../static/src/js/dist/drumTask.js"></script>
-  <script type="module" defer src="../static/src/js/forUI/questionChange_groupC.js"></script>
+  <script type="module" defer src="../static/src/js/dist/Information_test_C.js"></script>
+  <!-- <script type="module" defer src="../static/src/js/forUI/questionChange_groupA.js"></script> -->
   <script type="module" defer src="../static/src/js/forUI/questionColor.js"></script>
   <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
   <audio data-key="71" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-mid.wav"></audio>
 
 </body>

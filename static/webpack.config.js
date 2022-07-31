@@ -12,7 +12,10 @@ module.exports = {
         drumtask: path.resolve(__dirname, "src", "js", "drumTask.js"),
         makedrum: path.resolve(__dirname, "src", "js", "MakeDrum.js"),
         Task_dev: path.resolve(__dirname, "src", "js", "Task_dev.js"),        
-        test: path.resolve(__dirname, "src", "js", "fortest.js"),   
+        Information_test_A: path.resolve(__dirname, "src", "js", "Information_Test_GroupA.js"),   
+        Information_test_B: path.resolve(__dirname, "src", "js", "Information_Test_GroupB.js"),   
+        Information_test_C: path.resolve(__dirname, "src", "js", "Information_Test_GroupC.js"),   
+        Information_test_D: path.resolve(__dirname, "src", "js", "Information_Test_GroupD.js"),   
 
         //concrete: path.resolve(__dirname, "src", "concrete.js")
     },

@@ -99,7 +99,7 @@ export class ColorPicker {
     
     set_final(num){
         this.setted_color=this.selected_colors[num]
-        console.log(num, this.setted_color)
+        // console.log(num, this.setted_color)
         this.num = num;
         this.piano_coloring(num, this.setted_color)
 

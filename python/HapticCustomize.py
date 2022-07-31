@@ -12,13 +12,17 @@ class VirtualBrowser:
         if platform == 'win32':
             ID = 'dynamic98@gist.ac.kr'
             PW = 'niphid-zufFep-5tychi'
+            self.UserName = 'default_user'
 
-            InputIDXpath = '//*[@id="root"]/div/div/div[2]/div/div[3]/div/input'
-            InputPWXpath = '//*[@id="root"]/div/div/div[2]/div/div[6]/div/input'
-            LogInXpath = '//*[@id="root"]/div/div/div[2]/div/div[8]/button'
-            StudioXpath = '//*[@id="root"]/div/div/div/div[2]/div/div/div/div[1]'
-            EditXpath = '//*[@id="root"]/div/div[1]/div/div[2]/div/div[2]/div[1]/span'
-          
+            self.InputIDXpath = '//*[@id="root"]/div/div/div[2]/div/div[3]/div/input'
+            self.InputPWXpath = '//*[@id="root"]/div/div/div[2]/div/div[6]/div/input'
+            self.LogInXpath = '//*[@id="root"]/div/div/div[2]/div/div[8]/button'
+            self.StudioXpath = '//*[@id="root"]/div/div/div/div[2]/div/div/div/div[1]'
+            self.EditXpath = '//*[@id="root"]/div/div[1]/div/div[2]/div/div[2]/div[1]/span'
+            self.DeleteXpath = '//*[@id="root"]/div/div/div[1]/div[2]/div/div[6]/div/label'
+            self.ImportXpath = '//*[@id="root"]/div/div/div[1]/div[2]/div/div[1]/div/label/input'
+            self.ApplyXpath = '//*[@id="root"]/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div/div[4]'
+
             self.options = webdriver.ChromeOptions()
             self.options.add_experimental_option("excludeSwitches", ["enable-logging"])
             # self.options.add_argument('headless')
@@ -27,24 +31,53 @@ class VirtualBrowser:
             URL = 'https://login.bhaptics.com/login'
             self.driver.implicitly_wait(3)
             self.driver.get(url=URL)
-            self.driver.find_element(by=By.XPATH, value=InputIDXpath).send_keys(ID)
-            self.driver.find_element(by=By.XPATH, value=InputPWXpath).send_keys(PW)
-            self.driver.find_element(by=By.XPATH, value=LogInXpath).click()
+            self.driver.find_element(by=By.XPATH, value=self.InputIDXpath).send_keys(ID)
+            self.driver.find_element(by=By.XPATH, value=self.InputPWXpath).send_keys(PW)
+            self.driver.find_element(by=By.XPATH, value=self.LogInXpath).click()
             time.sleep(4)
-            self.driver.find_element(by=By.XPATH, value=StudioXpath).click()
-            self.driver.find_element(by=By.XPATH, value=EditXpath).click()
+            self.driver.find_element(by=By.XPATH, value=self.StudioXpath).click()
+            self.driver.find_element(by=By.XPATH, value=self.EditXpath).click()
+
+            self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
+            time.sleep(0.5)
+            self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/default_user/default_haptic.bhc"))
+            self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
+        
         else:
             print("well, I think you are not a Windows user")
 
     def SendHapticCustom(self, UserName, FileName):
-        DeleteXpath = '//*[@id="root"]/div/div/div[1]/div[2]/div/div[6]/div'
-        ImportXpath = '//*[@id="root"]/div/div/div[1]/div[2]/div/div[1]/div/label/input'
-        if EC.element_to_be_clickable((By.XPATH, DeleteXpath)):
-            self.driver.find_element(by=By.XPATH, value=DeleteXpath).click()
-        self.driver.find_element(by=By.XPATH, value=ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/{0}/{1}.bhc".format(UserName, FileName)))
+        # if EC.element_to_be_clickable((By.XPATH, DeleteXpath)):
+        if platform == 'win32':
+            self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
+            time.sleep(0.5)
+            self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/{0}/{1}.bhc".format(UserName, FileName)))
+            self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
+
+    def SetUserName(self, UserName):
+        if platform == 'win32':
+            self.UserName = UserName
+            UserPath = os.path.join(os.getcwd(), 'static', 'user', self.UserName)
+            filelist = os.listdir(os.path.join(UserPath))
+            customlist = []
+            for i in filelist:
+                if i.endswith('.bhc'):
+                    customlist.append(i)
+            if len(customlist) != 0:
+                customlist.sort(key=lambda x: os.path.getmtime(os.path.join(UserPath, x)), reverse=True)
+                RecentUserHaptic = customlist[0]
+                self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
+                time.sleep(0.5)
+                self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(UserPath, RecentUserHaptic))
+                self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
+            else:
+                self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
+                time.sleep(0.5)
+                self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/default_user/default_haptic.bhc"))
+                self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
+
     def QuitBrowser(self):
         self.driver.quit()
-
 
 if __name__=="__main__":
     print("Haptic Customization Code is Activated")

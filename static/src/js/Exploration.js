@@ -341,3 +341,50 @@ $('#save').click(function(){
         }
     })
 })
+
+
+$('#slide-haptic-sensitivity').click(function(){
+    let sensitivity = document.getElementById('slide-haptic-sensitivity').value
+    let intensity = document.getElementById('slide-haptic-intensity').value
+    let postdata = {
+        "sensitivity": sensitivity,
+        "intensity": intensity
+    }
+    $.ajax({
+        type: 'POST',
+        url: '/SendHaptic',
+        data: JSON.stringify(postdata),
+        dataType : 'JSON',
+        contentType: "application/json",
+        success: function(data){
+            // alert('haptic 완료')
+        },
+        error: function(request, status, error){
+            alert('ajax 통신 실패')
+            alert(error);
+        }
+    })
+})
+
+$('#slide-haptic-intensity').click(function(){
+    let sensitivity = document.getElementById('slide-haptic-sensitivity').value
+    let intensity = document.getElementById('slide-haptic-intensity').value
+    let postdata = {
+        "sensitivity": sensitivity,
+        "intensity": intensity
+    }
+    $.ajax({
+        type: 'POST',
+        url: '/SendHaptic',
+        data: JSON.stringify(postdata),
+        dataType : 'JSON',
+        contentType: "application/json",
+        success: function(data){
+            // alert('haptic 완료')
+        },
+        error: function(request, status, error){
+            alert('ajax 통신 실패')
+            alert(error);
+        }
+    })
+})
