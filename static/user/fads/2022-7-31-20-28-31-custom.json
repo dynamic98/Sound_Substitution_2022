@@ -1,0 +1,40 @@
+{
+  "UserName": "fads",
+  "UserNumber": "",
+  "piano": {
+    "shape": "decagon",
+    "texture": "wood",
+    "palette_num": 1,
+    "palette_set": [
+      "hsl(340, 100%, 20%)",
+      "hsl(340, 100%, 25%)",
+      "hsl(340, 100%, 30%)",
+      "hsl(340, 100%, 35%)",
+      "hsl(340, 100%, 40%)",
+      "hsl(340, 100%, 45%)",
+      "hsl(340, 100%, 50%)",
+      "hsl(340, 100%, 55%)",
+      "hsl(340, 100%, 60%)",
+      "hsl(340, 100%, 65%)",
+      "hsl(340, 100%, 70%)",
+      "hsl(340, 100%, 75%)"
+    ],
+    "interval": 70,
+    "size": 50,
+    "line": true
+  },
+  "drum": {
+    "shape": "circle",
+    "texture": "stone",
+    "color": {
+      "h": 0,
+      "s": 100,
+      "l": 52
+    },
+    "size": 50
+  },
+  "haptic": {
+    "sensitivity": 31,
+    "intensity": 5
+  }
+}

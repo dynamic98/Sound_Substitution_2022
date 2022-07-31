@@ -85,6 +85,8 @@ export class ColorPicker {
         })
     }
 
+    
+
     initial_setting(){
         for(let j=0; j<9; j++){
             this.set_pal(j+1)
@@ -156,6 +158,21 @@ export class ColorPicker {
                 target.style.backgroundColor=this.selected_colors[1][i]
             }
         }      
+    }
+
+    set_SaturationAndLightness(hue){
+        for(let i=0;i<12;i++){
+            var target = document.getElementById("s_"+(i+1).toString())
+            let sat_val=i*8+2
+            let satu_color="hsl("+hue+", "+sat_val+"%, 50%)"
+            target.style.backgroundColor=satu_color
+        }
+        for(let i=0;i<12;i++){
+            let target = document.getElementById("l_"+(i+1).toString())
+            let light_val=i*5+20
+            let light_color ="hsl("+hue+", 100%, "+light_val+"%)"
+            target.style.backgroundColor=light_color
+        }
     }
 
     set_pal(pal_num){

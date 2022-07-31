@@ -73,6 +73,10 @@ let MyColorPicker = new ColorPicker();
 let MyUserCustom = new GetUserCustom();
 
 // let thisCustom = MyUserCustom.getCustomObj();
+const transparent = '#FFFFFF';
+const red = '#FF5C5C';
+const black = '#221E21';
+
 
 
 let pitch_type = document.getElementById('pitchButton')
@@ -82,6 +86,34 @@ let drum_container=document.getElementsByClassName("set2")
 let pitch_area=document.getElementById('pitch_area')
 let beat_area=document.getElementById('beat_area')
 let reset=document.getElementById('reset')
+
+const shape_square = document.getElementById("btn-square");
+const shape_circle = document.getElementById("btn-circle");
+const shape_triangle= document.getElementById("btn-triangle");
+const shape_decagon = document.getElementById("btn-decagon");
+const shape_star = document.getElementById("btn-star");
+let shape_button_list = {circle:shape_circle, square:shape_square, triangle:shape_triangle, star: shape_star, decagon: shape_decagon}
+
+
+const texture_none = document.getElementById("none");
+const texture_wood = document.getElementById("wood");
+const texture_stone = document.getElementById("stone");
+const texture_paper = document.getElementById("paper");
+let texture_button_list = {none:texture_none, wood:texture_wood, stone:texture_stone, paper: texture_paper}
+
+const palette_satu = document.getElementById("picker_satu")
+const palette_light = document.getElementById("picker_light")
+const palette_1 = document.getElementById("palette1")
+const palette_2 = document.getElementById("palette2")
+const palette_3 = document.getElementById("palette3")
+const palette_4 = document.getElementById("palette4")
+const palette_5 = document.getElementById("palette5")
+const palette_6 = document.getElementById("palette6")
+const palette_7 = document.getElementById("palette7")
+const palette_8 = document.getElementById("palette8")
+const palette_9 = document.getElementById("palette9")
+let palette_button_list = {0: palette_satu, 1: palette_light, 2: palette_1, 3:palette_2, 4:palette_3, 5:palette_4, 6:palette_5, 7:palette_6, 8:palette_7, 9:palette_8, 10:palette_9}
+
 
 pitch_type.onclick=function(e){
     console.log("pitch mode")
@@ -94,6 +126,28 @@ pitch_type.onclick=function(e){
     pitch_area.style.display=''
     beat_area.style.display='none'
 
+    for (let child in shape_button_list){
+        if(child==MyUserCustom.CustomObj.Piano.shape){
+            shape_button_list[child].style.background = red;
+        }else{
+            shape_button_list[child].style.background = black;
+        }
+    }
+    for (let child in texture_button_list){
+        if(child==MyUserCustom.CustomObj.Piano.texture){
+            texture_button_list[child].style.outlineColor = red;
+        }else{
+            texture_button_list[child].style.outlineColor = transparent;
+        }
+    }
+    for (let child in palette_button_list){
+        if(child==MyUserCustom.CustomObj.Piano.texture){
+            palette_button_list[child].style.background = red;
+        }else{
+            palette_button_list[child].style.background = transparent;
+        }
+    }
+
 }
 beat_type.onclick=function(e){
     console.log("beat mode")
@@ -105,6 +159,22 @@ beat_type.onclick=function(e){
     drum_container[0].style.display=''
     pitch_area.style.display='none'
     beat_area.style.display=''
+
+    for (let child in shape_button_list){
+        if(child==MyUserCustom.CustomObj.Drum.shape){
+            shape_button_list[child].style.background = red;
+        }else{
+            shape_button_list[child].style.background = black;
+        }
+    }
+    for (let child in texture_button_list){
+        if(child==MyUserCustom.CustomObj.Drum.texture){
+            texture_button_list[child].style.outlineColor = red;
+        }else{
+            texture_button_list[child].style.outlineColor = transparent;
+        }
+    }
+
 }
 
 
@@ -256,6 +326,7 @@ function apply_default_custom(){
     pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
     kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
     piano.setCurrentEnergy(MyUserCustom.CustomObj.Piano.size)
+    MyColorPicker.set_SaturationAndLightness(parseInt(pitch_palette[0][0]*360))
     MyColorPicker.piano_coloring(MyUserCustom.CustomObj.Piano.palette_num, MyUserCustom.CustomObj.Piano.palette_set)
 
     // piano line is automatically applied
@@ -277,6 +348,33 @@ function apply_default_custom_toHTML(){
     document.getElementById('slide-beat-size').value = MyUserCustom.CustomObj.Drum.size.toString()
     document.getElementById('slide-haptic-sensitivity').value = MyUserCustom.CustomObj.Haptic.sensitivity.toString()
     document.getElementById('slide-haptic-intensity').value = MyUserCustom.CustomObj.Haptic.intensity.toString()
+
+    for (let child in shape_button_list){
+        if(child==MyUserCustom.CustomObj.Piano.shape){
+            shape_button_list[child].style.background = red;
+        }else{
+            shape_button_list[child].style.background = black;
+        }
+    }
+    for (let child in texture_button_list){
+        if(child==MyUserCustom.CustomObj.Piano.texture){
+            texture_button_list[child].style.outlineColor = red;
+        }else{
+            texture_button_list[child].style.outlineColor = transparent;
+        }
+    }
+    for (let child in palette_button_list){
+        if(child==MyUserCustom.CustomObj.Piano.texture){
+            palette_button_list[child].style.background = red;
+        }else{
+            palette_button_list[child].style.background = transparent;
+        }
+    }
+    // shape_button_list[MyUserCustom.CustomObj.Piano.shape].style.background = red;
+    // texture_button_list[MyUserCustom.CustomObj.Piano.texture].style.background = red;
+    // palette_button_list[MyUserCustom.CustomObj.Piano.palette_num.toString()].style.background = red;
+
+
 }
 
 $('#save').click(function(){
