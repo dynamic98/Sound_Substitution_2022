@@ -721,8 +721,8 @@ hr {
     /* box-shadow: 0 10px 20px #dbdbdb; */
     margin-top: 670px;
     display: inline-block; 
-    margin-left: 60px;
-    width: 400px;
+    margin-left: 20px;
+    width: 500px;
   }
   
   h4 .bigTitle {
@@ -874,11 +874,25 @@ hr {
     cursor: pointer;
     transition: all 0.2s ease;
     border-radius: 70%;
-    margin-left: 80px;
+    margin-left: 60px;
   }
 
   #reset {
     background-color: #2a9d8f;
+    border: none;
+    padding: 5px;
+    font-size: 31px;
+    height: 100px;
+    width: 100px;
+    box-shadow: 0 2px 4px darkslategray;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 70%;
+    margin-left: 20px;
+  }
+
+  #task {
+    background-color: #b72323;
     border: none;
     padding: 5px;
     font-size: 31px;
@@ -977,6 +991,10 @@ hr {
     margin-left: 30px;
   }
 
+  #taskGlyph{
+    margin-left: 30px;
+  }
+
 
   span{
     margin-right:2rem
@@ -1048,7 +1066,7 @@ hr {
 
   .colorContainer {
     margin-top: 10px;
-    height: 650px;
+    height: 680px;
     width: 130px;
     border-radius: 1rem;
     overflow: hidden;
@@ -1269,15 +1287,15 @@ hr {
     margin-top: 530px;
     display: inline-block; 
     margin-left: -40px;
-    width: 400px;
+    width: 600px;
   }
 
   .videoControlButton {
     margin-top: 10px;
     margin-left: 10px;
     display: flex;
-    width: 60px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
     border-radius: 6px;
     border: none;
     color: #fff;
@@ -1287,7 +1305,10 @@ hr {
     touch-action: manipulation;
     font-size: 12px;
   }
-
-
+  
+  #picker {
+    margin-bottom: -50px;
+  }
 
 }
+
