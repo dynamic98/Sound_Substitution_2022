@@ -1,49 +1,28 @@
-.movepageContainer {
-    float: right;
-    margin-top: -440px;
-    margin-right: 60px;
-}
-
-
-.arrow {
-    cursor: pointer;
-    position: relative;
-    display: block;
-    margin: 100px 0 0 100px;
-    width: 100px;
+#listen {
+    background-color: #ffe990;
+    border: none;
+    padding: 5px;
+    font-size: 50px;
     height: 100px;
-    border: solid 6px #999;
-    border-radius: 100%;
-    z-index: 1;
-    transition: all 0.2s linear;
+    width: 100px;
+    box-shadow: 0 2px 4px darkslategray;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 70%;
+    margin-left: 20px;
 }
-.arrow:before, .arrow:after {
-    content: '';
-    position: absolute;
-    width: 35%;
-    height: 10%;
-    top: 41%;
-    left: 55%;
-    background: #999;
-    z-index: 2;
-    transform: translate(-50%, -50%) rotate(45deg);
-    transition: all 0.2s linear;
+
+
+.movelistenContainer {
+    float: right;
+    margin-top: -120px;
+    margin-right: -150px;
 }
-.arrow:after {
-    z-index: 3;
-    top: 59%;
-    left: 55%;
-    transform: translate(-50%, -50%) rotate(-45deg);
-}
-.arrow:hover {
-    border: solid 8px rgb(52, 13, 207);
-}
-.arrow:hover:after, .arrow:hover:before {
-    background: rgb(73, 44, 191);
-}
-.arrow:active {
-    border: solid 8px rgb(52, 13, 207);
-}
-.arrow:active:after, .arrow:active:before {
-    background: rgb(31, 0, 155);
+
+@media (max-width: 1500px) {
+    .movelistenContainer {
+        float: right;
+        margin-top: -180px;
+        margin-right: -320px;
+    }
 }
