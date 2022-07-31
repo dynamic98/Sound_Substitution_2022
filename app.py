@@ -69,10 +69,55 @@ def menu():
 def explore():
   if request.method=='POST':
     data = GetUserCustom(UserName)
-    print(data)
   else:
     pass
   return render_template('Exploration.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+
+
+
+@app.route('/exploration-task_one_drum', methods=['POST'])
+def exploration_task_one_drum():
+  data = GetUserCustom(UserName)
+  return render_template('exploration_task_one_drum.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+@app.route('/exploration-task_two_piano', methods=['POST'])
+def exploration_task_two_piano():
+  data = GetUserCustom(UserName)
+  return render_template('exploration_task_two_piano.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+@app.route('/exploration-task_three_drum', methods=['POST'])
+def exploration_task_three_drum():
+  data = GetUserCustom(UserName)
+  return render_template('exploration_task_three_drum.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+@app.route('/exploration-task_four_piano', methods=['POST'])
+def exploration_task_four_piano():
+  data = GetUserCustom(UserName)
+  return render_template('exploration_task_four_piano.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+@app.route('/exploration-task_five_piano', methods=['POST'])
+def exploration_task_five_piano():
+  data = GetUserCustom(UserName)
+  return render_template('exploration_task_five_piano.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+@app.route('/exploration-task_six_piano', methods=['POST'])
+def exploration_task_six_piano():
+  data = GetUserCustom(UserName)
+  return render_template('exploration_task_six_piano.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+@app.route('/exploration-task_seven_piano', methods=['POST'])
+def exploration_task_seven_piano():
+  data = GetUserCustom(UserName)
+  return render_template('exploration_task_seven_piano.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+@app.route('/exploration-task_eight_piano', methods=['POST'])
+def exploration_task_eight_piano():
+  data = GetUserCustom(UserName)
+  return render_template('exploration_task_eight_piano.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+
+
 
 @app.route('/listening', methods=['POST'])
 def listen():
@@ -81,23 +126,11 @@ def listen():
   return render_template('listen.html', User_Name=UserName, User_Number=UserNumber, login="log in", filelist=entireSongList, separatedFileList=separatedSongList )
 
 
-@app.route('/pitch_task', methods=['POST'])
-def pitch_task():
-  data = GetUserCustom(UserName)
-  return render_template('pitch_task_one.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
-@app.route('/beat_task', methods=['POST'])
-def beat_task():
-  data = GetUserCustom(UserName)
-  return render_template('beat_task_one.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
 @app.route('/test', methods=['POST'])
 def test():
   return render_template('testmenu.html',User_Name=UserName, login="log in")
-
-@app.route('/dev', methods=['POST'])
-def dev():
-  return render_template('mainMenu.html',User_Name=UserName, login="log in")
 
 @app.route('/test-groupA', methods=['POST'])
 def groupA():
@@ -120,6 +153,12 @@ def groupD():
   return render_template('test_groupD.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
 
+
+
+
+@app.route('/dev', methods=['POST'])
+def dev():
+  return render_template('mainMenu.html',User_Name=UserName, login="log in")
 
 
 
@@ -285,6 +324,7 @@ def making_drum():
 # @app.route('/exploration', methods=['POST'])
 # def Exploration():
 #     return render_template('Exploration.html')
+
 
 if __name__ == '__main__':
   app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True, use_reloader=False)

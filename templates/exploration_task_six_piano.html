@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Music::Palette::beat_task</title>
+  <title>Music::Palette::pitch_task</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="stylesheet" href="../static/src/fonts/icomoon/style.css">
   <link rel="stylesheet" href="../static/src/css/owl.carousel.min.css">
@@ -17,16 +17,58 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <!-- Styles -->
-  <!-- <link type="text/css" href="../static/src/css/shape.css" rel="stylesheet"> -->
   <link type="text/css" href="../static/src/css/task.css" rel="stylesheet">
-  <link type="text/css" href="../static/src/css/pagemove_beat.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/navi.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/pagemove_pitch.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
   <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
- <div style="width:1300px;">
+  <section class="pianoContainer">
+    <ul class="set">
+      <li class="white do-1" id="key1"></li>
+      <li class="black do-s-1"id="key2" ></li>
+      <li class="white re-1"id="key3"></li>
+      <li class="black re-s-1"id="key4"></li>
+      <li class="white mi-1"id="key5"></li>
+      <li class="white fa-1"id="key6"></li>
+      <li class="black fa-s-1"id="key7"></li>
+      <li class="white sol-1"id="key8"></li>
+      <li class="black sol-s-1"id="key9"></li>
+      <li class="white la-1"id="key10"></li>
+      <li class="black la-s-1"id="key11"></li>
+      <li class="white si-1"id="key12"></li>
+
+      <li class="white do-2" id="key13"></li>
+      <li class="black do-s-2" id="key14"></li>
+      <li class="white re-2" id="key15" ></li>
+      <li class="black re-s-2" id="key16"></li>
+      <li class="white mi-2"id="key17"></li>
+      <li class="white fa-2"id="key18"></li>
+      <li class="black fa-s-2"id="key19"></li>
+      <li class="white sol-2"id="key20"></li>
+      <li class="black sol-s-2"id="key21"></li>
+      <li class="white la-2"id="key22"></li>
+      <li class="black la-s-2"id="key23"></li>
+      <li class="white si-2"id="key24"></li>
+
+      <li class="white do-3" id="key25"></li>
+      <li class="black do-s-3"id="key26"></li>
+      <li class="white re-3"id="key27"></li>
+      <li class="black re-s-3"id="key28"></li>
+      <li class="white mi-3"id="key29"></li>
+      <li class="white fa-3"id="key30"></li>
+      <li class="black fa-s-3"id="key31"></li>
+      <li class="white sol-3"id="key32"></li>
+      <li class="black sol-s-3"id="key33"></li>
+      <li class="white la-3"id="key34"></li>
+      <li class="black la-s-3"id="key35"></li>
+      <li class="white si-3"id="key36"></li>
+    </ul>
+  </section>
+
   <section class="sheetContainer">
     <!-- 여기에 시각화 표현 -->
     <!-- canvas -->
@@ -35,24 +77,20 @@
 
   <progress value="0"  max="15000" id="ProgressBar"></progress>
 
-  <ul class="set2" style="margin-left: 500px;" id="drum">
-    <img src="../static/src/images/drum.png">
-    <audio src="../static/src/sound/drum.wav" id="drum_audio"></audio>
-  </ul>
-
 
   <section class="musicContainer">
-    <div class="task_num" id="task_one"><span id="task_one_text">예제 1번 비트</span></div>
+    <div class="task_num" id="task_six"><span class="task_text" id="task_six_text">예제 6번: 동요 멜로디 2</span></div>
     <br>
     <button class="videoControlButton" id="play" style="display:inline;">시작</button>
     <button class="videoControlButton" id="save" style="display:inline;"><span class="glyphicon glyphicon-save" id="saveGlyph"></span></button>
     <button class="videoControlButton" id="reset" style="display:inline;"><span class="glyphicon glyphicon-erase" id="eraseGlyph"></span></button>
   </section>
 
-  <section class="movepageContainer">
-    <span class="arrow" id="nextpage"></span>
-  </section>
-</div>
+  <form action="/exploration-task_seven_piano" method="POST" class="phaseForm">
+    <section class="movepageContainer">
+      <button class="arrow" id="nextpage"></button>
+    </section>
+  </form>
 
   <div id="custom_data" hidden>
     <ol id="custom_data_piano"> piano
@@ -78,6 +116,7 @@
 
   <div id="user_name" hidden>{{User_Name}}</div>
   <div id="user_number" hidden>{{User_Number}}</div>
+
   <!--shader script-->
   <script type="x-shader/x-vertex" id="vertexshader">
     varying vec2 vUv;
@@ -96,12 +135,10 @@
     </script>
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
-  <script type="module" defer src="../static/src/js/dist/drumTask.js"></script>
-  <!-- <script type="module" defer src="../static/src/js/forUI/buttonColor.js"></script> -->
-  <!-- <script type="module" defer src="../static/src/js/forUI/changePlay.js"></script> -->
+  <script type="module" defer src="../static/src/js/dist/Exploration_task_six_piano.js"></script>
   <script src ="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-  <audio data-key="71" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-mid.wav"></audio>
+
 </body>
 
 </html>

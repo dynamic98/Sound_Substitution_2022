@@ -13,8 +13,8 @@ body {
     background-color: #585c5c;
 }
 
-#task_one_text {
-    margin-left: 200px;
+.task_text {
+    margin-left: 100px;
     color: white;
     font-size: 30px;
 }
@@ -1248,17 +1248,18 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
 
   .task_num {
-    width: 450px;
-    height: 40px;
+    width: 500px;
+    height: 50px;
     border-radius: 1rem;
     background-color: #585c5c;
 }
 
-  #task_one_text {
-    margin-left: 180px;
-    color: white;
-    font-size: 24px;
+  .task_text {
+      margin-left: 200px;
+      color: white;
+      font-size: 30px;
   }
+
 
   #play {
     margin-left: 50px;

@@ -1,5 +1,5 @@
 .question_group{
-    margin-top: 50px;
+    margin-top: 80px;
     margin-left: 200px;
     background-color: antiquewhite;
     width: 55.5%;
@@ -57,7 +57,7 @@
     height: 800px;
     background-color: transparent;
     border-radius: 1rem;
-    margin-top: -800px;
+    margin-top: -700px;
     margin-right: 40px;
 }
 
