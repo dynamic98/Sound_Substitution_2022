@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Music::Palette::test-groupA</title>
+  <title>Music::Palette::test-groupB</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -30,7 +30,7 @@
   <section class="sheetContainer">
     <!-- 여기에 시각화 표현 -->
     <!-- canvas -->
-    <div id="canvas"></div>
+    <div id="canvas" style="visibility:hidden;"></div>
   </section>
 
   <progress value="0"  max="15000" id="ProgressBar"></progress>
@@ -53,9 +53,9 @@
     <button class="videoControlButton" id="play" style="display:none;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
   </section>
 
-  <form action="/listening" method="POST">
+  <form action="/listening" method="POST" >
     <section class="movelistenContainer">
-      <button class="videoControlButton" id="listen" style="display:inline;"><span class="glyphicon glyphicon-eye-open" id="listenGlyph"></span></button>
+      <button class="videoControlButton" id="listen" style="visibility:hidden;"><span class="glyphicon glyphicon-eye-open" id="listenGlyph"></span></button>
     </section>
   </form>
 

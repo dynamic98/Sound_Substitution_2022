@@ -1,0 +1,40 @@
+{
+  "UserName": "dangdang",
+  "UserNumber": "1",
+  "piano": {
+    "shape": "circle",
+    "texture": "stone",
+    "palette_num": 6,
+    "palette_set": [
+      "hsl(0, 75%, 50%)",
+      "hsl(30, 75%, 50%)",
+      "hsl(60, 75%, 50%)",
+      "hsl(90, 75%, 50%)",
+      "hsl(120, 75%, 50%)",
+      "hsl(150, 75%, 50%)",
+      "hsl(180, 75%, 50%)",
+      "hsl(210, 75%, 50%)",
+      "hsl(240, 75%, 50%)",
+      "hsl(270, 75%, 50%)",
+      "hsl(300, 75%, 50%)",
+      "hsl(330, 75%, 50%)"
+    ],
+    "interval": "100",
+    "size": 50,
+    "line": false
+  },
+  "drum": {
+    "shape": "square",
+    "texture": "None",
+    "color": {
+      "h": 213,
+      "s": 100,
+      "l": 62
+    },
+    "size": "0"
+  },
+  "haptic": {
+    "sensitivity": 31,
+    "intensity": 19
+  }
+}

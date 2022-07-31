@@ -63,7 +63,7 @@
     <main>
         <!--시각 output-->
         <div class="visual-container">
-          <div id="canvas">
+          <div id="canvas" style="visibility:visible;">
           </div>
         </div>
 
@@ -150,8 +150,10 @@
     const soundvisualButton = 'soundvisualButton';
     const soundhapticButton = 'soundhapticButton';
     const everythingButton = 'everythingButton';
+    const canvas = document.getElementById('canvas');
 
     $('#soundButton').click(()=>{
+      canvas.style.visibility="hidden";
       let postdata = {HapticPlayState: "Paused"}
       $.ajax({
               type: 'POST',
@@ -169,6 +171,7 @@
             })
     })
     $('#soundvisualButton').click(()=>{
+      canvas.style.visibility="visible";
       let postdata = {HapticPlayState: "Paused"}
       $.ajax({
               type: 'POST',
@@ -186,6 +189,7 @@
             })
     })
     $('#soundhapticButton').click(()=>{
+      canvas.style.visibility="hidden";
       let postdata = {HapticPlayState: "Playing"}
       $.ajax({
               type: 'POST',
@@ -203,6 +207,7 @@
             })
     })
     $('#everythingButton').click(()=>{
+      canvas.style.visibility="visible";
       let postdata = {HapticPlayState: "Playing"}
       $.ajax({
               type: 'POST',

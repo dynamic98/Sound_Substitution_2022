@@ -1,6 +1,6 @@
 {
-  "UserName": "default_user",
-  "UserNumber": "",
+  "UserName": "Yoo",
+  "UserNumber": "2",
   "piano": {
     "shape": "Circle",
     "texture": "None",
@@ -34,7 +34,7 @@
     "size": 50
   },
   "haptic": {
-    "sensitivity": "31",
-    "intensity": "5"
+    "sensitivity": 31,
+    "intensity": 19
   }
 }

@@ -229,6 +229,8 @@ function apply_default_custom(){
     visualization.instruments['savedDrum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
     visualization.instruments['drum'].textureManager.texture = visualization.instruments['drum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
     visualization.instruments['savedDrum'].textureManager.texture = visualization.instruments['savedDrum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
+    visualization.instruments['savedDrum'].materialManager.materialParameters.transparent = true;
+    visualization.instruments['savedDrum'].materialManager.materialParameters.opacity = 0.5;
     drum.setCurrentEnergy(50)
 }
 
