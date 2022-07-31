@@ -45,10 +45,11 @@ const red = '#c52828';
 const grey = '#767676';
 
 let groupA_count = 0;
+let SelectedQuestion = 0;
 let SelectedAnswer = 4;
 let ChoiceList = [choice_one, choice_two, choice_three, choice_mola];
 let LogData = []
-
+let startTime = Date.now();
 const groupA_questionList = [
     "1-1. 가장 높은 음은 무엇인가요? 📣 ",
     "1-2. 가장 높은 음은 무엇인가요? 🎨",
@@ -98,7 +99,7 @@ function MakeChoice(){
             SelectedAnswer = index+1;
             console.log("SelectedAnswer",SelectedAnswer);
             UpdateTaskSheet();
-            console.log(Date.now())
+            LogData.push("Timestamp#"+(Date.now()-startTime).toString()+"#Action#"+"SelectedAnswer#"+SelectedAnswer.toString())
 
         })
     })
@@ -107,6 +108,7 @@ function MakeChoice(){
 function submit_groupA(){
     groupA_submit.addEventListener("click", () => {
         groupA_count += 1
+        SelectedQuestion = Math.floor(groupA_count/2)
         SelectedAnswer = 4
         groupA_question.innerText = groupA_questionList[groupA_count]
         question_one.style.background = grey;
@@ -121,7 +123,7 @@ function submit_groupA(){
         }
 
         UpdateTaskSheet();
-        console.log(Date.now())
+        LogData.push("Timestamp#"+(Date.now()-startTime).toString()+"#Action#"+"Submit#"+groupA_count.toString())
     });
 }
 
@@ -278,8 +280,6 @@ function parse_pitch_palette(set){
     return parsed_palette;
 }
 
-
-
 function apply_default_custom(){
     visualization.instruments['piano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
     visualization.instruments['savedPiano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
@@ -295,6 +295,9 @@ function apply_default_custom(){
 
 }
 
+if(groupA_count){
+
+}
 
 // let postdata = Object.assign({}, WritingMusicSheet.getMusicSheet())
 
