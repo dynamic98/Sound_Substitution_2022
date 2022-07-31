@@ -72,8 +72,6 @@ const groupA_questionList = [
     "테스트가 끝났습니다."
 ]
 
-// let HiddenNumber = [1, 3, 5, 8, 10, 12] 
-
 let kandinsky;
 let bpmTimer = new BPMTimer();
 let stats = new Stats();
@@ -107,8 +105,36 @@ function MakeChoice(){
 
 function submit_groupA(){
     groupA_submit.addEventListener("click", () => {
+        LogData.push("Timestamp#"+(Date.now()-startTime).toString()+"#Action#"+"Submit#"+groupA_count.toString())
         groupA_count += 1
+        if(groupA_count==18){
+            console.log(LogData);
+            groupA_question.innerText = groupA_questionList[18]
+            let postdata = Object.assign({}, LogData)
+            postdata.UserName = MyUserCustom.CustomObj.UserName;
+            postdata.UserNumber = MyUserCustom.CustomObj.UserNumber
+            postdata.TaskNum = "TestGroupA"
+            $.ajax({
+                type: 'POST',
+                url: '/SaveUserDB',
+                data: JSON.stringify(postdata),
+                dataType : 'JSON',
+                contentType: "application/json",
+                success: function(data){
+                    alert('DB 저장완료..')
+                },
+                error: function(request, status, error){
+                    alert('ajax 통신 실패')
+                    alert(error);
+                }
+            })
+
+            // postdata
+        }else if(groupA_count>18){
+            console.log("You Should Not Encounter This State.")
+        }else{
         SelectedQuestion = Math.floor(groupA_count/2)
+        console.log(SelectedQuestion)
         SelectedAnswer = 4
         groupA_question.innerText = groupA_questionList[groupA_count]
         question_one.style.background = grey;
@@ -123,14 +149,14 @@ function submit_groupA(){
         }
 
         UpdateTaskSheet();
-        LogData.push("Timestamp#"+(Date.now()-startTime).toString()+"#Action#"+"Submit#"+groupA_count.toString())
+        }
     });
 }
 
 function UpdateTaskSheet(){
     if(SelectedAnswer!=4){
         console.log("UpdateTaskSheet")
-        TaskSheet = SetA[groupA_count][SelectedAnswer-1];
+        TaskSheet = SetA[SelectedQuestion][SelectedAnswer-1];
         MusicLength = TaskSheet.length;
         TaskMusicSheet = new MusicSheet(MusicLength);
         TaskMusicSheet.setMusicSheet(TaskSheet);
@@ -295,9 +321,7 @@ function apply_default_custom(){
 
 }
 
-if(groupA_count){
 
-}
 
 // let postdata = Object.assign({}, WritingMusicSheet.getMusicSheet())
 
