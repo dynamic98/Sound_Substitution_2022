@@ -121,9 +121,10 @@ def exploration_task_eight_piano():
 
 @app.route('/listening', methods=['POST'])
 def listen():
+  data = GetUserCustom(UserName)
   entireSongList= makeHTMLWithFileList('static/music/original')
   separatedSongList= makeHTMLWithFileList('static/music/separated')
-  return render_template('listen.html', User_Name=UserName, User_Number=UserNumber, login="log in", filelist=entireSongList, separatedFileList=separatedSongList )
+  return render_template('listen.html', filelist=entireSongList, separatedFileList=separatedSongList, User_Name=UserName, User_Number = UserNumber, data = data )
 
 
 
