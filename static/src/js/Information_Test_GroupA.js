@@ -89,6 +89,8 @@ function MakeChoice(){
             SelectedAnswer = index+1;
             console.log("SelectedAnswer",SelectedAnswer);
             UpdateTaskSheet();
+            console.log(Date.now())
+
         })
     })
 }
@@ -104,9 +106,10 @@ function submit_groupA(){
         question_mola.style.background = grey;
         console.log("groupA_count",groupA_count)
         if(HiddenNumber.includes(groupA_count)){
-            canvas.style.visibility="hidden";
+            // canvas.style.visibility="hidden";
         }
         UpdateTaskSheet();
+        console.log(Date.now())
     });
 }
 
