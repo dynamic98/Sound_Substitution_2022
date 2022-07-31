@@ -1,6 +1,12 @@
 .movepageContainer {
     float: right;
-    margin-top: -440px;
+    margin-top: -380px;
+    margin-right: -230px;
+}
+
+.movehomeContainer {
+    float: right;
+    margin-top: -400px;
     margin-right: -230px;
 }
 
@@ -105,8 +111,14 @@
 @media (max-width: 1500px) {
     .movepageContainer {
         float: right;
-        margin-top: -640px;
-        margin-right: 80px;
+        margin-top: -690px;
+        margin-right: 20px;
+    }
+
+    .movehomeContainer {
+        float: right;
+        margin-top: -600px;
+        margin-right: 160px;
     }
     
 }

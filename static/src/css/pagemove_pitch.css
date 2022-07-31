@@ -1,9 +1,14 @@
 .movepageContainer {
     float: right;
-    margin-top: -440px;
-    margin-right: 80px;
+    margin-top: -380px;
+    margin-right: 70px;
 }
 
+.movehomeContainer {
+    float: right;
+    margin-top: -400px;
+    margin-right: 70px;
+}
 
 .arrow {
     cursor: pointer;
@@ -51,7 +56,13 @@
 @media (max-width: 1500px) {
     .movepageContainer {
         float: right;
-        margin-top: -180px;
-        margin-right: 220px;
+        margin-top: -230px;
+        margin-right: 160px;
+    }
+
+    .movehomeContainer {
+        float: right;
+        margin-top: -140px;
+        margin-right: 300px;
     }
 }

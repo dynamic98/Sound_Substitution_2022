@@ -19,6 +19,11 @@ body {
     font-size: 30px;
 }
 
+.userAction {
+  width: 300px;
+  height: 100px;
+}
+
 
 .colorContainer {
   margin-top: 10px;
@@ -1085,6 +1090,20 @@ div[slider] > input[type=range]::-ms-tooltip {
     border-radius: 70%;
     margin-left: 20px;
   }
+
+  #home {
+    background-color: #ab3074;
+    border: none;
+    padding: 5px;
+    font-size: 31px;
+    height: 100px;
+    width: 100px;
+    box-shadow: 0 2px 4px darkslategray;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 70%;
+    margin-left: 20px;
+  }
   
   .volumecontrolButton {
     margin-top: -700px;
@@ -1171,6 +1190,12 @@ div[slider] > input[type=range]::-ms-tooltip {
   #eraseGlyph{
     margin-left: 20px;
   }
+
+  #homeGlyph{
+    margin-left: 20px;
+  }
+
+  
 
 
   span{

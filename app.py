@@ -50,6 +50,7 @@ def menu():
   if request.method == 'POST':
       id_name = request.form['id_name']
       id_number = request.form['id_number']
+
       global UserName
       global UserNumber
       if id_name:
@@ -62,7 +63,16 @@ def menu():
         UserName = 'default_user'
         return render_template('menu.html', User_Name=UserName, User_Number=UserNumber, login="log in")
   else:
-    return render_template('menu.html',User_Name=UserName,  User_Number=UserNumber, login="log out")
+    return render_template('menu.html', User_Name=UserName,  User_Number=UserNumber, login="log out")
+
+
+@app.route('/home', methods=['POST'])
+def home():
+  if request.method=='POST':
+    data = GetUserCustom(UserName)
+  else:
+    pass
+  return render_template('menu.html', User_Name=UserName,  User_Number=UserNumber, data = data, login="log out")
 
 
 @app.route('/exploration', methods=['POST'])
