@@ -21,7 +21,8 @@ class VirtualBrowser:
             self.EditXpath = '//*[@id="root"]/div/div[1]/div/div[2]/div/div[2]/div[1]/span'
             self.DeleteXpath = '//*[@id="root"]/div/div/div[1]/div[2]/div/div[6]/div/label'
             self.ImportXpath = '//*[@id="root"]/div/div/div[1]/div[2]/div/div[1]/div/label/input'
-            self.ApplyXpath = '//*[@id="root"]/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div/div[4]'
+            self.ApplyXpath = '//*[@id="root"]/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div'
+            # self.ApplyXpath = '//*[@id="root"]/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div/div[4]/span'
             self.PlayXpath = '//*[@id="root"]/div/div/div[2]/div[2]/div[1]/div[2]/div[1]/div[4]/div/div/button'
             self.PlayStateXpath = '//*[@id="root"]/div/div/div[2]/div[2]/div[1]/div[2]/div[1]/div[4]/span'
 
@@ -43,6 +44,7 @@ class VirtualBrowser:
             self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
             time.sleep(0.5)
             self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/default_user/default_haptic.bhc"))
+            # time.sleep(0.1)
             self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
         
         else:
@@ -69,12 +71,12 @@ class VirtualBrowser:
                 customlist.sort(key=lambda x: os.path.getmtime(os.path.join(UserPath, x)), reverse=True)
                 RecentUserHaptic = customlist[0]
                 self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
-                time.sleep(0.5)
+                time.sleep(0.7)
                 self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(UserPath, RecentUserHaptic))
                 self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
             else:
                 self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
-                time.sleep(0.5)
+                time.sleep(0.7)
                 self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/default_user/default_haptic.bhc"))
                 self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
     

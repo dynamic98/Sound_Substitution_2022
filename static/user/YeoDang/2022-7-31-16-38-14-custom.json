@@ -1,0 +1,40 @@
+{
+  "UserName": "YeoDang",
+  "UserNumber": "2",
+  "piano": {
+    "shape": "star",
+    "texture": "None",
+    "palette_num": 3,
+    "palette_set": [
+      "hsl(30, 90%, 90%)",
+      "hsl(30, 75%, 75%)",
+      "hsl(30, 60%, 60%)",
+      "hsl(30, 45%, 45%)",
+      "hsl(150, 90%, 90%)",
+      "hsl(150, 75%, 75%)",
+      "hsl(150, 60%, 60%)",
+      "hsl(150, 45%, 45%)",
+      "hsl(270, 90%, 90%)",
+      "hsl(270, 75%, 75%)",
+      "hsl(270, 60%, 60%)",
+      "hsl(270, 45%, 45%)"
+    ],
+    "interval": 17,
+    "size": 46,
+    "line": false
+  },
+  "drum": {
+    "shape": "star",
+    "texture": "wood",
+    "color": {
+      "h": 259,
+      "s": 100,
+      "l": 78
+    },
+    "size": 93
+  },
+  "haptic": {
+    "sensitivity": 40,
+    "intensity": 19
+  }
+}
