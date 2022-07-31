@@ -73,7 +73,13 @@ def explore():
     pass
   return render_template('Exploration.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
-
+@app.route('/exploration_default', methods=['POST'])
+def explore_default():
+  if request.method=='POST':
+    data = GetUserCustom(UserName)
+  else:
+    pass
+  return render_template('Exploration_default.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
 
 @app.route('/exploration-task_one_drum', methods=['POST'])
