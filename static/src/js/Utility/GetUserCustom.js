@@ -9,10 +9,8 @@ export class GetUserCustom {
         this.HapticData = document.getElementById('custom_data_haptic').getElementsByTagName('li');
         this.UserName = document.getElementById('user_name').innerText;
         this.UserNumber = document.getElementById('user_number').innerText;
-
         this.CustomObj.UserName = this.UserName
         this.CustomObj.UserNumber = this.UserNumber
-
         this.initialize();
     }
 

@@ -2,16 +2,10 @@ import os
 import json
 import time
 
-def WriteHapticCustom(UserName, left, right):
+def WriteHapticCustom(UserName, Sensitivity, Intensity):
     refFilefolderPath = os.path.join(os.getcwd(), 'static', 'user', 'default_user')
-    Intensity_H1 = 16
-    Intensity_H2 = 15
-    Intensity_H3 = 14
-    Sensitivity_H1 = -40
-    Sensitivity_H2 = -50
-    Sensitivity_H3 = -20
-    H1toH2 = round(13/100*float(left)) + 1
-    H2toH3 = round(13/100*float(right)) + 1
+    this_Sensitivity = -int(float(Sensitivity)/100*120)
+    this_Intensity = int(float(Intensity)/100*40)
     id = int(time.time())
     data = """
     {
@@ -26,65 +20,37 @@ def WriteHapticCustom(UserName, left, right):
     "useMirroring": [ true, true ],
     "activeArea": [ [ ],  [ ],  [ ], [ ], [ ], [ ],  [ ], [ ], [ ], [] ],
     "isManualMapping": [ true, true, true, true, true, true, true, true, true, true],
-    "channels": [{"rmsThreshold": -50, "useAdaptiveThreshold": true, "adaptiveHigh": 95, "adaptiveLow": 50,
-    "subFilters": ["""%(id, id)
-    for i_H1,_ in enumerate(range(0, H1toH2)):
-        if i_H1 == 0:
+    "channels": [{"rmsThreshold": %d, "useAdaptiveThreshold": true, "adaptiveHigh": 95, "adaptiveLow": 50,
+    "subFilters": ["""%(id, id, this_Sensitivity)
+    for i,_ in enumerate(range(0, 15)):
+        if i == 0:
             subfilter = """ {
             "enable": true,
             "dbHigh": 0,
-            "dbLow": %d,
+            "dbLow": -85,
             "vsm": %d
-            }"""%(Sensitivity_H1, Intensity_H1)
+            }"""%(this_Intensity)
         else:
             subfilter = """,{
             "enable": true,
             "dbHigh": 0,
-            "dbLow": %d,
+            "dbLow": -85,
             "vsm": %d
-            }"""%(Sensitivity_H1, Intensity_H1)
-        data+=subfilter
-    
-    for _ in range(H1toH2, H2toH3):
-        subfilter = """,{
-        "enable": true,
-        "dbHigh": 0,
-        "dbLow": %d,
-        "vsm": %d
-        }"""%(Sensitivity_H2, Intensity_H2)
-        data+=subfilter
-    
-    for _ in range(H2toH3, 15):
-        subfilter = """,{
-        "enable": true,
-        "dbHigh": 0,
-        "dbLow": %d,
-        "vsm": %d
-        }"""%(Sensitivity_H3, Intensity_H3)
+            }"""%(this_Intensity)
         data+=subfilter
 
     data+=""" ],
       "subFilterMotorMappings": ["""
 
-    for i_H1,_ in enumerate(range(0, H1toH2)):
-        if i_H1 == 0:
+    for i,_ in enumerate(range(0, 15)):
+        if i == 0:
             filtermotor = """ {"mappingVest": [0, 0, 0, 0, 0],
-            "mappingOthers": [144, 0, 0, 0, 0 ]
+            "mappingOthers": [252, 0, 0, 0, 0 ]
             } """
         else:
             filtermotor = """ ,{"mappingVest": [0, 0, 0, 0, 0],
-            "mappingOthers": [144, 0, 0, 0, 0 ]
+            "mappingOthers": [252, 0, 0, 0, 0 ]
             } """
-        data+=filtermotor
-
-    for _ in range(H1toH2, H2toH3):
-        filtermotor = """,{"mappingVest": [0, 0, 0, 0, 0],
-            "mappingOthers": [72, 0, 0, 0, 0 ]}"""
-        data+=filtermotor
-    
-    for _ in range(H2toH3, 15):
-        filtermotor = """,{"mappingVest": [0, 0, 0, 0, 0],
-            "mappingOthers": [36, 0, 0, 0, 0 ]}"""
         data+=filtermotor
     data+= """ ]},"""
     # with open(os.path.join(refFilefolderPath, 'Modify.txt'), 'r') as f:

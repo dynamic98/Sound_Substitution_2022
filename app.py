@@ -34,7 +34,7 @@ folder = os.path.join('./static/music/separated')
 
 UserName = 'default_user'
 UserNumber = 0
-# ChromeBrowser = VirtualBrowser()
+ChromeBrowser = VirtualBrowser()
 
 # create the file 
 os.makedirs(folder, exist_ok=True)
@@ -56,6 +56,7 @@ def menu():
         UserName = id_name
         UserNumber = id_number
         os.makedirs(os.path.join('./static/user', UserName), exist_ok=True)
+        ChromeBrowser.SetUserName(UserName)
         return render_template('menu.html', User_Name=UserName, User_Number=UserNumber, login="log out")
       else:
         UserName = 'default_user'
@@ -98,21 +99,25 @@ def test():
 def dev():
   return render_template('mainMenu.html',User_Name=UserName, login="log in")
 
-@app.route('/test/groupA', methods=['POST'])
+@app.route('/test-groupA', methods=['POST'])
 def groupA():
-  return render_template('test_groupA.html',User_Name=UserName, login="log in")
+  data = GetUserCustom(UserName)
+  return render_template('test_groupA.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
-@app.route('/test/groupB', methods=['POST'])
+@app.route('/test-groupB', methods=['POST'])
 def groupB():
-  return render_template('test_groupB.html',User_Name=UserName, login="log in")
+  data = GetUserCustom(UserName)
+  return render_template('test_groupB.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
-@app.route('/test/groupC', methods=['POST'])
+@app.route('/test-groupC', methods=['POST'])
 def groupC():
-  return render_template('test_groupC.html',User_Name=UserName, login="log in")
+  data = GetUserCustom(UserName)
+  return render_template('test_groupC.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
-@app.route('/test/groupD', methods=['POST'])
+@app.route('/test-groupD', methods=['POST'])
 def groupD():
-  return render_template('test_groupD.html',User_Name=UserName, login="log in")
+  data = GetUserCustom(UserName)
+  return render_template('test_groupD.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
 
 
@@ -145,17 +150,17 @@ def concrete():
   return render_template('Task_dev.html',User_Name=UserName, login="log in")
 
 
-@app.route('/SendHapticCustom', methods=['POST'])
-def ajax():
-    data = request.get_json()
-    left = data['left']
-    right = data['right']
-    print(UserName)
-    FileName = WHC(UserName, left, right)
-    # VirtualBrowser(UserName, fileName)
-    # ChromeBrowser.SendHapticCustom(UserName, FileName)
-    return data
-    # return jsonify(result = "success", result2= data)
+@app.route('/SendHaptic', methods=['POST'])
+def ApplyHaptic():
+  data = request.get_json()
+  sensitivity = data['sensitivity']
+  intensity = data['intensity']
+  print(UserName)
+  FileName = WHC(UserName, sensitivity, intensity)
+  # VirtualBrowser(UserName, fileName)
+  ChromeBrowser.SendHapticCustom(UserName, FileName)
+  return data
+  # return jsonify(result = "success", result2= data)
 
 @app.route('/WriteUserCustom', methods=['POST'])
 def wuc():
@@ -167,23 +172,25 @@ def wuc():
 
 @app.route('/SaveUserCustom', methods=['POST'])
 def SaveUserCustom():
-    data = request.get_json()
-    # print('data', data)
-    # print(type(data))
-    WriteUserCustom(data)
+  data = request.get_json()
+  # Sensitivity = data['haptic']['sensitivity']
+  # Intensity = data['haptic']['intensity']
+  # FileName = WHC(UserName, Sensitivity, Intensity)
+  # print(FileName)
+  # ChromeBrowser.SendHapticCustom(UserName, FileName)
+  WriteUserCustom(data)
 
-    return data
+  return data
     # return jsonify(result = "success", result2= data)
 
 @app.route('/SaveUserDB', methods=['POST'])
 def SaveUserDB():
-    data = request.get_json()
-    # print('data', data)
-    # print(type(data))
-    WriteUserDB(data)
-
-    return data
-    # return jsonify(result = "success", result2= data)
+  data = request.get_json()
+  # print('data', data)
+  # print(type(data))
+  WriteUserDB(data)
+  return data
+  # return jsonify(result = "success", result2= data)
 
 
 

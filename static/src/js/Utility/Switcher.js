@@ -16,7 +16,7 @@ export class Switcher{
         }
         //return midi and adjust the energy 
         if (this.midi) {
-            let AdjustEnergy = Utility.sigmoid(10, energy);
+            let AdjustEnergy = 5*Utility.sigmoid(50, energy);
             return [this.midi, AdjustEnergy]
         }
     }

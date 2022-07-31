@@ -28,8 +28,9 @@ document.body.appendChild(stats.dom);
 let sourceContainer;
 //HTML element Name  & FOLDER NAME 
 let song = new Song("filelist", "static/music/original/")
-let drum;
+let drum, vocal;
 let MyUserCustom = new GetUserCustom();
+// console.log(MyUserCustom);
 let pitch_palette;
 
 
@@ -72,8 +73,10 @@ async function main() {
     //VISUALS & OTHERS
     // ----------------------------------------------------/
     drum = sourceContainer.getSource("drums")
+    vocal = sourceContainer.getSource("vocals")
     song.initializeKandinsky(song.getBPM(), song.getMaxVolume())
     drum.initializeKandinsky(song.getBPM(), song.getMaxVolume())
+    vocal.initializeKandinsky(song.getBPM(), song.getMaxVolume())
     bpmTimer.setBPM(song.getBPM())
     apply_default_custom();
 
@@ -95,7 +98,7 @@ function animate() {
         }
         //under 4 beat = calculate and create Geometry 
         else if (bpmTimer.isUnderFourBeat()) {
-            draw(song, "piano")
+            draw(vocal, "piano")
             draw(drum, "drum")
         }
         visualization.render();
@@ -143,15 +146,13 @@ function apply_default_custom(){
     visualization.instruments['piano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
     visualization.instruments['piano'].textureManager.texture = visualization.instruments['piano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
     pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
-    kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
-    piano.setCurrentEnergy(MyUserCustom.CustomObj.Piano.size)
-    MyColorPicker.piano_coloring(MyUserCustom.CustomObj.Piano.palette_num, MyUserCustom.CustomObj.Piano.palette_set)
+    vocal.kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
 
     // piano line is automatically applied
 
     visualization.instruments['drum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
     visualization.instruments['drum'].textureManager.texture = visualization.instruments['drum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
-    drum.setCurrentEnergy(MyUserCustom.CustomObj.Drum.size)
+    
     // drum color is automatically applied
 }
 //debug frame rate

@@ -114,7 +114,7 @@ function update() {
                             TaskMusicSheet.getDrumNote()
                         )
                     kandinsky.calculate(pitchAndEnergy);
-                    visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
+                    visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, 1)
                     visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
                 }
             Pictured=true;
@@ -147,7 +147,7 @@ function update() {
                         TaskMusicSheet.getDrumNote()
                     )
                 kandinsky.calculate(pitchAndEnergy);
-                visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
+                visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, 1)
                 visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
             }
         }
@@ -170,7 +170,7 @@ function update() {
                             TaskMusicSheet.getDrumNote()
                         )
                     kandinsky.calculate(pitchAndEnergy);
-                    visualization.setColor("savedDrum",  MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
+                    visualization.setColor("savedDrum",  MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, 1)
                     visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
                 }
             }
@@ -185,7 +185,7 @@ function update() {
                                 TaskMusicSheet.getDrumNote()
                             )
                         kandinsky.calculate(pitchAndEnergy);
-                        visualization.setColor("savedDrum",  MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
+                        visualization.setColor("savedDrum",  MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, 1)
                         visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*i, kandinsky.getPitchHeight())
                     }
             }
@@ -206,7 +206,7 @@ function update() {
 function draw(pitch, energy, midi) {
     let pitchAndEnergy = switcher.getPitchAndEnergy(pitch, energy, midi);
     kandinsky.calculate(pitchAndEnergy);
-    visualization.setColor("drum", MyUserCustom.CustomObj.Drum.color/360, 0.5, 0.5)
+    visualization.setColor("drum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
     //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
     visualization.createVisualNote("drum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
 
@@ -220,22 +220,12 @@ function apply_default_custom(){
     visualization.instruments['savedPiano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
     visualization.instruments['piano'].textureManager.texture = visualization.instruments['piano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
     visualization.instruments['savedPiano'].textureManager.texture = visualization.instruments['savedPiano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
-    // visualization.instruments['piano'].textureManager.setTexture(MyUserCustom.CustomObj.Piano.texture.toLowerCase())
-    // visualization.instruments['savedPiano'].textureManager.setTexture(MyUserCustom.CustomObj.Piano.texture.toLowerCase())
-    // pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
     kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
-    // piano.setCurrentEnergy(MyUserCustom.CustomObj.Piano.size)
-    // piano.setCurrentEnergy(50)
-    // piano line is automatically applied
 
     visualization.instruments['drum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
     visualization.instruments['savedDrum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
-    // visualization.instruments['drum'].textureManager.setTexture(MyUserCustom.CustomObj.Drum.texture.toLowerCase())
-    // visualization.instruments['savedDrum'].textureManager.setTexture(MyUserCustom.CustomObj.Drum.texture.toLowerCase())
     visualization.instruments['drum'].textureManager.texture = visualization.instruments['drum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
     visualization.instruments['savedDrum'].textureManager.texture = visualization.instruments['savedDrum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
-    // drum.setCurrentEnergy(MyUserCustom.CustomObj.Drum.size)
-    // drum color is automatically applied
     drum.setCurrentEnergy(50)
 }
 

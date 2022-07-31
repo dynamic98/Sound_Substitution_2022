@@ -56,14 +56,15 @@ export class MusicSheet {
         return this.MusicArray[this.currentIndex].keyboard_pitch.midi % 12
     }
     getDrumPitch() {
-        return this.MusicArray[this.currentIndex].drum_pitch
+        let drum_pitch = {frequency: 0, confidence: 1, note: "F4", midi: 65}
+        return drum_pitch
     }
     getDrumEnergy() {
         //console.log(this.MusicArray[this.currentIndex].keyboard_energy)
         return this.MusicArray[this.currentIndex].drum_energy
     }
     getDrumNote() {
-        return this.MusicArray[this.currentIndex].drum_pitch.midi % 12
+        return 65%12
     }
 
     setMusicArray =(keyboard_pitch = this.EmptyPitch, keyboard_energy = 0, drum_pitch = this.EmptyPitch, drum_energy = 0) => {

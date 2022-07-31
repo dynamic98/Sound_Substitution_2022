@@ -45,6 +45,7 @@ let progressTime = 15;
 let progressTimer = new ProgressTimer(progressTime, document.getElementById("ProgressBar"));
 
 let piano = new Piano("pianoContainer");
+// let MyColorPicker = new ColorPicker();
 
 let Task1Sheet = [
     {keyboard_pitch: {frequency: 0, confidence: 1, note:    0,  midi:  0} , keyboard_energy:  0, drum_pitch: {frequency: 0, confidence: 1, note: 0, midi: 0}, drum_energy: 0},
@@ -260,8 +261,16 @@ function parse_pitch_palette(set){
     }
     return parsed_palette;
 }
+
+function piano_coloring(set_num, colors){
+    for(let i=0; i<36; i++){    
+        let color_num=i%12
+        let piano_set = document.getElementById("key"+(i+1).toString())
+        piano_set.style.background=colors[color_num]
+    }
+}
+
 function apply_default_custom(){
-    console.log(visualization.instruments['piano'].textureManager)
     visualization.instruments['piano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
     visualization.instruments['savedPiano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
     visualization.instruments['piano'].textureManager.texture = visualization.instruments['piano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
@@ -269,7 +278,7 @@ function apply_default_custom(){
     pitch_palette = parse_pitch_palette(MyUserCustom.CustomObj.Piano.palette_set)
     kandinsky.setRange(MyUserCustom.CustomObj.Piano.interval)
     piano.setCurrentEnergy(50)
-    MyColorPicker.piano_coloring(MyUserCustom.CustomObj.Piano.palette_num, MyUserCustom.CustomObj.Piano.palette_set)
+    piano_coloring(MyUserCustom.CustomObj.Piano.palette_num, MyUserCustom.CustomObj.Piano.palette_set)
 
     // piano line is automatically applied
 
