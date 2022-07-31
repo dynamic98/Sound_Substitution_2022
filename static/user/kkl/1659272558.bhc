@@ -1,6 +1,6 @@
 {
-  "id": "1659269616",
-  "name": "1659269616",
+  "id": "1659272558",
+  "name": "1659272558",
   "isDefault": false,
   "version": 2,
   "category": "Music",
@@ -39,7 +39,7 @@
   ],
   "channels": [
     {
-      "rmsThreshold": -90,
+      "rmsThreshold": -37,
       "useAdaptiveThreshold": true,
       "adaptiveHigh": 95,
       "adaptiveLow": 50,
@@ -48,91 +48,91 @@
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         },
         {
           "enable": true,
           "dbHigh": 0,
           "dbLow": -85,
-          "vsm": 38
+          "vsm": 2
         }
       ],
       "subFilterMotorMappings": [

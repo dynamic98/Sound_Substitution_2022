@@ -30,7 +30,7 @@ def makeHTMLWithFileList(relativePath):
 
 app = Flask(__name__)
 
-folder = os.path.join('./static/music/separated')
+folder = os.path.join(os.getcwd(),'static','music','separated')
 
 UserName = 'default_user'
 UserNumber = 0
@@ -56,7 +56,7 @@ def menu():
       if id_name:
         UserName = id_name
         UserNumber = id_number
-        os.makedirs(os.path.join('./static/user', UserName), exist_ok=True)
+        os.makedirs(os.path.join(os.getcwd(),'static','user', UserName), exist_ok=True)
         ChromeBrowser.SetUserName(UserName)
         return render_template('menu.html', User_Name=UserName, User_Number=UserNumber, login="log out")
       else:
@@ -136,8 +136,8 @@ def exploration_task_eight_piano():
 @app.route('/listening', methods=['POST'])
 def listen():
   data = GetUserCustom(UserName)
-  entireSongList= makeHTMLWithFileList('static/music/original')
-  separatedSongList= makeHTMLWithFileList('static/music/separated')
+  entireSongList= makeHTMLWithFileList(os.path.join(os.getcwd(),'static','music','original'))
+  separatedSongList= makeHTMLWithFileList(os.path.join(os.getcwd(),'static','music','original'))
   return render_template('listen.html', filelist=entireSongList, separatedFileList=separatedSongList, User_Name=UserName, User_Number = UserNumber, data = data )
 
 

@@ -1,23 +1,23 @@
 {
-  "UserName": "default_user",
-  "UserNumber": "",
+  "UserName": "kkl",
+  "UserNumber": "11",
   "piano": {
     "shape": "circle",
     "texture": "none",
-    "palette_num": 10,
+    "palette_num": 6,
     "palette_set": [
-      "hsl(0, 75%, 100%)",
-      "hsl(0, 75%, 0%)",
-      "hsl(0, 75%, 100%)",
-      "hsl(0, 75%, 0%)",
-      "hsl(0, 75%, 100%)",
-      "hsl(0, 75%, 100%)",
-      "hsl(0, 75%, 0%)",
-      "hsl(0, 75%, 100%)",
-      "hsl(0, 75%, 0%)",
-      "hsl(0, 75%, 100%)",
-      "hsl(0, 75%, 0%)",
-      "hsl(0, 75%, 100%)"
+      "hsl(0, 75%, 50%)",
+      "hsl(30, 75%, 50%)",
+      "hsl(60, 75%, 50%)",
+      "hsl(90, 75%, 50%)",
+      "hsl(120, 75%, 50%)",
+      "hsl(150, 75%, 50%)",
+      "hsl(180, 75%, 50%)",
+      "hsl(210, 75%, 50%)",
+      "hsl(240, 75%, 50%)",
+      "hsl(270, 75%, 50%)",
+      "hsl(300, 75%, 50%)",
+      "hsl(330, 75%, 50%)"
     ],
     "interval": 70,
     "size": 50,
@@ -34,7 +34,7 @@
     "size": 50
   },
   "haptic": {
-    "sensitivity": "31",
+    "sensitivity": 31,
     "intensity": "5"
   }
 }

@@ -1,36 +1,40 @@
 {
   "UserName": "default_user",
-  "UserNumber": 10000,
+  "UserNumber": "",
   "piano": {
-    "shape": "Circle",
-    "texture": "None",
-    "palette_num": 0,
+    "shape": "circle",
+    "texture": "none",
+    "palette_num": 10,
     "palette_set": [
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)",
-      "hsl(0, 100%, 100%)"
+      "hsl(0, 75%, 100%)",
+      "hsl(0, 75%, 0%)",
+      "hsl(0, 75%, 100%)",
+      "hsl(0, 75%, 0%)",
+      "hsl(0, 75%, 100%)",
+      "hsl(0, 75%, 100%)",
+      "hsl(0, 75%, 0%)",
+      "hsl(0, 75%, 100%)",
+      "hsl(0, 75%, 0%)",
+      "hsl(0, 75%, 100%)",
+      "hsl(0, 75%, 0%)",
+      "hsl(0, 75%, 100%)"
     ],
     "interval": 70,
     "size": 50,
     "line": true
   },
   "drum": {
-    "shape": "Circle",
-    "texture": "None",
-    "color": 100,
+    "shape": "circle",
+    "texture": "none",
+    "color": {
+      "h": 0,
+      "s": 50,
+      "l": 100
+    },
     "size": 50
   },
   "haptic": {
-    "sensitivity": 80,
-    "intensity": 60
+    "sensitivity": "31",
+    "intensity": "5"
   }
 }
