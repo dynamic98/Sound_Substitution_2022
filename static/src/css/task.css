@@ -1248,14 +1248,14 @@ div[slider] > input[type=range]::-ms-tooltip {
   }
 
   .task_num {
-    width: 500px;
+    width: 450px;
     height: 50px;
     border-radius: 1rem;
     background-color: #585c5c;
 }
 
   .task_text {
-      margin-left: 200px;
+      margin-left: 100px;
       color: white;
       font-size: 30px;
   }

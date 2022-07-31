@@ -1,6 +1,6 @@
 .movepageContainer {
     float: right;
-    margin-top: -430px;
+    margin-top: -320px;
     margin-right: 60px;
 }
 
@@ -51,7 +51,7 @@
 @media (max-width: 1500px) {
     .movepageContainer {
         float: right;
-        margin-top: 390px;
+        margin-top: -180px;
         margin-right: 220px;
     }
 }
