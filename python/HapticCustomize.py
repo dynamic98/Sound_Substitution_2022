@@ -39,12 +39,13 @@ class VirtualBrowser:
             self.driver.find_element(by=By.XPATH, value=self.LogInXpath).click()
             time.sleep(4)
             self.driver.find_element(by=By.XPATH, value=self.StudioXpath).click()
+            time.sleep(0.5)
             self.driver.find_element(by=By.XPATH, value=self.EditXpath).click()
 
-            self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
-            time.sleep(0.5)
+            # self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
+            # time.sleep(0.5)
             self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/default_user/default_haptic.bhc"))
-            self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
+            # self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
 
             if self.driver.find_element(by=By.XPATH, value=self.PlayStateXpath).get_attribute("innerText")=='Paused':
                 self.driver.find_element(by=By.XPATH, value=self.PlayXpath).click()
@@ -56,8 +57,9 @@ class VirtualBrowser:
     def SendHapticCustom(self, UserName, FileName):
         # if EC.element_to_be_clickable((By.XPATH, DeleteXpath)):
         if platform == 'win32':
-            self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
-            time.sleep(0.5)
+            # time.sleep(0.1)
+            # self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
+            # time.sleep(0.5)
             self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/{0}/{1}.bhc".format(UserName, FileName)))
             self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
 
@@ -76,19 +78,19 @@ class VirtualBrowser:
             if len(customlist) != 0:
                 customlist.sort(key=lambda x: os.path.getmtime(os.path.join(UserPath, x)), reverse=True)
                 RecentUserHaptic = customlist[0]
-                self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
-                time.sleep(0.5)
+                # self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
+                # time.sleep(0.5)
                 self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(UserPath, RecentUserHaptic))
-                self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
+                # self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
 
                 if self.driver.find_element(by=By.XPATH, value=self.PlayStateXpath).get_attribute("innerText")=='Paused':
                     self.driver.find_element(by=By.XPATH, value=self.PlayXpath).click()
 
             else:
-                self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
-                time.sleep(0.5)
+                # self.driver.find_element(by=By.XPATH, value=self.DeleteXpath).click()
+                # time.sleep(0.5)
                 self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/default_user/default_haptic.bhc"))
-                self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
+                # self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
 
                 if self.driver.find_element(by=By.XPATH, value=self.PlayStateXpath).get_attribute("innerText")=='Paused':
                     self.driver.find_element(by=By.XPATH, value=self.PlayXpath).click()
