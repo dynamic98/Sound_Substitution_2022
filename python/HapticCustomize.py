@@ -22,6 +22,8 @@ class VirtualBrowser:
             self.DeleteXpath = '//*[@id="root"]/div/div/div[1]/div[2]/div/div[6]/div/label'
             self.ImportXpath = '//*[@id="root"]/div/div/div[1]/div[2]/div/div[1]/div/label/input'
             self.ApplyXpath = '//*[@id="root"]/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div/div[4]'
+            self.PlayXpath = '//*[@id="root"]/div/div/div[2]/div[2]/div[1]/div[2]/div[1]/div[4]/div/div/button'
+            self.PlayStateXpath = '//*[@id="root"]/div/div/div[2]/div[2]/div[1]/div[2]/div[1]/div[4]/span'
 
             self.options = webdriver.ChromeOptions()
             self.options.add_experimental_option("excludeSwitches", ["enable-logging"])
@@ -75,6 +77,13 @@ class VirtualBrowser:
                 time.sleep(0.5)
                 self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/default_user/default_haptic.bhc"))
                 self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
+    
+    def ToggleHaptic(self):
+        NowState = self.driver.find_element(by=By.XPATH, value=self.PlayStateXpath).get_attribute("innerText")
+        print(NowState)
+        self.driver.find_element(by=By.XPATH, value=self.PlayXpath).click()
+        NowState = self.driver.find_element(by=By.XPATH, value=self.PlayStateXpath).get_attribute("innerText")
+        print(NowState)
 
     def QuitBrowser(self):
         self.driver.quit()
