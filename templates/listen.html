@@ -150,35 +150,17 @@
     const soundvisualButton = 'soundvisualButton';
     const soundhapticButton = 'soundhapticButton';
     const everythingButton = 'everythingButton';
-    let postdata = Object.assign({}, LogData)
-            postdata.UserName = MyUserCustom.CustomObj.UserName;
-            postdata.UserNumber = MyUserCustom.CustomObj.UserNumber
-            postdata.TaskNum = "TestGroupD"
-            $.ajax({
-                type: 'POST',
-                url: '/SaveUserDB',
-                data: JSON.stringify(postdata),
-                dataType : 'JSON',
-                contentType: "application/json",
-                success: function(data){
-                    alert('DB 저장완료..')
-                },
-                error: function(request, status, error){
-                    alert('ajax 통신 실패')
-                    alert(error);
-                }
-            })
 
     $('#soundButton').click(()=>{
-      console.log(soundButton)
+      let postdata = {HapticPlayState: "Paused"}
       $.ajax({
               type: 'POST',
-              url: '/SaveUserDB',
+              url: '/SendHapticPlay',
               data: JSON.stringify(postdata),
               dataType : 'JSON',
               contentType: "application/json",
               success: function(data){
-                  alert('DB 저장완료..')
+                  // alert('HapticPlayState 변경')
               },
               error: function(request, status, error){
                   alert('ajax 통신 실패')
@@ -187,15 +169,15 @@
             })
     })
     $('#soundvisualButton').click(()=>{
-      console.log(soundvisualButton)
+      let postdata = {HapticPlayState: "Paused"}
       $.ajax({
               type: 'POST',
-              url: '/SaveUserDB',
+              url: '/SendHapticPlay',
               data: JSON.stringify(postdata),
               dataType : 'JSON',
               contentType: "application/json",
               success: function(data){
-                  alert('DB 저장완료..')
+                  // alert('HapticPlayState 변경')
               },
               error: function(request, status, error){
                   alert('ajax 통신 실패')
@@ -204,15 +186,15 @@
             })
     })
     $('#soundhapticButton').click(()=>{
-      console.log(soundhapticButton)
+      let postdata = {HapticPlayState: "Playing"}
       $.ajax({
               type: 'POST',
-              url: '/SaveUserDB',
+              url: '/SendHapticPlay',
               data: JSON.stringify(postdata),
               dataType : 'JSON',
               contentType: "application/json",
               success: function(data){
-                  alert('DB 저장완료..')
+                  // alert('HapticPlayState 변경')
               },
               error: function(request, status, error){
                   alert('ajax 통신 실패')
@@ -221,15 +203,15 @@
             })
     })
     $('#everythingButton').click(()=>{
-      console.log(everythingButton)
+      let postdata = {HapticPlayState: "Playing"}
       $.ajax({
               type: 'POST',
-              url: '/SaveUserDB',
+              url: '/SendHapticPlay',
               data: JSON.stringify(postdata),
               dataType : 'JSON',
               contentType: "application/json",
               success: function(data){
-                  alert('DB 저장완료..')
+                  // alert('HapticPlayState 변경')
               },
               error: function(request, status, error){
                   alert('ajax 통신 실패')
