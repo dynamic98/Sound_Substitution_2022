@@ -50,6 +50,7 @@ let SelectedAnswer = 4;
 let ChoiceList = [choice_one, choice_two, choice_three, choice_mola];
 let LogData = []
 let startTime = Date.now();
+
 const groupA_questionList = [
     "1-1. 가장 높은 음은 무엇인가요? 📣 ",
     "1-2. 가장 높은 음은 무엇인가요? 🎨",
