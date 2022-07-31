@@ -2,6 +2,8 @@ export class Drum {
     constructor(HTMLElementID) {
         this.HTMLElement = document.getElementById(HTMLElementID);
         this.DrumAudio = document.getElementById("drum_audio")
+        this.drumsynth = new Tone.MembraneSynth().toDestination();
+
 
         this.currentEnergy = 50
         this.currentPitch = 5
@@ -12,6 +14,7 @@ export class Drum {
 
         this.now = Tone.now();
         this.synth = new Tone.Synth().toDestination();
+        this.drumsynth = new Tone.MembraneSynth().toDestination();
         this.DictPitch = {
             0: "C",
             1: "C#",
@@ -37,7 +40,9 @@ export class Drum {
     }
 
     play() {
-        this.DrumAudio.play()
+        // this.DrumAudio.play()
+        this.drumsynth.volume.value = this.getEnergt()/100*60;
+        this.drumsynth.triggerAttackRelease("C0", this.now);
     }
 
     getAudioData() {

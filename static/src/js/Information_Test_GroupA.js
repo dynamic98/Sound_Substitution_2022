@@ -34,6 +34,7 @@ from './forUI/QuestionSet_Test.js'
 
 const groupA_question = document.getElementById("question_groupA");
 const groupA_submit = document.getElementById("submit_groupA");
+const canvas = document.getElementById("canvas")
 
 let choice_one = document.getElementById("question_one");
 let choice_two = document.getElementById("question_two");
@@ -46,6 +47,7 @@ const grey = '#767676';
 let groupA_count = 0;
 let SelectedAnswer = 4;
 let ChoiceList = [choice_one, choice_two, choice_three, choice_mola];
+let LogData = []
 
 const groupA_questionList = [
     "1. 가장 높은 음은 무엇인가요?",
@@ -59,6 +61,8 @@ const groupA_questionList = [
     "9. 소리의 음이 높이 변화가 가장 많은 멜로디는 무엇인가요?",
     "테스트가 끝났습니다."
 ]
+
+let HiddenNumber = [1, 3, 5, 7, 9] 
 
 let kandinsky;
 let bpmTimer = new BPMTimer();
@@ -99,6 +103,9 @@ function submit_groupA(){
         question_three.style.background = grey;
         question_mola.style.background = grey;
         console.log("groupA_count",groupA_count)
+        if(HiddenNumber.includes(groupA_count)){
+            canvas.style.visibility="hidden";
+        }
         UpdateTaskSheet();
     });
 }
@@ -272,6 +279,9 @@ function apply_default_custom(){
     visualization.instruments['savedDrum'].textureManager.texture = visualization.instruments['savedDrum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
 
 }
+
+
+// let postdata = Object.assign({}, WritingMusicSheet.getMusicSheet())
 
 // $('#reset').click(function(){
 //     WritingMusicSheet.resetMusicSheet();
