@@ -133,8 +133,6 @@ def exploration_task_eight_piano():
   return render_template('exploration_task_eight_piano.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
 
-
-
 @app.route('/listening', methods=['POST'])
 def listen():
   data = GetUserCustom(UserName)
@@ -206,6 +204,7 @@ def concrete():
   return render_template('Task_dev.html',User_Name=UserName, login="log in")
 
 
+# 이거 지우면 눈물남
 @app.route('/SendHaptic', methods=['POST'])
 def ApplyHaptic():
   data = request.get_json()
@@ -218,6 +217,7 @@ def ApplyHaptic():
   return data
   # return jsonify(result = "success", result2= data)
 
+# 이거 지우면 눈물남
 @app.route('/WriteUserCustom', methods=['POST'])
 def wuc():
   if request.method == 'POST':
@@ -226,6 +226,7 @@ def wuc():
     pass
   return render_template('/loading.html')
 
+# 이거 지우면 눈물남
 @app.route('/SaveUserCustom', methods=['POST'])
 def SaveUserCustom():
   data = request.get_json()
@@ -239,6 +240,7 @@ def SaveUserCustom():
   return data
     # return jsonify(result = "success", result2= data)
 
+# 이거 지우면 눈물남
 @app.route('/SaveUserDB', methods=['POST'])
 def SaveUserDB():
   data = request.get_json()
@@ -248,7 +250,13 @@ def SaveUserDB():
   return data
   # return jsonify(result = "success", result2= data)
 
-
+# 이거 지우면 눈물남
+@app.route('/SendHapticPlay', methods=['POST'])
+def SendHapticPlay():
+  data = request.get_json()
+  HapticPlayState = data['HapticPlayState']
+  ChromeBrowser.ToggleHaptic(HapticPlayState)
+  return data
 
 @app.route('/separate', methods=['POST'])
 def separate():

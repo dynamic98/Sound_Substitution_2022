@@ -78,10 +78,12 @@ class VirtualBrowser:
                 self.driver.find_element(by=By.XPATH, value=self.ImportXpath).send_keys(os.path.join(os.getcwd(),"static/user/default_user/default_haptic.bhc"))
                 self.driver.find_element(by=By.XPATH, value=self.ApplyXpath).click()
     
-    def ToggleHaptic(self):
+    def ToggleHaptic(self, ObjectState):
         NowState = self.driver.find_element(by=By.XPATH, value=self.PlayStateXpath).get_attribute("innerText")
-        print(NowState)
-        self.driver.find_element(by=By.XPATH, value=self.PlayXpath).click()
+        if ObjectState!=NowState:
+            self.driver.find_element(by=By.XPATH, value=self.PlayXpath).click()
+        else:
+            pass
         NowState = self.driver.find_element(by=By.XPATH, value=self.PlayStateXpath).get_attribute("innerText")
         print(NowState)
 
