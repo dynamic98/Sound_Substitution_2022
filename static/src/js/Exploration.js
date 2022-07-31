@@ -71,6 +71,7 @@ let mode_pitchbeat="pitch"
 let MyColorPicker = new ColorPicker();
 
 let MyUserCustom = new GetUserCustom();
+
 // let thisCustom = MyUserCustom.getCustomObj();
 
 
@@ -82,9 +83,8 @@ let pitch_area=document.getElementById('pitch_area')
 let beat_area=document.getElementById('beat_area')
 let reset=document.getElementById('reset')
 
-
 pitch_type.onclick=function(e){
-    // console.log("pitch mode")
+    console.log("pitch mode")
     mode_pitchbeat="pitch"
     geometryButtons.setModePitchBeat('pitch');
     textureButtons.setModePitchBeat('pitch');
@@ -96,7 +96,7 @@ pitch_type.onclick=function(e){
 
 }
 beat_type.onclick=function(e){
-    // console.log("beat mode")
+    console.log("beat mode")
     mode_pitchbeat="beat"
     geometryButtons.setModePitchBeat('beat');
     textureButtons.setModePitchBeat('beat');
@@ -106,6 +106,7 @@ beat_type.onclick=function(e){
     pitch_area.style.display='none'
     beat_area.style.display=''
 }
+
 
 let checkbox = document.getElementById('pitch-checkbox')
 checkbox.addEventListener('change', (event) => {

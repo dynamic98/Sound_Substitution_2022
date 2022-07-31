@@ -41,7 +41,7 @@ export class Drum {
 
     play() {
         // this.DrumAudio.play()
-        this.drumsynth.volume.value = this.getEnergt()/100*60;
+        this.drumsynth.volume.value = this.getEnergy()/100*60;
         this.drumsynth.triggerAttackRelease("C0", this.now);
     }
 
