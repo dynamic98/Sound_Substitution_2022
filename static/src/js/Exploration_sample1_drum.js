@@ -218,7 +218,6 @@ function draw(pitch, energy, midi) {
 document.body.appendChild(stats.dom);
 
 function apply_default_custom(){
-    console.log(visualization.instruments['piano'].textureManager)
     visualization.instruments['piano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
     visualization.instruments['savedPiano'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Piano.shape.toLowerCase())
     visualization.instruments['piano'].textureManager.texture = visualization.instruments['piano'].textureManager.textureObject[MyUserCustom.CustomObj.Piano.texture.toLowerCase()]
@@ -228,7 +227,12 @@ function apply_default_custom(){
     visualization.instruments['drum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
     visualization.instruments['savedDrum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())
     visualization.instruments['drum'].textureManager.texture = visualization.instruments['drum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
+
     visualization.instruments['savedDrum'].textureManager.texture = visualization.instruments['savedDrum'].textureManager.textureObject[MyUserCustom.CustomObj.Drum.texture.toLowerCase()]
+    // visualization.instruments['savedDrum'].materialManager.materialParameters.transmission = 0.5;
+    visualization.instruments['savedDrum'].materialManager.materialParameters.transparent = true;
+    visualization.instruments['savedDrum'].materialManager.materialParameters.opacity = 0.5;
+    // console.log(visualization.instruments['savedDrum'].materialManager)
     drum.setCurrentEnergy(50)
 }
 

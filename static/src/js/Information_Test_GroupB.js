@@ -132,6 +132,7 @@ function submit_groupB(){
 
             // postdata
         }else if(groupB_count>18){
+            $('#listen').click()
             console.log("You Should Not Encounter This State.")
         }else{
         SelectedQuestion = Math.floor(groupB_count/2)
