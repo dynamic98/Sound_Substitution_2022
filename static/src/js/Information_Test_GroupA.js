@@ -84,7 +84,6 @@ function MakeChoice(){
         choice.addEventListener("click", function(){
             SelectedAnswer = index+1;
             console.log("SelectedAnswer",SelectedAnswer);
-            progressTimer.play();
             UpdateTaskSheet();
         })
     })
@@ -111,14 +110,21 @@ function UpdateTaskSheet(){
         MusicLength = TaskSheet.length;
         TaskMusicSheet = new MusicSheet(MusicLength);
         TaskMusicSheet.setMusicSheet(TaskSheet);
+        main()
+        progressTimer.pause();
+        progressTimer.play();
+
+
     }else{
         TaskSheet = null;
         MusicLength = 0;
         TaskMusicSheet = null;
+        progressTimer.pause();
+        progressTimer.element.value = "0"
+        visualization.reset();
+        bpmTimer.restart()
     }
-    main()
 }
-console.log("dd")
 
 UpdateTaskSheet();
 MakeChoice();
@@ -132,18 +138,12 @@ function initialize() {
     bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
     AbsCount = AbsolutePosition(bpmTimer.getFourBeatTime());
-    LoopAmount = progressTime*1000 / bpmTimer.getFourBeatTime();
     apply_default_custom()
-    TotalCount = AbsCount*LoopAmount;
-
 }
 
 
 function main() {
-    NoteInterval = TotalCount/MusicLength;
-    OneLoopMusicLength = Math.floor(MusicLength/LoopAmount)
-    if(OneLoopMusicLength>MusicLength){OneLoopMusicLength=MusicLength};
-    LoopRemainder = MusicLength%OneLoopMusicLength
+    NoteInterval = AbsCount/MusicLength;
     LoopCount = 0;
     Pictured = false;
     // UpdateTaskSheet();
@@ -151,6 +151,7 @@ function main() {
     bpmTimer.restart()
     progressTimer.element.value = "0"
     progressTimer.played = true;
+
 }
 
 update();
@@ -160,7 +161,6 @@ function update() {
     stats.begin()
     requestAnimationFrame(update);
     if (TaskMusicSheet != null){
-        // console.log("TashMusicSheet", TaskMusicSheet, "groupCount", groupA_count, "selectedNumber", SelectedAnswer);
         TaskMusicSheet.setCurrentIndex(Math.floor(progressTimer.getThisSeconds() / (15000/MusicLength)))
         if (!progressTimer.getPlayed()){
             if(!Pictured){ // User first encounter this state
@@ -192,24 +192,52 @@ function update() {
         if (!bpmTimer.isUnderFourBeat()) {
             console.log("this time");
             visualization.reset();
-            LoopCount ++;
-            console.log(LoopCount, Math.floor(LoopAmount))
-            if(LoopCount<Math.floor(LoopAmount)){
-
-            }else{
-
-            }
 
         } else if (bpmTimer.isUnderFourBeat()) {
-                if(progressTimer.getPlayed()){
-
+            if(TaskMusicSheet.isCurrentIndexUpdated()){
+ 
+                if(TaskMusicSheet.getKeyboardEnergy()!=0){
+                    let pitchAndEnergy = switcher.getPitchAndEnergy(
+                            TaskMusicSheet.getKeyboardPitch(),
+                            TaskMusicSheet.getKeyboardEnergy(),
+                            TaskMusicSheet.getKeyboardNote()
+                        )
+                    // console.log(TaskMusicSheet.getMusicArray(TaskMusicSheet.getCurrentIndex()))
+                    console.log(TaskMusicSheet.getKeyboardStringNote(), TaskMusicSheet.getKeyboardEnergy());
+                    playinstrument.playPiano(TaskMusicSheet.getKeyboardStringNote(), TaskMusicSheet.getKeyboardEnergy())
+                    // console.log("PitchAndEnergy", pitchAndEnergy);
+                    kandinsky.calculate(pitchAndEnergy);
+                    visualization.setColor("savedPiano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
+                    visualization.createVisualAbsNote("savedPiano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*TaskMusicSheet.getCurrentIndex(), kandinsky.getPitchHeight())
+                    if(MyUserCustom.CustomObj.Piano.line){
+                        visualization.createConnectionLine("savedPiano")
+                    }
+                }
+                if(TaskMusicSheet.getDrumEnergy()!=0){
+                    let pitchAndEnergy = switcher.getPitchAndEnergy(
+                            TaskMusicSheet.getDrumPitch(),
+                            TaskMusicSheet.getDrumEnergy(),
+                            TaskMusicSheet.getDrumNote()
+                        )
+                    playinstrument.playDrum(TaskMusicSheet.getDrumEnergy())
+            
+                    console.log("DrumEnergy",TaskMusicSheet.getDrumEnergy(), "pitchAndEnergy", pitchAndEnergy)
+                    kandinsky.calculate(pitchAndEnergy);
+                    visualization.setColor("savedDrum", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
+                    visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*TaskMusicSheet.getCurrentIndex(), kandinsky.getPitchHeight())
+                    // if(MyUserCustom.CustomObj.Piano.line){
+                    //     visualization.createConnectionLine("savedDrum")
+                    // }
                 }
             }
+            }
         }
+    TaskMusicSheet.setLastIndex(TaskMusicSheet.getCurrentIndex())
     }
     visualization.render();
     visualization.update();
     stats.end();
+
 }
 
 

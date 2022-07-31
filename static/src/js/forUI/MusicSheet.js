@@ -55,6 +55,9 @@ export class MusicSheet {
     getKeyboardNote() {
         return this.MusicArray[this.currentIndex].keyboard_pitch.midi % 12
     }
+    getKeyboardStringNote() {
+        return this.MusicArray[this.currentIndex].keyboard_pitch.note
+    }
     getDrumPitch() {
         let drum_pitch = {frequency: 0, confidence: 1, note: "F4", midi: 65}
         return drum_pitch
