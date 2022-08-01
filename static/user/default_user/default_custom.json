@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
-  "UserName": "kkl",
-  "UserNumber": "11",
-=======
-  "UserName": "aaa11",
-  "UserNumber": "414141",
->>>>>>> 0517ea3 (Last Dance)
+  "UserName": "default_userr",
+  "UserNumber": "0",
   "piano": {
     "shape": "circle",
     "texture": "none",

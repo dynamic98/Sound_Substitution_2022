@@ -1,0 +1,40 @@
+{
+  "UserName": "yeogyeong_noh",
+  "UserNumber": "1",
+  "piano": {
+    "shape": "circle",
+    "texture": "paper",
+    "palette_num": 0,
+    "palette_set": [
+      "hsl(2, 2%, 50%)",
+      "hsl(2, 10%, 50%)",
+      "hsl(2, 18%, 50%)",
+      "hsl(2, 26%, 50%)",
+      "hsl(2, 34%, 50%)",
+      "hsl(2, 42%, 50%)",
+      "hsl(2, 50%, 50%)",
+      "hsl(2, 58%, 50%)",
+      "hsl(2, 66%, 50%)",
+      "hsl(2, 74%, 50%)",
+      "hsl(2, 82%, 50%)",
+      "hsl(2, 90%, 50%)"
+    ],
+    "interval": 70,
+    "size": "57",
+    "line": true
+  },
+  "drum": {
+    "shape": "triangle",
+    "texture": "wood",
+    "color": {
+      "h": 53,
+      "s": 100,
+      "l": 52
+    },
+    "size": "28"
+  },
+  "haptic": {
+    "sensitivity": 31,
+    "intensity": 5
+  }
+}

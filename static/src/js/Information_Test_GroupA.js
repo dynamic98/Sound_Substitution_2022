@@ -275,7 +275,7 @@ function update() {
             
                     console.log("DrumEnergy",TaskMusicSheet.getDrumEnergy(), "pitchAndEnergy", pitchAndEnergy)
                     kandinsky.calculate(pitchAndEnergy);
-                    visualization.setColor("savedDrum", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
+                    visualization.setColor("savedDrum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
                     visualization.createVisualAbsNote("savedDrum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*NoteInterval*TaskMusicSheet.getCurrentIndex(), kandinsky.getPitchHeight())
                     // if(MyUserCustom.CustomObj.Piano.line){
                     //     visualization.createConnectionLine("savedDrum")
