@@ -83,6 +83,16 @@ def explore():
     pass
   return render_template('Exploration.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
 
+@app.route('/exploration_last', methods=['POST'])
+def explore_last():
+  if request.method=='POST':
+    data = GetUserCustom(UserName)
+  else:
+    pass
+  return render_template('Exploration_last.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+
+
 @app.route('/exploration_default', methods=['POST'])
 def explore_default():
   if request.method=='POST':
@@ -321,6 +331,21 @@ def making_piano():
 def making_drum():
   data = GetUserCustom(UserName)
   return render_template('making_beat_task.html',User_Name=UserName, User_Number = UserNumber, data = data, login="log in")
+
+
+@app.route('/sentence_analysis', methods=['POST'])
+def sentence_analysis():
+  sentence = request.get_json()
+  print(sentence)
+  entireSongList= makeHTMLWithFileList(os.path.join(os.getcwd(),'static','music','original'))
+  separatedSongList= makeHTMLWithFileList(os.path.join(os.getcwd(),'static','music','original'))
+  candidate = {'imagery' : ["비발디-사계절_봄_, Op.8 No.1_01_Verse1", "DUN DUN dance", "Bad Boy"],
+               'movement': ["Bad Boy", "HIP5", "Joe Hisaishi-Kiki_s Delivery Service_01_Intro"]
+              }
+  # return render_template('listen.html', filelist=entireSongList, separatedFileList=separatedSongList, User_Name=UserName, User_Number=UserNumber, data=data )
+  return jsonify(filelist=entireSongList, separatedFileList=separatedSongList, candidate=candidate)
+
+
 
 # @app.route('/login', methods=['POST'])
 # def login():

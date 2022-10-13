@@ -50,6 +50,7 @@ export class Piano {
 
 
     play() {
+        this.synth.volume.value = this.getEnergy()/100*60;
         this.synth.triggerAttackRelease(this.DictPitch[this.currentPitch] + this.currentOctave.toString(), this.now);
 
     }

@@ -1,0 +1,40 @@
+{
+  "UserName": "seoyeonghee",
+  "UserNumber": "16",
+  "piano": {
+    "shape": "circle",
+    "texture": "none",
+    "palette_num": 6,
+    "palette_set": [
+      "hsl(0, 75%, 50%)",
+      "hsl(30, 75%, 50%)",
+      "hsl(60, 75%, 50%)",
+      "hsl(90, 75%, 50%)",
+      "hsl(120, 75%, 50%)",
+      "hsl(150, 75%, 50%)",
+      "hsl(180, 75%, 50%)",
+      "hsl(210, 75%, 50%)",
+      "hsl(240, 75%, 50%)",
+      "hsl(270, 75%, 50%)",
+      "hsl(300, 75%, 50%)",
+      "hsl(330, 75%, 50%)"
+    ],
+    "interval": 54,
+    "size": 57,
+    "line": true
+  },
+  "drum": {
+    "shape": "square",
+    "texture": "paper",
+    "color": {
+      "h": 301,
+      "s": 100,
+      "l": 56
+    },
+    "size": "100"
+  },
+  "haptic": {
+    "sensitivity": "67",
+    "intensity": "53"
+  }
+}

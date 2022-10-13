@@ -72,7 +72,14 @@ document.body.appendChild(stats.dom);
 
 main()
 
-function main() {
+import
+{
+    Utility
+}
+from './Utility/Utility.js'
+
+async function main() {
+    await Utility.sleep(1000)
     bpmTimer.setBPM(20)
     bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
@@ -208,7 +215,7 @@ function update() {
 
     } else if (bpmTimer.isUnderFourBeat()) {
             if(progressTimer.getPlayed()){
-            visualization.moveProgressBar(kandinsky.getPitchWidth())
+            visualization.moveProgressBar(kandinsky.getPitchWidth()*1.3)
             }
         }
     }
@@ -225,7 +232,7 @@ function draw(pitch, energy, midi) {
     kandinsky.calculate(pitchAndEnergy);
     visualization.setColor("piano", pitch_palette[kandinsky.tone][0], pitch_palette[kandinsky.tone][1], pitch_palette[kandinsky.tone][2])
     //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-    visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+    visualization.createVisualNote("piano", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*1.3, kandinsky.getPitchHeight())
     if(MyUserCustom.CustomObj.Piano.line){
         visualization.createConnectionLine("piano")
         }

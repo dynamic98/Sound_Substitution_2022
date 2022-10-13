@@ -74,7 +74,14 @@ document.body.appendChild(stats.dom);
 
 main()
 
-function main() {
+import
+{
+    Utility
+}
+from './Utility/Utility.js'
+
+async function main() {
+    await Utility.sleep(1000)
     bpmTimer.setBPM(20)
     bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);
@@ -196,7 +203,7 @@ function update() {
 
     } else if (bpmTimer.isUnderFourBeat()) {
             if(progressTimer.getPlayed()){
-            visualization.moveProgressBar(kandinsky.getPitchWidth())
+            visualization.moveProgressBar(kandinsky.getPitchWidth()*1.3)
             }
         }
     }
@@ -211,7 +218,7 @@ function draw(pitch, energy, midi) {
     kandinsky.calculate(pitchAndEnergy);
     visualization.setColor("drum", MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
     //myThree.createColor(kandinsky.getNormalizedTone(), kandinsky.getNormalizedOctave())
-    visualization.createVisualNote("drum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth(), kandinsky.getPitchHeight())
+    visualization.createVisualNote("drum", kandinsky.getPitchEnergy(), kandinsky.getPitchWidth()*1.3, kandinsky.getPitchHeight())
 
 }
 

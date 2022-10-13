@@ -196,7 +196,14 @@ document.body.appendChild(stats.dom);
 
 main()
 
-function main() {
+import
+{
+    Utility
+}
+from './Utility/Utility.js'
+
+async function main() {
+    await Utility.sleep(1000)
     bpmTimer.setBPM(20)
     bpmTimer.setBPMByMeshCount(MeshAmount)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);

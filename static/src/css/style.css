@@ -159,17 +159,19 @@ aside {
     -webkit-box-shadow: 10px 0 30px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 10px 0 30px 0 rgba(0, 0, 0, 0.1); }
   aside .side-inner {
-    padding: 30px 0;
+    /* padding: 30px 0; */
+    padding: 0;
     height: 100vh;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch; }
     aside .side-inner .profile {
-      margin-top: 20px;
+      margin-top: 10px;
       margin-left: auto;
       margin-right: auto;
       text-align: center;
-      margin-bottom: 30px;
-      padding-bottom: 30px;
+      margin-bottom: 0px;
+      /* margin-bottom: 20px; */
+      padding-bottom: 20px;
       border-bottom: 1px solid #efefef; }
       aside .side-inner .profile img {
         width: 80px;
@@ -553,10 +555,11 @@ div#demo > div#waveform > wave {
   background-color: #f4471f;
   color: white;
   border: none;
-  padding: 5px;
-  font-size: 40px;
-  height: 100px;
-  width: 100px;
+  /* padding: 5px; */
+  /* margin-left: 0%; */
+  font-size: 30px;
+  height: 55px;
+  width: 55px;
   box-shadow: 0 2px 4px darkslategray;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -564,11 +567,33 @@ div#demo > div#waveform > wave {
 }
 
 div#music-controls{
-  margin-top: 250px;
-  margin-left: 140px;
+  margin-top: 5%;
+  /* margin-left: 5%; */
 }
 
-/* div#music-controls > button.btn-primary{
+div.music-top3{
+  padding-left: 5px;
+  font-size: 14px;
+  height: 70px;
+  width:90%; 
+  margin-left:5%; 
+  margin-right:5%; 
+  border:2px 
+  solid rgb(0, 0, 0); 
+  background-color: #ffffff; 
+}
+
+div.music-top3-title{
+  width:90%; 
+  margin-left:5%; 
+  margin-right:5%; 
+  font-size: 20px; 
+  text-align: center; 
+}
+
+
+/* 
+div#music-controls > button.btn-primary{
   width: 200px;
   padding: 10px;
   margin-right: 10px;
@@ -1179,9 +1204,9 @@ div#music-controls{
     color: white;
     border: none;
     padding: 5px;
-    font-size: 40px;
-    height: 100px;
-    width: 100px;
+    font-size: 10px;
+    height: 30px;
+    width: 30px;
     box-shadow: 0 2px 4px darkslategray;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -1189,8 +1214,8 @@ div#music-controls{
   }
   
   div#music-controls{
-    margin-top: 100px;
-    margin-left: 130px;
+    margin-top: 5%;
+    /* margin-left: 5%; */
   }
   
   

@@ -27,34 +27,78 @@
         <div class="side-inner">
   
           <div class="profile" style="margin-top: 70px;">
-            <img src="../static/src/images/cutecat.jpeg" alt="Image" class="img-fluid" style="width: 150px;">
-            <h3 class="name" style="font-size: 26px;">{{User_Name}}</h3>
-            <span class="identity" style="font-size: 20px;">P{{User_Number}}</span>
-            <br id="musiclist">
-            <p id="musiclist" style="font-size: 20px; color: black;">Music List<p>
+            <h3 class="name" style="font-size: 26px;" hidden>{{User_Name}}</h3>
+            <span class="identity" style="font-size: 20px;" hidden>P{{User_Number}}</span>
             <div id="filelist" hidden> {{filelist}} </div>
             <div id="separatedFileList" hidden> {{ separatedFileList}} </div>
-            <select id="select-music">
-            </select>
+            <input id="submit-sentence" type="text" size="40" placeholder="음악 검색을 위한 문장을 입력해주세요."> 
+            <button id="button-submit-sentence" type="button">제출</button><br>
+            <h3 style="font-size: 20px;">문장 분석을 통한 음악 검색</h3>
+            <select id="select-music" style="width: 90%;"> </select>
+            <div id="music-controls">
+              <button class="videoControlButton" id="play" data-action="play">
+                <span class="glyphicon glyphicon-play" id="playGlyph"></span>
+              </button>
+            </div>
             <!-- <br id="musiclist">
             <button id="music_submit"> Submit </button> -->
           </div>
-  
+          <div class="music-top3-title">
+            심상
+          </div>
+          <div class="music-top3" id="music-imagery">
+            1. Bad Boy<br>
+            2. DUN DUN dance<br>
+            3. HIP5
+          </div>
+          <div class="music-top3-title">
+            움직임
+          </div>
+          <div class="music-top3" id="music-movement">
+            1. Bad Boy<br>
+            2. DUN DUN dance<br>
+            3. HIP5            
+          </div>
+          <div class="music-top3-title">
+            ___같다
+          </div>
+          <div class="music-top3" id="music-equal-as">
+            1. Bad Boy<br>
+            2. DUN DUN dance<br>
+            3. HIP5
+          </div>
+          <div class="music-top3-title">
+            음악적 특징
+          </div>
+          <div class="music-top3" id="music-characteristic">
+            1. 비발디-사계절_봄_, Op.8 No.1_01_Verse1<br>
+            2. DUN DUN dance<br>
+            3. HIP5
+          </div>
+          <div class="music-top3-title">
+            자유로운 묘사
+          </div>
+          <div class="music-top3" id="music-free-description">
+            1. Bad Boy<br>
+            2. DUN DUN dance<br>
+            3. HIP5
+          </div>
+          <div class="music-top3-title">
+            감정
+          </div>
+          <div class="music-top3" id="music-emotion">
+            1. Bad Boy<br>
+            2. Joe Hisaishi-Kiki_s Delivery Service_01_Intro<br>
+            3. HIP5
+          </div>
+
+
           <div id="sidebar-content">
             <audio id="audio" controls></audio>
             <div class="thetitle" id="title"></div>
           </div>
 
-          <div id="music-controls">
-            <button class="videoControlButton" id="play" data-action="play"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
-            <!-- <button class="btn btn-primary" data-action="play">
-                <i class="glyphicon glyphicon-play"></i>
-                재생
-                /
-                <i class="glyphicon glyphicon-pause"></i>
-                멈추기
-            </button> -->
-        </div>
+
 
         </div>
       </aside>
@@ -225,6 +269,29 @@
             })
     })
 
+    $('#button-submit-sentence').click(()=>{
+      let sentence = document.getElementById('submit-sentence').value
+      let postdata = {"data": sentence}
+      $.ajax({
+              type: 'POST',
+              url: '/sentence_analysis',
+              data: JSON.stringify(postdata),
+              dataType : 'JSON',
+              contentType: "application/json",
+              success: function(data){
+                  alert('문장 분석 성공');
+                  // alert(data);
+                  console.log(data)
+                  document.getElementById("music-imagery").innerText = "1. "+ data['candidate']['imagery'][0]+"\n2. "+data['candidate']['imagery'][1] +"\n3. "+ data['candidate']['imagery'][2]
+                  document.getElementById("music-movement").innerText = "1. "+ data['candidate']['movement'][0]+"\n2. "+data['candidate']['movement'][1] +"\n3. "+ data['candidate']['movement'][2]
+                  // document.write(response);
+              },
+              error: function(request, status, error){
+                  alert('ajax 통신 실패')
+                  alert(error);
+              }
+            })
+    })
 
 
 

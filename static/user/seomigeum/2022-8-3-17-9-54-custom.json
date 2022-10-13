@@ -1,0 +1,40 @@
+{
+  "UserName": "seomigeum",
+  "UserNumber": "23",
+  "piano": {
+    "shape": "circle",
+    "texture": "stone",
+    "palette_num": 1,
+    "palette_set": [
+      "hsl(111, 100%, 20%)",
+      "hsl(111, 100%, 25%)",
+      "hsl(111, 100%, 30%)",
+      "hsl(111, 100%, 35%)",
+      "hsl(111, 100%, 40%)",
+      "hsl(111, 100%, 45%)",
+      "hsl(111, 100%, 50%)",
+      "hsl(111, 100%, 55%)",
+      "hsl(111, 100%, 60%)",
+      "hsl(111, 100%, 65%)",
+      "hsl(111, 100%, 70%)",
+      "hsl(111, 100%, 75%)"
+    ],
+    "interval": "81",
+    "size": "61",
+    "line": true
+  },
+  "drum": {
+    "shape": "circle",
+    "texture": "paper",
+    "color": {
+      "h": 352,
+      "s": 100,
+      "l": 50
+    },
+    "size": "52"
+  },
+  "haptic": {
+    "sensitivity": 31,
+    "intensity": "39"
+  }
+}

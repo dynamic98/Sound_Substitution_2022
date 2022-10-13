@@ -185,7 +185,14 @@ initialize();
 
 main()
 
-function initialize() {
+import
+{
+    Utility
+}
+from './Utility/Utility.js'
+
+async function initialize() {
+    await Utility.sleep(1000)
     bpmTimer.setBPM(20)
     bpmTimer.setBPMByMeshCount(20)
     kandinsky = new Kandinsky(bpmTimer.getBPM(), 1);

@@ -1,0 +1,40 @@
+{
+  "UserName": "test1",
+  "UserNumber": "231312",
+  "piano": {
+    "shape": "circle",
+    "texture": "wood",
+    "palette_num": 6,
+    "palette_set": [
+      "hsl(0, 75%, 50%)",
+      "hsl(30, 75%, 50%)",
+      "hsl(60, 75%, 50%)",
+      "hsl(90, 75%, 50%)",
+      "hsl(120, 75%, 50%)",
+      "hsl(150, 75%, 50%)",
+      "hsl(180, 75%, 50%)",
+      "hsl(210, 75%, 50%)",
+      "hsl(240, 75%, 50%)",
+      "hsl(270, 75%, 50%)",
+      "hsl(300, 75%, 50%)",
+      "hsl(330, 75%, 50%)"
+    ],
+    "interval": 70,
+    "size": 50,
+    "line": true
+  },
+  "drum": {
+    "shape": "circle",
+    "texture": "stone",
+    "color": {
+      "h": 0,
+      "s": 50,
+      "l": 100
+    },
+    "size": 50
+  },
+  "haptic": {
+    "sensitivity": 31,
+    "intensity": 5
+  }
+}
