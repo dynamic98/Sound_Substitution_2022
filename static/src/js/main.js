@@ -32,6 +32,7 @@ let drum, vocal;
 let MyUserCustom = new GetUserCustom();
 // console.log(MyUserCustom);
 let pitch_palette;
+let Req;
 
 
 //event handlers
@@ -49,6 +50,49 @@ document.getElementById("select-music").onchange = async () => {
     sourceContainer.initialPlay(song.getWaveSurferTime, song.playWaveSurfer)
     bpmTimer.setBPM(song.getBPM())
 }
+
+$('#button-submit-sentence').click(()=>{
+    let sentence = document.getElementById('submit-sentence').value
+    let postdata = {"data": sentence}
+    $.ajax({
+            type: 'POST',
+            url: '/sentence_analysis',
+            data: JSON.stringify(postdata),
+            dataType : 'JSON',
+            contentType: "application/json",
+            success: function(data){
+                alert('문장 분석 성공');
+                // alert(data);
+            
+                // console.log(data['candidate'])
+                document.getElementById("music-imagery").innerText = "1. "+ data['candidate']['imagery'][0]+"\n2. "+data['candidate']['imagery'][1] +"\n3. "+ data['candidate']['imagery'][2]
+                document.getElementById("music-movement").innerText = "1. "+ data['candidate']['movement'][0]+"\n2. "+data['candidate']['movement'][1] +"\n3. "+ data['candidate']['movement'][2]
+                document.getElementById("music-equal-as").innerText = "1. "+ data['candidate']['equal-as'][0]+"\n2. "+data['candidate']['equal-as'][1] +"\n3. "+ data['candidate']['equal-as'][2]
+                document.getElementById("music-characteristic").innerText = "1. "+ data['candidate']['characteristic'][0]+"\n2. "+data['candidate']['characteristic'][1] +"\n3. "+ data['candidate']['characteristic'][2]
+                document.getElementById("music-free-description").innerText = "1. "+ data['candidate']['free-description'][0]+"\n2. "+data['candidate']['free-description'][1] +"\n3. "+ data['candidate']['free-description'][2]
+                document.getElementById("music-emotion").innerText = "1. "+ data['candidate']['emotion'][0]+"\n2. "+data['candidate']['emotion'][1] +"\n3. "+ data['candidate']['emotion'][2]
+
+                document.getElementById("filelist").innerText = data['filelist']
+                document.getElementById("separatedFileList").innerText = data['filelist']
+                // document.write(response);
+                
+                let filelist = data['filelist'].split(', ');
+                let selectMusicElement = document.getElementById("select-music");
+                selectMusicElement.options.length = 0;
+
+                for (let index in filelist) {
+                    selectMusicElement.options[selectMusicElement.options.length] = new Option(filelist[index]+'.mp3', index);
+                }
+                selectMusicElement.options[1].selected = true;
+
+            },
+            error: function(request, status, error){
+                alert('ajax 통신 실패')
+                alert(error);
+            }
+          })
+  })
+
 
 //----------------------------------------------------//
 main();
@@ -115,11 +159,11 @@ function draw(instance, instrumentType) {
         if (instance.getFileName() == "drums") {
             // visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -60)
             visualization.setColor(instrumentType,MyUserCustom.CustomObj.Drum.color['h']/360, 0.5, MyUserCustom.CustomObj.Drum.color['l']/100)
-            visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), -20)
+            visualization.createVisualNote(instrumentType, instance.getPitchEnergy()/3, instance.getPitchWidth(), -20)
         } else {
             // console.log(instance.kandinsky.pitch)
             visualization.setColor(instrumentType, pitch_palette[instance.kandinsky.tone][0], pitch_palette[instance.kandinsky.tone][2], pitch_palette[instance.kandinsky.tone][2])
-            visualization.createVisualNote(instrumentType, instance.getPitchEnergy(), instance.getPitchWidth(), instance.getPitchHeight())
+            visualization.createVisualNote(instrumentType, instance.getPitchEnergy()/3, instance.getPitchWidth(), instance.getPitchHeight())
             
             visualization.createConnectionLine(instrumentType)
 

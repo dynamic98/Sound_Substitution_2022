@@ -1,0 +1,41 @@
+{
+    "name": "LM with Sentence",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon --exec babel-node src/init.js",
+        "build": "webpack"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "vite": "^2.8.4"
+    },
+    "dependencies": {
+        "@simonwep/pickr": "^1.8.2",
+        "babel": "^6.23.0",
+        "body-parser": "^1.20.0",
+        "bpm-detective": "^2.0.5",
+        "child_process": "^1.0.2",
+        "express": "^4.18.1",
+        "meyda": "^5.3.0",
+        "mongo": "^0.1.0",
+        "mongod": "^2.0.0",
+        "mongodb": "^4.5.0",
+        "mongoose": "^6.3.2",
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.16",
+        "npm": "^8.8.0",
+        "pickr": "^0.1.4",
+        "pug": "^3.0.2",
+        "python-shell": "^3.0.1",
+        "three": "^0.138.3",
+        "three.meshline": "^1.4.0",
+        "uniq": "^1.0.1"
+    },
+    "keywords": [
+        "LM with Sentence"
+    ],
+    "author": "",
+    "license": "ISC",
+    "description": ""
+}

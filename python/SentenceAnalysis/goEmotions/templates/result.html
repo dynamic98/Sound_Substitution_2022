@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>LM with Sentence</title>
+
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <!-- <base href="/"> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Sharp|Material+Icons+Two+Tone|Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <h3>The Result</h3>
+
+    <div>
+        <p>
+            {% if query == None %}
+                <p id="order"> Put your query.</h5>
+            {% else %}
+                <p id="inputQuery"> Query: {{ query }} </p>
+                <br> <br>
+                <p id="predictedEmotion"> Predicted Emotion: {{ emotion }} </p>
+                <br> <br>
+                <p id="predictedEmotion"> Noun : {{ noun }} </p>
+                <br> <br>
+                <p id="predictedEmotion"> Adj : {{ adj }} </p>
+                <br> <br>
+                <p id="predictedEmotion"> Verb : {{ verb }} </p>
+                <br> <br>
+                <p id="predictedEmotion"> Similar Noun: {{ similar_noun }} </p>
+                <br> <br>
+                <p id="predictedEmotion"> Similar Verb: {{ similar_verb }} </p>
+                <br> <br>
+                <p id="predictedEmotion"> Similar Adj: {{ similar_adj }} </p>
+            {% endif %}
+        </p>
+    </div>
+
+</body>
+</html>

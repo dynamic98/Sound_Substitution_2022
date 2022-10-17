@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, jsonify
+import pandas
 from featureExtraction import extract_feature
 from werkzeug.utils import secure_filename
 import os
 import selenium
 import webbrowser
+import sys
 from python.WriteHapticCustom import WriteHapticCustom as WHC
 from python.UserCustomization import WriteUserCustom, GetUserCustom
 from python.UserDB import WriteUserDB
 from python.HapticCustomize import VirtualBrowser
+from python.SentenceAnalysis.goEmotions.sentence_analysis_sort import SentenceAnalysis
 
 ## 필요한 함수 선언 
 ###################################################
@@ -23,7 +26,7 @@ def makeHTMLWithFileList(relativePath):
       filestrlist = filestrlist + i + ', '
     else:
       filestrlist = filestrlist + i
-  print(filestrlist)
+  # print(filestrlist)
   return filestrlist
 ###################################################
 
@@ -34,6 +37,8 @@ folder = os.path.join(os.getcwd(),'static','music','separated')
 
 UserName = 'default_user'
 UserNumber = 0
+
+MySentenceAnalysis = SentenceAnalysis()
 ChromeBrowser = VirtualBrowser()
 
 # create the file 
@@ -336,14 +341,36 @@ def making_drum():
 @app.route('/sentence_analysis', methods=['POST'])
 def sentence_analysis():
   sentence = request.get_json()
-  print(sentence)
-  entireSongList= makeHTMLWithFileList(os.path.join(os.getcwd(),'static','music','original'))
-  separatedSongList= makeHTMLWithFileList(os.path.join(os.getcwd(),'static','music','original'))
-  candidate = {'imagery' : ["비발디-사계절_봄_, Op.8 No.1_01_Verse1", "DUN DUN dance", "Bad Boy"],
-               'movement': ["Bad Boy", "HIP5", "Joe Hisaishi-Kiki_s Delivery Service_01_Intro"]
-              }
+  # print(sentence)
+  # print(MySentenceAnalysis.query_analysis(sentence['data']))
+  search_dimension = ['imagery', 'movement', 'equal-as', 'characteristic', 'free-description', 'emotion']
+
+  final_list, total_list = MySentenceAnalysis.query_analysis(sentence['data'])
+  music_dict = MySentenceAnalysis.getMusicDict()
+  total_music_list = []
+  for music in total_list:
+    total_music_list.append(music_dict[music])
+
+  candidate = {}
+  for n, top3 in enumerate(final_list):
+    music_name_list = []
+    for music in top3['music'].tolist():
+      music_name_list.append(music_dict[music])
+    candidate[search_dimension[n]] = music_name_list
+
+  SongStrList = ''
+  for n, i in enumerate(total_music_list):
+    if n != len(total_music_list)-1:
+      SongStrList = SongStrList + i + ', '
+    else:
+      SongStrList = SongStrList + i
+
+
+  # entireSongList= makeHTMLWithFileList(os.path.join(os.getcwd(),'static','music','original'))
+  # separatedSongList= makeHTMLWithFileList(os.path.join(os.getcwd(),'static','music','original'))
+
   # return render_template('listen.html', filelist=entireSongList, separatedFileList=separatedSongList, User_Name=UserName, User_Number=UserNumber, data=data )
-  return jsonify(filelist=entireSongList, separatedFileList=separatedSongList, candidate=candidate)
+  return jsonify(filelist=SongStrList, separatedFileList=SongStrList, candidate=candidate)
 
 
 
