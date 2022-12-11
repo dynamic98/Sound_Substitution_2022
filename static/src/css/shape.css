@@ -27,16 +27,6 @@ img:active{
 }
 
 
-.colorContainer {
-  margin-top: 10px;
-  height: 85%;
-  width: 8%;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 10px 20px #dbdbdb;
-  float: left;
-}
-
 .palette {
   margin-top: 25px;
   display: flex;
@@ -74,18 +64,7 @@ img:active{
 
 
 
-.shapeContainer {
-    margin-top: 20px;
-    margin-left: 30px;
-    box-shadow: 0 10px 20px #dbdbdb;
-    width: 100px;
-    height: 660px;
-    border-radius: 30px;
-    padding: 10px 0px;
-    background: rgb(255, 255, 255);
-    overflow: auto;
-    float: left;
-  }
+
 
 .btn-primary {
   background: black;
@@ -660,7 +639,7 @@ hr {
 
   /* haptic menu UI*/
 
-  .hapticContainer {
+  /* .hapticContainer {
     background-color: rgb(252, 252, 252);
     position: absolute;
     border-radius: 1rem;
@@ -671,7 +650,7 @@ hr {
     width: 500px;
     float: right;
     height: 22%;
-  }
+  } */
 
 
   .customMenu {
@@ -790,15 +769,21 @@ hr {
   }
 
   .shapeContainer {
-    margin-left: 30px;
-    box-shadow: 0 10px 20px #dbdbdb;
+    margin-left: -4px;
+    /* box-shadow: 0 10px 20px #dbdbdb; */
     width: 130px;
     height: 800px;
+    position: static;
     /* border-radius: 30px; */
     /* padding: 10px 0px; */
-    background: rgb(255, 255, 255);
+    /* background: rgb(255, 255, 255); */
     overflow: auto;
     float: left;
+  }
+  .colorContainer {
+    margin-left: 125px;
+    width: 130px;
+    /* background-color: white; */
   }
 
   input[type="range"]{
@@ -823,9 +808,7 @@ hr {
     margin-left: 1100px;
   }
 
-  .colorContainer {
-    width: 130px;
-  }
+
 
   .musicPlay {
     margin-left: 150px;
@@ -1053,7 +1036,8 @@ hr {
   }
 
   .shapeContainer {
-    margin-left: 30px;
+    margin-left: 5px;
+    margin-top: 10px;
     box-shadow: 0 10px 20px #dbdbdb;
     width: 130px;
     height: 650px;
@@ -1068,9 +1052,9 @@ hr {
     margin-top: 10px;
     height: 680px;
     width: 130px;
-    border-radius: 1rem;
+    /* border-radius: 1rem; */
     overflow: hidden;
-    box-shadow: 0 10px 20px #dbdbdb;
+    /* box-shadow: 0 10px 20px #dbdbdb; */
     float: left;
   }
 

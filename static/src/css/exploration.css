@@ -3,8 +3,8 @@ body {font-family: 'LinuxBiolinumORegular';}
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  /* border: 1px solid #ccc; */
+  /* background-color: #f1f1f1; */
 }
 
 /* Style the buttons inside the tab */
@@ -17,6 +17,7 @@ body {font-family: 'LinuxBiolinumORegular';}
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
+  color: white;
 }
 
 /* Change background color of buttons on hover */
@@ -40,14 +41,15 @@ body {font-family: 'LinuxBiolinumORegular';}
 #pitch_area{
     display: block;
     padding: 6px 12px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-top: none;
 }
 #beat_area{
-    display: none;
+    display: block;
     padding: 6px 12px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-top: none;
+    margin-left: 125px;
 }
 
 
@@ -62,4 +64,9 @@ body {font-family: 'LinuxBiolinumORegular';}
     background: rgb(255, 255, 255);
     overflow: auto;
     float: left;
+}
+
+.Palette{
+  border-style: solid;
+  border-color: black;
 }

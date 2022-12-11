@@ -113,6 +113,7 @@ const palette_7 = document.getElementById("palette7")
 const palette_8 = document.getElementById("palette8")
 const palette_9 = document.getElementById("palette9")
 let palette_button_list = {0: palette_satu, 1: palette_light, 2: palette_1, 3:palette_2, 4:palette_3, 5:palette_4, 6:palette_5, 7:palette_6, 8:palette_7, 9:palette_8, 10:palette_9}
+// let palette_button_list = {1: palette_satu, 2: palette_light, 6: palette_1, 7:palette_2, 8:palette_3, 9:palette_4, 10:palette_5, 3:palette_6, 4:palette_7, 5:palette_8, 0:palette_9}
 
 
 pitch_type.onclick=function(e){
@@ -123,7 +124,7 @@ pitch_type.onclick=function(e){
 
     piano_container[0].style.display=''
     drum_container[0].style.display='none'
-    pitch_area.style.display=''
+    pitch_area.style.display='block'
     beat_area.style.display='none'
 
     for (let child in shape_button_list){
@@ -158,7 +159,7 @@ beat_type.onclick=function(e){
     piano_container[0].style.display='none'
     drum_container[0].style.display=''
     pitch_area.style.display='none'
-    beat_area.style.display=''
+    beat_area.style.display='block'
 
     for (let child in shape_button_list){
         if(child==MyUserCustom.CustomObj.Drum.shape){
@@ -328,7 +329,7 @@ function apply_default_custom(){
     piano.setCurrentEnergy(MyUserCustom.CustomObj.Piano.size)
     MyColorPicker.set_SaturationAndLightness(parseInt(pitch_palette[0][0]*360))
     MyColorPicker.piano_coloring(MyUserCustom.CustomObj.Piano.palette_num, MyUserCustom.CustomObj.Piano.palette_set)
-
+    
     // piano line is automatically applied
 
     visualization.instruments['drum'].geometryManager.setGeometryType(MyUserCustom.CustomObj.Drum.shape.toLowerCase())

@@ -112,22 +112,22 @@ export class ColorPicker {
                 if(i==num){
                     picker_class[i].style.backgroundColor="rgb(248, 87, 87)"
                 }else{
-                    picker_class[i].style.backgroundColor="rgb(250, 250, 250)"
+                    picker_class[i].style.backgroundColor="rgb(255, 255, 255)"
                 }
             }
             for(let j=0; j<9; j++){
-                palette_class[j].style.backgroundColor="rgb(250, 250, 250)"
+                palette_class[j].style.backgroundColor="rgb(255, 255, 255)"
             }
         }else{
             for(let i=0; i<2; i++){
-                picker_class[i].style.backgroundColor="rgb(250, 250, 250)"
+                picker_class[i].style.backgroundColor="rgb(255, 255, 255)"
             }
             for(let j=0; j<9; j++){
                 
                 if(j==(num-2)){
                     palette_class[j].style.backgroundColor="rgb(248, 87, 87)"
                 }else{
-                    palette_class[j].style.backgroundColor="rgb(250, 250, 250)"
+                    palette_class[j].style.backgroundColor="rgb(255, 255, 255)"
                 }
             }
         }
@@ -210,6 +210,17 @@ export class ColorPicker {
         }
         if(pal_num==9){
             for(let i=0;i<12;i++){
+                if(i==0 || i==2||i==4||i==5 || i==7||i==9||i==11){
+                    this.selected_colors[10][i]="hsl(0, 75%, 100%)"
+                }else{
+                    this.selected_colors[10][i]="hsl(0, 75%, 0%)"
+                }
+
+            }
+        }
+        if(pal_num==10){
+            for(let i=0;i<12;i++){
+                this.selected_colors[10][i]="hsl(0, 100%, 100%)"
                 if(i==0 || i==2||i==4||i==5 || i==7||i==9||i==11){
                     this.selected_colors[10][i]="hsl(0, 75%, 100%)"
                 }else{
