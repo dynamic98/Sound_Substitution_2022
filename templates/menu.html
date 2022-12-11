@@ -11,6 +11,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../static/src/css/bootstrap.min.css">
     <!-- Style -->
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/linux-biolinum" type="text/css"/>
     <link type="text/css" href="../static/src/css/menu.css" rel="stylesheet">
 </head>
 
@@ -19,37 +20,37 @@
 
         <div class="profile-card js-profile-card">
           <div class="profile-card__img">
-            <img src="../static/src/images/cutecat.jpeg" alt="profile card">
+            <img src="../static/src/images/user.png" alt="profile card">
           </div>
       
           <div class="profile-card__cnt js-profile-cnt">
             <div class="profile-card__name">{{User_Name}}</div>
             <div class="profile-card-loc">
-                <span class="profile-card-loc__txt">
+                <span class="profile-card-loc__txt" style="font-size: 20px;">
                   P{{User_Number}}
                 </span>
               </div>
               
-            <div class="profile-card__txt">실험에 참여해주셔서 감사합니다.</div>
+            <div class="profile-card__txt" style="font-size: 20px;">Welcome to the Cross-modal Music Palette.</div>
 
-            <div class="profile-card-ctr">
+            <div class="profile-card-ctr" style="margin-left: 100px;">
                 <form action="/test" method="POST" class="phaseForm">
-                    <button class="phaseButton" id="1Phase">1회기</button>
+                    <button class="phaseButton" id="1Phase">Session 1</button>
                 </form>
                 <form action="/exploration_default" method="POST" class="phaseForm">
-                    <button class="phaseButton" id="2Phase">2회기</button>
+                    <button class="phaseButton" id="2Phase">Session 2</button>
                 </form>
                 <form action="/exploration" method="POST" class="phaseForm">
-                    <button class="phaseButton" id="3Phase">3회기</button>
+                    <button class="phaseButton" id="3Phase">Session 3</button>
                 </form>
                 <form action="/exploration" method="POST" class="phaseForm">
-                    <button class="phaseButton" id="4Phase">4회기</button>
+                    <button class="phaseButton" id="4Phase">Session 4</button>
                 </form>
                 <form action="/test" method="POST" class="phaseForm">
-                    <button class="phaseButton" id="5Phase">5회기</button>
+                    <button class="phaseButton" id="5Phase">Session 5</button>
                 </form>
                 <form action="/dev" method="POST" class="phaseForm">
-                    <button class="phaseButton" id="devButton" >dev</button>
+                    <button class="phaseButton" id="devButton" style="visibility: hidden;"> dev</button>
                 </form>
             </div>
       

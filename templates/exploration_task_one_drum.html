@@ -18,18 +18,22 @@
 
   <!-- Styles -->
   <link type="text/css" href="../static/src/css/task.css" rel="stylesheet">
-  <link type="text/css" href="../static/src/css/pagemove_beat.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/pagemove_beat.css" rel="stylesheet">  
+  <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/linux-biolinum" type="text/css"/>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
   <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
+<button class="importing" style="margin-top: 200px; float: right; margin-right: 350px;">Import Sheet</button>
  <div style="width:1300px;">
   <section class="sheetContainer">
     <!-- 여기에 시각화 표현 -->
     <!-- canvas -->
     <div id="canvas"></div>
+
   </section>
 
   <progress value="0"  max="15000" id="ProgressBar"></progress>
@@ -39,15 +43,14 @@
     <audio src="../static/src/sound/drum.wav" id="drum_audio"></audio>
   </ul>
 
-
   <section class="musicContainer">
-    <div class="task_num" id="task_one"><span class="task_text" id="task_one_text">예제 1번-비트 재현하기</span></div>
+    <div class="task_num" id="task_one"><span class="task_text" id="task_one_text">Example 1. Reproduce the Beat</span></div>
     <br>
-    <button class="videoControlButton" id="play" style="display:inline;">시작</button>
+    <button class="videoControlButton" id="play" style="display:inline;">Start</button>
     <button class="videoControlButton" id="save" style="display:inline;"><span class="glyphicon glyphicon-save" id="saveGlyph"></span></button>
     <button class="videoControlButton" id="reset" style="display:inline;"><span class="glyphicon glyphicon-erase" id="eraseGlyph"></span></button>
   </section>
-
+  
   <form action="/home" method="POST">
     <section class="movehomeContainer">
       <button class="videoControlButton" id="home" style="display:inline;"><span class="glyphicon glyphicon-home" id="homeGlyph"></span></button>

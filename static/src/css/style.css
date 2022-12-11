@@ -13,7 +13,6 @@ html, body{
   background: var(--bgColor);
   background: linear-gradient(135deg, var(--bgColor), var(--bgColorLight));
   color: var(--textColor);
-  font-family: 'Saira', sans-serif;
 }
 
 
@@ -22,7 +21,7 @@ body {
   background-color: #fcfcfc; }
 
 p {
-  color: #b3b3b3;
+  color: #000000;
   font-weight: 300; }
 
 
@@ -564,7 +563,7 @@ div#demo > div#waveform > wave {
 }
 
 div#music-controls{
-  margin-top: 250px;
+  margin-top: 220px;
   margin-left: 140px;
 }
 
@@ -1197,4 +1196,17 @@ div#music-controls{
   
   
 
+}
+
+
+button.importing{
+  margin-top: 30px;
+  width: 160px;
+  height: 80px; 
+  border-radius: 5px;
+  font-size: 22px;
+  
+  background-color: rgb(173, 201, 230);
+  border: none;
+  box-shadow: 0 5px 10px #9d9d9d;
 }
