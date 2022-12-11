@@ -18,6 +18,7 @@
 
   <!-- Styles -->
   <!-- <link type="text/css" href="../static/src/css/shape.css" rel="stylesheet"> -->
+  <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/linux-biolinum" type="text/css"/>
   <link type="text/css" href="../static/src/css/test.css" rel="stylesheet">
   <link type="text/css" href="../static/src/css/pagemove_test.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
@@ -26,11 +27,11 @@
 </head>
 
 <body>
-  <div class="question_group" id="question_groupA">1-1. 가장 높은 음은 무엇인가요? 📣 </div>
+  <div class="question_group" id="question_groupA">1. What is the highest in pitch? </div>
   <section class="sheetContainer">
     <!-- 여기에 시각화 표현 -->
     <!-- canvas -->
-    <div id="canvas" style="visibility:hidden;"></div>
+    <div id="canvas" style="visibility:visible;"></div>
   </section>
 
   <progress value="0"  max="15000" id="ProgressBar"></progress>
@@ -41,15 +42,15 @@
   </ul>
 
   <section class="musicContainer">
-    <button type="button" class="questionButton" id="question_one">1번</button>
+    <button type="button" class="questionButton" id="question_one">option #1</button>
     <br>
-    <button type="button" class="questionButton" id="question_two">2번</button>
+    <button type="button" class="questionButton" id="question_two">option #2</button>
     <br>
-    <button type="button" class="questionButton" id="question_three">3번</button>
+    <button type="button" class="questionButton" id="question_three">option #3</button>
     <br>
-    <button type="button" class="questionButton" id="question_mola">모르겠음</button>
+    <button type="button" class="questionButton" id="question_mola">"don't know"</button>
     <br> <br> <br> <br>
-    <button type="button" class="questionButton" id="submit_groupA">제출하기</button>
+    <button type="button" class="questionButton" id="submit_groupA">Submit</button>
     <button class="videoControlButton" id="play" style="display:none;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button>
   </section>
 

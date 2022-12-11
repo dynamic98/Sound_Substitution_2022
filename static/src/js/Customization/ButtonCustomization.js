@@ -19,15 +19,19 @@ export class ButtonCustomization {
                 $("#" + child.id).on(event, () => {
                     this.parameter = child.id.replace(this.eraseTextFromIDName, '')
                     console.log(this.parameter)
-                    if(this.ModePitchBeat=='pitch'){
-                    callback1("piano", this.parameter)
-                    callback1("savedPiano", this.parameter)
-                    callback2("piano", this.parameter)
-                    } else if (this.ModePitchBeat=='beat'){
-                    callback1("drum", this.parameter)
-                    callback1("savedDrum", this.parameter)
-                    callback2("drum", this.parameter)
-                    }
+                    
+                    if(this.ModePitchBeat=='pitch')
+                        {
+                        callback1("piano", this.parameter)
+                        callback1("savedPiano", this.parameter)
+                        callback2("piano", this.parameter)
+                        } 
+                    else if (this.ModePitchBeat=='beat')
+                        {
+                        callback1("drum", this.parameter)
+                        callback1("savedDrum", this.parameter)
+                        callback2("drum", this.parameter)
+                        }
                 })
             }
 

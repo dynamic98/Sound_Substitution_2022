@@ -25,6 +25,8 @@ body {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
+  font-family: 'LinuxBiolinumORegular';
+
 }
 
 div.form{
@@ -60,7 +62,7 @@ p {
   padding: 15px;
   box-sizing: border-box;
   font-size: 18px;
-  font-family: 'Comfortaa', cursive;
+  font-family: 'LinuxBiolinumORegular';
 }
 
 .form input:focus {
@@ -68,7 +70,7 @@ p {
 }
 
 .form button {
-  font-family: 'Comfortaa', cursive;
+  font-family: 'LinuxBiolinumORegular';
   text-transform: uppercase;
   outline: 0;
   background: #404040;
@@ -127,7 +129,7 @@ ul.join_box{border: 0px solid #ddd;background-color: #fff; border-radius: 6px;}
 
 button.start{
   margin-left: 200px;
-  font-family: 'Comfortaa', cursive;
+  font-family: 'LinuxBiolinumORegular';
   text-transform: uppercase;
   outline: 0;
   background: #d99b9b;

@@ -52,25 +52,15 @@ let LogData = []
 let startTime = Date.now();
 
 const groupA_questionList = [
-    "1-1. 가장 높은 음은 무엇인가요? 📣 ",
-    "1-2. 가장 높은 음은 무엇인가요? 🎨",
-    "2-1. 가장 큰 소리는 무엇인가요? 📣 ",
-    "2-2. 가장 큰 소리는 무엇인가요? 🎨",
-    "3-1. 소리가 점점 높아지는 멜로디는 무엇인가요? 📣 ",
-    "3-2. 소리가 점점 높아지는 멜로디는 무엇인가요? 🎨",
-    "4-1. 소리가 점점 커지는 멜로디는 무엇인가요? 📣 ",
-    "4-2. 소리가 점점 커지는 멜로디는 무엇인가요? 🎨",
-    "5-1. 소리가 점점 빨라지는 멜로디는 무엇인가요? 📣 ",
-    "5-2. 소리가 점점 빨라지는 멜로디는 무엇인가요? 🎨",
-    "6-1. 소리가 점점 커지면서 음이 내려가는 멜로디는 무엇인가요? 📣 ",
-    "6-2. 소리가 점점 커지면서 음이 내려가는 멜로디는 무엇인가요? 🎨",
-    "7-1. 소리가 점점 빨라지면서 음이 올라가는 멜로디는 무엇인가요? 📣 ",
-    "7-2. 소리가 점점 빨라지면서 음이 올라가는 멜로디는 무엇인가요? 🎨",
-    "8-1. 소리가 점점 커지면서 음이 빨라지는 멜로디는 무엇인가요? 📣 ",
-    "8-2. 소리가 점점 커지면서 음이 빨라지는 멜로디는 무엇인가요? 🎨",
-    "9-1. 소리의 음이 높이 변화가 가장 많은 멜로디는 무엇인가요? 📣 ",
-    "9-2. 소리의 음이 높이 변화가 가장 많은 멜로디는 무엇인가요? 🎨",
-    "테스트가 끝났습니다."
+    "1. What is the highest in pitch?",
+    "2. What is the biggest in loudness?",
+    "3. What is the melody that gets higher gradually?",
+    "4. What is the melody that gets louder gradually?",
+    "5. What is the melody that gets faster gradually?",
+    "6. What is the melody that gets louder and goes down simultaneously?",
+    "7. What is the melody that gets faster and goes down simultaneously?",
+    "8. What is the melody that gets louder and faster simultaneously?",
+    "The test is over."
 ]
 
 let kandinsky;
@@ -108,9 +98,9 @@ function submit_groupA(){
     groupA_submit.addEventListener("click", () => {
         LogData.push("Timestamp#"+(Date.now()-startTime).toString()+"#Action#"+"Submit#"+groupA_count.toString())
         groupA_count += 1
-        if(groupA_count==18){
+        if(groupA_count==8){
             console.log(LogData);
-            groupA_question.innerText = groupA_questionList[18]
+            groupA_question.innerText = groupA_questionList[8]
             let postdata = Object.assign({}, LogData)
             postdata.UserName = MyUserCustom.CustomObj.UserName;
             postdata.UserNumber = MyUserCustom.CustomObj.UserNumber
@@ -131,11 +121,11 @@ function submit_groupA(){
             })
 
             // postdata
-        }else if(groupA_count>18){
+        }else if(groupA_count>8){
             $('#listen').click()
             console.log("You Should Not Encounter This State.")
         }else{
-        SelectedQuestion = Math.floor(groupA_count/2)
+        SelectedQuestion = Math.floor(groupA_count)
         console.log(SelectedQuestion)
         SelectedAnswer = 4
         groupA_question.innerText = groupA_questionList[groupA_count]
@@ -143,12 +133,7 @@ function submit_groupA(){
         question_two.style.background = grey;
         question_three.style.background = grey;
         question_mola.style.background = grey;
-
-        if (groupA_count % 2 == 1) {
-            canvas.style.visibility="visible";
-        } else {
-            canvas.style.visibility="hidden";
-        }
+        canvas.style.visibility="visible";
 
         UpdateTaskSheet();
         }

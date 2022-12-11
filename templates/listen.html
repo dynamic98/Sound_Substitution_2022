@@ -11,8 +11,9 @@
     <!-- Bootstrap CSS -->
     <link type="text/css" rel="stylesheet" href="../static/src/css/bootstrap.min.css">
     <!-- Style -->
-    <link type="text/css" rel="stylesheet" href="../static/src/css/style.css?after">
-    <link type="text/css" rel="stylesheet" href="../static/src/css/listenbutton.css?after">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/linux-biolinum" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="../static/src/css/style.css">
+    <link type="text/css" rel="stylesheet" href="../static/src/css/listenbutton.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -26,8 +27,7 @@
         </div>
         <div class="side-inner">
   
-          <div class="profile" style="margin-top: 70px;">
-            <img src="../static/src/images/cutecat.jpeg" alt="Image" class="img-fluid" style="width: 150px;">
+          <div class="profile" style="margin-top: 100px;">
             <h3 class="name" style="font-size: 26px;">{{User_Name}}</h3>
             <span class="identity" style="font-size: 20px;">P{{User_Number}}</span>
             <br id="musiclist">
@@ -78,25 +78,25 @@
     <section class="buttonContainer">
         <button class="button" id="soundButton">
             <div class="button__content">
-              <p class="button__text" id="sound">음악</p>
+              <p class="button__text" id="sound">S</p>
             </div>
         </button>
         <br>
         <button class="button" id="soundvisualButton">
             <div class="button__content">
-              <p class="button__text" id="soundvisual">음악 + 시각</p>
+              <p class="button__text" id="soundvisual">SV</p>
             </div>
         </button>
         <br>
         <button class="button" id="soundhapticButton">
             <div class="button__content">
-              <p class="button__text" id="soundhaptic">음악 + 햅틱</p>
+              <p class="button__text" id="soundhaptic">ST</p>
             </div>
         </button>
         <br>
         <button class="button" id="everythingButton">
             <div class="button__content">
-              <p class="button__text" id="everything">음악 + 혼합</p>
+              <p class="button__text" id="everything">SVT</p>
             </div>
         </button>
     </section>

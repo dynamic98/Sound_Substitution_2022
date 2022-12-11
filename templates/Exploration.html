@@ -18,8 +18,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <!-- Styles -->
+  <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/linux-biolinum" type="text/css"/>
   <link type="text/css" href="../static/src/css/shape.css" rel="stylesheet">
   <link type="text/css" href="../static/src/css/range.css" rel="stylesheet">
+  <link type="text/css" href="../static/src/css/exploration.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
   <script defer src=https://cdn.JsDelivr.net/npm/p5> </script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -27,9 +29,109 @@
 
 <body>
 
-  <section class="menuContainer">
-    <button type="button" class="button btnPush btnBlueGreen" id="pitchButton">음계</button>
-    <button type="button" class="button btnPush btnBlueGreen" id="beatButton">비트</button>
+  <section class="LeftContainer">
+    <div class="tab">
+      <button type="button"class="tablinks" id= "pitchButton">Melody</button>
+      <button type="button" class="tablinks" id= "beatButton">Rhythm</button>
+    </div>
+
+    <div id="pitch_area" class="tabcontent">
+      <section class="shapeContainer" >
+        <button type="button" class="btn btn-primary btn-circle-md" id="btn-circle"></button>
+        <button type="button" class="btn btn-primary btn-square-md" id="btn-square"></button>
+        <button type="button" class="btn btn-primary btn-triangle-md" id="btn-triangle"></button>
+        <button type="button" class="btn btn-primary btn-star-md" id="btn-star"></button>
+        <button type="button" class="btn btn-primary btn-decagon-md" id="btn-decagon"></button>
+        <hr>
+        <button type="button" class="textureButton" id="none"></button>
+        <button type="button" class="textureButton" id="wood" style="background: url(../static/src/texture/wood3.jpeg)"></button>
+        <button type="button" class="textureButton" id="stone" style="background: url(../static/src/texture/stone3.jpeg)"></button>
+        <button type="button" class="textureButton" id="paper" style="background: url(../static/src/texture/paper.jpeg)"></button>
+      </section>
+      
+      <section class="colorContainer"  style="margin-left: 5px;  background-color: rgb(250, 250, 250);" id="pitch_area">
+        <div id="pitch_color">
+          <div id="picker" style="padding:15px;">
+          </div>
+    
+          <div class="Picker" id="picker_satu">
+            <p style="margin:0px"> Saturation </p> <div class="color" id="s_1" >&nbsp&nbsp</div><div class="color" id="s_2">&nbsp&nbsp</div><div class="color" id="s_3">&nbsp&nbsp</div><div class="color" id="s_4">&nbsp&nbsp</div><div class="color" id="s_5">&nbsp&nbsp</div><div class="color" id="s_6">&nbsp&nbsp</div><div class="color" id="s_7">&nbsp&nbsp</div><div class="color" id="s_8">&nbsp&nbsp</div><div class="color" id="s_9">&nbsp&nbsp</div><div class="color" id="s_10">&nbsp&nbsp</div><div class="color" id="s_11">&nbsp&nbsp</div><div class="color" id="s_12">&nbsp&nbsp</div>
+          </div>
+    
+          <div class="Picker" id="picker_light">
+            <p style="margin:0px;"> Brightness </p><div class="color" id="l_1" >&nbsp&nbsp</div><div class="color" id="l_2">&nbsp&nbsp</div><div class="color" id="l_3">&nbsp&nbsp</div><div class="color" id="l_4">&nbsp&nbsp</div><div class="color" id="l_5">&nbsp&nbsp</div><div class="color" id="l_6">&nbsp&nbsp</div><div class="color" id="l_7">&nbsp&nbsp</div><div class="color" id="l_8">&nbsp&nbsp</div><div class="color" id="l_9">&nbsp&nbsp</div><div class="color" id="l_10">&nbsp&nbsp</div><div class="color" id="l_11">&nbsp&nbsp</div><div class="color" id="l_12">&nbsp&nbsp</div>
+          </div>
+        </div>
+    
+        <section class="color_candidate" id="palettes_candi">
+          <div class="Palette" id="palette1">
+            <p style="margin:0px;"> 빨강|초록|파랑</p>
+            <div class="color" id="p1_1" >&nbsp&nbsp</div><div class="color" id="p1_2">&nbsp&nbsp</div><div class="color" id="p1_3">&nbsp&nbsp</div><div class="color" id="p1_4">&nbsp&nbsp</div><div class="color" id="p1_5">&nbsp&nbsp</div><div class="color" id="p1_6">&nbsp&nbsp</div><div class="color" id="p1_7">&nbsp&nbsp</div><div class="color" id="p1_8">&nbsp&nbsp</div><div class="color" id="p1_9">&nbsp&nbsp</div><div class="color" id="p1_10">&nbsp&nbsp</div><div class="color" id="p1_11">&nbsp&nbsp</div><div class="color" id="p1_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette2">
+            <p  style="margin:0px;">주황|연두|보라</p>
+            <div class="color" id="p2_1">&nbsp&nbsp</div><div class="color" id="p2_2">&nbsp&nbsp</div><div class="color" id="p2_3">&nbsp&nbsp</div><div class="color" id="p2_4">&nbsp&nbsp</div><div class="color" id="p2_5">&nbsp&nbsp</div><div class="color" id="p2_6">&nbsp&nbsp</div><div class="color" id="p2_7">&nbsp&nbsp</div><div class="color" id="p2_8">&nbsp&nbsp</div><div class="color" id="p2_9">&nbsp&nbsp</div><div class="color" id="p2_10">&nbsp&nbsp</div><div class="color" id="p2_11">&nbsp&nbsp</div><div class="color" id="p2_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette3">
+            <p style="margin:0px;">노랑|청록|자주</p>
+            <div class="color" id="p3_1">&nbsp&nbsp</div><div class="color" id="p3_2">&nbsp&nbsp</div><div class="color" id="p3_3">&nbsp&nbsp</div><div class="color" id="p3_4">&nbsp&nbsp</div><div class="color" id="p3_5">&nbsp&nbsp</div><div class="color" id="p3_6">&nbsp&nbsp</div><div class="color" id="p3_7">&nbsp&nbsp</div><div class="color" id="p3_8">&nbsp&nbsp</div><div class="color" id="p3_9">&nbsp&nbsp</div><div class="color" id="p3_10">&nbsp&nbsp</div><div class="color" id="p3_11">&nbsp&nbsp</div><div class="color" id="p3_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette4">
+            <p style="margin:0px;">초록|파랑|분홍</p>
+            <div class="color" id="p4_1">&nbsp&nbsp</div><div class="color" id="p4_2">&nbsp&nbsp</div><div class="color" id="p4_3">&nbsp&nbsp</div><div class="color" id="p4_4">&nbsp&nbsp</div><div class="color" id="p4_5">&nbsp&nbsp</div><div class="color" id="p4_6">&nbsp&nbsp</div><div class="color" id="p4_7">&nbsp&nbsp</div><div class="color" id="p4_8">&nbsp&nbsp</div><div class="color" id="p4_9">&nbsp&nbsp</div><div class="color" id="p4_10">&nbsp&nbsp</div><div class="color" id="p4_11">&nbsp&nbsp</div><div class="color" id="p4_12">&nbsp&nbsp</div>
+            </div>
+          <div class="Palette" id="palette5">
+            <p style="margin:0px;"> 무지개 테마</p>
+            <div class="color" id="p5_1">&nbsp&nbsp</div><div class="color" id="p5_2">&nbsp&nbsp</div><div class="color" id="p5_3">&nbsp&nbsp</div><div class="color" id="p5_4">&nbsp&nbsp</div><div class="color" id="p5_5">&nbsp&nbsp</div><div class="color" id="p5_6">&nbsp&nbsp</div><div class="color" id="p5_7">&nbsp&nbsp</div><div class="color" id="p5_8">&nbsp&nbsp</div><div class="color" id="p5_9">&nbsp&nbsp</div><div class="color" id="p5_10">&nbsp&nbsp</div><div class="color" id="p5_11">&nbsp&nbsp</div><div class="color" id="p5_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette6">
+            <p style="margin:0px;"> 노을 테마 </p>
+            <div class="color" id="p6_1">&nbsp&nbsp</div><div class="color" id="p6_2">&nbsp&nbsp</div><div class="color" id="p6_3">&nbsp&nbsp</div><div class="color" id="p6_4">&nbsp&nbsp</div><div class="color" id="p6_5">&nbsp&nbsp</div><div class="color" id="p6_6">&nbsp&nbsp</div><div class="color" id="p6_7">&nbsp&nbsp</div><div class="color" id="p6_8">&nbsp&nbsp</div><div class="color" id="p6_9">&nbsp&nbsp</div><div class="color" id="p6_10">&nbsp&nbsp</div><div class="color" id="p6_11">&nbsp&nbsp</div><div class="color" id="p6_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette7">
+            <p style="margin:0px;"> 바다 테마 </p>
+            <div class="color" id="p7_1">&nbsp&nbsp</div><div class="color" id="p7_2">&nbsp&nbsp</div><div class="color" id="p7_3">&nbsp&nbsp</div><div class="color" id="p7_4">&nbsp&nbsp</div><div class="color" id="p7_5">&nbsp&nbsp</div><div class="color" id="p7_6">&nbsp&nbsp</div><div class="color" id="p7_7">&nbsp&nbsp</div><div class="color" id="p7_8">&nbsp&nbsp</div><div class="color" id="p7_9">&nbsp&nbsp</div><div class="color" id="p7_10">&nbsp&nbsp</div><div class="color" id="p7_11">&nbsp&nbsp</div><div class="color" id="p7_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette8">
+            <p style="margin:0px;"> 오로라 테마 </p>
+            <div class="color" id="p8_1">&nbsp&nbsp</div><div class="color" id="p8_2">&nbsp&nbsp</div><div class="color" id="p8_3">&nbsp&nbsp</div><div class="color" id="p8_4">&nbsp&nbsp</div><div class="color" id="p8_5">&nbsp&nbsp</div><div class="color" id="p8_6">&nbsp&nbsp</div><div class="color" id="p8_7">&nbsp&nbsp</div><div class="color" id="p8_8">&nbsp&nbsp</div><div class="color" id="p8_9">&nbsp&nbsp</div><div class="color" id="p8_10">&nbsp&nbsp</div><div class="color" id="p8_11">&nbsp&nbsp</div><div class="color" id="p8_12">&nbsp&nbsp</div>
+          </div>
+          <div class="Palette" id="palette9">
+            <p style="margin:0px;"> 기본 테마 </p>
+            <div class="color" id="p9_1">&nbsp&nbsp</div><div class="color" id="p9_2">&nbsp&nbsp</div><div class="color" id="p9_3">&nbsp&nbsp</div><div class="color" id="p9_4">&nbsp&nbsp</div><div class="color" id="p9_5">&nbsp&nbsp</div><div class="color" id="p9_6">&nbsp&nbsp</div><div class="color" id="p9_7">&nbsp&nbsp</div><div class="color" id="p9_8">&nbsp&nbsp</div><div class="color" id="p9_9">&nbsp&nbsp</div><div class="color" id="p9_10">&nbsp&nbsp</div><div class="color" id="p9_11">&nbsp&nbsp</div><div class="color" id="p9_12">&nbsp&nbsp</div>
+          </div>
+        </section>
+      </section>
+    </div>
+    
+    <div id="beat_area" class="tabcontent">
+      
+      <section class="shapeContainer" >
+        <button type="button" class="btn btn-primary btn-circle-md" id="btn-circle"></button>
+        <button type="button" class="btn btn-primary btn-square-md" id="btn-square"></button>
+        <button type="button" class="btn btn-primary btn-triangle-md" id="btn-triangle"></button>
+        <button type="button" class="btn btn-primary btn-star-md" id="btn-star"></button>
+        <button type="button" class="btn btn-primary btn-decagon-md" id="btn-decagon"></button>
+        <hr>
+        <button type="button" class="textureButton" id="none"></button>
+        <button type="button" class="textureButton" id="wood" style="background: url(../static/src/texture/wood3.jpeg)"></button>
+        <button type="button" class="textureButton" id="stone" style="background: url(../static/src/texture/stone3.jpeg)"></button>
+        <button type="button" class="textureButton" id="paper" style="background: url(../static/src/texture/paper.jpeg)"></button>
+      </section>
+  
+      <section class="colorContainer"  style="margin-left: 5px;  background-color: rgb(250, 250, 250);" id="beat_area">
+        <div id="picker2" style="padding:15px; padding-bottom:0px"></div>
+        <div class="Picker" id="picker_beat">
+          <p style="margin:0px"> Color</p> <div class="color" id="b_1" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- <section class="menuContainer">
+    <button type="button" class="button btnPush btnBlueGreen" id="pitchButton">Melody</button>
+    <button type="button" class="button btnPush btnBlueGreen" id="beatButton">Rhythm</button>
   </section>
 
 
@@ -47,23 +149,17 @@
   </section>
   
 
-  <!-- <section class="colorContainer"  style="display:none; margin-left: 5px;  background-color: rgb(250, 250, 250);" id="beat_area">
-    <div id="beat_color">
-      <div id="picker" style="padding:15px; padding-bottom:0px"></div>
-      </div>
-  </section> -->
-
   <section class="colorContainer"  style="margin-left: 5px;  background-color: rgb(250, 250, 250);" id="pitch_area">
     <div id="pitch_color">
       <div id="picker" style="padding:15px;">
       </div>
 
       <div class="Picker" id="picker_satu">
-        <p style="margin:0px"> 채도 </p> <div class="color" id="s_1" >&nbsp&nbsp</div><div class="color" id="s_2">&nbsp&nbsp</div><div class="color" id="s_3">&nbsp&nbsp</div><div class="color" id="s_4">&nbsp&nbsp</div><div class="color" id="s_5">&nbsp&nbsp</div><div class="color" id="s_6">&nbsp&nbsp</div><div class="color" id="s_7">&nbsp&nbsp</div><div class="color" id="s_8">&nbsp&nbsp</div><div class="color" id="s_9">&nbsp&nbsp</div><div class="color" id="s_10">&nbsp&nbsp</div><div class="color" id="s_11">&nbsp&nbsp</div><div class="color" id="s_12">&nbsp&nbsp</div>
+        <p style="margin:0px"> Saturation </p> <div class="color" id="s_1" >&nbsp&nbsp</div><div class="color" id="s_2">&nbsp&nbsp</div><div class="color" id="s_3">&nbsp&nbsp</div><div class="color" id="s_4">&nbsp&nbsp</div><div class="color" id="s_5">&nbsp&nbsp</div><div class="color" id="s_6">&nbsp&nbsp</div><div class="color" id="s_7">&nbsp&nbsp</div><div class="color" id="s_8">&nbsp&nbsp</div><div class="color" id="s_9">&nbsp&nbsp</div><div class="color" id="s_10">&nbsp&nbsp</div><div class="color" id="s_11">&nbsp&nbsp</div><div class="color" id="s_12">&nbsp&nbsp</div>
       </div>
 
       <div class="Picker" id="picker_light">
-        <p style="margin:0px;"> 밝기 </p><div class="color" id="l_1" >&nbsp&nbsp</div><div class="color" id="l_2">&nbsp&nbsp</div><div class="color" id="l_3">&nbsp&nbsp</div><div class="color" id="l_4">&nbsp&nbsp</div><div class="color" id="l_5">&nbsp&nbsp</div><div class="color" id="l_6">&nbsp&nbsp</div><div class="color" id="l_7">&nbsp&nbsp</div><div class="color" id="l_8">&nbsp&nbsp</div><div class="color" id="l_9">&nbsp&nbsp</div><div class="color" id="l_10">&nbsp&nbsp</div><div class="color" id="l_11">&nbsp&nbsp</div><div class="color" id="l_12">&nbsp&nbsp</div>
+        <p style="margin:0px;"> Brightness </p><div class="color" id="l_1" >&nbsp&nbsp</div><div class="color" id="l_2">&nbsp&nbsp</div><div class="color" id="l_3">&nbsp&nbsp</div><div class="color" id="l_4">&nbsp&nbsp</div><div class="color" id="l_5">&nbsp&nbsp</div><div class="color" id="l_6">&nbsp&nbsp</div><div class="color" id="l_7">&nbsp&nbsp</div><div class="color" id="l_8">&nbsp&nbsp</div><div class="color" id="l_9">&nbsp&nbsp</div><div class="color" id="l_10">&nbsp&nbsp</div><div class="color" id="l_11">&nbsp&nbsp</div><div class="color" id="l_12">&nbsp&nbsp</div>
       </div>
     </div>
 
@@ -105,17 +201,14 @@
         <div class="color" id="p9_1">&nbsp&nbsp</div><div class="color" id="p9_2">&nbsp&nbsp</div><div class="color" id="p9_3">&nbsp&nbsp</div><div class="color" id="p9_4">&nbsp&nbsp</div><div class="color" id="p9_5">&nbsp&nbsp</div><div class="color" id="p9_6">&nbsp&nbsp</div><div class="color" id="p9_7">&nbsp&nbsp</div><div class="color" id="p9_8">&nbsp&nbsp</div><div class="color" id="p9_9">&nbsp&nbsp</div><div class="color" id="p9_10">&nbsp&nbsp</div><div class="color" id="p9_11">&nbsp&nbsp</div><div class="color" id="p9_12">&nbsp&nbsp</div>
       </div>
     </section>
-  </div>
-</div>
-
-</section>
+  </section>
 
   <section class="colorContainer"  style="margin-left: 5px;  background-color: rgb(250, 250, 250);" id="beat_area">
     <div id="picker2" style="padding:15px; padding-bottom:0px"></div>
     <div class="Picker" id="picker_beat">
       <p style="margin:0px"> Color</p> <div class="color" id="b_1" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
     </div>
-  </section>
+  </section> -->
 
 
   <section class="pianoContainer">
@@ -268,6 +361,7 @@
           gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
         }
     </script>
+
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> 
   <script src ="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
   <script type="text/javascript" defer src="../static/src/js/dist/exploration.js"></script>

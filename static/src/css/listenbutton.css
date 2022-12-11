@@ -2,6 +2,8 @@
 	margin-left: 1500px;
 	margin-top: -700px;
 	margin-bottom: 140px;
+    font-family: 'LinuxBiolinumORegular';
+
 }
 
  body {
@@ -11,6 +13,8 @@
 	 align-items: center;
 	 background-color: #f4f5f6;
 	 font-size: 14px;
+	 font-family: 'LinuxBiolinumORegular';
+
 	 color: #666;
 }
  .button {
@@ -69,7 +73,7 @@
 	 width: 90px;
 	 position: relative;
 	 transform: translate3d(0px, -4px, 0px);
-	 margin-top: 40px;
+	 margin-top: 30px;
 	 margin-left: 8px;
 	 align-self: end;
 	 text-align: center;
@@ -81,7 +85,11 @@
 	 background-clip: text;
 	 transition: 0.13s ease-in-out;
 	 color: black;
-	 font-size: 16px;
+	 font-size: 30px;
+}
+
+.profile{
+    font-family: 'LinuxBiolinumORegular';
 }
 
  .credits {
