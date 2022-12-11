@@ -28,14 +28,17 @@
 </head>
 
 <body>
-
+  <div class="tab">
+    <button type="button"class="tablinks" id= "pitchButton">Melody</button>
+    <button type="button" class="tablinks" id= "beatButton">Rhythm</button>
+  </div>
   <section class="LeftContainer">
-    <div class="tab">
+    <!-- <div class="tab">
       <button type="button"class="tablinks" id= "pitchButton">Melody</button>
       <button type="button" class="tablinks" id= "beatButton">Rhythm</button>
-    </div>
+    </div> -->
 
-    <section class="shapeContainer" >
+    <section class="shapeContainer" style="margin-left: 2px;">
       <button type="button" class="btn btn-primary btn-circle-md" id="btn-circle"></button>
       <button type="button" class="btn btn-primary btn-square-md" id="btn-square"></button>
       <button type="button" class="btn btn-primary btn-triangle-md" id="btn-triangle"></button>
@@ -57,55 +60,55 @@
   
     <section class="colorContainer"  id="pitch_area">
       <div id="pitch_color">
-        <div id="picker" style="padding:15px;">
+        <div id="picker" style="padding:20px;">
         </div>
-        <div class="Palette" id="palette9">
+        <div class="Palette" id="palette9" style="margin-left: 10px;">
           <p style="margin:0px;"> Nothing </p>
           <div class="color" id="p9_1">&nbsp&nbsp</div><div class="color" id="p9_2">&nbsp&nbsp</div><div class="color" id="p9_3">&nbsp&nbsp</div><div class="color" id="p9_4">&nbsp&nbsp</div><div class="color" id="p9_5">&nbsp&nbsp</div><div class="color" id="p9_6">&nbsp&nbsp</div><div class="color" id="p9_7">&nbsp&nbsp</div><div class="color" id="p9_8">&nbsp&nbsp</div><div class="color" id="p9_9">&nbsp&nbsp</div><div class="color" id="p9_10">&nbsp&nbsp</div><div class="color" id="p9_11">&nbsp&nbsp</div><div class="color" id="p9_12">&nbsp&nbsp</div>
         </div>
 
-        <div class="Picker" id="picker_satu">
+        <div class="Picker" id="picker_satu" style="margin-left: 10px;">
           <p style="margin:0px"> Saturation </p> <div class="color" id="s_1" >&nbsp&nbsp</div><div class="color" id="s_2">&nbsp&nbsp</div><div class="color" id="s_3">&nbsp&nbsp</div><div class="color" id="s_4">&nbsp&nbsp</div><div class="color" id="s_5">&nbsp&nbsp</div><div class="color" id="s_6">&nbsp&nbsp</div><div class="color" id="s_7">&nbsp&nbsp</div><div class="color" id="s_8">&nbsp&nbsp</div><div class="color" id="s_9">&nbsp&nbsp</div><div class="color" id="s_10">&nbsp&nbsp</div><div class="color" id="s_11">&nbsp&nbsp</div><div class="color" id="s_12">&nbsp&nbsp</div>
         </div>
   
-        <div class="Picker" id="picker_light">
+        <div class="Picker" id="picker_light" style="margin-left: 10px;">
           <p style="margin:0px;"> Luminance </p><div class="color" id="l_1" >&nbsp&nbsp</div><div class="color" id="l_2">&nbsp&nbsp</div><div class="color" id="l_3">&nbsp&nbsp</div><div class="color" id="l_4">&nbsp&nbsp</div><div class="color" id="l_5">&nbsp&nbsp</div><div class="color" id="l_6">&nbsp&nbsp</div><div class="color" id="l_7">&nbsp&nbsp</div><div class="color" id="l_8">&nbsp&nbsp</div><div class="color" id="l_9">&nbsp&nbsp</div><div class="color" id="l_10">&nbsp&nbsp</div><div class="color" id="l_11">&nbsp&nbsp</div><div class="color" id="l_12">&nbsp&nbsp</div>
         </div>
       </div>
   
       <section class="color_candidate" id="palettes_candi">
-        <div class="Palette" id="palette6">
+        <div class="Palette" id="palette6" style="margin-left: 10px;">
           <p style="margin:0px;"> Red-Yellow </p>
           <div class="color" id="p6_1">&nbsp&nbsp</div><div class="color" id="p6_2">&nbsp&nbsp</div><div class="color" id="p6_3">&nbsp&nbsp</div><div class="color" id="p6_4">&nbsp&nbsp</div><div class="color" id="p6_5">&nbsp&nbsp</div><div class="color" id="p6_6">&nbsp&nbsp</div><div class="color" id="p6_7">&nbsp&nbsp</div><div class="color" id="p6_8">&nbsp&nbsp</div><div class="color" id="p6_9">&nbsp&nbsp</div><div class="color" id="p6_10">&nbsp&nbsp</div><div class="color" id="p6_11">&nbsp&nbsp</div><div class="color" id="p6_12">&nbsp&nbsp</div>
         </div>
-        <div class="Palette" id="palette7">
+        <div class="Palette" id="palette7" style="margin-left: 10px;">
           <p style="margin:0px;"> Green-Cyan </p>
           <div class="color" id="p7_1">&nbsp&nbsp</div><div class="color" id="p7_2">&nbsp&nbsp</div><div class="color" id="p7_3">&nbsp&nbsp</div><div class="color" id="p7_4">&nbsp&nbsp</div><div class="color" id="p7_5">&nbsp&nbsp</div><div class="color" id="p7_6">&nbsp&nbsp</div><div class="color" id="p7_7">&nbsp&nbsp</div><div class="color" id="p7_8">&nbsp&nbsp</div><div class="color" id="p7_9">&nbsp&nbsp</div><div class="color" id="p7_10">&nbsp&nbsp</div><div class="color" id="p7_11">&nbsp&nbsp</div><div class="color" id="p7_12">&nbsp&nbsp</div>
         </div>
-        <div class="Palette" id="palette8">
+        <div class="Palette" id="palette8" style="margin-left: 10px;">
           <p style="margin:0px;"> Blue-Violet </p>
           <div class="color" id="p8_1">&nbsp&nbsp</div><div class="color" id="p8_2">&nbsp&nbsp</div><div class="color" id="p8_3">&nbsp&nbsp</div><div class="color" id="p8_4">&nbsp&nbsp</div><div class="color" id="p8_5">&nbsp&nbsp</div><div class="color" id="p8_6">&nbsp&nbsp</div><div class="color" id="p8_7">&nbsp&nbsp</div><div class="color" id="p8_8">&nbsp&nbsp</div><div class="color" id="p8_9">&nbsp&nbsp</div><div class="color" id="p8_10">&nbsp&nbsp</div><div class="color" id="p8_11">&nbsp&nbsp</div><div class="color" id="p8_12">&nbsp&nbsp</div>
         </div>
 
-        <div class="Palette" id="palette1">
+        <div class="Palette" id="palette1" style="margin-left: 10px;">
           <p style="margin:0px;"> RGB</p>
             <div class="colorset" style="border-style: solid; border-color: black;">
               <div class="color" id="p1_1" >&nbsp&nbsp</div><div class="color" id="p1_2">&nbsp&nbsp</div><div class="color" id="p1_3">&nbsp&nbsp</div><div class="color" id="p1_4">&nbsp&nbsp</div><div class="color" id="p1_5">&nbsp&nbsp</div><div class="color" id="p1_6">&nbsp&nbsp</div><div class="color" id="p1_7">&nbsp&nbsp</div><div class="color" id="p1_8">&nbsp&nbsp</div><div class="color" id="p1_9">&nbsp&nbsp</div><div class="color" id="p1_10">&nbsp&nbsp</div><div class="color" id="p1_11">&nbsp&nbsp</div><div class="color" id="p1_12">&nbsp&nbsp</div>
             </div>
         </div>
-        <div class="Palette" id="palette2">
+        <div class="Palette" id="palette2" style="margin-left: 10px;">
           <p  style="margin:0px;">OGV</p>
           <div class="color" id="p2_1">&nbsp&nbsp</div><div class="color" id="p2_2">&nbsp&nbsp</div><div class="color" id="p2_3">&nbsp&nbsp</div><div class="color" id="p2_4">&nbsp&nbsp</div><div class="color" id="p2_5">&nbsp&nbsp</div><div class="color" id="p2_6">&nbsp&nbsp</div><div class="color" id="p2_7">&nbsp&nbsp</div><div class="color" id="p2_8">&nbsp&nbsp</div><div class="color" id="p2_9">&nbsp&nbsp</div><div class="color" id="p2_10">&nbsp&nbsp</div><div class="color" id="p2_11">&nbsp&nbsp</div><div class="color" id="p2_12">&nbsp&nbsp</div>
         </div>
-        <div class="Palette" id="palette3">
+        <div class="Palette" id="palette3" style="margin-left: 10px;">
           <p style="margin:0px;">YCM</p>
           <div class="color" id="p3_1">&nbsp&nbsp</div><div class="color" id="p3_2">&nbsp&nbsp</div><div class="color" id="p3_3">&nbsp&nbsp</div><div class="color" id="p3_4">&nbsp&nbsp</div><div class="color" id="p3_5">&nbsp&nbsp</div><div class="color" id="p3_6">&nbsp&nbsp</div><div class="color" id="p3_7">&nbsp&nbsp</div><div class="color" id="p3_8">&nbsp&nbsp</div><div class="color" id="p3_9">&nbsp&nbsp</div><div class="color" id="p3_10">&nbsp&nbsp</div><div class="color" id="p3_11">&nbsp&nbsp</div><div class="color" id="p3_12">&nbsp&nbsp</div>
         </div>
-        <div class="Palette" id="palette4">
+        <div class="Palette" id="palette4" style="margin-left: 10px;">
           <p style="margin:0px;">GBP</p>
           <div class="color" id="p4_1">&nbsp&nbsp</div><div class="color" id="p4_2">&nbsp&nbsp</div><div class="color" id="p4_3">&nbsp&nbsp</div><div class="color" id="p4_4">&nbsp&nbsp</div><div class="color" id="p4_5">&nbsp&nbsp</div><div class="color" id="p4_6">&nbsp&nbsp</div><div class="color" id="p4_7">&nbsp&nbsp</div><div class="color" id="p4_8">&nbsp&nbsp</div><div class="color" id="p4_9">&nbsp&nbsp</div><div class="color" id="p4_10">&nbsp&nbsp</div><div class="color" id="p4_11">&nbsp&nbsp</div><div class="color" id="p4_12">&nbsp&nbsp</div>
           </div>
-        <div class="Palette" id="palette5">
+        <div class="Palette" id="palette5" style="margin-left: 10px;">
           <p style="margin:0px;"> Rainbow</p>
           <div class="color" id="p5_1">&nbsp&nbsp</div><div class="color" id="p5_2">&nbsp&nbsp</div><div class="color" id="p5_3">&nbsp&nbsp</div><div class="color" id="p5_4">&nbsp&nbsp</div><div class="color" id="p5_5">&nbsp&nbsp</div><div class="color" id="p5_6">&nbsp&nbsp</div><div class="color" id="p5_7">&nbsp&nbsp</div><div class="color" id="p5_8">&nbsp&nbsp</div><div class="color" id="p5_9">&nbsp&nbsp</div><div class="color" id="p5_10">&nbsp&nbsp</div><div class="color" id="p5_11">&nbsp&nbsp</div><div class="color" id="p5_12">&nbsp&nbsp</div>
         </div>
@@ -118,9 +121,10 @@
   </section>
   
     <section class="colorContainer" id="beat_area">
-      <div id="picker2" style="padding:15px;"></div>
-      <div class="Picker" id="picker_beat">
-        <p style="margin:0px"> Color</p> <div class="color" id="b_1" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+      <div id="picker2" style="padding:20px;" ></div>
+      <div class="Picker" id="picker_beat" style="margin-left: 10px;">
+        <p> Color</p> 
+        <div class="color" id="b_1" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
       </div>
     </section>
 
@@ -259,52 +263,64 @@
 
   <progress value="0" max="15000" id="ProgressBar"></progress>
   
-    <ul class="set2" style="display: none; margin-left: 400px;" id="drum">
+    <ul class="set2" style="display: none; margin-left: 400px; margin-top: 30px;" id="drum">
       <img src="../static/src/images/drum.png">
       <audio src="../static/src/sound/drum.wav" id="drum_audio"></audio>
     </ul>
     
 
-
   <section class="visualContainer_pitch">
     <br>
-    <div class="pitchDIV" style="margin-left: 20px; font-size: 18px;">음의 높이 디자인</div>
+    <div class="pitchDIV" style="margin-left: 20px; font-size: 18px;"><b>Desinging Pitch</b></div>
     <div class="customMenu">
       <br>
-      <p class="smallTitle" style="display:inline;">간</p>
+      <p class="smallTitle" style="display:inline;">Interval</p>
       <input class="range" type="range" name="intensity" id="slide-pitch-interval" value="70" min="0" max="100" style="display:inline;"></input>
       <hr class="hrs">
-      <p class="smallTitle" style="display:inline;">크기</p>
+      <!-- <p class="smallTitle" style="display:inline;">크기</p>
       <input class="range" type="range" name="intensity" id="slide-pitch-size" value="50" min="0" max="100" style="display:inline;"></input>
-      <hr class="hrs">
-      <p class="smallTitle" id="liner" style="display:inline;">선의 유무</p>
+      <hr class="hrs"> -->
+      <p class="smallTitle" id="liner" style="display:inline;">Line</p>
       &nbsp&nbsp&nbsp&nbsp
       <input class="checkbox" type="checkbox" id="pitch-checkbox" checked style="display:inline;">
     </div>
   </section>
 
-  <section class="visualContainer_beat">
+
+  <section class="hapticContainer">
     <br>
-    <div class="beatDIV" style="margin-left: 20px; font-size: 18px;">박자 디자인</div>
+    <div class="canvasDIV" style="margin-left: 20px; font-size: 18px;"><b>Designing Tactile</b></div>
     <div class="customMenu">
       <br>
-      <p class="smallTitle" style="display:inline;">크기</p>
+      <p class="smallTitle" style="display:inline;">Sensitivity</p>
+        <input class="range" type="range" name="intensity" id="slide-haptic-sensitivity" value="0" min="0" max="100" style="display:inline; width: 70%"></input>
+      <hr class="hrs">
+      <p class="smallTitle" style="display:inline;">Intensity</p>&nbsp;&nbsp;&nbsp;
+      <input class="range" type="range" name="intensity" id="slide-haptic-intensity" value="0" min="0" max="100" style="display:inline; width: 70%; margin-right: -4px;"></input>
+    </div>
+  </section>
+
+
+  <section class="visualContainer_pitch2">
+    <br>
+    <div class="beatDIV" style="margin-left: 20px; font-size: 18px;"><b>Pitch Loudness</b></div>
+    <div class="customMenu">
+      <br>
+        <!-- <p class="smallTitle" style="display:inline;"></p> -->
+        <input class="range" type="range" name="intensity" id="slide-pitch-size" value="50" min="0" max="100" style="display:inline;"></input>
+    </div>
+  </section>
+
+  <section class="visualContainer_beat">
+    <br>
+    <div class="beatDIV" style="margin-left: 20px; font-size: 18px;"><b>Drum Loudness</b></div>
+    <div class="customMenu">
+      <br>
+      <!-- <p class="smallTitle" style="display:inline;"></p> -->
       <input class="range" type="range" name="intensity" id="slide-beat-size" value="0" min="0" max="100" style="display:inline;"></input>
     </div>
   </section>
 
-  <section class="hapticContainer">
-    <br>
-    <div class="canvasDIV" style="margin-left: 20px; font-size: 18px;">진동 디자인</div>
-    <div class="customMenu">
-      <br>
-      <p class="smallTitle" style="display:inline;">감도</p>
-        <input class="range" type="range" name="intensity" id="slide-haptic-sensitivity" value="0" min="0" max="100" style="display:inline;"></input>
-      <hr class="hrs">
-      <p class="smallTitle" style="display:inline;">세기</p>
-      <input class="range" type="range" name="intensity" id="slide-haptic-intensity" value="0" min="0" max="100" style="display:inline;"></input>
-    </div>
-  </section>
 
   <section class="musicContainer">
     <!-- <button class="videoControlButton" id="play" style="display:inline;"><span class="glyphicon glyphicon-play" id="playGlyph"></span></button> -->

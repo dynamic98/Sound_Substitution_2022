@@ -49,7 +49,8 @@ pitchBeatSwitcher()
 
 let geometryButtons = new ButtonCustomization("shapeContainer", "btn btn-primary", "btn-")
 let textureButtons = new ButtonCustomization("shapeContainer", "textureButton")
-let pitchslide = new SlideCustomization("visualContainer_pitch", "customMenu", "range")
+let pitchslide_interval = new SlideCustomization("visualContainer_pitch", "customMenu", "range")
+let pitchslide_loudness = new SlideCustomization("visualContainer_pitch2", "customMenu", "range")
 let beatslide = new SlideCustomization("visualContainer_beat", "customMenu", "range")
 let hapticslide = new SlideCustomization("hapticContainer", "customMenu", "range")
 
@@ -112,7 +113,10 @@ const palette_6 = document.getElementById("palette6")
 const palette_7 = document.getElementById("palette7")
 const palette_8 = document.getElementById("palette8")
 const palette_9 = document.getElementById("palette9")
+
+
 let palette_button_list = {0: palette_satu, 1: palette_light, 2: palette_1, 3:palette_2, 4:palette_3, 5:palette_4, 6:palette_5, 7:palette_6, 8:palette_7, 9:palette_8, 10:palette_9}
+// let palette_button_list = {0: palette_satu, 1: palette_light, 2: palette_1, 3:palette_2, 4:palette_3, 5:palette_4, 6:palette_5, 7:palette_6, 8:palette_7, 9:palette_8, 10:palette_9}
 // let palette_button_list = {1: palette_satu, 2: palette_light, 6: palette_1, 7:palette_2, 8:palette_3, 9:palette_4, 10:palette_5, 3:palette_6, 4:palette_7, 5:palette_8, 0:palette_9}
 
 
@@ -215,7 +219,16 @@ function main() {
     // })
     geometryButtons.assignEventHandler("click", visualization.setGeometryType, MyUserCustom.setCustomShape)
     textureButtons.assignEventHandler("click", visualization.setTexture, MyUserCustom.setCustomTexture)
-    pitchslide.assignEventHandler("click", (para, value) => {
+    pitchslide_interval.assignEventHandler("click", (para, value) => {
+        if (para == "slide-pitch-interval") {
+            kandinsky.setRange(value)
+            MyUserCustom.CustomObj.Piano.interval = value;
+        } else if (para == "slide-pitch-size") {
+            piano.setCurrentEnergy(value)
+            MyUserCustom.CustomObj.Piano.size = value;
+        }
+    })
+    pitchslide_loudness.assignEventHandler("click", (para, value) => {
         if (para == "slide-pitch-interval") {
             kandinsky.setRange(value)
             MyUserCustom.CustomObj.Piano.interval = value;

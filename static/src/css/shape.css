@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 body {
+
   height: 100vh;
   width: 100vw;
   font-family: 'Poppins', sans-serif;
@@ -137,12 +138,13 @@ img:active{
 /* canvas UI */
 .sheetContainer {
   /* background-color: rgb(255, 255, 255); */
-  position: absolute;
+  /* position: absolute; */
   /* height: 100%;
   width: 100%; */
   border-radius: 0.3rem;
   box-shadow: 0 10px 20px #dbdbdb;
-  margin-top: 30px;
+  /* margin-top: -1000px; */
+  margin-bottom: 680px;
   display: inline-block;
   margin-left: 30px;
 }
@@ -295,14 +297,14 @@ video {
 .hapticContainer {
     background-color: rgb(252, 252, 252);
     position: absolute;
-    height: 30%;
-    width: 30%;
+    width: 480px;
+    height: 20%;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 310px;
+    margin-top: 200px;
     display: inline-block;
-    margin-left: 720px;
-    float: right;
+    margin-left: -10px;
+    /* float: right; */
 }
 
 
@@ -420,7 +422,7 @@ video {
   width: 50%;
   border-radius: 1rem;
   /* box-shadow: 0 10px 20px #dbdbdb; */
-  margin-top: 560px;
+  margin-top: 500px;
   display: inline-block; 
   margin-left: 720px;
   float: right;
@@ -433,7 +435,7 @@ h4 .bigTitle {
 }
 
 p .smallTitle {
-  font-size: 12px;
+  font-size: 30px;
 }
 
 hr {
@@ -494,7 +496,7 @@ hr {
     position: absolute;
     bottom: 0px;
     margin-left: 320px;
-    margin-bottom: -60px;
+    margin-bottom: -10px;
     overflow: auto;
   }
 
@@ -614,12 +616,12 @@ hr {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: -30px;
+    margin-top: -10px;
     display: inline-block;
-    margin-left: 10px;
-    width: 500px;
-    float: right;
-    height: 25%;
+    margin-left: -10px;
+    width: 480px;
+    height: 20%;
+  
   }
 
   .visualContainer_beat {
@@ -627,12 +629,24 @@ hr {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 240px;
+    margin-top: 550px;
     display: inline-block;
-    margin-left: 10px;
-    width: 500px;
-    float: right;
-    height: 15%;
+    margin-left: -10px;
+    width: 480px;
+    height: 12%;
+  }
+
+
+  .visualContainer_pitch2 {
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px #dbdbdb;
+    margin-top: 410px;
+    display: inline-block;
+    margin-left: -10px;
+    width: 480px;
+    height: 12%;
   }
 
 
@@ -698,9 +712,9 @@ hr {
     height: 20%;
     border-radius: 1rem;
     /* box-shadow: 0 10px 20px #dbdbdb; */
-    margin-top: 670px;
+    margin-top: 690px;
     display: inline-block; 
-    margin-left: 20px;
+    margin-left: 10px;
     width: 500px;
   }
   
@@ -710,7 +724,7 @@ hr {
   }
   
   p .smallTitle {
-    font-size: 14px;
+    font-size: 16px;
 
   }
 
@@ -759,9 +773,9 @@ hr {
 
   /* canvas UI */
   .sheetContainer {
-    position: absolute;
+    /* position: absolute; */
     /* border-radius: 0.3rem; */
-    margin-top: -50px;
+    /* margin-top: -50px; */
     display: inline-block;
     margin-left: 20px;
     width: 1px;
@@ -782,13 +796,13 @@ hr {
   }
   .colorContainer {
     margin-left: 125px;
-    width: 130px;
+    width: 100%;
     /* background-color: white; */
   }
 
   input[type="range"]{
     -webkit-appearance:none;
-    margin-left: 40px;
+    margin-left: 30px;
     width:400px;
     height:20px;
     background-size:500px 10px;
@@ -956,6 +970,7 @@ hr {
 
 
   #ProgressBar{
+    visibility: hidden;
     margin-left: 20px;
     margin-top: 620px;
     width: 1070px;
@@ -998,17 +1013,19 @@ hr {
      /* color: rgb(31, 51, 231); */
      background-color: rgb(196, 226, 255);
      /* background-color: rgb(233, 152, 152); */
-     border-radius: 10px;
+     /* border-radius: 10px; */
      /* color:rgb(248, 87, 87); */
+     
    }
    .Picker{
+     /* width: 200px; */
      padding: 5px;
      padding-left: 10px;
    }
    .Picker:hover{
      /* color: rgb(31, 51, 231); */
      background-color: rgb(196, 226, 255);
-     border-radius: 10px;
+     /* border-radius: 10px; */
    }
    
    .IroSlider{
@@ -1050,8 +1067,8 @@ hr {
 
   .colorContainer {
     margin-top: 10px;
-    height: 680px;
-    width: 130px;
+    /* height: 680px;
+    width: 130px; */
     /* border-radius: 1rem; */
     overflow: hidden;
     /* box-shadow: 0 10px 20px #dbdbdb; */
@@ -1114,7 +1131,7 @@ hr {
   .pianoContainer {
     position: absolute;
     bottom: 0px;
-    margin-left: 330px;
+    margin-left: 20px;
     margin-bottom: -60px;
     overflow: auto;
   }
@@ -1256,11 +1273,10 @@ hr {
     position: absolute;
     border-radius: 1rem;
     box-shadow: 0 10px 20px #dbdbdb;
-    margin-top: 340px;
+    margin-top: 300px;
     display: inline-block;
     margin-left: 15px;
     width: 280px;
-    float: right;
     height: 22%;
   }
 
@@ -1268,8 +1284,8 @@ hr {
     background-color: transparent;
     height: 10%;
     border-radius: 1rem;
-    margin-top: 530px;
-    display: inline-block; 
+    /* margin-top: 530px; */
+    /* display: inline-block;  */
     margin-left: -40px;
     width: 600px;
   }
@@ -1296,3 +1312,6 @@ hr {
 
 }
 
+p.smallTitle{
+  font-size: 16px;
+}
